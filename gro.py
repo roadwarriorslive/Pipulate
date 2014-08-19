@@ -5,16 +5,18 @@ def main():
   # https://www.youtube.com/watch?v=q1kLEat9iFw Created first dict
   # https://www.youtube.com/watch?v=9jbTN9I-ce0 And made a dict of dicts
   try:
-    s['foo'] = {1:'foo',2:'bar',3:'Lumberjack',4:'I work all day'}
-    s['bar'] = {1:'foo',2:'bar',3:'Lumberjack',4:'I work all day'}
+    # https://www.youtube.com/watch?v=iZOKsHzDaWg For efficient iteration
+    s['0'] = {1:'foo',2:'bar',3:'Lumberjack'}
+    s['Hello'] = {'foo':'Hello','bar':'World','Lumberjack':'?'}
+    s['Spam'] = {'foo':'Spam','bar':'Eggs','Lumberjack':'?'}
   finally:
     s.close()
 
   s = shelve.open('drows.db')
 
   for item in s:
-    # print(item + ": " + str(s[item]))
-    print("%s: %s" % (item, s[item]))
+    if item != '0':
+      print("%s: %s" % (item, s[item]))
 
 def delrow(s, rowkey):
   try:
@@ -22,5 +24,6 @@ def delrow(s, rowkey):
   except:
     pass
 
+# https://www.youtube.com/watch?v=G8T1BmIw3Hs Created point-of-entry for main
 if __name__ == "__main__":
   main()
