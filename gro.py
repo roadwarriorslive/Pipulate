@@ -7,17 +7,20 @@ def main():
   try:
     # https://www.youtube.com/watch?v=iZOKsHzDaWg For efficient iteration
     # https://www.youtube.com/watch?v=efL6qgVxfz0 Defined meaning of these dicts
-    s['0'] = {1:'foo',2:'bar',3:'Lumberjack'}
-    s['Hello'] = {'foo':'Hello','bar':'World','Lumberjack':'?'}
-    s['Spam'] = {'foo':'Spam','bar':'Eggs','Lumberjack':'?'}
+    s['0'] = {1:'foo',2:'bar',3:'Lumberjack',4:'Knights'}
+    s['Hello'] = {'foo':'Hello','bar':'World','Lumberjack':'?','Knights':'?'}
+    s['Spam'] = {'foo':'Spam','bar':'Eggs','Lumberjack':'?','Knights':'?'}
   finally:
     s.close()
 
   s = shelve.open('drows.db')
 
+  fargs = {}
   for item in s['0']:
     fname = s['0'][item]
+    # https://www.youtube.com/watch?v=OihJmzlkZDU Look for function in global
     if fname in globals():
+      fargs[fname] = {}
       from inspect import signature, _empty
       # https://www.youtube.com/watch?v=WLW1-G56q1c Get the function's args
       sig = signature(eval(fname))
@@ -28,9 +31,12 @@ def main():
         #print(pdefault is _empty)
         #print('%s %s' % (pname, pdefault))
         if pdefault is _empty:
+          fargs[fname][pname] = None
           print('Required parameter: %s %s' % (fname, pname))
         else:
+          fargs[fname][pname] = pdefault
           print('I have default value for: %s %s %s' % (fname, pname, pdefault))
+  print(fargs)
 
   # https://www.youtube.com/watch?v=iZOKsHzDaWg Efficiently iterating
   for item in s:
@@ -44,6 +50,9 @@ def delrow(s, rowkey):
     del s[rowkey]
   except:
     pass
+
+def Knights():
+  return "Ni"
 
 def Lumberjack(job, play='', status='Okay'):
   return "I'm okay"
