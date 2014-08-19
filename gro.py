@@ -1,7 +1,10 @@
 import shelve
 s = shelve.open('drows.db')
 try:
-  s['drows'] = {1:'foo',2:'bar',3:'Lumberjack',4:'I work all day'}
+  s['drows'] = {
+    'foo':{1:'foo',2:'bar',3:'Lumberjack',4:'I work all day'},
+    'bar':{1:'foo',2:'bar',3:'Lumberjack',4:'I work all day'}
+    }
 finally:
   s.close()
 
