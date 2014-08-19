@@ -13,7 +13,14 @@ def main():
   s = shelve.open('drows.db')
 
   for item in s:
-    print(s[item])
+    # print(item + ": " + str(s[item]))
+    print("%s: %s" % (item, s[item]))
+
+def delrow(s, rowkey):
+  try:
+    del s[rowkey]
+  except:
+    pass
 
 if __name__ == "__main__":
   main()
