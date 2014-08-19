@@ -14,6 +14,13 @@ def main():
 
   s = shelve.open('drows.db')
 
+  for item in s['0']:
+    fname = s['0'][item]
+    if fname in globals():
+      print("%s is a function" % (fname))
+    else:
+      print("%s is not a function" % (fname))
+
   for item in s:
     if item != '0':
       print("%s: %s" % (item, s[item]))
@@ -23,6 +30,9 @@ def delrow(s, rowkey):
     del s[rowkey]
   except:
     pass
+
+def Lumberjack():
+  return "I'm okay"
 
 # https://www.youtube.com/watch?v=G8T1BmIw3Hs Created point-of-entry for main
 if __name__ == "__main__":
