@@ -1,28 +1,21 @@
 def main():
   import shelve
-  # https://www.youtube.com/watch?v=RQPBXNUwsRM Make our data persistent
-  s = shelve.open('drows.db')
-  # https://www.youtube.com/watch?v=q1kLEat9iFw Created first dict
-  # https://www.youtube.com/watch?v=9jbTN9I-ce0 And made a dict of dicts
+  allrows = shelve.open('drows.db')
   try:
-    # https://www.youtube.com/watch?v=iZOKsHzDaWg For efficient iteration
-    # https://www.youtube.com/watch?v=efL6qgVxfz0 Defined meaning of these dicts
-    s['0'] = {1:'foo',2:'bar',3:'Lumberjack',4:'Knights'}
-    s['Hello'] = {'foo':'Hello','bar':'World','Lumberjack':'?','Knights':'?'}
-    s['Spam'] = {'foo':'Spam','bar':'Eggs','Lumberjack':'?','Knights':'?'}
+    allrows['0'] = {1:'foo',2:'bar',3:'Lumberjack',4:'Knights'}
+    allrows['Hello'] = {'foo':'Hello','bar':'World','Lumberjack':'?','Knights':'?'}
+    allrows['Spam'] = {'foo':'Spam','bar':'Eggs','Lumberjack':'?','Knights':'?'}
   finally:
-    s.close()
+    allrows.close()
 
-  s = shelve.open('drows.db')
+  allrows = shelve.open('drows.db')
 
   fargs = {}
-  for item in s['0']:
-    fname = s['0'][item]
-    # https://www.youtube.com/watch?v=OihJmzlkZDU Look for function in global
+  for item in allrows['0']:
+    fname = allrows['0'][item]
     if fname in globals():
       fargs[fname] = {}
       from inspect import signature, _empty
-      # https://www.youtube.com/watch?v=WLW1-G56q1c Get the function's args
       sig = signature(eval(fname))
       print("%s is a function with arguments %s" % (fname, sig))
       for param in sig.parameters.values():
@@ -38,16 +31,13 @@ def main():
           print('I have default value for: %s %s %s' % (fname, pname, pdefault))
   print(fargs)
 
-  # https://www.youtube.com/watch?v=iZOKsHzDaWg Efficiently iterating
-  for item in s:
+  for item in allrows:
     if item != '0':
-      print("%s: %s" % (item, s[item]))
+      print("%s: %s" % (item, allrows[item]))
 
-def delrow(s, rowkey):
-  # https://www.youtube.com/watch?v=5oCRfOndrvY Deleting item from dictionary
-  # https://www.youtube.com/watch?v=fe5QFldVzh4 Breaking into its own function
+def delrow(allrows, rowkey):
   try:
-    del s[rowkey]
+    del allrows[rowkey]
   except:
     pass
 
@@ -57,6 +47,5 @@ def Knights():
 def Lumberjack(job, play='', status='Okay'):
   return "I'm okay"
 
-# https://www.youtube.com/watch?v=G8T1BmIw3Hs Created point-of-entry for main
 if __name__ == "__main__":
   main()
