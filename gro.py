@@ -19,8 +19,10 @@ def main():
     login = pickle.load(open('temp.pkl', 'rb'))
     gc = gspread.login(login['username'], login['password'])
     wks = gc.open("Use This").sheet1
-    wks.update_acell('B2', "it's down there somewhere, let me take another look.")
-    cell_list = wks.range('A1:B7')
+    row = wks.row_values(2)
+    print(str(row))
+    #wks.update_acell('B2', "it's down there somewhere, let me take another look.")
+    #cell_list = wks.range('A1:B7')
   else:
     pass
 
