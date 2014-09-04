@@ -1,9 +1,10 @@
-import glob
+import globs
 
 def main():
 
   allrows = ''
-  if glob.DBSOURCE == 'local':
+  globs.DBSOURCE = 'gdocs'
+  if globs.DBSOURCE == 'local':
     import shelve
     allrows = shelve.open('drows.db')
     try:
@@ -13,26 +14,17 @@ def main():
     finally:
       allrows.close()
     allrows = shelve.open('drows.db')
-  elif glob.DBSOURCE == 'gdocs':
-    import shelve
-    allrows = shelve.open('drows.db')
-    try:
-      allrows['0'] = {1:'foo',2:'bar',3:'Lumberjack',4:'Knights'}
-      allrows['Hello'] = {'foo':'Hello2','bar':'World','Lumberjack':'?','Knights':'?'}
-      allrows['Spam'] = {'foo':'Spam2','bar':'Eggs','Lumberjack':'?','Knights':'?'}
-    finally:
-      allrows.close()
-    allrows = shelve.open('drows.db')
+  elif globs.DBSOURCE == 'gdocs':
+    import pickle, gspread
+    login = pickle.load(open('temp.pkl', 'rb'))
+    gc = gspread.login(login['username'], login['password'])
+    wks = gc.open("Use This").sheet1
+    wks.update_acell('B2', "it's down there somewhere, let me take another look.")
+    cell_list = wks.range('A1:B7')
   else:
-    import shelve
-    allrows = shelve.open('drows.db')
-    try:
-      allrows['0'] = {1:'foo',2:'bar',3:'Lumberjack',4:'Knights'}
-      allrows['Hello'] = {'foo':'Hello3','bar':'World','Lumberjack':'?','Knights':'?'}
-      allrows['Spam'] = {'foo':'Spam3','bar':'Eggs','Lumberjack':'?','Knights':'?'}
-    finally:
-      allrows.close()
-    allrows = shelve.open('drows.db')
+    pass
+
+  return
 
   fargs = {}
   for item in allrows['0']:
