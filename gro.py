@@ -19,8 +19,18 @@ def main():
     login = pickle.load(open('temp.pkl', 'rb'))
     gc = gspread.login(login['username'], login['password'])
     wks = gc.open("Use This").sheet1
-    row = wks.row_values(2)
-    print(str(row))
+    climit = wks.col_count
+    rlimit = wks.row_count
+    for i in range(1, rlimit):
+      arow = wks.row_values(i)
+      if arow:
+        print(str(arow))
+      else:
+        break
+    #for arow in wks.row_values:
+    #  print(str(arow))
+    #row = wks.get_all_values()
+    #print(str(row))
     #wks.update_acell('B2', "it's down there somewhere, let me take another look.")
     #cell_list = wks.range('A1:B7')
   else:
