@@ -8,36 +8,34 @@ def main():
     import shelve
     allrows = shelve.open('drows.db')
     try:
-      allrows['0'] = {1:'foo',2:'bar',3:'Lumberjack',4:'Knights'}
-      allrows['Hello'] = {'foo':'Hello','bar':'World','Lumberjack':'?','Knights':'?'}
-      allrows['Spam'] = {'foo':'Spam','bar':'Eggs','Lumberjack':'?','Knights':'?'}
+      allrows['1'] = ['foo','bar','Lumberjack','Knights']
+      allrows['2'] = ['Hello','World','?','?']
+      allrows['3'] = ['Spam','Eggs','?','?']
     finally:
       allrows.close()
     allrows = shelve.open('drows.db')
+    globs.lastrow = len(allrows)
   elif globs.DBSOURCE == 'gdocs':
     import pickle, gspread
     login = pickle.load(open('temp.pkl', 'rb'))
     gc = gspread.login(login['username'], login['password'])
-    wks = gc.open("Use This").sheet1
-    climit = wks.col_count
-    rlimit = wks.row_count
-    for i in range(1, rlimit):
-      arow = wks.row_values(i)
+    allrows = gc.open("Use This").sheet1
+    for globs.lastrow in range(1, allrows.row_count):
+      arow = allrows.row_values(globs.lastrow)
       if arow:
-        print(str(arow))
+        pass
+        #print(str(arow))
       else:
         break
-    #for arow in wks.row_values:
-    #  print(str(arow))
-    #row = wks.get_all_values()
-    #print(str(row))
-    #wks.update_acell('B2', "it's down there somewhere, let me take another look.")
-    #cell_list = wks.range('A1:B7')
   else:
     pass
 
+  print(allrows)
+  print(globs.lastrow)
+
   return
 
+  '''
   fargs = {}
   for item in allrows['0']:
     fname = allrows['0'][item]
@@ -58,6 +56,7 @@ def main():
           fargs[fname][pname] = pdefault
           #print('I have default value for: %s %s %s' % (fname, pname, pdefault))
   # print(fargs)
+  '''
 
   for item in allrows:
     if item != '0':

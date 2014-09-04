@@ -1,1 +1,2 @@
 DBSOURCE = ''
+lastrow = 0
