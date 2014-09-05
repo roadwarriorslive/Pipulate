@@ -3,7 +3,7 @@ import globs
 def main():
 
   allrows = ''
-  globs.DBSOURCE = 'local'
+  globs.DBSOURCE = 'gdocs'
   if globs.DBSOURCE == 'local':
     import shelve, csv
     allrows = shelve.open('drows.db')
@@ -11,27 +11,26 @@ def main():
       reader = csv.reader(f)
       for globs.lastrow, row in enumerate(reader):
         allrows[str(globs.lastrow)] = row
-        print(row)
     allrows.close()
     allrows = shelve.open('drows.db')
-    globs.lastrow = len(allrows)
+    for rowkey in allrows:
+      print(allrows[rowkey])
   elif globs.DBSOURCE == 'gdocs':
     import pickle, gspread
     login = pickle.load(open('temp.pkl', 'rb'))
     gc = gspread.login(login['username'], login['password'])
-    allrows = gc.open("Use This").sheet1
-    for globs.lastrow in range(1, allrows.row_count):
-      arow = allrows.row_values(globs.lastrow)
+    wks = gc.open("Use This").sheet1
+    for globs.lastrow in range(1, wks.row_count):
+      arow = wks.row_values(globs.lastrow)
       if arow:
-        pass
-        #print(str(arow))
+        print(str(arow))
       else:
         break
   else:
     pass
 
-  print(allrows)
-  print(globs.lastrow)
+  #print(allrows)
+  #print(globs.lastrow)
 
   return
 
