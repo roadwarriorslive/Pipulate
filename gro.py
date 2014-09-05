@@ -1,10 +1,12 @@
 import globs
 
 def main():
+  for dbsource in ['gdocs','local']:
+    dosheet(dbsource)
 
+def dosheet(dbsource):
   allrows = ''
-  globs.DBSOURCE = 'gdocs'
-  if globs.DBSOURCE == 'local':
+  if dbsource == 'local':
     import shelve, csv
     allrows = shelve.open('drows.db')
     with open('sample.csv', newline='') as f:
@@ -15,7 +17,7 @@ def main():
     allrows = shelve.open('drows.db')
     for rowkey in allrows:
       print(allrows[rowkey])
-  elif globs.DBSOURCE == 'gdocs':
+  elif dbsource == 'gdocs':
     import pickle, gspread
     login = pickle.load(open('temp.pkl', 'rb'))
     gc = gspread.login(login['username'], login['password'])
