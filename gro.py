@@ -9,8 +9,8 @@ def main():
     allrows = shelve.open('drows.db')
     with open('sample.csv', newline='') as f:
       reader = csv.reader(f)
-      for globs.lastrow, row in enumerate(reader):
-        allrows[str(globs.lastrow)] = row
+      for rowdex, row in enumerate(reader):
+        allrows[str(rowdex)] = row
     allrows.close()
     allrows = shelve.open('drows.db')
     for rowkey in allrows:
@@ -20,17 +20,14 @@ def main():
     login = pickle.load(open('temp.pkl', 'rb'))
     gc = gspread.login(login['username'], login['password'])
     wks = gc.open("Use This").sheet1
-    for globs.lastrow in range(1, wks.row_count):
-      arow = wks.row_values(globs.lastrow)
+    for rowdex in range(1, wks.row_count):
+      arow = wks.row_values(rowdex)
       if arow:
         print(str(arow))
       else:
         break
   else:
     pass
-
-  #print(allrows)
-  #print(globs.lastrow)
 
   return
 
