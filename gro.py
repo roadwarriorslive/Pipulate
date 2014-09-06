@@ -11,12 +11,12 @@ def dosheet(dbsource):
     allrows = shelve.open('drows.db')
     with open('sample.csv', newline='') as f:
       reader = csv.reader(f)
-      for rowdex, row in enumerate(reader):
-        allrows[str(rowdex)] = row
+      for rowdex, arow in enumerate(reader):
+        allrows[str(rowdex)] = arow
     allrows.close()
     allrows = shelve.open('drows.db')
     for rowkey in allrows:
-      print(allrows[rowkey])
+      dorow(allrows[rowkey])
   elif dbsource == 'gdocs':
     import pickle, gspread
     login = pickle.load(open('temp.pkl', 'rb'))
@@ -25,14 +25,16 @@ def dosheet(dbsource):
     for rowdex in range(1, wks.row_count):
       arow = wks.row_values(rowdex)
       if arow:
-        print(str(arow))
+        dorow(arow)
       else:
         break
   else:
     pass
 
-  return
+def dorow(arow):
+  print(arow)
 
+def dofuncs():
   '''
   fargs = {}
   for item in allrows['0']:
@@ -55,21 +57,12 @@ def dosheet(dbsource):
           #print('I have default value for: %s %s %s' % (fname, pname, pdefault))
   # print(fargs)
   '''
+  pass
 
-  for item in allrows:
-    if item != '0':
-      print("%s: %s" % (item, allrows[item]))
-
-def delrow(allrows, rowkey):
-  try:
-    del allrows[rowkey]
-  except:
-    pass
-
-def Knights():
+def Func1():
   return "Ni"
 
-def Lumberjack(job, play='', status='Okay'):
+def Func2(job, play='', status='Okay'):
   return "I'm okay"
 
 if __name__ == "__main__":
