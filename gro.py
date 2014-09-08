@@ -3,6 +3,7 @@ import globs
 def main():
   for dbsource in ['gdocs', 'local']:
     dosheet(dbsource)
+    print(globs.fargs)
     print()
 
 def dosheet(dbsource):
@@ -46,19 +47,14 @@ def dofuncs(arow):
       fargs[rowdex] = {}
       from inspect import signature, _empty
       sig = signature(eval(fname))
-      # print("%s is a function with arguments %s" % (fname, sig))
       for param in sig.parameters.values():
         pname = param.name
         pdefault = param.default
-        #print(pdefault is _empty)
-        #print('%s %s' % (pname, pdefault))
         if pdefault is _empty:
           fargs[rowdex][pname] = None
-          # print('Required parameter: %s %s' % (fname, pname))
         else:
           fargs[rowdex][pname] = pdefault
-          #print('I have default value for: %s %s %s' % (fname, pname, pdefault))
-  print(fargs)
+  globs.fargs = fargs
 
 def Func1():
   return "Ni"
