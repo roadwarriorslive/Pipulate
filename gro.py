@@ -39,24 +39,27 @@ def dorow(rownum, arow):
   else:
     for coldex, acell in enumerate(arow):
       if acell == '?':
-        print(globs.funcs[coldex])
-        print(globs.fargs[coldex+1])
+        fname = globs.funcs[coldex]
+        fargs = globs.fargs[coldex]
+        if fargs:
+          pass
+        else:
+          print(eval(fname)())
 
 def dofuncs(arow):
   fargs = {}
-  for rowdex, fname in enumerate(arow):
-    rowdex = rowdex + 1
+  for coldex, fname in enumerate(arow):
     if fname in globals():
-      fargs[rowdex] = {}
+      fargs[coldex] = {}
       from inspect import signature, _empty
       sig = signature(eval(fname))
       for param in sig.parameters.values():
         pname = param.name
         pdefault = param.default
         if pdefault is _empty:
-          fargs[rowdex][pname] = None
+          fargs[coldex][pname] = None
         else:
-          fargs[rowdex][pname] = pdefault
+          fargs[coldex][pname] = pdefault
   globs.fargs = fargs
 
 def Func1():
