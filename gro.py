@@ -3,7 +3,6 @@ import globs
 def main():
   for dbsource in ['gdocs', 'local']:
     dosheet(dbsource)
-    print(globs.fargs)
     print()
 
 def dosheet(dbsource):
@@ -35,9 +34,13 @@ def dosheet(dbsource):
 
 def dorow(rownum, arow):
   if rownum == '1':
+    globs.funcs = arow
     dofuncs(arow)
   else:
-    print(arow)
+    for coldex, acell in enumerate(arow):
+      if acell == '?':
+        print(globs.funcs[coldex])
+        print(globs.fargs[coldex+1])
 
 def dofuncs(arow):
   fargs = {}
