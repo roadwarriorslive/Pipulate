@@ -1,8 +1,9 @@
 import globs
 
 def main():
-  for dbsource in ['local']:
+  for dbsource in ['gdocs', 'local']:
     dosheet(dbsource)
+    print()
 
 def dosheet(dbsource):
   allrows = ''
@@ -12,11 +13,11 @@ def dosheet(dbsource):
     with open('sample.csv', newline='') as f:
       reader = csv.reader(f)
       for rowdex, arow in enumerate(reader):
-        allrows[str(rowdex)] = arow
+        allrows[str(rowdex + 1)] = arow
     allrows.close()
     allrows = shelve.open('drows.db')
     for rowkey in sorted(allrows):
-      dorow(allrows[rowkey])
+      dorow(rowkey, allrows[rowkey])
   elif dbsource == 'gdocs':
     import pickle, gspread
     login = pickle.load(open('temp.pkl', 'rb'))
@@ -25,22 +26,24 @@ def dosheet(dbsource):
     for rowdex in range(1, wks.row_count):
       arow = wks.row_values(rowdex)
       if arow:
-        dorow(arow)
+        dorow(str(rowdex), arow)
       else:
         break
   else:
     pass
 
-def dorow(arow):
-  print(arow)
+def dorow(rownum, arow):
+  if rownum == '1':
+    dofuncs(arow)
+  else:
+    print(arow)
 
-def dofuncs():
-  '''
+def dofuncs(arow):
   fargs = {}
-  for item in allrows['0']:
-    fname = allrows['0'][item]
+  for rowdex, fname in enumerate(arow):
+    rowdex = rowdex + 1
     if fname in globals():
-      fargs[fname] = {}
+      fargs[rowdex] = {}
       from inspect import signature, _empty
       sig = signature(eval(fname))
       # print("%s is a function with arguments %s" % (fname, sig))
@@ -50,19 +53,17 @@ def dofuncs():
         #print(pdefault is _empty)
         #print('%s %s' % (pname, pdefault))
         if pdefault is _empty:
-          fargs[fname][pname] = None
+          fargs[rowdex][pname] = None
           # print('Required parameter: %s %s' % (fname, pname))
         else:
-          fargs[fname][pname] = pdefault
+          fargs[rowdex][pname] = pdefault
           #print('I have default value for: %s %s %s' % (fname, pname, pdefault))
-  # print(fargs)
-  '''
-  pass
+  print(fargs)
 
 def Func1():
   return "Ni"
 
-def Func2(job, play='', status='Okay'):
+def Func2(param1, param2='', status='Okay'):
   return "I'm okay"
 
 if __name__ == "__main__":
