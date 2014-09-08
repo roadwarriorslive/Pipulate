@@ -1,7 +1,7 @@
 import globs
 
 def main():
-  for dbsource in ['gdocs','local']:
+  for dbsource in ['local']:
     dosheet(dbsource)
 
 def dosheet(dbsource):
@@ -15,7 +15,7 @@ def dosheet(dbsource):
         allrows[str(rowdex)] = arow
     allrows.close()
     allrows = shelve.open('drows.db')
-    for rowkey in allrows:
+    for rowkey in sorted(allrows):
       dorow(allrows[rowkey])
   elif dbsource == 'gdocs':
     import pickle, gspread
