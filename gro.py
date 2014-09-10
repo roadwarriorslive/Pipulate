@@ -1,9 +1,9 @@
 import globs
 
 def main():
-  globs.funcs = [x for x in globals().keys() if x[:2] != '__']
-  globs.funcslc = [x.lower() for x in globs.funcs]
-  globs.funcstab = dict(zip(globs.funcslc, globs.funcs)) 
+  funcs = [x for x in globals().keys() if x[:2] != '__']
+  globs.funcslc = [x.lower() for x in funcs]
+  globs.transfunc = dict(zip(globs.funcslc, funcs)) 
   #print(globs.gfuncs)
   #return
   for dbsource in ['gdocs', 'local']:
@@ -54,7 +54,7 @@ def dorow(rownum, arow):
           evalfunc(coldex, arow)
 
 def evalfunc(coldex, arow):
-  fname = globs.funcstab[globs.row1[coldex]]
+  fname = globs.transfunc[globs.row1[coldex]]
   #print(globs.fargs)
   #return
   fargs = globs.fargs[coldex]
@@ -62,11 +62,18 @@ def evalfunc(coldex, arow):
   if fargs:
     #print(fname, fargs)
     for anarg in fargs:
-      evalme = "%s%s='xxx', " % (evalme, anarg)
+      anarg = anarg.lower()
+      argval = getargval(anarg, fargs[anarg], arow)
+      evalme = "%s%s='%s', " % (evalme, anarg, argval)
       #if fargs[anarg] == None: 
         #print(fname, anarg)
     evalme = evalme[:-2] + ')'
     print(evalme)
+
+def getargval(anarg, defargval, arow):
+  for coldex, acol in enumerate(globs.row1):
+    if acol == anarg:
+      return arow[coldex]
 
 def row1funcs(arow):
   fargs = {}
