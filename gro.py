@@ -1,6 +1,9 @@
 import globs
 
 def main():
+  globs.gfuncs = [x.lower() for x in globals().keys() if x[:2] != '__']
+  #print(globs.gfuncs)
+  #return
   for dbsource in ['gdocs', 'local']:
     dosheet(dbsource)
     print()
@@ -22,7 +25,11 @@ def dosheet(dbsource):
     import pickle, gspread
     login = pickle.load(open('temp.pkl', 'rb'))
     gc = gspread.login(login['username'], login['password'])
-    wks = gc.open("Use This").sheet1
+    try:
+      wks = gc.open("Use This").sheet1
+    except:
+      print("Couldn't reach Google Docs")
+      return
     for rowdex in range(1, wks.row_count):
       arow = wks.row_values(rowdex)
       if arow:
@@ -34,16 +41,20 @@ def dosheet(dbsource):
 
 def dorow(rownum, arow):
   if rownum == '1':
-    globs.funcs = arow
+    globs.funcs = [x.lower() for x in arow]
+    #print(globs.funcs)
+    #return
     row1funcs(arow)
   else:
     for coldex, acell in enumerate(arow):
-      if globs.funcs[coldex] in globals():
+      if globs.funcs[coldex] in globs.gfuncs:
         if acell == '?':
           evalfunc(coldex, arow)
 
 def evalfunc(coldex, arow):
   fname = globs.funcs[coldex]
+  #print(globs.fargs)
+  #return
   fargs = globs.fargs[coldex]
   evalme = "%s(" % fname
   if fargs:
@@ -58,7 +69,7 @@ def evalfunc(coldex, arow):
 def row1funcs(arow):
   fargs = {}
   for coldex, fname in enumerate(arow):
-    if fname in globals():
+    if fname.lower() in globs.gfuncs:
       fargs[coldex] = {}
       from inspect import signature, _empty
       sig = signature(eval(fname))
@@ -69,6 +80,7 @@ def row1funcs(arow):
           fargs[coldex][pname] = None
         else:
           fargs[coldex][pname] = pdefault
+  print(fargs)
   globs.fargs = fargs
 
 def Func1():
