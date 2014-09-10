@@ -1,7 +1,9 @@
 import globs
 
 def main():
-  globs.gfuncs = [x.lower() for x in globals().keys() if x[:2] != '__']
+  globs.funcs = [x for x in globals().keys() if x[:2] != '__']
+  globs.funcslc = [x.lower() for x in globs.funcs]
+  globs.funcstab = dict(zip(globs.funcslc, globs.funcs)) 
   #print(globs.gfuncs)
   #return
   for dbsource in ['gdocs', 'local']:
@@ -41,18 +43,18 @@ def dosheet(dbsource):
 
 def dorow(rownum, arow):
   if rownum == '1':
-    globs.funcs = [x.lower() for x in arow]
-    #print(globs.funcs)
+    globs.row1 = [x.lower() for x in arow]
+    #print(globs.row1)
     #return
     row1funcs(arow)
   else:
     for coldex, acell in enumerate(arow):
-      if globs.funcs[coldex] in globs.gfuncs:
+      if globs.row1[coldex] in globs.funcslc:
         if acell == '?':
           evalfunc(coldex, arow)
 
 def evalfunc(coldex, arow):
-  fname = globs.funcs[coldex]
+  fname = globs.funcstab[globs.row1[coldex]]
   #print(globs.fargs)
   #return
   fargs = globs.fargs[coldex]
@@ -69,7 +71,7 @@ def evalfunc(coldex, arow):
 def row1funcs(arow):
   fargs = {}
   for coldex, fname in enumerate(arow):
-    if fname.lower() in globs.gfuncs:
+    if fname.lower() in globs.funcslc:
       fargs[coldex] = {}
       from inspect import signature, _empty
       sig = signature(eval(fname))
@@ -80,7 +82,7 @@ def row1funcs(arow):
           fargs[coldex][pname] = None
         else:
           fargs[coldex][pname] = pdefault
-  print(fargs)
+  #print(fargs)
   globs.fargs = fargs
 
 def Func1():

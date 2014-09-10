@@ -1,3 +1,5 @@
 fargs = {}
+row1 = []
 funcs = []
-gfuncs = []
+funcslc = []
+funcstab = {}
