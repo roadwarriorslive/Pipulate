@@ -38,17 +38,22 @@ def dorow(rownum, arow):
     row1funcs(arow)
   else:
     for coldex, acell in enumerate(arow):
-      if acell == '?':
-        fargs = globs.fargs[coldex]
-        if fargs:
-          print(evalfunc(coldex, arow))
-        else:
-          print(evalfunc(coldex, arow))
+      if globs.funcs[coldex] in globals():
+        if acell == '?':
+          evalfunc(coldex, arow)
 
 def evalfunc(coldex, arow):
   fname = globs.funcs[coldex]
   fargs = globs.fargs[coldex]
-  return fname, fargs
+  evalme = "%s(" % fname
+  if fargs:
+    #print(fname, fargs)
+    for anarg in fargs:
+      evalme = "%s%s='xxx', " % (evalme, anarg)
+      #if fargs[anarg] == None: 
+        #print(fname, anarg)
+    evalme = evalme[:-2] + ')'
+    print(evalme)
 
 def row1funcs(arow):
   fargs = {}
@@ -70,7 +75,7 @@ def Func1():
   return "No arguments here"
 
 def Func2(param1, param2='', status='Okay'):
-  return "My params are:"
+  return "My params are: %s, %s" % (param1, param2)
 
 if __name__ == "__main__":
   main()
