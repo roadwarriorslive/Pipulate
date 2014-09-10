@@ -35,18 +35,22 @@ def dosheet(dbsource):
 def dorow(rownum, arow):
   if rownum == '1':
     globs.funcs = arow
-    dofuncs(arow)
+    row1funcs(arow)
   else:
     for coldex, acell in enumerate(arow):
       if acell == '?':
-        fname = globs.funcs[coldex]
         fargs = globs.fargs[coldex]
         if fargs:
-          pass
+          print(evalfunc(coldex, arow))
         else:
-          print(eval(fname)())
+          print(evalfunc(coldex, arow))
 
-def dofuncs(arow):
+def evalfunc(coldex, arow):
+  fname = globs.funcs[coldex]
+  fargs = globs.fargs[coldex]
+  return fname, fargs
+
+def row1funcs(arow):
   fargs = {}
   for coldex, fname in enumerate(arow):
     if fname in globals():
@@ -63,10 +67,10 @@ def dofuncs(arow):
   globs.fargs = fargs
 
 def Func1():
-  return "Ni"
+  return "No arguments here"
 
 def Func2(param1, param2='', status='Okay'):
-  return "I'm okay"
+  return "My params are:"
 
 if __name__ == "__main__":
   main()
