@@ -68,7 +68,9 @@ def evalfunc(coldex, arow):
       #if fargs[anarg] == None: 
         #print(fname, anarg)
     evalme = evalme[:-2] + ')'
-    print(evalme)
+  else:
+    evalme = evalme + ')'
+  print('%s: %s' % (evalme, eval(evalme)))
 
 def getargval(anarg, defargval, arow):
   for coldex, acol in enumerate(globs.row1):
@@ -78,7 +80,7 @@ def getargval(anarg, defargval, arow):
   if defargval:
     return adq(defargval)
   else:
-    return "foo"
+    return None
   
 def adq(aval):
   if aval == None:
