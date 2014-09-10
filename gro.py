@@ -64,7 +64,7 @@ def evalfunc(coldex, arow):
     for anarg in fargs:
       anarg = anarg.lower()
       argval = getargval(anarg, fargs[anarg], arow)
-      evalme = "%s%s='%s', " % (evalme, anarg, argval)
+      evalme = "%s%s=%s, " % (evalme, anarg, argval)
       #if fargs[anarg] == None: 
         #print(fname, anarg)
     evalme = evalme[:-2] + ')'
@@ -73,7 +73,18 @@ def evalfunc(coldex, arow):
 def getargval(anarg, defargval, arow):
   for coldex, acol in enumerate(globs.row1):
     if acol == anarg:
-      return arow[coldex]
+      if arow[coldex]:
+        return adq(arow[coldex])
+  if defargval:
+    return adq(defargval)
+  else:
+    return "foo"
+  
+def adq(aval):
+  if aval == None:
+    return None
+  else:
+    return "'%s'" % (aval)
 
 def row1funcs(arow):
   fargs = {}
