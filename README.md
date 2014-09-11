@@ -1,21 +1,29 @@
 gropey
 ======
 
-Welcome back my friends to the code that never ends. I'm so glad you can
-attend. Come inside, come inside! ... And by that, I mean watch [this 
-YouTube playlist:](https://www.youtube.com/watch?v=SdzDaohx-GA&list=PLy-AlqZFg6G8tBTB6FFN68mryG4JlCaf-)
+GroPeY lets you collect data straight off of the Web into spreadsheets.
 
-I propose to make you more technical in a way much more meaningful in your life
-(and your children's?) than merely becoming another fad-chasing cloud
-programmer. Although I'm confident that this particular github project, GroPeY,
-is a killer app in my fields of SEO and Social Media, it also serves as a great
-example of the type of education I plan on offering the world when I can spend
-more time on it. I'm going off to kickstart it right now today, and I will come
-back and provide the link here.
+<pre>                    _________            ________     __  __
+                    __  ____/_______________  __ \_____ \/ /
+                    _  / __ __  ___/  __ \_  /_/ /  _ \_  / 
+                    / /_/ / _  /   / /_/ /  ____//  __/  /  
+                    \____/  /_/    \____//_/     \___//_/  </pre> 
 
-Meanwhile, feel free to use this project as a way to learn Python from scratch
-(more or less). I have earlier YouTube playlists
-[here if you don't have a Raspberry Pi](https://www.youtube.com/watch?v=4zeBJE1r0VI&list=PLy-AlqZFg6G9pDJR3ZWuOfUCC4sMJu4uD) 
-and
-[here if you do](https://www.youtube.com/watch?v=H4c--k_dvjs&list=PLy-AlqZFg6G-TMinlBfMpGwEQGcrb1LGS) 
-that might also help.
+Got a list that you need to look up something for every item - like grabbing
+title tags for a list of URLs? Well, then GroPeY is your answer! For example,
+for any given URL, you will be able to:
+
+  1. Record the number of times that URL has appeared in a Tweet
+  2. Record the number of times that URL was liked or shared in Facebook
+  3. Record the number of times that URL was +1'd in Google Plus
+  4. Figure out what keyword the page is trying to target for search traffic
+  5. See how well that URL is doing for that keyword (position tracking)
+
+And it all accumulates on a spreadsheet where you can do trending and keep
+track of progress - all for free! But GroPeY is so much more, able to do such
+lookups using any source data (addresses, keywords, etc.) against any Web or
+data API source (you have access to), allowing you to write your own Python
+functions to extend the system. And what system is that? You can learn it well,
+because almost every line of code accompanied by a YouTube video. Playlist:
+https://www.youtube.com/watch?v=SdzDaohx-GA&list=PLy-AlqZFg6G8tBTB6FFN68mryG4JlCaf-
+
