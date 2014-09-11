@@ -17,9 +17,9 @@ def dosheet(dbsource):
   """Steps through active worksheet feeding each row for processing.
   
   The purpose of this function is to feed Python lists representing rows of a
-  spreadsheet into the processrow function, which handles question mark
+  worksheet into the processrow function, which handles question mark
   replacement. This is the outer loop of that process representing the entire
-  spreadsheet. In the first case, data can be loaded into a shelve object from
+  worksheet. In the first case, data can be loaded into a shelve object from
   csv and other sources for processing large datasets and scheduled tasks, or
   from Google Spreadsheets for lesser data, but a more interactive approach."""
   allrows = ''
@@ -55,11 +55,11 @@ def dosheet(dbsource):
 def processrow(rownum, arow):
   """Separates row-1 handling from question mark detection on all other rows.
   
-  Called on each row of a worksheet and either initializes functions when
-  it's row 1, or steps cell by cell along each subsequent (fed-in) row and when
+  Called on each row of a worksheet and either initializes functions when it's
+  row 1, or steps cell by cell along each subsequent (fed-in) row and when
   encountering a question mark, it determines whether to invoke the function
   indicated by the column label, using values from the active row as parameter
-  values if available, parameter defaults if not, and None if no defaults."""
+  values if available, parameter defaults if not, and None if not found."""
   if rownum == '1':
     globs.row1 = [x.lower() for x in arow]
     row1funcs(arow)
@@ -72,7 +72,7 @@ def processrow(rownum, arow):
 def row1funcs(arow):
   """Scans row-1 for names of global functions and builds dict of requirements.
   
-  This is only invoked on row 1 of a spreadsheet, where the names of functions
+  This is only invoked on row 1 of a worksheet, where the names of functions
   and parameters are expected to be discovered. By the end, we've created a
   dictionary of dictionaries called globs.fargs which plays an important role
   in building the code necessary for question mark replacement."""
