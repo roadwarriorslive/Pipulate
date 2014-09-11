@@ -1,10 +1,14 @@
-'''
+""" GroPeY lets you collect data straight off of the Web into spreadsheets.
+
                     _________            ________     __  __
                     __  ____/_______________  __ \_____ \/ /
                     _  / __ __  ___/  __ \_  /_/ /  _ \_  / 
                     / /_/ / _  /   / /_/ /  ____//  __/  /  
                     \____/  /_/    \____//_/     \___//_/   
-'''
+
+Insert overview of system here.
+
+"""
 
 import globs #Create objects that don't have to be passed as arguments.
 
