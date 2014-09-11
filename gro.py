@@ -1,4 +1,12 @@
-import globs
+'''
+                    _________            ________     __  __
+                    __  ____/_______________  __ \_____ \/ /
+                    _  / __ __  ___/  __ \_  /_/ /  _ \_  / 
+                    / /_/ / _  /   / /_/ /  ____//  __/  /  
+                    \____/  /_/    \____//_/     \___//_/   
+'''
+
+import globs #Create objects that don't have to be passed as arguments.
 
 def main():
   """Allows processing of multiple worksheets.
@@ -6,10 +14,10 @@ def main():
   This main function could have been the entire dosheet function, but this
   extra level allows for looping trough multiple worksheet sources and serves
   as a hook for future automation like scheduled tasks."""
-  funcs = [x for x in globals().keys() if x[:2] != '__']
-  globs.funcslc = [x.lower() for x in funcs]
-  globs.transfunc = dict(zip(globs.funcslc, funcs)) 
-  for dbsource in ['gdocs', 'local']:
+  funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
+  globs.funcslc = [x.lower() for x in funcs] #Lower-case all function names
+  globs.transfunc = dict(zip(globs.funcslc, funcs)) #Keep translation table
+  for dbsource in ['gdocs', 'local']: #Each dbsource represents one worksheet
     dosheet(dbsource)
     print()
 
@@ -24,33 +32,36 @@ def dosheet(dbsource):
   from Google Spreadsheets for lesser data, but a more interactive approach."""
   allrows = ''
   if dbsource == 'local':
+    #This is the "shelve" route, necessary for big data sets, useful for csv's.
     import shelve, csv
     allrows = shelve.open('drows.db')
     with open('sample.csv', newline='') as f:
       reader = csv.reader(f)
-      for rowdex, arow in enumerate(reader):
+      for rowdex, arow in enumerate(reader): #Dump entire csv into shelve.
         allrows[str(rowdex + 1)] = arow
     allrows.close()
+    #We can add support for much more than csv here through "shove" module.
     allrows = shelve.open('drows.db')
-    for rowkey in sorted(allrows):
+    for rowkey in sorted(allrows): #Process each row (list) from the shelve.
       processrow(rowkey, allrows[rowkey])
   elif dbsource == 'gdocs':
+    #This is the Google Spreadsheet route for smaller interactive sessions.
     import pickle, gspread
     login = pickle.load(open('temp.pkl', 'rb'))
     gc = gspread.login(login['username'], login['password'])
     try:
-      wks = gc.open("Use This").sheet1
+      wks = gc.open("Use This").sheet1 #HTTP connection errors happen here.
     except:
       print("Couldn't reach Google Docs")
       return
-    for rowdex in range(1, wks.row_count):
+    for rowdex in range(1, wks.row_count): #Start stepping through every row.
       arow = wks.row_values(rowdex)
-      if arow:
+      if arow: #But only process it if it does not come back as empty list.
         processrow(str(rowdex), arow)
       else:
-        break
+        break #Stop grabbing new rows at the first empty one encountered.
   else:
-    pass
+    pass #Leave opening for non-shelve, non-GDocs collections of lists.
 
 def processrow(rownum, arow):
   """Separates row-1 handling from question mark detection on all other rows.
@@ -61,9 +72,11 @@ def processrow(rownum, arow):
   indicated by the column label, using values from the active row as parameter
   values if available, parameter defaults if not, and None if not found."""
   if rownum == '1':
+    #Row 1 is always specially handled because it contains function names.
     globs.row1 = [x.lower() for x in arow]
     row1funcs(arow)
   else:
+    #All subsequent rows are checked for question mark replacement requests.
     for coldex, acell in enumerate(arow):
       if globs.row1[coldex] in globs.funcslc:
         if acell == '?':
@@ -78,18 +91,18 @@ def row1funcs(arow):
   in building the code necessary for question mark replacement."""
   fargs = {}
   for coldex, fname in enumerate(arow):
-    if fname.lower() in globs.funcslc:
+    if fname.lower() in globs.funcslc: #Detect if column name is a function
       fargs[coldex] = {}
       from inspect import signature, _empty
       sig = signature(eval(fname))
-      for param in sig.parameters.values():
+      for param in sig.parameters.values(): #Build dict of function reqirements
         pname = param.name
         pdefault = param.default
-        if pdefault is _empty:
+        if pdefault is _empty: #Catch when an argument has no default value
           fargs[coldex][pname] = None
         else:
           fargs[coldex][pname] = pdefault
-  globs.fargs = fargs
+  globs.fargs = fargs #Make dict global so we don't have to pass it around
 
 def evalfunc(coldex, arow):
   """Builds string to execute to get value to replace question mark with.
@@ -101,15 +114,18 @@ def evalfunc(coldex, arow):
   important, and the column index allows function name lookup."""
   fname = globs.transfunc[globs.row1[coldex]]
   fargs = globs.fargs[coldex]
-  evalme = "%s(" % fname
+  evalme = "%s(" % fname #Begin building string that will eventually be eval'd
   if fargs:
-    for anarg in fargs:
+    #The function we're looking at DOES have required arguments.
+    for anarg in fargs: 
+      #Add an arg=value to string for each required argument.
       anarg = anarg.lower()
-      argval = getargval(anarg, fargs[anarg], arow)
+      argval = getargval(anarg, fargs[anarg], arow) 
       evalme = "%s%s=%s, " % (evalme, anarg, argval)
-    evalme = evalme[:-2] + ')'
+    evalme = evalme[:-2] + ')' #Finish building string for the eval statement.
   else:
-    evalme = evalme + ')'
+    #No arguments required, so just immediately close the parenthesis.
+    evalme = evalme + ')' 
   print('%s: %s' % (evalme, eval(evalme)))
 
 def getargval(anarg, defargval, arow):
@@ -120,13 +136,14 @@ def getargval(anarg, defargval, arow):
   beats the default provided by the function. Lacking values on the row and a
   default, the Python value of None will be returned."""
   for coldex, acol in enumerate(globs.row1):
-    if acol == anarg:
-      if arow[coldex]:
-        return adq(arow[coldex])
+    if acol == anarg: #Found column named same thing as a required argument.
+      if arow[coldex]: #The cell in that column has a non-zero/empty value.
+        return adq(arow[coldex]) #So, we got what we need. Return it.
+  #Oops, no required arguments were found on the row.
   if defargval:
-    return adq(defargval)
+    return adq(defargval) #So, if it's got a default value, return that.
   else:
-    return None
+    return None #We ALWAYS have to return at least None, least errors ensue.
   
 def adq(aval):
   """Conditionally builds quotes on arg-value for function invocation string.
@@ -136,9 +153,9 @@ def adq(aval):
   keyword None must not become quoted. Typically, numbers shouldn't be quoted
   either, but we're feeding everything but None around as strings for now."""
   if aval == None:
-    return None
+    return None #None-in/None-out. This special keyword shouldn't be quoted.
   else:
-    return "'%s'" % (aval)
+    return "'%s'" % (aval) #ALMOST everything else should be quoted.
 
 def Func1():
   return "No arguments here"
