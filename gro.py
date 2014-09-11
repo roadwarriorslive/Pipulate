@@ -1,7 +1,9 @@
 import globs
 
 def main():
-  '''Only exists to call dosheet. A hook for automation.'''
+  '''This main function could have been the entire dosheet function, but this
+  extra level allows for looping trough multiple worksheet sources and serves
+  as a hook for future automation like scheduled tasks.'''
   funcs = [x for x in globals().keys() if x[:2] != '__']
   globs.funcslc = [x.lower() for x in funcs]
   globs.transfunc = dict(zip(globs.funcslc, funcs)) 
@@ -11,7 +13,7 @@ def main():
 
 def dosheet(dbsource):
   '''The purpose of this function is to feed Python lists representing rows of
-  a spreadsheet into the dorows function, which handles question mark
+  a spreadsheet into the processrow function, which handles question mark
   replacement. This is the outer loop of that process representing the entire
   spreadsheet. In the first case, data can be loaded into a shelve object from
   csv and other sources for processing large datasets and scheduled tasks, or
@@ -27,7 +29,7 @@ def dosheet(dbsource):
     allrows.close()
     allrows = shelve.open('drows.db')
     for rowkey in sorted(allrows):
-      dorow(rowkey, allrows[rowkey])
+      processrow(rowkey, allrows[rowkey])
   elif dbsource == 'gdocs':
     import pickle, gspread
     login = pickle.load(open('temp.pkl', 'rb'))
@@ -40,7 +42,7 @@ def dosheet(dbsource):
     for rowdex in range(1, wks.row_count):
       arow = wks.row_values(rowdex)
       if arow:
-        dorow(str(rowdex), arow)
+        processrow(str(rowdex), arow)
       else:
         break
   else:
