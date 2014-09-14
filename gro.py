@@ -1,10 +1,11 @@
 """ GroPeY lets you collect data straight off of the Web into spreadsheets.
 
-                    _________            ________     __  __
-                    __  ____/_______________  __ \_____ \/ /
-                    _  / __ __  ___/  __ \_  /_/ /  _ \_  / 
-                    / /_/ / _  /   / /_/ /  ____//  __/  /  
-                    \____/  /_/    \____//_/     \___//_/   
+          ________        ________       ______      _____           
+          ___  __ \____  ____  __ \___  ____  /_____ __  /_____      
+          __  /_/ /_  / / /_  /_/ /  / / /_  /_  __ `/  __/  _ \     
+          _  ____/_  /_/ /_  ____// /_/ /_  / / /_/ // /_ /  __/     
+          /_/     _\__, / /_/     \__,_/ /_/  \__,_/ \__/ \___/      
+                  /____/                                             
 
 Got a list that you need to look up something for every item - like grabbing
 title tags for a list of URLs? Well, then GroPeY is your answer! For example,
