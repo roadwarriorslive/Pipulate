@@ -62,6 +62,12 @@ def dblocal():
   allrows = shelve.open('drows.db')
   for rowkey in sorted(allrows): #Process each row (list) from the shelve.
     newrow = processrow(rowkey, allrows[rowkey])
+    allrows[rowkey] = newrow
+  with open('sampleout.csv','w', newline='') as f:
+    w = csv.writer(f)
+    for rowkey in sorted(allrows):
+      print(allrows[rowkey])
+      w.writerow(list(allrows[rowkey]))
 
 def dbgdocs():
   """Keeps a Google Spreadsheet open for row-by-row processing.
@@ -81,21 +87,25 @@ def dbgdocs():
   for rowdex in range(1, wks.row_count): #Start stepping through every row.
     arow = wks.row_values(rowdex)
     if arow: #But only process it if it does not come back as empty list.
-      newrow = processrow(str(rowdex), arow)
-      for coldex, acell in enumerate(newrow):
-        if questionmark(arow, rowdex, coldex):
-          wks.update_cell(rowdex, coldex+1, acell)
+      newrow = processrow(str(rowdex), arow) #Replace question marks in row
+      for coldex, acell in enumerate(newrow): #Then step through new row
+        if questionmark(arow, rowdex, coldex): #And update Google worksheet
+          wks.update_cell(rowdex, coldex+1, acell) #Gspread has no "0" column
     else:
       break #Stop grabbing new rows at the first empty one encountered.
 
 def questionmark(oldrow, rowdex, coldex):
+  """Returns true if a question mark is supposed to be replaced in cell.
+  
+  This is called for every cell on every row processed and checks whether
+  question mark replacemnt should actually occur."""
   if rowdex != 1:
     if globs.row1[coldex] in globs.funcslc:
       if oldrow[coldex] == '?':
         return(True)
   return(False)
 
-def processrow(rownum, arow):
+def processrow(rowdex, arow):
   """Separates row-1 handling from question mark detection on all other rows.
   
   Called on each row of a worksheet and either initializes functions when it's
@@ -104,17 +114,16 @@ def processrow(rownum, arow):
   indicated by the column label, using values from the active row as parameter
   values if available, parameter defaults if not, and None if not found."""
   changedrow = arow[:]
-  if rownum == '1':
+  if str(rowdex) == '1':
     #Row 1 is always specially handled because it contains function names.
     globs.row1 = [x.lower() for x in changedrow]
     row1funcs(changedrow)
   else:
     #All subsequent rows are checked for question mark replacement requests.
     for coldex, acell in enumerate(changedrow):
-      if globs.row1[coldex] in globs.funcslc:
-        if acell == '?':
-          changedrow[coldex] = evalfunc(coldex, changedrow)
-          #print(replaceqmwith)
+      if questionmark(arow, rowdex, coldex):
+        changedrow[coldex] = evalfunc(coldex, changedrow)
+        #print(replaceqmwith)
   return(changedrow)
 
 def row1funcs(arow):
