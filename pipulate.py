@@ -32,19 +32,6 @@ import globs #Create objects that don't have to be passed as arguments.
 def main():
   """Allows processing of multiple worksheets.
 
-  This main function could have been the entire dosheet function, but this
-  extra level allows for looping trough multiple worksheet sources and serves
-  as a hook for future automation like scheduled tasks."""
-  funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
-  globs.funcslc = [x.lower() for x in funcs] #Lower-case all function names
-  globs.transfunc = dict(zip(globs.funcslc, funcs)) #Keep translation table
-  for dbsource in ['gdocs', 'local']: #Each dbsource represents one worksheet
-    dosheet(dbsource)
-    print()
-
-def dosheet(dbsource):
-  """Steps through active worksheet feeding each row for processing.
-  
   The purpose of this function is to feed Python lists representing rows of a
   worksheet into the processrow function, which handles question mark
   replacement. This is the outer loop of that process representing the entire
@@ -52,9 +39,13 @@ def dosheet(dbsource):
   csv and other sources for processing large datasets and scheduled tasks, or
   in the second case, from Google Spreadsheets for smaller datasets, but a more
   interactive approach."""
-  allrows = ''
-  dbmethod = {'local': dblocal, 'gdocs': dbgdocs}
-  dbmethod[dbsource]()
+  funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
+  globs.funcslc = [x.lower() for x in funcs] #Lower-case all function names
+  globs.transfunc = dict(zip(globs.funcslc, funcs)) #Keep translation table
+  for dbsource in ['gdocs', 'local']: #Each dbsource represents one worksheet
+    dbmethod = {'local': dblocal, 'gdocs': dbgdocs}
+    dbmethod[dbsource]()
+    print()
 
 def dblocal():
   #This is the "shelve" route, necessary for big data sets, useful for csv's.
