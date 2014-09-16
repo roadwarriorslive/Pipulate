@@ -83,10 +83,17 @@ def dbgdocs():
     if arow: #But only process it if it does not come back as empty list.
       newrow = processrow(str(rowdex), arow)
       for coldex, acell in enumerate(newrow):
-        coldex = coldex + 1
-        wks.update_cell(rowdex, coldex, 'Bingo!')    
+        if questionmark(arow, rowdex, coldex):
+          wks.update_cell(rowdex, coldex+1, acell)
     else:
       break #Stop grabbing new rows at the first empty one encountered.
+
+def questionmark(oldrow, rowdex, coldex):
+  if rowdex != 1:
+    if globs.row1[coldex] in globs.funcslc:
+      if oldrow[coldex] == '?':
+        return(True)
+  return(False)
 
 def processrow(rownum, arow):
   """Separates row-1 handling from question mark detection on all other rows.
@@ -96,18 +103,19 @@ def processrow(rownum, arow):
   encountering a question mark, it determines whether to invoke the function
   indicated by the column label, using values from the active row as parameter
   values if available, parameter defaults if not, and None if not found."""
+  changedrow = arow[:]
   if rownum == '1':
     #Row 1 is always specially handled because it contains function names.
-    globs.row1 = [x.lower() for x in arow]
-    row1funcs(arow)
+    globs.row1 = [x.lower() for x in changedrow]
+    row1funcs(changedrow)
   else:
     #All subsequent rows are checked for question mark replacement requests.
-    for coldex, acell in enumerate(arow):
+    for coldex, acell in enumerate(changedrow):
       if globs.row1[coldex] in globs.funcslc:
         if acell == '?':
-          arow[coldex] = evalfunc(coldex, arow)
+          changedrow[coldex] = evalfunc(coldex, changedrow)
           #print(replaceqmwith)
-  return(arow)
+  return(changedrow)
 
 def row1funcs(arow):
   """Scans row-1 for names of global functions and builds dict of requirements.
