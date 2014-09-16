@@ -32,23 +32,25 @@ import globs #Create objects that don't have to be passed as arguments.
 def main():
   """Allows processing of multiple worksheets.
 
-  The purpose of this function is to feed Python lists representing rows of a
-  worksheet into the processrow function, which handles question mark
-  replacement. This is the outer loop of that process representing the entire
-  worksheet. In the first case, data can be loaded into a shelve object from
-  csv and other sources for processing large datasets and scheduled tasks, or
-  in the second case, from Google Spreadsheets for smaller datasets, but a more
-  interactive approach."""
+  During testing, main is set to process one Google Spreadsheet and one local
+  csv file. It also creates a list of global functions and translation table to
+  their lower-case versions for recognizing function names in column labels.
+  A Pythonic switch statement calls dbgdocs once and dblocal once."""
   funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
   globs.funcslc = [x.lower() for x in funcs] #Lower-case all function names
   globs.transfunc = dict(zip(globs.funcslc, funcs)) #Keep translation table
+  dbmethod = {'local': dblocal, 'gdocs': dbgdocs}
   for dbsource in ['gdocs', 'local']: #Each dbsource represents one worksheet
-    dbmethod = {'local': dblocal, 'gdocs': dbgdocs}
     dbmethod[dbsource]()
     print()
 
 def dblocal():
-  #This is the "shelve" route, necessary for big data sets, useful for csv's.
+  """Loads a local csv file and dumps it into shelve object for processing.
+
+  While support for csv files will be very useful for many people, using the
+  shelve API here is to leave a hook for the external shove library which will
+  allow this to run on MUCH larger datasets by connecting it to Redis, Amazon
+  S3, Berkeley DB, Postgres or other backend databases."""
   import shelve, csv
   allrows = shelve.open('drows.db')
   with open('sample.csv', newline='') as f:
@@ -59,10 +61,15 @@ def dblocal():
   #We can add support for much more than csv here through "shove" module.
   allrows = shelve.open('drows.db')
   for rowkey in sorted(allrows): #Process each row (list) from the shelve.
-    processrow(rowkey, allrows[rowkey])
+    newrow = processrow(rowkey, allrows[rowkey])
 
 def dbgdocs():
-  #This is the Google Spreadsheet route for smaller interactive sessions.
+  """Keeps a Google Spreadsheet open for row-by-row processing.
+
+  While Google Spreadsheets is not the most efficient or scalable way to manage
+  this process, it provides a ready-made user interface for convenient
+  interactive sessions with smaller datasets. Demonstrating this approach to
+  people is impressive and has a compelling charm."""
   import pickle, gspread
   login = pickle.load(open('temp.pkl', 'rb'))
   gc = gspread.login(login['username'], login['password'])
@@ -74,7 +81,10 @@ def dbgdocs():
   for rowdex in range(1, wks.row_count): #Start stepping through every row.
     arow = wks.row_values(rowdex)
     if arow: #But only process it if it does not come back as empty list.
-      processrow(str(rowdex), arow)
+      newrow = processrow(str(rowdex), arow)
+      for coldex, acell in enumerate(newrow):
+        coldex = coldex + 1
+        wks.update_cell(rowdex, coldex, 'Bingo!')    
     else:
       break #Stop grabbing new rows at the first empty one encountered.
 
@@ -97,7 +107,7 @@ def processrow(rownum, arow):
         if acell == '?':
           arow[coldex] = evalfunc(coldex, arow)
           #print(replaceqmwith)
-  print(arow)
+  return(arow)
 
 def row1funcs(arow):
   """Scans row-1 for names of global functions and builds dict of requirements.
