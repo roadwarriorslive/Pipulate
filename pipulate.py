@@ -1,4 +1,4 @@
-r""" Pipulate lets you collect data straight off of the Web into spreadsheets.
+""" Pipulate lets you collect data straight off of the Web into spreadsheets.
 
         _____ _             _       _                              
        |  __ (_)           | |     | |                             
@@ -53,37 +53,39 @@ def dosheet(dbsource):
   in the second case, from Google Spreadsheets for smaller datasets, but a more
   interactive approach."""
   allrows = ''
-  if dbsource == 'local':
-    #This is the "shelve" route, necessary for big data sets, useful for csv's.
-    import shelve, csv
-    allrows = shelve.open('drows.db')
-    with open('sample.csv', newline='') as f:
-      reader = csv.reader(f)
-      for rowdex, arow in enumerate(reader): #Dump entire csv into shelve.
-        allrows[str(rowdex + 1)] = arow
-    allrows.close()
-    #We can add support for much more than csv here through "shove" module.
-    allrows = shelve.open('drows.db')
-    for rowkey in sorted(allrows): #Process each row (list) from the shelve.
-      processrow(rowkey, allrows[rowkey])
-  elif dbsource == 'gdocs':
-    #This is the Google Spreadsheet route for smaller interactive sessions.
-    import pickle, gspread
-    login = pickle.load(open('temp.pkl', 'rb'))
-    gc = gspread.login(login['username'], login['password'])
-    try:
-      wks = gc.open("Use This").sheet1 #HTTP connection errors happen here.
-    except:
-      print("Couldn't reach Google Docs")
-      return
-    for rowdex in range(1, wks.row_count): #Start stepping through every row.
-      arow = wks.row_values(rowdex)
-      if arow: #But only process it if it does not come back as empty list.
-        processrow(str(rowdex), arow)
-      else:
-        break #Stop grabbing new rows at the first empty one encountered.
-  else:
-    pass #Leave opening for non-shelve, non-GDocs collections of lists.
+  dbmethod = {'local': dblocal, 'gdocs': dbgdocs}
+  dbmethod[dbsource]()
+
+def dblocal():
+  #This is the "shelve" route, necessary for big data sets, useful for csv's.
+  import shelve, csv
+  allrows = shelve.open('drows.db')
+  with open('sample.csv', newline='') as f:
+    reader = csv.reader(f)
+    for rowdex, arow in enumerate(reader): #Dump entire csv into shelve.
+      allrows[str(rowdex + 1)] = arow
+  allrows.close()
+  #We can add support for much more than csv here through "shove" module.
+  allrows = shelve.open('drows.db')
+  for rowkey in sorted(allrows): #Process each row (list) from the shelve.
+    processrow(rowkey, allrows[rowkey])
+
+def dbgdocs():
+  #This is the Google Spreadsheet route for smaller interactive sessions.
+  import pickle, gspread
+  login = pickle.load(open('temp.pkl', 'rb'))
+  gc = gspread.login(login['username'], login['password'])
+  try:
+    wks = gc.open("Use This").sheet1 #HTTP connection errors happen here.
+  except:
+    print("Couldn't reach Google Docs")
+    return
+  for rowdex in range(1, wks.row_count): #Start stepping through every row.
+    arow = wks.row_values(rowdex)
+    if arow: #But only process it if it does not come back as empty list.
+      processrow(str(rowdex), arow)
+    else:
+      break #Stop grabbing new rows at the first empty one encountered.
 
 def processrow(rownum, arow):
   """Separates row-1 handling from question mark detection on all other rows.
