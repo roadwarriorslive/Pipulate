@@ -95,7 +95,9 @@ def processrow(rownum, arow):
     for coldex, acell in enumerate(arow):
       if globs.row1[coldex] in globs.funcslc:
         if acell == '?':
-          evalfunc(coldex, arow)
+          arow[coldex] = evalfunc(coldex, arow)
+          #print(replaceqmwith)
+  print(arow)
 
 def row1funcs(arow):
   """Scans row-1 for names of global functions and builds dict of requirements.
@@ -141,7 +143,8 @@ def evalfunc(coldex, arow):
   else:
     #No arguments required, so just immediately close the parenthesis.
     evalme = evalme + ')' 
-  print('%s: %s' % (evalme, eval(evalme)))
+  #return('%s: %s' % (evalme, eval(evalme)))
+  return(eval(evalme))
 
 def getargval(anarg, defargval, arow):
   """Returns value to set argument equal-to in function invocation string.
@@ -173,10 +176,10 @@ def adq(aval):
     return "'%s'" % (aval) #ALMOST everything else should be quoted.
 
 def Func1():
-  return "No arguments here"
+  return "Out from func1"
 
 def Func2(param1, param2='', status='Okay'):
-  return "My params are: %s, %s" % (param1, param2)
+  return "%s %s" % (param1, param2)
 
 if __name__ == "__main__":
   main()
