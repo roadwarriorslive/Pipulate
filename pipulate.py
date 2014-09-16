@@ -42,7 +42,6 @@ def main():
   dbmethod = {'local': dblocal, 'gdocs': dbgdocs}
   for dbsource in ['gdocs', 'local']: #Each dbsource represents one worksheet
     dbmethod[dbsource]()
-    print()
 
 def dblocal():
   """Loads a local csv file and dumps it into shelve object for processing.
@@ -66,7 +65,6 @@ def dblocal():
   with open('sampleout.csv','w', newline='') as f:
     w = csv.writer(f)
     for rowkey in sorted(allrows):
-      print(allrows[rowkey])
       w.writerow(list(allrows[rowkey]))
 
 def dbgdocs():
@@ -123,7 +121,6 @@ def processrow(rowdex, arow):
     for coldex, acell in enumerate(changedrow):
       if questionmark(arow, rowdex, coldex):
         changedrow[coldex] = evalfunc(coldex, changedrow)
-        #print(replaceqmwith)
   return(changedrow)
 
 def row1funcs(arow):
