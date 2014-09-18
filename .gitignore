@@ -1,4 +1,5 @@
 *.pkl
+*.swp
 *.db
 *.csv
 __pycache__/
