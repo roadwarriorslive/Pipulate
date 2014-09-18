@@ -28,6 +28,6 @@ lookups using any source data (addresses, keywords, etc.) against any Web or
 data API source (you have access to), allowing you to write your own Python
 functions to extend the system. And what system is that? You can learn it well,
 because almost every line of code accompanied by a YouTube video. Playlist:
-https://www.youtube.com/watch?v=SdzDaohx-GA&list=PLy-AlqZFg6G8tBTB6FFN68mryG4JlCaf-"""
 
+<iframe width="560" height="315" src="//www.youtube.com/embed/videoseries?list=PLy-AlqZFg6G8tBTB6FFN68mryG4JlCaf-" frameborder="0" allowfullscreen></iframe>
 
