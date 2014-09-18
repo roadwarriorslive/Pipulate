@@ -31,14 +31,21 @@ import globs #Create objects that don't have to be passed as arguments.
 from flask import Flask
 app = Flask(__name__)
 from flask import request
+from flask import render_template
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def hello():
-  if "gkey" in request.args:
-    globs.GKEY = request.args.get('gkey')
-    main() 
-    return "Replaced questionmarks"
-  return "Doing nothing"
+  if request.method == 'POST':
+    #A hook for uploading CSV files
+    return "CSV file upload"
+  else:
+    if request.args:
+      if "gkey" in request.args:
+        globs.GKEY = request.args.get('gkey')
+        main() 
+        return "Replaced questionmarks"
+    else:
+      return render_template('pipulate.html', name="Mike")
 
 def main():
   """Allows processing of multiple worksheets.
