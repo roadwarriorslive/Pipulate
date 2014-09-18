@@ -34,7 +34,8 @@ from flask import request
 
 @app.route("/")
 def hello():
-  if "go" in request.args:
+  if "gkey" in request.args:
+    globs.GKEY = request.args.get('gkey')
     main() 
     return "Replaced questionmarks"
   return "Doing nothing"
@@ -88,7 +89,8 @@ def dbgdocs():
   login = pickle.load(open('temp.pkl', 'rb'))
   gc = gspread.login(login['username'], login['password'])
   try:
-    wks = gc.open("Use This").sheet1 #HTTP connection errors happen here.
+    wks = gc.open_by_key(globs.GKEY).sheet1 #HTTP connection errors happen here.
+    # https://docs.google.com/spreadsheets/d/182yAd0VYBhY30IW1sGXUg110aWh0pMaQa4nVtWXgNBo/edit?usp=sharing
   except:
     print("Couldn't reach Google Docs")
     return
