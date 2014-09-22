@@ -31,20 +31,22 @@ import globs #Create objects that don't have to be passed as arguments.
 from flask import Flask, request, render_template
 from flask_wtf import Form
 from flask_wtf.file import FileField
-from wtforms import StringField
+from wtforms import validators, StringField
 from wtforms.validators import DataRequired
 
 app = Flask(__name__)
 
 class pipform(Form):
-  gkey = StringField('Your Google Spreadsheet Key')
+  gkey = StringField('Your Google Spreadsheet Key', [validators.required()])
   csvfile = FileField('Your CSV File')
 
 @app.route("/", methods=['GET', 'POST'])
 def main():
   if request.method == 'POST':
-    #A hook for uploading CSV files
-    return "CSV file upload"
+    form = pipform(csrf_enabled=False)
+    if form.validate_on_submit():
+      return "I would pipulate now"
+    return render_template('pipulate.html', form=form)
   else:
     if request.args:
       if "gkey" in request.args:
