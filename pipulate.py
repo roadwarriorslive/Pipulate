@@ -28,27 +28,25 @@ because almost every line of code accompanied by a YouTube video. Playlist:
 https://www.youtube.com/watch?v=SdzDaohx-GA&list=PLy-AlqZFg6G8tBTB6FFN68mryG4JlCaf-"""
 
 import globs #Create objects that don't have to be passed as arguments.
-from flask import Flask
-app = Flask(__name__)
-from flask import request
-from flask import render_template
-
+from flask import Flask, request, render_template
 from flask_wtf import Form
 from wtforms import StringField
 from wtforms.validators import DataRequired
+
+app = Flask(__name__)
 
 class MyForm(Form):
   name = StringField('name', validators=[DataRequired()])
 
 @app.route('/submit', methods=('GET', 'POST'))
 def submit():
-    form = MyForm()
-    if form.validate_on_submit():
-        return redirect('/success')
-    return render_template('submit.html', form=form)
+  form = MyForm()
+  if form.validate_on_submit():
+    return redirect('/success')
+  return render_template('submit.html', form=form)
 
 @app.route("/", methods=['GET', 'POST'])
-def hello():
+def main():
   if request.method == 'POST':
     #A hook for uploading CSV files
     return "CSV file upload"
@@ -56,13 +54,13 @@ def hello():
     if request.args:
       if "gkey" in request.args:
         globs.GKEY = request.args.get('gkey')
-        main() 
+        pipulate()
         return "Replaced questionmarks"
     else:
       form = MyForm(csrf_enabled=False)
       return render_template('pipulate.html', form=form, name="Mike")
 
-def main():
+def pipuluate():
   """Allows processing of multiple worksheets.
 
   During testing, main is set to process one Google Spreadsheet and one local
