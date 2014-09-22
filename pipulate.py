@@ -30,13 +30,15 @@ https://www.youtube.com/watch?v=SdzDaohx-GA&list=PLy-AlqZFg6G8tBTB6FFN68mryG4JlC
 import globs #Create objects that don't have to be passed as arguments.
 from flask import Flask, request, render_template
 from flask_wtf import Form
+from flask_wtf.file import FileField
 from wtforms import StringField
 from wtforms.validators import DataRequired
 
 app = Flask(__name__)
 
-class MyForm(Form):
-  name = StringField('name', validators=[DataRequired()])
+class pipform(Form):
+  gkey = StringField('Your Google Spreadsheet Key')
+  csvfile = FileField('Your CSV File')
 
 @app.route("/", methods=['GET', 'POST'])
 def main():
@@ -50,11 +52,8 @@ def main():
         pipulate()
         return "Replaced questionmarks"
     else:
-      form = MyForm(csrf_enabled=False)
-      return render_template('pipulate.html', 
-                              form=form, 
-                              name="Mike", 
-                              last="Levin")
+      form = pipform(csrf_enabled=False)
+      return render_template('pipulate.html', form=form)
 
 def pipuluate():
   """Allows processing of multiple worksheets.
