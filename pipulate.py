@@ -38,13 +38,6 @@ app = Flask(__name__)
 class MyForm(Form):
   name = StringField('name', validators=[DataRequired()])
 
-@app.route('/submit', methods=('GET', 'POST'))
-def submit():
-  form = MyForm()
-  if form.validate_on_submit():
-    return redirect('/success')
-  return render_template('submit.html', form=form)
-
 @app.route("/", methods=['GET', 'POST'])
 def main():
   if request.method == 'POST':
@@ -58,12 +51,15 @@ def main():
         return "Replaced questionmarks"
     else:
       form = MyForm(csrf_enabled=False)
-      return render_template('pipulate.html', form=form, name="Mike")
+      return render_template('pipulate.html', 
+                              form=form, 
+                              name="Mike", 
+                              last="Levin")
 
 def pipuluate():
   """Allows processing of multiple worksheets.
 
-  During testing, main is set to process one Google Spreadsheet and one local
+  During testing, this is set to process one Google Spreadsheet and one local
   csv file. It also creates a list of global functions and translation table to
   their lower-case versions for recognizing function names in column labels.
   A Pythonic switch statement calls dbgdocs once and dblocal once."""
