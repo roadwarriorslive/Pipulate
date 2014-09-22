@@ -32,13 +32,13 @@ from flask import Flask, request, render_template
 from flask_wtf import Form
 from flask_wtf.file import FileField
 from wtforms import validators, StringField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, Optional, Required
 
 app = Flask(__name__)
 
 class pipform(Form):
-  gkey = StringField('Your Google Spreadsheet Key', [validators.required()])
-  csvfile = FileField('Your CSV File')
+  gkey = StringField('Your Google Spreadsheet Key', [RequiredIf(csvfile='')])
+  csvfile = FileField('Your CSV File', [RequiredIf(gkey='')])
 
 @app.route("/", methods=['GET', 'POST'])
 def main():
@@ -227,6 +227,29 @@ def adq(aval):
     return None #None-in/None-out. This special keyword shouldn't be quoted.
   else:
     return "'%s'" % (aval) #ALMOST everything else should be quoted.
+
+class RequiredIf(object):
+  """Validates field conditionally.
+
+  Usage::
+
+    login_method = StringField('', [AnyOf(['email', 'facebook'])])
+    email = StringField('', [RequiredIf(login_method='email')])
+    password = StringField('', [RequiredIf(login_method='email')])
+    facebook_token = StringField('', [RequiredIf(login_method='facebook')])
+  """
+  def __init__(self, *args, **kwargs):
+    self.conditions = kwargs
+
+  def __call__(self, form, field):
+    for name, data in self.conditions.items():
+      if name not in form._fields:
+        Optional(form, field)
+      else:
+        condition_field = form._fields.get(name)
+        if condition_field.data == data and not field.data:
+          Required()(form, field)
+    Optional()(form, field)
 
 def Func1():
   return "Out from func1"
