@@ -68,15 +68,19 @@ def main():
   if request.method == 'POST':
     form = PipForm(csrf_enabled=False)
     if form.validate_on_submit():
-      globs.GKEY = form.gkey.data
-      pipulate()
-      return "I pipulated"
+      if form.gkey.data:
+        globs.GKEY = form.gkey.data
+        pipulate('gdocs')
+        return "I pipulated Google Spreadsheet"
+      if form.csvfile.data:
+        pipulate('local')
+        return "I would have pipulated uploaded CSV file"
     return render_template('pipulate.html', form=form)
   else:
     form = PipForm(csrf_enabled=False)
     return render_template('pipulate.html', form=form)
 
-def pipulate():
+def pipulate(dbsource):
   """Allows processing of multiple worksheets.
 
   During testing, this is set to process one Google Spreadsheet and one local
@@ -87,8 +91,7 @@ def pipulate():
   globs.funcslc = [x.lower() for x in funcs] #Lower-case all function names
   globs.transfunc = dict(zip(globs.funcslc, funcs)) #Keep translation table
   dbmethod = {'local': dblocal, 'gdocs': dbgdocs}
-  for dbsource in ['gdocs']: #Each dbsource represents one worksheet
-    dbmethod[dbsource]()
+  dbmethod[dbsource]()
 
 def dblocal():
   """Loads a local csv file and dumps it into shelve object for processing.
