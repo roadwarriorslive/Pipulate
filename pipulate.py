@@ -59,28 +59,24 @@ class RequiredIf(object):
           Required()(form, field)
     Optional()(form, field)
 
-class pipform(Form):
+class PipForm(Form):
   gkey = StringField('Your Google Spreadsheet Key', [RequiredIf(csvfile='')])
   csvfile = FileField('Your CSV File', [RequiredIf(gkey='')])
 
 @app.route("/", methods=['GET', 'POST'])
 def main():
   if request.method == 'POST':
-    form = pipform(csrf_enabled=False)
+    form = PipForm(csrf_enabled=False)
     if form.validate_on_submit():
-      return "I would pipulate now"
+      globs.GKEY = form.gkey.data
+      pipulate()
+      return "I pipulated"
     return render_template('pipulate.html', form=form)
   else:
-    if request.args:
-      if "gkey" in request.args:
-        globs.GKEY = request.args.get('gkey')
-        pipulate()
-        return "Replaced questionmarks"
-    else:
-      form = pipform(csrf_enabled=False)
-      return render_template('pipulate.html', form=form)
+    form = PipForm(csrf_enabled=False)
+    return render_template('pipulate.html', form=form)
 
-def pipuluate():
+def pipulate():
   """Allows processing of multiple worksheets.
 
   During testing, this is set to process one Google Spreadsheet and one local
@@ -91,7 +87,7 @@ def pipuluate():
   globs.funcslc = [x.lower() for x in funcs] #Lower-case all function names
   globs.transfunc = dict(zip(globs.funcslc, funcs)) #Keep translation table
   dbmethod = {'local': dblocal, 'gdocs': dbgdocs}
-  for dbsource in ['gdocs', 'local']: #Each dbsource represents one worksheet
+  for dbsource in ['gdocs']: #Each dbsource represents one worksheet
     dbmethod[dbsource]()
 
 def dblocal():
