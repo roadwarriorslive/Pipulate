@@ -63,6 +63,10 @@ class PipForm(Form):
   gkey = StringField('Your Google Spreadsheet Key', [RequiredIf(csvfile='')])
   csvfile = FileField('Your CSV File', [RequiredIf(gkey='')])
 
+def allowed_file(filename):
+  return '.' in filename and \
+    filename.rsplit('.', 1)[1] in globs.ALLOWED_EXTENSIONS
+
 @app.route("/", methods=['GET', 'POST'])
 def main():
   if request.method == 'POST':
@@ -73,6 +77,13 @@ def main():
         pipulate('gdocs')
         return "I pipulated Google Spreadsheet"
       if form.csvfile.data:
+        import os
+        from werkzeug import secure_filename        
+        app.config['UPLOAD_FOLDER'] = globs.UPLOAD_FOLDER
+        file = request.files['csvfile']
+        if file and allowed_file(file.filename):
+          filename = secure_filename(file.filename)
+          file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         pipulate('local')
         return "I would have pipulated uploaded CSV file"
     return render_template('pipulate.html', form=form)
@@ -102,7 +113,8 @@ def dblocal():
   S3, Berkeley DB, Postgres or other backend databases."""
   import shelve, csv
   allrows = shelve.open('drows.db')
-  with open('sample.csv', newline='') as f:
+  import os
+  with open(os.path.join(app.config['UPLOAD_FOLDER'], 'sample.csv'), newline='') as f:
     reader = csv.reader(f)
     for rowdex, arow in enumerate(reader): #Dump entire csv into shelve.
       allrows[str(rowdex + 1)] = arow
