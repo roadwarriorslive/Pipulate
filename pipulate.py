@@ -111,9 +111,12 @@ def dblocal():
   shelve API here is to leave a hook for the external shove library which will
   allow this to run on MUCH larger datasets by connecting it to Redis, Amazon
   S3, Berkeley DB, Postgres or other backend databases."""
-  import shelve, csv
+  import shelve, csv, os
+  try:
+    os.remove('drows.db')
+  except OSError:
+    pass
   allrows = shelve.open('drows.db')
-  import os
   with open(os.path.join(globs.UPLOAD_FOLDER, globs.filename), newline='') as f:
     reader = csv.reader(f)
     for rowdex, arow in enumerate(reader): #Dump entire csv into shelve.
