@@ -75,7 +75,7 @@ def main():
       if form.gkey.data:
         globs.GKEY = form.gkey.data
         pipulate('gdocs')
-        return "I pipulated Google Spreadsheet"
+        return render_template('pipulate.html', form=form)
       if form.csvfile.data:
         import os
         from werkzeug import secure_filename        
@@ -85,7 +85,7 @@ def main():
           globs.filename = secure_filename(file.filename)
           file.save(os.path.join(globs.UPLOAD_FOLDER, globs.filename))
         pipulate('local')
-        return "I would have pipulated uploaded CSV file"
+        return render_template('pipulate.html', form=form)
     return render_template('pipulate.html', form=form)
   else:
     form = PipForm(csrf_enabled=False)
