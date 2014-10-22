@@ -34,7 +34,7 @@ from flask_wtf.file import FileField
 from wtforms import validators, StringField
 from wtforms.validators import DataRequired, Optional, Required
 
-app = Flask(__name__, static_folder='/tmp', static_url_path='/tmp')
+app = Flask(__name__, static_folder='../uploads', static_url_path='/files')
 
 class RequiredIf(object):
   """Validates field conditionally.
