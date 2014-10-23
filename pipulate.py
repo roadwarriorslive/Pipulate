@@ -25,7 +25,14 @@ lookups using any source data (addresses, keywords, etc.) against any Web or
 data API source (you have access to), allowing you to write your own Python
 functions to extend the system. And what system is that? You can learn it well,
 because almost every line of code accompanied by a YouTube video. Playlist:
-https://www.youtube.com/watch?v=SdzDaohx-GA&list=PLy-AlqZFg6G8tBTB6FFN68mryG4JlCaf-"""
+https://www.youtube.com/watch?v=SdzDaohx-GA&list=PLy-AlqZFg6G8tBTB6FFN68mryG4JlCaf-
+
+REQUIREMENTS
+pip install pygreen 
+pip install flask_wtf
+pip install gspread
+
+"""
 
 import globs #Create objects that don't have to be passed as arguments.
 from flask import Flask, request, render_template
@@ -60,8 +67,8 @@ class RequiredIf(object):
     Optional()(form, field)
 
 class PipForm(Form):
-  gkey = StringField('Your Google Spreadsheet Key', [RequiredIf(csvfile='')])
-  csvfile = FileField('Your CSV File', [RequiredIf(gkey='')])
+  pipurl = StringField('URL to Pipulate', [RequiredIf(csvfile='')])
+  csvfile = FileField('Your CSV File', [RequiredIf(pipurl='')])
 
 def allowed_file(filename):
   return '.' in filename and \
@@ -72,8 +79,8 @@ def main():
   if request.method == 'POST':
     form = PipForm(csrf_enabled=False)
     if form.validate_on_submit():
-      if form.gkey.data:
-        globs.GKEY = form.gkey.data
+      if form.pipurl.data:
+        globs.PIPURL = form.pipurl.data
         pipulate('gdocs')
         return render_template('pipulate.html', form=form)
       if form.csvfile.data:
@@ -144,7 +151,7 @@ def dbgdocs():
   login = pickle.load(open('temp.pkl', 'rb'))
   gc = gspread.login(login['username'], login['password'])
   try:
-    wks = gc.open_by_key(globs.GKEY).sheet1 #HTTP connection errors happen here.
+    wks = gc.open_by_url(globs.PIPURL).sheet1 #HTTP connection errors happen here.
     # https://docs.google.com/spreadsheets/d/182yAd0VYBhY30IW1sGXUg110aWh0pMaQa4nVtWXgNBo/edit?usp=sharing
   except:
     print("Couldn't reach Google Docs")

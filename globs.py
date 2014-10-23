@@ -1,4 +1,4 @@
-GKEY = ''
+PIPURL = ''
 fargs = {}
 row1 = []
 funcslc = []

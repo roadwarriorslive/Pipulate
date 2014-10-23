@@ -17,7 +17,7 @@
     <div role="main" class="ui-content jqm-content jqm-fullwidth">
         <form method="POST" action="/" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
-            {{ form.gkey.label }} {{ form.gkey(size=60) }}<br/>
+            {{ form.pipurl.label }} {{ form.pipurl(size=500) }}<br/>
             {{ form.csvfile.label }} {{ form.csvfile() }}<br/>
             <div style="text-align:center;">
             <button class="ui-btn ui-icon-arrow-r ui-btn-icon-right ui-btn-inline" type="submit" value="Pipulate">pipulate</button>
