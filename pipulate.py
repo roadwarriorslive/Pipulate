@@ -85,7 +85,7 @@ def main():
           globs.filename = secure_filename(file.filename)
           file.save(os.path.join(globs.UPLOAD_FOLDER, globs.filename))
         pipulate('local')
-        return render_template('pipulate.html', form=form)
+        return render_template('pipulate.html', form=form, filename=globs.filename)
     return render_template('pipulate.html', form=form)
   else:
     form = PipForm(csrf_enabled=False)

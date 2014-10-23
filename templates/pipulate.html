@@ -19,10 +19,14 @@
             {{ form.hidden_tag() }}
             {{ form.gkey.label }} {{ form.gkey(size=60) }}<br/>
             {{ form.csvfile.label }} {{ form.csvfile() }}<br/>
-            <br/>
             <div style="text-align:center;">
             <button class="ui-btn ui-icon-arrow-r ui-btn-icon-right ui-btn-inline" type="submit" value="Pipulate">pipulate</button>
             </div>
+            {% if filename %}
+            <div style="text-align:center;">
+            Click to download pipulated <a href="/files/{{ filename }}">{{ filename }}</a> file.
+            </div>
+            {% endif %}
         </form>
     </div><!-- /content -->
     <div data-role="panel" data-display="push" data-theme="b" id="nav-panel">
