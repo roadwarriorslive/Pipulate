@@ -99,13 +99,14 @@ def main():
     return render_template('pipulate.html', form=form, bookmarklet=getBookmarklet())
 
 def getBookmarklet():
+  import socket
   return '''javascript: var d = document,
       w = window,
       e = w.getSelection,
       k = d.getSelection,
       x = d.selection,
       s = (e ? e() : (k) ? k() : (x ? x.createRange().text : 0)),
-      f = 'http://mikelevinseo.local:8080/',
+      f = 'http://%s.local:8080/',
       l = d.location,
       e = encodeURIComponent,
       u = f + '?u=' + e(l.href) + '&t=' + e(d.title) + '&s=' + e(s) + '&v=4';
@@ -114,7 +115,7 @@ def getBookmarklet():
   };
   if (/Firefox/.test(navigator.userAgent)) setTimeout(a, 0);
   else a();
-  void(0)'''
+  void(0)''' % socket.gethostname()
 
 def pipulate(dbsource):
   """Allows processing of multiple worksheets.
