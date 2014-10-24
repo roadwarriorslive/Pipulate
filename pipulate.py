@@ -76,8 +76,8 @@ def allowed_file(filename):
 
 @app.route("/", methods=['GET', 'POST'])
 def main():
+  form = PipForm(csrf_enabled=False)
   if request.method == 'POST':
-    form = PipForm(csrf_enabled=False)
     if form.validate_on_submit():
       if form.pipurl.data:
         globs.PIPURL = form.pipurl.data
@@ -95,8 +95,11 @@ def main():
         return render_template('pipulate.html', form=form, filename=globs.filename)
     return render_template('pipulate.html', form=form)
   else:
-    form = PipForm(csrf_enabled=False)
-    return render_template('pipulate.html', form=form, bookmarklet=getBookmarklet())
+    if request.args:
+      form.pipurl.data = request.args.get('u')
+    return render_template('pipulate.html', 
+                            form=form, 
+                            bookmarklet=getBookmarklet())
 
 def getBookmarklet():
   import socket
