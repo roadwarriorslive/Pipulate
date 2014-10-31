@@ -31,6 +31,7 @@ REQUIREMENTS
 pip install pygreen 
 pip install flask_wtf
 pip install gspread
+pip install Flask-OAuthlib
 
 """
 
@@ -99,7 +100,18 @@ def main():
       form.pipurl.data = request.args.get('u')
     return render_template('pipulate.html', 
                             form=form, 
-                            bookmarklet=getBookmarklet())
+                            bookmarklet=getBookmarklet(),
+                            loginlink=getLoginlink())
+
+def getLoginlink():
+  baseurl = "https://accounts.google.com/o/oauth2/auth"
+  qsdict = {  'scope': 'https://spreadsheets.google.com/feeds/',
+              'response_type': 'token',
+              'redirect_uri': 'http://localhost:8080',
+              'client_id': '394883714902-h3fjk3u6rb4jr4ntpeft41kov6et2nve.apps.googleusercontent.com'
+            }
+  from urllib.parse import urlencode
+  return "%s?%s" % (baseurl, urlencode(qsdict))
 
 def getBookmarklet():
   import socket
