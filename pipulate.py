@@ -31,7 +31,6 @@ REQUIREMENTS
 pip install pygreen 
 pip install flask_wtf
 pip install gspread
-pip install Flask-OAuthlib
 
 """
 
