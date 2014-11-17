@@ -1,4 +1,57 @@
-Beginning of Journal
+# Beginning of Journal
+--------------------------------------------------------------------------------
+## Mon Nov 17 10:43:32 EST 2014
+
+This is the second daily work journal entry in the same day. What I do is
+simply hit the keyboard shortcut: @j, which does all the date insertion and
+cursor positioning and markdown formatting so that I can just start typing.
+This is something I innovated for myself when I first started using Mercurial
+(hg) and later git for my daily work journal--at least on-and-off. It is
+continually so tempting to use Google Docs for this purpose, because obviously
+it is a more natural writing environment--a real word processor. However, since
+committing to vim as my text editor / development environment, I've been
+looking for reasons to "be in vim" more often than normal day-to-day agency
+life allows. It will look like coding to my co-workers, but it is not coding.
+They will even be able to see it through github.
+
+But whereas I had extreme granular permission control over who sees my journal
+entries and how under Google Docs (I could start them in a shared or non-shared
+location) so that only myself (and perhaps Google) can read them, or so that my
+whole team can read them. I've begun to get into that habit here, having almost
+every day accounted for. But it's not WHERE every day is accounted for so much as
+THAT every day is accounted for. If some future data-mining artificial
+intelligence went accounting for my days in the future, if it were in Google
+Docs, it may or may not be able to access it, based on permissions and whether
+I even published the publish-able, which I usually don't. But when I do, I
+publish it on a WordPress site hosted at MikeLev.in, which may or may not be
+there and accessible in the future. I may as well give this daily work journal
+the same advantages as everything else that ends up in git, and github in
+particular. Systems like archive.org and everything else mining public
+information will essentially immortalize my daily work journal. Hello World.
+
+So, what next and why? That is the question. Well, it's all about client work.
+But it's also about forging the most intelligent way forward possible so that
+these next years at Flying Point Digital are as enjoyable and profitable and
+contributing to my daughter's education as possible. That means financially
+rewarding enough to travel and delegate my work here. The pouring forth of my
+online presence will mostly be through here (github) and my YouTube videos.
+That is very appropriate, I think. I will probably also use that utility I
+wrote that lets me easily publish TO WordPress from GitHub. There's a lot more
+I could do with that which I haven't been--but I should, given my recent
+activities, and the fact that I already did the difficult work.
+
+It's already noon! Okay, doing these automatic date-stamps as part of the daily
+journal entries is going to help a lot too in terms of keeping me aware of
+time. It's also going to help me deal with a lot of other related issues, like
+maintaining focus in a world and a business where so much of our work is done
+on the Internet through Web browsers, but the Web is in itself such a
+distraction--especially with all these notification systems competing for our
+attention. The trick is to use this daily journal in a plain old text file in
+vim natively on my machine as my main go-to point throughout the day. I detect
+the top-item to-do list going to have to end up at the top of this document.
+Although of course I'm going to be sanitizing out actual client names as I go
+so that everything remains publish-able.
+
 --------------------------------------------------------------------------------
 ## Mon Nov 17 09:20:04 EST 2014
 
