@@ -35,13 +35,14 @@ pip install gspread
 """
 
 import globs #Create objects that don't have to be passed as arguments.
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, session
 from flask_wtf import Form
 from flask_wtf.file import FileField
 from wtforms import validators, StringField
 from wtforms.validators import DataRequired, Optional, Required
 
 app = Flask(__name__, static_folder='../uploads', static_url_path='/files')
+app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 class RequiredIf(object):
   """Validates field conditionally.
@@ -96,7 +97,10 @@ def main():
     return render_template('pipulate.html', form=form)
   else:
     if request.args:
-      form.pipurl.data = request.args.get('u')
+      if "access_token" in request.args:
+        session['oa2'] = request.args.get("access_token")
+      if 'u' in request.args:
+        form.pipurl.data = request.args.get('u')
     return render_template('pipulate.html', 
                             form=form, 
                             bookmarklet=getBookmarklet(),

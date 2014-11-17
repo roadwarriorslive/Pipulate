@@ -1,5 +1,33 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Mon Nov 17 12:55:32 EST 2014
+
+It's very refreshing to not have to worry about SSH sessions timing out. But
+I'm on a Windows machine in vim doing Python work. Imagine that. As much as I
+love the Raspberry Pi, I have to adjust my "what I'm all about" to be more
+about Linux-light, Python, vim and git. MinGW seems to be plenty of Unixy like
+stuff to keep things chugging along. But that script I wrote to publish from
+git to WordPress will probably be an example of something that relies a little
+more heavily on an actual Bash shell. Get a tiny little follow-on from last
+Friday's work done before jumping head-first into client work. Working more
+intelligently is what this is all about. And with the amount that SEO has
+changed, is changing, and will continue to change, it's really these things
+about my daily work-flow that make all the difference. I'm different. But I
+have to be different, effective, and still able to communicate well. And so...
+
+1, 2, 3... 1? Been awhile since I've used that technique. Anyone who has read
+my prior daily work journals will be used to seeing that technique all over the
+place. You always have to start with the first step. And so, you think through
+your next 3 steps and tackle step 1. You're always at step 1.
+
+1. Research Flask Sessions VERY QUICKLY. Okay, get over the hangup of having to
+do a YouTube video for EVERY edit. This journal in particular should get you
+over that. Think out loud here, and it will serve much the same function. 
+
+Okay, done. That's where I should have been on Friday. Do a commit. But I think
+don't push. Try to do pushes when a journal entry gets to a natural cut-point.
+
+--------------------------------------------------------------------------------
 ## Mon Nov 17 10:43:32 EST 2014
 
 This is the second daily work journal entry in the same day. What I do is
