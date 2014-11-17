@@ -1,0 +1,72 @@
+Beginning of Journal
+--------------------------------------------------------------------------------
+## Mon Nov 17 09:20:04 EST 2014
+
+Dear daily work journal inside my github repository for the Pipulate project. I
+just made this file, journal.txt. It's a pretty big deal to me where I keep my
+daily journal, for it makes all sorts of decisions automatic, like whether, how
+and where it gets published. By actually putting IN the repository for a free
+and open source project on github, it will by definition get automatically
+published every time I update it, commit changes on this file, and push. And
+so, by making this my default first daily work journal location, I am putting
+this "task" in charge of all other tasks--including my day-to-day work for
+clients and such. And that's a good thing, because my effectiveness here is not
+just as another SEO Microsoft Office suite jockey (Powerpoint, Word, email,
+etc.) but rather it is in my ability to think different than others and act on
+those differences to produce more and different and better results than others
+in my field. Ultimately, my effectiveness in the field itself including
+whatever it transforms into will be determined by my ability to think and act
+better than others.
+
+Okay, some of the things that have to change now are ensuring that my vim
+environment is pretty much the same on all of the machines I sit down to work
+out. I no longer am logging into some Rackspace or Raspberry Pi server to do my
+work through SSH to some remote server (even if the server is sitting next to
+me). Instead, I am getting my Linux / Python / vim and git environment right on
+the machine I'm working on so that my web development address is localhost.
+I've tried to avoid this for some time, but ultimately, it's better to not have
+to log into some remote machine. It's even the way git was envisioned by Linus
+Torvalds who figured he might want to see who fixed a bug at 30 thousand feet.
+See? Linus didn't want to rely on that full-time connection to the Internet
+just to do his thing. In today's world of mash-ups, it seems pretty far fetched
+to do all your development work locally without an Internet connection, but
+even in the case of Pipulate, all you need is a locally running webserver to
+simulate the serving of some site on the Web, and using the csv-file interface
+to Pipulate instead of the Google Docs interface, and development is totally
+possible. I'd have to make access to JQuery, JQuery Mobile and any other
+JavaScript libraries that I rely on local, but no big deal. Dev work on
+Pipulate disconnected from the Internet is possible, and I should embrace that.
+
+What's further, I should talk as freely as I can about the development of the
+Pipulate project in a way that's just as high-profile, exposed and compelling
+as those YouTube videos I do on Friday while I'm coding and while I'm walking
+my dog in the morning on days I'm not coding. Doing journal entries here in the
+repository keeps my mind where it should be--on what I'm doing with this
+project and this code. It keeps me practicing vim constantly, and it makes
+issues surrounding Pipulate "parent" to even issues surrounding my employers
+(and by extension, MY) clients. But there's no problem that my clients face
+that aren't specific instances of the types of larger general problems in the
+industry that I'm designing Pipulate to address--and ultimately, let us help
+our clients fix... and then train them to KEEP those things fixed, so they
+don't keep popping out-of-whack. Pipulate is a little bit of a Swiss Army Knife
+of SEO & Social tools that can be used on a case-by-case basis in order to do
+special investigations (like keyword builds and the like), or it can be the
+scheduled and distributed workhorse doing position and popularity monitoring,
+distilling down the data into actionable next-step recommendations.
+
+In other words, Pipulate is going to ROCK the SEO and Social worlds--not only
+insofar as it will replace other much more expensive tools, but also in how it
+will allow you to work with other Pipulators to create circles of private
+collaborators to allow you to use each other as (respectfully) as private proxy
+servers to distribute monitoring traffic and processing jobs. In yet more other
+words, Pipulate will provide a lot of those abilities previously reserved for
+only the most advanced technical Kung Fu gurus to the average (yet, slightly
+still ambitious) marketer and wanna-be programmer. Pipulate provides a
+framework to a large number of the fairly advanced monitoring and
+service-interaction tasks you can imagine, while still not calling on you to do
+that much programming directly yourself--until the time comes that you do. It's
+a lot like that day you try your hand at Excel macros, but instead of such
+silly throw-away work as macros within obsolescencing office software, you will
+be trying your hand at the actual awesome Python Programming language. I plan
+on Pipulate being a gateway drug to programming.
+
