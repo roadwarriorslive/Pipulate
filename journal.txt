@@ -1,5 +1,51 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Mon Nov 17 17:41:36 EST 2014
+
+It's the end of the day now--5:40 PM and I really feel the difference already
+of having a daily work journal directly in my repository. THIS is a better base
+of operations - a command-line terminal with vim running - than a web browser
+with infinite distractions. I love having my keyboard macro back for achieving
+a sort of blog-like chronological ordering while still in a text file. It will
+be the biggest part of the Pipulate project file-wise, but so what? It's like
+the DNA of this project. It will be interesting for dissecting my thoughts
+about my decisions if the project ever really gets so big that anyone cares. It
+will stay inextricably interconnected with the code itself in a way that not
+even the YouTube videos can. But it is key to my doing coding work during the
+week in a documented fashion without having to do a YouTube video for every
+commit.
+
+Soon, my Dell Venue 8 Pro Kickstarted docking/charging station will arrive, and
+I might even consider using that here at the office. It will be nice to have a
+TOTALLY portable Windows system. If I set that up with a webserver and maybe a
+custom hosts file, I could use it for offline development work in the Linus
+Torvalds coding at 30,000 feet way--except of course, on the subway. Think
+about having no web service connections to worry about breaking when testing
+Pipulate! Wow, that will really help me polish the csv-file aspect (versus the
+Google Spreadsheets mode).
+
+One thing: I can't really remain pure about when I do commits and pushes. This
+entry, for example, is going to have to be pushed before I leave, because it
+would be ridiculous risking losing thought-work like this by not committing and
+pushing from wherever I am at the end of the day.
+
+And now a word about platform-independence! I used to think platform
+independence existed so long as you could get a terminal window that you could
+SSH from--and into whatever remote server you were ACTUALLY developing on. Now,
+I believe in developing TRULY local on the very machine you're sitting down at.
+Why let bandwidth and flakey connections be a bottleneck? Why not get the
+benefit of the speed of the hardware you're sitting in front of? Only reason
+not to is if it couldn't run your code just as well as anything else, and
+that's no longer the case. Even Windows 7 makes a decent Linux / Python / vim
+and git platform so long as you install MinGW -- and probably Cygwin would do
+as well. But I chose MinGW because I got Pipulate running on it most easily. It
+worked with the main Python distribution which was the newest, instead of the
+one bundled with the Cygwin/MinGW installer. It probably really doesn't even
+matter if I figured it out on Cygwin first, that would have been fine. The
+important thing is close-enough to be compatible and host the app. Knowledge is
+transferable, because most knowledge is bunched up around Python and vim.
+
+--------------------------------------------------------------------------------
 ## Mon Nov 17 12:55:32 EST 2014
 
 It's very refreshing to not have to worry about SSH sessions timing out. But
