@@ -2,4 +2,7 @@
 *.swp
 *.db
 *.csv
+*.bak
+*.dat
+*.dir
 __pycache__/
