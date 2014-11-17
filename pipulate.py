@@ -108,13 +108,16 @@ def main():
 
 def getLoginlink():
   baseurl = "https://accounts.google.com/o/oauth2/auth"
-  qsdict = {  'scope': 'https://spreadsheets.google.com/feeds/',
+  qsdict = {  'scope': 'https://docs.google.com/feeds/',
               'response_type': 'token',
               'redirect_uri': 'http://localhost:8080',
+              'approval_prompt': 'force',
               'client_id': '394883714902-h3fjk3u6rb4jr4ntpeft41kov6et2nve.apps.googleusercontent.com'
             }
   from urllib.parse import urlencode
   return "%s?%s" % (baseurl, urlencode(qsdict))
+
+
 
 def getBookmarklet():
   import socket
