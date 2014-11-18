@@ -117,8 +117,6 @@ def getLoginlink():
   from urllib.parse import urlencode
   return "%s?%s" % (baseurl, urlencode(qsdict))
 
-
-
 def getBookmarklet():
   import socket
   return '''javascript: var d = document,
@@ -137,6 +135,10 @@ def getBookmarklet():
   if (/Firefox/.test(navigator.userAgent)) setTimeout(a, 0);
   else a();
   void(0)''' % socket.gethostname()
+
+class Credentials (object):
+  def __init__ (self, access_token=None):
+    self.access_token = access_token
 
 def pipulate(dbsource):
   """Allows processing of multiple worksheets.
@@ -188,8 +190,10 @@ def dbgdocs():
   interactive sessions with smaller datasets. Demonstrating this approach to
   people is impressive and has a compelling charm."""
   import pickle, gspread
-  login = pickle.load(open('temp.pkl', 'rb'))
-  gc = gspread.login(login['username'], login['password'])
+  #login = pickle.load(open('temp.pkl', 'rb'))
+  #gc = gspread.login(login['username'], login['password'])
+  credentials = Credentials(access_token=session['oa2'])
+  gc = gspread.authorize(credentials)
   try:
     wks = gc.open_by_url(globs.PIPURL).sheet1 #HTTP connection errors happen here.
     # https://docs.google.com/spreadsheets/d/182yAd0VYBhY30IW1sGXUg110aWh0pMaQa4nVtWXgNBo/edit?usp=sharing

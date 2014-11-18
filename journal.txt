@@ -1,5 +1,41 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Tue Nov 18 09:23:58 EST 2014
+
+Ah, the feeling of my old macro at the beginning of the morning. An actual
+OS/vim-inserted datestamp of the moment I sat down. 
+
+Tue Nov 18 10:13:29 EST 2014
+I especially like being able to pop in a datestamp as I go. It gives a real
+idea of the flow of the day. I get in early and have a really good mentoring
+career chat with one of my people. I have a 1:00 PM client call coming up, but
+I will have backup from 2 people on it. I'm not a fan of presenting the monthly
+reports myself, but its mostly because I didn't prepare them myself and don't
+necessarily have the depth behind what I'm showing if/when challenged. That's
+mitigated a lot by having my counterparts in on the presentation. 
+
+Be prepared for that call today, and then be ready to run off for the other
+on-site client meeting.
+
+Tue Nov 18 11:17:48 EST 2014
+Ah, the lovely fire-drills. Okay, I have to make sure my meeting is scheduled
+correctly in Gotomeeting. Okay, done. So many usernames and passwords to keep
+track of! I have a client call coming up at 1:00 PM and then have to scoot over
+to a client site.
+
+Tue Nov 18 12:46:06 EST 2014
+Okay, the client meeting is just 15 minutes from now. Getting my last practice
+runs in, but it looks like one of my people is going to be walking the client
+through most of the deck. Just don't let yourself become mentally lazy. Stay on
+top of everything.
+
+Tue Nov 18 17:45:31 EST 2014
+Okay, did an on-site client meeting today, plus a monthly SEO call. Really
+nothing new in terms of codding. Only about 15 minutes before day is over. Can
+I get some coding in? Can I test to see if authorization works? If I did, how
+would it go? Page? http://burnash.github.io/gspread/oauth2.html
+
+--------------------------------------------------------------------------------
 ## Mon Nov 17 17:41:36 EST 2014
 
 It's the end of the day now--5:40 PM and I really feel the difference already
