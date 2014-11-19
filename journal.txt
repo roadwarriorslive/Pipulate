@@ -1,5 +1,33 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Wed Nov 19 09:30:20 EST 2014
+
+Ah, yep. Executing that new datestamp headline macro has a satisfying feeling
+in the morning. I look to see what time I did it by. Compare it to yesterday.
+Make myself time and mission-sensitive. And now what? Follow through on your
+work from last night. Had good morning chat with my coworkers about the wisdom
+of work on the side to have skin in the game, and on the switch from iPhone to
+Android (Moto X) and on the new YouTube production facility in NYC which we're
+skipping the parties going on today and tomorrow, but are still determined to
+get to maybe later. We're all working on getting our subscriber rates up to
+over 5000... hahaha!
+
+Wed Nov 19 10:38:23 EST 2014
+I still haven't done the test I want, but I've been invited to Lily and Adal's
+wedding, and symbol under c in facade is called a cedilla. Ha ha ha. I love
+where I work. Okay, so...
+
+Wed Nov 19 11:05:12 EST 2014
+And again! 1, 2, 3... 1? 
+
+Wed Nov 19 13:59:00 EST 2014
+This is why I have work from home Fridays. Okay, I was getting hung up on the
+login screen not showing the permission scopes it was asking for correctly, but
+it turns out that's because the session was already logged in, and progressive
+scope was letting an incomplete list show (only offline access). And so I just
+implemented a logout link.
+
+--------------------------------------------------------------------------------
 ## Tue Nov 18 09:23:58 EST 2014
 
 Ah, the feeling of my old macro at the beginning of the morning. An actual

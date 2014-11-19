@@ -108,7 +108,7 @@ def main():
 
 def getLoginlink():
   baseurl = "https://accounts.google.com/o/oauth2/auth"
-  qsdict = {  'scope': 'https://spreadsheets.google.com/feeds/ https://www.googleapis.com/auth/drive',
+  qsdict = {  'scope': 'https://docs.google.com/feeds/ https://docs.googleusercontent.com/ https://spreadsheets.google.com/feeds/',
               'response_type': 'token',
               'redirect_uri': 'http://localhost:8080',
               'approval_prompt': 'force',
