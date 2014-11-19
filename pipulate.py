@@ -41,7 +41,7 @@ from flask_wtf.file import FileField
 from wtforms import validators, StringField
 from wtforms.validators import DataRequired, Optional, Required
 
-app = Flask(__name__, static_folder='../uploads', static_url_path='/files')
+app = Flask(__name__, static_folder=r'..\uploads', static_url_path='/files')
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 class RequiredIf(object):
@@ -97,6 +97,11 @@ def main():
     return render_template('pipulate.html', form=form)
   else:
     if request.args:
+      if 'logout' in request.args:
+        import urllib.request
+        revokeurl = 'https://accounts.google.com/o/oauth2/revoke?token=' + session['oa2']
+        urllib.request.urlopen(revokeurl)
+        session.clear()
       if "access_token" in request.args:
         session['oa2'] = request.args.get("access_token")
       if 'u' in request.args:
@@ -125,7 +130,7 @@ def getBookmarklet():
       k = d.getSelection,
       x = d.selection,
       s = (e ? e() : (k) ? k() : (x ? x.createRange().text : 0)),
-      f = 'http://%s.local:8080/',
+      f = 'http://localhost:8080/',
       l = d.location,
       e = encodeURIComponent,
       u = f + '?u=' + e(l.href) + '&t=' + e(d.title) + '&s=' + e(s) + '&v=4';
@@ -134,7 +139,7 @@ def getBookmarklet():
   };
   if (/Firefox/.test(navigator.userAgent)) setTimeout(a, 0);
   else a();
-  void(0)''' % socket.gethostname()
+  void(0)'''
 
 class Credentials (object):
   def __init__ (self, access_token=None):

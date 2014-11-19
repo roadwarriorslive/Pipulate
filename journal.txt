@@ -27,6 +27,15 @@ it turns out that's because the session was already logged in, and progressive
 scope was letting an incomplete list show (only offline access). And so I just
 implemented a logout link.
 
+Wed Nov 19 15:25:42 EST 2014
+I got out the single email that I had to do today. I also did a test to see
+that the OAuth2 login actually allowed the pipulation process to occur--and it
+did! I wish I could have made a Code-with-Mike Friday video out of that, but I
+really have to put login behind me using whatever scraps of time I can
+throughout the day.
+
+Now I need to put the polish on it. 
+
 --------------------------------------------------------------------------------
 ## Tue Nov 18 09:23:58 EST 2014
 
