@@ -15,47 +15,45 @@
 </script>
 </head>
 <body>
-<div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-responsive-page1" data-title="Panel responsive page" data-url="panel-responsive-page1">
+  <div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-responsive-page1" data-title="Panel responsive page" data-url="panel-responsive-page1">
     <div data-role="header">
-        <h1>PIPULATE</h1>
-        <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
-        <a href="#add-form" data-icon="gear" data-iconpos="notext">Add</a>
+      <h1>PIPULATE</h1>
+      <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+      <a href="#add-form" data-icon="gear" data-iconpos="notext">Add</a>
     </div><!-- /header -->
     <div role="main" class="ui-content jqm-content jqm-fullwidth">
-        <form method="POST" action="/" enctype="multipart/form-data">
-            {{ form.hidden_tag() }}
-            {{ form.pipurl.label }} {{ form.pipurl(size=500) }}<br/>
-            {{ form.csvfile.label }} {{ form.csvfile() }}<br/>
-            <div style="text-align:center;">
-            <button class="ui-btn ui-icon-arrow-r ui-btn-icon-right ui-btn-inline" type="submit" value="Pipulate">pipulate</button>
-            </div>
-            {% if filename %}
-            <div style="text-align:center;">
-            Click to download pipulated <a href="/files/{{ filename }}">{{ filename }}</a> file.
-            </div>
-            {% endif %}
-        </form>
+      <form method="POST" action="/" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        {{ form.pipurl.label }} {{ form.pipurl(size=500) }}<br/>
+        {{ form.csvfile.label }} {{ form.csvfile() }}<br/>
+        <div style="text-align:center;">
+          <button class="ui-btn ui-icon-arrow-r ui-btn-icon-right ui-btn-inline" type="submit" value="Pipulate">pipulate</button>
+        </div>
+        {% if filename %}
+        <div style="text-align:center;">
+          Click to download pipulated <a href="/files/{{ filename }}">{{ filename }}</a> file.
+        </div>
+        {% endif %}
+      </form>
     </div><!-- /content -->
     <div data-role="panel" data-display="push" data-theme="b" id="nav-panel">
-        <ul data-role="listview">
-            <li data-icon="delete"><a href="#" data-rel="close">Close menu</a></li>
-                <li><a href="#">Sample option 1</a></li>
-                <li><a href="#">Sample option 2</a></li>
-                <li><a href="#">Sample option 3</a></li>
-        </ul>
+      <ul data-role="listview">
+      <li data-icon="delete"><a href="#" data-rel="close">Close menu</a></li>
+      <li><a href="#">Sample option 1</a></li>
+      <li><a href="#">Sample option 2</a></li>
+      <li><a href="#">Sample option 3</a></li>
+      </ul>
     </div><!-- /panel -->
     <div data-role="panel" data-position="right" data-display="reveal" data-theme="a" id="add-form">
-        <form class="userform">
-            <h2>Bookmarklet &amp; Login</h2>
-            Drag this to bookmark toolbar: <button class="ui-btn ui-icon-star ui-btn-icon-right ui-btn-inline" type="submit" value="Pipulate"><a href="{{ bookmarklet }}">Pipulate</a></button>
-            <br/><a href="{{ loginlink }}">Login</a>
-            {% if session %}
-            <br/><a href="http://localhost:8080?logout">Logout</a>
-            {% endif %}
-        </form>
+      <form class="userform">
+        <h2>Bookmarklet &amp; Login</h2>
+        Drag this to bookmark toolbar: <button class="ui-btn ui-icon-star ui-btn-icon-right ui-btn-inline" type="submit" value="Pipulate"><a href="{{ bookmarklet }}">Pipulate</a></button>
+        <br/><a href="{{ loginlink }}">Login</a>
+        {% if session %}
+        <br/><a href="http://localhost:8080?logout">Logout</a>
+        {% endif %}
+      </form>
     </div><!-- /panel -->
-</div>
-
-
+  </div>
 </body>
 </html>
