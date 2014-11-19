@@ -98,10 +98,12 @@ def main():
   else:
     if request.args:
       if 'logout' in request.args:
-        import urllib.request
-        revokeurl = 'https://accounts.google.com/o/oauth2/revoke?token=' + session['oa2']
-        urllib.request.urlopen(revokeurl)
-        session.clear()
+        if session:
+          if 'oa2' in session:
+            import urllib.request
+            revokeurl = 'https://accounts.google.com/o/oauth2/revoke?token=' + session['oa2']
+            urllib.request.urlopen(revokeurl)
+          session.clear()
       if "access_token" in request.args:
         session['oa2'] = request.args.get("access_token")
       if 'u' in request.args:

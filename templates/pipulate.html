@@ -46,10 +46,12 @@
     </div><!-- /panel -->
     <div data-role="panel" data-position="right" data-display="reveal" data-theme="a" id="add-form">
         <form class="userform">
-            <h2>Login</h2>
-            Drag this to bookmark toolbar: <a href="{{ bookmarklet }}">Pipulate</a>
+            <h2>Bookmarklet &amp; Login</h2>
+            Drag this to bookmark toolbar: <button class="ui-btn ui-icon-star ui-btn-icon-right ui-btn-inline" type="submit" value="Pipulate"><a href="{{ bookmarklet }}">Pipulate</a></button>
             <br/><a href="{{ loginlink }}">Login</a>
+            {% if session %}
             <br/><a href="http://localhost:8080?logout">Logout</a>
+            {% endif %}
         </form>
     </div><!-- /panel -->
 </div>
