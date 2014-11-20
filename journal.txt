@@ -30,6 +30,9 @@ pipulate user interface. There's mechanisms built into Flask, and there are
 other things I could do. I should at the very minimum use the built-into-Flask
 stuff--at least for and especially for debugging. 
 
+Thu Nov 20 11:21:47 EST 2014
+Okay, I have flask message flashing in as a Hello World sort of thing. Turn it
+into some basic feedback for the user now.
 
 --------------------------------------------------------------------------------
 ## Wed Nov 19 09:30:20 EST 2014

@@ -77,7 +77,6 @@ def allowed_file(filename):
 
 @app.route("/", methods=['GET', 'POST'])
 def main():
-  flash('Hello World')
   form = PipForm(csrf_enabled=False)
   if request.method == 'POST':
     if form.validate_on_submit():
@@ -93,12 +92,14 @@ def main():
         if file and allowed_file(file.filename):
           globs.filename = secure_filename(file.filename)
           file.save(os.path.join(globs.UPLOAD_FOLDER, globs.filename))
-        pipulate('local')
+          flash('CSV file processed')
+          pipulate('local')
         return render_template('pipulate.html', form=form, filename=globs.filename)
     return render_template('pipulate.html', form=form)
   else:
     if request.args:
       if 'logout' in request.args:
+        flash('Logged out from Google')
         if session:
           if 'oa2' in session:
             import urllib.request
@@ -107,6 +108,7 @@ def main():
           session.clear()
       if "access_token" in request.args:
         session['oa2'] = request.args.get("access_token")
+        flash('Logged into Google')
       if 'u' in request.args:
         form.pipurl.data = request.args.get('u')
     return render_template('pipulate.html', 
