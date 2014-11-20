@@ -41,7 +41,7 @@ from flask_wtf.file import FileField
 from wtforms import validators, StringField
 from wtforms.validators import DataRequired, Optional, Required
 
-app = Flask(__name__, static_folder=r'..\uploads', static_url_path='/files')
+app = Flask(__name__, static_folder='../uploads', static_url_path='/files')
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 class RequiredIf(object):
@@ -157,7 +157,10 @@ def dblocal():
   except OSError:
     pass
   allrows = shelve.open('drows.db')
-  with open(os.path.join(globs.UPLOAD_FOLDER, globs.filename), newline='') as f:
+  ospath = os.path.join(globs.UPLOAD_FOLDER, globs.filename)
+  if ospath[-1:] == '\\':
+    ospath = ospath[:-1]
+  with open(ospath, 'r') as f:
     reader = csv.reader(f)
     for rowdex, arow in enumerate(reader): #Dump entire csv into shelve.
       allrows[str(rowdex + 1)] = arow
