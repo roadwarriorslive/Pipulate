@@ -86,10 +86,10 @@ def main():
             revokeurl = 'https://accounts.google.com/o/oauth2/revoke?token=' + session['oa2']
             urllib.request.urlopen(revokeurl)
           session.clear()
-          flash('Logged out from Google')
+          flash('Logged out from Google.')
       if "access_token" in request.args:
         session['oa2'] = request.args.get("access_token")
-        flash('Logged into Google')
+        flash('Logged into Google. Get pipulating!')
       if 'u' in request.args:
         session['u'] = request.args.get('u')
         flash('URL found')
@@ -177,6 +177,7 @@ def dbgdocs():
       credentials = Credentials(access_token=session['oa2'])
     else:
       flash('Not logged into Google. Please Login.')
+      return
     try:
       gc = gspread.authorize(credentials)
       wks = gc.open_by_url(globs.PIPURL).sheet1 #HTTP connection errors happen here.
