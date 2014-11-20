@@ -15,7 +15,7 @@
     </script>
   </head>
   <body>
-    <div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-responsive-page1" data-title="Panel responsive page" data-url="panel-responsive-page1">
+    <div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-responsive-page1" data-title="Pipulate" data-url="panel-responsive-page1">
       <div data-role="header">
         <h1>PIPULATE</h1>
         <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
@@ -47,7 +47,8 @@
       <div data-role="panel" data-position="right" data-display="reveal" data-theme="a" id="add-form">
         <form class="userform">
           <h2>Bookmarklet &amp; Login</h2>
-          Drag this to bookmark toolbar: <button class="ui-btn ui-icon-star ui-btn-icon-right ui-btn-inline" type="submit" value="Pipulate"><a href="{{ bookmarklet }}">Pipulate</a></button>
+          Drag this to bookmark toolbar: <a href="{{ bookmarklet }}">Pipulate</a>
+          <hr/>
           <br/><a href="{{ loginlink }}">Login</a>
           {% if session %}
           <br/><a href="http://localhost:8080?logout">Logout</a>

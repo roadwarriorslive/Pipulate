@@ -125,23 +125,7 @@ def getLoginlink():
   return "%s?%s" % (baseurl, urlencode(qsdict))
 
 def getBookmarklet():
-  import socket
-  return '''javascript: var d = document,
-      w = window,
-      e = w.getSelection,
-      k = d.getSelection,
-      x = d.selection,
-      s = (e ? e() : (k) ? k() : (x ? x.createRange().text : 0)),
-      f = 'http://localhost:8080/',
-      l = d.location,
-      e = encodeURIComponent,
-      u = f + '?u=' + e(l.href) + '&t=' + e(d.title) + '&s=' + e(s) + '&v=4';
-  a = function() {
-      if (!w.open(u, 't', 'toolbar=0,resizable=1,scrollbars=1,status=1,width=720,height=570')) l.href = u;
-  };
-  if (/Firefox/.test(navigator.userAgent)) setTimeout(a, 0);
-  else a();
-  void(0)'''
+  return '''javascript:(function(){open('http://localhost:8080/?u='+encodeURIComponent(document.location.href));})();'''
 
 class Credentials (object):
   def __init__ (self, access_token=None):
@@ -199,23 +183,25 @@ def dbgdocs():
   import pickle, gspread
   #login = pickle.load(open('temp.pkl', 'rb'))
   #gc = gspread.login(login['username'], login['password'])
-  credentials = Credentials(access_token=session['oa2'])
-  gc = gspread.authorize(credentials)
-  try:
-    wks = gc.open_by_url(globs.PIPURL).sheet1 #HTTP connection errors happen here.
-    # https://docs.google.com/spreadsheets/d/182yAd0VYBhY30IW1sGXUg110aWh0pMaQa4nVtWXgNBo/edit?usp=sharing
-  except:
-    print("Couldn't reach Google Docs")
-    return
-  for rowdex in range(1, wks.row_count): #Start stepping through every row.
-    arow = wks.row_values(rowdex)
-    if arow: #But only process it if it does not come back as empty list.
-      newrow = processrow(str(rowdex), arow) #Replace question marks in row
-      for coldex, acell in enumerate(newrow): #Then step through new row
-        if questionmark(arow, rowdex, coldex): #And update Google worksheet
-          wks.update_cell(rowdex, coldex+1, acell) #Gspread has no "0" column
-    else:
-      break #Stop grabbing new rows at the first empty one encountered.
+  if session:
+    if 'oa2' in session:
+      credentials = Credentials(access_token=session['oa2'])
+      gc = gspread.authorize(credentials)
+    try:
+      wks = gc.open_by_url(globs.PIPURL).sheet1 #HTTP connection errors happen here.
+      # https://docs.google.com/spreadsheets/d/182yAd0VYBhY30IW1sGXUg110aWh0pMaQa4nVtWXgNBo/edit?usp=sharing
+    except:
+      print("Couldn't reach Google Docs")
+      return
+    for rowdex in range(1, wks.row_count): #Start stepping through every row.
+      arow = wks.row_values(rowdex)
+      if arow: #But only process it if it does not come back as empty list.
+        newrow = processrow(str(rowdex), arow) #Replace question marks in row
+        for coldex, acell in enumerate(newrow): #Then step through new row
+          if questionmark(arow, rowdex, coldex): #And update Google worksheet
+            wks.update_cell(rowdex, coldex+1, acell) #Gspread has no "0" column
+      else:
+        break #Stop grabbing new rows at the first empty one encountered.
 
 def questionmark(oldrow, rowdex, coldex):
   """Returns true if a question mark is supposed to be replaced in cell.

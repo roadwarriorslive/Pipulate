@@ -34,7 +34,17 @@ did! I wish I could have made a Code-with-Mike Friday video out of that, but I
 really have to put login behind me using whatever scraps of time I can
 throughout the day.
 
-Now I need to put the polish on it. 
+Now I need to put the polish on it.
+
+Wed Nov 19 18:18:51 EST 2014
+Interesting day. I get to work late tonight because Adi is with the
+grandparents. How am I best going to use it? Unboxing video of Dell Pro Venue 8
+docking station that I helped kickstart? Or get Pipulate further along?
+
+Wed Nov 19 19:35:50 EST 2014
+Finally decided to fix Google Spreadsheet redraw problem, which seems to happen
+from using any sort of element select logic on the screen. Ended up switching
+to tab approach in the process. May go back.
 
 --------------------------------------------------------------------------------
 ## Tue Nov 18 09:23:58 EST 2014
