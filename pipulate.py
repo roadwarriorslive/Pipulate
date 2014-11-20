@@ -63,7 +63,7 @@ def main():
     if form.pipurl.data:
       globs.PIPURL = form.pipurl.data
       pipulate('gdocs')
-    if form.csvfile.data:
+    elif form.csvfile.data:
       import os
       from werkzeug import secure_filename        
       app.config['UPLOAD_FOLDER'] = globs.UPLOAD_FOLDER
@@ -73,6 +73,10 @@ def main():
         file.save(os.path.join(globs.UPLOAD_FOLDER, globs.filename))
         flash('CSV file processed')
         pipulate('local')
+      else:
+        flash('Nothing to Pipulate')
+    else:
+      flash('Nothing to Pipulate')
     return render_template('pipulate.html', form=form, filename=globs.filename)
   else:
     if request.args:
@@ -172,12 +176,14 @@ def dbgdocs():
   if session:
     if 'oa2' in session:
       credentials = Credentials(access_token=session['oa2'])
-      gc = gspread.authorize(credentials)
+    else:
+      flash('Not logged into Google. Please Login.')
     try:
+      gc = gspread.authorize(credentials)
       wks = gc.open_by_url(globs.PIPURL).sheet1 #HTTP connection errors happen here.
       # https://docs.google.com/spreadsheets/d/182yAd0VYBhY30IW1sGXUg110aWh0pMaQa4nVtWXgNBo/edit?usp=sharing
     except:
-      print("Couldn't reach Google Docs")
+      flash("Couldn't reach Google Docs")
       return
     for rowdex in range(1, wks.row_count): #Start stepping through every row.
       arow = wks.row_values(rowdex)
