@@ -1,5 +1,37 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Thu Nov 20 09:26:46 EST 2014
+
+And a new day begins! I tried doing the unboxing for the Dell Venue 8 Pro
+docking station that I helped Kickstart, but I got into the office just a
+little too late. The morning activity started in a big way during the video,
+and I'm pretty sure there was client work discussion in the background, and I
+have to burn the video. Ugh. Oh well. It's not meant to be with the Dell Venue
+8 videos I guess. I lost a whole unboxing video of the original device too, but
+for different reasons.
+
+This work you're doing now is to reduce the magnitude of client requests and
+increase the frequency and quality and proactive nature of deliverables. Rapid
+investigations. The initial keyword research and site audit. Everything. And
+tons of things outside the direct SEO and Social industry that could benefit
+from stepping through a list of things to do some sort of lookup against any
+data source from the Internet. The trick now is to get to a point where you can
+get the new Pipulate running on your last remaining Rackspace server. Have it
+run side-by-side with your old work.
+
+I went back to the popping up a new window for the bookmarklet, but left the
+other code in there and commented out. I am going to avoid issues of providing
+a way to use it one way or the other (for now). I have much more important
+set-up work to do for tomorrow's code-with-Mike Friday. 
+
+We are actually at a pretty critical juncture user-interface-wise. What I need
+to do is create some excellent communication between the server and the
+pipulate user interface. There's mechanisms built into Flask, and there are
+other things I could do. I should at the very minimum use the built-into-Flask
+stuff--at least for and especially for debugging. 
+
+
+--------------------------------------------------------------------------------
 ## Wed Nov 19 09:30:20 EST 2014
 
 Ah, yep. Executing that new datestamp headline macro has a satisfying feeling

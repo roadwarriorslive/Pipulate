@@ -35,7 +35,7 @@ pip install gspread
 """
 
 import globs #Create objects that don't have to be passed as arguments.
-from flask import Flask, request, render_template, session
+from flask import Flask, request, render_template, session, flash
 from flask_wtf import Form
 from flask_wtf.file import FileField
 from wtforms import validators, StringField
@@ -77,6 +77,7 @@ def allowed_file(filename):
 
 @app.route("/", methods=['GET', 'POST'])
 def main():
+  flash('Hello World')
   form = PipForm(csrf_enabled=False)
   if request.method == 'POST':
     if form.validate_on_submit():
@@ -125,7 +126,8 @@ def getLoginlink():
   return "%s?%s" % (baseurl, urlencode(qsdict))
 
 def getBookmarklet():
-  return '''javascript:(function(){open('http://localhost:8080/?u='+encodeURIComponent(document.location.href));})();'''
+  #return '''javascript:(function(){open('http://localhost:8080/?u='+encodeURIComponent(document.location.href));})();'''
+  return '''javascript:(function(){window.open('http://localhost:8080/?u='+encodeURIComponent(document.location.href), 't', 'toolbar=0,resizable=1,scrollbars=1,status=1,width=640,height=960');})();'''
 
 class Credentials (object):
   def __init__ (self, access_token=None):
