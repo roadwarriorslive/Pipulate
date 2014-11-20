@@ -71,13 +71,12 @@ def main():
       if file and allowed_file(file.filename):
         globs.filename = secure_filename(file.filename)
         file.save(os.path.join(globs.UPLOAD_FOLDER, globs.filename))
-        flash('CSV file processed')
         pipulate('local')
       else:
         flash('Nothing to Pipulate')
     else:
       flash('Nothing to Pipulate')
-    return render_template('pipulate.html', form=form, filename=globs.filename)
+    return render_template('pipulate.html', form=form)
   else:
     if request.args:
       if 'logout' in request.args:
@@ -158,10 +157,10 @@ def dblocal():
     newrow = processrow(rowkey, allrows[rowkey])
     allrows[rowkey] = newrow
   with open(os.path.join(globs.UPLOAD_FOLDER, globs.filename),'w', newline='') as f:
-
     w = csv.writer(f)
     for rowkey in sorted(allrows):
       w.writerow(list(allrows[rowkey]))
+  flash('<a href="/files/%s">Click to download Pipulated %s file</a>' % (globs.filename, globs.filename))
 
 def dbgdocs():
   """Keeps a Google Spreadsheet open for row-by-row processing.
@@ -306,7 +305,7 @@ def adq(aval):
     return "'%s'" % (aval) #ALMOST everything else should be quoted.
 
 def Func1():
-  return "Out from func1"
+  return "Out from Function One"
 
 def Func2(param1, param2='', status='Okay'):
   return "%s %s" % (param1, param2)
