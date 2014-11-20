@@ -44,6 +44,10 @@ from wtforms.validators import DataRequired, Optional, Required
 app = Flask(__name__, static_folder='../uploads', static_url_path='/files')
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
+@app.context_processor
+def templateglobals():
+    return dict(loginlink=getLoginlink(), bookmarklet=getBookmarklet())
+
 class RequiredIf(object):
   """Validates field conditionally.
 
@@ -99,22 +103,20 @@ def main():
   else:
     if request.args:
       if 'logout' in request.args:
-        flash('Logged out from Google')
         if session:
           if 'oa2' in session:
             import urllib.request
             revokeurl = 'https://accounts.google.com/o/oauth2/revoke?token=' + session['oa2']
             urllib.request.urlopen(revokeurl)
           session.clear()
+          flash('Logged out from Google')
       if "access_token" in request.args:
         session['oa2'] = request.args.get("access_token")
         flash('Logged into Google')
       if 'u' in request.args:
         form.pipurl.data = request.args.get('u')
-    return render_template('pipulate.html', 
-                            form=form, 
-                            bookmarklet=getBookmarklet(),
-                            loginlink=getLoginlink())
+        flash('URL found')
+    return render_template('pipulate.html', form=form)
 
 def getLoginlink():
   baseurl = "https://accounts.google.com/o/oauth2/auth"
@@ -209,6 +211,9 @@ def dbgdocs():
             wks.update_cell(rowdex, coldex+1, acell) #Gspread has no "0" column
       else:
         break #Stop grabbing new rows at the first empty one encountered.
+    flash('Processed Google Spreadsheet')
+  else:
+    flash('Please Login to Google')
 
 def questionmark(oldrow, rowdex, coldex):
   """Returns true if a question mark is supposed to be replaced in cell.
