@@ -114,8 +114,11 @@ def main():
         session['oa2'] = request.args.get("access_token")
         flash('Logged into Google')
       if 'u' in request.args:
-        form.pipurl.data = request.args.get('u')
+        session['u'] = request.args.get('u')
         flash('URL found')
+      if session:
+        if 'u' in session:
+          form.pipurl.data = session['u']
     return render_template('pipulate.html', form=form)
 
 def getLoginlink():

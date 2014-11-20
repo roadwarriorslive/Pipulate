@@ -1,5 +1,19 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Thu Nov 20 13:32:05 EST 2014
+
+Okay, we had a circuit blow and I had to reboot my machine, so I took a lunch
+break. Good stopping point. I just did a github push. This Flask flash
+capability is a good one. It's interesting that stuff like that is actually
+built into the framework. Little surprises. I need to make sure I understand
+what other things like flash there may be. 
+
+When you click on Pipulate from a Google Spreadsheet, there should be some way
+to keep re-filling-in the URL into that field. Maybe tie it to session.
+Whenever it's read off of the URL, write it into a session variable. Whenever
+the form is built, populate it if found in session.
+
+--------------------------------------------------------------------------------
 ## Thu Nov 20 09:26:46 EST 2014
 
 And a new day begins! I tried doing the unboxing for the Dell Venue 8 Pro
