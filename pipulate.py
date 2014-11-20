@@ -183,7 +183,7 @@ def dbgdocs():
       wks = gc.open_by_url(globs.PIPURL).sheet1 #HTTP connection errors happen here.
       # https://docs.google.com/spreadsheets/d/182yAd0VYBhY30IW1sGXUg110aWh0pMaQa4nVtWXgNBo/edit?usp=sharing
     except:
-      flash("Couldn't reach Google Docs")
+      flash("Couldn't reach Google Docs. Try logging in again.")
       return
     for rowdex in range(1, wks.row_count): #Start stepping through every row.
       arow = wks.row_values(rowdex)

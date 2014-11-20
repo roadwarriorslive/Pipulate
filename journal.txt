@@ -20,6 +20,10 @@ Thu Nov 20 14:59:35 EST 2014
 Tore out form custom field validation that didn't appear to be working anyway.
 It was too fragile, and there appear to be better ways of handling it.
 
+Thu Nov 20 16:54:31 EST 2014
+How can I have the best tomorrow possible? How can I come back with this
+amazing Pipulate product?
+
 --------------------------------------------------------------------------------
 ## Thu Nov 20 09:26:46 EST 2014
 
