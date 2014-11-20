@@ -48,32 +48,9 @@ app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 def templateglobals():
     return dict(loginlink=getLoginlink(), bookmarklet=getBookmarklet())
 
-class RequiredIf(object):
-  """Validates field conditionally.
-
-  Usage::
-
-    login_method = StringField('', [AnyOf(['email', 'facebook'])])
-    email = StringField('', [RequiredIf(login_method='email')])
-    password = StringField('', [RequiredIf(login_method='email')])
-    facebook_token = StringField('', [RequiredIf(login_method='facebook')])
-  """
-  def __init__(self, *args, **kwargs):
-    self.conditions = kwargs
-
-  def __call__(self, form, field):
-    for name, data in self.conditions.items():
-      if name not in form._fields:
-        Optional(form, field)
-      else:
-        condition_field = form._fields.get(name)
-        if condition_field.data == data and not field.data:
-          Required()(form, field)
-    Optional()(form, field)
-
 class PipForm(Form):
-  pipurl = StringField('URL to Pipulate', [RequiredIf(csvfile='')])
-  csvfile = FileField('Your CSV File', [RequiredIf(pipurl='')])
+  pipurl = StringField('URL to Pipulate')
+  csvfile = FileField('Your CSV File')
 
 def allowed_file(filename):
   return '.' in filename and \
@@ -83,23 +60,20 @@ def allowed_file(filename):
 def main():
   form = PipForm(csrf_enabled=False)
   if request.method == 'POST':
-    if form.validate_on_submit():
-      if form.pipurl.data:
-        globs.PIPURL = form.pipurl.data
-        pipulate('gdocs')
-        return render_template('pipulate.html', form=form)
-      if form.csvfile.data:
-        import os
-        from werkzeug import secure_filename        
-        app.config['UPLOAD_FOLDER'] = globs.UPLOAD_FOLDER
-        file = request.files['csvfile']
-        if file and allowed_file(file.filename):
-          globs.filename = secure_filename(file.filename)
-          file.save(os.path.join(globs.UPLOAD_FOLDER, globs.filename))
-          flash('CSV file processed')
-          pipulate('local')
-        return render_template('pipulate.html', form=form, filename=globs.filename)
-    return render_template('pipulate.html', form=form)
+    if form.pipurl.data:
+      globs.PIPURL = form.pipurl.data
+      pipulate('gdocs')
+    if form.csvfile.data:
+      import os
+      from werkzeug import secure_filename        
+      app.config['UPLOAD_FOLDER'] = globs.UPLOAD_FOLDER
+      file = request.files['csvfile']
+      if file and allowed_file(file.filename):
+        globs.filename = secure_filename(file.filename)
+        file.save(os.path.join(globs.UPLOAD_FOLDER, globs.filename))
+        flash('CSV file processed')
+        pipulate('local')
+    return render_template('pipulate.html', form=form, filename=globs.filename)
   else:
     if request.args:
       if 'logout' in request.args:
@@ -134,7 +108,7 @@ def getLoginlink():
 
 def getBookmarklet():
   #return '''javascript:(function(){open('http://localhost:8080/?u='+encodeURIComponent(document.location.href));})();'''
-  return '''javascript:(function(){window.open('http://localhost:8080/?u='+encodeURIComponent(document.location.href), 't', 'toolbar=0,resizable=1,scrollbars=1,status=1,width=640,height=960');})();'''
+  return '''javascript:(function(){window.open('http://localhost:8080/?u='+encodeURIComponent(document.location.href), 'Pipulate', 'toolbar=0,resizable=1,scrollbars=1,status=1,width=640,height=960');})();'''
 
 class Credentials (object):
   def __init__ (self, access_token=None):

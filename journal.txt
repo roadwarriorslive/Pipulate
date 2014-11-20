@@ -13,6 +13,13 @@ to keep re-filling-in the URL into that field. Maybe tie it to session.
 Whenever it's read off of the URL, write it into a session variable. Whenever
 the form is built, populate it if found in session.
 
+Now it's time to get serious about this project. Set the stage for an
+incredibly awesome tomorrow.
+
+Thu Nov 20 14:59:35 EST 2014
+Tore out form custom field validation that didn't appear to be working anyway.
+It was too fragile, and there appear to be better ways of handling it.
+
 --------------------------------------------------------------------------------
 ## Thu Nov 20 09:26:46 EST 2014
 
