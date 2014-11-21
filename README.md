@@ -37,7 +37,9 @@ because almost every line of code accompanied by a YouTube video. Playlist:
                                                  /_/      
 
   1. Easy general accessibility (run on Levinux or Host)
-  2. Actually useful real-world functions (no more Spam and Eggs)
-  3. Scheduling (APScheduler ?)
-  4. Trending (scheduling new row or tab creation)
-  5. Working behind logins (Scraping Facebook, etc. session hijacking?)
+  2. Un-hardwire localhost so it can run hosted on registered domain
+  3. Actually useful real-world functions (no more Spam and Eggs)
+  4. Scheduling (APScheduler ?)
+  5. Trending (scheduling new row or tab creation)
+  6. Easy screen scraping
+  7. Working behind logins (Scraping Facebook, etc. session hijacking?)

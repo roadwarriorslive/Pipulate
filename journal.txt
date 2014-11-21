@@ -1,5 +1,42 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Fri Nov 21 16:04:24 EST 2014
+
+Wow, I am working on my Macbook Air today that had Maverick on it, but today I
+upgraded to Yosemite. I shot a bunch of videos, and got my screens to a nice
+working point where I don't have to rely on switching tabs to see more than one
+terminal at once. Even on a tiny Macbook Air screen, I can get 2 80-column
+terminal side-by-side. That's a pretty good environment to work and produce
+videos in, given the Mac's remarkable implementation of virtual screens--almost
+good enough to make me not miss Amiga+N... which I still remember as clear as
+yesterday, even though it's like 20 years later.
+
+Okay, what next? This is a nexus moment in Pipulate. First thing is I lost a
+bunch of videos that I uploaded today from ScreenFlow, and I think it was from
+trying to upload too many at once. I have to go one at a time, which could very
+well leave a backlog of videos to upload by the end of the day. My shot at
+getting Levinux working didn't work out very well. That's such a shame. The
+question is how to get a QEMU binary for Mac that works on ALL Mac hardware
+platforms. Ugh! 
+
+Give Levinux one more try! But keep track of the order of videos you're
+uploading. The first one that uploaded successfully wasn't supposed to be the
+first. Here's the actual order for today:
+
+  1. Yosemite (waiting to appear)
+  2. CodeWithMike (published)
+  3. IntroductionToYosemite
+  4. LevinuxNoGo
+  5. GithubReadmeMarkdown
+  6. QemuOnYosemite
+
+Fri Nov 21 18:10:42 EST 2014
+Got tons of videos done but not uploaded. Also did a great proof of concept
+that Levinux will be able to run on Yosemite. I have to go back to the old Q
+emulator. So be it. Anyway, let me commit this and just get into a good place
+for picking this up again later.
+
+--------------------------------------------------------------------------------
 ## Thu Nov 20 13:32:05 EST 2014
 
 Okay, we had a circuit blow and I had to reboot my machine, so I took a lunch
