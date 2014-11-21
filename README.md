@@ -29,5 +29,15 @@ data API source (you have access to), allowing you to write your own Python
 functions to extend the system. And what system is that? You can learn it well,
 because almost every line of code accompanied by a YouTube video. Playlist:
 
-[![Pipulate YouTube Playlist](http://img.youtube.com/vi/SdzDaohx-GA/0.jpg)](//www.youtube.com/embed/videoseries?list=PLy-AlqZFg6G8tBTB6FFN68mryG4JlCaf-)
+              ____                  __                    
+             / __ \____  ____ _____/ /___ ___  ____ _____ 
+            / /_/ / __ \/ __ `/ __  / __ `__ \/ __ `/ __ \
+           / _, _/ /_/ / /_/ / /_/ / / / / / / /_/ / /_/ /
+          /_/ |_|\____/\__,_/\__,_/_/ /_/ /_/\__,_/ .___/ 
+                                                 /_/      
 
+  1. Easy general accessibility (run on Levinux or Host)
+  2. Actually useful real-world functions (no more Spam and Eggs)
+  3. Scheduling (APScheduler ?)
+  4. Trending (scheduling new row or tab creation)
+  5. Working behind logins (Scraping Facebook, etc. session hijacking?)
