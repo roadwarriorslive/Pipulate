@@ -1,5 +1,30 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Mon Nov 24 10:00:17 EST 2014
+
+Lovely! I got the macro typed just in time... no, just too late. It's 10:00 AM.
+Chatted with JM about his copyright adventure. But what should today look like?
+Reveiw the issues and put it in a "more traditional" Google Docs daily journal
+entry of the type that's automatically shared with Flying Point. Those have
+come to a sudden stop now that I've been using this journal for that.
+
+Your time here at Flying Point is going to be greatly characterized by how you
+strike that balance between the technical work that sets you ahead and apart
+and the client work that needs to get done and pays the bills. Strike that
+balance properly. Do that by never working on tech stuff that looks excessively
+geeky or indulgent. Instead, always focus on things that go to the bottom
+line--as Pipulate soon will.
+
+Mon Nov 24 18:02:46 EST 2014
+End of day so soon. Much went into meetings and talks again, but that's a large
+part of my role here. But I did take a few moments towards the end of the day
+to see if I could get Python 3.x running on Tiny Core Linux... and even
+researched other lightweight Linuxes a little! But it turns out that Python
+3.3.1 actually is in the Tiny Core 4.x repository. It's a bit strange, but my
+best choice might be to use the latest 4.x version of Tiny Core just to get
+Python 3.x. I hope I'm not relying on any Python 3.4.x features.
+
+--------------------------------------------------------------------------------
 ## Fri Nov 21 16:04:24 EST 2014
 
 Wow, I am working on my Macbook Air today that had Maverick on it, but today I
