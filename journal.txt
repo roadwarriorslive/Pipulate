@@ -1,5 +1,105 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Tue Nov 25 09:50:01 EST 2014
+
+9:50 AM. Getting better about getting started right away. It's going to be
+interesting to split my journaling work between here in the repository and over
+in Google Docs. But I think it's a better "show" by being here. But there's
+really not enough time in the day to keep TWO journals. I think what I do is I
+deal with the 30K foot view here (really abstract stuff, so I don't spill the
+beans about any specific client work) and then on the "other side" it's really
+only documents and emails that are meant to be delivered. I think out the needs
+for such things here, and then I go over there to produce those documents.
+That's good. Already did the first with a very-necessary email reply. 
+
+The merging of the Levinux and Pipulate projects continues to be my most
+compelling next step, because it:
+
+  1. Completely eliminates hosting costs
+  2. Allows everyone to keep their Pipulating private
+  3. Makes Pipulate easy to use by general audience on localhost:8080
+  4. Mixes up the IP from which Pipulate traffic originates from
+  5. Provides an environment where people experiment with coding (easy reset)
+
+Tue Nov 25 12:39:47 EST 2014
+I need to remaster Levinux, but it seems to me that one of the best things I
+can do on the Internet is to document the process of mastering Levinux. I
+should make it almost like a script. 
+
+First start out with the Mac port of QEMU called Q found at
+http://www.kju-app.org/ Use the one labeled Download Latest Nightly Build
+Q-0.9.1d118 - 10.2mb. Install it on a Mac. This version is from February 16,
+2008! Now while this seems impossibly unacceptably old, the truth is that it
+runs the target version of Linux (Tiny Core Linux) just fine on nearly every
+type of Macintosh and x86 Mac OS X I've ever tested it on, right up until the
+latest, Yosemite. And the advantage of having something ACTUALLY RUN has a lot
+going for it (versus doing new compiles of new versions with long dependency
+chains and much narrow set of Macs that the binary will run on). And so, every
+time I revisit remastering Levinux, I keep going back to Q over the
+alternatives like the QEMU in MacPorts or Homebrew. And finally, on the issue
+of why start with Mac? Because Mac has this nifty app-packaging capability that
+lets you treat directories as if they were runnable programs (that drag around
+their resource files with them when you move them), but the reqirements of
+using this packaging is much more strict than file arrangement on PCs or Linux
+platforms. So the Mac dictates the first set of files that we lay down.
+
+The mistake I made on the last Levinux is trying to pare down and modernize and
+organize all the QEMU files. I think the solution is to just let them go where
+they naturally want to go. That means all the Mac Q files get left in their
+default locations, and dump all the Windows files into
+Levinux.app\contents\MacOS so that there are not path problems. Now, actually
+try to get Pipulate running on a fresh (old) qemu install. Use tce to install:
+
+  1. python-3.3
+  2. git
+  3. curl
+  4. expat
+
+Ugh! And now I'm stuck at pip. Argh! There's always a gotcha. It seems to me
+that my next logical step is actually to step Pipulate BACK to being Python 2.7
+compatible. I really don't want to do that. But I think the signature function
+from inspect may be the ONLY 3.3-specific feature I'm using. And everything
+potentially becomes so much more lightweight (in terms of Python dependencies)
+if I roll back to 2.7. Should I do an experiment? Just get Pipulate running if
+I use the LATEST Tiny Core Linux distro 5.4, and Python 2.7 that's in the
+latest (and very small) repo. Think! Give it a try. It's not too hard to do.
+Get all the requirements installed, and just have it choke on the >3.3
+dependency.
+
+  1. tce-load -wi python
+  2. tce-load -wi python-distribute
+  3. sudo easy_install pip
+
+Tue Nov 25 16:37:55 EST 2014
+Ugh! Ventured into a bunch of exploratory alternative options today, from
+TTYLinux to Arch to CirrOS. There's so many possibilities but so few that work
+as well as Tiny Core Linux. I'm coming to the conclusion that the best clue is
+on using TinyCore-current.iso and selecting Boot Core (command line only on
+slow devices, waitusb=5). The boot is so friggn fast!
+
+It looks like I'm still going to be on Tiny Core Linux. Using the "big" Tiny
+Core ISO image with the slow device boot option boots blazingly fast. And I
+could do all the software installs that were required:
+
+  1. tce-load -wi python
+  2. tce-load -wi python-distribute
+  3. tce-load -wi git
+  4. sudo easy_install pip
+  5. sudo pip install pygreen
+  6. sudo pip install flask_wtf
+  7. sudo pip install gspread
+  8. git clone https://github.com/miklevin/pipulate
+
+One thing's for sure. I won't be going for the most "pure" QEMU, but rather,
+the most reliable and cross-platform compatible binary.
+
+It appears that the trick I've been using to run script.sh files from
+Application Bundles on the Mac has stopped working with Yosemite. I think I am
+going to have to switch to using Platypus.
+
+https://github.com/sveinbjornt/Platypus
+
+--------------------------------------------------------------------------------
 ## Mon Nov 24 10:00:17 EST 2014
 
 Lovely! I got the macro typed just in time... no, just too late. It's 10:00 AM.
