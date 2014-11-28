@@ -1,5 +1,112 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Fri Nov 28 11:10:56 EST 2014
+
+Well, a lot has happened since that last journal entry. I did indeed test
+Platypus... a lot! And after some struggling, I was very happy with what I
+found. The narrative of the unification of Pipulate with Levinux is coming
+together very nicely, and I'm on the cusp of a sort of culmination of much of
+my work of years past. It's really a shame that 360i never "got" what I was
+doing there, or I could have shined with them through their hyper-growth phase.
+But alas, the bulk of my work goes into Github now, with all the sexy agency
+bits reserved for Flying Point Digital, where the need for such secret weapons
+is higher, as I'm starting to believe, is the appreciation level.
+
+Today is the day off after Thanksgiving, but on the cusp of a major
+breakthrough such as I am, I need to exert a serious bit of effort into this
+next move. In doing so, I am seriously rethinking core presumptions about
+Levinux. They are as follows:
+
+OLD VERSIONS OF QEMU OKAY
+There is no inherent advantages to being one newer versions of QEMU in order to
+run Tiny Core Linux. In fact, it's looking like the older the better, so long
+as it actually runs. Specifically, the ancient Mac "Q" fork of QEMU that wraps
+everything in a loving Cocoa user interface runs all the latest versions of
+Tiny Core Linux just fine. What's more, it works just fine on Yosemite and
+Mountain Lion. I've had MUCH better binary file compatibility with Q than I
+have with anything I've installed from the next runner up, Homebrew. I can't
+put it in curses mode (which would be the ideal) so it captures the pointer
+which is a little off-putting to the types of newbs I'm tarketing with this
+endeavor, but it's infinitely better than not running at all. And so with QEMU,
+I settled on the one labeled "Download latest nightly" Q-0.9.1d118 - 10.2mb at
+http://www.kju-app.org/builds/download.php?download=nightlies/Q-0.9.1d118.dmg
+
+The stand-alone version it used to be able to save out for "flash drives"
+stopped working. That's where my last video left off. I confirmed by going in
+through a shell and launching the i386-softmmu with the latest Tiny Core Linux
+iso image that the important bits were all still working on Yosemite. I did
+this with the command: i386-softmmu -cdrom TinyCore-current.iso, which worked
+like a charm. QEMU is running on the Mac as cleanly as ever, and really
+blazingly fast. So the rest was figuring out how to fix whatever went wrong
+with the clicking of the Mac bundle.app. You see, the stand-alone QEMU from Q
+uses this Mac OS X trick where a directory is created and for all intents and
+purposes, runs like a program when double-clicked. It's a wonderful trick that
+I used to use in my Amiga days with a program called WBScript that a friend
+Howard Harrison wrote for me. I was tickled to see the technique is available
+today on the Mac. But there's a bunch of things you have to get just-so, and
+that's where the Platypus project from Github came into the picture. It allowed
+me to create a Mac shell file that gets compiled by Platypus into an
+executable, but which calls another Mac shell file that's carried around in the
+same directory, but which doesn't get compiled, thereby leaving me free to
+edit how the qemu binary i386-softmmu gets executed. In short, I combined the
+auto-bundling but broken work of Q with the correct bundling from Platypus. And
+so, the re-mastering of Levinux begins.
+
+It turns out that almost all the Mac QEMU dependency files go in
+name.app/Contents/Resources/qemu while the old PC QEMU binaries are biased
+towards finding their dependency files in the current directory where the qemu
+binary is located and run from. And so, the old file collision problems I used
+to have so much are mitigated by staying on the actual binaries provided by old
+versions. In other words, the ancient Windows qemu binaries of QEMU from TAKEDA
+Toshiya at http://homepage3.nifty.com/takeda-toshiya/qemu/index.html can be
+dumped into name.app/Contents/MacOS where I have to locate TinyCore-current.iso
+(or Core-current.iso) with no ill effects, and no file collision issues. And
+so, what version to use from Toshiya? Well, I've already established that
+text-only curses mode is not nearly as important to me as it used to be, so
+it really becomes a question of newest yet smallest version that will run Tiny
+Core Linux, which turned out to be qemu-0.12.1-windows.zip at only 7.5 MB
+archived. I dumped the entire file-contents of that archive into the MacOS
+bundle directory, with the exception of the totally unnecessary linux.img file,
+which is some old tiny RedHat testing file. The difference in file-size from
+the TAKEDA 0.12.2 file to 0.12.5 file is 7.5 MB up to 20 MB, and so 0.12.2 it
+is for Levinux!
+
+And so, I wrote the scripts using the old trick of a file.vbs calling a
+file.bat in order to run the bat silently. This is necessary so that you don't
+end up with two windows for Levinux when you double-click the icon from the PC
+to launch it. If you don't "silence" the batch file window, it will stay open
+and locked as a useless black window in the background, while a new window pops
+up for the QEMU session--terribly annoying. I have however noticed problems
+with using this technique on Windows 7, which I use at the office every day. I
+will work it out, and currently, I have the new "starting point" for Levinux
+tested with a double-click on: 
+
+  * Windows XP Pro SP3
+  * Mac OS X Yosemite 10.10.1
+  * Mac OS X Mountain Lion 10.8.5
+
+Soon, I'll have it tested on Windows 8.x because of my my Dell Pro Venue 8
+tablet, and on Windows 7 because of my office PC. It's pretty clear I'll be
+using Dropbox again to sync all my Levinux work between machines, but I can't
+use my main personal account because it's too much to load up on every machine
+I'm experimenting with, so I'm using a Dropbox account I made to dedicate to
+Levinux development and archiving old versions (none of which are ever very
+large). Going back 15 files to Beta 1 is only 240 MB of files - not bad,
+considering that the XP VMWare testing file is over 20 GB itself. 
+
+--------------------------------------------------------------------------------
+## Wed Nov 26 12:58:01 EST 2014
+
+It's the day before Thanksgiving, and it's been a fairly slow day with a lot of
+bonding here at the office. I work with great people! Today, I've worked on an
+article that will be my first published as an SEO director at Flying Point. But
+I just ran out of steam a little bit, so I'm going to revisit the Levinux remix
+again today, totally working on my Macbook Air with Yosemite installed. 1, 2
+3... 1?
+
+  1. Test Platypus.
+
+--------------------------------------------------------------------------------
 ## Tue Nov 25 09:50:01 EST 2014
 
 9:50 AM. Getting better about getting started right away. It's going to be
