@@ -106,7 +106,9 @@ def getLoginlink():
               'approval_prompt': 'force',
               'client_id': '394883714902-h3fjk3u6rb4jr4ntpeft41kov6et2nve.apps.googleusercontent.com'
             }
-  from urllib.parse import urlencode
+  #py3to2
+  #from urllib.parse import urlencode
+  from urllib import urlencode
   return "%s?%s" % (baseurl, urlencode(qsdict))
 
 def getBookmarklet():
@@ -240,8 +242,37 @@ def row1funcs(arow):
   for coldex, fname in enumerate(arow):
     if fname.lower() in globs.funcslc: #Detect if column name is a function
       fargs[coldex] = {}
-      from inspect import signature, _empty
-      sig = signature(eval(fname))
+      #py3to2
+      #from inspect import signature, _empty
+      from inspect import getargspec
+      #sig = signature(eval(fname))
+      argspec = getargspec(eval(fname))
+      if argspec: # Function has parameters
+        myargs = argspec[0]
+        mydefs = argspec[3]
+        offset = 0
+        if mydefs:
+          offset = len(myargs) - len(mydefs)
+          if offset:
+            for i in range(0, offset-1):
+              fargs[coldex][myargs[i]] = None
+            for i in range(offset, len(myargs)):
+              fargs[coldex][myargs[i]] = mydefs[offset-i]
+        else:
+          for anarg in myargs:
+            fargs[coldex][anarg] = None
+
+        for argdex, anarg in enumerate(myargs): #For each argument of function
+          fargs[coldex][anarg] = None
+
+        #if mydefs:
+        #  offset = len(mydefs) - len (myargs)
+        #for argdex, anarg in enumerate(myargs):
+        #  if argdex <= offset:
+        #    fargs[coldex][anarg] = None
+        #  else:
+        #    fargs[coldex][anarg] = mydefs[argdex-offset+1]
+      '''
       for param in sig.parameters.values(): #Build dict of function reqirements
         pname = param.name
         pdefault = param.default
@@ -249,6 +280,7 @@ def row1funcs(arow):
           fargs[coldex][pname] = None
         else:
           fargs[coldex][pname] = pdefault
+      '''
   globs.fargs = fargs #Make dict global so we don't have to pass it around
 
 def evalfunc(coldex, arow):
