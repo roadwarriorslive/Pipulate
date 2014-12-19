@@ -158,7 +158,7 @@ def dblocal():
   for rowkey in sorted(allrows): #Process each row (list) from the shelve.
     newrow = processrow(rowkey, allrows[rowkey])
     allrows[rowkey] = newrow
-  with open(os.path.join(globs.UPLOAD_FOLDER, globs.filename),'w', newline='') as f:
+  with open(os.path.join(globs.UPLOAD_FOLDER, globs.filename),'w') as f:
     w = csv.writer(f)
     for rowkey in sorted(allrows):
       w.writerow(list(allrows[rowkey]))
