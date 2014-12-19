@@ -82,9 +82,9 @@ def main():
       if 'logout' in request.args:
         if session:
           if 'oa2' in session:
-            import urllib.request
+            import urllib2
             revokeurl = 'https://accounts.google.com/o/oauth2/revoke?token=' + session['oa2']
-            urllib.request.urlopen(revokeurl)
+            urllib2.urlopen(revokeurl)
           session.clear()
           flash('Logged out from Google.')
       if "access_token" in request.args:
