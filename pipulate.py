@@ -344,3 +344,5 @@ from functions import *
 
 if __name__ == "__main__":
   app.run(host='0.0.0.0', port=8888, debug=True)
+
+# Testing auto git pull from Levinux on boot
