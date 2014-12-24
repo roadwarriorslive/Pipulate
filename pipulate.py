@@ -1,13 +1,13 @@
 """ Pipulate lets you collect data straight off of the Web into spreadsheets.
 
-        _____ _             _       _                              
-       |  __ (_)           | |     | |                             
-       | |__) | _ __  _   _| | __ _| |_ ___     ___ ___  _ __ ___  
-       |  ___/ | '_ \| | | | |/ _` | __/ _ \   / __/ _ \| '_ ` _ \ 
+        _____ _             _       _
+       |  __ (_)           | |     | |
+       | |__) | _ __  _   _| | __ _| |_ ___     ___ ___  _ __ ___
+       |  ___/ | '_ \| | | | |/ _` | __/ _ \   / __/ _ \| '_ ` _ \
        | |   | | |_) | |_| | | (_| | ||  __/  | (_| (_) | | | | | |
        |_|   |_| .__/ \__,_|_|\__,_|\__\___| (_)___\___/|_| |_| |_|
-               | |                                                 
-               |_|                                                 
+               | |
+               |_|
 
 Got a list that you need to look up something for every item - like grabbing
 title tags for a list of URLs? Well, then Pipulate is your answer! For example,
@@ -27,11 +27,11 @@ functions to extend the system. And what system is that? You can learn it well,
 because almost every line of code accompanied by a YouTube video. Playlist:
 https://www.youtube.com/watch?v=SdzDaohx-GA&list=PLy-AlqZFg6G8tBTB6FFN68mryG4JlCaf-
 
-REQUIREMENTS
-pip install pygreen 
-pip install flask_wtf
-pip install gspread
-
+REQUIREMENTS:
+easy_install flask
+easy_install flask_wtf
+easy_install requests
+easy_install gspread
 """
 
 import globs #Create objects that don't have to be passed as arguments.
