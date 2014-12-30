@@ -7,7 +7,6 @@ def tweets(url):
   return adict["count"]
 
 def plusses(url):
-  import requests
   api = "https://clients6.google.com/rpc"
   jobj = '''{
     "method":"pos.plusones.get",
@@ -31,6 +30,9 @@ def shares(url):
   api = "http://graph.facebook.com/?id="
   respobj = requests.get(api + url)
   adict = respobj.json()
-  return adict["shares"]
+  try:
+    return adict["shares"]
+  except:
+    pass
 
 
