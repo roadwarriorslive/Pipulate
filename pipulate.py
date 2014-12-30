@@ -112,7 +112,7 @@ def getLoginlink():
   return "%s?%s" % (baseurl, urlencode(qsdict))
 
 def getBookmarklet():
-  return '''javascript:(function(){window.open('http://%s]+'/?u='+encodeURIComponent(document.location.href), 'Pipulate', 'toolbar=0,resizable=1,scrollbars=1,status=1,width=640,height=960');})();''' % (request.headers['Host'])
+  return '''javascript:(function(){window.open('http://%s/?u='+encodeURIComponent(document.location.href), 'Pipulate', 'toolbar=0,resizable=1,scrollbars=1,status=1,width=640,height=960');})();''' % (request.headers['Host'])
 
 class Credentials (object):
   def __init__ (self, access_token=None):
