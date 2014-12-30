@@ -32,4 +32,11 @@ def plusses(url):
   adict = respobj.json()
   return adict['result']['metadata']['globalCounts']['count']
 
+def fbshares(url):
+  import requests
+  api = "http://graph.facebook.com/?id="
+  respobj = requests.get(api + url)
+  adict = respobj.json()
+  return adict["shares"]
+
 
