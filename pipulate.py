@@ -102,7 +102,7 @@ def getLoginlink():
   baseurl = "https://accounts.google.com/o/oauth2/auth"
   qsdict = {  'scope': 'https://docs.google.com/feeds/ https://docs.googleusercontent.com/ https://spreadsheets.google.com/feeds/',
               'response_type': 'token',
-              'redirect_uri': 'http://localhost:8888',
+              'redirect_uri': 'http://'+request.headers['Host'],
               'approval_prompt': 'force',
               'client_id': '394883714902-h3fjk3u6rb4jr4ntpeft41kov6et2nve.apps.googleusercontent.com'
             }
@@ -112,8 +112,7 @@ def getLoginlink():
   return "%s?%s" % (baseurl, urlencode(qsdict))
 
 def getBookmarklet():
-  #return '''javascript:(function(){open('http://localhost:8888/?u='+encodeURIComponent(document.location.href));})();'''
-  return '''javascript:(function(){window.open('http://localhost:8888/?u='+encodeURIComponent(document.location.href), 'Pipulate', 'toolbar=0,resizable=1,scrollbars=1,status=1,width=640,height=960');})();'''
+  return '''javascript:(function(){window.open('http://%s]+'/?u='+encodeURIComponent(document.location.href), 'Pipulate', 'toolbar=0,resizable=1,scrollbars=1,status=1,width=640,height=960');})();''' % (request.headers['Host'])
 
 class Credentials (object):
   def __init__ (self, access_token=None):

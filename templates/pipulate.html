@@ -11,7 +11,7 @@
         var myhash = location.hash
         if (myhash.indexOf('access_token') > 0) {
           myhash = myhash.substring(1, myhash.length);
-          window.location = 'http://localhost:8888?' + myhash;
+          window.location = 'http://{{ request.headers['Host'] }}?' + myhash;
         }
       }
     </script>
@@ -62,7 +62,7 @@
           <hr/>
           <br/><a href="{{ loginlink }}">Login with Google</a>
           {% if session %}
-          <br/><a href="http://localhost:8888?logout">Logout</a>
+          <br/><a href="http://{{ request.headers['Host'] }}?logout">Logout</a>
           {% endif %}
         </form>
       </div><!-- /panel -->
