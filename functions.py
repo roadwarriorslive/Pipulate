@@ -1,11 +1,6 @@
-def Func1():
-  return "Out from Function One"
-
-def Func2(param1, param2='', status='Okay'):
-  return "%s %s" % (param1, param2)
+import requests
 
 def tweets(url):
-  import requests
   api = "http://urls.api.twitter.com/1/urls/count.json?url="
   respobj = requests.get(api + url)
   adict = respobj.json()
@@ -32,8 +27,7 @@ def plusses(url):
   adict = respobj.json()
   return adict['result']['metadata']['globalCounts']['count']
 
-def fbshares(url):
-  import requests
+def shares(url):
   api = "http://graph.facebook.com/?id="
   respobj = requests.get(api + url)
   adict = respobj.json()
