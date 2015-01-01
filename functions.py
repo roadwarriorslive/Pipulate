@@ -29,9 +29,9 @@ def plusses(url):
   }''' % (url)
   respobj = requests.post(api, jobj)
   adict = respobj.json()
+  # Lower line no longer necessary, but kept a little while for clarity!
   # return adict['result']['metadata']['globalCounts']['count']
-  # return walkdict(adict, 'count')
-  return "foo"
+  return walkdict(adict, 'count')
 
 def tweets(url):
   api = "http://urls.api.twitter.com/1/urls/count.json?url="
