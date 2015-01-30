@@ -59,6 +59,15 @@ def allowed_file(filename):
 @app.route("/", methods=['GET', 'POST'])
 def main():
   form = PipForm(csrf_enabled=False)
+  if session:
+    if 'oa2' in session:
+      import gspread
+      credentials = Credentials(access_token=session['oa2'])
+      try:
+        gspread.authorize(credentials)
+        session['loggedin'] = "1"
+      except:
+        session.clear()
   if request.method == 'POST':
     if form.pipurl.data:
       globs.PIPURL = form.pipurl.data
@@ -89,6 +98,7 @@ def main():
           flash('Logged out from Google.')
       if "access_token" in request.args:
         session['oa2'] = request.args.get("access_token")
+        session['loggedin'] = "1"
         flash('Logged into Google. Get pipulating!')
       if 'u' in request.args:
         session['u'] = request.args.get('u')
@@ -241,10 +251,7 @@ def row1funcs(arow):
   for coldex, fname in enumerate(arow):
     if fname.lower() in globs.funcslc: #Detect if column name is a function
       fargs[coldex] = {}
-      #py3to2
-      #from inspect import signature, _empty
       from inspect import getargspec
-      #sig = signature(eval(fname))
       argspec = getargspec(eval(fname))
       if argspec: # Function has parameters
         myargs = argspec[0]
@@ -264,22 +271,6 @@ def row1funcs(arow):
         for argdex, anarg in enumerate(myargs): #For each argument of function
           fargs[coldex][anarg] = None
 
-        #if mydefs:
-        #  offset = len(mydefs) - len (myargs)
-        #for argdex, anarg in enumerate(myargs):
-        #  if argdex <= offset:
-        #    fargs[coldex][anarg] = None
-        #  else:
-        #    fargs[coldex][anarg] = mydefs[argdex-offset+1]
-      '''
-      for param in sig.parameters.values(): #Build dict of function reqirements
-        pname = param.name
-        pdefault = param.default
-        if pdefault is _empty: #Catch when an argument has no default value
-          fargs[coldex][pname] = None
-        else:
-          fargs[coldex][pname] = pdefault
-      '''
   globs.fargs = fargs #Make dict global so we don't have to pass it around
 
 def evalfunc(coldex, arow):
@@ -345,3 +336,4 @@ if __name__ == "__main__":
   app.run(host='0.0.0.0', port=8888, debug=True)
 
 # Testing auto git pull from Levinux on boot x2
+
