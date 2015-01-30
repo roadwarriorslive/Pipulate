@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css" />
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
-    <script>$.mobile.ajaxEnabled = false;</script>
     <script>
       if (location.hash) {
         var myhash = location.hash
@@ -31,10 +30,13 @@
       <div role="main" class="ui-content jqm-content jqm-fullwidth" data-theme="a">
         <form method="POST" action="/" enctype="multipart/form-data">
           {{ form.hidden_tag() }}
-          {{ form.pipurl.label }} {{ form.pipurl(size=500) }}<br/>
-          {{ form.csvfile.label }} {{ form.csvfile() }}<br/>
           <div style="text-align:center;">
+            {% if session and 'loggedin' in session %}
+            {{ form.pipurl.label }} {{ form.pipurl(size=500) }}<br/>
             <input data-role="button" data-inline="true" data-icon="arrow-r" data-iconpos="right" type="submit" value="Pipulate it" name="submit" data-theme="b">
+            {% else %}
+              <a href="{{ loginlink }}" class="ui-btn ui-btn-b ui-btn-inline ui-corner-all">Login with Google</a>
+            {% endif %}
           </div>
         </form>
         {% with messages = get_flashed_messages() %}
@@ -46,7 +48,6 @@
             </ul>
           {% endif %}
         {% endwith %}
-      {{ session['loggedin'] }}
       </div><!-- /content -->
       <div data-role="panel" data-display="push" data-theme="b" id="nav-panel">
         <ul data-role="listview">

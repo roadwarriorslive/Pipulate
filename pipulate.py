@@ -50,11 +50,6 @@ def templateglobals():
 
 class PipForm(Form):
   pipurl = StringField('URL to Pipulate')
-  csvfile = FileField('Your CSV File')
-
-def allowed_file(filename):
-  return '.' in filename and \
-    filename.rsplit('.', 1)[1] in globs.ALLOWED_EXTENSIONS
 
 @app.route("/", methods=['GET', 'POST'])
 def main():
@@ -72,17 +67,6 @@ def main():
     if form.pipurl.data:
       globs.PIPURL = form.pipurl.data
       pipulate('gdocs')
-    elif form.csvfile.data:
-      import os
-      from werkzeug import secure_filename        
-      app.config['UPLOAD_FOLDER'] = globs.UPLOAD_FOLDER
-      file = request.files['csvfile']
-      if file and allowed_file(file.filename):
-        globs.filename = secure_filename(file.filename)
-        file.save(os.path.join(globs.UPLOAD_FOLDER, globs.filename))
-        pipulate('local')
-      else:
-        flash('Nothing to Pipulate')
     else:
       flash('Nothing to Pipulate')
     return render_template('pipulate.html', form=form)
@@ -116,8 +100,6 @@ def getLoginlink():
               'approval_prompt': 'force',
               'client_id': '394883714902-h3fjk3u6rb4jr4ntpeft41kov6et2nve.apps.googleusercontent.com'
             }
-  #py3to2
-  #from urllib.parse import urlencode
   from urllib import urlencode
   return "%s?%s" % (baseurl, urlencode(qsdict))
 
@@ -129,60 +111,12 @@ class Credentials (object):
     self.access_token = access_token
 
 def pipulate(dbsource):
-  """Allows processing of multiple worksheets.
+  """Allows processing of multiple worksheets."""
 
-  During testing, this is set to process one Google Spreadsheet and one local
-  csv file. It also creates a list of global functions and translation table to
-  their lower-case versions for recognizing function names in column labels.
-  A Pythonic switch statement calls dbgdocs once and dblocal once."""
   funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
   globs.funcslc = [x.lower() for x in funcs] #Lower-case all function names
   globs.transfunc = dict(zip(globs.funcslc, funcs)) #Keep translation table
-  dbmethod = {'local': dblocal, 'gdocs': dbgdocs}
-  dbmethod[dbsource]()
-
-def dblocal():
-  """Loads a local csv file and dumps it into shelve object for processing.
-
-  While support for csv files will be very useful for many people, using the
-  shelve API here is to leave a hook for the external shove library which will
-  allow this to run on MUCH larger datasets by connecting it to Redis, Amazon
-  S3, Berkeley DB, Postgres or other backend databases."""
-  import shelve, csv, os
-  try:
-    os.remove('drows.db')
-  except OSError:
-    pass
-  allrows = shelve.open('drows.db')
-  ospath = os.path.join(globs.UPLOAD_FOLDER, globs.filename)
-  if ospath[-1:] == '\\':
-    ospath = ospath[:-1]
-  with open(ospath, 'r') as f:
-    reader = csv.reader(f)
-    for rowdex, arow in enumerate(reader): #Dump entire csv into shelve.
-      allrows[str(rowdex + 1)] = arow
-  allrows.close()
-  #We can add support for much more than csv here through "shove" module.
-  allrows = shelve.open('drows.db')
-  for rowkey in sorted(allrows): #Process each row (list) from the shelve.
-    newrow = processrow(rowkey, allrows[rowkey])
-    allrows[rowkey] = newrow
-  with open(os.path.join(globs.UPLOAD_FOLDER, globs.filename),'w') as f:
-    w = csv.writer(f)
-    for rowkey in sorted(allrows):
-      w.writerow(list(allrows[rowkey]))
-  flash('<a href="/files/%s">Click to download Pipulated %s file</a>' % (globs.filename, globs.filename))
-
-def dbgdocs():
-  """Keeps a Google Spreadsheet open for row-by-row processing.
-
-  While Google Spreadsheets is not the most efficient or scalable way to manage
-  this process, it provides a ready-made user interface for convenient
-  interactive sessions with smaller datasets. Demonstrating this approach to
-  people is impressive and has a compelling charm."""
   import pickle, gspread
-  #login = pickle.load(open('temp.pkl', 'rb'))
-  #gc = gspread.login(login['username'], login['password'])
   if session:
     if 'oa2' in session:
       credentials = Credentials(access_token=session['oa2'])
@@ -267,7 +201,6 @@ def row1funcs(arow):
         else:
           for anarg in myargs:
             fargs[coldex][anarg] = None
-
         for argdex, anarg in enumerate(myargs): #For each argument of function
           fargs[coldex][anarg] = None
 
@@ -329,11 +262,6 @@ def adq(aval):
 
 from functions import *
 
-#if __name__ == "__main__":
-#  main()
-
 if __name__ == "__main__":
   app.run(host='0.0.0.0', port=8888, debug=True)
-
-# Testing auto git pull from Levinux on boot x2
 
