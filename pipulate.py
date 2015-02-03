@@ -124,6 +124,7 @@ def pipulate(dbsource):
   funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
   globs.funcslc = [x.lower() for x in funcs] #Lower-case all function names
   globs.transfunc = dict(zip(globs.funcslc, funcs)) #Keep translation table
+  qms = 0
   import gspread
   if session:
     if 'oa2' in session:
@@ -150,9 +151,13 @@ def pipulate(dbsource):
         for coldex, acell in enumerate(newrow): #Then step through new row
           if questionmark(arow, rowdex, coldex): #And update Google worksheet
             pipsheet.update_cell(rowdex, coldex+1, acell) #Gspread has no "0" column
+            qms += 1
       else:
         break #Stop grabbing new rows at the first empty one encountered.
-    flash('Replated question marks.")
+    if qms:
+      flash('Replaced %s question marks.' % qms)
+    else:
+      flash('No question marks found in Sheet 1')
   else:
     flash('Please Login to Google')
 
