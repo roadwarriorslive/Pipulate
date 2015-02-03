@@ -112,7 +112,7 @@ def getLoginlink():
   return "%s?%s" % (baseurl, urlencode(qsdict))
 
 def getBookmarklet():
-  return '''javascript:(function(){window.open('http://%s/?u='+encodeURIComponent(document.location.href), 'Pipulate', 'toolbar=0,resizable=1,scrollbars=1,status=1,width=640,height=367');})();''' % (request.headers['Host'])
+  return '''javascript:(function(){window.open('http://%s/?u='+encodeURIComponent(document.location.href), 'Pipulate', 'toolbar=0,resizable=1,scrollbars=1,status=1,width=640,height=520');})();''' % (request.headers['Host'])
 
 class Credentials (object):
   def __init__ (self, access_token=None):
@@ -145,6 +145,12 @@ def pipulate(dbsource):
     except:
       config = pipdoc.add_worksheet(title="Pipulate", rows="1", cols="2")
       flash("Created Pipulate tab.")
+    try:
+      config = pipdoc.worksheet("Scrapers")
+    except:
+      scrapers = pipdoc.add_worksheet(title="Scrapers", rows="0", cols="3")
+      scrapers.append_row(["name", "type", "pattern"])
+      flash("Created Scrapers tab.")
     for rowdex in range(1, pipsheet.row_count): #Start stepping through every row.
       arow = pipsheet.row_values(rowdex)
       if arow: #But only process it if it does not come back as empty list.
@@ -156,7 +162,7 @@ def pipulate(dbsource):
             qmarks += 1
       else:
         blankrows += 1
-        if blankrows == 5:
+        if blankrows > 3:
           break
     if qmarks:
       flash('Replaced %s question marks.' % qmarks)
