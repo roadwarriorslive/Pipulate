@@ -44,6 +44,8 @@ from wtforms.validators import DataRequired, Optional, Required
 app = Flask(__name__, static_folder='../uploads', static_url_path='/files')
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
+letter = {2:'B',3:'C',4:'D',5:'E',6:'F'}
+
 @app.context_processor
 def templateglobals():
     return dict(loginlink=getLoginlink(), bookmarklet=getBookmarklet())
@@ -143,12 +145,12 @@ def pipulate(dbsource):
     try:
       config = pipdoc.worksheet("Pipulate")
     except:
-      config = pipdoc.add_worksheet(title="Pipulate", rows="1", cols="2")
-      cell_list = config.range('A1:B1')
-      cell_list[0].value = 'name'
-      cell_list[1].value = 'value'
-      config.update_cells(cell_list)
-      flash("Created Pipulate tab.")
+      headers = ['name', 'value']
+      namevals = []
+      namevals.append(['foo', 'bar'])
+      namevals.append(['ham', 'eggs'])
+      namevals.append(['pet', 'parrot'])
+      inittab(pipdoc, 'Pipulate', headers, namevals)
     try:
       config = pipdoc.worksheet("Scrapers")
     except:
@@ -179,6 +181,18 @@ def pipulate(dbsource):
       flash('No question marks found in Sheet 1.')
   else:
     flash('Please Login to Google')
+
+def inittab(gdoc, tabname, headerlist, listoflists=[]):
+  numcols = len(headerlist)
+  newtab = gdoc.add_worksheet(title=tabname, rows="1", cols=numcols)
+  cell_list = newtab.range('A1:%s1' % letter[numcols])
+  for index, cell in enumerate(cell_list):
+    cell.value = headerlist[index]
+  newtab.update_cells(cell_list)
+  for row in listoflists:
+    newtab.append_row(row)
+  flash("Created %s tab." % (tabname))
+  return
 
 def questionmark(oldrow, rowdex, coldex):
   """Returns true if a question mark is supposed to be replaced in cell.
