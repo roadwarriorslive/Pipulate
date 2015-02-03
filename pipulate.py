@@ -59,8 +59,8 @@ def main():
       import gspread
       credentials = Credentials(access_token=session['oa2'])
       try:
-        gc = gspread.authorize(credentials)
-        gc.openall()
+        gsp = gspread.authorize(credentials)
+        gsp.openall()
         session['loggedin'] = "1"
       except:
         session.clear()
@@ -124,7 +124,7 @@ def pipulate(dbsource):
   funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
   globs.funcslc = [x.lower() for x in funcs] #Lower-case all function names
   globs.transfunc = dict(zip(globs.funcslc, funcs)) #Keep translation table
-  import pickle, gspread
+  import gspread
   if session:
     if 'oa2' in session:
       credentials = Credentials(access_token=session['oa2'])
@@ -132,22 +132,27 @@ def pipulate(dbsource):
       flash('Not logged into Google. Please Login.')
       return
     try:
-      gc = gspread.authorize(credentials)
-      wks = gc.open_by_url(globs.PIPURL).sheet1 #HTTP connection errors happen here.
-      # https://docs.google.com/spreadsheets/d/182yAd0VYBhY30IW1sGXUg110aWh0pMaQa4nVtWXgNBo/edit?usp=sharing
+      gsp = gspread.authorize(credentials)
+      pipdoc = gsp.open_by_url(globs.PIPURL) #HTTP connection errors happen here.
+      pipsheet = pipdoc.sheet1
     except:
       flash("Couldn't reach Google Docs. Try logging in again.")
       return
-    for rowdex in range(1, wks.row_count): #Start stepping through every row.
-      arow = wks.row_values(rowdex)
+    try:
+      config = pipdoc.worksheet("Pipulate")
+    except:
+      config = pipdoc.add_worksheet(title="Pipulate", rows="1", cols="2")
+      flash("Created Pipulate tab.")
+    for rowdex in range(1, pipsheet.row_count): #Start stepping through every row.
+      arow = pipsheet.row_values(rowdex)
       if arow: #But only process it if it does not come back as empty list.
         newrow = processrow(str(rowdex), arow) #Replace question marks in row
         for coldex, acell in enumerate(newrow): #Then step through new row
           if questionmark(arow, rowdex, coldex): #And update Google worksheet
-            wks.update_cell(rowdex, coldex+1, acell) #Gspread has no "0" column
+            pipsheet.update_cell(rowdex, coldex+1, acell) #Gspread has no "0" column
       else:
         break #Stop grabbing new rows at the first empty one encountered.
-    flash('Processed Google Spreadsheet')
+    flash('Replated question marks.")
   else:
     flash('Please Login to Google')
 
