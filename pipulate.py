@@ -49,7 +49,7 @@ def templateglobals():
     return dict(loginlink=getLoginlink(), bookmarklet=getBookmarklet())
 
 class PipForm(Form):
-  pipurl = StringField('URL to Pipulate')
+  pipurl = StringField('Paste a Google Docs URL:')
 
 @app.route("/", methods=['GET', 'POST'])
 def main():

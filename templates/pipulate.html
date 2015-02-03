@@ -35,7 +35,7 @@
         <a href="#add-form" data-icon="gear" data-iconpos="notext">Add</a>
       </div><!-- /header -->
       <div role="main" class="ui-content jqm-content jqm-fullwidth" data-theme="a">
-    <p class="pressthis" style="text-align: center">Step 1: Drag this to Bookmark bar (if you haven't alredy) --&gt; <a href="{{ bookmarklet }}" onclick="return false;" oncontextmenu="if(window.navigator.userAgent.indexOf('WebKit')!=-1||window.navigator.userAgent.indexOf('MSIE')!=-1){jQuery('.pressthis-code').show().find('textarea').focus().select();return false;}"><span>Pipulate</span></a>
+    <p class="pressthis" style="text-align: center">Drag this to Bookmark bar (if you haven't alredy) --&gt; <a href="{{ bookmarklet }}" onclick="return false;" oncontextmenu="if(window.navigator.userAgent.indexOf('WebKit')!=-1||window.navigator.userAgent.indexOf('MSIE')!=-1){jQuery('.pressthis-code').show().find('textarea').focus().select();return false;}"><span>Pipulate</span></a>
         <form method="POST" action="/" enctype="multipart/form-data">
           {{ form.hidden_tag() }}
           <div style="text-align:center;">
@@ -43,7 +43,7 @@
             {{ form.pipurl.label }} {{ form.pipurl(size=500) }}<br/>
             <input data-role="button" data-inline="true" data-icon="arrow-r" data-iconpos="right" type="submit" value="Pipulate it" name="submit" data-theme="b">
             {% else %}
-              <a href="{{ loginlink }}" class="ui-btn ui-btn-b ui-btn-inline ui-corner-all">Login with Google</a>
+              Login with Google: <a href="{{ loginlink }}" class="ui-btn ui-btn-b ui-btn-inline ui-corner-all">Login with Google</a>
             {% endif %}
           </div>
         </form>
@@ -67,10 +67,8 @@
       </div><!-- /panel -->
       <div data-role="panel" data-position="right" data-display="reveal" data-theme="a" id="add-form">
         <form class="userform">
-          <h2>Bookmarklet &amp; Login</h2>
-          Drag this to bookmark toolbar: <a href="{{ bookmarklet }}" data-role="button" data-inline="true" data-theme="b" data-icon="star">Pipulate</a>
+          <h2>Settings</h2>
           <hr/>
-          <br/><a href="{{ loginlink }}">Login with Google</a>
           {% if session %}
           <br/><a href="http://{{ request.headers['Host'] }}?logout">Logout</a>
           {% endif %}
