@@ -11,6 +11,13 @@ def walkdict(obj, key):
         return v
       # print("%s: %s" % (k, v))
 
+def scrapes():
+  scrapelist = []
+  scrapelist.append(['tweets',    'xpath', "//span[.='Tweets']"])
+  scrapelist.append(['following', 'xpath', "//span[.='Following']"])
+  scrapelist.append(['followers', 'xpath', "//span[.='Followers']"])
+  return scrapelist
+
 def plusses(url):
   api = "https://clients6.google.com/rpc"
   jobj = '''{

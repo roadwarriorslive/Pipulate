@@ -158,8 +158,8 @@ def pipulate(dbsource):
       cell_list[1].value = 'type'
       cell_list[2].value = 'pattern'
       scrapers.update_cells(cell_list)
+      flash("Created Scrapers tab.")
       #scrapers.append_row(["name", "type", "pattern"])
-    flash("Created Scrapers tab.")
     for rowdex in range(1, pipsheet.row_count): #Start stepping through every row.
       arow = pipsheet.row_values(rowdex)
       if arow: #But only process it if it does not come back as empty list.
@@ -176,7 +176,7 @@ def pipulate(dbsource):
     if qmarks:
       flash('Replaced %s question marks.' % qmarks)
     else:
-      flash('No question marks found in Sheet 1')
+      flash('No question marks found in Sheet 1.')
   else:
     flash('Please Login to Google')
 
