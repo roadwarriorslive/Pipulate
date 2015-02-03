@@ -35,7 +35,7 @@ easy_install gspread
 """
 
 import globs #Create objects that don't have to be passed as arguments.
-from flask import Flask, request, render_template, session, flash
+from flask import Flask, request, render_template, session, flash, redirect, url_for
 from flask_wtf import Form
 from flask_wtf.file import FileField
 from wtforms import validators, StringField
@@ -49,7 +49,7 @@ def templateglobals():
     return dict(loginlink=getLoginlink(), bookmarklet=getBookmarklet())
 
 class PipForm(Form):
-  pipurl = StringField('Paste a Google Docs URL:')
+  pipurl = StringField('Paste a Google Spreadsheet URL:')
 
 @app.route("/", methods=['GET', 'POST'])
 def main():
@@ -69,7 +69,7 @@ def main():
       globs.PIPURL = form.pipurl.data
       pipulate('gdocs')
     else:
-      flash('Nothing to Pipulate')
+      flash('Nothing to Pipulate. Enter a Google Spreadsheet URL and try again.')
     return render_template('pipulate.html', form=form)
   else:
     if request.args:
@@ -84,16 +84,20 @@ def main():
       if "access_token" in request.args:
         session['oa2'] = request.args.get("access_token")
         session['loggedin'] = "1"
-        from flask import redirect, url_for
         return redirect(url_for('main'))
-        #flash('Logged into Google. Get pipulating!')
       if 'u' in request.args:
         session['u'] = request.args.get('u')
-        flash('URL found')
       if session:
         if 'u' in session:
           form.pipurl.data = session['u']
+      if request.url_root == url_root(form.pipurl.data):
+        form.pipurl.data = ''
     return render_template('pipulate.html', form=form)
+
+def url_root(url):
+  from urlparse import urlparse
+  parsed = urlparse(url)
+  return "%s://%s%s" % (parsed[0], parsed[1], parsed[2])
 
 def getLoginlink():
   baseurl = "https://accounts.google.com/o/oauth2/auth"
