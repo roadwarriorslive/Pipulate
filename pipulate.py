@@ -59,7 +59,8 @@ def main():
       import gspread
       credentials = Credentials(access_token=session['oa2'])
       try:
-        gspread.authorize(credentials)
+        gc = gspread.authorize(credentials)
+        gc.openall()
         session['loggedin'] = "1"
       except:
         session.clear()
@@ -83,7 +84,9 @@ def main():
       if "access_token" in request.args:
         session['oa2'] = request.args.get("access_token")
         session['loggedin'] = "1"
-        flash('Logged into Google. Get pipulating!')
+        from flask import redirect, url_for
+        return redirect(url_for('main'))
+        #flash('Logged into Google. Get pipulating!')
       if 'u' in request.args:
         session['u'] = request.args.get('u')
         flash('URL found')
