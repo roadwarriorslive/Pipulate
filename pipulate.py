@@ -81,6 +81,7 @@ def main():
             urllib2.urlopen(revokeurl)
           session.clear()
           flash('Logged out from Google.')
+        return render_template('pipulate.html', form=form)
       if "access_token" in request.args:
         session['oa2'] = request.args.get("access_token")
         session['loggedin'] = "1"
