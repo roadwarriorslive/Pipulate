@@ -82,16 +82,16 @@ def main():
           session.clear()
           flash('Logged out from Google.')
         return render_template('pipulate.html', form=form)
+      if 'u' in request.args:
+        session['u'] = request.args.get('u')
       if "access_token" in request.args:
         session['oa2'] = request.args.get("access_token")
         session['loggedin'] = "1"
-        return redirect(url_for('main'))
-      if 'u' in request.args:
-        session['u'] = request.args.get('u')
+        return redirect(url_for('main', u=session['u']))
       if session:
         if 'u' in session:
           form.pipurl.data = session['u']
-      if request.url_root == url_root(form.pipurl.data):
+      if form.pipurl.data and request.url_root == url_root(form.pipurl.data):
         form.pipurl.data = ''
     return render_template('pipulate.html', form=form)
 
