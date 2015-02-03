@@ -35,7 +35,7 @@
         <a href="#add-form" data-icon="gear" data-iconpos="notext">Add</a>
       </div><!-- /header -->
       <div role="main" class="ui-content jqm-content jqm-fullwidth" data-theme="a">
-        {% if not request.args %}
+        {% if not request.args and request.method != 'POST' %}
           <p class="pressthis" style="text-align: center">Drag this to Bookmark bar (if you haven't already) --&gt; <a href="{{ bookmarklet }}" onclick="return false;" oncontextmenu="if(window.navigator.userAgent.indexOf('WebKit')!=-1||window.navigator.userAgent.indexOf('MSIE')!=-1){jQuery('.pressthis-code').show().find('textarea').focus().select();return false;}"><span>Pipulate</span></a>
         {% endif %}
         <form method="POST" action="/" enctype="multipart/form-data">
