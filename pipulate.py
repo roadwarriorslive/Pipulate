@@ -46,7 +46,7 @@ def main():
   if request.method == 'POST':
     if form.pipurl.data:
       globs.PIPURL = form.pipurl.data
-      pipulate('gdocs')
+      pipulate()
     else:
       flash('Nothing to Pipulate. Enter a Google Spreadsheet URL and try again.')
     return render_template('pipulate.html', form=form)
@@ -97,7 +97,7 @@ class Credentials (object):
   def __init__ (self, access_token=None):
     self.access_token = access_token
 
-def pipulate(dbsource):
+def pipulate():
   """Allows processing of multiple worksheets."""
 
   funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
