@@ -199,8 +199,9 @@ def pipulate():
           newrow = processrow(str(rowdex), onerow) #Replace question marks in row
           blankrows = 0
           for coldex, acell in enumerate(newrow): #Then step through new row
-            pipsheet.update_cell(rowdex, coldex+1, acell) #Gspread has no "0" column
-            qmarkstotal += 1
+            if acell != None:
+              pipsheet.update_cell(rowdex, coldex+1, acell) #Gspread has no "0" column
+              qmarkstotal += 1
       else:
         blankrows += 1
         if blankrows > 3:
