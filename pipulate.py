@@ -162,7 +162,13 @@ def pipulate(dbsource):
     globs.scrapepatterns = dict(zip(globs.scrapelc, scrapepatterns))
     globs.transscrape = dict(zip(globs.scrapelc, scrapenames)) #Keep translation table
     for rowdex in range(1, pipsheet.row_count): #Start stepping through every row.
+      globs.html = '' #Blank the global html object. Recylces fetches.
       arow = pipsheet.row_values(rowdex)
+      if 'url' in globs.row1:
+        try:
+          globs.html = gethtml(arow[globs.row1.index('url')])
+        except:
+          pass
       if arow: #But only process it if it does not come back as empty list.
         newrow = processrow(str(rowdex), arow) #Replace question marks in row
         blankrows = 0
@@ -312,8 +318,10 @@ def genericscraper(coldex, arow):
         return None
 
 def gethtml(url):
-  html = requests.get(url)
-  return(html.text)
+  if globs.html:
+    return globs.html
+  else:
+    return requests.get(url).text
 
 def getargval(anarg, defargval, arow):
   """Returns value to set argument equal-to in function invocation string.

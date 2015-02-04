@@ -1,4 +1,5 @@
 PIPURL = ''
+html = ''
 fargs = {}
 row1 = []
 funcslc = []
