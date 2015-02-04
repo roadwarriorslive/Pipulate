@@ -24,6 +24,10 @@ def walkdict(obj, key):
       if k == key:
         return v
 
+def datestamp():
+  import datetime
+  return datetime.date.today()
+
 def plusses(url):
   api = "https://clients6.google.com/rpc"
   jobj = '''{

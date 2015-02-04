@@ -142,40 +142,52 @@ def pipulate():
     globs.scrapepatterns = zipnamevaldict(snames, spatterns)
     globs.transscrape = zipnamevaldict(snames, snames)
     trendlist = []
+
+    out("Trend spotting")
+    trended = False
+    for rowdex in range(1, pipsheet.row_count): #Give trending its own loop
+      arow = pipsheet.row_values(rowdex)
+      if arow:
+        if rowdex == 2: #Looking for trending requests
+          if '*' in arow:
+            trended = True
+            trendlist.append(arow)
+        elif trendlist and rowdex > 2:
+          if '*' in arow:
+            trendlist.append(arow)
+      else:
+        blankrows += 1
+        if blankrows > 3:
+          break
+    for trendrow in trendlist:
+      trendrow = ['?' if x=='*' else x for x in trendrow]
+      InsertRow(pipsheet, trendrow)
+    trendlist = []
+    flash("Trending asterisks discovered.")
+
+    #We need to get it again if trending rows were added.
+    if trended:
+      try:
+        pipsheet = pipdoc.get_worksheet(0)
+      except:
+        flash("Couldn't reach Google Docs. Try logging in again.")
+        return
+
+    globs.numrows = len(pipsheet.col_values(1)) + 1
+    blankrows = 0
+    out("Question mark replacement")
     for rowdex in range(1, pipsheet.row_count): #Start stepping through every row.
       globs.html = '' #Blank the global html object. Recylces fetches.
       arow = pipsheet.row_values(rowdex)
-      if rowdex == 2: #Looking for trending requests
-        if '*' in arow:
-          trendlist.append(arow)
-      elif trendlist and rowdex > 2:
-        if '*' in arow:
-          trendlist.append(arow)
-        else:
-          for trendrow in trendlist:
-            trendrow = ['?' if x=='*' else x for x in trendrow]
-            InsertRow(pipsheet, trendrow)
-          trendlist = []
-          flash("Trending asterisks discovered.")
-      if 'url' in globs.row1:
-        try:
-          globs.html = gethtml(arow[globs.row1.index('url')])
-        except:
-          pass
       if arow: #But only process it if it does not come back as empty list.
-        try:
-          newrow = processrow(str(rowdex), arow) #Replace question marks in row
-          blankrows = 0
-        except:
-          continue
+        out("Processing row %s" % rowdex)
+        newrow = processrow(str(rowdex), arow) #Replace question marks in row
+        blankrows = 0
         for coldex, acell in enumerate(newrow): #Then step through new row
           if questionmark(arow, rowdex, coldex): #And update Google worksheet
-            try:
-              pipsheet.update_cell(rowdex, coldex+1, acell) #Gspread has no "0" column
-              qmarks += 1
-            except:
-              pipsheet.update_cell(rowdex, coldex+1, acell) #Gspread has no "0" column
-              qmarks += 1
+            out("Found question marks on row")
+            pipsheet.update_cell(rowdex, coldex+1, acell) #Gspread has no "0" column
+            qmarks += 1
       else:
         blankrows += 1
         if blankrows > 3:
@@ -198,10 +210,15 @@ def InsertRow(worksheet, alist):
   column = globs.letter[len(alist)]
   endrow = globs.numrows
   rowrange = "A%s:%s%s" % (endrow, column, endrow)
-  out(rowrange)
+  out('Inserting row in range %s' % rowrange)
   cell_list = worksheet.range(rowrange)
   for index, cell in enumerate(cell_list):
-    cell.value = alist[index]
+    ival = ''
+    if alist[index] == None:
+      ival = ''
+    else:
+      ival = alist[index]
+    cell.value = ival
   worksheet.update_cells(cell_list)
   globs.numrows += 1
 
@@ -244,9 +261,17 @@ def processrow(rowdex, arow):
     #All subsequent rows are checked for question mark replacement requests.
     for coldex, acell in enumerate(changedrow):
       if questionmark(arow, rowdex, coldex):
-        if globs.row1[coldex] in globs.transfuncs.keys():
+        if 'url' in globs.row1: #Only fetch html once per row if possible
+          try:
+            globs.html = gethtml(arow[globs.row1.index('url')])
+          except:
+            pass
+        collabel = globs.row1[coldex]
+        if collabel in globs.transfuncs.keys():
+          out("Function %s found" % collabel)
           changedrow[coldex] = evalfunc(coldex, changedrow) #The Function Path
-        elif globs.row1[coldex] in globs.transscrape.keys():
+        elif collabel in globs.transscrape.keys():
+          out("Scraper %s found" % collabel)
           changedrow[coldex] = genericscraper(coldex, changedrow) #Scraping
   return(changedrow)
 
@@ -335,10 +360,16 @@ def genericscraper(coldex, arow):
         return None
 
 def gethtml(url):
+  html = ''
   if globs.html:
     return globs.html
   else:
-    return requests.get(url).text
+    out("Fetching html once for row")
+    try:
+      html = requests.get(url).text
+    except:
+      html = requests.get(url).text
+  return html
 
 def getargval(anarg, defargval, arow):
   """Returns value to set argument equal-to in function invocation string.
