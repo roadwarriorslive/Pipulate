@@ -124,7 +124,7 @@ def pipulate():
       flash("Couldn't reach Google Docs. Try logging in again.")
       return
     globs.numrows = len(pipsheet.col_values(1)) + 1
-    InsertRow(pipsheet, "Testing")
+    InsertRow(pipsheet, ['foo', 'bar'])
     try:
       pipdoc.worksheet("Pipulate")
     except:
@@ -195,8 +195,15 @@ def zipnamevaldict(keys, values):
 def lowercaselist(alist):
   return [x.lower() for x in alist]
 
-def InsertRow(wkshtobj, thetext):
-  wkshtobj.update_cell(globs.numrows, 1, thetext)
+def InsertRow(worksheet, alist):
+  column = globs.letter[len(alist)]
+  endrow = globs.numrows
+  rowrange = "A%s:%s%s" % (endrow, column, endrow)
+  out(rowrange)
+  cell_list = worksheet.range(rowrange)
+  for cell in cell_list:
+    cell.value = 'O_o'
+  worksheet.update_cells(cell_list)
   globs.numrows += 1
 
 def inittab(gdoc, tabname, headerlist, listoflists=[]):
