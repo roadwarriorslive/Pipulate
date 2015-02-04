@@ -124,7 +124,6 @@ def pipulate():
       flash("Couldn't reach Google Docs. Try logging in again.")
       return
     globs.numrows = len(pipsheet.col_values(1)) + 1
-    InsertRow(pipsheet, ['foo', 'bar'])
     try:
       pipdoc.worksheet("Pipulate")
     except:
@@ -153,9 +152,8 @@ def pipulate():
         if '*' in arow:
           trendlist.append(arow)
         else:
-          for row in trendlist:
-            #pipsheet.append_row(row)
-            pass
+          for trendrow in trendlist:
+            InsertRow(pipsheet, trendrow)
           trendlist = []
           flash("Trending asterisks discovered.")
       if 'url' in globs.row1:
@@ -201,8 +199,8 @@ def InsertRow(worksheet, alist):
   rowrange = "A%s:%s%s" % (endrow, column, endrow)
   out(rowrange)
   cell_list = worksheet.range(rowrange)
-  for cell in cell_list:
-    cell.value = 'O_o'
+  for index, cell in enumerate(cell_list):
+    cell.value = alist[index]
   worksheet.update_cells(cell_list)
   globs.numrows += 1
 
