@@ -194,9 +194,8 @@ def questionmark(oldrow, rowdex, coldex):
   This is called for every cell on every row processed and checks whether
   question mark replacemnt should actually occur."""
   if rowdex != 1:
-    if globs.row1[coldex] in globs.funcslc:
-      if oldrow[coldex] == '?':
-        return(True)
+    if oldrow[coldex] == '?':
+      return(True)
   return(False)
 
 def processrow(rowdex, arow):
@@ -216,7 +215,11 @@ def processrow(rowdex, arow):
     #All subsequent rows are checked for question mark replacement requests.
     for coldex, acell in enumerate(changedrow):
       if questionmark(arow, rowdex, coldex):
-        changedrow[coldex] = evalfunc(coldex, changedrow)
+        if globs.row1[coldex] in globs.funcslc:
+          changedrow[coldex] = evalfunc(coldex, changedrow)
+        elif globs.row1[coldex] in globs.scrapelc:
+          changedrow[coldex] = genericscraper(coldex, changedrow)
+          pass #put scrape handling here
   return(changedrow)
 
 def row1funcs(arow):
@@ -275,6 +278,9 @@ def evalfunc(coldex, arow):
     evalme = evalme + ')' 
   #return('%s: %s' % (evalme, eval(evalme)))
   return(eval(evalme))
+
+def genericscraper(coldex, arow):
+  return('I would scrape')
 
 def getargval(anarg, defargval, arow):
   """Returns value to set argument equal-to in function invocation string.
