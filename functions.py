@@ -1,5 +1,19 @@
 import requests
 
+def scrapes():
+  s = []
+  s.append(['title',       'xpath', "//title/text()"])
+  s.append(['description', 'xpath', "//meta[@name='description']/@content"])
+  s.append(['tweets',      'xpath', "//span[.='Tweets']/following-sibling::span/text()"])
+  s.append(['following',   'xpath', "//span[.='Following']/following-sibling::span/text()"])
+  s.append(['followers',   'xpath', "//span[.='Followers']/following-sibling::span/text()"])
+  s.append(['views',       'xpath', "//div[@class='watch-view-count']/text()"])
+  s.append(['thumbsup',    'xpath', "//button[@id='watch-like']/span/text()"])
+  s.append(['thumbsdown',  'xpath', "//button[@id='watch-dislike']/span/text()"])
+  s.append(['subscribers', 'regex', r"subscriber-count.*?>(?P<scrape>[0-9,]+?)<"])
+  s.append(['ga',          'regex', r"(?:\'|\")(?P<scrape>UA-.*?)(?:\'|\")"])
+  return s
+
 def walkdict(obj, key):
   stack = obj.items()
   while stack:
@@ -9,18 +23,6 @@ def walkdict(obj, key):
     else:
       if k == key:
         return v
-
-def scrapes():
-  scrapelist = []
-  scrapelist.append(['tweets',      'xpath', "//span[.='Tweets']/following-sibling::span/text()"])
-  scrapelist.append(['following',   'xpath', "//span[.='Following']/following-sibling::span/text()"])
-  scrapelist.append(['followers',   'xpath', "//span[.='Followers']/following-sibling::span/text()"])
-  scrapelist.append(['views',       'xpath', "//div[@class='watch-view-count']/text()"])
-  scrapelist.append(['thumbsup',    'xpath', "//button[@id='watch-like']/span/text()"])
-  scrapelist.append(['thumbsdown',  'xpath', "//button[@id='watch-dislike']/span/text()"])
-  scrapelist.append(['subscribers', 'regex', r"subscriber-count.*?>(?P<scrape>[0-9,]+?)<"])
-  scrapelist.append(['ga',          'regex', r"(?:\'|\")(?P<scrape>UA-.*?)(?:\'|\")"])
-  return scrapelist
 
 def plusses(url):
   api = "https://clients6.google.com/rpc"
