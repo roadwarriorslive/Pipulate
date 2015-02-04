@@ -130,14 +130,13 @@ def pipulate(dbsource):
     except:
       headers = ['name', 'type', 'pattern']
       inittab(pipdoc, 'Scrapers', headers, scrapes())
-    scrapesheet = pipdoc.worksheet("Scrapers")
-    scrapenames = scrapesheet.col_values(1)
-    scrapetypes = scrapesheet.col_values(2)
-    scrapepatterns = scrapesheet.col_values(3)
-    globs.scrapelc = lowercaselist(scrapenames) #Lower-case all scrape  names
-    globs.scrapetypes = dict(zip(globs.scrapelc, scrapetypes))
-    globs.scrapepatterns = dict(zip(globs.scrapelc, scrapepatterns))
-    globs.transscrape = dict(zip(globs.scrapelc, scrapenames)) #Keep translation table
+    sst = pipdoc.worksheet("Scrapers")
+    snames = sst.col_values(1)
+    stypes = sst.col_values(2)
+    spatterns = sst.col_values(3)
+    globs.scrapetypes = zipnamevaldict(snames, stypes)
+    globs.scrapepatterns = zipnamevaldict(snames, spatterns)
+    globs.transscrape = zipnamevaldict(snames, snames)
     for rowdex in range(1, pipsheet.row_count): #Start stepping through every row.
       globs.html = '' #Blank the global html object. Recylces fetches.
       arow = pipsheet.row_values(rowdex)
@@ -164,8 +163,9 @@ def pipulate(dbsource):
   else:
     flash('Please Login to Google')
 
-def makeglobdict():
-  return
+def zipnamevaldict(keys, values):
+  keys = lowercaselist(keys)
+  return dict(zip(keys, values))
 
 def lowercaselist(alist):
   return [x.lower() for x in alist]
@@ -211,7 +211,7 @@ def processrow(rowdex, arow):
       if questionmark(arow, rowdex, coldex):
         if globs.row1[coldex] in globs.funcslc:
           changedrow[coldex] = evalfunc(coldex, changedrow)
-        elif globs.row1[coldex] in globs.scrapelc:
+        elif globs.row1[coldex] in globs.transscrape.keys():
           changedrow[coldex] = genericscraper(coldex, changedrow)
           pass #put scrape handling here
   return(changedrow)
