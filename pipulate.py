@@ -42,7 +42,8 @@ def main():
         gsp.openall()
         session['loggedin'] = "1"
       except:
-        session.clear()
+        #session.clear()
+        pass
   if request.method == 'POST':
     if form.pipurl.data:
       globs.PIPURL = form.pipurl.data
@@ -118,6 +119,9 @@ def pipulate():
     except:
       flash("Couldn't reach Google Docs. Try logging in again.")
       return
+    col1 = pipsheet.col_values(1)
+    print(len(col1))
+    pipsheet.update_cell(len(col1)+1, 1, 'Bingo!')
     try:
       pipdoc.worksheet("Pipulate")
     except:
@@ -135,21 +139,21 @@ def pipulate():
     globs.scrapetypes = zipnamevaldict(snames, stypes)
     globs.scrapepatterns = zipnamevaldict(snames, spatterns)
     globs.transscrape = zipnamevaldict(snames, snames)
+    trendlist = []
     for rowdex in range(1, pipsheet.row_count): #Start stepping through every row.
       globs.html = '' #Blank the global html object. Recylces fetches.
       arow = pipsheet.row_values(rowdex)
       if rowdex == 2: #Looking for trending requests
         if '*' in arow:
-          globs.trending += 1
-      elif globs.trending and rowdex > 2:
+          trendlist.append(arow)
+      elif trendlist and rowdex > 2:
         if '*' in arow:
-          globs.trending += 1
+          trendlist.append(arow)
         else:
-          endrow = globs.trending + 1
-          endcol = globs.letter[len(globs.row1)]
-          trendrange = "A2:%s%s" % (endcol, endrow)
-          print(trendrange)
-          globs.trending = 0
+          for row in trendlist:
+            #pipsheet.append_row(row)
+            pass
+          trendlist = []
           flash("Trending asterisks discovered.")
       if 'url' in globs.row1:
         try:
@@ -157,8 +161,11 @@ def pipulate():
         except:
           pass
       if arow: #But only process it if it does not come back as empty list.
-        newrow = processrow(str(rowdex), arow) #Replace question marks in row
-        blankrows = 0
+        try:
+          newrow = processrow(str(rowdex), arow) #Replace question marks in row
+          blankrows = 0
+        except:
+          continue
         for coldex, acell in enumerate(newrow): #Then step through new row
           if questionmark(arow, rowdex, coldex): #And update Google worksheet
             try:
