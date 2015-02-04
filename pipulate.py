@@ -101,8 +101,7 @@ def pipulate(dbsource):
   """Allows processing of multiple worksheets."""
 
   funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
-  globs.funcslc = lowercaselist(funcs) #Lower-case all function names
-  globs.transfunc = dict(zip(globs.funcslc, funcs)) #Keep translation table
+  globs.transfuncs = zipnamevaldict(funcs, funcs) #Keep translation table
   qmarks = 0
   blankrows = 0
   import gspread
@@ -150,8 +149,12 @@ def pipulate(dbsource):
         blankrows = 0
         for coldex, acell in enumerate(newrow): #Then step through new row
           if questionmark(arow, rowdex, coldex): #And update Google worksheet
-            pipsheet.update_cell(rowdex, coldex+1, acell) #Gspread has no "0" column
-            qmarks += 1
+            try:
+              pipsheet.update_cell(rowdex, coldex+1, acell) #Gspread has no "0" column
+              qmarks += 1
+            except:
+              pipsheet.update_cell(rowdex, coldex+1, acell) #Gspread has no "0" column
+              qmarks += 1
       else:
         blankrows += 1
         if blankrows > 3:
@@ -209,11 +212,11 @@ def processrow(rowdex, arow):
     #All subsequent rows are checked for question mark replacement requests.
     for coldex, acell in enumerate(changedrow):
       if questionmark(arow, rowdex, coldex):
-        if globs.row1[coldex] in globs.funcslc:
+        print("hit")
+        if globs.row1[coldex] in globs.transfuncs.keys():
           changedrow[coldex] = evalfunc(coldex, changedrow)
         elif globs.row1[coldex] in globs.transscrape.keys():
           changedrow[coldex] = genericscraper(coldex, changedrow)
-          pass #put scrape handling here
   return(changedrow)
 
 def row1funcs(arow):
@@ -226,7 +229,7 @@ def row1funcs(arow):
   fargs = {}
   for coldex, fname in enumerate(arow):
     fname = fname.lower()
-    if fname in globs.funcslc: #Detect if column name is a function
+    if fname in globs.transfuncs.keys(): #Detect if column name is a function
       fargs[coldex] = {}
       from inspect import getargspec
       argspec = getargspec(eval(fname))
@@ -257,7 +260,7 @@ def evalfunc(coldex, arow):
   values provided by function itself, as well as parameter values provided in
   the provided row. Because rows are being handled as lists, order is
   important, and the column index allows function name lookup."""
-  fname = globs.transfunc[globs.row1[coldex]]
+  fname = globs.transfuncs[globs.row1[coldex]]
   fargs = globs.fargs[coldex]
   evalme = "%s(" % fname #Begin building string that will eventually be eval'd
   if fargs:

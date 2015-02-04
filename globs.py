@@ -3,7 +3,6 @@ config = {}
 html = ''
 fargs = {}
 row1 = []
-funcslc = []
 transfuncs = {}
 transscrape = {}
 scrapetypes = {}
