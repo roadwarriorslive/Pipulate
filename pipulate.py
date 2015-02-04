@@ -112,16 +112,20 @@ def pipulate():
   import gspread
   if session:
     if 'oa2' in session:
+      out("OAuth2 token found")
       credentials = Credentials(access_token=session['oa2'])
     else:
+      out("Token appears to have expired")
       flash('Not logged into Google. Please Login.')
       return
     try:
+      out("Attempting to connect to Google Docs.")
       gsp = gspread.authorize(credentials)
       pipdoc = gsp.open_by_url(globs.PIPURL) #HTTP connection errors happen here.
       pipsheet = pipdoc.get_worksheet(0)
     except:
-      flash("Couldn't reach Google Docs. Try logging in again.")
+      out("We have token but still cannot connect.")
+      flash("You may have to login to Google again.")
       return
     globs.numrows = len(pipsheet.col_values(1)) + 1
     try:
@@ -142,6 +146,8 @@ def pipulate():
     globs.scrapepatterns = zipnamevaldict(snames, spatterns)
     globs.transscrape = zipnamevaldict(snames, snames)
     trendlist = []
+    globs.row1 = pipsheet.row_values(1)
+    row1funcs(globs.row1)
 
     out("Trend spotting")
     trended = False
@@ -186,10 +192,10 @@ def pipulate():
       onerow = pipsheet.row_values(rowdex)
       if onerow: #But only process it if it does not come back as empty list.
         out("Examining row %s" % rowdex)
-        newrow = processrow(str(rowdex), onerow) #Replace question marks in row
-        blankrows = 0
-        for coldex, acell in enumerate(newrow): #Then step through new row
-          if questionmark(onerow, rowdex, coldex): #And update Google worksheet
+        if '?' in onerow:
+          newrow = processrow(str(rowdex), onerow) #Replace question marks in row
+          blankrows = 0
+          for coldex, acell in enumerate(newrow): #Then step through new row
             pipsheet.update_cell(rowdex, coldex+1, acell) #Gspread has no "0" column
             qmarkstotal += 1
       else:
@@ -257,11 +263,7 @@ def processrow(rowdex, onerow):
   indicated by the column label, using values from the active row as parameter
   values if available, parameter defaults if not, and None if not found."""
   changedrow = onerow[:]
-  if str(rowdex) == '1':
-    #Row 1 is always specially handled because it contains function names.
-    globs.row1 = lowercaselist(changedrow)
-    row1funcs(changedrow)
-  else:
+  if rowdex > 1:
     #All subsequent rows are checked for question mark replacement requests.
     for coldex, acell in enumerate(changedrow):
       if questionmark(onerow, rowdex, coldex):
