@@ -22,7 +22,6 @@ from wtforms.validators import DataRequired, Optional, Required
 app = Flask(__name__, static_folder='../uploads', static_url_path='/files')
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
-letter = {2:'B',3:'C',4:'D',5:'E',6:'F'}
 
 @app.context_processor
 def templateglobals():
@@ -167,7 +166,7 @@ def pipulate(dbsource):
 def inittab(gdoc, tabname, headerlist, listoflists=[]):
   numcols = len(headerlist)
   newtab = gdoc.add_worksheet(title=tabname, rows="1", cols=numcols)
-  cell_list = newtab.range('A1:%s1' % letter[numcols])
+  cell_list = newtab.range('A1:%s1' % globs.letter[numcols])
   for index, cell in enumerate(cell_list):
     cell.value = headerlist[index]
   newtab.update_cells(cell_list)
