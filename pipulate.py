@@ -153,7 +153,9 @@ def pipulate(dbsource):
       headers = ['name', 'type', 'pattern']
       inittab(pipdoc, 'Scrapers', headers, scrapes())
     scrapesheet = pipdoc.worksheet("Scrapers")
-    scrapenames = scrapesheet.col_values(1)
+    scrapes = scrapesheet.col_values(1)
+    globs.scrapelc = [x.lower() for x in scrapes] #Lower-case all scrape  names
+    globs.transscrape = dict(zip(globs.scrapelc, scrapes)) #Keep translation table
     for rowdex in range(1, pipsheet.row_count): #Start stepping through every row.
       arow = pipsheet.row_values(rowdex)
       if arow: #But only process it if it does not come back as empty list.

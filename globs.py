@@ -1,9 +1,10 @@
 PIPURL = ''
 fargs = {}
-scrapernames = []
 row1 = []
 funcslc = []
 transfuncs = {}
+scrapelc = []
+transcrape = {}
 UPLOAD_FOLDER = '../uploads'
 filename = ''
 ALLOWED_EXTENSIONS = set(['csv'])
