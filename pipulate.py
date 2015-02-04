@@ -123,7 +123,6 @@ def pipulate():
     except:
       headers = ['name', 'value']
       inittab(pipdoc, 'Pipulate', headers)
-    
     try:
       pipdoc.worksheet("Scrapers")
     except:
@@ -139,6 +138,17 @@ def pipulate():
     for rowdex in range(1, pipsheet.row_count): #Start stepping through every row.
       globs.html = '' #Blank the global html object. Recylces fetches.
       arow = pipsheet.row_values(rowdex)
+      if rowdex == 2:
+        if '*' in arow:
+          globs.trending += 1
+      elif globs.trending and rowdex > 2:
+        if '*' in arow:
+          globs.trending += 1
+        else:
+          print(globs.trending)
+          #Do range copy and insert here
+          globs.trending = 0
+          flash("Trending asterisks discovered.")
       if 'url' in globs.row1:
         try:
           globs.html = gethtml(arow[globs.row1.index('url')])
@@ -212,11 +222,10 @@ def processrow(rowdex, arow):
     #All subsequent rows are checked for question mark replacement requests.
     for coldex, acell in enumerate(changedrow):
       if questionmark(arow, rowdex, coldex):
-        print("hit")
         if globs.row1[coldex] in globs.transfuncs.keys():
-          changedrow[coldex] = evalfunc(coldex, changedrow)
+          changedrow[coldex] = evalfunc(coldex, changedrow) #The Function Path
         elif globs.row1[coldex] in globs.transscrape.keys():
-          changedrow[coldex] = genericscraper(coldex, changedrow)
+          changedrow[coldex] = genericscraper(coldex, changedrow) #Scraping
   return(changedrow)
 
 def row1funcs(arow):
