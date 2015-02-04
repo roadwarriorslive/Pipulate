@@ -153,9 +153,13 @@ def pipulate(dbsource):
       headers = ['name', 'type', 'pattern']
       inittab(pipdoc, 'Scrapers', headers, scrapes())
     scrapesheet = pipdoc.worksheet("Scrapers")
-    scrapes = scrapesheet.col_values(1)
-    globs.scrapelc = [x.lower() for x in scrapes] #Lower-case all scrape  names
-    globs.transscrape = dict(zip(globs.scrapelc, scrapes)) #Keep translation table
+    scrapenames = scrapesheet.col_values(1)
+    scrapetypes = scrapesheet.col_values(2)
+    scrapepatterns = scrapesheet.col_values(3)
+    globs.scrapelc = [x.lower() for x in scrapenames] #Lower-case all scrape  names
+    globs.scrapetypes = dict(zip(globs.scrapelc, scrapetypes))
+    globs.scrapepatterns = dict(zip(globs.scrapelc, scrapepatterns))
+    globs.transscrape = dict(zip(globs.scrapelc, scrapenames)) #Keep translation table
     for rowdex in range(1, pipsheet.row_count): #Start stepping through every row.
       arow = pipsheet.row_values(rowdex)
       if arow: #But only process it if it does not come back as empty list.
@@ -281,7 +285,9 @@ def evalfunc(coldex, arow):
 
 def genericscraper(coldex, arow):
   sname = globs.transscrape[globs.row1[coldex]]
-  return(sname)
+  stype = globs.scrapetypes[sname]
+  spattern = globs.scrapepatterns[sname]
+  return(spattern)
 
 def getargval(anarg, defargval, arow):
   """Returns value to set argument equal-to in function invocation string.
