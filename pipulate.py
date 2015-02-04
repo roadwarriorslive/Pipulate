@@ -107,7 +107,7 @@ def pipulate():
 
   funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
   globs.transfuncs = zipnamevaldict(funcs, funcs) #Keep translation table
-  qmarks = 0
+  qmarkstotal = 0
   blankrows = 0
   import gspread
   if session:
@@ -146,15 +146,20 @@ def pipulate():
     out("Trend spotting")
     trended = False
     for rowdex in range(1, pipsheet.row_count): #Give trending its own loop
-      arow = pipsheet.row_values(rowdex)
-      if arow:
+      out("Looking for asteriks on row %s " % rowdex)
+      onerow = pipsheet.row_values(rowdex)
+      if onerow:
         if rowdex == 2: #Looking for trending requests
-          if '*' in arow:
+          if '*' in onerow:
             trended = True
-            trendlist.append(arow)
+            trendlist.append(onerow)
         elif trendlist and rowdex > 2:
-          if '*' in arow:
-            trendlist.append(arow)
+          if '*' in onerow:
+            trendlist.append(onerow)
+          else:
+            blankrows += 1
+            if blankrows > 3:
+              break
       else:
         blankrows += 1
         if blankrows > 3:
@@ -178,22 +183,21 @@ def pipulate():
     out("Question mark replacement")
     for rowdex in range(1, pipsheet.row_count): #Start stepping through every row.
       globs.html = '' #Blank the global html object. Recylces fetches.
-      arow = pipsheet.row_values(rowdex)
-      if arow: #But only process it if it does not come back as empty list.
-        out("Processing row %s" % rowdex)
-        newrow = processrow(str(rowdex), arow) #Replace question marks in row
+      onerow = pipsheet.row_values(rowdex)
+      if onerow: #But only process it if it does not come back as empty list.
+        out("Examining row %s" % rowdex)
+        newrow = processrow(str(rowdex), onerow) #Replace question marks in row
         blankrows = 0
         for coldex, acell in enumerate(newrow): #Then step through new row
-          if questionmark(arow, rowdex, coldex): #And update Google worksheet
-            out("Found question marks on row")
+          if questionmark(onerow, rowdex, coldex): #And update Google worksheet
             pipsheet.update_cell(rowdex, coldex+1, acell) #Gspread has no "0" column
-            qmarks += 1
+            qmarkstotal += 1
       else:
         blankrows += 1
         if blankrows > 3:
           break
-    if qmarks:
-      flash('Replaced %s question marks.' % qmarks)
+    if qmarkstotal:
+      flash('Replaced %s question marks.' % qmarkstotal)
     else:
       flash('No question marks found in Sheet 1.')
   else:
@@ -244,7 +248,7 @@ def questionmark(oldrow, rowdex, coldex):
       return(True)
   return(False)
 
-def processrow(rowdex, arow):
+def processrow(rowdex, onerow):
   """Separates row-1 handling from question mark detection on all other rows.
   
   Called on each row of a worksheet and either initializes functions when it's
@@ -252,7 +256,7 @@ def processrow(rowdex, arow):
   encountering a question mark, it determines whether to invoke the function
   indicated by the column label, using values from the active row as parameter
   values if available, parameter defaults if not, and None if not found."""
-  changedrow = arow[:]
+  changedrow = onerow[:]
   if str(rowdex) == '1':
     #Row 1 is always specially handled because it contains function names.
     globs.row1 = lowercaselist(changedrow)
@@ -260,22 +264,21 @@ def processrow(rowdex, arow):
   else:
     #All subsequent rows are checked for question mark replacement requests.
     for coldex, acell in enumerate(changedrow):
-      if questionmark(arow, rowdex, coldex):
+      if questionmark(onerow, rowdex, coldex):
         if 'url' in globs.row1: #Only fetch html once per row if possible
           try:
-            globs.html = gethtml(arow[globs.row1.index('url')])
+            globs.html = gethtml(onerow[globs.row1.index('url')])
           except:
             pass
         collabel = globs.row1[coldex]
+        out(collabel)
         if collabel in globs.transfuncs.keys():
-          out("Function %s found" % collabel)
           changedrow[coldex] = evalfunc(coldex, changedrow) #The Function Path
         elif collabel in globs.transscrape.keys():
-          out("Scraper %s found" % collabel)
           changedrow[coldex] = genericscraper(coldex, changedrow) #Scraping
   return(changedrow)
 
-def row1funcs(arow):
+def row1funcs(onerow):
   """Scans row-1 for names of global functions and builds dict of requirements.
   
   This is only invoked on row 1 of a worksheet, where the names of functions
@@ -283,7 +286,7 @@ def row1funcs(arow):
   dictionary of dictionaries called globs.fargs which plays an important role
   in building the code necessary for question mark replacement."""
   fargs = {}
-  for coldex, fname in enumerate(arow):
+  for coldex, fname in enumerate(onerow):
     fname = fname.lower()
     if fname in globs.transfuncs.keys(): #Detect if column name is a function
       fargs[coldex] = {}
@@ -308,7 +311,7 @@ def row1funcs(arow):
 
   globs.fargs = fargs #Make dict global so we don't have to pass it around
 
-def evalfunc(coldex, arow):
+def evalfunc(coldex, onerow):
   """Builds string to execute to get value to replace question mark with.
   
   Once a question mark is found in a cell belonging to a function-named column,
@@ -324,7 +327,7 @@ def evalfunc(coldex, arow):
     for anarg in fargs: 
       #Add an arg=value to string for each required argument.
       anarg = anarg.lower()
-      argval = getargval(anarg, fargs[anarg], arow) 
+      argval = getargval(anarg, fargs[anarg], onerow) 
       evalme = "%s%s=%s, " % (evalme, anarg, argval)
     evalme = evalme[:-2] + ')' #Finish building string for the eval statement.
   else:
@@ -332,12 +335,12 @@ def evalfunc(coldex, arow):
     evalme = evalme + ')' 
   return(eval(evalme))
 
-def genericscraper(coldex, arow):
+def genericscraper(coldex, onerow):
   sname = globs.transscrape[globs.row1[coldex]]
   stype = globs.scrapetypes[sname]
   spattern = globs.scrapepatterns[sname]
   if 'url' in globs.row1:
-    url = arow[globs.row1.index('url')]
+    url = onerow[globs.row1.index('url')]
     html = gethtml(url)
     if stype.lower() == 'xpath':
       import lxml.html
@@ -371,7 +374,7 @@ def gethtml(url):
       html = requests.get(url).text
   return html
 
-def getargval(anarg, defargval, arow):
+def getargval(anarg, defargval, onerow):
   """Returns value to set argument equal-to in function invocation string.
   
   This function returns which value should be used as the arguments to the
@@ -380,8 +383,8 @@ def getargval(anarg, defargval, arow):
   default, the Python value of None will be returned."""
   for coldex, acol in enumerate(globs.row1):
     if acol == anarg: #Found column named same thing as a required argument.
-      if arow[coldex]: #The cell in that column has a non-zero/empty value.
-        return adq(arow[coldex]) #So, we got what we need. Return it.
+      if onerow[coldex]: #The cell in that column has a non-zero/empty value.
+        return adq(onerow[coldex]) #So, we got what we need. Return it.
   #Oops, no required arguments were found on the row.
   if defargval:
     return adq(defargval) #So, if it's got a default value, return that.

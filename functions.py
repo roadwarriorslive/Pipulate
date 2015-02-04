@@ -27,6 +27,10 @@ def walkdict(obj, key):
 def datestamp():
   import datetime
   return datetime.date.today()
+  
+def timestamp():
+  import datetime
+  return datetime.datetime.today().strftime('%X')
 
 def plusses(url):
   api = "https://clients6.google.com/rpc"
