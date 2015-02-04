@@ -231,7 +231,8 @@ def row1funcs(arow):
   in building the code necessary for question mark replacement."""
   fargs = {}
   for coldex, fname in enumerate(arow):
-    if fname.lower() in globs.funcslc: #Detect if column name is a function
+    fname = fname.lower()
+    if fname in globs.funcslc: #Detect if column name is a function
       fargs[coldex] = {}
       from inspect import getargspec
       argspec = getargspec(eval(fname))
@@ -276,11 +277,11 @@ def evalfunc(coldex, arow):
   else:
     #No arguments required, so just immediately close the parenthesis.
     evalme = evalme + ')' 
-  #return('%s: %s' % (evalme, eval(evalme)))
   return(eval(evalme))
 
 def genericscraper(coldex, arow):
-  return('I would scrape')
+  sname = globs.transscrape[globs.row1[coldex]]
+  return(sname)
 
 def getargval(anarg, defargval, arow):
   """Returns value to set argument equal-to in function invocation string.
