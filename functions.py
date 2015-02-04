@@ -12,13 +12,14 @@ def walkdict(obj, key):
 
 def scrapes():
   scrapelist = []
-  scrapelist.append(['tweets',    'xpath', "//span[.='Tweets']/following-sibling::span/text()"])
-  scrapelist.append(['following', 'xpath', "//span[.='Following']/following-sibling::span/text()"])
-  scrapelist.append(['followers', 'xpath', "//span[.='Followers']/following-sibling::span/text()"])
-  scrapelist.append(['views',     'xpath', "//div[@class='watch-view-count']/text()"])
-  scrapelist.append(['thumbsup',  'xpath', "//button[@id='watch-like']/span/text()"])
-  scrapelist.append(['thumbsdown','xpath', "//button[@id='watch-dislike']/span/text()"])
-  scrapelist.append(['ga',        'regex', r"(?:\'|\")(?P<scrape>UA-.*?)(?:\'|\")"])
+  scrapelist.append(['tweets',      'xpath', "//span[.='Tweets']/following-sibling::span/text()"])
+  scrapelist.append(['following',   'xpath', "//span[.='Following']/following-sibling::span/text()"])
+  scrapelist.append(['followers',   'xpath', "//span[.='Followers']/following-sibling::span/text()"])
+  scrapelist.append(['views',       'xpath', "//div[@class='watch-view-count']/text()"])
+  scrapelist.append(['thumbsup',    'xpath', "//button[@id='watch-like']/span/text()"])
+  scrapelist.append(['thumbsdown',  'xpath', "//button[@id='watch-dislike']/span/text()"])
+  scrapelist.append(['subscribers', 'regex', r"subscriber-count.*?>(?P<scrape>[0-9,]+?)<"])
+  scrapelist.append(['ga',          'regex', r"(?:\'|\")(?P<scrape>UA-.*?)(?:\'|\")"])
   return scrapelist
 
 def plusses(url):
