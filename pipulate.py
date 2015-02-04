@@ -151,6 +151,7 @@ def pipulate():
 
     out("Trend spotting")
     trended = False
+    qstart = 1
     for rowdex in range(1, pipsheet.row_count): #Give trending its own loop
       out("Looking for asteriks on row %s " % rowdex)
       onerow = pipsheet.row_values(rowdex)
@@ -170,6 +171,7 @@ def pipulate():
         blankrows += 1
         if blankrows > 3:
           break
+    qstart = globs.numrows - len(trendlist)
     for trendrow in trendlist:
       trendrow = ['?' if x=='*' else x for x in trendrow]
       InsertRow(pipsheet, trendrow)
@@ -184,10 +186,11 @@ def pipulate():
         flash("Couldn't reach Google Docs. Try logging in again.")
         return
 
+
     globs.numrows = len(pipsheet.col_values(1)) + 1
     blankrows = 0
     out("Question mark replacement")
-    for rowdex in range(1, pipsheet.row_count): #Start stepping through every row.
+    for rowdex in range(qstart, pipsheet.row_count): #Start stepping through every row.
       globs.html = '' #Blank the global html object. Recylces fetches.
       onerow = pipsheet.row_values(rowdex)
       if onerow: #But only process it if it does not come back as empty list.
