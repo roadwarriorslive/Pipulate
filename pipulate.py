@@ -153,6 +153,7 @@ def pipulate():
           trendlist.append(arow)
         else:
           for trendrow in trendlist:
+            trendrow = ['?' if x=='*' else x for x in trendrow]
             InsertRow(pipsheet, trendrow)
           trendlist = []
           flash("Trending asterisks discovered.")
