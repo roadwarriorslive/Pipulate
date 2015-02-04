@@ -9,13 +9,15 @@ def walkdict(obj, key):
     else:
       if k == key:
         return v
-      # print("%s: %s" % (k, v))
 
 def scrapes():
   scrapelist = []
   scrapelist.append(['tweets',    'xpath', "//span[.='Tweets']/following-sibling::span/text()"])
   scrapelist.append(['following', 'xpath', "//span[.='Following']/following-sibling::span/text()"])
   scrapelist.append(['followers', 'xpath', "//span[.='Followers']/following-sibling::span/text()"])
+  scrapelist.append(['views',     'xpath', "//div[@class='watch-view-count']/text()"])
+  scrapelist.append(['thumbsup',  'xpath', "//button[@id='watch-like']/span/text()"])
+  scrapelist.append(['thumbsdown','xpath', "//button[@id='watch-dislike']/span/text()"])
   return scrapelist
 
 def plusses(url):

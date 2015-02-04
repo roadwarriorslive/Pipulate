@@ -293,8 +293,11 @@ def genericscraper(coldex, arow):
     if stype == 'xpath':
       import lxml.html
       searchme = lxml.html.fromstring(html)
-      match = searchme.xpath(spattern)[0]
-      return match
+      match = searchme.xpath(spattern)
+      if match:
+        return match[0]
+      else:
+        return None
 
 def gethtml(url):
   html = requests.get(url)
