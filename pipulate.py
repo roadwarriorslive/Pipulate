@@ -139,7 +139,7 @@ def pipulate(dbsource):
     try:
       gsp = gspread.authorize(credentials)
       pipdoc = gsp.open_by_url(globs.PIPURL) #HTTP connection errors happen here.
-      pipsheet = pipdoc.sheet1
+      pipsheet = pipdoc.get_worksheet(0)
     except:
       flash("Couldn't reach Google Docs. Try logging in again.")
       return
