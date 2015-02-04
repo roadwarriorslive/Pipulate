@@ -89,7 +89,8 @@ def main():
       if "access_token" in request.args:
         session['oa2'] = request.args.get("access_token")
         session['loggedin'] = "1"
-        return redirect(url_for('main', u=session['u']))
+        if 'u' in session:
+          return redirect(url_for('main', u=session['u']))
       if session:
         if 'u' in session:
           form.pipurl.data = session['u']
@@ -290,12 +291,23 @@ def genericscraper(coldex, arow):
   if 'url' in globs.row1:
     url = arow[globs.row1.index('url')]
     html = gethtml(url)
-    if stype == 'xpath':
+    if stype.lower() == 'xpath':
       import lxml.html
       searchme = lxml.html.fromstring(html)
       match = searchme.xpath(spattern)
       if match:
         return match[0]
+      else:
+        return None
+    elif stype.lower() == 'regex':
+      import re
+      match = re.search(spattern, html, re.S | re.I)
+      if match:
+        if "scrape" in match.groupdict().keys():
+          keep = match.group("scrape")
+          return keep
+        else:
+          return None
       else:
         return None
 

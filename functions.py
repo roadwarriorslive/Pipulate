@@ -18,6 +18,7 @@ def scrapes():
   scrapelist.append(['views',     'xpath', "//div[@class='watch-view-count']/text()"])
   scrapelist.append(['thumbsup',  'xpath', "//button[@id='watch-like']/span/text()"])
   scrapelist.append(['thumbsdown','xpath', "//button[@id='watch-dislike']/span/text()"])
+  scrapelist.append(['ga',        'regex', r"(?:\'|\")(?P<scrape>UA-.*?)(?:\'|\")"])
   return scrapelist
 
 def plusses(url):
