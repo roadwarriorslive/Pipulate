@@ -1,3 +1,4 @@
+DBUG = True
 PIPURL = ''
 config = {}
 html = ''

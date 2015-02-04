@@ -22,6 +22,9 @@ from wtforms.validators import DataRequired, Optional, Required
 app = Flask(__name__, static_folder='../uploads', static_url_path='/files')
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
+def out(msg):
+  if globs.DBUG:
+    print(msg)
 
 @app.context_processor
 def templateglobals():
@@ -32,6 +35,7 @@ class PipForm(Form):
 
 @app.route("/", methods=['GET', 'POST'])
 def main():
+  out("Entering Main")
   form = PipForm(csrf_enabled=False)
   if session:
     if 'oa2' in session:
