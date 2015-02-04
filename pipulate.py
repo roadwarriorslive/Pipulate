@@ -138,15 +138,17 @@ def pipulate():
     for rowdex in range(1, pipsheet.row_count): #Start stepping through every row.
       globs.html = '' #Blank the global html object. Recylces fetches.
       arow = pipsheet.row_values(rowdex)
-      if rowdex == 2:
+      if rowdex == 2: #Looking for trending requests
         if '*' in arow:
           globs.trending += 1
       elif globs.trending and rowdex > 2:
         if '*' in arow:
           globs.trending += 1
         else:
-          print(globs.trending)
-          #Do range copy and insert here
+          endrow = globs.trending + 1
+          endcol = globs.letter[len(globs.row1)]
+          trendrange = "A2:%s%s" % (endcol, endrow)
+          print(trendrange)
           globs.trending = 0
           flash("Trending asterisks discovered.")
       if 'url' in globs.row1:
