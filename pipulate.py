@@ -35,6 +35,7 @@ easy_install gspread
 """
 
 import globs #Create objects that don't have to be passed as arguments.
+import requests
 from flask import Flask, request, render_template, session, flash, redirect, url_for
 from flask_wtf import Form
 from flask_wtf.file import FileField
@@ -78,9 +79,8 @@ def main():
       if 'logout' in request.args:
         if session:
           if 'oa2' in session:
-            import urllib2
             revokeurl = 'https://accounts.google.com/o/oauth2/revoke?token=' + session['oa2']
-            urllib2.urlopen(revokeurl)
+            requests.get(revokeurl)
           session.clear()
           flash('Logged out from Google.')
         return render_template('pipulate.html', form=form)
