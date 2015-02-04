@@ -287,7 +287,18 @@ def genericscraper(coldex, arow):
   sname = globs.transscrape[globs.row1[coldex]]
   stype = globs.scrapetypes[sname]
   spattern = globs.scrapepatterns[sname]
-  return(spattern)
+  if 'url' in globs.row1:
+    url = arow[globs.row1.index('url')]
+    html = gethtml(url)
+    if stype == 'xpath':
+      import lxml.html
+      searchme = lxml.html.fromstring(html)
+      match = searchme.xpath(spattern)[0]
+      return match
+
+def gethtml(url):
+  html = requests.get(url)
+  return(html.text)
 
 def getargval(anarg, defargval, arow):
   """Returns value to set argument equal-to in function invocation string.

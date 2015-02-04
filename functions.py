@@ -13,9 +13,9 @@ def walkdict(obj, key):
 
 def scrapes():
   scrapelist = []
-  scrapelist.append(['tweets',    'xpath', "//span[.='Tweets']"])
-  scrapelist.append(['following', 'xpath', "//span[.='Following']"])
-  scrapelist.append(['followers', 'xpath', "//span[.='Followers']"])
+  scrapelist.append(['tweets',    'xpath', "//span[.='Tweets']/following-sibling::span/text()"])
+  scrapelist.append(['following', 'xpath', "//span[.='Following']/following-sibling::span/text()"])
+  scrapelist.append(['followers', 'xpath', "//span[.='Followers']/following-sibling::span/text()"])
   return scrapelist
 
 def plusses(url):
@@ -40,7 +40,7 @@ def plusses(url):
   # return adict['result']['metadata']['globalCounts']['count']
   return walkdict(adict, 'count')
 
-def tweets(url):
+def tweeted(url):
   api = "http://urls.api.twitter.com/1/urls/count.json?url="
   respobj = requests.get(api + url)
   adict = respobj.json()
