@@ -1,5 +1,6 @@
 DBUG = True
 PIPURL = ''
+numrows = 0
 config = {}
 html = ''
 fargs = {}
