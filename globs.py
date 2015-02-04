@@ -1,5 +1,6 @@
 PIPURL = ''
 fargs = {}
+scrapernames = []
 row1 = []
 funcslc = []
 transfuncs = {}

@@ -146,22 +146,14 @@ def pipulate(dbsource):
       config = pipdoc.worksheet("Pipulate")
     except:
       headers = ['name', 'value']
-      namevals = []
-      namevals.append(['foo', 'bar'])
-      namevals.append(['ham', 'eggs'])
-      namevals.append(['pet', 'parrot'])
-      inittab(pipdoc, 'Pipulate', headers, namevals)
+      inittab(pipdoc, 'Pipulate', headers)
     try:
       config = pipdoc.worksheet("Scrapers")
     except:
-      scrapers = pipdoc.add_worksheet(title="Scrapers", rows="1", cols="3")
-      cell_list = scrapers.range('A1:C1')
-      cell_list[0].value = 'name'
-      cell_list[1].value = 'type'
-      cell_list[2].value = 'pattern'
-      scrapers.update_cells(cell_list)
-      flash("Created Scrapers tab.")
-      #scrapers.append_row(["name", "type", "pattern"])
+      headers = ['name', 'type', 'pattern']
+      inittab(pipdoc, 'Scrapers', headers, scrapes())
+    scrapesheet = pipdoc.worksheet("Scrapers")
+    scrapenames = scrapesheet.col_values(1)
     for rowdex in range(1, pipsheet.row_count): #Start stepping through every row.
       arow = pipsheet.row_values(rowdex)
       if arow: #But only process it if it does not come back as empty list.
