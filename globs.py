@@ -1,4 +1,5 @@
 PIPURL = ''
+config = {}
 html = ''
 fargs = {}
 row1 = []

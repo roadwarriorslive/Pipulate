@@ -101,7 +101,7 @@ def pipulate(dbsource):
   """Allows processing of multiple worksheets."""
 
   funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
-  globs.funcslc = [x.lower() for x in funcs] #Lower-case all function names
+  globs.funcslc = lowercaselist(funcs) #Lower-case all function names
   globs.transfunc = dict(zip(globs.funcslc, funcs)) #Keep translation table
   qmarks = 0
   blankrows = 0
@@ -120,12 +120,13 @@ def pipulate(dbsource):
       flash("Couldn't reach Google Docs. Try logging in again.")
       return
     try:
-      config = pipdoc.worksheet("Pipulate")
+      pipdoc.worksheet("Pipulate")
     except:
       headers = ['name', 'value']
       inittab(pipdoc, 'Pipulate', headers)
+    
     try:
-      config = pipdoc.worksheet("Scrapers")
+      pipdoc.worksheet("Scrapers")
     except:
       headers = ['name', 'type', 'pattern']
       inittab(pipdoc, 'Scrapers', headers, scrapes())
@@ -133,7 +134,7 @@ def pipulate(dbsource):
     scrapenames = scrapesheet.col_values(1)
     scrapetypes = scrapesheet.col_values(2)
     scrapepatterns = scrapesheet.col_values(3)
-    globs.scrapelc = [x.lower() for x in scrapenames] #Lower-case all scrape  names
+    globs.scrapelc = lowercaselist(scrapenames) #Lower-case all scrape  names
     globs.scrapetypes = dict(zip(globs.scrapelc, scrapetypes))
     globs.scrapepatterns = dict(zip(globs.scrapelc, scrapepatterns))
     globs.transscrape = dict(zip(globs.scrapelc, scrapenames)) #Keep translation table
@@ -162,6 +163,12 @@ def pipulate(dbsource):
       flash('No question marks found in Sheet 1.')
   else:
     flash('Please Login to Google')
+
+def makeglobdict():
+  return
+
+def lowercaselist(alist):
+  return [x.lower() for x in alist]
 
 def inittab(gdoc, tabname, headerlist, listoflists=[]):
   numcols = len(headerlist)
@@ -196,7 +203,7 @@ def processrow(rowdex, arow):
   changedrow = arow[:]
   if str(rowdex) == '1':
     #Row 1 is always specially handled because it contains function names.
-    globs.row1 = [x.lower() for x in changedrow]
+    globs.row1 = lowercaselist(changedrow)
     row1funcs(changedrow)
   else:
     #All subsequent rows are checked for question mark replacement requests.
