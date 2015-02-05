@@ -160,7 +160,7 @@ def pipulate():
     globs.scrapepatterns = zipnamevaldict(snames, spatterns)
     globs.transscrape = zipnamevaldict(snames, snames)
     trendlist = []
-    globs.row1 = pipsheet.row_values(1)
+    globs.row1 = lowercaselist(pipsheet.row_values(1))
     row1funcs(globs.row1)
 
     out("Trend spotting")
@@ -250,8 +250,6 @@ def InsertRow(worksheet, alist):
   column = globs.letter[len(alist)]
   endrow = globs.numrows + 1
   rowrange = "A%s:%s%s" % (endrow, column, endrow)
-  out(endrow)
-  out(worksheet.row_count)
   if endrow == worksheet.row_count + 1:
     worksheet.add_rows(1)
   cell_list = worksheet.range(rowrange)
