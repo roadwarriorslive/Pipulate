@@ -49,15 +49,12 @@
             {% endif %}
           </div>
         </form>
-        {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            <ul class=flashes>
-            {% for message in messages %}
-              <li>{{ message | safe }}</li>
-            {% endfor %}
-            </ul>
-          {% endif %}
-        {% endwith %}
+<div id="data">nothing received yet</div>
+{% for i, c in data: %}
+<script>
+  $("#data").text("{{ i }} {{ c }}")
+</script>
+{% endfor %}
       </div><!-- /content -->
       <div data-role="panel" data-display="push" data-theme="b" id="nav-panel">
         <ul data-role="listview">
