@@ -118,16 +118,29 @@ def pipulate():
       out("Token appears to have expired")
       flash('Not logged into Google. Please Login.')
       return
+    out("Attempting to connect to Google Docs API.")
     try:
-      out("Attempting to connect to Google Docs.")
       gsp = gspread.authorize(credentials)
+    except:
+      return
+    out("Attempting to open spreadsheet")
+    try:
       pipdoc = gsp.open_by_url(globs.PIPURL) 
+    except gspread.exceptions.SpreadsheetNotFound:
+      flash("Please give the document a name to force first save.")
+      return
+    except:
+      return
+    out("Attempting to open Pipulate worksheet")
+    try:
       pipsheet = pipdoc.worksheet("Pipulate")
     except:
-      out("We have token but still cannot connect.")
-      flash("You may have to login to Google again.")
-      return
-    globs.numrows = len(pipsheet.col_values(1)) + 1
+      pipsheet = pipdoc.add_worksheet(title="Pipulate", rows="1", cols="5")
+    #except:
+    #  out("We have token but still cannot connect.")
+    #  flash("You may have to login to Google again.")
+    #  return
+    globs.numrows = len(pipsheet.col_values(1))
     try:
       pipdoc.worksheet("Config")
     except:
@@ -153,7 +166,7 @@ def pipulate():
     out("Trend spotting")
     trended = False
     qstart = 1
-    for rowdex in range(1, pipsheet.row_count): #Give trending its own loop
+    for rowdex in range(1, pipsheet.row_count+1): #Give trending its own loop
       if rowdex > 1:
         out("Looking for asteriks on row %s " % rowdex)
       onerow = pipsheet.row_values(rowdex)
@@ -176,7 +189,7 @@ def pipulate():
         if blankrows > 3:
           break
     if trended:
-      qstart = globs.numrows - len(trendlist)
+      qstart = globs.numrows - len(trendlist) + 1
     else:
       qstart = 1
     for trendrow in trendlist:
@@ -193,11 +206,11 @@ def pipulate():
         flash("Couldn't reach Google Docs. Try logging in again.")
         return
 
-    globs.numrows = len(pipsheet.col_values(1)) + 1
+    globs.numrows = len(pipsheet.col_values(1))
     blankrows = 0
     out("Question mark replacement")
     out(qstart)
-    for rowdex in range(qstart, pipsheet.row_count): #Start stepping through every row.
+    for rowdex in range(qstart, pipsheet.row_count+1): #Start stepping through every row.
       globs.html = '' #Blank the global html object. Recylces fetches.
       onerow = pipsheet.row_values(rowdex)
       if onerow: #But only process it if it does not come back as empty list.
@@ -235,18 +248,25 @@ def lowercaselist(alist):
 
 def InsertRow(worksheet, alist):
   column = globs.letter[len(alist)]
-  endrow = globs.numrows
+  endrow = globs.numrows + 1
   rowrange = "A%s:%s%s" % (endrow, column, endrow)
-  out('Inserting row in range %s' % rowrange)
-  cell_list = worksheet.range(rowrange)
-  for index, cell in enumerate(cell_list):
-    ival = ''
-    if alist[index] == None:
+  append = False
+  try:
+    cell_list = worksheet.range(rowrange)
+  except:
+    append = True
+  if append:
+    out("Appending row")
+  else:
+    out('Inserting row in range %s' % rowrange)
+    for index, cell in enumerate(cell_list):
       ival = ''
-    else:
-      ival = alist[index]
-    cell.value = ival
-  worksheet.update_cells(cell_list)
+      if alist[index] == None:
+        ival = ''
+      else:
+        ival = alist[index]
+      cell.value = ival
+    worksheet.update_cells(cell_list)
   globs.numrows += 1
 
 def inittab(gdoc, tabname, headerlist, listoflists=[]):
