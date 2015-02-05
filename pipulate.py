@@ -133,6 +133,7 @@ def pipulate():
     except:
       headers = ['name', 'value']
       inittab(pipdoc, 'Pipulate', headers)
+    globs.config = refreshconfig(pipdoc, "Pipulate")
     try:
       pipdoc.worksheet("Scrapers")
     except:
@@ -186,7 +187,6 @@ def pipulate():
         flash("Couldn't reach Google Docs. Try logging in again.")
         return
 
-
     globs.numrows = len(pipsheet.col_values(1)) + 1
     blankrows = 0
     out("Question mark replacement")
@@ -212,6 +212,12 @@ def pipulate():
       flash('No question marks found in Sheet 1.')
   else:
     flash('Please Login to Google')
+
+def refreshconfig(pipdoc, sheetname):
+  worksheet = pipdoc.worksheet(sheetname)
+  names = worksheet.col_values(1)
+  values = worksheet.col_values(2)
+  return zipnamevaldict(names, values)
 
 def zipnamevaldict(keys, values):
   keys = lowercaselist(keys)
