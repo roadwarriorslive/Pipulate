@@ -2,7 +2,7 @@ import requests
 
 def pipinit():
   s = []
-  s.append(['http://mikelev.in','*','*','*','*'])
+  s.append(['http://mikelev.in','*','*','*','*','*','*'])
   s.append(['http://levinux.com','*','*','*','*','*','*'])
   s.append(['http://pipulate.com','*','*','*','*','*','*'])
   s.append(['http://www.flyingpointdigital.com','*','*','*','*','*','*'])
@@ -31,6 +31,7 @@ def walkdict(obj, key):
     else:
       if k == key:
         return v
+  return None
 
 def datestamp():
   import datetime
@@ -40,7 +41,7 @@ def timestamp():
   import datetime
   return datetime.datetime.today().strftime('%X')
 
-def plusses(url):
+def plussed(url):
   api = "https://clients6.google.com/rpc"
   jobj = '''{
     "method":"pos.plusones.get",
@@ -66,15 +67,14 @@ def tweeted(url):
   api = "http://urls.api.twitter.com/1/urls/count.json?url="
   respobj = requests.get(api + url)
   adict = respobj.json()
-  return adict["count"]
+  return walkdict(adict, 'count')
 
-def shares(url):
-  api = "http://graph.facebook.com/?id="
-  respobj = requests.get(api + url)
+def shared(url):
+  respobj = requests.get('https://graph.facebook.com/' + url) 
   adict = respobj.json()
-  try:
-    return adict["shares"]
-  except:
-    pass
+  return walkdict(adict, 'shares')
 
-
+def liked(url): 
+  respobj = requests.get('https://graph.facebook.com/' + url) 
+  adict = respobj.json()
+  return walkdict(adict, 'likes')

@@ -123,20 +123,23 @@ def pipulate():
       gsp = gspread.authorize(credentials)
     except:
       return
-    out("Attempting to open spreadsheet")
+    out("Attempting to open spreadsheet.")
     try:
       pipdoc = gsp.open_by_url(globs.PIPURL) 
     except gspread.exceptions.SpreadsheetNotFound:
       flash("Please give the document a name to force first save.")
       return
     except:
+      flash("Difficulty opening spreadsheet.")
       return
-    out("Attempting to open Pipulate worksheet")
+    out("Attempting to open Pipulate worksheet.")
     try:
       pipsheet = pipdoc.worksheet("Pipulate")
     except:
+      out("Initializing Pipulate worksheet.")
       headers = ['URL', 'Tweeted', 'Shared', 'Liked', 'Plussed', 'DateStamp', 'TimeStamp']
-      inittab(pipdoc, 'Pipulate', headers)
+      inittab(pipdoc, 'Pipulate', headers, pipinit())
+    out("Attempting to open Pipulate worksheet 2.")
     pipsheet = pipdoc.worksheet("Pipulate")
     globs.numrows = len(pipsheet.col_values(1))
     try:
@@ -216,9 +219,10 @@ def pipulate():
           newrow = processrow(str(rowdex), onerow) #Replace question marks in row
           blankrows = 0
           for coldex, acell in enumerate(newrow): #Then step through new row
-            if acell != None:
-              pipsheet.update_cell(rowdex, coldex+1, acell) #Gspread has no "0" column
-              qmarkstotal += 1
+            if acell == None:
+              acell = ''
+            pipsheet.update_cell(rowdex, coldex+1, acell) #Gspread has no "0" column
+            qmarkstotal += 1
       else:
         blankrows += 1
         if blankrows > 3:
