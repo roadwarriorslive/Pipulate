@@ -122,7 +122,7 @@ def pipulate():
       out("Attempting to connect to Google Docs.")
       gsp = gspread.authorize(credentials)
       pipdoc = gsp.open_by_url(globs.PIPURL) #HTTP connection errors happen here.
-      pipsheet = pipdoc.get_worksheet(0)
+      pipsheet = pipdoc.worksheet("Pipulate")
     except:
       out("We have token but still cannot connect.")
       flash("You may have to login to Google again.")
@@ -182,7 +182,7 @@ def pipulate():
     #We need to get it again if trending rows were added.
     if trended:
       try:
-        pipsheet = pipdoc.get_worksheet(0)
+        pipsheet = pipdoc.worksheet("Pipulate")
       except:
         flash("Couldn't reach Google Docs. Try logging in again.")
         return
