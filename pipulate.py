@@ -29,8 +29,8 @@ def out(msg):
 
 def webout(params):
   out(params)
-  #return Response(stream_template('pipulate.html', form=params))
-  return render_template('pipulate.html', form=params)
+  return Response(stream_template('pipulate2.html', form=params))
+  #return render_template('pipulate.html', form=params)
 
 def stream_template(template_name, **context):
   app.update_template_context(context)
