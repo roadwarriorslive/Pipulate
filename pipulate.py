@@ -26,6 +26,9 @@ def out(msg):
   if globs.DBUG:
     print(msg)
 
+def webout(params):
+  return render_template('pipulate.html', form=params)
+
 @app.context_processor
 def templateglobals():
     return dict(loginlink=getLoginlink(), bookmarklet=getBookmarklet())
@@ -54,6 +57,7 @@ def main():
       pipulate()
     else:
       flash('Nothing to Pipulate. Enter a Google Spreadsheet URL and try again.')
+    #webout(form)
     return render_template('pipulate.html', form=form)
   else:
     if request.args:
@@ -64,6 +68,7 @@ def main():
             requests.get(revokeurl)
           session.clear()
           flash('Logged out from Google.')
+        #webout(form)
         return render_template('pipulate.html', form=form)
       if 'u' in request.args:
         session['u'] = request.args.get('u')
@@ -77,6 +82,7 @@ def main():
           form.pipurl.data = session['u']
       if form.pipurl.data and request.url_root == url_root(form.pipurl.data):
         form.pipurl.data = ''
+    #webout(form)
     return render_template('pipulate.html', form=form)
 
 def url_root(url):
@@ -139,7 +145,6 @@ def pipulate():
       out("Initializing Pipulate worksheet.")
       headers = ['URL', 'Tweeted', 'Shared', 'Liked', 'Plussed', 'DateStamp', 'TimeStamp']
       inittab(pipdoc, 'Pipulate', headers, pipinit())
-    out("Attempting to open Pipulate worksheet 2.")
     pipsheet = pipdoc.worksheet("Pipulate")
     globs.numrows = len(pipsheet.col_values(1))
     try:
@@ -209,8 +214,8 @@ def pipulate():
     globs.numrows = len(pipsheet.col_values(1))
     blankrows = 0
     out("Question mark replacement")
-    out(qstart)
     for rowdex in range(qstart, pipsheet.row_count+1): #Start stepping through every row.
+      globs.hobj = None
       globs.html = '' #Blank the global html object. Recylces fetches.
       onerow = pipsheet.row_values(rowdex)
       if onerow: #But only process it if it does not come back as empty list.
@@ -308,7 +313,7 @@ def processrow(rowdex, onerow):
           except:
             pass
         collabel = globs.row1[coldex]
-        out(collabel)
+        out('FUNCTION: %s ' % collabel)
         if collabel in globs.transfuncs.keys():
           changedrow[coldex] = evalfunc(coldex, changedrow) #The Function Path
         elif collabel in globs.transscrape.keys():
@@ -400,16 +405,17 @@ def genericscraper(coldex, onerow):
         return None
 
 def gethtml(url):
-  html = ''
   if globs.html:
+    out("Recycling fetched HTML")
     return globs.html
   else:
-    out("Fetching html once for row")
+    out("Doing first HTML fetch for row")
     try:
-      html = requests.get(url).text
+      globs.hobj = requests.get(url)
     except:
-      html = requests.get(url).text
-  return html
+      return None
+    globs.html = globs.hobj.text
+  return globs.html
 
 def getargval(anarg, defargval, onerow):
   """Returns value to set argument equal-to in function invocation string.
