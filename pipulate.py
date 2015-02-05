@@ -234,6 +234,7 @@ def pipulate():
           for coldex, acell in enumerate(newrow): #Then step through new row
             if acell == None:
               acell = ''
+            #!!!ERROR
             pipsheet.update_cell(rowdex, coldex+1, acell) #Gspread has no "0" column
             qmarkstotal += 1
       else:
