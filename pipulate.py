@@ -27,10 +27,6 @@ def out(msg):
   if globs.DBUG:
     print(msg)
 
-def webout(params):
-  return Response(stream_template('pipulate3.html', form=params))
-  #return render_template('pipulate.html', form=params)
-
 def stream_template(template_name, **context):
   app.update_template_context(context)
   t = app.jinja_env.get_template(template_name)
@@ -66,33 +62,30 @@ def main():
       pipulate()
     else:
       flash('Nothing to Pipulate. Enter a Google Spreadsheet URL and try again.')
-    return webout(form)
-    #return render_template('pipulate.html', form=form)
   else:
-    if request.args:
-      if 'logout' in request.args:
-        if session:
-          if 'oa2' in session:
-            revokeurl = 'https://accounts.google.com/o/oauth2/revoke?token=' + session['oa2']
-            requests.get(revokeurl)
-          session.clear()
-          flash('Logged out from Google.')
-        return webout(form)
-        #return render_template('pipulate.html', form=form)
+    if request.args and "access_token" in request.args:
+      session['oa2'] = request.args.get("access_token")
+      session['loggedin'] = "1"
+      if 'u' in session:
+        return redirect(url_for('main', u=session['u']))
+      else:
+        return redirect(url_for('main'))
+    elif request.args and 'logout' in request.args:
+      if session:
+        if 'oa2' in session:
+          revokeurl = 'https://accounts.google.com/o/oauth2/revoke?token=' + session['oa2']
+          requests.get(revokeurl)
+        session.clear()
+        flash('Logged out from Google.')
+    elif request.args:
       if 'u' in request.args:
         session['u'] = request.args.get('u')
-      if "access_token" in request.args:
-        session['oa2'] = request.args.get("access_token")
-        session['loggedin'] = "1"
-        if 'u' in session:
-          return redirect(url_for('main', u=session['u']))
       if session:
         if 'u' in session:
           form.pipurl.data = session['u']
       if form.pipurl.data and request.url_root == url_root(form.pipurl.data):
         form.pipurl.data = ''
-    return webout(form)
-    #return render_template('pipulate.html', form=form)
+  return render_template('pipulate.html', form=form)
 
 def url_root(url):
   from urlparse import urlparse
