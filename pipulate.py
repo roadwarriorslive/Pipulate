@@ -129,11 +129,11 @@ def pipulate():
       return
     globs.numrows = len(pipsheet.col_values(1)) + 1
     try:
-      pipdoc.worksheet("Pipulate")
+      pipdoc.worksheet("Config")
     except:
       headers = ['name', 'value']
-      inittab(pipdoc, 'Pipulate', headers)
-    globs.config = refreshconfig(pipdoc, "Pipulate")
+      inittab(pipdoc, 'Config', headers)
+    globs.config = refreshconfig(pipdoc, "Config")
     try:
       pipdoc.worksheet("Scrapers")
     except:
