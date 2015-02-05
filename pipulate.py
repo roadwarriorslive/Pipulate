@@ -31,7 +31,7 @@ def stream_template(template_name, **context):
   app.update_template_context(context)
   t = app.jinja_env.get_template(template_name)
   rv = t.stream(context)
-  ##rv.enable_buffering(5)
+  rv.enable_buffering(5)
   return rv
 
 @app.context_processor
@@ -85,7 +85,13 @@ def main():
           form.pipurl.data = session['u']
       if form.pipurl.data and request.url_root == url_root(form.pipurl.data):
         form.pipurl.data = ''
-  return render_template('pipulate.html', form=form)
+  def g():
+    import time
+    for i, c in enumerate("hello"*10):
+      time.sleep(.1)  # an artificial delay
+      yield i, c
+  return Response(stream_template('pipulate4.html', form=form, data=g()))
+  #return render_template('pipulate.html', form=form)
 
 def url_root(url):
   from urlparse import urlparse
