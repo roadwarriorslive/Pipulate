@@ -135,11 +135,9 @@ def pipulate():
     try:
       pipsheet = pipdoc.worksheet("Pipulate")
     except:
-      pipsheet = pipdoc.add_worksheet(title="Pipulate", rows="1", cols="5")
-    #except:
-    #  out("We have token but still cannot connect.")
-    #  flash("You may have to login to Google again.")
-    #  return
+      headers = ['URL', 'Tweeted', 'Shared', 'Liked', 'Plussed', 'DateStamp', 'TimeStamp']
+      inittab(pipdoc, 'Pipulate', headers)
+    pipsheet = pipdoc.worksheet("Pipulate")
     globs.numrows = len(pipsheet.col_values(1))
     try:
       pipdoc.worksheet("Config")
@@ -196,7 +194,6 @@ def pipulate():
       trendrow = ['?' if x=='*' else x for x in trendrow]
       InsertRow(pipsheet, trendrow)
     trendlist = []
-    flash("Trending asterisks discovered.")
 
     #We need to get it again if trending rows were added.
     if trended:

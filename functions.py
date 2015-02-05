@@ -1,5 +1,13 @@
 import requests
 
+def pipinit():
+  s = []
+  s.append(['http://mikelev.in','*','*','*','*'])
+  s.append(['http://levinux.com','*','*','*','*','*','*'])
+  s.append(['http://pipulate.com','*','*','*','*','*','*'])
+  s.append(['http://www.flyingpointdigital.com','*','*','*','*','*','*'])
+  return s
+
 def scrapes():
   s = []
   s.append(['title',       'xpath', "//title/text()"])
