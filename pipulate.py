@@ -250,22 +250,19 @@ def InsertRow(worksheet, alist):
   column = globs.letter[len(alist)]
   endrow = globs.numrows + 1
   rowrange = "A%s:%s%s" % (endrow, column, endrow)
-  append = False
-  try:
-    cell_list = worksheet.range(rowrange)
-  except:
-    append = True
-  if append:
-    out("Appending row")
-  else:
-    out('Inserting row in range %s' % rowrange)
-    for index, cell in enumerate(cell_list):
+  out(endrow)
+  out(worksheet.row_count)
+  if endrow == worksheet.row_count + 1:
+    worksheet.add_rows(1)
+  cell_list = worksheet.range(rowrange)
+  out('Inserting row in range %s' % rowrange)
+  for index, cell in enumerate(cell_list):
+    ival = ''
+    if alist[index] == None:
       ival = ''
-      if alist[index] == None:
-        ival = ''
-      else:
-        ival = alist[index]
-      cell.value = ival
+    else:
+      ival = alist[index]
+    cell.value = ival
     worksheet.update_cells(cell_list)
   globs.numrows += 1
 
