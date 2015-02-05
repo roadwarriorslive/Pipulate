@@ -183,11 +183,11 @@ def pipulate():
             trendlist.append(onerow)
           else:
             blankrows += 1
-            if blankrows > 3:
+            if blankrows > 2:
               break
       else:
         blankrows += 1
-        if blankrows > 3:
+        if blankrows > 2:
           break
     if trended:
       qstart = globs.numrows - len(trendlist) + 1
