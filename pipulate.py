@@ -121,7 +121,7 @@ def pipulate():
     try:
       out("Attempting to connect to Google Docs.")
       gsp = gspread.authorize(credentials)
-      pipdoc = gsp.open_by_url(globs.PIPURL) #HTTP connection errors happen here.
+      pipdoc = gsp.open_by_url(globs.PIPURL) 
       pipsheet = pipdoc.worksheet("Pipulate")
     except:
       out("We have token but still cannot connect.")
@@ -154,13 +154,16 @@ def pipulate():
     trended = False
     qstart = 1
     for rowdex in range(1, pipsheet.row_count): #Give trending its own loop
-      out("Looking for asteriks on row %s " % rowdex)
+      if rowdex > 1:
+        out("Looking for asteriks on row %s " % rowdex)
       onerow = pipsheet.row_values(rowdex)
       if onerow:
         if rowdex == 2: #Looking for trending requests
           if '*' in onerow:
             trended = True
             trendlist.append(onerow)
+          else:
+            break
         elif trendlist and rowdex > 2:
           if '*' in onerow:
             trendlist.append(onerow)
@@ -172,7 +175,10 @@ def pipulate():
         blankrows += 1
         if blankrows > 3:
           break
-    qstart = globs.numrows - len(trendlist)
+    if trended:
+      qstart = globs.numrows - len(trendlist)
+    else:
+      qstart = 1
     for trendrow in trendlist:
       trendrow = ['?' if x=='*' else x for x in trendrow]
       InsertRow(pipsheet, trendrow)
@@ -190,6 +196,7 @@ def pipulate():
     globs.numrows = len(pipsheet.col_values(1)) + 1
     blankrows = 0
     out("Question mark replacement")
+    out(qstart)
     for rowdex in range(qstart, pipsheet.row_count): #Start stepping through every row.
       globs.html = '' #Blank the global html object. Recylces fetches.
       onerow = pipsheet.row_values(rowdex)
