@@ -57,8 +57,8 @@ def main():
       pipulate()
     else:
       flash('Nothing to Pipulate. Enter a Google Spreadsheet URL and try again.')
-    #webout(form)
-    return render_template('pipulate.html', form=form)
+    return webout(form)
+    #return render_template('pipulate.html', form=form)
   else:
     if request.args:
       if 'logout' in request.args:
@@ -68,8 +68,8 @@ def main():
             requests.get(revokeurl)
           session.clear()
           flash('Logged out from Google.')
-        #webout(form)
-        return render_template('pipulate.html', form=form)
+        return webout(form)
+        #return render_template('pipulate.html', form=form)
       if 'u' in request.args:
         session['u'] = request.args.get('u')
       if "access_token" in request.args:
@@ -82,8 +82,8 @@ def main():
           form.pipurl.data = session['u']
       if form.pipurl.data and request.url_root == url_root(form.pipurl.data):
         form.pipurl.data = ''
-    #webout(form)
-    return render_template('pipulate.html', form=form)
+    return webout(form)
+    #return render_template('pipulate.html', form=form)
 
 def url_root(url):
   from urlparse import urlparse
