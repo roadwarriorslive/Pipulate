@@ -13,7 +13,8 @@
 
 import globs #Create objects that don't have to be passed as arguments.
 import requests
-from flask import Flask, request, render_template, session, flash, redirect, url_for
+from flask import Flask, Response, request, render_template, session, flash, redirect, url_for
+
 from flask_wtf import Form
 from flask_wtf.file import FileField
 from wtforms import validators, StringField
@@ -27,7 +28,16 @@ def out(msg):
     print(msg)
 
 def webout(params):
+  out(params)
+  #return Response(stream_template('pipulate.html', form=params))
   return render_template('pipulate.html', form=params)
+
+def stream_template(template_name, **context):
+  app.update_template_context(context)
+  t = app.jinja_env.get_template(template_name)
+  rv = t.stream(context)
+  ##rv.enable_buffering(5)
+  return rv
 
 @app.context_processor
 def templateglobals():
@@ -250,7 +260,12 @@ def zipnamevaldict(keys, values):
   return dict(zip(keys, values))
 
 def lowercaselist(alist):
-  return [x.lower() for x in alist]
+  for index, item in enumerate(alist):
+    try:
+      alist[index] = item.lower()
+    except:
+      pass
+  return alist
 
 def InsertRow(worksheet, alist):
   column = globs.letter[len(alist)]
@@ -329,7 +344,10 @@ def row1funcs(onerow):
   in building the code necessary for question mark replacement."""
   fargs = {}
   for coldex, fname in enumerate(onerow):
-    fname = fname.lower()
+    try:
+      fname = fname.lower()
+    except:
+      pass
     if fname in globs.transfuncs.keys(): #Detect if column name is a function
       fargs[coldex] = {}
       from inspect import getargspec
