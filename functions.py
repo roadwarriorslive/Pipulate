@@ -1,4 +1,5 @@
 import requests
+import globs
 
 def pipinit():
   s = []
@@ -40,6 +41,15 @@ def datestamp():
 def timestamp():
   import datetime
   return datetime.datetime.today().strftime('%X')
+
+def response(url):
+  if globs.hobj:
+    return globs.hobj.status_code
+  else:
+    try:
+      return requests.get(url).status_code
+    except:
+      return "Error"
 
 def plussed(url):
   api = "https://clients6.google.com/rpc"
