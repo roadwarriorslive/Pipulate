@@ -30,12 +30,9 @@
       <p class="pressthis" style="text-align: center">Drag this to Bookmark bar (if you haven't already) --&gt; <a href="{{ bookmarklet }}" onclick="return false;" oncontextmenu="if(window.navigator.userAgent.indexOf('WebKit')!=-1||window.navigator.userAgent.indexOf('MSIE')!=-1){jQuery('.pressthis-code').show().find('textarea').focus().select();return false;}"><span>Pipulate</span></a>
     {% endif %}
     <form method="POST" action="/" enctype="multipart/form-data">
-      {% if session and 'loggedin' in session and session['loggedin'] == "1" %}
       {{ form.pipurl.label }} {{ form.pipurl(size=500) }}<br/>
       <input data-role="button" data-inline="true" data-icon="arrow-r" data-iconpos="right" type="submit" value="Pipulate it" name="submit" data-theme="b">
-      {% else %}
-        <a href="{{ loginlink }}" class="ui-btn ui-btn-b ui-btn-inline ui-corner-all">Login with Google</a>
-      {% endif %}
+        <a href="{{ loginlink }}">Login with Google</a>
     </form>
     {% if session %}
     <a href="http://{{ request.headers['Host'] }}?logout">Logout</a>
