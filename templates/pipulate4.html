@@ -2,11 +2,8 @@
 <html>
   <head>
     <title>Pipulate</title>
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css" />
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script>
-      $.mobile.ajaxEnabled = false;
       if (location.hash) {
         var myhash = location.hash
         if (myhash.indexOf('access_token') > 0) {
@@ -29,50 +26,26 @@
     </style>
   </head>
   <body>
-    <div data-role="page" class="jqm-demos ui-responsive-panel" id="Pipulate" data-title="Pipulate" data-url="Pipulate-UI" data-theme="a">
-      <div data-role="header" data-theme="b">
-        <h1>PIPULATE</h1>
-        <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
-        <a href="#add-form" data-icon="gear" data-iconpos="notext">Add</a>
-      </div><!-- /header -->
-      <div role="main" class="ui-content jqm-content jqm-fullwidth" data-theme="a">
-        {% if not request.args and request.method != 'POST' %}
-          <p class="pressthis" style="text-align: center">Drag this to Bookmark bar (if you haven't already) --&gt; <a href="{{ bookmarklet }}" onclick="return false;" oncontextmenu="if(window.navigator.userAgent.indexOf('WebKit')!=-1||window.navigator.userAgent.indexOf('MSIE')!=-1){jQuery('.pressthis-code').show().find('textarea').focus().select();return false;}"><span>Pipulate</span></a>
-        {% endif %}
-        <form method="POST" action="/" enctype="multipart/form-data">
-          <div style="text-align:center;">
-            {% if session and 'loggedin' in session and session['loggedin'] == "1" %}
-            {{ form.pipurl.label }} {{ form.pipurl(size=500) }}<br/>
-            <input data-role="button" data-inline="true" data-icon="arrow-r" data-iconpos="right" type="submit" value="Pipulate it" name="submit" data-theme="b">
-            {% else %}
-              <a href="{{ loginlink }}" class="ui-btn ui-btn-b ui-btn-inline ui-corner-all">Login with Google</a>
-            {% endif %}
-          </div>
-        </form>
-<div id="data">nothing received yet</div>
-{% for i, c in data: %}
-<script>
-  $("#data").text("{{ i }} {{ c }}")
-</script>
-{% endfor %}
-      </div><!-- /content -->
-      <div data-role="panel" data-display="push" data-theme="b" id="nav-panel">
-        <ul data-role="listview">
-        <li data-icon="delete"><a href="#" data-rel="close">Close menu</a></li>
-        <li><a href="#">Sample option 1</a></li>
-        <li><a href="#">Sample option 2</a></li>
-        <li><a href="#">Sample option 3</a></li>
-        </ul>
-      </div><!-- /panel -->
-      <div data-role="panel" data-position="right" data-display="reveal" data-theme="a" id="add-form">
-        <form class="userform">
-          <h2>Settings</h2>
-          <hr/>
-          {% if session %}
-          <br/><a href="http://{{ request.headers['Host'] }}?logout">Logout</a>
-          {% endif %}
-        </form>
-      </div><!-- /panel -->
-    </div>
+    <h1>PIPULATE</h1>
+    {% if not request.args and request.method != 'POST' %}
+      <p class="pressthis" style="text-align: center">Drag this to Bookmark bar (if you haven't already) --&gt; <a href="{{ bookmarklet }}" onclick="return false;" oncontextmenu="if(window.navigator.userAgent.indexOf('WebKit')!=-1||window.navigator.userAgent.indexOf('MSIE')!=-1){jQuery('.pressthis-code').show().find('textarea').focus().select();return false;}"><span>Pipulate</span></a>
+    {% endif %}
+    <form method="POST" action="/" enctype="multipart/form-data">
+      {% if session and 'loggedin' in session and session['loggedin'] == "1" %}
+      {{ form.pipurl.label }} {{ form.pipurl(size=500) }}<br/>
+      <input data-role="button" data-inline="true" data-icon="arrow-r" data-iconpos="right" type="submit" value="Pipulate it" name="submit" data-theme="b">
+      {% else %}
+        <a href="{{ loginlink }}" class="ui-btn ui-btn-b ui-btn-inline ui-corner-all">Login with Google</a>
+      {% endif %}
+    </form>
+    {% if session %}
+    <a href="http://{{ request.headers['Host'] }}?logout">Logout</a>
+    {% endif %}
+    <div id="data">nothing received yet</div>
+    {% for i, c in data: %}
+    <script>
+      $("#data").text("{{ i }} {{ c }}")
+    </script>
+    {% endfor %}
   </body>
 </html>
