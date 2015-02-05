@@ -31,7 +31,7 @@ def stream_template(template_name, **context):
   app.update_template_context(context)
   t = app.jinja_env.get_template(template_name)
   rv = t.stream(context)
-  rv.enable_buffering(5)
+  #rv.enable_buffering(5)
   return rv
 
 @app.context_processor
@@ -156,12 +156,13 @@ def pipulate():
     trendlist = []
     globs.row1 = lowercaselist(pipsheet.row_values(1))
     row1funcs(globs.row1)
-
+    yield "Trend spotting"
     out("Trend spotting")
     trended = False
     qstart = 1
     for rowdex in range(1, pipsheet.row_count+1): #Give trending its own loop
       if rowdex > 1:
+        yield "Looking for asterisks on row %s" % rowdex
         out("Looking for asteriks on row %s " % rowdex)
       onerow = pipsheet.row_values(rowdex)
       if onerow:
@@ -201,12 +202,14 @@ def pipulate():
 
     globs.numrows = len(pipsheet.col_values(1))
     blankrows = 0
+    yield "Beginning question mark replacement"
     out("Question mark replacement")
     for rowdex in range(qstart, pipsheet.row_count+1): #Start stepping through every row.
       globs.hobj = None
       globs.html = '' #Blank the global html object. Recylces fetches.
       onerow = pipsheet.row_values(rowdex)
       if onerow: #But only process it if it does not come back as empty list.
+        yield "Examining row %s" % rowdex
         out("Examining row %s" % rowdex)
         if '?' in onerow:
           newrow = processrow(str(rowdex), onerow) #Replace question marks in row
