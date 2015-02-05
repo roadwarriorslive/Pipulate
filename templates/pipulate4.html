@@ -2,7 +2,6 @@
 <html>
   <head>
     <title>Pipulate</title>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script>
       if (location.hash) {
         var myhash = location.hash
@@ -40,12 +39,10 @@
     </form>
     {% if session %}
     <a href="http://{{ request.headers['Host'] }}?logout">Logout</a>
+    <br/>
     {% endif %}
-    <div id="data">nothing received yet</div>
-    {% for i, c in data: %}
-    <script>
-      $("#data").text("{{ i }} {{ c }}")
-    </script>
+    {% for msg in data: %}
+      {{ msg }}<br/>
     {% endfor %}
   </body>
 </html>

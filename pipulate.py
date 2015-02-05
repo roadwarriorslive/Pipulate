@@ -59,7 +59,136 @@ def main():
   if request.method == 'POST':
     if form.pipurl.data:
       globs.PIPURL = form.pipurl.data
-      pipulate()
+      #pipbegin
+      funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
+      globs.transfuncs = zipnamevaldict(funcs, funcs) #Keep translation table
+      qmarkstotal = 0
+      blankrows = 0
+      import gspread
+      if session:
+        if 'oa2' in session:
+          out("OAuth2 token found")
+          credentials = Credentials(access_token=session['oa2'])
+        else:
+          out("Token appears to have expired")
+          flash('Not logged into Google. Please Login.')
+          return
+        out("Attempting to connect to Google Docs API.")
+        try:
+          gsp = gspread.authorize(credentials)
+        except:
+          return
+        out("Attempting to open spreadsheet.")
+        try:
+          pipdoc = gsp.open_by_url(globs.PIPURL) 
+        except gspread.exceptions.SpreadsheetNotFound:
+          flash("Please give the document a name to force first save.")
+          return
+        except:
+          flash("Difficulty opening spreadsheet.")
+          return
+        out("Attempting to open Pipulate worksheet.")
+        try:
+          pipsheet = pipdoc.worksheet("Pipulate")
+        except:
+          out("Initializing Pipulate worksheet.")
+          headers = ['URL', 'Tweeted', 'Shared', 'Liked', 'Plussed', 'DateStamp', 'TimeStamp']
+          inittab(pipdoc, 'Pipulate', headers, pipinit())
+        pipsheet = pipdoc.worksheet("Pipulate")
+        globs.numrows = len(pipsheet.col_values(1))
+        try:
+          pipdoc.worksheet("Config")
+        except:
+          headers = ['name', 'value']
+          inittab(pipdoc, 'Config', headers)
+        globs.config = refreshconfig(pipdoc, "Config")
+        try:
+          pipdoc.worksheet("Scrapers")
+        except:
+          headers = ['name', 'type', 'pattern']
+          inittab(pipdoc, 'Scrapers', headers, scrapes())
+        sst = pipdoc.worksheet("Scrapers")
+        snames = sst.col_values(1)
+        stypes = sst.col_values(2)
+        spatterns = sst.col_values(3)
+        globs.scrapetypes = zipnamevaldict(snames, stypes)
+        globs.scrapepatterns = zipnamevaldict(snames, spatterns)
+        globs.transscrape = zipnamevaldict(snames, snames)
+        trendlist = []
+        globs.row1 = lowercaselist(pipsheet.row_values(1))
+        row1funcs(globs.row1)
+
+        out("Trend spotting")
+        trended = False
+        qstart = 1
+        for rowdex in range(1, pipsheet.row_count+1): #Give trending its own loop
+          if rowdex > 1:
+            out("Looking for asteriks on row %s " % rowdex)
+          onerow = pipsheet.row_values(rowdex)
+          if onerow:
+            if rowdex == 2: #Looking for trending requests
+              if '*' in onerow:
+                trended = True
+                trendlist.append(onerow)
+              else:
+                break
+            elif trendlist and rowdex > 2:
+              if '*' in onerow:
+                trendlist.append(onerow)
+              else:
+                blankrows += 1
+                if blankrows > 2:
+                  break
+          else:
+            blankrows += 1
+            if blankrows > 2:
+              break
+        if trended:
+          qstart = globs.numrows - len(trendlist) + 1
+        else:
+          qstart = 1
+        for trendrow in trendlist:
+          trendrow = ['?' if x=='*' else x for x in trendrow]
+          InsertRow(pipsheet, trendrow)
+        trendlist = []
+
+        #We need to get it again if trending rows were added.
+        if trended:
+          try:
+            pipsheet = pipdoc.worksheet("Pipulate")
+          except:
+            flash("Couldn't reach Google Docs. Try logging in again.")
+            return
+
+        globs.numrows = len(pipsheet.col_values(1))
+        blankrows = 0
+        out("Question mark replacement")
+        for rowdex in range(qstart, pipsheet.row_count+1): #Start stepping through every row.
+          globs.hobj = None
+          globs.html = '' #Blank the global html object. Recylces fetches.
+          onerow = pipsheet.row_values(rowdex)
+          if onerow: #But only process it if it does not come back as empty list.
+            out("Examining row %s" % rowdex)
+            if '?' in onerow:
+              newrow = processrow(str(rowdex), onerow) #Replace question marks in row
+              blankrows = 0
+              for coldex, acell in enumerate(newrow): #Then step through new row
+                if acell == None:
+                  acell = ''
+                #!!!ERROR
+                pipsheet.update_cell(rowdex, coldex+1, acell) #Gspread has no "0" column
+                qmarkstotal += 1
+          else:
+            blankrows += 1
+            if blankrows > 3:
+              break
+        if qmarkstotal:
+          flash('Replaced %s question marks.' % qmarkstotal)
+        else:
+          flash('No question marks found in Sheet 1.')
+      else:
+        flash('Please Login to Google')
+      #pipend
     else:
       flash('Nothing to Pipulate. Enter a Google Spreadsheet URL and try again.')
   else:
@@ -85,13 +214,15 @@ def main():
           form.pipurl.data = session['u']
       if form.pipurl.data and request.url_root == url_root(form.pipurl.data):
         form.pipurl.data = ''
-  def g():
-    import time
-    for i, c in enumerate("hello"*10):
-      time.sleep(.1)  # an artificial delay
-      yield i, c
-  return Response(stream_template('pipulate4.html', form=form, data=g()))
+  hw = yielder()
+  return Response(stream_template('pipulate4.html', form=form, data=hw))
   #return render_template('pipulate.html', form=form)
+
+def yielder():
+  yield "Hello"
+  yield "World"
+  yield "Spam"
+  yield "Eggs"
 
 def url_root(url):
   from urlparse import urlparse
@@ -115,138 +246,6 @@ def getBookmarklet():
 class Credentials (object):
   def __init__ (self, access_token=None):
     self.access_token = access_token
-
-def pipulate():
-  """Allows processing of multiple worksheets."""
-
-  funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
-  globs.transfuncs = zipnamevaldict(funcs, funcs) #Keep translation table
-  qmarkstotal = 0
-  blankrows = 0
-  import gspread
-  if session:
-    if 'oa2' in session:
-      out("OAuth2 token found")
-      credentials = Credentials(access_token=session['oa2'])
-    else:
-      out("Token appears to have expired")
-      flash('Not logged into Google. Please Login.')
-      return
-    out("Attempting to connect to Google Docs API.")
-    try:
-      gsp = gspread.authorize(credentials)
-    except:
-      return
-    out("Attempting to open spreadsheet.")
-    try:
-      pipdoc = gsp.open_by_url(globs.PIPURL) 
-    except gspread.exceptions.SpreadsheetNotFound:
-      flash("Please give the document a name to force first save.")
-      return
-    except:
-      flash("Difficulty opening spreadsheet.")
-      return
-    out("Attempting to open Pipulate worksheet.")
-    try:
-      pipsheet = pipdoc.worksheet("Pipulate")
-    except:
-      out("Initializing Pipulate worksheet.")
-      headers = ['URL', 'Tweeted', 'Shared', 'Liked', 'Plussed', 'DateStamp', 'TimeStamp']
-      inittab(pipdoc, 'Pipulate', headers, pipinit())
-    pipsheet = pipdoc.worksheet("Pipulate")
-    globs.numrows = len(pipsheet.col_values(1))
-    try:
-      pipdoc.worksheet("Config")
-    except:
-      headers = ['name', 'value']
-      inittab(pipdoc, 'Config', headers)
-    globs.config = refreshconfig(pipdoc, "Config")
-    try:
-      pipdoc.worksheet("Scrapers")
-    except:
-      headers = ['name', 'type', 'pattern']
-      inittab(pipdoc, 'Scrapers', headers, scrapes())
-    sst = pipdoc.worksheet("Scrapers")
-    snames = sst.col_values(1)
-    stypes = sst.col_values(2)
-    spatterns = sst.col_values(3)
-    globs.scrapetypes = zipnamevaldict(snames, stypes)
-    globs.scrapepatterns = zipnamevaldict(snames, spatterns)
-    globs.transscrape = zipnamevaldict(snames, snames)
-    trendlist = []
-    globs.row1 = lowercaselist(pipsheet.row_values(1))
-    row1funcs(globs.row1)
-
-    out("Trend spotting")
-    trended = False
-    qstart = 1
-    for rowdex in range(1, pipsheet.row_count+1): #Give trending its own loop
-      if rowdex > 1:
-        out("Looking for asteriks on row %s " % rowdex)
-      onerow = pipsheet.row_values(rowdex)
-      if onerow:
-        if rowdex == 2: #Looking for trending requests
-          if '*' in onerow:
-            trended = True
-            trendlist.append(onerow)
-          else:
-            break
-        elif trendlist and rowdex > 2:
-          if '*' in onerow:
-            trendlist.append(onerow)
-          else:
-            blankrows += 1
-            if blankrows > 2:
-              break
-      else:
-        blankrows += 1
-        if blankrows > 2:
-          break
-    if trended:
-      qstart = globs.numrows - len(trendlist) + 1
-    else:
-      qstart = 1
-    for trendrow in trendlist:
-      trendrow = ['?' if x=='*' else x for x in trendrow]
-      InsertRow(pipsheet, trendrow)
-    trendlist = []
-
-    #We need to get it again if trending rows were added.
-    if trended:
-      try:
-        pipsheet = pipdoc.worksheet("Pipulate")
-      except:
-        flash("Couldn't reach Google Docs. Try logging in again.")
-        return
-
-    globs.numrows = len(pipsheet.col_values(1))
-    blankrows = 0
-    out("Question mark replacement")
-    for rowdex in range(qstart, pipsheet.row_count+1): #Start stepping through every row.
-      globs.hobj = None
-      globs.html = '' #Blank the global html object. Recylces fetches.
-      onerow = pipsheet.row_values(rowdex)
-      if onerow: #But only process it if it does not come back as empty list.
-        out("Examining row %s" % rowdex)
-        if '?' in onerow:
-          newrow = processrow(str(rowdex), onerow) #Replace question marks in row
-          blankrows = 0
-          for coldex, acell in enumerate(newrow): #Then step through new row
-            if acell == None:
-              acell = ''
-            #!!!ERROR
-            pipsheet.update_cell(rowdex, coldex+1, acell) #Gspread has no "0" column
-            qmarkstotal += 1
-      else:
-        blankrows += 1
-        if blankrows > 3:
-          break
-    if qmarkstotal:
-      flash('Replaced %s question marks.' % qmarkstotal)
-    else:
-      flash('No question marks found in Sheet 1.')
-  else:
-    flash('Please Login to Google')
 
 def refreshconfig(pipdoc, sheetname):
   worksheet = pipdoc.worksheet(sheetname)
