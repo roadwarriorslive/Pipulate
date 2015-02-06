@@ -91,14 +91,8 @@ def main():
   else:
     return render_template('pipulate.html', form=form)
 
-def yielder():
-  yield "Hello"
-  yield "World"
-  yield "Spam"
-  yield "Eggs"
-
 def pipulate():
-  yield "Begin Pipulate"
+  yield "Beginning to pipulate..."
   funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
   globs.transfuncs = zipnamevaldict(funcs, funcs) #Keep translation table
   qmarkstotal = 0
@@ -121,8 +115,8 @@ def pipulate():
     try:
       pipdoc = gsp.open_by_url(globs.PIPURL) 
     except gspread.exceptions.SpreadsheetNotFound:
-      flash("Please give the document a name to force first save.")
-      return
+      yield("Please give the document a name to force first save.")
+      raise StopIteration
     except:
       flash("Difficulty opening spreadsheet.")
       return
