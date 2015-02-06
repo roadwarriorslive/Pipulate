@@ -302,8 +302,14 @@ def InsertRow(worksheet, onelist):
 
 def InsertRows(worksheet, listoflists):
   numnewrows = len(listoflists)
-  worksheet.add_rows(numnewrows)
-  globs.numrows += numnewrows
+  lastrowused = globs.numrows
+  numrowsneeded = len(listoflists)
+  allrowsevenempty = worksheet.row_count
+  availableblankrows = allrowsevenempty - lastrowused
+  if availableblankrows < numrowsneeded:
+    rowstoadd = numrowsneeded - availableblankrows
+    worksheet.add_rows(rowstoadd)
+  globs.numrows += rowstoadd
 
 def inittab(gdoc, tabname, headerlist, listoflists=[]):
   numcols = len(headerlist)
