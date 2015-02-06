@@ -2,7 +2,68 @@
 <html>
   <head>
     <title>Pipulate</title>
-    <LINK href="/static/styles.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Nunito:700' rel='stylesheet' type='text/css'>
+    <link href="http://picnicss.com/releases/v2.3.min.css" rel="stylesheet" type="text/css">
+    <style>
+    body {
+      display: block;
+      font-size: 16px;
+      color: #333;
+      background: #FFF;
+      margin-top: 60px;
+      width: 100%;}
+    .bookmarklet{
+    padding: 0px;
+    }
+    .pressthis{
+      margin:3px 5px 6px 5px;
+      float: right;
+      }
+    .pressthis a,.pressthis a:active,.pressthis a:focus,.pressthis a:hover{
+      display:inline-block;
+      position:relative;cursor:
+      move;color:#333;
+      background:#e6e6e6;
+      -webkit-border-radius:5px;
+      border-radius:5px;
+      border:1px solid #b4b4b4;
+      font-family:Nunito;
+      font-style:normal;
+      font-size:14px;
+      text-decoration:none}
+    .pressthis a:active{
+      outline:0}
+    .pressthis a:hover:after{
+      -webkit-transform:skew(20deg) rotate(9deg);
+      -ms-transform:skew(20deg) rotate(9deg);
+      transform:skew(20deg) rotate(9deg);
+      -webkit-box-shadow:0 10px 8px rgba(0,0,0,.7);
+      box-shadow:0 10px 8px rgba(0,0,0,.7)}
+    .pressthis a span{
+      display:inline-block;
+      margin:0px 15px 0px 10px;}
+    .pressthis a span:
+      before{color:#777;
+      font:400 20px/1 ;
+      position:relative;
+      display:inline-block;
+      top:4px;
+      margin-right:4px}
+    .pressthis a:after{
+      content:'';
+      width:70%;
+      height:55%;
+      z-index:-1;
+      position:absolute;
+      right:10px;
+      bottom:9px;
+      background:0 0;
+      -webkit-transform:skew(20deg) rotate(6deg);
+      -ms-transform:skew(20deg) rotate(6deg);
+      transform:skew(20deg) rotate(6deg);
+      -webkit-box-shadow:0 10px 8px rgba(0,0,0,.6);
+      box-shadow:0 10px 8px rgba(0,0,0,.6)}
+    </style>
     <script>
       if (location.hash) {
         var myhash = location.hash
@@ -14,17 +75,16 @@
     </script>
   </head>
   <body>
-    <h1>PIPULATE</h1>
-    <p class="pressthis" style="text-align: center">Drag this to Bookmark bar (if you haven't already) --&gt; <a href="{{ bookmarklet }}" onclick="return false;" oncontextmenu="if(window.navigator.userAgent.indexOf('WebKit')!=-1||window.navigator.userAgent.indexOf('MSIE')!=-1){jQuery('.pressthis-code').show().find('textarea').focus().select();return false;}"><span>Pipulate</span></a>
     <form method="POST" action="/" enctype="multipart/form-data">
-      {{ form.pipurl.label }} {{ form.pipurl(size=100) }}<br/>
-    <input type="submit" value="Pipulate it" name="submit">
-        <a href="{{ loginlink }}">Login with Google</a>
+      {{ form.pipurl.label }} {{ form.pipurl(size=73) }}<br/>
+       <input class="button" type="submit" value="Pipulate it" name="submit">
     </form>
-    {% if session %}
-    <a href="http://{{ request.headers['Host'] }}?logout">Logout</a>
+    <br/><a href="{{ loginlink }}">Login with Google</a>
+    <br/><a href="http://{{ request.headers['Host'] }}?logout">Logout</a>
     <br/>
-    {% endif %}
+    <nav>
+      <div class="pressthis" style="text-align: center">Drag to bookmarks: <a class="bookmarklet" href="{{ bookmarklet }}" onclick="return false;" oncontextmenu="if(window.navigator.userAgent.indexOf('WebKit')!=-1||window.navigator.userAgent.indexOf('MSIE')!=-1){jQuery('.pressthis-code').show().find('textarea').focus().select();return false;}"><span>Pipulate</span></a></div>
+    </nav>
     {% for msg in data: %}
       {{ msg }}<br/>
     {% endfor %}
