@@ -217,7 +217,6 @@ def pipulate():
       onerow = pipsheet.row_values(rowdex)
       if onerow: #But only process it if it does not come back as empty list.
         yield "Examining row %s" % rowdex
-        out("Examining row %s" % rowdex)
         if '?' in onerow:
           newrow = processrow(str(rowdex), onerow) #Replace question marks in row
           blankrows = 0
@@ -301,6 +300,7 @@ def InsertRow(worksheet, onelist):
   globs.numrows += 1
 
 def InsertRows(worksheet, listoflists):
+  out(listoflists)
   numnewrows = len(listoflists)
   lastrowused = globs.numrows
   numrowsneeded = len(listoflists)
@@ -309,7 +309,25 @@ def InsertRows(worksheet, listoflists):
   if availableblankrows < numrowsneeded:
     rowstoadd = numrowsneeded - availableblankrows
     worksheet.add_rows(rowstoadd)
-  globs.numrows += rowstoadd
+    globs.numrows += rowstoadd
+  upperleftrangenumber = lastrowused + 1
+  lowerrightrangenumber = lastrowused + numnewrows
+  column = globs.letter[len(listoflists[0])]
+  rowrange = "A%s:%s%s" % (upperleftrangenumber, column, lowerrightrangenumber)
+  out(rowrange)
+  flattenitlist = []
+  for onelist in listoflists:
+    for onecell in onelist:
+      flattenitlist.append(onecell)
+  flattenitlist = ['?' if x=='*' else x for x in flattenitlist] 
+  cell_list = worksheet.range(rowrange)
+  for index, onecell in enumerate(cell_list):
+    try:
+      onecell.value = flattenitlist[index]
+    except:
+      pass
+  worksheet.update_cells(cell_list)
+  return
 
 def inittab(gdoc, tabname, headerlist, listoflists=[]):
   numcols = len(headerlist)
@@ -330,7 +348,6 @@ def inittab(gdoc, tabname, headerlist, listoflists=[]):
       onecell.value = wholelist[index]
     except:
       pass
-
   newtab.update_cells(cell_list)
   return
 
