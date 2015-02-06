@@ -11,19 +11,27 @@
 
 """
 
-import globs #Create objects that don't have to be passed as arguments.
-import requests
-from flask import stream_with_context, Flask, Response, request, render_template, session, flash, redirect, url_for
+import globs                                        # Talmudic style commentaries
+import requests                                     # Will help with 3.x port
+from flask_wtf import Form                          # All Flask form examples use it
+from wtforms import StringField
+from flask import (Flask,                           # This app is all about Flask
+  stream_with_context,                              # Yes, comments even work here
+  render_template,
+  Response,
+  request,
+  session,
+  redirect,
+  url_for,
+  flash)
 
-from flask_wtf import Form
-from flask_wtf.file import FileField
-from wtforms import validators, StringField
-from wtforms.validators import DataRequired, Optional, Required
+import os
+app = Flask(__name__, 
+  static_folder='./static',                         # No more file upload/download
+  static_url_path='/static')                        # so we can put stuff here
+app.secret_key = os.urandom(24)                     # New key every time is fine
 
-app = Flask(__name__, static_folder='./static', static_url_path='/static')
-app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
-
-def out(msg):
+def out(msg):                                       # Debug output to server terminal
   if globs.DBUG:
     print(msg)
 
@@ -106,29 +114,27 @@ def pipulate():
       out("Token appears to have expired")
       flash('Not logged into Google. Please Login.')
       return
-    out("Attempting to connect to Google Docs API.")
     try:
       gsp = gspread.authorize(credentials)
     except:
-      return
-    out("Attempting to open spreadsheet.")
+      raise StopIteration
     try:
       pipdoc = gsp.open_by_url(globs.PIPURL) 
     except gspread.exceptions.SpreadsheetNotFound:
       yield("Please give the document a name to force first save.")
       raise StopIteration
     except:
-      flash("Difficulty opening spreadsheet.")
-      return
-    out("Attempting to open Pipulate worksheet.")
+      yield("Difficulty opening spreadsheet. You probably have to re-login.")
+      raise StopIteration
     try:
       pipsheet = pipdoc.worksheet("Pipulate")
     except:
-      out("Initializing Pipulate worksheet.")
       headers = ['URL', 'Tweeted', 'Shared', 'Liked', 'Plussed', 'DateStamp', 'TimeStamp']
       inittab(pipdoc, 'Pipulate', headers, pipinit())
-    pipsheet = pipdoc.worksheet("Pipulate")
-    globs.numrows = len(pipsheet.col_values(1))
+      yield "Creating the Pipulate tab."
+    finally:
+      pipsheet = pipdoc.worksheet("Pipulate")
+      globs.numrows = len(pipsheet.col_values(1))
     try:
       pipdoc.worksheet("Config")
     except:
@@ -191,8 +197,8 @@ def pipulate():
       try:
         pipsheet = pipdoc.worksheet("Pipulate")
       except:
-        flash("Couldn't reach Google Docs. Try logging in again.")
-        return
+        yield ("Couldn't reach Google Docs. Try logging in again.")
+        raise StopIteration
 
     globs.numrows = len(pipsheet.col_values(1))
     blankrows = 0
@@ -219,11 +225,11 @@ def pipulate():
         if blankrows > 3:
           break
     if qmarkstotal:
-      flash('Replaced %s question marks.' % qmarkstotal)
+      yield('Replaced %s question marks.' % qmarkstotal)
     else:
-      flash('No question marks found in Sheet 1.')
+      yield('No question marks found in Sheet 1.')
   else:
-    flash('Please Login to Google')
+    yield('Please Login to Google')
   yield "End Pipulate"
 
 def url_root(url):
@@ -296,7 +302,7 @@ def inittab(gdoc, tabname, headerlist, listoflists=[]):
   newtab.update_cells(cell_list)
   for row in listoflists:
     newtab.append_row(row)
-  flash("Created %s tab." % (tabname))
+  #flash("Created %s tab." % (tabname))
   return
 
 def questionmark(oldrow, rowdex, coldex):
