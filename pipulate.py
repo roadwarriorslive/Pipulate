@@ -35,42 +35,42 @@ def out(msg):                                       # Debug output to server ter
   if globs.DBUG:
     print(msg)
 
-def stream_template(template_name, **context):
-  app.update_template_context(context)
-  t = app.jinja_env.get_template(template_name)
-  rv = t.stream(context)
-  #rv.enable_buffering(5)
-  return rv
+def stream_template(template_name, **context):      # This is the key to streaming
+  app.update_template_context(context)              # output to the user in the
+  t = app.jinja_env.get_template(template_name)     # web browser much like a
+  rv = t.stream(context)                            # long page load, but with
+  return rv                                         # better memory efficiency.
 
-@app.context_processor
-def templateglobals():
-    return dict(loginlink=getLoginlink(), bookmarklet=getBookmarklet())
+@app.context_processor                              # Anything that I want to be
+def templateglobals():                              # available in Jinja2 templates
+  return dict(loginlink=getLoginlink(),             # without having to always
+  bookmarklet=getBookmarklet())                     # pass them as parameters
 
 class PipForm(Form):
   pipurl = StringField('Paste a Google Spreadsheet URL:')
 
-@app.route("/", methods=['GET', 'POST'])
-def main():
-  pipit = False
-  out("Entering Main")
-  form = PipForm(csrf_enabled=False)
-  if session:
-    if 'oa2' in session:
-      import gspread
-      credentials = Credentials(access_token=session['oa2'])
+@app.route("/", methods=['GET', 'POST'])            # Main point of entry when
+def main():                                         # visiting app's homepage.
+  streamit = False                                  # Default to not streaming.
+  form = PipForm(csrf_enabled=False)                # Initialize form for UI.
+  if session:                                       # I've seen you before!
+    if 'oa2' in session:                            # and I think you're logged in
+      import gspread                                # so I'll grab spreadsheet API
+      creds = Credentials(access_token=session['oa2'])
       try:
-        gsp = gspread.authorize(credentials)
-        gsp.openall()
-        session['loggedin'] = "1"
-      except:
-        #session.clear()
-        pass
-  if request.method == 'POST':
-    if form.pipurl.data:
-      globs.PIPURL = form.pipurl.data
-      pipit = stream_with_context(pipulate())
-    else:
-      flash('Nothing to Pipulate. Enter a Google Spreadsheet URL and try again.')
+        gsp = gspread.authorize(creds)              # We may not be in the clear
+        gsp.openall()                               # so I'll try to do something
+        session['loggedin'] = "1"                   # and toggle assured success
+      except:                                       # becasue if not, we're not
+        session.clear()                             # really logged in, and should
+        flash("Login expired. Please log back in")  # get user to log in again.
+
+  if request.method == 'POST':                      # Pipulation must only ever
+    if form.pipurl.data:                            # occur on the POST method
+      globs.PIPURL = form.pipurl.data               # with a submitted URL. That
+      streamit = stream_with_context(pipulate())    # tells us to start streaming.
+    else:                                           # Some messages just have to
+      flash('Please enter a URL to Pipulate')       # be flashed versus streamed.
   else:
     if request.args and "access_token" in request.args:
       session['oa2'] = request.args.get("access_token")
@@ -94,7 +94,7 @@ def main():
           form.pipurl.data = session['u']
       if form.pipurl.data and request.url_root == url_root(form.pipurl.data):
         form.pipurl.data = ''
-  if pipit:
+  if streamit:
     return Response(stream_template('pipulate.html', form=form, data=pipit))
   else:
     return render_template('pipulate.html', form=form)
@@ -109,12 +109,12 @@ def pipulate():
   if session:
     if 'oa2' in session:
       out("OAuth2 token found")
-      credentials = Credentials(access_token=session['oa2'])
+      creds = Credentials(access_token=session['oa2'])
     else:
       yield "Google Login appears to have expired. Log back in."
       raise StopIteration
     try:
-      gsp = gspread.authorize(credentials)
+      gsp = gspread.authorize(creds)
     except:
       yield "Google Login unsuccessful"
       raise StopIteration
