@@ -1,14 +1,20 @@
 """ Pipulate lets you collect data straight off of the Web into spreadsheets.
+          _____ _             _       _
+         |  __ (_)           | |     | |
+         | |__) | _ __  _   _| | __ _| |_ ___     ___ ___  _ __ ___
+         |  ___/ | '_ \| | | | |/ _` | __/ _ \   / __/ _ \| '_ ` _ \
+         | |   | | |_) | |_| | | (_| | ||  __/  | (_| (_) | | | | | |
+         |_|   |_| .__/ \__,_|_|\__,_|\__\___| (_)___\___/|_| |_| |_|
+                 | |
+                 |_|
 
-        _____ _             _       _
-       |  __ (_)           | |     | |
-       | |__) | _ __  _   _| | __ _| |_ ___     ___ ___  _ __ ___
-       |  ___/ | '_ \| | | | |/ _` | __/ _ \   / __/ _ \| '_ ` _ \
-       | |   | | |_) | |_| | | (_| | ||  __/  | (_| (_) | | | | | |
-       |_|   |_| .__/ \__,_|_|\__,_|\__\___| (_)___\___/|_| |_| |_|
-               | |
-               |_|
-
+            It doesn't look like much, but looks can be deceiving.
+           I center these lines in the vim editor by hitting shift-V
+            to highlight the text and then hitting :center[Enter]. 
+              This is important to remember. I program in Python
+                 primarily so that I can work on this project.
+                     You will not understand this message
+                           until you do. Greetings!
 """
 
 import globs                                        # Talmudic style commentaries
@@ -26,7 +32,7 @@ from flask import (Flask,                           # This app is all about Flas
   flash)
 
 import os
-app = Flask(__name__, 
+app = Flask(__name__,
   static_folder='./static',                         # No more file upload/download
   static_url_path='/static')                        # so we can put stuff here
 app.secret_key = os.urandom(24)                     # New key every time is fine
@@ -119,7 +125,7 @@ def pipulate():
       yield "Google Login unsuccessful"
       raise StopIteration
     try:
-      pipdoc = gsp.open_by_url(globs.PIPURL) 
+      pipdoc = gsp.open_by_url(globs.PIPURL)
     except gspread.exceptions.SpreadsheetNotFound:
       yield "Please give the document a name to force first save."
       raise StopIteration
@@ -307,7 +313,7 @@ def inittab(gdoc, tabname, headerlist, listoflists=[]):
 
 def questionmark(oldrow, rowdex, coldex):
   """Returns true if a question mark is supposed to be replaced in cell.
-  
+
   This is called for every cell on every row processed and checks whether
   question mark replacemnt should actually occur."""
   if rowdex != 1:
@@ -317,7 +323,7 @@ def questionmark(oldrow, rowdex, coldex):
 
 def processrow(rowdex, onerow):
   """Separates row-1 handling from question mark detection on all other rows.
-  
+
   Called on each row of a worksheet and either initializes functions when it's
   row 1, or steps cell by cell along each subsequent (fed-in) row and when
   encountering a question mark, it determines whether to invoke the function
@@ -343,7 +349,7 @@ def processrow(rowdex, onerow):
 
 def row1funcs(onerow):
   """Scans row-1 for names of global functions and builds dict of requirements.
-  
+
   This is only invoked on row 1 of a worksheet, where the names of functions
   and parameters are expected to be discovered. By the end, we've created a
   dictionary of dictionaries called globs.fargs which plays an important role
@@ -379,7 +385,7 @@ def row1funcs(onerow):
 
 def evalfunc(coldex, onerow):
   """Builds string to execute to get value to replace question mark with.
-  
+
   Once a question mark is found in a cell belonging to a function-named column,
   the exact invocation that's needed must be built, keeping in mind default
   values provided by function itself, as well as parameter values provided in
@@ -390,15 +396,15 @@ def evalfunc(coldex, onerow):
   evalme = "%s(" % fname #Begin building string that will eventually be eval'd
   if fargs:
     #The function we're looking at DOES have required arguments.
-    for anarg in fargs: 
+    for anarg in fargs:
       #Add an arg=value to string for each required argument.
       anarg = anarg.lower()
-      argval = getargval(anarg, fargs[anarg], onerow) 
+      argval = getargval(anarg, fargs[anarg], onerow)
       evalme = "%s%s=%s, " % (evalme, anarg, argval)
     evalme = evalme[:-2] + ')' #Finish building string for the eval statement.
   else:
     #No arguments required, so just immediately close the parenthesis.
-    evalme = evalme + ')' 
+    evalme = evalme + ')'
   return eval(evalme)
 
 def genericscraper(coldex, onerow):
@@ -443,7 +449,7 @@ def gethtml(url):
 
 def getargval(anarg, defargval, onerow):
   """Returns value to set argument equal-to in function invocation string.
-  
+
   This function returns which value should be used as the arguments to the
   function invocation string being built. The value found on the row always
   beats the default provided by the function. Lacking values on the row and a
@@ -457,10 +463,10 @@ def getargval(anarg, defargval, onerow):
     return adq(defargval) #So, if it's got a default value, return that.
   else:
     return None #We ALWAYS have to return at least None, least errors ensue.
-  
+
 def adq(aval):
   """Conditionally builds quotes on arg-value for function invocation string.
-  
+
   This handles the value quoting details when building argument part of the
   function invocation string when replacing a question mark. For example, the
   keyword None must not become quoted. Typically, numbers shouldn't be quoted
