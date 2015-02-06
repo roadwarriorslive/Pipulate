@@ -68,7 +68,7 @@ def main():                                         # visiting app's homepage.
         gsp.openall()                               # so I'll try to do something
         session['loggedin'] = "1"                   # and toggle assured success
       except:                                       # becasue if not, we're not
-        session.clear()                            # really logged in, and should
+        session.clear()                             # really logged in, and should
         flash("Login expired. Please log back in")  # get user to log in again.
 
   if request.method == 'POST':                      # Pipulation must only ever
@@ -136,7 +136,7 @@ def pipulate():
       pipsheet = pipdoc.worksheet("Pipulate")
     except:
       headers = ['URL', 'Tweeted', 'Shared', 'Liked', 'Plussed', 'DateStamp', 'TimeStamp']
-      inittab(pipdoc, 'Pipulate', headers, pipinit())
+      InitTab(pipdoc, 'Pipulate', headers, pipinit())
       yield "Creating the Pipulate tab."
     finally:
       pipsheet = pipdoc.worksheet("Pipulate")
@@ -145,13 +145,13 @@ def pipulate():
       pipdoc.worksheet("Config")
     except:
       headers = ['name', 'value']
-      inittab(pipdoc, 'Config', headers)
+      InitTab(pipdoc, 'Config', headers)
     globs.config = refreshconfig(pipdoc, "Config")
     try:
       pipdoc.worksheet("Scrapers")
     except:
       headers = ['name', 'type', 'pattern']
-      inittab(pipdoc, 'Scrapers', headers, scrapes())
+      InitTab(pipdoc, 'Scrapers', headers, scrapes())
     sst = pipdoc.worksheet("Scrapers")
     snames = sst.col_values(1)
     stypes = sst.col_values(2)
@@ -330,7 +330,7 @@ def InsertRows(worksheet, listoflists):
   worksheet.update_cells(cell_list)
   return
 
-def inittab(gdoc, tabname, headerlist, listoflists=[]):
+def InitTab(gdoc, tabname, headerlist, listoflists=[]):
   numcols = len(headerlist)
   if listoflists and '*' in listoflists[1]:
     numrows = len(listoflists)+1
