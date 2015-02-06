@@ -87,9 +87,9 @@ def main():
       if form.pipurl.data and request.url_root == url_root(form.pipurl.data):
         form.pipurl.data = ''
   if pipit:
-    return Response(stream_template('pipulate4.html', form=form, data=pipit))
+    return Response(stream_template('pipulate.html', form=form, data=pipit))
   else:
-    return render_template('pipulate4.html', form=form)
+    return render_template('pipulate.html', form=form)
 
 def yielder():
   yield "Hello"
