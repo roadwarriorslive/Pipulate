@@ -190,7 +190,8 @@ def pipulate():
         if blankrows > skipafternumblanks:
           break
     if trended:
-      qstart = globs.numrows - len(trendlistoflists) + 1
+      #qstart = globs.numrows - len(trendlistoflists) + 1
+      qstart = globs.numrows + 1
     else:
       qstart = 1
     #for trendrow in trendlistoflists:
