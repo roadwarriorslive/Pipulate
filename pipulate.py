@@ -300,39 +300,25 @@ def InsertRow(worksheet, alist):
   globs.numrows += 1
 
 def inittab(gdoc, tabname, headerlist, listoflists=[]):
-  flattenlist = []
-  #numcols = len(headerlist)
-  #newtab = gdoc.add_worksheet(title=tabname, rows="1", cols=numcols)
-  #cell_list = newtab.range('A1:%s1' % globs.letter[numcols])
-  #for index, cell in enumerate(cell_list):
-  #  cell.value = headerlist[index]
-  #newtab.update_cells(cell_list)
-  #for row in listoflists:
-  #  newtab.append_row(row)
-  #return
   numcols = len(headerlist)
   if listoflists and '*' in listoflists[1]:
-    numrows = len(listoflists)*2+1
+    numrows = len(listoflists)+1
+    #numrows = len(listoflists)*2+1
   else:
     numrows = 2
   endletter = globs.letter[numcols]
   newtab = gdoc.add_worksheet(title=tabname, rows=numrows, cols=numcols)
   cell_list = newtab.range('A1:%s%s' % (endletter, numrows))
-  for index, header in enumerate(headerlist):
-    cell_list[index].value = header
-
-  for onecell in headerlist:
-    flattenlist.append(onecell)
+  initlist = []
   for onelist in listoflists:
     for onecell in onelist:
-      flattenlist.append(onecell)
-
-  #for index, oneitem in enumerate(flattenlist):
-  #  out("%s: %s" % (index, oneitem))
-  
+      initlist.append(onecell)
+  #qmarklist = [m.replace('*', '?') for m in asterlist]
+  #wholelist = headerlist + asterlist + qmarklist
+  wholelist = headerlist + initlist
   for index, onecell in enumerate(cell_list):
     try:
-      onecell.value = flattenlist[index]
+      onecell.value = wholelist[index]
     except:
       pass
 
