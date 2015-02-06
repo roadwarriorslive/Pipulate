@@ -68,7 +68,7 @@ def main():                                         # visiting app's homepage.
         gsp.openall()                               # so I'll try to do something
         session['loggedin'] = "1"                   # and toggle assured success
       except:                                       # becasue if not, we're not
-        session.clear()                             # really logged in, and should
+        session.clear()                            # really logged in, and should
         flash("Login expired. Please log back in")  # get user to log in again.
 
   if request.method == 'POST':                      # Pipulation must only ever
@@ -300,15 +300,26 @@ def InsertRow(worksheet, alist):
   globs.numrows += 1
 
 def inittab(gdoc, tabname, headerlist, listoflists=[]):
+  #numcols = len(headerlist)
+  #newtab = gdoc.add_worksheet(title=tabname, rows="1", cols=numcols)
+  #cell_list = newtab.range('A1:%s1' % globs.letter[numcols])
+  #for index, cell in enumerate(cell_list):
+  #  cell.value = headerlist[index]
+  #newtab.update_cells(cell_list)
+  #for row in listoflists:
+  #  newtab.append_row(row)
+  #return
   numcols = len(headerlist)
-  newtab = gdoc.add_worksheet(title=tabname, rows="1", cols=numcols)
-  cell_list = newtab.range('A1:%s1' % globs.letter[numcols])
-  for index, cell in enumerate(cell_list):
-    cell.value = headerlist[index]
+  if listoflists:
+    numrows = len(listoflists)*2
+  else:
+    numrows = 2
+  endletter = globs.letter[numcols]
+  newtab = gdoc.add_worksheet(title=tabname, rows=len(listoflists)*2, cols=numcols)
+  cell_list = newtab.range('A1:%s%s' % (endletter, numrows))
+  for index, header in enumerate(headerlist):
+    cell_list[index].value = header
   newtab.update_cells(cell_list)
-  for row in listoflists:
-    newtab.append_row(row)
-  #flash("Created %s tab." % (tabname))
   return
 
 def questionmark(oldrow, rowdex, coldex):
