@@ -12,11 +12,23 @@
       background: #FFF;
       margin-top: 60px;
       width: 100%;}
+    nav{
+      background-color:#EEEEEE;
+    }
+    #content{
+      margin:5px 5px 5px 5px;
+      text-align:center;
+    }
     #arrow{
       font-weight: bold;
       font-size: 1.8em;
       position : relative;
       top:.2em;
+    }
+    #drag{
+      font-size: 1em;
+      position : relative;
+      top:.1em;
     }
     .bookmarklet{padding: 0px;}
     .burgercheck~label{
@@ -81,34 +93,23 @@
     </script>
   </head>
   <body>
-    <form method="POST" action="/" enctype="multipart/form-data">
-      {{ form.pipurl.label }} {{ form.pipurl(size=73) }}<br/>
-       <input class="button" type="submit" value="Pipulate it" name="submit">
-    </form>
-    <br/><a href="{{ loginlink }}">Login with Google</a>
-    <br/><a href="http://{{ request.headers['Host'] }}?logout">Logout</a>
-    <br/>
+    <div id="content">
+      <form method="POST" action="/" enctype="multipart/form-data">
+        {{ form.pipurl.label }} {{ form.pipurl(size=73) }}<br/>
+         <input class="button" type="submit" value="Pipulate it" name="submit">
+      </form>
+      <br/>
+    </div>
     <nav>
   <!-- responsive -->
   <input id="bmenu" class="burgercheck" type="checkbox">
   <label for="bmenu" class="burgermenu"></label>
   <!-- /responsive -->
-      <div class="pressthis" style="text-align: center"><a class="bookmarklet" href="{{ bookmarklet }}" onclick="return false;" oncontextmenu="if(window.navigator.userAgent.indexOf('WebKit')!=-1||window.navigator.userAgent.indexOf('MSIE')!=-1){jQuery('.pressthis-code').show().find('textarea').focus().select();return false;}"><span>Pipulate</span></a> <strong id="arrow">&larr;</strong> Drag to Boomarks Bar.</div>
+      <div class="pressthis" style="text-align: center"><a class="bookmarklet" href="{{ bookmarklet }}" onclick="return false;" oncontextmenu="if(window.navigator.userAgent.indexOf('WebKit')!=-1||window.navigator.userAgent.indexOf('MSIE')!=-1){jQuery('.pressthis-code').show().find('textarea').focus().select();return false;}"><span>Pipulate</span></a> <strong id="arrow">&larr;</strong> <span id="drag">Drag to Boomarks Bar.</span></div>
   <div class="menu">
-    <a href="#buttons" class="icon-button">Buttons</a>
-    <a href="#input" class="icon-form">Form</a>
-    <a href="#table" class="icon-table">Table</a>
-    <a href="#grids" class="icon-grid">Grids</a>
-    <a href="#nav" class="icon-menu">Nav</a>
-    <a href="/test/" class="button primary">Test</a>
-    <a class="button primary" href="/demo/">
-        Demo
-      </a>
-    <a class="button warning primary" href="https://github.com/picnicss/picnic">
-        Github
-    </a>
+    <a href="{{ loginlink }}">Login with Google</a>
+    <a href="http://{{ request.headers['Host'] }}?logout">Logout</a>
   </div>
-
     </nav>
     {% for msg in data: %}
       {{ msg }}<br/>
