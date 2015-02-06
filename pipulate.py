@@ -116,14 +116,15 @@ def pipulate():
     try:
       gsp = gspread.authorize(credentials)
     except:
+      yield "Google Login unsuccessful"
       raise StopIteration
     try:
       pipdoc = gsp.open_by_url(globs.PIPURL) 
     except gspread.exceptions.SpreadsheetNotFound:
-      yield("Please give the document a name to force first save.")
+      yield "Please give the document a name to force first save."
       raise StopIteration
     except:
-      yield("Difficulty opening spreadsheet. You probably have to re-login.")
+      yield "Difficulty opening spreadsheet. You probably have to re-login."
       raise StopIteration
     try:
       pipsheet = pipdoc.worksheet("Pipulate")
@@ -224,11 +225,11 @@ def pipulate():
         if blankrows > 3:
           break
     if qmarkstotal:
-      yield('Replaced %s question marks.' % qmarkstotal)
+      yield 'Replaced %s question marks.' % qmarkstotal
     else:
-      yield('No question marks found in Sheet 1.')
+      yield 'No question marks found in Sheet 1.'
   else:
-    yield('Please Login to Google')
+    yield 'Please Login to Google'
   yield "End Pipulate"
 
 def url_root(url):
@@ -311,8 +312,8 @@ def questionmark(oldrow, rowdex, coldex):
   question mark replacemnt should actually occur."""
   if rowdex != 1:
     if oldrow[coldex] == '?':
-      return(True)
-  return(False)
+      return True
+  return False
 
 def processrow(rowdex, onerow):
   """Separates row-1 handling from question mark detection on all other rows.
@@ -338,7 +339,7 @@ def processrow(rowdex, onerow):
           changedrow[coldex] = evalfunc(coldex, changedrow) #The Function Path
         elif collabel in globs.transscrape.keys():
           changedrow[coldex] = genericscraper(coldex, changedrow) #Scraping
-  return(changedrow)
+  return changedrow
 
 def row1funcs(onerow):
   """Scans row-1 for names of global functions and builds dict of requirements.
@@ -398,7 +399,7 @@ def evalfunc(coldex, onerow):
   else:
     #No arguments required, so just immediately close the parenthesis.
     evalme = evalme + ')' 
-  return(eval(evalme))
+  return eval(evalme)
 
 def genericscraper(coldex, onerow):
   sname = globs.transscrape[globs.row1[coldex]]
