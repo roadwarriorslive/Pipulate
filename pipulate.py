@@ -18,20 +18,20 @@
 """
 
 import globs                                        # Talmudic style commentaries
-import requests                                     # Will help with 3.x port
+import requests                                     # This will help with 3.x port
 from flask_wtf import Form                          # All Flask form examples use it
 from wtforms import StringField
 from flask import (Flask,                           # This app is all about Flask
   stream_with_context,                              # Yes, comments even work here
   render_template,
-  Response,
-  request,
-  session,
-  redirect,
-  url_for,
-  flash)
+  Response,                                         # Occasionally, open the Python
+  request,                                          # interactive interpreter and
+  session,                                          # then type: import this
+  redirect,                                         # Internalize those messages
+  url_for,                                          # and then wonder why exit()
+  flash)                                            # needs those parentheses.
 
-import os
+import os                                           # Comments get more pragmatic.
 app = Flask(__name__,
   static_folder='./static',                         # No more file upload/download
   static_url_path='/static')                        # so we can put stuff here
@@ -101,7 +101,7 @@ def main():                                         # visiting app's homepage.
       if form.pipurl.data and request.url_root == url_root(form.pipurl.data):
         form.pipurl.data = ''
   if streamit:
-    return Response(stream_template('pipulate.html', form=form, data=pipit))
+    return Response(stream_template('pipulate.html', form=form, data=streamit))
   else:
     return render_template('pipulate.html', form=form)
 
