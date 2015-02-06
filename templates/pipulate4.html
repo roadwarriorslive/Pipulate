@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Pipulate</title>
+    <LINK href="/static/styles.css" rel="stylesheet" type="text/css">
     <script>
       if (location.hash) {
         var myhash = location.hash
@@ -11,27 +12,13 @@
         }
       }
     </script>
-    <style>
-    .ui-input-text {
-      background-color: rgba(38, 38, 38, 0.5);
-    }
-    .pressthis{margin:20px 0}
-    .pressthis a,.pressthis a:active,.pressthis a:focus,.pressthis a:hover{display:inline-block;position:relative;cursor:move;color:#333;background:#e6e6e6;-webkit-border-radius:5px;border-radius:5px;border:1px solid #b4b4b4;font-style:normal;line-height:16px;font-size:14px;text-decoration:none}
-    .pressthis a:active{outline:0}
-    .pressthis a:hover:after{-webkit-transform:skew(20deg) rotate(9deg);-ms-transform:skew(20deg) rotate(9deg);transform:skew(20deg) rotate(9deg);-webkit-box-shadow:0 10px 8px rgba(0,0,0,.7);box-shadow:0 10px 8px rgba(0,0,0,.7)}
-    .pressthis a span{display:inline-block;margin:0;padding:10px 12px 8px 9px}
-    .pressthis a span:before{color:#777;font:400 20px/1 ;position:relative;display:inline-block;top:4px;margin-right:4px}
-    .pressthis a:after{content:'';width:70%;height:55%;z-index:-1;position:absolute;right:10px;bottom:9px;background:0 0;-webkit-transform:skew(20deg) rotate(6deg);-ms-transform:skew(20deg) rotate(6deg);transform:skew(20deg) rotate(6deg);-webkit-box-shadow:0 10px 8px rgba(0,0,0,.6);box-shadow:0 10px 8px rgba(0,0,0,.6)}
-    </style>
   </head>
   <body>
     <h1>PIPULATE</h1>
-    {% if not request.args and request.method != 'POST' %}
-      <p class="pressthis" style="text-align: center">Drag this to Bookmark bar (if you haven't already) --&gt; <a href="{{ bookmarklet }}" onclick="return false;" oncontextmenu="if(window.navigator.userAgent.indexOf('WebKit')!=-1||window.navigator.userAgent.indexOf('MSIE')!=-1){jQuery('.pressthis-code').show().find('textarea').focus().select();return false;}"><span>Pipulate</span></a>
-    {% endif %}
+    <p class="pressthis" style="text-align: center">Drag this to Bookmark bar (if you haven't already) --&gt; <a href="{{ bookmarklet }}" onclick="return false;" oncontextmenu="if(window.navigator.userAgent.indexOf('WebKit')!=-1||window.navigator.userAgent.indexOf('MSIE')!=-1){jQuery('.pressthis-code').show().find('textarea').focus().select();return false;}"><span>Pipulate</span></a>
     <form method="POST" action="/" enctype="multipart/form-data">
-      {{ form.pipurl.label }} {{ form.pipurl(size=500) }}<br/>
-      <input data-role="button" data-inline="true" data-icon="arrow-r" data-iconpos="right" type="submit" value="Pipulate it" name="submit" data-theme="b">
+      {{ form.pipurl.label }} {{ form.pipurl(size=100) }}<br/>
+    <input type="submit" value="Pipulate it" name="submit">
         <a href="{{ loginlink }}">Login with Google</a>
     </form>
     {% if session %}

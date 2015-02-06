@@ -20,7 +20,7 @@ from flask_wtf.file import FileField
 from wtforms import validators, StringField
 from wtforms.validators import DataRequired, Optional, Required
 
-app = Flask(__name__, static_folder='../uploads', static_url_path='/files')
+app = Flask(__name__, static_folder='./static', static_url_path='/static')
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 def out(msg):
