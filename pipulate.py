@@ -31,11 +31,11 @@ from flask import (Flask,                           # This app is all about Flas
   url_for,                                          # and then wonder why exit()
   flash)                                            # needs those parentheses.
 
-import os                                           # Comments get more pragmatic.
 app = Flask(__name__,
   static_folder='./static',                         # No more file upload/download
   static_url_path='/static')                        # so we can put stuff here
-app.secret_key = os.urandom(24)                     # New key every time is fine
+
+app.secret_key = r"m\x00\r\xa5\\\xbeTW\xb3\xdf\x17\xb0!T\x9b6\x88l\xcf\xa1vmD}"
 
 def out(msg):                                       # Debug output to server terminal
   if globs.DBUG:
@@ -319,7 +319,13 @@ def inittab(gdoc, tabname, headerlist, listoflists=[]):
   cell_list = newtab.range('A1:%s%s' % (endletter, numrows))
   for index, header in enumerate(headerlist):
     cell_list[index].value = header
-  newtab.update_cells(cell_list)
+  #if listoflists:
+  #  for rowdex, onerow in enumerate(listoflists):
+  #    for coldex, onecell in enumerate(onerow):
+  #for index, cell in enumerate(cell_list):
+  #cell_list[index].value = listoflists[cell.row-1][0]
+        
+  #newtab.update_cells(cell_list)
   return
 
 def questionmark(oldrow, rowdex, coldex):
