@@ -159,7 +159,7 @@ def pipulate():
     globs.scrapetypes = zipnamevaldict(snames, stypes)
     globs.scrapepatterns = zipnamevaldict(snames, spatterns)
     globs.transscrape = zipnamevaldict(snames, snames)
-    trendlist = []
+    trendlistoflists = []
     globs.row1 = lowercaselist(pipsheet.row_values(1))
     row1funcs(globs.row1)
     yield "Trend spotting"
@@ -167,36 +167,37 @@ def pipulate():
     trended = False
     qstart = 1
     for rowdex in range(1, pipsheet.row_count+1): #Give trending its own loop
-      if rowdex > 1:
-        yield "Looking for asterisks on row %s" % rowdex
-        out("Looking for asteriks on row %s " % rowdex)
       onerow = pipsheet.row_values(rowdex)
       if onerow:
+        skipafternumblanks = 1
         if rowdex == 2: #Looking for trending requests
           if '*' in onerow:
+            yield "Found asterisks in row 2. Trending!"
             trended = True
-            trendlist.append(onerow)
+            trendlistoflists.append(onerow)
           else:
             break
-        elif trendlist and rowdex > 2:
+        elif trendlistoflists and rowdex > 2:
           if '*' in onerow:
-            trendlist.append(onerow)
+            yield "Found asterisk on row %s" % rowdex
+            trendlistoflists.append(onerow)
           else:
             blankrows += 1
-            if blankrows > 2:
+            if blankrows > skipafternumblanks:
               break
       else:
         blankrows += 1
-        if blankrows > 2:
+        if blankrows > skipafternumblanks:
           break
     if trended:
-      qstart = globs.numrows - len(trendlist) + 1
+      qstart = globs.numrows - len(trendlistoflists) + 1
     else:
       qstart = 1
-    for trendrow in trendlist:
-      trendrow = ['?' if x=='*' else x for x in trendrow]
-      InsertRow(pipsheet, trendrow)
-    trendlist = []
+    #for trendrow in trendlistoflists:
+    #  trendrow = ['?' if x=='*' else x for x in trendrow]
+    #  InsertRow(pipsheet, trendrow)
+    InsertRows(pipsheet, trendlistoflists)
+    trendlistoflists = []
 
     #We need to get it again if trending rows were added.
     if trended:
@@ -236,7 +237,7 @@ def pipulate():
       yield 'No question marks found in Sheet 1.'
   else:
     yield 'Please Login to Google'
-  yield "End Pipulate"
+  yield "I am done pipulating."
 
 def url_root(url):
   from urlparse import urlparse
@@ -298,6 +299,9 @@ def InsertRow(worksheet, onelist):
       cell.value = ival
       worksheet.update_cells(cell_list)
   globs.numrows += 1
+
+def InsertRows(worksheet, listoflists):
+  out("Test")
 
 def inittab(gdoc, tabname, headerlist, listoflists=[]):
   numcols = len(headerlist)
