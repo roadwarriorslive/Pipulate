@@ -90,7 +90,7 @@ def main():                                         # visiting app's homepage.
         if 'oa2' in session:
           revokeurl = 'https://accounts.google.com/o/oauth2/revoke?token=' + session['oa2']
           requests.get(revokeurl)
-        session.clear()
+        #session.clear()
         flash('Logged out from Google.')
     elif request.args:
       if 'u' in request.args:
@@ -315,7 +315,7 @@ def inittab(gdoc, tabname, headerlist, listoflists=[]):
   else:
     numrows = 2
   endletter = globs.letter[numcols]
-  newtab = gdoc.add_worksheet(title=tabname, rows=len(listoflists)*2, cols=numcols)
+  newtab = gdoc.add_worksheet(title=tabname, rows=numrows, cols=numcols)
   cell_list = newtab.range('A1:%s%s' % (endletter, numrows))
   for index, header in enumerate(headerlist):
     cell_list[index].value = header
