@@ -271,30 +271,30 @@ def zipnamevaldict(keys, values):
   keys = lowercaselist(keys)
   return dict(zip(keys, values))
 
-def lowercaselist(alist):
-  for index, item in enumerate(alist):
+def lowercaselist(onelist):
+  for index, item in enumerate(onelist):
     try:
-      alist[index] = item.lower()
+      onelist[index] = item.lower()
     except:
       pass
-  return alist
+  return onelist
 
-def InsertRow(worksheet, alist):
-  column = globs.letter[len(alist)]
+def InsertRow(worksheet, onelist):
+  column = globs.letter[len(onelist)]
   endrow = globs.numrows + 1
   rowrange = "A%s:%s%s" % (endrow, column, endrow)
   if endrow == worksheet.row_count + 1:
-    worksheet.append_row(alist)
+    worksheet.append_row(onelist)
     #worksheet.add_rows(1)
   else:
     cell_list = worksheet.range(rowrange)
     out('Inserting row in range %s' % rowrange)
     for index, cell in enumerate(cell_list):
       ival = ''
-      if alist[index] == None:
+      if onelist[index] == None:
         ival = ''
       else:
-        ival = alist[index]
+        ival = onelist[index]
       cell.value = ival
       worksheet.update_cells(cell_list)
   globs.numrows += 1
@@ -303,7 +303,6 @@ def inittab(gdoc, tabname, headerlist, listoflists=[]):
   numcols = len(headerlist)
   if listoflists and '*' in listoflists[1]:
     numrows = len(listoflists)+1
-    #numrows = len(listoflists)*2+1
   else:
     numrows = 2
   endletter = globs.letter[numcols]
@@ -313,8 +312,6 @@ def inittab(gdoc, tabname, headerlist, listoflists=[]):
   for onelist in listoflists:
     for onecell in onelist:
       initlist.append(onecell)
-  #qmarklist = [m.replace('*', '?') for m in asterlist]
-  #wholelist = headerlist + asterlist + qmarklist
   wholelist = headerlist + initlist
   for index, onecell in enumerate(cell_list):
     try:
