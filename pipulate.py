@@ -111,9 +111,8 @@ def pipulate():
       out("OAuth2 token found")
       credentials = Credentials(access_token=session['oa2'])
     else:
-      out("Token appears to have expired")
-      flash('Not logged into Google. Please Login.')
-      return
+      yield "Google Login appears to have expired. Log back in."
+      raise StopIteration
     try:
       gsp = gspread.authorize(credentials)
     except:
