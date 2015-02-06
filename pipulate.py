@@ -300,6 +300,7 @@ def InsertRow(worksheet, alist):
   globs.numrows += 1
 
 def inittab(gdoc, tabname, headerlist, listoflists=[]):
+  flattenlist = []
   #numcols = len(headerlist)
   #newtab = gdoc.add_worksheet(title=tabname, rows="1", cols=numcols)
   #cell_list = newtab.range('A1:%s1' % globs.letter[numcols])
@@ -310,8 +311,8 @@ def inittab(gdoc, tabname, headerlist, listoflists=[]):
   #  newtab.append_row(row)
   #return
   numcols = len(headerlist)
-  if listoflists:
-    numrows = len(listoflists)*2
+  if listoflists and '*' in listoflists[1]:
+    numrows = len(listoflists)*2+1
   else:
     numrows = 2
   endletter = globs.letter[numcols]
@@ -319,13 +320,23 @@ def inittab(gdoc, tabname, headerlist, listoflists=[]):
   cell_list = newtab.range('A1:%s%s' % (endletter, numrows))
   for index, header in enumerate(headerlist):
     cell_list[index].value = header
-  #if listoflists:
-  #  for rowdex, onerow in enumerate(listoflists):
-  #    for coldex, onecell in enumerate(onerow):
-  #for index, cell in enumerate(cell_list):
-  #cell_list[index].value = listoflists[cell.row-1][0]
-        
-  #newtab.update_cells(cell_list)
+
+  for onecell in headerlist:
+    flattenlist.append(onecell)
+  for onelist in listoflists:
+    for onecell in onelist:
+      flattenlist.append(onecell)
+
+  #for index, oneitem in enumerate(flattenlist):
+  #  out("%s: %s" % (index, oneitem))
+  
+  for index, onecell in enumerate(cell_list):
+    try:
+      onecell.value = flattenlist[index]
+    except:
+      pass
+
+  newtab.update_cells(cell_list)
   return
 
 def questionmark(oldrow, rowdex, coldex):
