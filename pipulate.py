@@ -102,8 +102,8 @@ def main():                                         # visiting app's homepage.
         session['u'] = request.args.get('u')
       if session and 'u' in session:
         form.pipurl.data = session['u']
-      #if form.pipurl.data and request.url_root == url_root(form.pipurl.data):
-      #  form.pipurl.data = ''
+    if form.pipurl.data and request.url_root == url_root(form.pipurl.data):
+      form.pipurl.data = '' #can't pipulate the pipulate site
   if streamit:
     return Response(stream_template('pipulate.html', form=form, data=streamit))
   else:
@@ -137,18 +137,17 @@ def pipulate():
       yield "spinoff"
       raise StopIteration
     except:
-      yield "Difficulty opening spreadsheet. You probably have to re-login."
+      yield "Pipulate currently only works with Google Spreadheet URLs"
       yield "spinoff"
       raise StopIteration
     try:
-      pipsheet = pipdoc.worksheet("Pipulate")
+      worksheet = pipdoc.worksheet("Pipulate")
     except:
       headers = ['URL', 'Tweeted', 'Shared', 'Liked', 'Plussed', 'DateStamp', 'TimeStamp']
-      InitTab(pipdoc, 'Pipulate', headers, pipinit())
-      yield "Creating the Pipulate tab."
+      yield InitTab(pipdoc, 'Pipulate', headers, pipinit())
     finally:
-      pipsheet = pipdoc.worksheet("Pipulate")
-      globs.numrows = len(pipsheet.col_values(1))
+      worksheet = pipdoc.worksheet("Pipulate")
+      globs.numrows = len(worksheet.col_values(1))
 
     #try:
     #  sheet1 = pipdoc.worksheet("Sheet1")
@@ -166,13 +165,13 @@ def pipulate():
       pipdoc.worksheet("Config")
     except:
       headers = ['name', 'value']
-      InitTab(pipdoc, 'Config', headers)
+      yield InitTab(pipdoc, 'Config', headers)
     globs.config = refreshconfig(pipdoc, "Config")
     try:
       pipdoc.worksheet("Scrapers")
     except:
       headers = ['name', 'type', 'pattern']
-      InitTab(pipdoc, 'Scrapers', headers, scrapes())
+      yield InitTab(pipdoc, 'Scrapers', headers, scrapes())
     sst = pipdoc.worksheet("Scrapers")
     snames = sst.col_values(1)
     stypes = sst.col_values(2)
@@ -182,13 +181,13 @@ def pipulate():
     globs.transscrape = zipnamevaldict(snames, snames)
 
     trendlistoflists = []
-    globs.row1 = lowercaselist(pipsheet.row_values(1))
+    globs.row1 = lowercaselist(worksheet.row_values(1))
     row1funcs(globs.row1)
     trended = False
     qstart = 1
     out("Trend spotting")
-    for rowdex in range(1, pipsheet.row_count+1): #Give trending its own loop
-      onerow = pipsheet.row_values(rowdex)
+    for rowdex in range(1, worksheet.row_count+1): #Give trending its own loop
+      onerow = worksheet.row_values(rowdex)
       if onerow:
         if rowdex == 2: #Looking for trending requests
           if '*' in onerow:
@@ -213,22 +212,22 @@ def pipulate():
       qstart = globs.numrows + 1
     else:
       qstart = 1
-    InsertRows(pipsheet, trendlistoflists)
+    InsertRows(worksheet, trendlistoflists)
     trendlistoflists = []
 
     #We need to get it again if trending rows were added.
     if trended:
       try:
-        pipsheet = pipdoc.worksheet("Pipulate")
+        worksheet = pipdoc.worksheet("Pipulate")
       except:
         yield ("Couldn't reach Google Docs. Try logging in again.")
         yield "spinoff"
         raise StopIteration
 
-    globs.numrows = len(pipsheet.col_values(1))
+    globs.numrows = len(worksheet.col_values(1))
     blankrows = 0 #Lets us skip occasional blank rows
     out("Question mark replacement")
-    for index, rowdex in enumerate(range(qstart, pipsheet.row_count+1)): #Start stepping through every row.
+    for index, rowdex in enumerate(range(qstart, worksheet.row_count+1)): #Start stepping through every row.
       if index == 0:
         yield "Processing row: %s" % rowdex
       else:
@@ -236,7 +235,7 @@ def pipulate():
       globs.hobj = None
       globs.html = '' #Blank the global html object. Recylces fetches.
       rowrange = "A%s:%s%s" % (rowdex, globs.letter[len(globs.row1)], rowdex)
-      cell_list = pipsheet.range(rowrange)
+      cell_list = worksheet.range(rowrange)
       onerow = []
       for cell in cell_list:
         onerow.append(cell.value)
@@ -250,7 +249,7 @@ def pipulate():
           result = None
         for x in range(0, globs.retry):
           try:
-            result = pipsheet.update_cells(cell_list)
+            result = worksheet.update_cells(cell_list)
             out("Successfully updated row %s" % rowdex)
             break
           except:
@@ -263,7 +262,7 @@ def pipulate():
     out('Finished question marks')
   else:
     yield 'Please Login to Google'
-  yield "I am done pipulating."
+  yield "Done pipulating."
   yield "spinoff"
 
 def url_root(url):
@@ -396,7 +395,7 @@ def InitTab(gdoc, tabname, headerlist, listoflists=[]):
     except:
       pass
   newtab.update_cells(cell_list)
-  return
+  return "Making %s tab." % tabname
 
 def questionmark(oldrow, rowdex, coldex):
   """Returns true if a question mark is supposed to be replaced in cell.
