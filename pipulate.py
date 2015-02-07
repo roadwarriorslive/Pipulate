@@ -10,7 +10,7 @@
 
             It doesn't look like much, but looks can be deceiving.
            I center these lines in the vim editor by hitting shift-V
-            to highlight the text and then hitting :center[Enter]. 
+            to highlight the text and then hitting :center[Enter].
               This is important to remember. I program in Python
                  primarily so that I can work on this project.
                      You will not understand this message
@@ -51,7 +51,7 @@ def stream_template(template_name, **context):      # This is the key to streami
 def templateglobals():                              # available in Jinja2 templates
   return dict(loginlink=getLoginlink(),             # without having to always
   bookmarklet=getBookmarklet(),                     # pass them as parameters
-  logoutlink=getLogoutlink())                    
+  logoutlink=getLogoutlink())
 
 class PipForm(Form):
   pipurl = StringField('Paste a Google Spreadsheet URL:')
@@ -64,13 +64,14 @@ def main():                                         # visiting app's homepage.
     if 'oa2' in session:                            # and I think you're logged in
       import gspread                                # so I'll grab spreadsheet API
       creds = Credentials(access_token=session['oa2'])
-      try:
-        gsp = gspread.authorize(creds)              # We may not be in the clear
-        gsp.openall()                               # so I'll try to do something
-        session['loggedin'] = "1"                   # and toggle assured success
-      except:                                       # becasue if not, we're not
-        session.clear()                             # really logged in, and should
-        flash("Login expired. Please log back in")  # get user to log in again.
+      for x in range(0, globs.retry):
+        try:
+          gsp = gspread.authorize(creds)
+          gsp.openall()
+          session['loggedin'] = "1"
+        except:
+          session.clear()
+          flash("Login expired. Please log back in")
 
   if request.method == 'POST':                      # Pipulation must only ever
     if form.pipurl.data:                            # occur on the POST method
@@ -159,7 +160,7 @@ def pipulate():
     #  try:
     #    cell = sheet1.find(something)
     #  except:
-    #    gsp.del_worksheet(sheet1) 
+    #    gsp.del_worksheet(sheet1)
 
     try:
       pipdoc.worksheet("Config")
@@ -241,9 +242,9 @@ def pipulate():
         onerow.append(cell.value)
       if '?' in onerow:
         #Perfect opportunity to test nested generator yield messages
-        blankrows = 0 
+        blankrows = 0
         newrow = processrow(str(rowdex), onerow) #Replace question marks in row
-        newrow = ['' if x==None else x for x in newrow] 
+        newrow = ['' if x==None else x for x in newrow]
         for index, onecell in enumerate(cell_list):
           onecell.value = newrow[index]
           result = None
@@ -254,7 +255,7 @@ def pipulate():
             break
           except:
             out("API problem on row %s. Retrying." % rowdex)
-            time.sleep(2)         
+            time.sleep(2)
       else:
         blankrows += 1
         if blankrows > 3:
@@ -363,7 +364,7 @@ def InsertRows(worksheet, listoflists):
   for onelist in listoflists:
     for onecell in onelist:
       flattenitlist.append(onecell)
-  flattenitlist = ['?' if x=='*' else x for x in flattenitlist] 
+  flattenitlist = ['?' if x=='*' else x for x in flattenitlist]
   cell_list = worksheet.range(rowrange)
   for index, onecell in enumerate(cell_list):
     try:
@@ -434,7 +435,7 @@ def processrow(rowdex, onerow):
               break
             except:
               out("API problem on row %s. Retrying." % rowdex)
-              time.sleep(2)         
+              time.sleep(2)
         elif collabel in globs.transscrape.keys():
           for x in range(0, globs.retry):
             try:
@@ -443,7 +444,7 @@ def processrow(rowdex, onerow):
               break
             except:
               out("API problem on row %s. Retrying." % rowdex)
-              time.sleep(2)         
+              time.sleep(2)
   return changedrow
 
 def row1funcs(onerow):
