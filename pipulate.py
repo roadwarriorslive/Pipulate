@@ -64,7 +64,7 @@ def main():                                         # visiting app's homepage.
     if 'oa2' in session:                            # and I think you're logged in
       import gspread                                # so I'll grab spreadsheet API
       creds = Credentials(access_token=session['oa2'])
-      for x in range(0, globs.retry):
+      for x in range(0, globs.retrytimes):
         try:
           gsp = gspread.authorize(creds)
           gsp.openall()
@@ -128,7 +128,7 @@ def pipulate():
     try:
       gsp = gspread.authorize(creds)
     except:
-      yield "Google Login unsuccessful"
+      yield "Google Login unsuccessful."
       yield "spinoff"
       raise StopIteration
     try:
@@ -138,7 +138,7 @@ def pipulate():
       yield "spinoff"
       raise StopIteration
     except:
-      yield "Pipulate currently only works with Google Spreadheet URLs"
+      yield "Pipulate currently only works with Google Spreadheet URLs."
       yield "spinoff"
       raise StopIteration
     try:
@@ -248,14 +248,14 @@ def pipulate():
         for index, onecell in enumerate(cell_list):
           onecell.value = newrow[index]
           result = None
-        for x in range(0, globs.retry):
+        for x in range(0, globs.retrytimes):
           try:
             result = worksheet.update_cells(cell_list)
             out("Successfully updated row %s" % rowdex)
             break
           except:
             out("API problem on row %s. Retrying." % rowdex)
-            time.sleep(2)
+            time.sleep(globs.retryseconds)
       else:
         blankrows += 1
         if blankrows > 3:
@@ -428,23 +428,23 @@ def processrow(rowdex, onerow):
             pass
         collabel = globs.row1[coldex]
         if collabel in globs.transfuncs.keys():
-          for x in range(0, globs.retry):
+          for x in range(0, globs.retrytimes):
             try:
               changedrow[coldex] = evalfunc(coldex, changedrow) #The Function Path
               out('FUNCTION SUCCESS: %s ' % collabel)
               break
             except:
               out("API problem on row %s. Retrying." % rowdex)
-              time.sleep(2)
+              time.sleep(globs.retryseconds)
         elif collabel in globs.transscrape.keys():
-          for x in range(0, globs.retry):
+          for x in range(0, globs.retrytimes):
             try:
               changedrow[coldex] = genericscraper(coldex, changedrow) #Scraping
               out('SCRAPE SUCCESS: %s ' % collabel)
               break
             except:
               out("API problem on row %s. Retrying." % rowdex)
-              time.sleep(2)
+              time.sleep(globs.retryseconds)
   return changedrow
 
 def row1funcs(onerow):

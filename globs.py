@@ -1,5 +1,6 @@
 DBUG = True
-retry = 5
+retrytimes = 5
+retryseconds = 2
 PIPURL = ''
 numrows = 0
 config = {}
