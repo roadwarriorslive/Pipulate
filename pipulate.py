@@ -382,11 +382,24 @@ def processrow(rowdex, onerow):
           except:
             pass
         collabel = globs.row1[coldex]
-        out('FUNCTION: %s ' % collabel)
         if collabel in globs.transfuncs.keys():
-          changedrow[coldex] = evalfunc(coldex, changedrow) #The Function Path
+          for x in range(0, 5):
+            try:
+              changedrow[coldex] = evalfunc(coldex, changedrow) #The Function Path
+              out('FUNCTION SUCCESS: %s ' % collabel)
+              break
+            except:
+              out("API problem on row %s. Retrying." % rowdex)
+              time.sleep(2)         
         elif collabel in globs.transscrape.keys():
-          changedrow[coldex] = genericscraper(coldex, changedrow) #Scraping
+          for x in range(0, 5):
+            try:
+              changedrow[coldex] = genericscraper(coldex, changedrow) #Scraping
+              out('SCRAPE SUCCESS: %s ' % collabel)
+              break
+            except:
+              out("API problem on row %s. Retrying." % rowdex)
+              time.sleep(2)         
   return changedrow
 
 def row1funcs(onerow):
