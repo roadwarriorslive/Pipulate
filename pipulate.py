@@ -174,7 +174,7 @@ def pipulate():
       if onerow:
         if rowdex == 2: #Looking for trending requests
           if '*' in onerow:
-            yield "Found asterisks in row 2"
+            yield "Found trending asterisks in row 2"
             trended = True
             trendlistoflists.append(onerow)
           else:
