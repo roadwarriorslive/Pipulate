@@ -9,6 +9,9 @@
       margin: 100px auto 0;
       width: 70px;
       text-align: center;
+      position: fixed;
+      left: 0;
+      right: 0;
     }
 
     .spinner > div {
@@ -175,7 +178,7 @@
     {% for msg in data: -%}
       {% if msg == "spinon" %}
         <script>
-          document.getElementById("spinner").style.display = "block";
+          document.getElementById("spinner").style.display = "inline";
         </script>
       {% elif msg == "spinoff" %}
         <script>
