@@ -209,23 +209,24 @@ def pipulate():
     yield "Beginning question mark replacement"
     out("Question mark replacement")
     for rowdex in range(qstart, pipsheet.row_count+1): #Start stepping through every row.
+      yield "Examining row %s" % rowdex
       globs.hobj = None
       globs.html = '' #Blank the global html object. Recylces fetches.
       rowrange = "A%s:%s%s" % (rowdex, globs.letter[len(globs.row1)], rowdex)
-      out(rowrange)
-      #cell_list = pipsheet.range(rowrange)
-      onerow = pipsheet.row_values(rowdex)
-      if onerow: #But only process it if it does not come back as empty list.
-        yield "Examining row %s" % rowdex
-        if '?' in onerow:
-          newrow = processrow(str(rowdex), onerow) #Replace question marks in row
-          blankrows = 0
-          for coldex, acell in enumerate(newrow): #Then step through new row
-            if acell == None:
-              acell = ''
-            #!!!ERROR
-            pipsheet.update_cell(rowdex, coldex+1, acell) #Gspread has no "0" column
-            qmarkstotal += 1
+      cell_list = pipsheet.range(rowrange)
+      onerow = []
+      for cell in cell_list:
+        onerow.append(cell.value)
+      #onerow = pipsheet.row_values(rowdex)
+      if '?' in onerow:
+        newrow = processrow(str(rowdex), onerow) #Replace question marks in row
+        blankrows = 0
+        for coldex, acell in enumerate(newrow): #Then step through new row
+          if acell == None:
+            acell = ''
+          #!!!ERROR
+          pipsheet.update_cell(rowdex, coldex+1, acell) #Gspread has no "0" column
+          qmarkstotal += 1
       else:
         blankrows += 1
         if blankrows > 3:
