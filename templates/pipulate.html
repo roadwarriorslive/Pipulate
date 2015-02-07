@@ -120,12 +120,12 @@
     <a href="http://{{ request.headers['Host'] }}?logout">Logout</a>
   </div>
     </nav>
-    {% for msg in data: %}
-      {% if msg[:1] == ',' %}
+    {% for msg in data: -%}
+      {% if msg[:1] == ',' -%}
         {{ msg }}
-      {% else %}
+      {%- else -%}
         <br/>{{ msg }}
-      {% endif %}
-    {% endfor %}
+      {%- endif %}
+    {%- endfor %}
   </body>
 </html>

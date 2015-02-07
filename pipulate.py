@@ -161,10 +161,9 @@ def pipulate():
     trendlistoflists = []
     globs.row1 = lowercaselist(pipsheet.row_values(1))
     row1funcs(globs.row1)
-    yield "Trend spotting"
-    out("Trend spotting")
     trended = False
     qstart = 1
+    out("Trend spotting")
     for rowdex in range(1, pipsheet.row_count+1): #Give trending its own loop
       onerow = pipsheet.row_values(rowdex)
       if onerow:
@@ -205,10 +204,12 @@ def pipulate():
 
     globs.numrows = len(pipsheet.col_values(1))
     blankrows = 0 #Lets us skip occasional blank rows
-    yield "Beginning question mark replacement"
     out("Question mark replacement")
-    for rowdex in range(qstart, pipsheet.row_count+1): #Start stepping through every row.
-      yield "Examining row %s" % rowdex
+    for index, rowdex in enumerate(range(qstart, pipsheet.row_count+1)): #Start stepping through every row.
+      if index == 0:
+        yield "Processing row: %s" % rowdex
+      else:
+        yield ", %s" % rowdex
       globs.hobj = None
       globs.html = '' #Blank the global html object. Recylces fetches.
       rowrange = "A%s:%s%s" % (rowdex, globs.letter[len(globs.row1)], rowdex)
@@ -227,16 +228,16 @@ def pipulate():
         for x in range(0, 5):
           try:
             result = pipsheet.update_cells(cell_list)
-            yield "Row updated successfully."
+            out("Successfully updated row %s" % rowdex)
             break
           except:
-            yield "API failure. Retrying."
+            out("API problem on row %s. Retrying." % rowdex)
             time.sleep(2)         
       else:
         blankrows += 1
         if blankrows > 3:
           break
-    yield 'Finished question mark replacement'
+    out('Finished question marks')
   else:
     yield 'Please Login to Google'
   yield "I am done pipulating."
