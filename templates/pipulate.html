@@ -185,10 +185,14 @@
     {% for msg in data: -%}
       {% if msg == "spinon" %}
         <script>
+          // Lock button and display spinner
+          $('#pipulate').prop("disabled", true)
           $('#spinner').css('display', 'inline');
         </script>
       {% elif msg == "spinoff" %}
         <script>
+          // Unlock button and remove spinner
+          $('#pipulate').prop("disabled", false)
           $('#spinner').css('display', 'none');
           $( "i" ).removeClass( "fa-spin fa-circle-o-notch" )
           $( "i" ).addClass( "fa-check" )
