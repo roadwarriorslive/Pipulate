@@ -147,9 +147,11 @@
   </head>
   <body>
     <div id="content">
-      <form method="POST" action="/" enctype="multipart/form-data">
+      <form method="POST" action="/">
         <span id="paste">URL: </span>{{ form.pipurl(size=70) }}<br/>
-         <input id="pipulate" class="button" type="submit" value="Start Pipulating" name="submit">
+          <button id="pipulate" class="button" type="submit" value="Start Pipulating" name="submit">
+            Start Pipulating &nbsp;<i id="piplock" class="fa fa-chevron-circle-right"></i>
+          </button>
       </form>
     </div>
     <nav>
@@ -183,13 +185,15 @@
     {% for msg in data: -%}
       {% if msg == "spinon" %}
         <script>
-          document.getElementById("spinner").style.display = "inline";
+          $('#spinner').css('display', 'inline');
         </script>
       {% elif msg == "spinoff" %}
         <script>
-          document.getElementById("spinner").style.display = "none";
+          $('#spinner').css('display', 'none');
           $( "i" ).removeClass( "fa-spin fa-circle-o-notch" )
           $( "i" ).addClass( "fa-check" )
+          $('#piplock').addClass("fa-chevron-circle-right")
+          $('#piplock').removeClass("fa-lock")
         </script>
       {% elif msg[:1] == ',' -%}
         {{ msg }}
@@ -197,6 +201,8 @@
         <script>
           $( "i" ).removeClass( "fa-spin fa-circle-o-notch" )
           $( "i" ).addClass( "fa-check" )
+          $('#piplock').removeClass("fa-chevron-circle-right")
+          $('#piplock').addClass("fa-lock")
         </script>
         <br/><i class="fa fa-circle-o-notch fa-spin"></i></i> {{ msg }}
       {%- endif %}
