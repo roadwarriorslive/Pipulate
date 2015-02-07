@@ -107,6 +107,7 @@ def main():                                         # visiting app's homepage.
 
 def pipulate():
   yield "Beginning to pipulate..."
+  yield "spinon"
   funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
   globs.transfuncs = zipnamevaldict(funcs, funcs) #Keep translation table
   blankrows = 0
@@ -117,19 +118,23 @@ def pipulate():
       creds = Credentials(access_token=session['oa2'])
     else:
       yield "Google Login appears to have expired. Log back in."
+      yield "spinoff"
       raise StopIteration
     try:
       gsp = gspread.authorize(creds)
     except:
       yield "Google Login unsuccessful"
+      yield "spinoff"
       raise StopIteration
     try:
       pipdoc = gsp.open_by_url(globs.PIPURL)
     except gspread.exceptions.SpreadsheetNotFound:
       yield "Please give the document a name to force first save."
+      yield "spinoff"
       raise StopIteration
     except:
       yield "Difficulty opening spreadsheet. You probably have to re-login."
+      yield "spinoff"
       raise StopIteration
     try:
       pipsheet = pipdoc.worksheet("Pipulate")
@@ -199,6 +204,7 @@ def pipulate():
         pipsheet = pipdoc.worksheet("Pipulate")
       except:
         yield ("Couldn't reach Google Docs. Try logging in again.")
+        yield "spinoff"
         raise StopIteration
 
     globs.numrows = len(pipsheet.col_values(1))
@@ -240,6 +246,7 @@ def pipulate():
   else:
     yield 'Please Login to Google'
   yield "I am done pipulating."
+  yield "spinoff"
 
 def url_root(url):
   from urlparse import urlparse

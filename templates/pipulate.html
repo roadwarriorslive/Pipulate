@@ -127,6 +127,9 @@
       box-shadow:0 10px 8px rgba(0,0,0,.6)}
     </style>
     <script>
+      window.onload = function() {
+        document.getElementById("spinner").style.display = "none";
+      }
       if (location.hash) {
         var myhash = location.hash
         if (myhash.indexOf('access_token') > 0) {
@@ -164,13 +167,21 @@
       <a href="http://{{ request.headers['Host'] }}?logout">Logout</a>
     </div>
     </nav>
-    <div class="spinner">
+    <div id="spinner" class="spinner">
       <div class="bounce1"></div>
       <div class="bounce2"></div>
       <div class="bounce3"></div>
     </div>
     {% for msg in data: -%}
-      {% if msg[:1] == ',' -%}
+      {% if msg == "spinon" %}
+        <script>
+          document.getElementById("spinner").style.display = "block";
+        </script>
+      {% elif msg == "spinoff" %}
+        <script>
+          document.getElementById("spinner").style.display = "none";
+        </script>
+      {% elif msg[:1] == ',' -%}
         {{ msg }}
       {%- else -%}
         <br/>{{ msg }}
