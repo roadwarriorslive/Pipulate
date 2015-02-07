@@ -7,8 +7,12 @@
     <link href="http://picnicss.com/releases/v2.3.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <style>
+    #pipulate{margin-top:10px}
+    #paste{
+      font-weight:normal;
+    }
     #pipstream{
-      margin: 10px 20px 0px 20px;
+      margin: 0px 20px 0px 20px;
     }
     .spinner {
       margin: 5px auto 0;
@@ -144,8 +148,8 @@
   <body>
     <div id="content">
       <form method="POST" action="/" enctype="multipart/form-data">
-        {{ form.pipurl.label }} {{ form.pipurl(size=73) }}<br/>
-         <input class="button" type="submit" value="Pipulate it" name="submit">
+        <span id="paste">URL: </span>{{ form.pipurl(size=70) }}<br/>
+         <input id="pipulate" class="button" type="submit" value="Start Pipulating" name="submit">
       </form>
     </div>
     <nav>
