@@ -211,6 +211,9 @@ def pipulate():
     for rowdex in range(qstart, pipsheet.row_count+1): #Start stepping through every row.
       globs.hobj = None
       globs.html = '' #Blank the global html object. Recylces fetches.
+      rowrange = "A%s:%s%s" % (rowdex, globs.letter[len(globs.row1)], rowdex)
+      out(rowrange)
+      #cell_list = pipsheet.range(rowrange)
       onerow = pipsheet.row_values(rowdex)
       if onerow: #But only process it if it does not come back as empty list.
         yield "Examining row %s" % rowdex
@@ -297,7 +300,6 @@ def InsertRow(worksheet, onelist):
   globs.numrows += 1
 
 def InsertRows(worksheet, listoflists):
-  out(listoflists)
   numnewrows = len(listoflists)
   lastrowused = globs.numrows
   numrowsneeded = len(listoflists)
@@ -311,7 +313,6 @@ def InsertRows(worksheet, listoflists):
   lowerrightrangenumber = lastrowused + numnewrows
   column = globs.letter[len(listoflists[0])]
   rowrange = "A%s:%s%s" % (upperleftrangenumber, column, lowerrightrangenumber)
-  out(rowrange)
   flattenitlist = []
   for onelist in listoflists:
     for onecell in onelist:
