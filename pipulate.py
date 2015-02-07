@@ -225,7 +225,7 @@ def pipulate():
         for index, onecell in enumerate(cell_list):
           onecell.value = newrow[index]
           result = None
-        for x in range(0, 5):
+        for x in range(0, globs.retry):
           try:
             result = pipsheet.update_cells(cell_list)
             out("Successfully updated row %s" % rowdex)
@@ -383,7 +383,7 @@ def processrow(rowdex, onerow):
             pass
         collabel = globs.row1[coldex]
         if collabel in globs.transfuncs.keys():
-          for x in range(0, 5):
+          for x in range(0, globs.retry):
             try:
               changedrow[coldex] = evalfunc(coldex, changedrow) #The Function Path
               out('FUNCTION SUCCESS: %s ' % collabel)
@@ -392,7 +392,7 @@ def processrow(rowdex, onerow):
               out("API problem on row %s. Retrying." % rowdex)
               time.sleep(2)         
         elif collabel in globs.transscrape.keys():
-          for x in range(0, 5):
+          for x in range(0, globs.retry):
             try:
               changedrow[coldex] = genericscraper(coldex, changedrow) #Scraping
               out('SCRAPE SUCCESS: %s ' % collabel)

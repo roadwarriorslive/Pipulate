@@ -1,4 +1,5 @@
 DBUG = True
+retry = 5
 PIPURL = ''
 numrows = 0
 config = {}
