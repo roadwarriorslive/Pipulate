@@ -121,7 +121,11 @@
   </div>
     </nav>
     {% for msg in data: %}
-      {{ msg }}<br/>
+      {% if msg[:1] == ',' %}
+        {{ msg }}
+      {% else %}
+        <br/>{{ msg }}
+      {% endif %}
     {% endfor %}
   </body>
 </html>

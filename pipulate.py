@@ -18,7 +18,7 @@
 """
 
 import globs                                        # Talmudic style commentaries
-import requests                                     # This will help with 3.x port
+import requests, time                               # Requests will help 3.x port
 from flask_wtf import Form                          # All Flask form examples use it
 from wtforms import StringField
 from flask import (Flask,                           # This app is all about Flask
@@ -171,14 +171,14 @@ def pipulate():
         skipafternumblanks = 1
         if rowdex == 2: #Looking for trending requests
           if '*' in onerow:
-            yield "Found asterisks in row 2. Trending!"
+            yield "Found asterisks in row 2"
             trended = True
             trendlistoflists.append(onerow)
           else:
             break
         elif trendlistoflists and rowdex > 2:
           if '*' in onerow:
-            yield "Found asterisk on row %s" % rowdex
+            yield ", %s" % rowdex
             trendlistoflists.append(onerow)
           else:
             blankrows += 1
@@ -223,7 +223,15 @@ def pipulate():
         newrow = ['' if x==None else x for x in newrow] 
         for index, onecell in enumerate(cell_list):
           onecell.value = newrow[index]
-        pipsheet.update_cells(cell_list)
+          result = None
+        for x in range(0, 5):
+          try:
+            result = pipsheet.update_cells(cell_list)
+            yield "Row updated successfully."
+            break
+          except:
+            yield "API failure. Retrying."
+            time.sleep(2)         
       else:
         blankrows += 1
         if blankrows > 3:
