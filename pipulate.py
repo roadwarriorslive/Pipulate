@@ -259,8 +259,6 @@ def pipulate():
     out('Finished question marks')
   else:
     yield 'Please Login to Google'
-
-    pipdoc = gsp.open_by_url(globs.PIPURL)
   yield "I am done pipulating."
   yield "spinoff"
 
