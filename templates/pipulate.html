@@ -135,9 +135,9 @@
       box-shadow:0 10px 8px rgba(0,0,0,.6)}
     </style>
     <script>
-      window.onload = function() {
-        document.getElementById("spinner").style.display = "none";
-      }
+      $(document).ready(function(){  
+        $("#spinner").hide();
+      });
       if (location.hash) {
         var myhash = location.hash
         if (myhash.indexOf('access_token') > 0) {
@@ -190,14 +190,14 @@
           // Lock button and display spinner
           $('#pipulate').prop("disabled", true)
           $('#pipulate').fadeTo("fast",.5);
-          $('#spinner').css('display', 'inline');
+          $('#spinner').show()
         </script>
       {% elif msg == "spinoff" %}
         <script>
           // Unlock button and remove spinner
           $('#pipulate').prop("disabled", false)
           $('#pipulate').fadeTo("fast",1);
-          $('#spinner').css('display', 'none');
+          $('#spinner').hide()
           $( "i" ).removeClass( "fa-spin fa-circle-o-notch" )
           $( "i" ).addClass( "fa-check" )
           $('#piplock').addClass("fa-chevron-circle-right")
