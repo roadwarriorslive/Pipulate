@@ -2,12 +2,13 @@
 <html>
   <head>
     <title>Pipulate</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <link href='http://fonts.googleapis.com/css?family=Nunito:700' rel='stylesheet' type='text/css'>
     <link href="http://picnicss.com/releases/v2.3.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <style>
     #pipstream{
-      margin: 20px 20px 0px 20px;
+      margin: 10px 20px 0px 20px;
     }
     .spinner {
       margin: 5px auto 0;
@@ -183,10 +184,16 @@
       {% elif msg == "spinoff" %}
         <script>
           document.getElementById("spinner").style.display = "none";
+          $( "i" ).removeClass( "fa-spin fa-circle-o-notch" )
+          $( "i" ).addClass( "fa-check" )
         </script>
       {% elif msg[:1] == ',' -%}
         {{ msg }}
       {%- else -%}
+        <script>
+          $( "i" ).removeClass( "fa-spin fa-circle-o-notch" )
+          $( "i" ).addClass( "fa-check" )
+        </script>
         <br/><i class="fa fa-circle-o-notch fa-spin"></i></i> {{ msg }}
       {%- endif %}
     {%- endfor %}
