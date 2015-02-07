@@ -334,6 +334,8 @@ def InitTab(gdoc, tabname, headerlist, listoflists=[]):
   numcols = len(headerlist)
   if listoflists and '*' in listoflists[1]:
     numrows = len(listoflists)+1
+  elif listoflists:
+    numrows = len(listoflists)+2
   else:
     numrows = 2
   endletter = globs.letter[numcols]
