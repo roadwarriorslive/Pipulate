@@ -167,7 +167,6 @@ def pipulate():
     for rowdex in range(1, pipsheet.row_count+1): #Give trending its own loop
       onerow = pipsheet.row_values(rowdex)
       if onerow:
-        skipafternumblanks = 1
         if rowdex == 2: #Looking for trending requests
           if '*' in onerow:
             yield "Found asterisks in row 2"
@@ -181,11 +180,11 @@ def pipulate():
             trendlistoflists.append(onerow)
           else:
             blankrows += 1
-            if blankrows > skipafternumblanks:
+            if blankrows > 1:
               break
       else:
         blankrows += 1
-        if blankrows > skipafternumblanks:
+        if blankrows > 1:
           break
     if trended:
       qstart = globs.numrows + 1
