@@ -13,6 +13,8 @@
     }
     #pipstream{
       margin: 0px 20px 0px 20px;
+      position: fixed;
+      top: 150px;
     }
     .spinner {
       margin: 5px auto 0;
@@ -187,12 +189,14 @@
         <script>
           // Lock button and display spinner
           $('#pipulate').prop("disabled", true)
+          $('#pipulate').fadeTo("fast",.5);
           $('#spinner').css('display', 'inline');
         </script>
       {% elif msg == "spinoff" %}
         <script>
           // Unlock button and remove spinner
           $('#pipulate').prop("disabled", false)
+          $('#pipulate').fadeTo("fast",1);
           $('#spinner').css('display', 'none');
           $( "i" ).removeClass( "fa-spin fa-circle-o-notch" )
           $( "i" ).addClass( "fa-check" )
