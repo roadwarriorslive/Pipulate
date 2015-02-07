@@ -109,7 +109,6 @@ def pipulate():
   yield "Beginning to pipulate..."
   funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
   globs.transfuncs = zipnamevaldict(funcs, funcs) #Keep translation table
-  qmarkstotal = 0
   blankrows = 0
   import gspread
   if session:
@@ -205,7 +204,7 @@ def pipulate():
         raise StopIteration
 
     globs.numrows = len(pipsheet.col_values(1))
-    blankrows = 0
+    blankrows = 0 #Lets us skip occasional blank rows
     yield "Beginning question mark replacement"
     out("Question mark replacement")
     for rowdex in range(qstart, pipsheet.row_count+1): #Start stepping through every row.
@@ -217,24 +216,19 @@ def pipulate():
       onerow = []
       for cell in cell_list:
         onerow.append(cell.value)
-      #onerow = pipsheet.row_values(rowdex)
       if '?' in onerow:
+        #Perfect opportunity to test nested generator yield messages
+        blankrows = 0 
         newrow = processrow(str(rowdex), onerow) #Replace question marks in row
-        blankrows = 0
-        for coldex, acell in enumerate(newrow): #Then step through new row
-          if acell == None:
-            acell = ''
-          #!!!ERROR
-          pipsheet.update_cell(rowdex, coldex+1, acell) #Gspread has no "0" column
-          qmarkstotal += 1
+        newrow = ['' if x==None else x for x in newrow] 
+        for index, onecell in enumerate(cell_list):
+          onecell.value = newrow[index]
+        pipsheet.update_cells(cell_list)
       else:
         blankrows += 1
         if blankrows > 3:
           break
-    if qmarkstotal:
-      yield 'Replaced %s question marks.' % qmarkstotal
-    else:
-      yield 'No question marks found in Sheet 1.'
+    yield 'Finished question mark replacement'
   else:
     yield 'Please Login to Google'
   yield "I am done pipulating."
