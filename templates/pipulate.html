@@ -164,7 +164,7 @@
         <div class="pressthis" style="text-align: center"><a class="bookmarklet" href="{{ bookmarklet }}" onclick="return false;" oncontextmenu="if(window.navigator.userAgent.indexOf('WebKit')!=-1||window.navigator.userAgent.indexOf('MSIE')!=-1){jQuery('.pressthis-code').show().find('textarea').focus().select();return false;}"><span>Pipulate</span></a> <strong id="arrow">&larr;</strong> <span id="drag">Drag to Boomarks Bar.</span></div>
     <div class="menu">
       <a href="{{ loginlink }}">Login with Google</a>
-      <a href="http://{{ request.headers['Host'] }}?logout">Logout</a>
+      <a href="{{ logoutlink }}">Logout</a>
     </div>
     </nav>
     <div id="spinner" class="spinner">

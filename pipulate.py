@@ -50,7 +50,8 @@ def stream_template(template_name, **context):      # This is the key to streami
 @app.context_processor                              # Anything that I want to be
 def templateglobals():                              # available in Jinja2 templates
   return dict(loginlink=getLoginlink(),             # without having to always
-  bookmarklet=getBookmarklet())                     # pass them as parameters
+  bookmarklet=getBookmarklet(),                     # pass them as parameters
+  logoutlink=getLogoutlink())                    
 
 class PipForm(Form):
   pipurl = StringField('Paste a Google Spreadsheet URL:')
@@ -90,16 +91,19 @@ def main():                                         # visiting app's homepage.
         if 'oa2' in session:
           revokeurl = 'https://accounts.google.com/o/oauth2/revoke?token=' + session['oa2']
           requests.get(revokeurl)
-        #session.clear()
+        if 'u' in request.args:
+          form.pipurl.data = request.args.get('u')
+        session.clear()
         flash('Logged out from Google.')
     elif request.args:
+      out("hit")
       if 'u' in request.args:
+        form.pipurl.data = request.args.get('u')
         session['u'] = request.args.get('u')
-      if session:
-        if 'u' in session:
-          form.pipurl.data = session['u']
-      if form.pipurl.data and request.url_root == url_root(form.pipurl.data):
-        form.pipurl.data = ''
+      if session and 'u' in session:
+        form.pipurl.data = session['u']
+      #if form.pipurl.data and request.url_root == url_root(form.pipurl.data):
+      #  form.pipurl.data = ''
   if streamit:
     return Response(stream_template('pipulate.html', form=form, data=streamit))
   else:
@@ -280,6 +284,22 @@ def getLoginlink():
 
 def getBookmarklet():
   return '''javascript:(function(){window.open('http://%s/?u='+encodeURIComponent(document.location.href), 'Pipulate', 'toolbar=0,resizable=1,scrollbars=1,status=1,width=640,height=520');})();''' % (request.headers['Host'])
+
+def getLogoutlink():
+  from urllib import quote_plus
+  u = ''
+  host = request.headers['Host']
+  if session and 'u' in session:
+    u = session['u']
+  elif request.args and 'u' in request.args:
+    u = request.args.get('u')
+  if u:
+    u = quote_plus(u)
+  if u:
+    logout = "http://%s?logout&u=%s" % (host, u)
+  else:
+    logout = "http://%s?logout" % host
+  return logout
 
 class Credentials (object):
   def __init__ (self, access_token=None):
