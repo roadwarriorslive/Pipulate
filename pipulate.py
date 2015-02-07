@@ -145,6 +145,19 @@ def pipulate():
     finally:
       pipsheet = pipdoc.worksheet("Pipulate")
       globs.numrows = len(pipsheet.col_values(1))
+
+    #try:
+    #  sheet1 = pipdoc.worksheet("Sheet1")
+    #except:
+    #  pass
+    #else:
+    #  import re
+    #  something = re.compile('.+')
+    #  try:
+    #    cell = sheet1.find(something)
+    #  except:
+    #    gsp.del_worksheet(sheet1) 
+
     try:
       pipdoc.worksheet("Config")
     except:
@@ -163,6 +176,7 @@ def pipulate():
     globs.scrapetypes = zipnamevaldict(snames, stypes)
     globs.scrapepatterns = zipnamevaldict(snames, spatterns)
     globs.transscrape = zipnamevaldict(snames, snames)
+
     trendlistoflists = []
     globs.row1 = lowercaselist(pipsheet.row_values(1))
     row1funcs(globs.row1)
@@ -245,6 +259,8 @@ def pipulate():
     out('Finished question marks')
   else:
     yield 'Please Login to Google'
+
+    pipdoc = gsp.open_by_url(globs.PIPURL)
   yield "I am done pipulating."
   yield "spinoff"
 
