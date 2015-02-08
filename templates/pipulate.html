@@ -7,7 +7,7 @@
     <link href="http://picnicss.com/releases/v2.3.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <style>
-    #magicbox{margin-top: 10px;height:150px;}
+    #magicbox{margin-top: 10px;}
     #pipulate{font-family:Nunito}
     #pipurl{margin-bottom:10px}
     #paste{
@@ -115,7 +115,9 @@
       box-shadow:0 10px 8px rgba(0,0,0,.7)}
     .pressthis a span{
       display:inline-block;
-      margin:0px 15px 0px 15px;}
+      margin-left:25px;
+      margin-right:26px;
+      }
     .pressthis a span:
       before{color:#777;
       font:400 20px/1 ;
@@ -165,7 +167,8 @@
           <div class="bounce2"></div>
           <div class="bounce3"></div>
         </div>
-        <textarea id="magicbox" rows="5" cols="80">Magic Here</textarea>
+        <div>foo</div>
+        <textarea id="magicbox" rows="4" cols="80">Magic Here</textarea>
       </div>
     </div>
     <nav>
@@ -191,20 +194,20 @@
     {% endwith %}
     </div>
     <div id="pipstream">
-    {% for msg, magic in data: -%}
+    {% for step, learn, magic in data: -%}
       <script>
         if ('{{ magic }}' != '') {
           $("#magicbox").val('{{ magic }}');
         }
       </script>
-      {% if msg == "spinon" %}
+      {% if step == "spinon" %}
         <script>
           // Lock button and display spinner
           $('#pipulate').prop("disabled", true)
           $('#pipulate').fadeTo("fast",.5);
           $('#spinner').show()
         </script>
-      {% elif msg == "spinoff" %}
+      {% elif step == "spinoff" %}
         <script>
           // Unlock button and remove spinner
           $('#pipulate').prop("disabled", false)
@@ -215,7 +218,7 @@
           $('#piplock').addClass("fa-chevron-circle-right")
           $('#piplock').removeClass("fa-lock")
         </script>
-      {% elif msg == "spindown" %}
+      {% elif step == "spindown" %}
         <script>
           // Unlock button and gracefully show user things are fubar.
           $('#pipulate').prop("disabled", false)
@@ -226,8 +229,8 @@
           $('#piplock').addClass("fa-chevron-circle-right")
           $('#piplock').removeClass("fa-lock")
         </script>
-      {% elif msg[:1] == ',' -%}
-        {{ msg }}
+      {% elif step[:1] == ',' -%}
+        {{ step }}
       {%- else -%}
         <script>
           $( "i" ).removeClass( "fa-spin fa-circle-o-notch" )
@@ -235,7 +238,7 @@
           $('#piplock').removeClass("fa-chevron-circle-right")
           $('#piplock').addClass("fa-lock")
         </script>
-        {% if loop.index > 1: %}<br/>{% endif %}<i class="fa fa-circle-o-notch fa-spin"></i></i> {{ msg }}
+        {% if loop.index > 1: %}<br/>{% endif %}<i class="fa fa-circle-o-notch fa-spin"></i></i> {{ step }}
       {%- endif %}
     {%- endfor %}
     </div>
