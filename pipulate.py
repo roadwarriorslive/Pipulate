@@ -95,7 +95,6 @@ def main():                                         # visiting app's homepage.
         session.clear()
         flash('Logged out from Google.')
     elif request.args:
-      out("hit")
       if 'u' in request.args:
         form.pipurl.data = request.args.get('u')
         session['u'] = request.args.get('u')
@@ -145,7 +144,8 @@ def pipulate():
         worksheet = gdoc.worksheet("Pipulate")
       except:
         headers = ['URL', 'Tweeted', 'Shared', 'Liked', 'Plussed', 'DateStamp', 'TimeStamp']
-        yield InitTab(gdoc, 'Pipulate', headers, pipinit())
+        yme = InitTab(gdoc, 'Pipulate', headers, pipinit())
+        yield yme
       finally:
         worksheet = gdoc.worksheet("Pipulate")
         globs.numrows = len(worksheet.col_values(1))
@@ -153,13 +153,15 @@ def pipulate():
         gdoc.worksheet("Config")
       except:
         headers = ['name', 'value']
-        yield InitTab(gdoc, 'Config', headers)
+        yme = InitTab(gdoc, 'Config', headers)
+        yield yme
       globs.config = refreshconfig(gdoc, "Config")
       try:
         gdoc.worksheet("Scrapers")
       except:
         headers = ['name', 'type', 'pattern']
-        yield InitTab(gdoc, 'Scrapers', headers, scrapes())
+        yme = InitTab(gdoc, 'Scrapers', headers, scrapes())
+        yield yme
       sst = gdoc.worksheet("Scrapers")
       snames = sst.col_values(1)
       stypes = sst.col_values(2)
@@ -186,7 +188,8 @@ def pipulate():
               break
           elif trendlistoflists and rowdex > 2:
             if '*' in onerow:
-              yield ", %s" % rowdex
+              yme = ", %s" % rowdex
+              yield yme
               trendlistoflists.append(onerow)
             else:
               blankrows += 1
@@ -209,7 +212,7 @@ def pipulate():
         try:
           worksheet = gdoc.worksheet("Pipulate")
         except:
-          yield ("Couldn't reach Google Docs. Try logging in again.")
+          yield "Couldn't reach Google Docs. Try logging in again."
           yield "spinoff"
           raise StopIteration
 
@@ -218,9 +221,11 @@ def pipulate():
       out("Question mark replacement")
       for index, rowdex in enumerate(range(qstart, worksheet.row_count+1)): #Start stepping through every row.
         if index == 0:
-          yield "Pipulating row: %s" % rowdex
+          yme = "Pipulating row: %s" % rowdex
+          yield yme
         else:
-          yield ", %s" % rowdex
+          yme = ", %s" % rowdex
+          yield yme
         globs.hobj = None
         globs.html = '' #Blank the global html object. Recylces fetches.
         rowrange = "A%s:%s%s" % (rowdex, globs.letter[len(globs.row1)], rowdex)
@@ -228,9 +233,8 @@ def pipulate():
         onerow = []
         for cell in CellList:
           onerow.append(cell.value)
-        out(onerow)
         if '?' in onerow:
-          #Perfect opportunity to test nested generator yield messages
+          #Perfect opportunity to test nested generator messages
           blankrows = 0
           newrow = processrow(str(rowdex), onerow) #Replace question marks in row
           newrow = ['' if x==None else x for x in newrow]
@@ -261,7 +265,8 @@ def pipulate():
     if ename == "StopIteration":
       yield "Better luck pipulating next time."
     else:
-      yield (ename, fname, exc_tb.tb_lineno)
+      fixme = "%s, %s, %s" % (ename, fname, exc_tb.tb_lineno)
+      yield fixme
       yield "Pipulation prematurely terminated."
       yield "Please open an issue at https://github.com/miklevin/pipulate"
       yield "Or just tap me on the shoulder."
