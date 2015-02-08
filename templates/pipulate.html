@@ -224,6 +224,9 @@
         if ('{{ magic }}' != '') {
           $("#magicbox").val('{{ magic }}');
         }
+        if ('{{ learn }}' != '') {
+          $("#learnsomething").html('{{ learn }}');
+        }
       </script>
       {% if step == "spinon" %}
         <script>
