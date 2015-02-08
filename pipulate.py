@@ -109,6 +109,7 @@ def main():                                         # visiting app's homepage.
 
 def pipulate():
   try:
+    out("Beginning to pipulate")
     yield "Beginning to pipulate...", "Hello World", "Begin"
     yield "spinon", "", ""
     funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
@@ -258,6 +259,7 @@ def pipulate():
       yield 'Please Login to Google', "", ""
     yield "Pipulation complete.", "Goodbye World", "End"
     yield "spinoff", "", ""
+    out("Pipulation complete")
   except Exception as e:
     exc_type, exc_obj, exc_tb = sys.exc_info()
     fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
