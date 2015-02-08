@@ -7,16 +7,20 @@
     <link href="http://picnicss.com/releases/v2.3.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <style>
+    #magicbox{margin-top: 10px;}
     #pipulate{font-family:Nunito}
     #pipurl{margin-bottom:10px}
     #paste{
       font-weight:normal;
     }
     #pipstream{
-      margin: 0px 20px 0px 20px;
+      margin-left:20px;
+      margin-right:20px;
     }
     .spinner {
-      margin: 5px auto 0;
+      margin-top: 40px;
+      margin-left: auto;
+      margin-right:auto;
       width: 70px;
       text-align: center;
       position: fixed;
@@ -150,11 +154,17 @@
   <body>
     <div id="content">
       <form method="POST" action="/">
-        <span id="paste">URL: </span>{{ form.pipurl(size=70) }}<br/>
+        <span id="paste">URL: </span>{{ form.pipurl(size=75) }}<br/>
           <button id="pipulate" class="button" type="submit">
             Start Pipulating &nbsp;<i id="piplock" class="fa fa-chevron-circle-right"></i>
           </button>
       </form>
+      <div id="spinner" class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+      </div>
+      <textarea id="magicbox" rows="5" cols="80">Magic Here</textarea>
     </div>
     <nav>
     <!-- responsive -->
@@ -167,11 +177,6 @@
       <a href="{{ logoutlink }}">Logout</a>
     </div>
     </nav>
-    <div id="spinner" class="spinner">
-      <div class="bounce1"></div>
-      <div class="bounce2"></div>
-      <div class="bounce3"></div>
-    </div>
     <div id="pipflash">
     {% with messages = get_flashed_messages() %}
       {% if messages %}
@@ -185,6 +190,11 @@
     </div>
     <div id="pipstream">
     {% for msg, magic in data: -%}
+      <script>
+        if ('{{ magic }}' != '') {
+          $("#magicbox").val('{{ magic }}');
+        }
+      </script>
       {% if msg == "spinon" %}
         <script>
           // Lock button and display spinner
@@ -223,7 +233,7 @@
           $('#piplock').removeClass("fa-chevron-circle-right")
           $('#piplock').addClass("fa-lock")
         </script>
-        <br/><i class="fa fa-circle-o-notch fa-spin"></i></i> {{ msg }}
+        {% if loop.index > 1: %}<br/>{% endif %}<i class="fa fa-circle-o-notch fa-spin"></i></i> {{ msg }}
       {%- endif %}
     {%- endfor %}
     </div>

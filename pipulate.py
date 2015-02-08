@@ -109,7 +109,7 @@ def main():                                         # visiting app's homepage.
 
 def pipulate():
   try:
-    yield "Beginning to pipulate...", ""
+    yield "Beginning to pipulate...", "Begin"
     yield "spinon", ""
     funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
     globs.transfuncs = zipnamevaldict(funcs, funcs) #Keep translation table
@@ -255,7 +255,7 @@ def pipulate():
       out('Finished question marks')
     else:
       yield 'Please Login to Google', ""
-    yield "Pipulation complete.", ""
+    yield "Pipulation complete.", "End"
     yield "spinoff", ""
   except Exception as e:
     exc_type, exc_obj, exc_tb = sys.exc_info()
