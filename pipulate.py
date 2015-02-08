@@ -109,8 +109,8 @@ def main():                                         # visiting app's homepage.
 
 def pipulate():
   try:
-    yield "Beginning to pipulate..."
-    yield "spinon"
+    yield "Beginning to pipulate...", ""
+    yield "spinon", ""
     funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
     globs.transfuncs = zipnamevaldict(funcs, funcs) #Keep translation table
     blankrows = 0
@@ -120,31 +120,31 @@ def pipulate():
         out("OAuth2 token found")
         creds = Credentials(access_token=session['oa2'])
       else:
-        yield "Google Login appears to have expired. Log back in."
-        yield "spinoff"
+        yield "Google Login appears to have expired. Log back in.", ""
+        yield "spinoff", ""
         raise StopIteration
       try:
         gsp = gspread.authorize(creds)
       except:
-        yield "Google Login unsuccessful."
-        yield "spinoff"
+        yield "Google Login unsuccessful.", ""
+        yield "spinoff", ""
         raise StopIteration
       try:
         gdoc = gsp.open_by_url(globs.PIPURL)
       except gspread.exceptions.SpreadsheetNotFound:
-        yield "Please give the document a name to force first save."
-        yield "spinoff"
+        yield "Please give the document a name to force first save.", ""
+        yield "spinoff", ""
         raise StopIteration
       except:
-        yield "Pipulate currently only works with Google Spreadheet URLs."
-        yield "spinoff"
+        yield "Pipulate currently only works with Google Spreadheet URLs.", ""
+        yield "spinoff", ""
         raise StopIteration
       try:
         worksheet = gdoc.worksheet("Pipulate")
       except:
         headers = ['URL', 'Tweeted', 'Shared', 'Liked', 'Plussed', 'DateStamp', 'TimeStamp']
         yme = InitTab(gdoc, 'Pipulate', headers, pipinit())
-        yield yme
+        yield yme, ""
       finally:
         worksheet = gdoc.worksheet("Pipulate")
         globs.numrows = len(worksheet.col_values(1))
@@ -153,14 +153,14 @@ def pipulate():
       except:
         headers = ['name', 'value']
         yme = InitTab(gdoc, 'Config', headers)
-        yield yme
+        yield yme, ""
       globs.config = refreshconfig(gdoc, "Config")
       try:
         gdoc.worksheet("Scrapers")
       except:
         headers = ['name', 'type', 'pattern']
         yme = InitTab(gdoc, 'Scrapers', headers, scrapes())
-        yield yme
+        yield yme, ""
       sst = gdoc.worksheet("Scrapers")
       snames = sst.col_values(1)
       stypes = sst.col_values(2)
@@ -180,7 +180,7 @@ def pipulate():
         if onerow:
           if rowdex == 2: #Looking for trending requests
             if '*' in onerow:
-              yield "Found trending asterisks in row 2"
+              yield "Found trending asterisks in row 2", ""
               trended = True
               trendlistoflists.append(onerow)
             else:
@@ -188,7 +188,7 @@ def pipulate():
           elif trendlistoflists and rowdex > 2:
             if '*' in onerow:
               yme = ", %s" % rowdex
-              yield yme
+              yield yme, ""
               trendlistoflists.append(onerow)
             else:
               blankrows += 1
@@ -211,8 +211,8 @@ def pipulate():
         try:
           worksheet = gdoc.worksheet("Pipulate")
         except:
-          yield "Couldn't reach Google Docs. Try logging in again."
-          yield "spinoff"
+          yield "Couldn't reach Google Docs. Try logging in again.", ""
+          yield "spinoff", ""
           raise StopIteration
 
       globs.numrows = len(worksheet.col_values(1))
@@ -221,10 +221,10 @@ def pipulate():
       for index, rowdex in enumerate(range(qstart, worksheet.row_count+1)): #Start stepping through every row.
         if index == 0:
           yme = "Pipulating row: %s" % rowdex
-          yield yme
+          yield yme, ""
         else:
           yme = ", %s" % rowdex
-          yield yme
+          yield yme, ""
         globs.hobj = None
         globs.html = '' #Blank the global html object. Recylces fetches.
         rowrange = "A%s:%s%s" % (rowdex, globs.letter[len(globs.row1)], rowdex)
@@ -254,22 +254,22 @@ def pipulate():
             break
       out('Finished question marks')
     else:
-      yield 'Please Login to Google'
-    yield "Pipulation complete."
-    yield "spinoff"
+      yield 'Please Login to Google', ""
+    yield "Pipulation complete.", ""
+    yield "spinoff", ""
   except Exception as e:
     exc_type, exc_obj, exc_tb = sys.exc_info()
     fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
     ename = type(e).__name__
     if ename == "StopIteration":
-      yield "Better luck pipulating next time."
+      yield "Better luck pipulating next time.", ""
     else:
       fixme = "%s, %s, %s" % (ename, fname, exc_tb.tb_lineno)
-      yield fixme
-      yield "Pipulation prematurely terminated."
-      yield "Please open an issue at https://github.com/miklevin/pipulate"
-      yield "Or just tap me on the shoulder."
-    yield "spindown"
+      yield fixme, ""
+      yield "Pipulation prematurely terminated.", ""
+      yield "Please open an issue at https://github.com/miklevin/pipulate", ""
+      yield "Or just tap me on the shoulder.", ""
+    yield "spindown", ""
 
 def url_root(url):
   from urlparse import urlparse
