@@ -220,7 +220,7 @@ def pipulate():
       out("Question mark replacement")
       for index, rowdex in enumerate(range(qstart, worksheet.row_count+1)): #Start stepping through every row.
         if index == 0:
-          yield "Processing row: %s" % rowdex
+          yield "Pipulating row: %s" % rowdex
         else:
           yield ", %s" % rowdex
         globs.hobj = None
@@ -230,6 +230,7 @@ def pipulate():
         onerow = []
         for cell in CellList:
           onerow.append(cell.value)
+        out(onerow)
         if '?' in onerow:
           #Perfect opportunity to test nested generator yield messages
           blankrows = 0
@@ -246,14 +247,14 @@ def pipulate():
             except:
               out("API problem on row %s. Retrying." % rowdex)
               time.sleep(globs.retryseconds)
-        else:
+        elif onerow.count('') == len(onerow):
           blankrows += 1
           if blankrows > 3:
             break
       out('Finished question marks')
     else:
       yield 'Please Login to Google'
-    yield "Done pipulating."
+    yield "Pipulation complete."
     yield "spinoff"
   except Exception as e:
     exc_type, exc_obj, exc_tb = sys.exc_info()
