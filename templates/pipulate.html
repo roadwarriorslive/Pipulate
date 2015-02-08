@@ -7,7 +7,7 @@
     <link href="http://picnicss.com/releases/v2.3.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <style>
-    #magicbox{margin-top: 10px;}
+    #magicbox{margin-top: 10px;height:150px;}
     #pipulate{font-family:Nunito}
     #pipurl{margin-bottom:10px}
     #paste{
@@ -22,8 +22,8 @@
       margin-left: auto;
       margin-right:auto;
       width: 70px;
-      text-align: center;
-      position: fixed;
+      position: absolute;
+      line-height: 7;
       left: 0;
       right: 0;
     }
@@ -159,12 +159,14 @@
             Start Pipulating &nbsp;<i id="piplock" class="fa fa-chevron-circle-right"></i>
           </button>
       </form>
-      <div id="spinner" class="spinner">
-        <div class="bounce1"></div>
-        <div class="bounce2"></div>
-        <div class="bounce3"></div>
+      <div id="magicdiv">
+        <div id="spinner" class="spinner">
+          <div class="bounce1"></div>
+          <div class="bounce2"></div>
+          <div class="bounce3"></div>
+        </div>
+        <textarea id="magicbox" rows="5" cols="80">Magic Here</textarea>
       </div>
-      <textarea id="magicbox" rows="5" cols="80">Magic Here</textarea>
     </div>
     <nav>
     <!-- responsive -->
@@ -220,7 +222,7 @@
           $('#pipulate').fadeTo("fast",1);
           $('#spinner').hide()
           $( "i" ).removeClass( "fa-spin fa-circle-o-notch" )
-          $( "i" ).addClass( "fa-frown-o" )
+          $( "i" ).addClass( "fa-circle-o" )
           $('#piplock').addClass("fa-chevron-circle-right")
           $('#piplock').removeClass("fa-lock")
         </script>
