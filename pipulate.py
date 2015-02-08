@@ -202,8 +202,9 @@ def pipulate():
         qstart = globs.numrows + 1
       else:
         qstart = 1
-      InsertRows(worksheet, trendlistoflists)
-      trendlistoflists = []
+      if trendlistoflists:
+        InsertRows(worksheet, trendlistoflists)
+        trendlistoflists = []
 
       #We need to get it again if trending rows were added.
       if trended:
