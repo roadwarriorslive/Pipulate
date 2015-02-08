@@ -72,6 +72,7 @@
     #arrow{
       font-weight: bold;
       font-size: 1.8em;
+      color: #323232;
       position : relative;
       top:.2em;
     }
@@ -198,6 +199,17 @@
           $('#spinner').hide()
           $( "i" ).removeClass( "fa-spin fa-circle-o-notch" )
           $( "i" ).addClass( "fa-check" )
+          $('#piplock').addClass("fa-chevron-circle-right")
+          $('#piplock').removeClass("fa-lock")
+        </script>
+      {% elif msg == "spindown" %}
+        <script>
+          // Unlock button and gracefully show user things are fubar.
+          $('#pipulate').prop("disabled", false)
+          $('#pipulate').fadeTo("fast",1);
+          $('#spinner').hide()
+          $( "i" ).removeClass( "fa-spin fa-circle-o-notch" )
+          $( "i" ).addClass( "fa-frown-o" )
           $('#piplock').addClass("fa-chevron-circle-right")
           $('#piplock').removeClass("fa-lock")
         </script>

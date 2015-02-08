@@ -111,160 +111,165 @@ def main():                                         # visiting app's homepage.
     return render_template('pipulate.html', form=form)
 
 def pipulate():
-  yield "Beginning to pipulate..."
-  yield "spinon"
-  funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
-  globs.transfuncs = zipnamevaldict(funcs, funcs) #Keep translation table
-  blankrows = 0
-  import gspread
-  if session:
-    if 'oa2' in session:
-      out("OAuth2 token found")
-      creds = Credentials(access_token=session['oa2'])
-    else:
-      yield "Google Login appears to have expired. Log back in."
-      yield "spinoff"
-      raise StopIteration
-    try:
-      gsp = gspread.authorize(creds)
-    except:
-      yield "Google Login unsuccessful."
-      yield "spinoff"
-      raise StopIteration
-    try:
-      pipdoc = gsp.open_by_url(globs.PIPURL)
-    except gspread.exceptions.SpreadsheetNotFound:
-      yield "Please give the document a name to force first save."
-      yield "spinoff"
-      raise StopIteration
-    except:
-      yield "Pipulate currently only works with Google Spreadheet URLs."
-      yield "spinoff"
-      raise StopIteration
-    try:
-      worksheet = pipdoc.worksheet("Pipulate")
-    except:
-      headers = ['URL', 'Tweeted', 'Shared', 'Liked', 'Plussed', 'DateStamp', 'TimeStamp']
-      yield InitTab(pipdoc, 'Pipulate', headers, pipinit())
-    finally:
-      worksheet = pipdoc.worksheet("Pipulate")
-      globs.numrows = len(worksheet.col_values(1))
-
-    #try:
-    #  sheet1 = pipdoc.worksheet("Sheet1")
-    #except:
-    #  pass
-    #else:
-    #  import re
-    #  something = re.compile('.+')
-    #  try:
-    #    cell = sheet1.find(something)
-    #  except:
-    #    gsp.del_worksheet(sheet1)
-
-    try:
-      pipdoc.worksheet("Config")
-    except:
-      headers = ['name', 'value']
-      yield InitTab(pipdoc, 'Config', headers)
-    globs.config = refreshconfig(pipdoc, "Config")
-    try:
-      pipdoc.worksheet("Scrapers")
-    except:
-      headers = ['name', 'type', 'pattern']
-      yield InitTab(pipdoc, 'Scrapers', headers, scrapes())
-    sst = pipdoc.worksheet("Scrapers")
-    snames = sst.col_values(1)
-    stypes = sst.col_values(2)
-    spatterns = sst.col_values(3)
-    globs.scrapetypes = zipnamevaldict(snames, stypes)
-    globs.scrapepatterns = zipnamevaldict(snames, spatterns)
-    globs.transscrape = zipnamevaldict(snames, snames)
-
-    trendlistoflists = []
-    globs.row1 = lowercaselist(worksheet.row_values(1))
-    row1funcs(globs.row1)
-    trended = False
-    qstart = 1
-    out("Trend spotting")
-    for rowdex in range(1, worksheet.row_count+1): #Give trending its own loop
-      onerow = worksheet.row_values(rowdex)
-      if onerow:
-        if rowdex == 2: #Looking for trending requests
-          if '*' in onerow:
-            yield "Found trending asterisks in row 2"
-            trended = True
-            trendlistoflists.append(onerow)
-          else:
-            break
-        elif trendlistoflists and rowdex > 2:
-          if '*' in onerow:
-            yield ", %s" % rowdex
-            trendlistoflists.append(onerow)
-          else:
-            blankrows += 1
-            if blankrows > 1:
-              break
+  try:
+    yield "Beginning to pipulate..."
+    yield "spinon"
+    funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
+    globs.transfuncs = zipnamevaldict(funcs, funcs) #Keep translation table
+    blankrows = 0
+    import gspread
+    if session:
+      if 'oa2' in session:
+        out("OAuth2 token found")
+        creds = Credentials(access_token=session['oa2'])
       else:
-        blankrows += 1
-        if blankrows > 1:
-          break
-    if trended:
-      qstart = globs.numrows + 1
-    else:
-      qstart = 1
-    InsertRows(worksheet, trendlistoflists)
-    trendlistoflists = []
-
-    #We need to get it again if trending rows were added.
-    if trended:
-      try:
-        worksheet = pipdoc.worksheet("Pipulate")
-      except:
-        yield ("Couldn't reach Google Docs. Try logging in again.")
+        yield "Google Login appears to have expired. Log back in."
         yield "spinoff"
         raise StopIteration
+      try:
+        gsp = gspread.authorize(creds)
+      except:
+        yield "Google Login unsuccessful."
+        yield "spinoff"
+        raise StopIteration
+      try:
+        gdoc = gsp.open_by_url(globs.PIPURL)
+      except gspread.exceptions.SpreadsheetNotFound:
+        yield "Please give the document a name to force first save."
+        yield "spinoff"
+        raise StopIteration
+      except:
+        yield "Pipulate currently only works with Google Spreadheet URLs."
+        yield "spinoff"
+        raise StopIteration
+      try:
+        worksheet = gdoc.worksheet("Pipulate")
+      except:
+        headers = ['URL', 'Tweeted', 'Shared', 'Liked', 'Plussed', 'DateStamp', 'TimeStamp']
+        yield InitTab(gdoc, 'Pipulate', headers, pipinit())
+      finally:
+        worksheet = gdoc.worksheet("Pipulate")
+        globs.numrows = len(worksheet.col_values(1))
 
-    globs.numrows = len(worksheet.col_values(1))
-    blankrows = 0 #Lets us skip occasional blank rows
-    out("Question mark replacement")
-    for index, rowdex in enumerate(range(qstart, worksheet.row_count+1)): #Start stepping through every row.
-      if index == 0:
-        yield "Processing row: %s" % rowdex
-      else:
-        yield ", %s" % rowdex
-      globs.hobj = None
-      globs.html = '' #Blank the global html object. Recylces fetches.
-      rowrange = "A%s:%s%s" % (rowdex, globs.letter[len(globs.row1)], rowdex)
-      cell_list = worksheet.range(rowrange)
-      onerow = []
-      for cell in cell_list:
-        onerow.append(cell.value)
-      if '?' in onerow:
-        #Perfect opportunity to test nested generator yield messages
-        blankrows = 0
-        newrow = processrow(str(rowdex), onerow) #Replace question marks in row
-        newrow = ['' if x==None else x for x in newrow]
-        for index, onecell in enumerate(cell_list):
-          onecell.value = newrow[index]
-          result = None
-        for x in range(0, globs.retrytimes):
-          try:
-            result = worksheet.update_cells(cell_list)
-            out("Successfully updated row %s" % rowdex)
+      #try:
+      #  sheet1 = gdoc.worksheet("Sheet1")
+      #except:
+      #  pass
+      #else:
+      #  import re
+      #  something = re.compile('.+')
+      #  try:
+      #    cell = sheet1.find(something)
+      #  except:
+      #    gsp.del_worksheet(sheet1)
+
+      try:
+        gdoc.worksheet("Config")
+      except:
+        headers = ['name', 'value']
+        yield InitTab(gdoc, 'Config', headers)
+      globs.config = refreshconfig(gdoc, "Config")
+      try:
+        gdoc.worksheet("Scrapers")
+      except:
+        headers = ['name', 'type', 'pattern']
+        yield InitTab(gdoc, 'Scrapers', headers, scrapes())
+      sst = gdoc.worksheet("Scrapers")
+      snames = sst.col_values(1)
+      stypes = sst.col_values(2)
+      spatterns = sst.col_values(3)
+      globs.scrapetypes = zipnamevaldict(snames, stypes)
+      globs.scrapepatterns = zipnamevaldict(snames, spatterns)
+      globs.transscrape = zipnamevaldict(snames, snames)
+
+      trendlistoflists = []
+      globs.row1 = lowercaselist(worksheet.row_values(1))
+      row1funcs(globs.row1)
+      trended = False
+      qstart = 1
+      out("Trend spotting")
+      for rowdex in range(1, worksheet.row_count+1): #Give trending its own loop
+        onerow = worksheet.row_values(rowdex)
+        if onerow:
+          if rowdex == 2: #Looking for trending requests
+            if '*' in onerow:
+              yield "Found trending asterisks in row 2"
+              trended = True
+              trendlistoflists.append(onerow)
+            else:
+              break
+          elif trendlistoflists and rowdex > 2:
+            if '*' in onerow:
+              yield ", %s" % rowdex
+              trendlistoflists.append(onerow)
+            else:
+              blankrows += 1
+              if blankrows > 1:
+                break
+        else:
+          blankrows += 1
+          if blankrows > 1:
             break
-          except:
-            out("API problem on row %s. Retrying." % rowdex)
-            time.sleep(globs.retryseconds)
+      if trended:
+        qstart = globs.numrows + 1
       else:
-        blankrows += 1
-        if blankrows > 3:
-          break
-    out('Finished question marks')
-  else:
-    yield 'Please Login to Google'
-  yield "Done pipulating."
-  yield "spinoff"
+        qstart = 1
+      InsertRows(worksheet, trendlistoflists)
+      trendlistoflists = []
+
+      #We need to get it again if trending rows were added.
+      if trended:
+        try:
+          worksheet = gdoc.worksheet("Pipulate")
+        except:
+          yield ("Couldn't reach Google Docs. Try logging in again.")
+          yield "spinoff"
+          raise StopIteration
+
+      globs.numrows = len(worksheet.col_values(1))
+      blankrows = 0 #Lets us skip occasional blank rows
+      out("Question mark replacement")
+      for index, rowdex in enumerate(range(qstart, worksheet.row_count+1)): #Start stepping through every row.
+        if index == 0:
+          yield "Processing row: %s" % rowdex
+        else:
+          yield ", %s" % rowdex
+        globs.hobj = None
+        globs.html = '' #Blank the global html object. Recylces fetches.
+        rowrange = "A%s:%s%s" % (rowdex, globs.letter[len(globs.row1)], rowdex)
+        CellList = worksheet.range(rowrange)
+        onerow = []
+        for cell in CellList:
+          onerow.append(cell.value)
+        if '?' in onerow:
+          #Perfect opportunity to test nested generator yield messages
+          blankrows = 0
+          newrow = processrow(str(rowdex), onerow) #Replace question marks in row
+          newrow = ['' if x==None else x for x in newrow]
+          for index, onecell in enumerate(CellList):
+            onecell.value = newrow[index]
+            result = None
+          for x in range(0, globs.retrytimes):
+            try:
+              result = worksheet.update_cells(CellList)
+              out("Successfully updated row %s" % rowdex)
+              break
+            except:
+              out("API problem on row %s. Retrying." % rowdex)
+              time.sleep(globs.retryseconds)
+        else:
+          blankrows += 1
+          if blankrows > 3:
+            break
+      out('Finished question marks')
+    else:
+      yield 'Please Login to Google'
+    yield "Done pipulating."
+    yield "spinoff"
+  except:
+    yield "Pipulation prematurely terminated."
+    yield "spindown"
+    
 
 def url_root(url):
   from urlparse import urlparse
@@ -308,8 +313,8 @@ class Credentials (object):
   def __init__ (self, access_token=None):
     self.access_token = access_token
 
-def refreshconfig(pipdoc, sheetname):
-  worksheet = pipdoc.worksheet(sheetname)
+def refreshconfig(gdoc, sheetname):
+  worksheet = gdoc.worksheet(sheetname)
   names = worksheet.col_values(1)
   values = worksheet.col_values(2)
   return zipnamevaldict(names, values)
@@ -334,16 +339,16 @@ def InsertRow(worksheet, onelist):
     worksheet.append_row(onelist)
     #worksheet.add_rows(1)
   else:
-    cell_list = worksheet.range(rowrange)
+    CellList = worksheet.range(rowrange)
     out('Inserting row in range %s' % rowrange)
-    for index, cell in enumerate(cell_list):
+    for index, cell in enumerate(CellList):
       ival = ''
       if onelist[index] == None:
         ival = ''
       else:
         ival = onelist[index]
       cell.value = ival
-      worksheet.update_cells(cell_list)
+      worksheet.update_cells(CellList)
   globs.numrows += 1
 
 def InsertRows(worksheet, listoflists):
@@ -365,13 +370,13 @@ def InsertRows(worksheet, listoflists):
     for onecell in onelist:
       flattenitlist.append(onecell)
   flattenitlist = ['?' if x=='*' else x for x in flattenitlist]
-  cell_list = worksheet.range(rowrange)
-  for index, onecell in enumerate(cell_list):
+  CellList = worksheet.range(rowrange)
+  for index, onecell in enumerate(CellList):
     try:
       onecell.value = flattenitlist[index]
     except:
       pass
-  worksheet.update_cells(cell_list)
+  worksheet.update_cells(CellList)
   return
 
 def InitTab(gdoc, tabname, headerlist, listoflists=[]):
@@ -384,18 +389,18 @@ def InitTab(gdoc, tabname, headerlist, listoflists=[]):
     numrows = 2
   endletter = globs.letter[numcols]
   newtab = gdoc.add_worksheet(title=tabname, rows=numrows, cols=numcols)
-  cell_list = newtab.range('A1:%s%s' % (endletter, numrows))
+  CellList = newtab.range('A1:%s%s' % (endletter, numrows))
   initlist = []
   for onelist in listoflists:
     for onecell in onelist:
       initlist.append(onecell)
   wholelist = headerlist + initlist
-  for index, onecell in enumerate(cell_list):
+  for index, onecell in enumerate(CellList):
     try:
       onecell.value = wholelist[index]
     except:
       pass
-  newtab.update_cells(cell_list)
+  newtab.update_cells(CellList)
   return "Making %s tab." % tabname
 
 def questionmark(oldrow, rowdex, coldex):
