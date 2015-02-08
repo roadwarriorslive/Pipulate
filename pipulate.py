@@ -111,6 +111,7 @@ def main():                                         # visiting app's homepage.
     return render_template('pipulate.html', form=form)
 
 def pipulate():
+  import sys, os
   try:
     yield "Beginning to pipulate..."
     yield "spinon"
@@ -150,19 +151,6 @@ def pipulate():
       finally:
         worksheet = gdoc.worksheet("Pipulate")
         globs.numrows = len(worksheet.col_values(1))
-
-      #try:
-      #  sheet1 = gdoc.worksheet("Sheet1")
-      #except:
-      #  pass
-      #else:
-      #  import re
-      #  something = re.compile('.+')
-      #  try:
-      #    cell = sheet1.find(something)
-      #  except:
-      #    gsp.del_worksheet(sheet1)
-
       try:
         gdoc.worksheet("Config")
       except:
@@ -266,10 +254,18 @@ def pipulate():
       yield 'Please Login to Google'
     yield "Done pipulating."
     yield "spinoff"
-  except:
-    yield "Pipulation prematurely terminated."
+  except Exception as e:
+    exc_type, exc_obj, exc_tb = sys.exc_info()
+    fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+    ename = type(e).__name__
+    if ename == "StopIteration":
+      yield "Better luck pipulating next time."
+    else:
+      yield (ename, fname, exc_tb.tb_lineno)
+      yield "Pipulation prematurely terminated."
+      yield "Please open an issue at https://github.com/miklevin/pipulate"
+      yield "Or just tap me on the shoulder."
     yield "spindown"
-    
 
 def url_root(url):
   from urlparse import urlparse
