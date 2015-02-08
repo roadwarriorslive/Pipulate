@@ -31,11 +31,9 @@ from flask import (Flask,                           # This app is all about Flas
   url_for,                                          # and then wonder why exit()
   flash)                                            # needs those parentheses.
 
-app = Flask(__name__,
-  static_folder='./static',                         # No more file upload/download
-  static_url_path='/static')                        # so we can put stuff here
+app = Flask(__name__)                               # Flask init requirement
 
-app.secret_key = r"m\x00\r\xa5\\\xbeTW\xb3\xdf\x17\xb0!T\x9b6\x88l\xcf\xa1vmD}"
+app.secret_key = "m\x00\r\xa5\\\xbeTW\xb3\xdf\x17\xb0!T\x9b6\x88l\xcf\xa1vmD}"
 
 def out(msg):                                       # Debug output to server terminal
   if globs.DBUG:
@@ -249,7 +247,7 @@ def pipulate():
               time.sleep(globs.retryseconds)
         elif onerow.count('') == len(onerow):
           blankrows += 1
-          if blankrows >skippableblankrows:
+          if blankrows > globs.skippableblankrows:
             break
       out('Finished question marks')
     else:
