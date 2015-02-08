@@ -18,7 +18,7 @@
 """
 
 import globs                                        # Talmudic style commentaries
-import requests, time                               # Requests will help 3.x port
+import requests, time, sys, os                      # Requests will help 3.x port
 from flask_wtf import Form                          # All Flask form examples use it
 from wtforms import StringField
 from flask import (Flask,                           # This app is all about Flask
@@ -108,7 +108,6 @@ def main():                                         # visiting app's homepage.
     return render_template('pipulate.html', form=form)
 
 def pipulate():
-  import sys, os
   try:
     yield "Beginning to pipulate..."
     yield "spinon"
@@ -440,7 +439,7 @@ def processrow(rowdex, onerow):
               out('FUNCTION SUCCESS: %s ' % collabel)
               break
             except:
-              out("API problem on row %s. Retrying." % rowdex)
+              out("Function problem on row %s. Retrying." % rowdex)
               time.sleep(globs.retryseconds)
         elif collabel in globs.transscrape.keys():
           for x in range(0, globs.retrytimes):
@@ -449,7 +448,7 @@ def processrow(rowdex, onerow):
               out('SCRAPE SUCCESS: %s ' % collabel)
               break
             except:
-              out("API problem on row %s. Retrying." % rowdex)
+              out("Scrape problem on row %s. Retrying." % rowdex)
               time.sleep(globs.retryseconds)
   return changedrow
 
