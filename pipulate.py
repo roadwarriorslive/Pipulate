@@ -249,7 +249,7 @@ def pipulate():
               time.sleep(globs.retryseconds)
         elif onerow.count('') == len(onerow):
           blankrows += 1
-          if blankrows > 3:
+          if blankrows >skippableblankrows:
             break
       out('Finished question marks')
     else:
