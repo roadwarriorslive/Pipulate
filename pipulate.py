@@ -421,6 +421,7 @@ def processrow(rowdex, onerow):
   encountering a question mark, it determines whether to invoke the function
   indicated by the column label, using values from the active row as parameter
   values if available, parameter defaults if not, and None if not found."""
+  import traceback
   changedrow = onerow[:]
   if rowdex > 1:
     #All subsequent rows are checked for question mark replacement requests.
@@ -438,7 +439,10 @@ def processrow(rowdex, onerow):
               changedrow[coldex] = evalfunc(coldex, changedrow) #The Function Path
               out('FUNCTION SUCCESS: %s ' % collabel)
               break
-            except:
+            except Exception as e:
+              exc_type, exc_value, exc_tb = sys.exc_info()
+              filename, line_num, func_name, text = traceback.extract_tb(exc_tb)[-1]
+              out('%s, %s, %s, %s' % (filename, func_name, line_num, text))
               out("Function problem on row %s. Retrying." % rowdex)
               time.sleep(globs.retryseconds)
         elif collabel in globs.transscrape.keys():
@@ -447,7 +451,10 @@ def processrow(rowdex, onerow):
               changedrow[coldex] = genericscraper(coldex, changedrow) #Scraping
               out('SCRAPE SUCCESS: %s ' % collabel)
               break
-            except:
+            except Exception as e:
+              exc_type, exc_value, exc_tb = sys.exc_info()
+              filename, line_num, func_name, text = traceback.extract_tb(exc_tb)[-1]
+              out('%s, %s, %s, %s' % (filename, func_name, line_num, text))
               out("Scrape problem on row %s. Retrying." % rowdex)
               time.sleep(globs.retryseconds)
   return changedrow
