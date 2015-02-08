@@ -168,6 +168,14 @@
     <script>
       $(document).ready(function(){  
         $("#spinner").hide();
+        $( "#pipulate" ).click(function() {
+          $('#pipulate').prop("disabled", true)
+          $('#spinner').show()
+          $('#piplock').removeClass("fa-chevron-circle-right")
+          $('#piplock').addClass("fa-lock")
+          $('#pipulate').fadeTo("fast",.5);
+          $('#pipform').submit();
+        });
       });
       if (location.hash) {
         var myhash = location.hash
@@ -180,7 +188,7 @@
   </head>
   <body>
     <div id="content">
-      <form method="POST" action="/">
+      <form id="pipform" method="POST" action="/">
         <span id="paste">URL: </span>{{ form.pipurl(size=75) }}<br/>
           <button id="pipulate" class="button" type="submit">
             Start Pipulating &nbsp;<i id="piplock" class="fa fa-chevron-circle-right"></i>
@@ -233,7 +241,7 @@
           // Lock button and display spinner
           $('#pipulate').prop("disabled", true)
           $('#pipulate').fadeTo("fast",.5);
-          $('#spinner').show()
+          //$('#spinner').show()
         </script>
       {% elif step == "spinoff" %}
         <script>
@@ -263,8 +271,8 @@
         <script>
           $( "i" ).removeClass( "fa-spin fa-circle-o-notch" )
           $( "i" ).addClass( "fa-check" )
-          $('#piplock').removeClass("fa-chevron-circle-right")
-          $('#piplock').addClass("fa-lock")
+          //$('#piplock').removeClass("fa-chevron-circle-right")
+          //$('#piplock').addClass("fa-lock")
         </script>
         {% if loop.index > 1: %}<br/>{% endif %}<i class="fa fa-circle-o-notch fa-spin"></i></i> {{ step }}
       {%- endif %}
