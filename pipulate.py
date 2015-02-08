@@ -272,7 +272,7 @@ def pipulate():
       yield "Pipulation prematurely terminated.", "", ""
       yield "Please open an issue at https://github.com/miklevin/pipulate", "", ""
       yield "Or just tap me on the shoulder.", "", ""
-    yield "spindown", "", ""
+    yield "spinerr", "", ""
 
 def url_root(url):
   from urlparse import urlparse
