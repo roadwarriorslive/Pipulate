@@ -151,14 +151,14 @@ def pipulate():
         yield "spinoff", "", ""
         raise StopIteration
       try:
-        worksheet = gdoc.worksheet("Pipulate")
+        onesheet = gdoc.worksheet("Pipulate")
       except:
         headers = ['URL', 'Tweeted', 'Shared', 'Liked', 'Plussed', 'DateStamp', 'TimeStamp']
         yme = InitTab(gdoc, 'Pipulate', headers, pipinit())
-        worksheet = gdoc.worksheet("Pipulate")
+        onesheet = gdoc.worksheet("Pipulate")
         yield yme, "", ""
       finally:
-        globs.numrows = len(worksheet.col_values(1))
+        globs.numrows = len(onesheet.col_values(1)) #!!! optimize
       try:
         gdoc.worksheet("Config")
       except:
@@ -185,13 +185,13 @@ def pipulate():
       globs.transscrape = ziplckey(nam, nam)
 
       trendlistoflists = []
-      globs.row1 = lowercaselist(worksheet.row_values(1))
+      globs.row1 = lowercaselist(onesheet.row_values(1))
       row1funcs(globs.row1)
       trended = False
       qstart = 1
       yield "", "Looking For Trend Jobs", ""
-      for rowdex in range(1, worksheet.row_count+1): #Give trending its own loop
-        onerow = worksheet.row_values(rowdex)
+      for rowdex in range(1, onesheet.row_count+1): #Give trending its own loop
+        onerow = onesheet.row_values(rowdex)
         yield "", "", json.dumps(onerow)
         if onerow:
           if rowdex == 2: #Looking for trending requests
@@ -221,7 +221,7 @@ def pipulate():
       if trendlistoflists:
         for x in range(0, globs.retrytimes):
           try:
-            InsertRows(worksheet, trendlistoflists)
+            InsertRows(onesheet, trendlistoflists)
             trendlistoflists = []
             break
           except Exception as e:
@@ -234,16 +234,16 @@ def pipulate():
       #We need to get it again if trending rows were added.
       if trended:
         try:
-          worksheet = gdoc.worksheet("Pipulate")
+          onesheet = gdoc.worksheet("Pipulate")
         except:
           yield "Couldn't reach Google Docs. Try logging in again.", "", ""
           yield "spinoff", "", ""
           raise StopIteration
 
-      globs.numrows = len(worksheet.col_values(1))
+      globs.numrows = len(onesheet.col_values(1))
       blankrows = 0 #Lets us skip occasional blank rows
       out("Question mark replacement")
-      for index, rowdex in enumerate(range(qstart, worksheet.row_count+1)): #Start stepping through every row.
+      for index, rowdex in enumerate(range(qstart, onesheet.row_count+1)): #Start stepping through every row.
         if index == 0:
           yme = "Pipulating row: %s" % rowdex
           yield yme, "", ""
@@ -253,11 +253,11 @@ def pipulate():
         globs.hobj = None
         globs.html = '' #Blank the global html object. Recylces fetches.
         rowrange = "A%s:%s%s" % (rowdex, globs.letter[len(globs.row1)], rowdex)
-        CellList = worksheet.range(rowrange)
+        CellList = onesheet.range(rowrange)
         onerow = []
         for cell in CellList:
           onerow.append(cell.value)
-        yield "", "Row %s" % rowrange, json.dumps(onerow)
+        yield "", "Row %s" % rowrange, "" #json.dumps(onerow)
         if '?' in onerow:
           #Perfect opportunity to test nested generator messages
           blankrows = 0
@@ -270,7 +270,7 @@ def pipulate():
             result = None
           for x in range(0, globs.retrytimes):
             try:
-              result = worksheet.update_cells(CellList)
+              result = onesheet.update_cells(CellList)
               out("Successfully updated row %s" % rowdex)
               break
             except:
@@ -346,9 +346,9 @@ class Credentials (object):
     self.access_token = access_token
 
 def refreshconfig(gdoc, sheetname):
-  worksheet = gdoc.worksheet(sheetname)
-  names = worksheet.col_values(1)
-  values = worksheet.col_values(2)
+  onesheet = gdoc.worksheet(sheetname)
+  names = onesheet.col_values(1)
+  values = onesheet.col_values(2)
   return ziplckey(names, values)
 
 def ziplckey(keys, values):
@@ -363,15 +363,15 @@ def lowercaselist(onelist):
       pass
   return onelist
 
-def InsertRow(worksheet, onelist):
+def InsertRow(onesheet, onelist):
   column = globs.letter[len(onelist)]
   endrow = globs.numrows + 1
   rowrange = "A%s:%s%s" % (endrow, column, endrow)
-  if endrow == worksheet.row_count + 1:
-    worksheet.append_row(onelist)
-    #worksheet.add_rows(1)
+  if endrow == onesheet.row_count + 1:
+    onesheet.append_row(onelist)
+    #onesheet.add_rows(1)
   else:
-    CellList = worksheet.range(rowrange)
+    CellList = onesheet.range(rowrange)
     out('Inserting row in range %s' % rowrange)
     for index, cell in enumerate(CellList):
       ival = ''
@@ -380,18 +380,18 @@ def InsertRow(worksheet, onelist):
       else:
         ival = onelist[index]
       cell.value = ival
-      worksheet.update_cells(CellList)
+      onesheet.update_cells(CellList)
   globs.numrows += 1
 
-def InsertRows(worksheet, listoflists):
+def InsertRows(onesheet, listoflists):
   numnewrows = len(listoflists)
   lastrowused = globs.numrows
   numrowsneeded = len(listoflists)
-  allrowsevenempty = worksheet.row_count
+  allrowsevenempty = onesheet.row_count
   availableblankrows = allrowsevenempty - lastrowused
   if availableblankrows < numrowsneeded:
     rowstoadd = numrowsneeded - availableblankrows
-    worksheet.add_rows(rowstoadd)
+    onesheet.add_rows(rowstoadd)
     globs.numrows += rowstoadd
   upperleftrangenumber = lastrowused + 1
   lowerrightrangenumber = lastrowused + numnewrows
@@ -402,13 +402,13 @@ def InsertRows(worksheet, listoflists):
     for onecell in onelist:
       flattenitlist.append(onecell)
   flattenitlist = ['?' if x=='*' else x for x in flattenitlist]
-  CellList = worksheet.range(rowrange)
+  CellList = onesheet.range(rowrange)
   for index, onecell in enumerate(CellList):
     try:
       onecell.value = flattenitlist[index]
     except:
       pass
-  worksheet.update_cells(CellList)
+  onesheet.update_cells(CellList)
   return
 
 def InitTab(gdoc, tabname, headerlist, listoflists=[]):
