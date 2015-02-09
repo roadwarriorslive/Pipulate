@@ -158,12 +158,12 @@ def pipulate():
         onesheet = gdoc.worksheet("Pipulate")
       except:
         #headers = ['URL', 'Tweeted', 'Shared', 'Liked', 'Plussed', 'DateStamp', 'TimeStamp']
-        headers = ['URL', 'Subscribers']
+        headers = ['URL', 'Subscribers', 'ISOTimeStamp']
         yme = InitTab(gdoc, 'Pipulate', headers, pipinit())
         onesheet = gdoc.worksheet("Pipulate")
         yield yme, "", ""
       finally:
-        globs.numrows = len(onesheet.col_values(1)) #!!! optimize
+        globs.numrows = len(onesheet.col_values(1)) #!!!UnboundLocalError
       try:
         gdoc.worksheet("Config")
       except:

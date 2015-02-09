@@ -1,4 +1,4 @@
-import requests
+import requests, datetime
 import globs
 
 def cyclemotto():
@@ -45,9 +45,9 @@ def cyclemotto():
 
 def pipinit():
   s = []
-  s.append(['https://www.youtube.com/user/miklevin','*'])
-  s.append(['https://www.youtube.com/user/ForeverG5','*'])
-  s.append(['https://www.youtube.com/user/PewDiePie','*'])
+  s.append(['https://www.youtube.com/user/miklevin','*','*'])
+  s.append(['https://www.youtube.com/user/ForeverG5','*','*'])
+  s.append(['https://www.youtube.com/user/PewDiePie','*','*'])
   return s
 
 def pipinit2():
@@ -83,14 +83,16 @@ def walkdict(obj, key):
         return v
   return None
 
+def isotimestamp():
+  i = datetime.datetime.now()
+  return "%s" % i.isoformat() 
+
 def datestamp():
-  import datetime
   now = datetime.datetime.now()
   now = now.strftime("%B %d, %Y")
   return now
   
 def timestamp():
-  import datetime
   return datetime.datetime.today().strftime('%X')
 
 def response(url):
