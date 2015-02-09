@@ -18,7 +18,7 @@
 """
 
 import globs                                        # Talmudic style commentaries
-import requests, time, sys, os, json                # Requests will help 3.x port
+import requests, time, sys, os, json, datetime      # Requests will help 3.x port
 from flask_wtf import Form                          # All Flask form examples use it
 from wtforms import StringField
 from flask import (Flask,                           # This app is all about Flask
@@ -191,6 +191,12 @@ def pipulate():
 
       trendlistoflists = []
       globs.row1 = lowercaselist(onesheet.row_values(1))
+      now = datetime.datetime.now()
+      if 'isotimestamp' in globs.row1:
+        cell = onesheet.cell(globs.numrows, globs.row1.index('isotimestamp')+1)
+        out(cell.value)
+        raise StopIteration
+        yield str(globs.row1.find('isotimestamp')), "", ""
       row1funcs(globs.row1)
       trended = False
       qstart = 1
@@ -250,7 +256,7 @@ def pipulate():
       for index, rowdex in enumerate(range(qstart, onesheet.row_count+1)): #Start stepping through every row.
         if index == 0:
           yme = "Pipulating row: %s" % rowdex
-          yield yme, "Next, we replace question marks (pipulate)...", ""
+          yield yme, "Next, we replace question marks (a.k.a. pipulate)...", ""
         else:
           yme = ", %s" % rowdex
           yield yme, "", ""
@@ -297,7 +303,7 @@ def pipulate():
       loginmsg = ""
       if session and 'loggedin' in session and session['loggedin'] != '1':
         loginmsg = "Login link under the upper-left \"burger button\"."
-      yield "Better pipulating next time.", loginmsg, ""
+      yield "Try again or come back later.", loginmsg, ""
     else:
       fixme = "%s, %s, %s" % (ename, fname, exc_tb.tb_lineno)
       yield fixme, "", ""

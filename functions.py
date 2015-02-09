@@ -11,6 +11,7 @@ def cyclemotto():
     session['i'] += 1
   s = []
   s.append("And now for something completely different... Pipulate!")
+  s.append("Free and Open Source SEO software that does cool stuff")
   s.append("What do you want to Pipulate today?")
   s.append("Step 1: Drag the bookmarklet to the Bookmark bar.")
   s.append("You can change the sample data filled into the Pipulate tab,")
