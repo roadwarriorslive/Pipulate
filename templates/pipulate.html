@@ -48,7 +48,7 @@
       margin-right:auto;
       width: 70px;
       position: absolute;
-      line-height: 6;
+      line-height: 6.5;
       left: 0;
       right: 0;
     }
@@ -168,23 +168,24 @@
     <script>
       function lockbutton() {
         $('#pipulate').fadeTo(0,.5);
-        $('#pipulate').prop("disabled", true)
-        $('#piplock').removeClass("fa-chevron-circle-right")
-        $('#piplock').addClass("fa-lock")
+        $('#pipulate').prop("disabled", true);
+        $('#piplock').removeClass("fa-chevron-circle-right");
+        $('#piplock').addClass("fa-lock");
       }
       function unlockbutton() {
-        $('#pipulate').prop("disabled", false)
+        $('#pipulate').prop("disabled", false);
         $('#pipulate').fadeTo("fast",1);
-        $('#piplock').addClass("fa-chevron-circle-right")
-        $('#piplock').removeClass("fa-lock")
+        $('#piplock').addClass("fa-chevron-circle-right");
+        $('#piplock').removeClass("fa-lock");
       }
       $(document).ready(function(){  
         {% if request.method == 'GET': %}
           $("#spinner").hide();
         {% endif %}
-        $( "#pipulate" ).click(function() {
+        $("#pipulate").click(function() {
           lockbutton();
-          $('#spinner').show()
+          $('#spinner').show();
+          $('#pipstream').text('');
           $('#pipform').submit();
         });
       });
@@ -255,34 +256,32 @@
       {% if step == "spinon" %}
         <script>
           // Lock button and display spinner
-          $('#pipulate').prop("disabled", true)
+          $('#pipulate').prop("disabled", true);
           $('#pipulate').fadeTo("fast",.5);
-          //$('#spinner').show()
+          //$('#spinner').show();
         </script>
       {% elif step == "spinoff" %}
         <script>
           // Unlock button and remove spinner
-          $('#spinner').hide()
-          $("i").removeClass( "fa-spin fa-circle-o-notch" )
-          $("i").addClass( "fa-check" )
+          $('#spinner').hide();
+          $("i").removeClass("fa-spin fa-circle-o-notch");
+          $("i").addClass("fa-check");
           unlockbutton();
         </script>
       {% elif step == "spinerr" %}
         <script>
           // Unlock button and gracefully show user things are fubar.
-          $('#spinner').hide()
-          $("i").removeClass( "fa-spin fa-circle-o-notch" )
-          $("i.bullet").addClass( "fa-circle-o" )
+          $('#spinner').hide();
+          $("i").removeClass("fa-spin fa-circle-o-notch");
+          $("i.bullet").addClass("fa-circle-o");
           unlockbutton();
         </script>
       {% elif step[:1] == ',' -%}
         {{ step }}
       {%- else -%}
         <script>
-          $( "i" ).removeClass( "fa-spin fa-circle-o-notch" )
-          $( "i" ).addClass( "fa-check" )
-          //$('#piplock').removeClass("fa-chevron-circle-right")
-          //$('#piplock').addClass("fa-lock")
+          $("i").removeClass("fa-spin fa-circle-o-notch");
+          $("i").addClass("fa-check");
         </script>
         {% if loop.index > 1: %}<br/>{% endif %}<i class="bullet fa fa-circle-o-notch fa-spin"></i></i> {{ step }}
       {%- endif %}
