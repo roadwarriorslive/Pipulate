@@ -157,7 +157,8 @@ def pipulate():
       try:
         onesheet = gdoc.worksheet("Pipulate")
       except:
-        headers = ['URL', 'Tweeted', 'Shared', 'Liked', 'Plussed', 'DateStamp', 'TimeStamp']
+        #headers = ['URL', 'Tweeted', 'Shared', 'Liked', 'Plussed', 'DateStamp', 'TimeStamp']
+        headers = ['URL', 'Subscribers']
         yme = InitTab(gdoc, 'Pipulate', headers, pipinit())
         onesheet = gdoc.worksheet("Pipulate")
         yield yme, "", ""
@@ -229,7 +230,7 @@ def pipulate():
             break
           except Exception as e:
             exc_type, exc_value, exc_tb = sys.exc_info()
-            filename, line_num, func_name, text = traceback.extract_tb(exc_tb)[-1]
+            filename, line_num, func_name, text = traceback.extract_tb(exc_tb)[-1] #NameError
             out('%s, %s, %s, %s' % (filename, func_name, line_num, text))
             out("Error on trending, retry %s" % x)
             time.sleep(globs.retryseconds)
@@ -249,7 +250,7 @@ def pipulate():
       for index, rowdex in enumerate(range(qstart, onesheet.row_count+1)): #Start stepping through every row.
         if index == 0:
           yme = "Pipulating row: %s" % rowdex
-          yield yme, "Next, we replace question marks...", ""
+          yield yme, "Next, we replace question marks (pipulate)...", ""
         else:
           yme = ", %s" % rowdex
           yield yme, "", ""

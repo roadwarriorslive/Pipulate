@@ -45,6 +45,13 @@ def cyclemotto():
 
 def pipinit():
   s = []
+  s.append(['https://www.youtube.com/user/miklevin','*'])
+  s.append(['https://www.youtube.com/user/ForeverG5','*'])
+  s.append(['https://www.youtube.com/user/PewDiePie','*'])
+  return s
+
+def pipinit2():
+  s = []
   s.append(['http://mikelev.in','*','*','*','*','*','*'])
   s.append(['http://levinux.com','*','*','*','*','*','*'])
   s.append(['http://pipulate.com','*','*','*','*','*','*'])
