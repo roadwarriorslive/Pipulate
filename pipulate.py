@@ -110,7 +110,7 @@ def main():                                         # visiting app's homepage.
 def pipulate():
   try:
     out("Beginning to pipulate")
-    yield "Beginning to pipulate...", "Hello World", ""
+    yield "Beginning to pipulate...", "", ""
     yield "spinon", "", ""
     funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
     globs.transfuncs = ziplckey(funcs, funcs) #Keep translation table
@@ -179,9 +179,10 @@ def pipulate():
       row1funcs(globs.row1)
       trended = False
       qstart = 1
-      out("Trend spotting")
+      yield "", "Looking For Trend Jobs", ""
       for rowdex in range(1, worksheet.row_count+1): #Give trending its own loop
         onerow = worksheet.row_values(rowdex)
+        yield "", "", json.dumps(onerow)
         if onerow:
           if rowdex == 2: #Looking for trending requests
             if '*' in onerow:
@@ -246,12 +247,14 @@ def pipulate():
         onerow = []
         for cell in CellList:
           onerow.append(cell.value)
+        yield "", "Row %s" % rowrange, json.dumps(onerow)
         if '?' in onerow:
           #Perfect opportunity to test nested generator messages
           blankrows = 0
           newrow = processrow(str(rowdex), onerow) #Replace question marks in row
           newrow = ['' if x==None else x for x in newrow]
-          yield "", "Row %s" % rowrange, ""
+          out(newrow)
+          #yield "", "", json.dumps(newrow)
           for index, onecell in enumerate(CellList):
             onecell.value = newrow[index]
             result = None
@@ -270,7 +273,7 @@ def pipulate():
       out('Finished question marks')
     else:
       yield 'Please Login to Google', "", ""
-    yield "Pipulation complete.", "Goodbye World", ""
+    yield "Pipulation complete.", "Yep, that's what the data looked like", ""
     yield "spinoff", "", ""
     out("Pipulation complete")
   except Exception as e:

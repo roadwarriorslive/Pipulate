@@ -256,7 +256,8 @@
       <script>
         {%- if magic: -%}
           var pjson = {{ magic|safe }};
-          $("#magicbox").val(JSON.stringify(pjson, null, '\t'));
+          //$("#magicbox").val(JSON.stringify(pjson, null, '\t'));
+          $("#magicbox").val(JSON.stringify(pjson));
         {%- endif -%}
         {%- if learn: -%}$("#learnsomething").html('{{ learn }}');{%- endif -%}
       </script>
