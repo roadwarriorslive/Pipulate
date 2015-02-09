@@ -189,14 +189,13 @@ def pipulate():
       row1funcs(globs.row1)
       trended = False
       qstart = 1
-      yield "", "Looking For Trend Jobs", ""
+      yield "", "Then, we look for Trending requests...", ""
       for rowdex in range(1, onesheet.row_count+1): #Give trending its own loop
-        onerow = onesheet.row_values(rowdex)
-        yield "", "", json.dumps(onerow)
+        onerow = onesheet.row_values(rowdex) #!!! HTTPError
         if onerow:
           if rowdex == 2: #Looking for trending requests
             if '*' in onerow:
-              yield "Found trending asterisks in row 2", "", ""
+              yield "Found trending asterisks in row 2", "", json.dumps(onerow)
               trended = True
               trendlistoflists.append(onerow)
             else:
@@ -204,7 +203,7 @@ def pipulate():
           elif trendlistoflists and rowdex > 2:
             if '*' in onerow:
               yme = ", %s" % rowdex
-              yield yme, "", ""
+              yield yme, "", json.dumps(onerow)
               trendlistoflists.append(onerow)
             else:
               blankrows += 1
@@ -246,7 +245,7 @@ def pipulate():
       for index, rowdex in enumerate(range(qstart, onesheet.row_count+1)): #Start stepping through every row.
         if index == 0:
           yme = "Pipulating row: %s" % rowdex
-          yield yme, "", ""
+          yield yme, "Next, we replace question marks...", ""
         else:
           yme = ", %s" % rowdex
           yield yme, "", ""
@@ -257,14 +256,12 @@ def pipulate():
         onerow = []
         for cell in CellList:
           onerow.append(cell.value)
-        yield "", "Row %s" % rowrange, "" #json.dumps(onerow)
         if '?' in onerow:
           #Perfect opportunity to test nested generator messages
           blankrows = 0
           newrow = processrow(str(rowdex), onerow) #Replace question marks in row
           newrow = ['' if x==None else x for x in newrow]
-          out(newrow)
-          #yield "", "", json.dumps(newrow)
+          yield "", "", json.dumps(newrow)
           for index, onecell in enumerate(CellList):
             onecell.value = newrow[index]
             result = None
@@ -283,7 +280,7 @@ def pipulate():
       out('Finished question marks')
     else:
       yield 'Please Login to Google', "", ""
-    yield "Pipulation complete.", "", ""
+    yield "Pipulation complete.", "This box contains the last JSON data processed.", ""
     yield "spinoff", "", ""
     out("Pipulation complete")
   except Exception as e:

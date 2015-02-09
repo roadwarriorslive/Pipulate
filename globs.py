@@ -9,7 +9,6 @@ html = ''
 hobj = ''
 fargs = {}
 row1 = []
-col1 = []
 transfuncs = {}
 transscrape = {}
 scrapetypes = {}
