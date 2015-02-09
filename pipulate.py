@@ -134,13 +134,13 @@ def pipulate():
         raise StopIteration
       try:
         gdoc = gsp.open_by_url(globs.PIPURL) #HTTPError
+      except gspread.httpsession.HTTPError, e:
+        #yield 'HTTP ERROR %s occured' % e.code, "", ""
+        yield "Session timed out. Please login again.", "", ""
+        raise StopIteration
       except gspread.exceptions.NoValidUrlKeyFound:
         yield "Currently, the URL must be a Google Spreadsheet.", "", ""
         yield "<a href='https://docs.google.com/spreadsheets/create' target='_new'>Create</a> a new Google Spreadsheet and click Bookmarklet again.", "Google Spreadsheet Not Found.", ""
-        raise StopIteration
-      except gspread.exceptions.HTTPError, e:
-        yield 'HTTP ERROR %s occured' % e.code, "", ""
-        yield e, "", ""
         raise StopIteration
       except gspread.exceptions.SpreadsheetNotFound:
         yield "Please give the document a name to force first save.", "", ""
