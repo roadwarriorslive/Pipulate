@@ -163,7 +163,6 @@ def pipulate():
         yme = InitTab(gdoc, 'Scrapers', headers, scrapes())
         yield yme, "", ""
       sst = gdoc.worksheet("Scrapers")
-      #This is actually 3 API calls
       lod = sst.get_all_records() #Returns list of dictionaries
       #lod = json.dumps(sst.get_all_records()) #Returns list of dictionaries
       #yield "Getting all records", "All Records", pjson
@@ -171,9 +170,6 @@ def pipulate():
       pat = [[d['pattern']][0] for d in lod]
       typ = [[d['type']][0] for d in lod]
       nam = [[d['name']][0] for d in lod]
-      #snames = sst.col_values(1)
-      #stypes = sst.col_values(2)
-      #spatterns = sst.col_values(3)
       globs.scrapetypes = ziplckey(nam, typ)
       globs.scrapepatterns = ziplckey(nam, pat)
       globs.transscrape = ziplckey(nam, nam)
