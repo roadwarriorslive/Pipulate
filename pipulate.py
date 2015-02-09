@@ -18,7 +18,7 @@
 """
 
 import globs                                        # Talmudic style commentaries
-import requests, time, sys, os                      # Requests will help 3.x port
+import requests, time, sys, os, json                # Requests will help 3.x port
 from flask_wtf import Form                          # All Flask form examples use it
 from wtforms import StringField
 from flask import (Flask,                           # This app is all about Flask
@@ -163,6 +163,10 @@ def pipulate():
         yme = InitTab(gdoc, 'Scrapers', headers, scrapes())
         yield yme, "", ""
       sst = gdoc.worksheet("Scrapers")
+      #This is actually 3 API calls
+      pjson = json.dumps(sst.get_all_records())
+      yield "Getting all records", "All Records", pjson
+      raise StopIteration
       snames = sst.col_values(1)
       stypes = sst.col_values(2)
       spatterns = sst.col_values(3)
@@ -204,8 +208,17 @@ def pipulate():
       else:
         qstart = 1
       if trendlistoflists:
-        InsertRows(worksheet, trendlistoflists)
-        trendlistoflists = []
+        for x in range(0, globs.retrytimes):
+          try:
+            InsertRows(worksheet, trendlistoflists)
+            trendlistoflists = []
+            break
+          except Exception as e:
+            exc_type, exc_value, exc_tb = sys.exc_info()
+            filename, line_num, func_name, text = traceback.extract_tb(exc_tb)[-1]
+            out('%s, %s, %s, %s' % (filename, func_name, line_num, text))
+            out("Error on trending, retry %s" % x)
+            time.sleep(globs.retryseconds)
 
       #We need to get it again if trending rows were added.
       if trended:

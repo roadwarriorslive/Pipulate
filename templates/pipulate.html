@@ -55,7 +55,7 @@
     .spinner > div {
       width: 18px;
       height: 18px;
-      background-color: #333;
+      background-color: #C6C6C6;
       border-radius: 100%;
       display: inline-block;
       -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
@@ -186,6 +186,8 @@
           lockbutton();
           $('#spinner').show();
           $('#pipstream').text('');
+          $('#magicbox').val('');
+          $('#learnsomething').html('A Window Into The Magic...');
           $('#pipform').submit();
         });
       });
@@ -217,8 +219,8 @@
           <div class="bounce2"></div>
           <div class="bounce3"></div>
         </div>
-        <div id="learnsomething">foo</div>
-        <textarea id="magicbox" rows="4" cols="30">Magic Here</textarea>
+        <div id="learnsomething"></div>
+        <textarea id="magicbox" rows="4" cols="60"></textarea>
       </div>
     </div>
     <nav>
@@ -247,7 +249,8 @@
     {% for step, learn, magic in data: -%}
       {%- if magic or learn: -%}
       <script>
-        {%- if magic: -%}$("#magicbox").val('{{ magic }}');{%- endif -%}
+        var pjson = {{ magic|safe }};
+        {%- if magic: -%}$("#magicbox").val(JSON.stringify(pjson, null, '\t'));{%- endif -%}
         {%- if learn: -%}$("#learnsomething").html('{{ learn }}');{%- endif -%}
       </script>
       {%- endif -%}
