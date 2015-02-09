@@ -137,8 +137,7 @@ def pipulate():
         yield "spinoff", "", ""
         raise StopIteration
       except:
-        yield "Pipulate currently only works with Google Spreadheet URLs.", "",
-        ""
+        yield "Pipulate currently only works with Google Spreadheet URLs.", "", ""
         yield "spinoff", "", ""
         raise StopIteration
       try:

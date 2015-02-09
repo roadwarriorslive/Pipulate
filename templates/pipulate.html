@@ -245,14 +245,12 @@
     </div>
     <div id="pipstream">
     {% for step, learn, magic in data: -%}
+      {%- if magic or learn: -%}
       <script>
-        if ('{{ magic }}' != '') {
-          $("#magicbox").val('{{ magic }}');
-        }
-        if ('{{ learn }}' != '') {
-          $("#learnsomething").html('{{ learn }}');
-        }
+        {%- if magic: -%}$("#magicbox").val('{{ magic }}');{%- endif -%}
+        {%- if learn: -%}$("#learnsomething").html('{{ learn }}');{%- endif -%}
       </script>
+      {%- endif -%}
       {% if step == "spinon" %}
         <script>
           // Lock button and display spinner
@@ -276,16 +274,16 @@
           $("i.bullet").addClass("fa-circle-o");
           unlockbutton();
         </script>
-      {% elif step[:1] == ',' -%}
+      {%- elif step[:1] == ',' -%}
         {{ step }}
       {%- else -%}
         <script>
           $("i").removeClass("fa-spin fa-circle-o-notch");
           $("i").addClass("fa-check");
         </script>
-        {% if loop.index > 1: %}<br/>{% endif %}<i class="bullet fa fa-circle-o-notch fa-spin"></i></i> {{ step }}
-      {%- endif %}
-    {%- endfor %}
+        {%- if loop.index > 1: -%}<br/>{%- endif -%}<i class="bullet fa fa-circle-o-notch fa-spin"></i> {{ step }}
+      {%- endif -%}
+    {%- endfor -%}
     </div>
   </body>
 </html>
