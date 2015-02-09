@@ -251,6 +251,7 @@ def pipulate():
           blankrows = 0
           newrow = processrow(str(rowdex), onerow) #Replace question marks in row
           newrow = ['' if x==None else x for x in newrow]
+          yield "", "Row %s" % rowrange, ""
           for index, onecell in enumerate(CellList):
             onecell.value = newrow[index]
             result = None
