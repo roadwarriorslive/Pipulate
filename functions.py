@@ -78,7 +78,9 @@ def walkdict(obj, key):
 
 def datestamp():
   import datetime
-  return datetime.date.today()
+  now = datetime.datetime.now()
+  now = now.strftime("%B %d, %Y")
+  return now
   
 def timestamp():
   import datetime
