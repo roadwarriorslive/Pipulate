@@ -272,7 +272,7 @@
           // Unlock button and gracefully show user things are fubar.
           $('#spinner').hide()
           $("i").removeClass( "fa-spin fa-circle-o-notch" )
-          $("i").addClass( "fa-circle-o" )
+          $("i.bullet").addClass( "fa-circle-o" )
           unlockbutton();
         </script>
       {% elif step[:1] == ',' -%}
@@ -284,7 +284,7 @@
           //$('#piplock').removeClass("fa-chevron-circle-right")
           //$('#piplock').addClass("fa-lock")
         </script>
-        {% if loop.index > 1: %}<br/>{% endif %}<i class="fa fa-circle-o-notch fa-spin"></i></i> {{ step }}
+        {% if loop.index > 1: %}<br/>{% endif %}<i class="bullet fa fa-circle-o-notch fa-spin"></i></i> {{ step }}
       {%- endif %}
     {%- endfor %}
     </div>
