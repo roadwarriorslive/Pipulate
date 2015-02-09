@@ -194,7 +194,9 @@ def pipulate():
       now = datetime.datetime.now()
       if 'isotimestamp' in globs.row1:
         cell = onesheet.cell(globs.numrows, globs.row1.index('isotimestamp')+1)
-        out(cell.value)
+        import dateutil.parser
+        lastinsertdate = dateutil.parser.parse(cell.value)
+        out(type(lastinsertdate))
         raise StopIteration
         yield str(globs.row1.find('isotimestamp')), "", ""
       row1funcs(globs.row1)
