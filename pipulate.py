@@ -134,12 +134,20 @@ def pipulate():
         raise StopIteration
       try:
         gdoc = gsp.open_by_url(globs.PIPURL)
+      except gspread.exceptions.NoValidUrlKeyFound:
+        yield "Currently, the URL must be a Google Spreadsheet.", "", ""
+        yield "<a href='https://docs.google.com/spreadsheets/create' target='_new'>Create</a> a new Google Spreadsheet and click Bookmarklet again.", "Google Spreadsheet Not Found.", ""
+        raise StopIteration
       except gspread.exceptions.SpreadsheetNotFound:
         yield "Please give the document a name to force first save.", "", ""
         yield "spinoff", "", ""
         raise StopIteration
-      except:
-        yield "Either logged out or not a Google Spreadsheet.", "", ""
+      except Exception as e:
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        ename = type(e).__name__
+        fixme = "%s, %s, %s" % (ename, fname, exc_tb.tb_lineno)
+        yield fixme, "", ""
         yield "spinoff", "", ""
         raise StopIteration
       try:
@@ -275,7 +283,7 @@ def pipulate():
       out('Finished question marks')
     else:
       yield 'Please Login to Google', "", ""
-    yield "Pipulation complete.", "Yep, that's what the data looked like", ""
+    yield "Pipulation complete.", "", ""
     yield "spinoff", "", ""
     out("Pipulation complete")
   except Exception as e:
@@ -283,7 +291,10 @@ def pipulate():
     fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
     ename = type(e).__name__
     if ename == "StopIteration":
-      yield "Better pipulating next time.", "Login found under the \"burger button\"", ""
+      loginmsg = ""
+      if session and 'loggedin' in session and session['loggedin'] != '1':
+        loginmsg = "Login link under the upper-left \"burger button\"."
+      yield "Better pipulating next time.", loginmsg, ""
     else:
       fixme = "%s, %s, %s" % (ename, fname, exc_tb.tb_lineno)
       yield fixme, "", ""

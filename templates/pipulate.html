@@ -251,7 +251,7 @@
     {% endwith %}
     </div>
     <div id="pipstream">
-    {% for step, learn, magic in data: -%}
+    {% for lineitem, learn, magic in data: -%}
       {%- if magic or learn: -%}
       <script>
         {%- if magic: -%}
@@ -262,15 +262,15 @@
         {%- if learn: -%}$("#learnsomething").html('{{ learn }}');{%- endif -%}
       </script>
       {%- endif -%}
-      {%- if step -%}
-        {%- if step == "spinon" -%}
+      {%- if lineitem -%}
+        {%- if lineitem == "spinon" -%}
           <script>
             // Lock button and display spinner
             $('#pipulate').prop("disabled", true);
             $('#pipulate').fadeTo("fast",.5);
             //$('#spinner').show();
           </script>
-        {%- elif step == "spinoff" -%}
+        {%- elif lineitem == "spinoff" -%}
           <script>
             // Unlock button and remove spinner
             $('#spinner').hide();
@@ -278,7 +278,7 @@
             $("i").addClass("fa-check");
             unlockbutton();
           </script>
-        {%- elif step == "spinerr" -%}
+        {%- elif lineitem == "spinerr" -%}
           <script>
             // Unlock button and gracefully show user things are fubar.
             $('#spinner').hide();
@@ -286,14 +286,14 @@
             $("i.bullet").addClass("fa-circle-o");
             unlockbutton();
           </script>
-        {%- elif step[:1] == ',' -%}
-          {{ step }}
+        {%- elif lineitem[:1] == ',' -%}
+          {{ lineitem }}
         {%- else -%}
           <script>
             $("i").removeClass("fa-spin fa-circle-o-notch");
             $("i").addClass("fa-check");
           </script>
-          {%- if loop.index > 1: -%}<br/>{%- endif -%}<i class="bullet fa fa-circle-o-notch fa-spin"></i> {{ step }}
+          {%- if loop.index > 1: -%}<br/>{%- endif -%}<i class="bullet fa fa-circle-o-notch fa-spin"></i> {{ lineitem|safe }}
         {%- endif -%}
       {%- endif -%}
     {%- endfor -%}

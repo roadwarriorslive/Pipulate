@@ -10,18 +10,38 @@ def cyclemotto():
   else:
     session['i'] += 1
   s = []
+  s.append("And now for something completely different... Pipulate!")
   s.append("What do you want to Pipulate today?")
-  s.append("Shows on second cycle")
-  s.append("Pipulate: What do you want it to be today?")
-  s.append("Small Data is the new Big")
-  s.append("Try making a new Scrape pattern.")
-  s.append("Want real power? Learn Regular Expressions!")
+  s.append("Step 1: Drag the bookmarklet to the Bookmark bar.")
+  s.append("You can change the sample data filled into the Pipulate tab,")
+  s.append("Make a Google Spreadsheet and click the Bookmarklet.")
+  s.append("Pipulate can be coerced to do almost anything.")
+  s.append("I never met a KPI I couldn't collect.")
+  s.append("This box shows the data that's being shot around, FYI.")
+  s.append("Need to scrape something different off the page? Scrapers tab!")
+  s.append("Want real power? Try learning Regular Expressions!")
+  s.append("I'd pipulate in Excel, but GDocs is free and has a Web API.")
+  s.append("Point of interest: Pipulate is written in Python.")
+  s.append("Visit the project at: https://github.com/miklevin/pipulate")
+  s.append("On a Mac? Open Terminal, then type \"python\", then \"import this\".")
+  s.append("To exit, type \"exit()\". Makes sense, right?")
+  s.append("Careful, or else you might start learning some Python.")
+  s.append("Download your own dedicated Pipulate server at Levinux.com.")
+  s.append("Levinux: Give me 10 minutes, and I'll give you skills for life.")
+  s.append("Learn the tech \"Short \"Stack: Linux, Python, vim and git.")
+  s.append("You don't need to learn programming, but it really helps.")
+  s.append("We all stand on the shoulders of giants.")
+  s.append("The trick is choosing the correct shoulders to stand on.")
+  s.append("Google Ken Thompson, Linus Torvalds and Guido van Rossum.")
+  s.append("For extra points, google Richard Stallman.")
   s.append("I lost an electron. Are you positive?")
-  s.append("Careful, you might learn Python.")
+  s.append("Genius is mostly a matter of careful cultivation.")
+  s.append("Girl, you pipulate alot!")
+  mottomodulo = session['i'] % len(s)
   try:
-    return session['i']
+    return s[mottomodulo]
   except:
-    return 'bar'
+    return s[0]
 
 def pipinit():
   s = []
