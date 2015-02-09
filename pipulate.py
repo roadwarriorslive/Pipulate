@@ -155,9 +155,9 @@ def pipulate():
       except:
         headers = ['URL', 'Tweeted', 'Shared', 'Liked', 'Plussed', 'DateStamp', 'TimeStamp']
         yme = InitTab(gdoc, 'Pipulate', headers, pipinit())
+        worksheet = gdoc.worksheet("Pipulate")
         yield yme, "", ""
       finally:
-        worksheet = gdoc.worksheet("Pipulate")
         globs.numrows = len(worksheet.col_values(1))
       try:
         gdoc.worksheet("Config")
