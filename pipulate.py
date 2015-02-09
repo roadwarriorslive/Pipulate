@@ -49,7 +49,10 @@ def stream_template(template_name, **context):      # This is the key to streami
 def templateglobals():                              # available in Jinja2 templates
   return dict(loginlink=getLoginlink(),             # without having to always
   bookmarklet=getBookmarklet(),                     # pass them as parameters
-  logoutlink=getLogoutlink())
+  logoutlink=getLogoutlink(),
+  loadcount=loadcount(),
+  slogns=slogans()
+  )
 
 class PipForm(Form):
   pipurl = StringField('Paste a Google Spreadsheet URL:')
@@ -308,6 +311,15 @@ def getLoginlink():
             }
   from urllib import urlencode
   return "%s?%s" % (baseurl, urlencode(qsdict))
+
+def loadcount():
+  try:
+    session['i']
+  except:
+    session['i'] = 0
+  else:
+    session['i'] += 1
+  return session['i']
 
 def getBookmarklet():
   return '''javascript:(function(){window.open('http://%s/?u='+encodeURIComponent(document.location.href), 'Pipulate', 'toolbar=0,resizable=1,scrollbars=1,status=1,width=640,height=520');})();''' % (request.headers['Host'])
