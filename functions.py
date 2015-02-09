@@ -1,16 +1,27 @@
 import requests
 import globs
 
-def slogans():
+def cyclemotto():
+  from flask import session
+  try:
+    session['i']
+  except:
+    session['i'] = 0
+  else:
+    session['i'] += 1
   s = []
   s.append("What do you want to Pipulate today?")
+  s.append("Shows on second cycle")
   s.append("Pipulate: What do you want it to be today?")
   s.append("Small Data is the new Big")
   s.append("Try making a new Scrape pattern.")
   s.append("Want real power? Learn Regular Expressions!")
   s.append("I lost an electron. Are you positive?")
   s.append("Careful, you might learn Python.")
-  return s
+  try:
+    return session['i']
+  except:
+    return 'bar'
 
 def pipinit():
   s = []
