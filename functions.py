@@ -1,6 +1,17 @@
 import requests
 import globs
 
+def slogans():
+  s = []
+  s.append("What do you want to Pipulate today?")
+  s.append("Pipulate: What do you want it to be today?")
+  s.append("Small Data is the new Big")
+  s.append("Try making a new Scrape pattern.")
+  s.append("Want real power? Learn Regular Expressions!")
+  s.append("I lost an electron. Are you positive?")
+  s.append("Careful, you might learn Python.")
+  return s
+
 def pipinit():
   s = []
   s.append(['http://mikelev.in','*','*','*','*','*','*'])

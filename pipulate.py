@@ -281,7 +281,7 @@ def pipulate():
     fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
     ename = type(e).__name__
     if ename == "StopIteration":
-      yield "Better luck pipulating next time.", "", ""
+      yield "Better pipulating next time.", "Login found under the \"burger button\"", ""
     else:
       fixme = "%s, %s, %s" % (ename, fname, exc_tb.tb_lineno)
       yield fixme, "", ""
