@@ -110,10 +110,10 @@ def main():                                         # visiting app's homepage.
 def pipulate():
   try:
     out("Beginning to pipulate")
-    yield "Beginning to pipulate...", "Hello World", "Begin"
+    yield "Beginning to pipulate...", "Hello World", ""
     yield "spinon", "", ""
     funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
-    globs.transfuncs = zipnamevaldict(funcs, funcs) #Keep translation table
+    globs.transfuncs = ziplckey(funcs, funcs) #Keep translation table
     blankrows = 0
     import gspread
     if session:
@@ -137,7 +137,7 @@ def pipulate():
         yield "spinoff", "", ""
         raise StopIteration
       except:
-        yield "Pipulate currently only works with Google Spreadheet URLs.", "", ""
+        yield "Either logged out or not a Google Spreadsheet.", "", ""
         yield "spinoff", "", ""
         raise StopIteration
       try:
@@ -164,15 +164,19 @@ def pipulate():
         yield yme, "", ""
       sst = gdoc.worksheet("Scrapers")
       #This is actually 3 API calls
-      pjson = json.dumps(sst.get_all_records())
-      yield "Getting all records", "All Records", pjson
-      raise StopIteration
-      snames = sst.col_values(1)
-      stypes = sst.col_values(2)
-      spatterns = sst.col_values(3)
-      globs.scrapetypes = zipnamevaldict(snames, stypes)
-      globs.scrapepatterns = zipnamevaldict(snames, spatterns)
-      globs.transscrape = zipnamevaldict(snames, snames)
+      lod = sst.get_all_records() #Returns list of dictionaries
+      #lod = json.dumps(sst.get_all_records()) #Returns list of dictionaries
+      #yield "Getting all records", "All Records", pjson
+      #raise StopIteration
+      pat = [[d['pattern']][0] for d in lod]
+      typ = [[d['type']][0] for d in lod]
+      nam = [[d['name']][0] for d in lod]
+      #snames = sst.col_values(1)
+      #stypes = sst.col_values(2)
+      #spatterns = sst.col_values(3)
+      globs.scrapetypes = ziplckey(nam, typ)
+      globs.scrapepatterns = ziplckey(nam, pat)
+      globs.transscrape = ziplckey(nam, nam)
 
       trendlistoflists = []
       globs.row1 = lowercaselist(worksheet.row_values(1))
@@ -269,7 +273,7 @@ def pipulate():
       out('Finished question marks')
     else:
       yield 'Please Login to Google', "", ""
-    yield "Pipulation complete.", "Goodbye World", "End"
+    yield "Pipulation complete.", "Goodbye World", ""
     yield "spinoff", "", ""
     out("Pipulation complete")
   except Exception as e:
@@ -332,9 +336,9 @@ def refreshconfig(gdoc, sheetname):
   worksheet = gdoc.worksheet(sheetname)
   names = worksheet.col_values(1)
   values = worksheet.col_values(2)
-  return zipnamevaldict(names, values)
+  return ziplckey(names, values)
 
-def zipnamevaldict(keys, values):
+def ziplckey(keys, values):
   keys = lowercaselist(keys)
   return dict(zip(keys, values))
 

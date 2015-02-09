@@ -187,7 +187,7 @@
           $('#spinner').show();
           $('#pipstream').text('');
           $('#magicbox').val('');
-          $('#learnsomething').html('A Window Into The Magic...');
+          $('#learnsomething').html('Hey, pssst! Wanna see some data...');
           $('#pipform').submit();
         });
       });
@@ -219,7 +219,12 @@
           <div class="bounce2"></div>
           <div class="bounce3"></div>
         </div>
-        <div id="learnsomething"></div>
+        {% if request.method == 'POST': %}
+          <div id="learnsomething">Hey, pssst! Wanna see some data...</div>
+        {% else %}
+          <div id="learnsomething"></div>
+        {% endif %}
+
         <textarea id="magicbox" rows="4" cols="60"></textarea>
       </div>
     </div>
@@ -249,8 +254,10 @@
     {% for step, learn, magic in data: -%}
       {%- if magic or learn: -%}
       <script>
-        var pjson = {{ magic|safe }};
-        {%- if magic: -%}$("#magicbox").val(JSON.stringify(pjson, null, '\t'));{%- endif -%}
+        {%- if magic: -%}
+          var pjson = {{ magic|safe }};
+          $("#magicbox").val(JSON.stringify(pjson, null, '\t'));
+        {%- endif -%}
         {%- if learn: -%}$("#learnsomething").html('{{ learn }}');{%- endif -%}
       </script>
       {%- endif -%}
