@@ -133,10 +133,14 @@ def pipulate():
         yield "spinoff", "", ""
         raise StopIteration
       try:
-        gdoc = gsp.open_by_url(globs.PIPURL)
+        gdoc = gsp.open_by_url(globs.PIPURL) #HTTPError
       except gspread.exceptions.NoValidUrlKeyFound:
         yield "Currently, the URL must be a Google Spreadsheet.", "", ""
         yield "<a href='https://docs.google.com/spreadsheets/create' target='_new'>Create</a> a new Google Spreadsheet and click Bookmarklet again.", "Google Spreadsheet Not Found.", ""
+        raise StopIteration
+      except gspread.exceptions.HTTPError, e:
+        yield 'HTTP ERROR %s occured' % e.code, "", ""
+        yield e, "", ""
         raise StopIteration
       except gspread.exceptions.SpreadsheetNotFound:
         yield "Please give the document a name to force first save.", "", ""
@@ -165,7 +169,7 @@ def pipulate():
         headers = ['name', 'value']
         yme = InitTab(gdoc, 'Config', headers)
         yield yme, "", ""
-      globs.config = refreshconfig(gdoc, "Config")
+      globs.config = refreshconfig(gdoc, "Config") #HTTPError
       try:
         gdoc.worksheet("Scrapers")
       except:
@@ -189,7 +193,7 @@ def pipulate():
       row1funcs(globs.row1)
       trended = False
       qstart = 1
-      yield "", "Then, we look for Trending requests...", ""
+      yield "", "Then, we look for Trending requests (asterisks in row 2+)...", ""
       for rowdex in range(1, onesheet.row_count+1): #Give trending its own loop
         onerow = onesheet.row_values(rowdex) #!!! HTTPError
         if onerow:
@@ -259,6 +263,7 @@ def pipulate():
         if '?' in onerow:
           #Perfect opportunity to test nested generator messages
           blankrows = 0
+          yield "", "", json.dumps(onerow)
           newrow = processrow(str(rowdex), onerow) #Replace question marks in row
           newrow = ['' if x==None else x for x in newrow]
           yield "", "", json.dumps(newrow)
