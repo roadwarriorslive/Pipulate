@@ -166,14 +166,25 @@
       box-shadow:0 10px 8px rgba(0,0,0,.6)}
     </style>
     <script>
+      function lockbutton() {
+        $('#pipulate').fadeTo(0,.5);
+        $('#pipulate').prop("disabled", true)
+        $('#piplock').removeClass("fa-chevron-circle-right")
+        $('#piplock').addClass("fa-lock")
+      }
+      function unlockbutton() {
+        $('#pipulate').prop("disabled", false)
+        $('#pipulate').fadeTo("fast",1);
+        $('#piplock').addClass("fa-chevron-circle-right")
+        $('#piplock').removeClass("fa-lock")
+      }
       $(document).ready(function(){  
-        $("#spinner").hide();
+        {% if request.method == 'GET': %}
+          $("#spinner").hide();
+        {% endif %}
         $( "#pipulate" ).click(function() {
-          $('#pipulate').prop("disabled", true)
+          lockbutton();
           $('#spinner').show()
-          $('#piplock').removeClass("fa-chevron-circle-right")
-          $('#piplock').addClass("fa-lock")
-          $('#pipulate').fadeTo("fast",.5);
           $('#pipform').submit();
         });
       });
@@ -193,6 +204,11 @@
           <button id="pipulate" class="button" type="submit">
             Start Pipulating &nbsp;<i id="piplock" class="fa fa-chevron-circle-right"></i>
           </button>
+          {% if request.method == 'POST': %}
+            <script>
+              lockbutton();
+            </script>
+          {% endif %}
       </form>
       <div id="magicdiv">
         <div id="spinner" class="spinner">
@@ -246,24 +262,18 @@
       {% elif step == "spinoff" %}
         <script>
           // Unlock button and remove spinner
-          $('#pipulate').prop("disabled", false)
-          $('#pipulate').fadeTo("fast",1);
           $('#spinner').hide()
-          $( "i" ).removeClass( "fa-spin fa-circle-o-notch" )
-          $( "i" ).addClass( "fa-check" )
-          $('#piplock').addClass("fa-chevron-circle-right")
-          $('#piplock').removeClass("fa-lock")
+          $("i").removeClass( "fa-spin fa-circle-o-notch" )
+          $("i").addClass( "fa-check" )
+          unlockbutton();
         </script>
       {% elif step == "spinerr" %}
         <script>
           // Unlock button and gracefully show user things are fubar.
-          $('#pipulate').prop("disabled", false)
-          $('#pipulate').fadeTo("fast",1);
           $('#spinner').hide()
-          $( "i" ).removeClass( "fa-spin fa-circle-o-notch" )
-          $( "i" ).addClass( "fa-circle-o" )
-          $('#piplock').addClass("fa-chevron-circle-right")
-          $('#piplock').removeClass("fa-lock")
+          $("i").removeClass( "fa-spin fa-circle-o-notch" )
+          $("i").addClass( "fa-circle-o" )
+          unlockbutton();
         </script>
       {% elif step[:1] == ',' -%}
         {{ step }}
