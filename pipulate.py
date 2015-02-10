@@ -131,9 +131,12 @@ def pipulate():
       try:
         gsp = gspread.authorize(creds)
       except:
+        out("Login failed.")
         yield "Google Login unsuccessful.", "", ""
         yield "spinoff", "", ""
         raise StopIteration
+      else:
+        out("Login successful.")
       try:
         gdoc = gsp.open_by_url(globs.PIPURL) #HTTPError
       except gspread.httpsession.HTTPError, e:
@@ -156,40 +159,59 @@ def pipulate():
         yield fixme, "", ""
         yield "spinoff", "", ""
         raise StopIteration
+      else:
+        out("Google Spreadsheet successfully opened")
       try:
         onesheet = gdoc.worksheet("Pipulate")
       except:
         #headers = ['URL', 'Tweeted', 'Shared', 'Liked', 'Plussed', 'DateStamp', 'TimeStamp']
         headers = ['URL', 'Subscribers', 'ISOTimeStamp']
+        out("Creating Pipulate tab.")
         yme = InitTab(gdoc, 'Pipulate', headers, pipinit())
         onesheet = gdoc.worksheet("Pipulate")
+        out("Pipulate tab created.")
         yield yme, "", ""
       finally:
+        out("Counting rows in Pipulate tab.")
         globs.numrows = len(onesheet.col_values(1)) #!!!UnboundLocalError
+        out("%s rows found." % globs.numrows)
       try:
         gdoc.worksheet("Config")
       except:
         headers = ['name', 'value']
+        out("Creating Config tab.")
         yme = InitTab(gdoc, 'Config', headers)
+        out("Config tab created.")
         yield yme, "", ""
-      globs.config = refreshconfig(gdoc, "Config") #HTTPError
+      try:
+        out("Reading Config tab into globals.")
+        globs.config = refreshconfig(gdoc, "Config") #HTTPError
+      except:
+        out("Copying Config tag to globals failed.")
+      else:
+        out("Config tab copied to globals.")
       try:
         gdoc.worksheet("Scrapers")
       except:
         headers = ['name', 'type', 'pattern']
         yme = InitTab(gdoc, 'Scrapers', headers, scrapes())
+        out("Scrapers tab created.")
         yield yme, "", ""
-      sst = gdoc.worksheet("Scrapers")
-      lod = sst.get_all_records() #Returns list of dictionaries
-      #lod = json.dumps(sst.get_all_records()) #Returns list of dictionaries
-      #yield "Getting all records", "All Records", pjson
-      #raise StopIteration
-      pat = [[d['pattern']][0] for d in lod]
-      typ = [[d['type']][0] for d in lod]
-      nam = [[d['name']][0] for d in lod]
-      globs.scrapetypes = ziplckey(nam, typ)
-      globs.scrapepatterns = ziplckey(nam, pat)
-      globs.transscrape = ziplckey(nam, nam)
+      try:
+        out("Loading Scrapers.")
+        sst = gdoc.worksheet("Scrapers")
+        lod = sst.get_all_records() #Returns list of dictionaries
+        pat = [[d['pattern']][0] for d in lod]
+        typ = [[d['type']][0] for d in lod]
+        nam = [[d['name']][0] for d in lod]
+        globs.scrapetypes = ziplckey(nam, typ)
+        globs.scrapepatterns = ziplckey(nam, pat)
+        globs.transscrape = ziplckey(nam, nam)
+      except:
+        out("Failed to load Scrapers.")
+        raise StopIteration
+      else:
+        out("Scrpaers loaded.")
       globs.row1 = lowercaselist(onesheet.row_values(1))
       trendlistoflists = []
       row1funcs(globs.row1)
@@ -226,8 +248,6 @@ def pipulate():
       lastinsertdate = None
       if 'isotimestamp' in globs.row1:
         backintime = globs.numrows - len(trendlistoflists)
-        out(globs.numrows)
-        out(backintime)
         timeletter = globs.letter[globs.row1.index('isotimestamp')+1]
         mayhaverun = "%s%s:%s%s" % (timeletter, backintime, timeletter, globs.numrows)
         CellList = onesheet.range(mayhaverun)
@@ -375,6 +395,7 @@ class Credentials (object):
     self.access_token = access_token
 
 def refreshconfig(gdoc, sheetname):
+  #!!! Needs optimization
   onesheet = gdoc.worksheet(sheetname)
   names = onesheet.col_values(1)
   values = onesheet.col_values(2)

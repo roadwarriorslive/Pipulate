@@ -181,6 +181,10 @@
       $(document).ready(function(){  
         {% if request.method == 'GET': %}
           $("#spinner").hide();
+        {% elif form.pipurl.data == '': %}
+          $("#spinner").hide();
+          unlockbutton();
+          $("#learnsomething").html('Copy and paste Google Spreadsheet URL into URL field.');
         {% endif %}
         $("#pipulate").click(function() {
           lockbutton();
