@@ -63,6 +63,7 @@ class PipForm(Form):
 
 @app.route("/", methods=['GET', 'POST'])            # Main point of entry when
 def main():                                         # visiting app's homepage.
+  out("")
   out("ENTERED MAIN FUNCTION", 80)
   streamit = False                                  # Default to not streaming.
   form = PipForm(csrf_enabled=False)                # Initialize form for UI.
@@ -78,7 +79,6 @@ def main():                                         # visiting app's homepage.
         except:
           session.clear()
           flash("Login expired. Please log back in")
-
   if request.method == 'POST':                      # Pipulation must only ever
     if form.pipurl.data:                            # occur on the POST method
       globs.PIPURL = form.pipurl.data               # with a submitted URL. That
@@ -110,9 +110,13 @@ def main():                                         # visiting app's homepage.
         form.pipurl.data = session['u']
     if form.pipurl.data and request.url_root == url_root(form.pipurl.data):
       form.pipurl.data = '' #can't pipulate the pipulate site
+  out("Selecting template method.")
   if streamit:
+    out("Streaming output to user.")
     return Response(stream_template('pipulate.html', form=form, data=streamit))
   else:
+    out("RENDERING TEMPLATE", 80)
+    out("")
     return render_template('pipulate.html', form=form)
 
 def pipulate():
@@ -172,7 +176,7 @@ def pipulate():
         onesheet = gdoc.worksheet("Pipulate")
       except:
         #headers = ['URL', 'Tweeted', 'Shared', 'Liked', 'Plussed', 'DateStamp', 'TimeStamp']
-        headers = ['URL', 'Subscribers', 'ISOTimeStamp']
+        headers = ['URL', 'Subscribers', 'ISOTimeStamp', 'Count']
         out("Creating Pipulate tab.")
         yme = InitTab(gdoc, 'Pipulate', headers, pipinit())
         onesheet = gdoc.worksheet("Pipulate")
@@ -263,7 +267,6 @@ def pipulate():
       globs.fargs = fargs 
       trended = False
       qstart = 1
-      yield "", "Then, we look for Trending requests (asterisks in row 2+)...", ""
       out("About to scan down Pipulate tab looking for asterisks.")
       for rowdex in range(1, onesheet.row_count+1):
         try:
@@ -298,16 +301,24 @@ def pipulate():
           if blankrows > 1:
             out("Found second blank row, so trending scan complete.")
             break
-      if trended and 'isotimestamp' in globs.row1:
+      if trended and 'count' in globs.row1:
         now = datetime.datetime.now()
         lastinsertdate = None
-        backintime = globs.numrows - len(trendlistoflists)
-        timeletter = globs.letter[globs.row1.index('isotimestamp')+1]
+        backintime = globs.numrows - len(trendlistoflists) + 1
+        timeletter = globs.letter[globs.row1.index('count') + 1]
         mayhaverun = "%s%s:%s%s" % (timeletter, backintime, timeletter, globs.numrows)
         CellList = onesheet.range(mayhaverun)
+        counts = []
         for onecell in CellList:
-          out("Foo %s" % onecell.value)
-
+          counts.append(onecell.value)
+        same = all(x == counts[0] for x in counts)
+        if same:
+          if counts[0] == '*':
+            counts[0] = 0
+          nextnum = int(counts[0]) + 1
+          for onelist in trendlistoflists:
+            onelist[globs.row1.index('count')] = nextnum
+        out(trendlistoflists)
         #cell = onesheet.cell(globs.numrows, globs.row1.index('isotimestamp')+1)
         #import dateutil.parser
         #lastinsertdate = dateutil.parser.parse(cell.value)
@@ -446,7 +457,7 @@ def pipulate():
       yield 'Please Login to Google', "", ""
     yield "Pipulation complete.", "This box contains the last JSON data processed.", ""
     yield "spinoff", "", ""
-    out("PIPULATION COMPLETE", 80)
+    out("Reported pipulation complete to user.")
   except Exception as e:
     exc_type, exc_obj, exc_tb = sys.exc_info()
     fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
@@ -463,6 +474,8 @@ def pipulate():
       yield "Please open an issue at https://github.com/miklevin/pipulate", "", ""
       yield "Or just tap me on the shoulder.", "", ""
     yield "spinerr", "", ""
+  out("EXITING GENERATOR", 80)
+  out("")
 
 def url_root(url):
   from urlparse import urlparse

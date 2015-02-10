@@ -1,6 +1,9 @@
 import requests, datetime
 import globs
 
+def count():
+  return 1
+
 def cyclemotto():
   from flask import session
   try:
@@ -46,9 +49,9 @@ def cyclemotto():
 
 def pipinit():
   s = []
-  s.append(['https://www.youtube.com/user/miklevin','*','*'])
-  s.append(['https://www.youtube.com/user/ForeverG5','*','*'])
-  s.append(['https://www.youtube.com/user/PewDiePie','*','*'])
+  s.append(['https://www.youtube.com/user/miklevin','*','*','*'])
+  s.append(['https://www.youtube.com/user/ForeverG5','*','*','*'])
+  s.append(['https://www.youtube.com/user/PewDiePie','*','*','*'])
   return s
 
 def pipinit2():
