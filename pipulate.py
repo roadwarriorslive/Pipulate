@@ -199,7 +199,7 @@ def pipulate():
         lastinsertdate = dateutil.parser.parse(cell.value)
       out("%s %s" % (now, lastinsertdate))
       diff = now - lastinsertdate
-      out(diff.seconds)
+      out(diff.seconds/60)
       raise StopIteration
       out((now-lastinsertdate).days * 24 * 60)
       row1funcs(globs.row1)
