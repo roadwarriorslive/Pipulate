@@ -188,20 +188,8 @@ def pipulate():
       globs.scrapetypes = ziplckey(nam, typ)
       globs.scrapepatterns = ziplckey(nam, pat)
       globs.transscrape = ziplckey(nam, nam)
-
-      trendlistoflists = []
       globs.row1 = lowercaselist(onesheet.row_values(1))
-      now = datetime.datetime.now()
-      lastinsertdate = None
-      if 'isotimestamp' in globs.row1:
-        cell = onesheet.cell(globs.numrows, globs.row1.index('isotimestamp')+1)
-        import dateutil.parser
-        lastinsertdate = dateutil.parser.parse(cell.value)
-      out("%s %s" % (now, lastinsertdate))
-      diff = now - lastinsertdate
-      out(diff.seconds/60)
-      raise StopIteration
-      out((now-lastinsertdate).days * 24 * 60)
+      trendlistoflists = []
       row1funcs(globs.row1)
       trended = False
       qstart = 1
@@ -229,6 +217,31 @@ def pipulate():
           blankrows += 1
           if blankrows > 1:
             break
+
+
+
+      now = datetime.datetime.now()
+      lastinsertdate = None
+      if 'isotimestamp' in globs.row1:
+        backintime = globs.numrows - len(trendlistoflists)
+        out(globs.numrows)
+        out(backintime)
+        timeletter = globs.letter[globs.row1.index('isotimestamp')+1]
+        mayhaverun = "%s%s:%s%s" % (timeletter, backintime, timeletter, globs.numrows)
+        CellList = onesheet.range(mayhaverun)
+        for onecell in CellList:
+          out("Foo %s" % onecell.value)
+
+        #cell = onesheet.cell(globs.numrows, globs.row1.index('isotimestamp')+1)
+        #import dateutil.parser
+        #lastinsertdate = dateutil.parser.parse(cell.value)
+      #out("%s %s" % (now, lastinsertdate))
+      #out((now-lastinsertdate).days * 24 * 60)
+      #diff = now - lastinsertdate
+      #out(diff.seconds/60)
+
+
+
       if trended:
         qstart = globs.numrows + 1
       else:
