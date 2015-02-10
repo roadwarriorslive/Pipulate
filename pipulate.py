@@ -198,6 +198,8 @@ def Pipulate():
       try:
         out("Reading Config tab into globals.")
         globs.config = refreshconfig(gdoc, "Config") #HTTPError
+        out(globs.config['throttlerownumber'])
+        return
       except:
         out("Copying Config tag to globals failed.")
       else:
@@ -264,7 +266,6 @@ def Pipulate():
                 fargs[coldex2][anarg] = None
             for argdex, anarg in enumerate(myargs): #For each argument of function
               fargs[coldex2][anarg] = None
-      out("Putting function argument dictionary in globals.")
       trended = False
       qstart = 1
       out("About to scan down Pipulate tab looking for asterisks.")
