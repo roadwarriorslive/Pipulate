@@ -564,10 +564,27 @@ def processrow(rowdex, onerow):
           except:
             pass
         collabel = globs.row1[coldex]
+
         if collabel in globs.transfuncs.keys():
           for x in range(0, globs.retrytimes):
+
+
+            fname = globs.transfuncs[globs.row1[coldex]]
+            fargs = globs.fargs[coldex]
+            evalme = "%s(" % fname #Begin building string that will eventually be eval'd
+            if fargs:
+              #The function we're looking at DOES have required arguments.
+              for anarg in fargs:
+                #Add an arg=value to string for each required argument.
+                anarg = anarg.lower()
+                argval = getargval(anarg, fargs[anarg], changedrow)
+                evalme = "%s%s=%s, " % (evalme, anarg, argval)
+              evalme = evalme[:-2] + ')' #Finish building string for the eval statement.
+            else:
+              #No arguments required, so just immediately close the parenthesis.
+              evalme = evalme + ')'
             try:
-              changedrow[coldex] = evalfunc(coldex, changedrow) #The Function Path
+              changedrow[coldex] = eval(evalme)
               out('%s worked' % collabel)
               break
             except Exception as e:
