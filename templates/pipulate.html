@@ -254,14 +254,12 @@ overflow-y:scroll;
         <textarea id="magicbox" rows="4" cols="60"></textarea>
       </div>
     </div>
-    <div id="pipflash">
+    <div id="pipstream">
     {% with messages = get_flashed_messages() %}
       {% if messages %}
-        <ul class=flashes>
         {% for message in messages %}
-          <br/>{{ message }}
+          <br/><i class="bullet fa fa-circle-o"></i> {{ message }}
         {% endfor %}
-        </ul>
       {% endif %}
     {% endwith %}
     </div>
