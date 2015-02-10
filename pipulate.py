@@ -141,6 +141,7 @@ def pipulate():
       try:
         gdoc = gsp.open_by_url(globs.PIPURL) #HTTPError
       except gspread.httpsession.HTTPError, e:
+        out("Login appeared successful, but rejected on document open attempt.")
         #yield 'HTTP ERROR %s occured' % e.code, "", ""
         yield "Session timed out. Please login again.", "", ""
         raise StopIteration
@@ -161,7 +162,7 @@ def pipulate():
         yield "spinoff", "", ""
         raise StopIteration
       else:
-        out("Google Spreadsheet successfully opened")
+        out("Google Spreadsheet successfully opened.")
       try:
         onesheet = gdoc.worksheet("Pipulate")
       except:
@@ -222,39 +223,79 @@ def pipulate():
       else:
         out("Row 1 succesfully loaded.")
       trendlistoflists = []
-      row1funcs(globs.row1)
+      out("Scanning row 1 for function and scraper names.")
+      fargs = {}
+      for coldex2, fname in enumerate(globs.row1):
+        try:
+          fname = fname.lower()
+        except:
+          pass
+        if fname in globs.transfuncs.keys(): 
+          out("Found function %s in row 1." % fname)
+          fargs[coldex2] = {}
+          from inspect import getargspec
+          argspec = getargspec(eval(fname))
+          if argspec:
+            out("%s has arguments: %s" % (fname, argspec))
+            myargs = argspec[0]
+            mydefs = argspec[3]
+            offset = 0
+            if mydefs:
+              out("%s has defaults: %s" % (fname, mydefs))
+              offset = len(myargs) - len(mydefs)
+              if offset:
+                for i in range(0, offset-1):
+                  fargs[coldex2][myargs[i]] = None
+                for i in range(offset, len(myargs)):
+                  fargs[coldex2][myargs[i]] = mydefs[offset-i]
+            else:
+              out("%s has no defaults." % (fname))
+              for anarg in myargs:
+                fargs[coldex2][anarg] = None
+            for argdex, anarg in enumerate(myargs): #For each argument of function
+              fargs[coldex2][anarg] = None
+      out("Putting function argument dictionary in globals.")
+      globs.fargs = fargs 
       trended = False
       qstart = 1
       yield "", "Then, we look for Trending requests (asterisks in row 2+)...", ""
-      for rowdex in range(1, onesheet.row_count+1): #Give trending its own loop
-        onerow = onesheet.row_values(rowdex) #!!! HTTPError
+      out("About to scan down Pipulate tab looking for asterisks.")
+      for rowdex in range(1, onesheet.row_count+1):
+        try:
+          out("Scanning row %s for asterisks." % rowdex)
+          onerow = onesheet.row_values(rowdex) #!!! HTTPError
+        except:
+          out("Couldn't open row.")
+        else:
+          out("Successfully opened row.")
         if onerow:
           if rowdex == 2: #Looking for trending requests
             if '*' in onerow:
-              yield "Found trending asterisks in row 2", "", json.dumps(onerow)
               trended = True
+              out("Found asterisks on row 2 -- trending activated!")
               trendlistoflists.append(onerow)
+              yield "Found trending asterisks in row 2", "", json.dumps(onerow)
             else:
               break
           elif trendlistoflists and rowdex > 2:
             if '*' in onerow:
+              out("Found astrisks on row %s." % rowdex)
+              trendlistoflists.append(onerow)
               yme = ", %s" % rowdex
               yield yme, "", json.dumps(onerow)
-              trendlistoflists.append(onerow)
             else:
               blankrows += 1
               if blankrows > 1:
+                out("Found second row without asterisks, so stopped looking.")
                 break
         else:
           blankrows += 1
           if blankrows > 1:
+            out("Found second blank row, so trending scan complete.")
             break
-
-
-
-      now = datetime.datetime.now()
-      lastinsertdate = None
-      if 'isotimestamp' in globs.row1:
+      if trended and 'isotimestamp' in globs.row1:
+        now = datetime.datetime.now()
+        lastinsertdate = None
         backintime = globs.numrows - len(trendlistoflists)
         timeletter = globs.letter[globs.row1.index('isotimestamp')+1]
         mayhaverun = "%s%s:%s%s" % (timeletter, backintime, timeletter, globs.numrows)
@@ -549,41 +590,6 @@ def processrow(rowdex, onerow):
               time.sleep(globs.retryseconds)
   return changedrow
 
-def row1funcs(onerow):
-  """Scans row-1 for names of global functions and builds dict of requirements.
-
-  This is only invoked on row 1 of a worksheet, where the names of functions
-  and parameters are expected to be discovered. By the end, we've created a
-  dictionary of dictionaries called globs.fargs which plays an important role
-  in building the code necessary for question mark replacement."""
-  fargs = {}
-  for coldex, fname in enumerate(onerow):
-    try:
-      fname = fname.lower()
-    except:
-      pass
-    if fname in globs.transfuncs.keys(): #Detect if column name is a function
-      fargs[coldex] = {}
-      from inspect import getargspec
-      argspec = getargspec(eval(fname))
-      if argspec: # Function has parameters
-        myargs = argspec[0]
-        mydefs = argspec[3]
-        offset = 0
-        if mydefs:
-          offset = len(myargs) - len(mydefs)
-          if offset:
-            for i in range(0, offset-1):
-              fargs[coldex][myargs[i]] = None
-            for i in range(offset, len(myargs)):
-              fargs[coldex][myargs[i]] = mydefs[offset-i]
-        else:
-          for anarg in myargs:
-            fargs[coldex][anarg] = None
-        for argdex, anarg in enumerate(myargs): #For each argument of function
-          fargs[coldex][anarg] = None
-
-  globs.fargs = fargs #Make dict global so we don't have to pass it around
 
 def evalfunc(coldex, onerow):
   """Builds string to execute to get value to replace question mark with.
