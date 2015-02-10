@@ -198,8 +198,6 @@ def Pipulate():
       try:
         out("Reading Config tab into globals.")
         globs.config = refreshconfig(gdoc, "Config") #HTTPError
-        out(globs.config['throttlerownumber'])
-        return
       except:
         out("Copying Config tag to globals failed.")
       else:
@@ -361,6 +359,10 @@ def Pipulate():
       blankrows = 0 #Lets us skip occasional blank rows
       out("Question mark replacement")
       for index, rowdex in enumerate(range(qstart, onesheet.row_count+1)): #Start stepping through every row.
+        if 'throttlerownumber' in globs.config:
+          if index >= int(globs.config['throttlerownumber']):
+            out("GOTCHA", 80, "!")
+            break
         if index == 0:
           yme = "Pipulating row: %s" % rowdex
           yield yme, "Next, we replace question marks (a.k.a. pipulate)...", ""
