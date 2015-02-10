@@ -6,15 +6,14 @@
          | |   | | |_) | |_| | | (_| | ||  __/  | (_| (_) | | | | | |
          |_|   |_| .__/ \__,_|_|\__,_|\__\___| (_)___\___/|_| |_| |_|
                  | |
-                 |_|
-
-            It doesn't look like much, but looks can be deceiving.
+            It do|_|'t look like much, but looks can be deceiving.
            I center these lines in the vim editor by hitting shift-V
             to highlight the text and then hitting :center[Enter].
               This is important to remember. I program in Python
                  primarily so that I can work on this project.
                      You will not understand this message
                            until you do. Greetings!
+
 """
 
 import globs                                        # Talmudic style commentaries
