@@ -192,6 +192,7 @@ def Pipulate():
       except:
         headers = ['name', 'value']
         out("Creating Config tab.")
+        #yme = InitTab(gdoc, 'Config', headers, [['throttlerownumber','1']])
         yme = InitTab(gdoc, 'Config', headers)
         out("Config tab created.")
         yield yme, "", ""
@@ -318,6 +319,10 @@ def Pipulate():
           nextnum = int(counts[0]) + 1
           for onelist in trendlistoflists:
             onelist[globs.row1.index('count')] = nextnum
+        else:
+          if 'throttlerownumber' in globs.config:
+            if int(globs.config['throttlerownumber']):
+              pass
         out(trendlistoflists)
         #cell = onesheet.cell(globs.numrows, globs.row1.index('isotimestamp')+1)
         #import dateutil.parser
@@ -491,7 +496,7 @@ def Pipulate():
     exc_type, exc_obj, exc_tb = sys.exc_info()
     fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
     ename = type(e).__name__
-    out("PIPULATION FAILURE", 80, "X")
+    out("PIPULATION FAILURE", 80, "X", ":-(")
     if ename == "StopIteration":
       loginmsg = ""
       if session and 'loggedin' in session and session['loggedin'] != '1':
