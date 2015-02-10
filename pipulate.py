@@ -263,7 +263,6 @@ def pipulate():
             for argdex, anarg in enumerate(myargs): #For each argument of function
               fargs[coldex2][anarg] = None
       out("Putting function argument dictionary in globals.")
-      globs.fargs = fargs 
       trended = False
       qstart = 1
       out("About to scan down Pipulate tab looking for asterisks.")
@@ -393,14 +392,14 @@ def pipulate():
                 if collabel in globs.transfuncs.keys():
                   for x in range(0, globs.retrytimes):
                     fname = globs.transfuncs[globs.row1[coldex]]
-                    fargs = globs.fargs[coldex]
+                    farg = fargs[coldex]
                     evalme = "%s(" % fname #Begin building string that will eventually be eval'd
-                    if fargs:
+                    if farg:
                       #The function we're looking at DOES have required arguments.
-                      for anarg in fargs:
+                      for anarg in farg:
                         #Add an arg=value to string for each required argument.
                         anarg = anarg.lower()
-                        argval = getargval(anarg, fargs[anarg], newrow)
+                        argval = getargval(anarg, farg[anarg], newrow)
                         evalme = "%s%s=%s, " % (evalme, anarg, argval)
                       evalme = evalme[:-2] + ')' #Finish building string for the eval statement.
                     else:

@@ -7,7 +7,6 @@ numrows = 0
 config = {}
 html = ''
 hobj = ''
-fargs = {}
 row1 = []
 transfuncs = {}
 transscrape = {}
