@@ -192,13 +192,16 @@ def pipulate():
       trendlistoflists = []
       globs.row1 = lowercaselist(onesheet.row_values(1))
       now = datetime.datetime.now()
+      lastinsertdate = None
       if 'isotimestamp' in globs.row1:
         cell = onesheet.cell(globs.numrows, globs.row1.index('isotimestamp')+1)
         import dateutil.parser
         lastinsertdate = dateutil.parser.parse(cell.value)
-        out(type(lastinsertdate))
-        raise StopIteration
-        yield str(globs.row1.find('isotimestamp')), "", ""
+      out("%s %s" % (now, lastinsertdate))
+      diff = now - lastinsertdate
+      out(diff.seconds)
+      raise StopIteration
+      out((now-lastinsertdate).days * 24 * 60)
       row1funcs(globs.row1)
       trended = False
       qstart = 1
