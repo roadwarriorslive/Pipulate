@@ -125,7 +125,7 @@ def pipulate():
     yield "spinon", "", ""
     out("Reading in functions.")
     funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
-    globs.transfuncs = ziplckey(funcs, funcs) #Keep translation table
+    transfuncs = ziplckey(funcs, funcs) #Keep translation table
     blankrows = 0
     import gspread
     if session:
@@ -238,7 +238,7 @@ def pipulate():
           fname = fname.lower()
         except:
           pass
-        if fname in globs.transfuncs.keys(): 
+        if fname in transfuncs.keys(): 
           out("Found function %s in row 1." % fname)
           fargs[coldex2] = {}
           from inspect import getargspec
@@ -389,9 +389,9 @@ def pipulate():
                   except:
                     pass
                 collabel = globs.row1[coldex]
-                if collabel in globs.transfuncs.keys():
+                if collabel in transfuncs.keys():
                   for x in range(0, globs.retrytimes):
-                    fname = globs.transfuncs[globs.row1[coldex]]
+                    fname = transfuncs[globs.row1[coldex]]
                     farg = fargs[coldex]
                     evalme = "%s(" % fname #Begin building string that will eventually be eval'd
                     if farg:
@@ -418,7 +418,33 @@ def pipulate():
                 elif collabel in globs.transscrape.keys():
                   for x in range(0, globs.retrytimes):
                     try:
-                      newrow[coldex] = genericscraper(coldex, newrow) #Scraping
+
+                      out("Entering generic scraper.")
+                      sname = globs.transscrape[globs.row1[coldex]]
+                      stype = globs.scrapetypes[sname]
+                      spattern = globs.scrapepatterns[sname]
+                      if 'url' in globs.row1:
+                        url = onerow[globs.row1.index('url')]
+                        html = gethtml(url)
+                        if stype.lower() == 'xpath':
+                          import lxml.html
+                          searchme = lxml.html.fromstring(html)
+                          match = searchme.xpath(spattern)
+                          if match:
+                            newrow[coldex] = match[0]
+                          else:
+                            newrow[coldex] =  None
+                        elif stype.lower() == 'regex':
+                          import re
+                          match = re.search(spattern, html, re.S | re.I)
+                          if match:
+                            if "scrape" in match.groupdict().keys():
+                              newrow[coldex] = match.group("scrape")
+                            else:
+                              newrow[coldex] = None
+                          else:
+                            newrow[coldex] = None
+
                       out('%s worked.' % collabel)
                       break
                     except Exception as e:
@@ -448,7 +474,7 @@ def pipulate():
               time.sleep(globs.retryseconds)
         elif onerow.count('') == len(onerow):
           blankrows += 1
-          if blankrows > globs.skippableblankrows:
+          if blankrows > skippableblankrows:
             break
       out('Finished question marks')
     else:
@@ -613,33 +639,6 @@ def questionmark(oldrow, rowdex, coldex):
     if oldrow[coldex] == '?':
       return True
   return False
-
-def genericscraper(coldex, onerow):
-  sname = globs.transscrape[globs.row1[coldex]]
-  stype = globs.scrapetypes[sname]
-  spattern = globs.scrapepatterns[sname]
-  if 'url' in globs.row1:
-    url = onerow[globs.row1.index('url')]
-    html = gethtml(url)
-    if stype.lower() == 'xpath':
-      import lxml.html
-      searchme = lxml.html.fromstring(html)
-      match = searchme.xpath(spattern)
-      if match:
-        return match[0]
-      else:
-        return None
-    elif stype.lower() == 'regex':
-      import re
-      match = re.search(spattern, html, re.S | re.I)
-      if match:
-        if "scrape" in match.groupdict().keys():
-          keep = match.group("scrape")
-          return keep
-        else:
-          return None
-      else:
-        return None
 
 def gethtml(url):
   if globs.html:

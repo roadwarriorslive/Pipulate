@@ -2,7 +2,6 @@ DBUG = True
 PIPURL = ''
 retrytimes = 5
 retryseconds = 2
-skippableblankrows = 3
 numrows = 0
 config = {}
 html = ''
