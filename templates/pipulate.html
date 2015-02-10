@@ -29,6 +29,9 @@ overflow-y:scroll;
       height: 38px;
     }
     #magicbox{
+      -webkit-border-radius:0px;
+      border-radius:0px;
+      border: 2px solid lightgrey;
       margin-top: 0px;
       margin-left: auto;
       margin-right:auto;
@@ -41,6 +44,9 @@ overflow-y:scroll;
     #pipurl{margin-bottom:14px}
     #paste{
       white-space:nowrap;
+    }
+    #pastelabel{
+      font-size: 1.3em;
     }
     #pipstream{
       margin-left:20px;
@@ -223,7 +229,7 @@ overflow-y:scroll;
     </nav>
     <div id="content">
       <form id="pipform" method="POST" action="/">
-        <div id="paste">URL: {{ form.pipurl(size=60) }}</div>
+        <div id="paste"><span id="pastelabel"><i id="piplock" class="fa fa-table"></i> URL: </span>{{ form.pipurl(size=58) }}</div>
           <button id="pipulate" class="button" type="submit">
             Start Pipulating &nbsp;<i id="piplock" class="fa fa-chevron-circle-right"></i>
           </button>
