@@ -568,7 +568,7 @@ def processrow(rowdex, onerow):
           for x in range(0, globs.retrytimes):
             try:
               changedrow[coldex] = evalfunc(coldex, changedrow) #The Function Path
-              out('FUNCTION SUCCESS: %s ' % collabel)
+              out('%s worked' % collabel)
               break
             except Exception as e:
               exc_type, exc_value, exc_tb = sys.exc_info()
@@ -580,7 +580,7 @@ def processrow(rowdex, onerow):
           for x in range(0, globs.retrytimes):
             try:
               changedrow[coldex] = genericscraper(coldex, changedrow) #Scraping
-              out('SCRAPE SUCCESS: %s ' % collabel)
+              out('%s worked.' % collabel)
               break
             except Exception as e:
               exc_type, exc_value, exc_tb = sys.exc_info()
@@ -589,7 +589,6 @@ def processrow(rowdex, onerow):
               out("Scrape problem on row %s. Retrying." % rowdex)
               time.sleep(globs.retryseconds)
   return changedrow
-
 
 def evalfunc(coldex, onerow):
   """Builds string to execute to get value to replace question mark with.
@@ -644,10 +643,10 @@ def genericscraper(coldex, onerow):
 
 def gethtml(url):
   if globs.html:
-    out("Recycling fetched HTML")
+    out("Recycling HTML.")
     return globs.html
   else:
-    out("Doing first HTML fetch for row")
+    out("Doing first HTML fetch for row.")
     try:
       globs.hobj = requests.get(url)
     except:
