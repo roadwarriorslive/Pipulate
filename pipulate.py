@@ -360,7 +360,65 @@ def pipulate():
           #Perfect opportunity to test nested generator messages
           blankrows = 0
           yield "", "", json.dumps(onerow)
-          newrow = processrow(str(rowdex), onerow) #Replace question marks in row
+
+          out("About to pipulate row %s." % rowdex)
+          rowdexstring = str(rowdex)
+          import traceback
+          newrow = onerow[:]
+          if rowdexstring > 1:
+            #All subsequent rows are checked for question mark replacement requests.
+            for coldex, acell in enumerate(newrow):
+              if questionmark(onerow, rowdexstring, coldex):
+                if 'url' in globs.row1: #Only fetch html once per row if possible
+                  try:
+                    globs.html = gethtml(onerow[globs.row1.index('url')])
+                  except:
+                    pass
+                collabel = globs.row1[coldex]
+                if collabel in globs.transfuncs.keys():
+                  for x in range(0, globs.retrytimes):
+                    fname = globs.transfuncs[globs.row1[coldex]]
+                    fargs = globs.fargs[coldex]
+                    evalme = "%s(" % fname #Begin building string that will eventually be eval'd
+                    if fargs:
+                      #The function we're looking at DOES have required arguments.
+                      for anarg in fargs:
+                        #Add an arg=value to string for each required argument.
+                        anarg = anarg.lower()
+                        argval = getargval(anarg, fargs[anarg], newrow)
+                        evalme = "%s%s=%s, " % (evalme, anarg, argval)
+                      evalme = evalme[:-2] + ')' #Finish building string for the eval statement.
+                    else:
+                      #No arguments required, so just immediately close the parenthesis.
+                      evalme = evalme + ')'
+                    try:
+                      newrow[coldex] = eval(evalme)
+                      out('%s worked' % collabel)
+                      break
+                    except Exception as e:
+                      exc_type, exc_value, exc_tb = sys.exc_info()
+                      filename, line_num, func_name, text = traceback.extract_tb(exc_tb)[-1]
+                      out('%s, %s, %s, %s' % (filename, func_name, line_num, text))
+                      out("Function problem on row %s. Retrying." % rowdexstring)
+                      time.sleep(globs.retryseconds)
+                elif collabel in globs.transscrape.keys():
+                  for x in range(0, globs.retrytimes):
+                    try:
+                      newrow[coldex] = genericscraper(coldex, newrow) #Scraping
+                      out('%s worked.' % collabel)
+                      break
+                    except Exception as e:
+                      exc_type, exc_value, exc_tb = sys.exc_info()
+                      filename, line_num, func_name, text = traceback.extract_tb(exc_tb)[-1]
+                      out('%s, %s, %s, %s' % (filename, func_name, line_num, text))
+                      out("Scrape problem on row %s. Retrying." % rowdexstring)
+                      time.sleep(globs.retryseconds)
+
+
+
+
+
+          out("Finished pipulating replacing questionmarks in memory.")
           newrow = ['' if x==None else x for x in newrow]
           yield "", "", json.dumps(newrow)
           for index, onecell in enumerate(CellList):
@@ -535,101 +593,10 @@ def InitTab(gdoc, tabname, headerlist, listoflists=[]):
   return "Making %s tab." % tabname
 
 def questionmark(oldrow, rowdex, coldex):
-  """Returns true if a question mark is supposed to be replaced in cell.
-
-  This is called for every cell on every row processed and checks whether
-  question mark replacemnt should actually occur."""
   if rowdex != 1:
     if oldrow[coldex] == '?':
       return True
   return False
-
-def processrow(rowdex, onerow):
-  """Separates row-1 handling from question mark detection on all other rows.
-
-  Called on each row of a worksheet and either initializes functions when it's
-  row 1, or steps cell by cell along each subsequent (fed-in) row and when
-  encountering a question mark, it determines whether to invoke the function
-  indicated by the column label, using values from the active row as parameter
-  values if available, parameter defaults if not, and None if not found."""
-  import traceback
-  changedrow = onerow[:]
-  if rowdex > 1:
-    #All subsequent rows are checked for question mark replacement requests.
-    for coldex, acell in enumerate(changedrow):
-      if questionmark(onerow, rowdex, coldex):
-        if 'url' in globs.row1: #Only fetch html once per row if possible
-          try:
-            globs.html = gethtml(onerow[globs.row1.index('url')])
-          except:
-            pass
-        collabel = globs.row1[coldex]
-
-        if collabel in globs.transfuncs.keys():
-          for x in range(0, globs.retrytimes):
-
-
-            fname = globs.transfuncs[globs.row1[coldex]]
-            fargs = globs.fargs[coldex]
-            evalme = "%s(" % fname #Begin building string that will eventually be eval'd
-            if fargs:
-              #The function we're looking at DOES have required arguments.
-              for anarg in fargs:
-                #Add an arg=value to string for each required argument.
-                anarg = anarg.lower()
-                argval = getargval(anarg, fargs[anarg], changedrow)
-                evalme = "%s%s=%s, " % (evalme, anarg, argval)
-              evalme = evalme[:-2] + ')' #Finish building string for the eval statement.
-            else:
-              #No arguments required, so just immediately close the parenthesis.
-              evalme = evalme + ')'
-            try:
-              changedrow[coldex] = eval(evalme)
-              out('%s worked' % collabel)
-              break
-            except Exception as e:
-              exc_type, exc_value, exc_tb = sys.exc_info()
-              filename, line_num, func_name, text = traceback.extract_tb(exc_tb)[-1]
-              out('%s, %s, %s, %s' % (filename, func_name, line_num, text))
-              out("Function problem on row %s. Retrying." % rowdex)
-              time.sleep(globs.retryseconds)
-        elif collabel in globs.transscrape.keys():
-          for x in range(0, globs.retrytimes):
-            try:
-              changedrow[coldex] = genericscraper(coldex, changedrow) #Scraping
-              out('%s worked.' % collabel)
-              break
-            except Exception as e:
-              exc_type, exc_value, exc_tb = sys.exc_info()
-              filename, line_num, func_name, text = traceback.extract_tb(exc_tb)[-1]
-              out('%s, %s, %s, %s' % (filename, func_name, line_num, text))
-              out("Scrape problem on row %s. Retrying." % rowdex)
-              time.sleep(globs.retryseconds)
-  return changedrow
-
-def evalfunc(coldex, onerow):
-  """Builds string to execute to get value to replace question mark with.
-
-  Once a question mark is found in a cell belonging to a function-named column,
-  the exact invocation that's needed must be built, keeping in mind default
-  values provided by function itself, as well as parameter values provided in
-  the provided row. Because rows are being handled as lists, order is
-  important, and the column index allows function name lookup."""
-  fname = globs.transfuncs[globs.row1[coldex]]
-  fargs = globs.fargs[coldex]
-  evalme = "%s(" % fname #Begin building string that will eventually be eval'd
-  if fargs:
-    #The function we're looking at DOES have required arguments.
-    for anarg in fargs:
-      #Add an arg=value to string for each required argument.
-      anarg = anarg.lower()
-      argval = getargval(anarg, fargs[anarg], onerow)
-      evalme = "%s%s=%s, " % (evalme, anarg, argval)
-    evalme = evalme[:-2] + ')' #Finish building string for the eval statement.
-  else:
-    #No arguments required, so just immediately close the parenthesis.
-    evalme = evalme + ')'
-  return eval(evalme)
 
 def genericscraper(coldex, onerow):
   sname = globs.transscrape[globs.row1[coldex]]
