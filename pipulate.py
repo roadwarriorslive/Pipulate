@@ -35,9 +35,14 @@ app = Flask(__name__)                               # Flask init requirement
 
 app.secret_key = "m\x00\r\xa5\\\xbeTW\xb3\xdf\x17\xb0!T\x9b6\x88l\xcf\xa1vmD}"
 
-def out(msg):                                       # Debug output to server terminal
+def out(msg, total=0, symbol="-"):                          # Debug output to server terminal
   if globs.DBUG:
-    print(msg)
+    if total:
+      half = ((total - len(msg)) / 2) - 1
+      side = half*symbol
+      print("%s %s %s" % (side, msg, side))
+    else:
+      print(msg)
 
 def stream_template(template_name, **context):      # This is the key to streaming
   app.update_template_context(context)              # output to the user in the
@@ -58,7 +63,7 @@ class PipForm(Form):
 
 @app.route("/", methods=['GET', 'POST'])            # Main point of entry when
 def main():                                         # visiting app's homepage.
-  out("Entered main function,")
+  out("ENTERED MAIN FUNCTION", 80)
   streamit = False                                  # Default to not streaming.
   form = PipForm(csrf_enabled=False)                # Initialize form for UI.
   if session:                                       # I've seen you before!
@@ -441,7 +446,7 @@ def pipulate():
       yield 'Please Login to Google', "", ""
     yield "Pipulation complete.", "This box contains the last JSON data processed.", ""
     yield "spinoff", "", ""
-    out("Pipulation complete")
+    out("PIPULATION COMPLETE", 80)
   except Exception as e:
     exc_type, exc_obj, exc_tb = sys.exc_info()
     fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
