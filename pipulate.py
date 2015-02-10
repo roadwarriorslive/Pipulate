@@ -214,9 +214,9 @@ def pipulate():
         pat = [[d['pattern']][0] for d in lod]
         typ = [[d['type']][0] for d in lod]
         nam = [[d['name']][0] for d in lod]
-        globs.scrapetypes = ziplckey(nam, typ)
-        globs.scrapepatterns = ziplckey(nam, pat)
-        globs.transscrape = ziplckey(nam, nam)
+        scrapetypes = ziplckey(nam, typ)
+        scrapepatterns = ziplckey(nam, pat)
+        transscrape = ziplckey(nam, nam)
       except:
         out("Failed to load Scrapers.")
         raise StopIteration
@@ -292,6 +292,7 @@ def pipulate():
             else:
               blankrows += 1
               if blankrows > 1:
+                yield "Finished setting up trending. Patience...", "Things may appear to freeze. Wait a minute before re-trying.", ""
                 out("Found second row without asterisks, so stopped looking.")
                 break
         else:
@@ -339,8 +340,8 @@ def pipulate():
             break
           except Exception as e:
             exc_type, exc_value, exc_tb = sys.exc_info()
-            filename, line_num, func_name, text = traceback.extract_tb(exc_tb)[-1] #NameError
-            out('%s, %s, %s, %s' % (filename, func_name, line_num, text))
+            pyfi, line_num, func_name, text = traceback.extract_tb(exc_tb)[-1] #NameError
+            out('%s, %s, %s, %s' % (pyfi, func_name, line_num, text))
             out("Error on trending, retry %s" % x)
             time.sleep(globs.retryseconds)
 
@@ -411,18 +412,18 @@ def pipulate():
                       break
                     except Exception as e:
                       exc_type, exc_value, exc_tb = sys.exc_info()
-                      filename, line_num, func_name, text = traceback.extract_tb(exc_tb)[-1]
-                      out('%s, %s, %s, %s' % (filename, func_name, line_num, text))
+                      pyfi, line_num, func_name, text = traceback.extract_tb(exc_tb)[-1]
+                      out('%s, %s, %s, %s' % (pyfi, func_name, line_num, text))
                       out("Function problem on row %s. Retrying." % rowdexstring)
                       time.sleep(globs.retryseconds)
-                elif collabel in globs.transscrape.keys():
+                elif collabel in transscrape.keys():
                   for x in range(0, globs.retrytimes):
                     try:
 
                       out("Entering generic scraper.")
-                      sname = globs.transscrape[globs.row1[coldex]]
-                      stype = globs.scrapetypes[sname]
-                      spattern = globs.scrapepatterns[sname]
+                      sname = transscrape[globs.row1[coldex]]
+                      stype = scrapetypes[sname]
+                      spattern = scrapepatterns[sname]
                       if 'url' in globs.row1:
                         url = onerow[globs.row1.index('url')]
                         html = gethtml(url)
@@ -449,8 +450,8 @@ def pipulate():
                       break
                     except Exception as e:
                       exc_type, exc_value, exc_tb = sys.exc_info()
-                      filename, line_num, func_name, text = traceback.extract_tb(exc_tb)[-1]
-                      out('%s, %s, %s, %s' % (filename, func_name, line_num, text))
+                      pyfi, line_num, func_name, text = traceback.extract_tb(exc_tb)[-1]
+                      out('%s, %s, %s, %s' % (pyfi, func_name, line_num, text))
                       out("Scrape problem on row %s. Retrying." % rowdexstring)
                       time.sleep(globs.retryseconds)
 
