@@ -81,7 +81,7 @@ def main():                                         # visiting app's homepage.
   if request.method == 'POST':                      # Pipulation must only ever
     if form.pipurl.data:                            # occur on the POST method
       globs.PIPURL = form.pipurl.data               # with a submitted URL. That
-      STREAMIT = stream_with_context(pipulate())    # tells us to start streaming.
+      STREAMIT = stream_with_context(Pipulate())    # tells us to start streaming.
     else:                                           # Some messages just have to
       flash('Please enter a URL to Pipulate')       # be flashed versus streamed.
   else:
@@ -118,7 +118,7 @@ def main():                                         # visiting app's homepage.
     out("")
     return render_template('pipulate.html', form=form)
 
-def pipulate():
+def Pipulate():
   out("Entering pipulate generator.")
   try:
     yield "Beginning to pipulate...", "", ""
