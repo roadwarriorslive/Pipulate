@@ -110,19 +110,21 @@ def main():                                         # visiting app's homepage.
     return render_template('pipulate.html', form=form)
 
 def pipulate():
+  out("Entering pipulate generator.")
   try:
-    out("Beginning to pipulate")
     yield "Beginning to pipulate...", "", ""
     yield "spinon", "", ""
+    out("Reading in functions.")
     funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
     globs.transfuncs = ziplckey(funcs, funcs) #Keep translation table
     blankrows = 0
     import gspread
     if session:
       if 'oa2' in session:
-        out("OAuth2 token found")
         creds = Credentials(access_token=session['oa2'])
+        out("Credential object created.")
       else:
+        out("Expired login.")
         yield "Google Login appears to have expired. Log back in.", "", ""
         yield "spinoff", "", ""
         raise StopIteration
