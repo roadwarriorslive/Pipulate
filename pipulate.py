@@ -119,7 +119,7 @@ def main():                                         # visiting app's homepage.
     return render_template('pipulate.html', form=form)
 
 def Pipulate():
-  out("Entering pipulate generator.")
+  out("PIPULATION BEGINNING", 80, "o")
   try:
     yield "Beginning to pipulate...", "", ""
     yield "spinon", "", ""
@@ -482,11 +482,12 @@ def Pipulate():
       yield 'Please Login to Google', "", ""
     yield "Pipulation complete.", "This box contains the last JSON data processed.", ""
     yield "spinoff", "", ""
-    out("Reported pipulation complete to user.")
+    out("PIPULATION OVER", 80, "o")
   except Exception as e:
     exc_type, exc_obj, exc_tb = sys.exc_info()
     fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
     ename = type(e).__name__
+    out("PIPULATION FAILURE", 80, "X")
     if ename == "StopIteration":
       loginmsg = ""
       if session and 'loggedin' in session and session['loggedin'] != '1':
