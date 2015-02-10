@@ -58,6 +58,7 @@ class PipForm(Form):
 
 @app.route("/", methods=['GET', 'POST'])            # Main point of entry when
 def main():                                         # visiting app's homepage.
+  out("Entered main function,")
   streamit = False                                  # Default to not streaming.
   form = PipForm(csrf_enabled=False)                # Initialize form for UI.
   if session:                                       # I've seen you before!
@@ -211,8 +212,15 @@ def pipulate():
         out("Failed to load Scrapers.")
         raise StopIteration
       else:
-        out("Scrpaers loaded.")
-      globs.row1 = lowercaselist(onesheet.row_values(1))
+        out("Scrapaers loaded.")
+      try:
+        out("Loading row1 into globals.")
+        globs.row1 = lowercaselist(onesheet.row_values(1))
+      except:
+        out("Failed to load row 1.")
+        raise StopIteration
+      else:
+        out("Row 1 succesfully loaded.")
       trendlistoflists = []
       row1funcs(globs.row1)
       trended = False
