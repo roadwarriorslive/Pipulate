@@ -64,7 +64,7 @@ class PipForm(Form):
 def main():                                         # visiting app's homepage.
   out("")
   out("ENTERED MAIN FUNCTION", 80)
-  streamit = False                                  # Default to not streaming.
+  STREAMIT = False                                  # Default to not streaming.
   form = PipForm(csrf_enabled=False)                # Initialize form for UI.
   if session:                                       # I've seen you before!
     if 'oa2' in session:                            # and I think you're logged in
@@ -81,7 +81,7 @@ def main():                                         # visiting app's homepage.
   if request.method == 'POST':                      # Pipulation must only ever
     if form.pipurl.data:                            # occur on the POST method
       globs.PIPURL = form.pipurl.data               # with a submitted URL. That
-      streamit = stream_with_context(pipulate())    # tells us to start streaming.
+      STREAMIT = stream_with_context(pipulate())    # tells us to start streaming.
     else:                                           # Some messages just have to
       flash('Please enter a URL to Pipulate')       # be flashed versus streamed.
   else:
@@ -110,9 +110,9 @@ def main():                                         # visiting app's homepage.
     if form.pipurl.data and request.url_root == url_root(form.pipurl.data):
       form.pipurl.data = '' #can't pipulate the pipulate site
   out("Selecting template method.")
-  if streamit:
+  if STREAMIT:
     out("Streaming output to user.")
-    return Response(stream_template('pipulate.html', form=form, data=streamit))
+    return Response(stream_template('pipulate.html', form=form, data=STREAMIT))
   else:
     out("RENDERING TEMPLATE", 80)
     out("")
