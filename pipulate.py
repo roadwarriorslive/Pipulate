@@ -34,12 +34,12 @@ app = Flask(__name__)                               # Flask init requirement
 
 app.secret_key = "m\x00\r\xa5\\\xbeTW\xb3\xdf\x17\xb0!T\x9b6\x88l\xcf\xa1vmD}"
 
-def out(msg, total=0, symbol="-"):                          # Debug output to server terminal
+def out(msg, total=0, symbol="-", mood=":-)"):      # Debug output to server terminal
   if globs.DBUG:
     if total:
-      half = ((total - len(msg)) / 2) - 1
+      half = ((total - len(msg)) / 2) - 6
       side = half*symbol
-      print("%s %s %s" % (side, msg, side))
+      print("%s << %s >> %s %s" % (side, msg, side, mood))
     else:
       print(msg)
 
@@ -63,7 +63,7 @@ class PipForm(Form):
 @app.route("/", methods=['GET', 'POST'])            # Main point of entry when
 def main():                                         # visiting app's homepage.
   out("")
-  out("ENTERED MAIN FUNCTION", 80)
+  out("ENTERED MAIN FUNCTION", 80, "M")
   STREAMIT = False                                  # Default to not streaming.
   form = PipForm(csrf_enabled=False)                # Initialize form for UI.
   if session:                                       # I've seen you before!
@@ -119,7 +119,7 @@ def main():                                         # visiting app's homepage.
     return render_template('pipulate.html', form=form)
 
 def Pipulate():
-  out("PIPULATION BEGINNING", 80, "o")
+  out("PIPULATION BEGINNING", 80, "P")
   try:
     yield "Beginning to pipulate...", "", ""
     yield "spinon", "", ""
@@ -129,6 +129,7 @@ def Pipulate():
     blankrows = 0
     import gspread
     if session:
+      out("LOGIN ATTEMPT", 70, "L")
       if 'oa2' in session:
         creds = Credentials(access_token=session['oa2'])
         out("Credential object created.")
@@ -171,6 +172,7 @@ def Pipulate():
         raise StopIteration
       else:
         out("Google Spreadsheet successfully opened.")
+      out("LOGIN SUCCESS", 70, "L")
       try:
         onesheet = gdoc.worksheet("Pipulate")
       except:
@@ -372,7 +374,6 @@ def Pipulate():
         for cell in CellList:
           onerow.append(cell.value)
         if '?' in onerow:
-          #Perfect opportunity to test nested generator messages
           blankrows = 0
           yield "", "", json.dumps(onerow)
 
@@ -482,7 +483,7 @@ def Pipulate():
       yield 'Please Login to Google', "", ""
     yield "Pipulation complete.", "This box contains the last JSON data processed.", ""
     yield "spinoff", "", ""
-    out("PIPULATION OVER", 80, "o")
+    out("PIPULATION OVER", 80, "P")
   except Exception as e:
     exc_type, exc_obj, exc_tb = sys.exc_info()
     fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
@@ -500,7 +501,7 @@ def Pipulate():
       yield "Please open an issue at https://github.com/miklevin/pipulate", "", ""
       yield "Or just tap me on the shoulder.", "", ""
     yield "spinerr", "", ""
-  out("EXITING GENERATOR", 80)
+  out("EXITING GENERATOR", 80, "M")
   out("")
 
 def url_root(url):
