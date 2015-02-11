@@ -88,7 +88,7 @@ def main():                                         # visiting app's homepage.
     if request.args and "access_token" in request.args:
       session['oa2'] = request.args.get("access_token")
       session['loggedin'] = "1"
-      session['i'] -= 1
+      session['i'] -= 1 #Don't skip a message, just becuse I redirect.
       if 'u' in session:
         return redirect(url_for('main', u=session['u']))
       else:
@@ -177,7 +177,7 @@ def Pipulate():
       try:
         onesheet = gdoc.worksheet("Pipulate")
       except:
-        #headers = ['URL', 'Tweeted', 'Shared', 'Liked', 'Plussed', 'DateStamp', 'TimeStamp']
+        headers = ['URL', 'Tweeted', 'Shared', 'Liked', 'Plussed', 'DateStamp', 'TimeStamp']
         headers = ['URL', 'Subscribers', 'ISOTimeStamp', 'Count']
         out("Creating Pipulate tab.")
         yme = InitTab(gdoc, 'Pipulate', headers, pipinit())
@@ -193,8 +193,8 @@ def Pipulate():
       except:
         headers = ['name', 'value']
         out("Creating Config tab.")
-        #yme = InitTab(gdoc, 'Config', headers, [['throttlerownumber','1']])
-        yme = InitTab(gdoc, 'Config', headers)
+        yme = InitTab(gdoc, 'Config', headers, [['throttlerownumber','1']])
+        #yme = InitTab(gdoc, 'Config', headers)
         out("Config tab created.")
         yield yme, "", ""
       try:
@@ -497,6 +497,8 @@ def Pipulate():
     exc_type, exc_obj, exc_tb = sys.exc_info()
     fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
     ename = type(e).__name__
+    fixme = "%s, %s, %s" % (ename, fname, exc_tb.tb_lineno)
+    out(fixme)
     out("PIPULATION FAILURE", 80, "X", ":-(")
     if ename == "StopIteration":
       loginmsg = ""
@@ -504,7 +506,6 @@ def Pipulate():
         loginmsg = "Login link under the upper-left \"burger button\"."
       yield "Try again or come back later.", loginmsg, ""
     else:
-      fixme = "%s, %s, %s" % (ename, fname, exc_tb.tb_lineno)
       yield fixme, "", ""
       yield "Pipulation prematurely terminated.", "", ""
       yield "Please open an issue at https://github.com/miklevin/pipulate", "", ""
@@ -624,7 +625,7 @@ def InsertRows(onesheet, listoflists):
 
 def InitTab(gdoc, tabname, headerlist, listoflists=[]):
   numcols = len(headerlist)
-  if listoflists and '*' in listoflists[1]:
+  if listoflists and len(listoflists) > 1 and '*' in listoflists[1]:
     numrows = len(listoflists)+1
   elif listoflists:
     numrows = len(listoflists)+2
