@@ -265,7 +265,7 @@ overflow-y:scroll;
     </div>
     <div id="pipstream">
     {% for lineitem, learn, magic in data: -%}
-      {%- if magic or learn: -%}
+      {%- if learn or magic: -%}
       <script>
         {%- if magic: -%}
           var pjson = {{ magic|safe }};
@@ -289,6 +289,7 @@ overflow-y:scroll;
             $('#spinner').hide();
             $("i").removeClass("fa-spin fa-circle-o-notch");
             $("i").addClass("fa-check");
+            document.write('<img src="static/pipulate.gif" style="vertical-align: top;">');
             unlockbutton();
           </script>
         {%- elif lineitem == "spinerr" -%}

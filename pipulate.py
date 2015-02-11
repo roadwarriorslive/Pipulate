@@ -295,7 +295,7 @@ def Pipulate():
             else:
               blankrows += 1
               if blankrows > 1:
-                yield "Finished setting up trending. Patience...", "Things may appear to freeze. Wait a minute before re-trying.", ""
+                yield "Finished setting up trending. Patience, young Jedi...", "Things may appear to freeze. Wait a minute before re-trying.", ""
                 out("Found second row without asterisks, so stopped looking.")
                 break
         else:
@@ -321,6 +321,7 @@ def Pipulate():
           for onelist in trendlistoflists:
             onelist[globs.row1.index('count')] = nextnum
         else:
+          out("GOTCHA", 160, "~")
           if 'throttlerownumber' in globs.config:
             if int(globs.config['throttlerownumber']):
               pass
@@ -367,7 +368,6 @@ def Pipulate():
       for index, rowdex in enumerate(range(qstart, onesheet.row_count+1)): #Start stepping through every row.
         if 'throttlerownumber' in globs.config:
           if index >= int(globs.config['throttlerownumber']):
-            out("GOTCHA", 80, "!")
             break
         if index == 0:
           yme = "Pipulating row: %s" % rowdex
@@ -490,7 +490,7 @@ def Pipulate():
       out('Finished question marks')
     else:
       yield 'Please Login to Google', "", ""
-    yield "Pipulation complete.", "Congratulations, pipulation complete! Do a little victory dance.", ""
+    yield "Pipulation complete.&nbsp;&nbsp;", "Congratulations, pipulation complete! Do a little victory dance.", ""
     yield "spinoff", "", ""
     out("PIPULATION OVER", 80, "P")
   except Exception as e:
