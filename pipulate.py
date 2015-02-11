@@ -88,6 +88,7 @@ def main():                                         # visiting app's homepage.
     if request.args and "access_token" in request.args:
       session['oa2'] = request.args.get("access_token")
       session['loggedin'] = "1"
+      session['i'] -= 1
       if 'u' in session:
         return redirect(url_for('main', u=session['u']))
       else:
