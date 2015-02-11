@@ -1,11 +1,11 @@
 import requests, datetime
+from flask import session
 import globs
 
 def count():
   return 1
 
 def cyclemotto():
-  from flask import session
   try:
     session['i']
   except:

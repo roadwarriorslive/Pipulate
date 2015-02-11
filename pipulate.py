@@ -136,7 +136,7 @@ def Pipulate():
         out("Credential object created.")
       else:
         out("Expired login.")
-        yield "Google Login appears to have expired. Log back in.", "", ""
+        yield "Google Login appears to have expired. Log back in.", "Login under the \"burger button\" in the upper-right.", ""
         yield "spinoff", "", ""
         raise StopIteration
       try:
@@ -283,7 +283,7 @@ def Pipulate():
               trended = True
               out("Found asterisks on row 2 -- trending activated!")
               trendlistoflists.append(onerow)
-              yield "Found trending asterisks in row 2", "", json.dumps(onerow)
+              yield "Found trending asterisks in row 2", "Then we look for trending job requests...", json.dumps(onerow)
             else:
               break
           elif trendlistoflists and rowdex > 2:
@@ -371,7 +371,7 @@ def Pipulate():
             break
         if index == 0:
           yme = "Pipulating row: %s" % rowdex
-          yield yme, "Next, we replace question marks (a.k.a. pipulate)...", ""
+          yield yme, "Next, we replace question marks. This may take awhile...", ""
         else:
           yme = ", %s" % rowdex
           yield yme, "", ""
@@ -490,7 +490,7 @@ def Pipulate():
       out('Finished question marks')
     else:
       yield 'Please Login to Google', "", ""
-    yield "Pipulation complete.", "This box contains the last JSON data processed.", ""
+    yield "Pipulation complete.", "Congratulations, pipulation complete! Do a little victory dance.", ""
     yield "spinoff", "", ""
     out("PIPULATION OVER", 80, "P")
   except Exception as e:
@@ -534,7 +534,7 @@ def getLoginlink():
   return "%s?%s" % (baseurl, urlencode(qsdict))
 
 def getBookmarklet():
-  return '''javascript:(function(){window.open('http://%s/?u='+encodeURIComponent(document.location.href), 'Pipulate', 'toolbar=0,resizable=1,scrollbars=1,status=1,width=640,height=520');})();''' % (request.headers['Host'])
+  return '''javascript:(function(){window.open('http://%s/?u='+encodeURIComponent(document.location.href), 'Pipulate', 'toolbar=0,resizable=1,scrollbars=1,status=1,width=640,height=540');})();''' % (request.headers['Host'])
 
 def getLogoutlink():
   from urllib import quote_plus
