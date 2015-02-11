@@ -182,6 +182,9 @@ overflow-y:scroll;
         $('#pipulate').prop("disabled", true);
         $('#piplock').removeClass("fa-chevron-circle-right");
         $('#piplock').addClass("fa-lock");
+        if($("#pbjt").length != 0) {
+            $("#pbjt").hide();
+          }
       }
       function unlockbutton() {
         $('#pipulate').prop("disabled", false);
@@ -289,7 +292,7 @@ overflow-y:scroll;
             $('#spinner').hide();
             $("i").removeClass("fa-spin fa-circle-o-notch");
             $("i").addClass("fa-check");
-            document.write('<img src="static/pipulate.gif" style="vertical-align: top;">');
+            document.write('<img id="pbjt" src="static/pipulate.gif" style="vertical-align: top;">');
             unlockbutton();
           </script>
         {%- elif lineitem == "spinerr" -%}
