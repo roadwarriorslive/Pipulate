@@ -191,13 +191,16 @@ def Pipulate():
 
 
       out("Counting rows in Pipulate tab.")
-      #!!! Put retry logic here
+      onesheet = gdoc.worksheet("Pipulate")
+      yield "Deliberate Exit", "", "", ""
+      out("Deliberate Exit")
+      raise StopIteration
       globs.numrows = len(onesheet.col_values(1)) #!!!UnboundLocalError HTTPError OPTIMIZE!
       yme = "%s rows found." % globs.numrows
       out(yme)
       yield yme, "", "", ""
+      #!!! Put retry logic here
 
-      exit()
 
       yield "", "", "", "*" #redlock
       try:
