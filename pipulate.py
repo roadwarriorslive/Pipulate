@@ -325,7 +325,9 @@ def Pipulate():
           times = []
           for onecell in CellList:
             times.append(onecell.value)
-          out(times)
+          same = all(x == times[0] for x in times)
+          if not same:
+            out("Trapped", 80, "#")
           nextnum = int(counts[0]) + 1
           for onelist in trendlistoflists:
             onelist[globs.row1.index('count')] = nextnum
