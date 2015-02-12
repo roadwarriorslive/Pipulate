@@ -176,27 +176,46 @@ def Pipulate():
         out("Google Spreadsheet successfully opened.")
         yield "", "", "", "" #whitelock
       out("LOGIN SUCCESS", 70, "L")
+
+      onesheet = None
       yield "", "", "", "*" #redlock
       try:
-        #!!! Add retry logic
         onesheet = gdoc.worksheet("Pipulate")
       except:
-        headers = ['URL', 'Tweeted', 'Shared', 'Liked', 'Plussed', 'DateStamp', 'TimeStamp']
-        headers = ['URL', 'Subscribers', 'ISOTimeStamp', 'Count']
-        out("Creating Pipulate tab.")
-        yme = InitTab(gdoc, 'Pipulate', headers, pipinit())
-        onesheet = gdoc.worksheet("Pipulate")
-        out("Pipulate tab created.")
-        yield yme, "", "", ""
+        pass
       else:
         yield "", "", "", "" #redlock
-      finally:
-        out("Counting rows in Pipulate tab.")
-        #!!! Put retry logic here
-        globs.numrows = len(onesheet.col_values(1)) #!!!UnboundLocalError HTTPError OPTIMIZE!
-        yme = "%s rows found." % globs.numrows
-        out(yme)
-        yield yme, "", "", ""
+
+      if not onesheet:
+        #headers = ['URL', 'Tweeted', 'Shared', 'Liked', 'Plussed', 'DateStamp', 'TimeStamp']
+        headers = ['URL', 'Subscribers', 'ISOTimeStamp', 'Count']
+        out("Creating Pipulate tab.")
+        yield "", "", "", "*" #redlock
+        try:
+          yme = InitTab(gdoc, 'Pipulate', headers, pipinit())
+        except:
+          pass
+        else:
+          yield yme, "", "", "" #redlock (combined, and that's OK)
+
+        try:
+          onesheet = gdoc.worksheet("Pipulate")
+        except:
+          pass
+        else:
+          yield "", "", "", "" #redlock
+        out("Pipulate tab created.")
+
+
+      out("Counting rows in Pipulate tab.")
+      #!!! Put retry logic here
+      globs.numrows = len(onesheet.col_values(1)) #!!!UnboundLocalError HTTPError OPTIMIZE!
+      yme = "%s rows found." % globs.numrows
+      out(yme)
+      yield yme, "", "", ""
+
+
+
       yield "", "", "", "*" #redlock
       try:
         gdoc.worksheet("Config")
