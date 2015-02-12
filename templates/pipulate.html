@@ -182,9 +182,6 @@ overflow-y:scroll;
         $('#pipulate').prop("disabled", true);
         $('#piplock').removeClass("fa-chevron-circle-right");
         $('#piplock').addClass("fa-lock");
-        if($("#pbjt").length != 0) {
-            $("#pbjt").hide();
-          }
       }
       function unlockbutton() {
         $('#pipulate').prop("disabled", false);
@@ -202,8 +199,8 @@ overflow-y:scroll;
         {% endif %}
         $("#pipulate").click(function() {
           lockbutton();
+          $('#pipstream').hide();;
           $('#spinner').show();
-          $('#pipstream').text('');
           $('#magicbox').val('');
           $('#learnsomething').html("Sit back and relax. I'm beginning to pipulate...");
           $('#pipform').submit();
@@ -265,8 +262,6 @@ overflow-y:scroll;
         {% endfor %}
       {% endif %}
     {% endwith %}
-    </div>
-    <div id="pipstream">
     {% for lineitem, learn, magic in data: -%}
       {%- if learn or magic: -%}
       <script>

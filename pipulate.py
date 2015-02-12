@@ -272,7 +272,7 @@ def Pipulate():
       out("About to scan down Pipulate tab looking for asterisks.")
       for rowdex in range(1, onesheet.row_count+1):
         try:
-          out("Scanning row %s for asterisks." % rowdex)
+          out("Scanning row %s for asterisks." % rowdex) #This can have a pretty long delay
           onerow = onesheet.row_values(rowdex) #!!! HTTPError
         except:
           out("Couldn't open row.")
@@ -304,6 +304,8 @@ def Pipulate():
           if blankrows > 1:
             out("Found second blank row, so trending scan complete.")
             break
+      out("The search for trending rows complete.")
+      trendingrowsfinished = True
       if trended and 'count' in globs.row1:
         now = datetime.datetime.now()
         #lastinsertdate = None
@@ -314,8 +316,8 @@ def Pipulate():
         counts = []
         for onecell in CellList:
           counts.append(onecell.value)
-        same = all(x == counts[0] for x in counts)
-        if same:
+        samecount = all(x == counts[0] for x in counts)
+        if samecount:
           if counts[0] == '*':
             counts[0] = 0
           #Here we need to detect if there's rows left over.
@@ -325,9 +327,12 @@ def Pipulate():
           times = []
           for onecell in CellList:
             times.append(onecell.value)
-          same = all(x == times[0] for x in times)
-          if not same:
-            out("Trapped", 80, "#")
+          out(times)
+          trendingrowsfinished = times.count('?') == 0
+          out(trendingrowsfinished)
+          if not trendingrowsfinished:
+            qstart = globs.numrows - times.count('?') + 1
+            trendlistoflists = []
           nextnum = int(counts[0]) + 1
           for onelist in trendlistoflists:
             onelist[globs.row1.index('count')] = nextnum
@@ -346,10 +351,13 @@ def Pipulate():
       #out(diff.seconds/60)
 
 
-
-      if trended:
+      if trended and trendingrowsfinished == True:
+        out("Trapped", 80, "T")
         qstart = globs.numrows + 1
+      elif trended:
+        pass
       else:
+        out("Slipped", 80, "S")
         qstart = 1
       if trendlistoflists:
         for x in range(0, globs.retrytimes):
