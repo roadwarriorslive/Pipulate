@@ -410,7 +410,7 @@ def Pipulate():
       out("Question mark replacement")
       for index, rowdex in enumerate(range(qstart, onesheet.row_count+1)): #Start stepping through every row.
         if 'rowthrottlenumber' in globs.config:
-          if index >= int(globs.config['rowthrottlenumber']):
+          if index >= int(rowthrottlenumber):
             break
         if index == 0:
           yme = "Pipulating row: %s" % rowdex
