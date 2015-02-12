@@ -318,6 +318,7 @@ def Pipulate():
           if counts[0] == '*':
             counts[0] = 0
           #Here we need to detect if there's rows left over.
+          timeletter = globs.letter[globs.row1.index('isotimestamp') + 1]
           nextnum = int(counts[0]) + 1
           for onelist in trendlistoflists:
             onelist[globs.row1.index('count')] = nextnum
