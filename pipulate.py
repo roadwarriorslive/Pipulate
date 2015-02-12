@@ -156,7 +156,6 @@ def Pipulate():
         raise StopIteration
       else:
         out("Login successful.")
-      yield "", "", "", "*" #redlock
       try:
         gdoc = gsp.open_by_url(globs.PIPURL) #HTTPError
       except gspread.httpsession.HTTPError, e:
@@ -189,20 +188,22 @@ def Pipulate():
       for tabtuple in InitTab(gdoc, 'Pipulate', headers, pipinit()):
         yield tabtuple
 
-
       out("Counting rows in Pipulate tab.")
       onesheet = gdoc.worksheet("Pipulate")
-      yield "Deliberate Exit", "", "", ""
-      out("Deliberate Exit")
-      raise StopIteration
       globs.numrows = len(onesheet.col_values(1)) #!!!UnboundLocalError HTTPError OPTIMIZE!
       yme = "%s rows found." % globs.numrows
       out(yme)
       yield yme, "", "", ""
+
+      # Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug
+      yield "Deliberate Exit", "", "", ""
+      out("Deliberate Exit")
+      raise StopIteration
+      # Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug
+
       #!!! Put retry logic here
 
 
-      yield "", "", "", "*" #redlock
       try:
         gdoc.worksheet("Config")
       except:
@@ -213,8 +214,7 @@ def Pipulate():
         out("Config tab created.")
         yield yme, "", "", ""
       else:
-        yield "", "", "", "" #redlock
-      yield "", "", "", "*" #redlock
+        pass
       try:
         out("Reading Config tab into globals.")
         globs.config = refreshconfig(gdoc, "Config") #HTTPError
@@ -222,19 +222,13 @@ def Pipulate():
         out("Copying Config tag to globals failed.")
       else:
         out("Config tab copied to globals.")
-        yield "", "", "", "" #redlock
-      yield "", "", "", "*" #redlock
       try:
         gdoc.worksheet("Scrapers")
       except:
-        yield "", "", "", "" #redlock
         headers = ['name', 'type', 'pattern']
-        yield "", "", "", "*" #redlock
         yme = InitTab(gdoc, 'Scrapers', headers, scrapes())
-        yield "", "", "", "" #redlock
         out("Scrapers tab created.")
         yield yme, "", "", ""
-      yield "", "", "", "" #redlock
       try:
         out("Loading Scrapers.")
         sst = gdoc.worksheet("Scrapers")
@@ -249,7 +243,6 @@ def Pipulate():
         out("Failed to load Scrapers.")
         raise StopIteration
       else:
-        yield "", "", "", "*" #redlock
         out("Scrapaers loaded.")
       try:
         out("Loading row1 into globals.")
@@ -418,7 +411,6 @@ def Pipulate():
 
       #We need to get it again if trending rows were added.
       if trended:
-        yield "", "", "", "*" #redlock
         try:
           onesheet = gdoc.worksheet("Pipulate")
         except:
@@ -426,7 +418,7 @@ def Pipulate():
           yield "spinoff", "", "", ""
           raise StopIteration
         else:
-          yield "", "", "", "" #redlock
+          pass
 
       globs.numrows = len(onesheet.col_values(1))
       blankrows = 0 #Lets us skip occasional blank rows
@@ -695,29 +687,34 @@ def InitTab(gdoc, tabname, headerlist, listoflists=[]):
     initsheet = gdoc.worksheet("Pipulate")
   except:
     pass
-
-  numcols = len(headerlist)
-  if listoflists and len(listoflists) > 1 and '*' in listoflists[1]:
-    numrows = len(listoflists)+1
-  elif listoflists:
-    numrows = len(listoflists)+2
   else:
-    numrows = 2
-  endletter = globs.letter[numcols]
-  newtab = gdoc.add_worksheet(title=tabname, rows=numrows, cols=numcols)
-  CellList = newtab.range('A1:%s%s' % (endletter, numrows))
-  initlist = []
-  for onelist in listoflists:
-    for onecell in onelist:
-      initlist.append(onecell)
-  wholelist = headerlist + initlist
-  for index, onecell in enumerate(CellList):
-    try:
-      onecell.value = wholelist[index]
-    except:
-      pass
-  newtab.update_cells(CellList)
-  yield "Exiting InitTab", "", "", ""
+    yme = "%s already exists. Exiting InitTab." % tabname
+    yield yme, "", "", ""
+    raise StopIteration
+
+  if not initsheet:
+    numcols = len(headerlist)
+    if listoflists and len(listoflists) > 1 and '*' in listoflists[1]:
+      numrows = len(listoflists)+1
+    elif listoflists:
+      numrows = len(listoflists)+2
+    else:
+      numrows = 2
+    endletter = globs.letter[numcols]
+    newtab = gdoc.add_worksheet(title=tabname, rows=numrows, cols=numcols)
+    CellList = newtab.range('A1:%s%s' % (endletter, numrows))
+    initlist = []
+    for onelist in listoflists:
+      for onecell in onelist:
+        initlist.append(onecell)
+    wholelist = headerlist + initlist
+    for index, onecell in enumerate(CellList):
+      try:
+        onecell.value = wholelist[index]
+      except:
+        pass
+    newtab.update_cells(CellList)
+    yield "Exiting InitTab", "", "", ""
   
 
 def questionmark(oldrow, rowdex, coldex):
