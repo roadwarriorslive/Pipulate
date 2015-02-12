@@ -1,4 +1,4 @@
-""" 
+"""
           _____ _             _       _
          |  __ (_)           | |     | |
          | |__) | _ __  _   _| | __ _| |_ ___     ___ ___  _ __ ___
@@ -78,12 +78,12 @@ def main():                                         # visiting app's homepage.
         except:
           session.clear()
           flash("Login expired. Please log back in")
-  if request.method == 'POST':                      # Pipulation must only ever
-    if form.pipurl.data:                            # occur on the POST method
-      globs.PIPURL = form.pipurl.data               # with a submitted URL. That
-      STREAMIT = stream_with_context(Pipulate())    # tells us to start streaming.
-    else:                                           # Some messages just have to
-      flash('Please enter a URL to Pipulate')       # be flashed versus streamed.
+  if request.method == 'POST':
+    if form.pipurl.data:
+      globs.PIPURL = form.pipurl.data
+      STREAMIT = stream_with_context(Pipulate())
+    else:
+      flash('Please enter a URL to Pipulate (or click bookmarklet again)')
   else:
     if request.args and "access_token" in request.args:
       session['oa2'] = request.args.get("access_token")
@@ -242,7 +242,7 @@ def Pipulate():
           fname = fname.lower()
         except:
           pass
-        if fname in transfuncs.keys(): 
+        if fname in transfuncs.keys():
           out("Found function %s in row 1." % fname)
           fargs[coldex2] = {}
           from inspect import getargspec
@@ -491,7 +491,7 @@ def Pipulate():
     else:
       yield 'Please Login to Google', "", ""
     yield "Pipulation complete.&nbsp;&nbsp;", "Congratulations, pipulation complete! Do a little victory dance.", ""
-    yield "spinoff", "", ""
+    yield "spinoffsuccess", "", ""
     out("PIPULATION OVER", 80, "P")
   except Exception as e:
     exc_type, exc_obj, exc_tb = sys.exc_info()

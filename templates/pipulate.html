@@ -286,13 +286,21 @@ overflow-y:scroll;
             $('#pipulate').fadeTo("fast",.5);
             //$('#spinner').show();
           </script>
-        {%- elif lineitem == "spinoff" -%}
+        {%- elif lineitem == "spinoffsuccess" -%}
           <script>
-            // Unlock button and remove spinner
+            // Unlock button and remove spinner, successful pipulation
             $('#spinner').hide();
             $("i").removeClass("fa-spin fa-circle-o-notch");
             $("i").addClass("fa-check");
             document.write('<img id="pbjt" src="static/pipulate.gif" style="vertical-align: top;">');
+            unlockbutton();
+          </script>
+        {%- elif lineitem == "spinoff" -%}
+          <script>
+            // Unlock button and remove spinner, failed pipulation
+            $('#spinner').hide();
+            $("i").removeClass("fa-spin fa-circle-o-notch");
+            $("i").addClass("fa-check");
             unlockbutton();
           </script>
         {%- elif lineitem == "spinerr" -%}
