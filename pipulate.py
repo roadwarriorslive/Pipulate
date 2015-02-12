@@ -17,7 +17,7 @@
 """
 
 import globs                                        # Talmudic style commentaries
-import requests, time, sys, os, json, datetime      # Requests will help 3.x port
+import requests, traceback, datetime, time, json, sys, os
 from flask_wtf import Form                          # All Flask form examples use it
 from wtforms import StringField
 from flask import (Flask,                           # This app is all about Flask
@@ -333,7 +333,6 @@ def Pipulate():
           for onecell in CellList:
             times.append(onecell.value)
           trendingrowsfinished = times.count('?') == 0
-          out(trendingrowsfinished)
           currentornew = 'current'
           if trendingrowsfinished:
             currentornew = 'the new'
@@ -342,7 +341,7 @@ def Pipulate():
               s = ''
             else:
               s = 's'
-            yme = "Current trending interval complete. Inserting %s new row%s." % (rowthrottlenumber, s)
+            yme = "Current trending interval complete. Inserting %s new row%s..." % (rowthrottlenumber, s)
             yield yme, "", ""
           if 'rowthrottlenumber' in globs.config:
             rowthrottlenumber = globs.config['rowthrottlenumber']
@@ -431,7 +430,6 @@ def Pipulate():
 
           out("About to pipulate row %s." % rowdex)
           rowdexstring = str(rowdex)
-          import traceback
           newrow = onerow[:]
           if rowdexstring > 1:
             #All subsequent rows are checked for question mark replacement requests.
