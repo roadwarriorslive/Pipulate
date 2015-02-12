@@ -176,6 +176,7 @@ def Pipulate():
         out("Google Spreadsheet successfully opened.")
         yield "", "", "", "" #whitelock
       out("LOGIN SUCCESS", 70, "L")
+      yield "", "", "", "*" #redlock
       try:
         #!!! Add retry logic
         onesheet = gdoc.worksheet("Pipulate")
@@ -187,6 +188,8 @@ def Pipulate():
         onesheet = gdoc.worksheet("Pipulate")
         out("Pipulate tab created.")
         yield yme, "", "", ""
+      else:
+        yield "", "", "", "" #redlock
       finally:
         out("Counting rows in Pipulate tab.")
         #!!! Put retry logic here
@@ -194,6 +197,7 @@ def Pipulate():
         yme = "%s rows found." % globs.numrows
         out(yme)
         yield yme, "", "", ""
+      yield "", "", "", "*" #redlock
       try:
         gdoc.worksheet("Config")
       except:
@@ -203,6 +207,9 @@ def Pipulate():
         #yme = InitTab(gdoc, 'Config', headers)
         out("Config tab created.")
         yield yme, "", "", ""
+      else:
+        yield "", "", "", "" #redlock
+      yield "", "", "", "*" #redlock
       try:
         out("Reading Config tab into globals.")
         globs.config = refreshconfig(gdoc, "Config") #HTTPError
@@ -210,13 +217,19 @@ def Pipulate():
         out("Copying Config tag to globals failed.")
       else:
         out("Config tab copied to globals.")
+        yield "", "", "", "" #redlock
+      yield "", "", "", "*" #redlock
       try:
         gdoc.worksheet("Scrapers")
       except:
+        yield "", "", "", "" #redlock
         headers = ['name', 'type', 'pattern']
+        yield "", "", "", "*" #redlock
         yme = InitTab(gdoc, 'Scrapers', headers, scrapes())
+        yield "", "", "", "" #redlock
         out("Scrapers tab created.")
         yield yme, "", "", ""
+      yield "", "", "", "" #redlock
       try:
         out("Loading Scrapers.")
         sst = gdoc.worksheet("Scrapers")
@@ -231,6 +244,7 @@ def Pipulate():
         out("Failed to load Scrapers.")
         raise StopIteration
       else:
+        yield "", "", "", "*" #redlock
         out("Scrapaers loaded.")
       try:
         out("Loading row1 into globals.")
@@ -399,12 +413,15 @@ def Pipulate():
 
       #We need to get it again if trending rows were added.
       if trended:
+        yield "", "", "", "*" #redlock
         try:
           onesheet = gdoc.worksheet("Pipulate")
         except:
           yield "Couldn't reach Google Docs. Try logging in again.", "", "", ""
           yield "spinoff", "", "", ""
           raise StopIteration
+        else:
+          yield "", "", "", "" #redlock
 
       globs.numrows = len(onesheet.col_values(1))
       blankrows = 0 #Lets us skip occasional blank rows
