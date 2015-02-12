@@ -175,6 +175,7 @@ def Pipulate():
         out("Google Spreadsheet successfully opened.")
       out("LOGIN SUCCESS", 70, "L")
       try:
+        #!!! Add retry logic
         onesheet = gdoc.worksheet("Pipulate")
       except:
         headers = ['URL', 'Tweeted', 'Shared', 'Liked', 'Plussed', 'DateStamp', 'TimeStamp']
@@ -298,7 +299,6 @@ def Pipulate():
             else:
               blankrows += 1
               if blankrows > 1:
-                yield "Trending request understood.", "Things may appear to freeze. Have patience.", ""
                 out("Found second row without asterisks, so stopped looking.")
                 break
         else:
@@ -306,7 +306,7 @@ def Pipulate():
           if blankrows > 1:
             out("Found second blank row, so trending scan complete.")
             break
-      out("The search for trending rows complete.")
+      yield "Trending request understood.", "", ""
       trendingrowsfinished = True
       if trended and 'count' in globs.row1:
         now = datetime.datetime.now()
@@ -350,7 +350,8 @@ def Pipulate():
             s = ''
           else:
             s = 's'
-          tnum = globs.config['rowthrottlenumber']
+          if 'rowthrottlenumber' in globs.config:
+            tnum = globs.config['rowthrottlenumber']
           yme = "Processing next %s row%s from %s time interval." % (tnum, s, currentornew)
           yield yme, "", ""
           if not trendingrowsfinished:
@@ -572,7 +573,7 @@ def getLoginlink():
   return "%s?%s" % (baseurl, urlencode(qsdict))
 
 def getBookmarklet():
-  return '''javascript:(function(){window.open('http://%s/?u='+encodeURIComponent(document.location.href), 'Pipulate', 'toolbar=0,resizable=1,scrollbars=1,status=1,width=640,height=540');})();''' % (request.headers['Host'])
+  return '''javascript:(function(){window.open('http://%s/?u='+encodeURIComponent(document.location.href), 'Pipulate', 'toolbar=0,resizable=1,scrollbars=1,status=1,width=640,height=600');})();''' % (request.headers['Host'])
 
 def getLogoutlink():
   from urllib import quote_plus
