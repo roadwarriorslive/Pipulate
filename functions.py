@@ -40,7 +40,6 @@ def cyclemotto():
   s.append("Point of interest: Pipulate is written in Python.")
   s.append("Visit the project at: https://github.com/miklevin/pipulate")
   s.append("On a Mac? Open Terminal, then type \"python\", then \"import this\".")
-  s.append("To exit, type \"exit()\". Makes sense, right?")
   s.append("Careful, or else you might start learning some Python.")
   s.append("Download your own dedicated Pipulate server at Levinux.com.")
   s.append("Levinux: Give me 10 minutes, and I'll give you skills for life.")

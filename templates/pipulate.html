@@ -177,17 +177,25 @@ overflow-y:scroll;
       box-shadow:0 10px 8px rgba(0,0,0,.6)}
     </style>
     <script>
+      function redlock() {
+        $('#piplock').css('color', 'red');
+      }
+      function whitelock() {
+        $('#piplock').css('color', 'white');
+      }
       function lockbutton() {
         $('#pipulate').fadeTo(0,.5);
         $('#pipulate').prop("disabled", true);
         $('#piplock').removeClass("fa-chevron-circle-right");
         $('#piplock').addClass("fa-lock");
+        redlock();
       }
       function unlockbutton() {
         $('#pipulate').prop("disabled", false);
         $('#pipulate').fadeTo("fast",1);
         $('#piplock').addClass("fa-chevron-circle-right");
         $('#piplock').removeClass("fa-lock");
+        whitelock();
       }
       $(document).ready(function(){  
         {% if request.method == 'GET': %}
