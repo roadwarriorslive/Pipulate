@@ -121,9 +121,9 @@ def main():                                         # visiting app's homepage.
 
 def successassured():
   import time
-  for i in range(0, 10):
+  for i in range(0, 3):
     yield "foo %s" % i
-    time.sleep(globs.retryseconds)
+    time.sleep(1)
 
 def Pipulate():
   for i in successassured():
@@ -185,34 +185,9 @@ def Pipulate():
         yield "", "", "", "" #whitelock
       out("LOGIN SUCCESS", 70, "L")
 
-      onesheet = None
-      yield "", "", "", "*" #redlock
-      try:
-        onesheet = gdoc.worksheet("Pipulate")
-      except:
-        pass
-      else:
-        yield "", "", "", "" #redlock
-
-      if not onesheet:
-        #headers = ['URL', 'Tweeted', 'Shared', 'Liked', 'Plussed', 'DateStamp', 'TimeStamp']
-        headers = ['URL', 'Subscribers', 'ISOTimeStamp', 'Count']
-        out("Creating Pipulate tab.")
-        yield "", "", "", "*" #redlock
-        try:
-          yme = InitTab(gdoc, 'Pipulate', headers, pipinit())
-        except:
-          pass
-        else:
-          yield yme, "", "", "" #redlock (combined, and that's OK)
-
-        try:
-          onesheet = gdoc.worksheet("Pipulate")
-        except:
-          pass
-        else:
-          yield "", "", "", "" #redlock
-        out("Pipulate tab created.")
+      headers = ['URL', 'Subscribers', 'ISOTimeStamp', 'Count']
+      for tabtuple in InitTab(gdoc, 'Pipulate', headers, pipinit()):
+        yield tabtuple
 
 
       out("Counting rows in Pipulate tab.")
@@ -222,7 +197,7 @@ def Pipulate():
       out(yme)
       yield yme, "", "", ""
 
-
+      exit()
 
       yield "", "", "", "*" #redlock
       try:
@@ -711,6 +686,13 @@ def InsertRows(onesheet, listoflists):
   return
 
 def InitTab(gdoc, tabname, headerlist, listoflists=[]):
+  yield "Entering InitTab", "", "", ""
+  initsheet = None
+  try:
+    initsheet = gdoc.worksheet("Pipulate")
+  except:
+    pass
+
   numcols = len(headerlist)
   if listoflists and len(listoflists) > 1 and '*' in listoflists[1]:
     numrows = len(listoflists)+1
@@ -732,7 +714,8 @@ def InitTab(gdoc, tabname, headerlist, listoflists=[]):
     except:
       pass
   newtab.update_cells(CellList)
-  return "Making %s tab." % tabname
+  yield "Exiting InitTab", "", "", ""
+  
 
 def questionmark(oldrow, rowdex, coldex):
   if rowdex != 1:
