@@ -119,15 +119,7 @@ def main():                                         # visiting app's homepage.
     out("")
     return render_template('pipulate.html', form=form)
 
-def successassured():
-  import time
-  for i in range(0, 3):
-    yield "foo %s" % i
-    time.sleep(1)
-
 def Pipulate():
-  for i in successassured():
-    yield i, "", "", ""
   out("PIPULATION BEGINNING", 80, "P")
   try:
     yield "Beginning to pipulate...", "", "", ""
@@ -201,14 +193,6 @@ def Pipulate():
         yield tabtuple
 
 
-      # Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug
-      yield "Deliberate Exit", "", "", ""
-      out("Deliberate Exit")
-      raise StopIteration
-      # Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug
-
-      #!!! Put retry logic here
-
       try:
         out("Reading Config tab into globals.")
         globs.config = refreshconfig(gdoc, "Config") #HTTPError
@@ -218,20 +202,22 @@ def Pipulate():
         out("Config tab copied to globals.")
 
 
+      headers = ['name', 'type', 'pattern']
+      for tabtuple in InitTab(gdoc, 'Scrapers', headers, scrapes()):
+        yield tabtuple
+
+
+      # Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug
+      yield "Deliberate Exit", "", "", ""
+      out("Deliberate Exit")
+      raise StopIteration
+      # Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug
 
 
 
 
 
 
-
-      try:
-        gdoc.worksheet("Scrapers")
-      except:
-        headers = ['name', 'type', 'pattern']
-        yme = InitTab(gdoc, 'Scrapers', headers, scrapes())
-        out("Scrapers tab created.")
-        yield yme, "", "", ""
       try:
         out("Loading Scrapers.")
         sst = gdoc.worksheet("Scrapers")
