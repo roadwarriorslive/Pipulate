@@ -119,7 +119,15 @@ def main():                                         # visiting app's homepage.
     out("")
     return render_template('pipulate.html', form=form)
 
+def successassured():
+  import time
+  for i in range(0, 10):
+    yield "foo %s" % i
+    time.sleep(globs.retryseconds)
+
 def Pipulate():
+  for i in successassured():
+    yield i, "", "", ""
   out("PIPULATION BEGINNING", 80, "P")
   try:
     yield "Beginning to pipulate...", "", "", ""
