@@ -195,6 +195,12 @@ def Pipulate():
       out(yme)
       yield yme, "", "", ""
 
+
+      headers = ['name', 'value']
+      for tabtuple in InitTab(gdoc, 'Config', headers, [['rowthrottlenumber','1']]):
+        yield tabtuple
+
+
       # Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug
       yield "Deliberate Exit", "", "", ""
       out("Deliberate Exit")
@@ -203,18 +209,6 @@ def Pipulate():
 
       #!!! Put retry logic here
 
-
-      try:
-        gdoc.worksheet("Config")
-      except:
-        headers = ['name', 'value']
-        out("Creating Config tab.")
-        yme = InitTab(gdoc, 'Config', headers, [['rowthrottlenumber','1']])
-        #yme = InitTab(gdoc, 'Config', headers)
-        out("Config tab created.")
-        yield yme, "", "", ""
-      else:
-        pass
       try:
         out("Reading Config tab into globals.")
         globs.config = refreshconfig(gdoc, "Config") #HTTPError
@@ -222,6 +216,15 @@ def Pipulate():
         out("Copying Config tag to globals failed.")
       else:
         out("Config tab copied to globals.")
+
+
+
+
+
+
+
+
+
       try:
         gdoc.worksheet("Scrapers")
       except:
@@ -684,7 +687,7 @@ def InitTab(gdoc, tabname, headerlist, listoflists=[]):
   yield "Entering InitTab", "", "", ""
   initsheet = None
   try:
-    initsheet = gdoc.worksheet("Pipulate")
+    initsheet = gdoc.worksheet(tabname)
   except:
     pass
   else:
