@@ -188,14 +188,12 @@ overflow-y:scroll;
         $('#pipulate').prop("disabled", true);
         $('#piplock').removeClass("fa-chevron-circle-right");
         $('#piplock').addClass("fa-lock");
-        redlock();
       }
       function unlockbutton() {
         $('#pipulate').prop("disabled", false);
         $('#pipulate').fadeTo("fast",1);
         $('#piplock').addClass("fa-chevron-circle-right");
         $('#piplock').removeClass("fa-lock");
-        whitelock();
       }
       $(document).ready(function(){  
         {% if request.method == 'GET': %}
@@ -270,7 +268,16 @@ overflow-y:scroll;
         {% endfor %}
       {% endif %}
     {% endwith %}
-    {% for lineitem, learn, magic in data: -%}
+    {% for lineitem, learn, magic, glock in data: -%}
+      {%- if glock: -%}
+        <script>
+          redlock();
+        </script>
+      {%- else: -%}
+        <script>
+          whitelock();
+        </script>
+      {%- endif -%}
       {%- if learn or magic: -%}
       <script>
         {%- if magic: -%}

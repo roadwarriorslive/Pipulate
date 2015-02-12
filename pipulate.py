@@ -122,8 +122,8 @@ def main():                                         # visiting app's homepage.
 def Pipulate():
   out("PIPULATION BEGINNING", 80, "P")
   try:
-    yield "Beginning to pipulate...", "", ""
-    yield "spinon", "", ""
+    yield "Beginning to pipulate...", "", "", ""
+    yield "spinon", "", "", ""
     out("Reading in functions.")
     funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
     transfuncs = ziplckey(funcs, funcs) #Keep translation table
@@ -136,43 +136,45 @@ def Pipulate():
         out("Credential object created.")
       else:
         out("Expired login.")
-        yield "Google Login appears to have expired. Log back in.", "Login under the \"burger button\" in the upper-right.", ""
-        yield "spinoff", "", ""
+        yield "Google Login appears to have expired. Log back in.", "Login under the \"burger button\" in the upper-right.", "", ""
+        yield "spinoff", "", "", ""
         raise StopIteration
       try:
         gsp = gspread.authorize(creds)
       except:
         out("Login failed.")
-        yield "Google Login unsuccessful.", "", ""
-        yield "spinoff", "", ""
+        yield "Google Login unsuccessful.", "", "", ""
+        yield "spinoff", "", "", ""
         raise StopIteration
       else:
         out("Login successful.")
+      yield "", "", "", "*" #redlock
       try:
         gdoc = gsp.open_by_url(globs.PIPURL) #HTTPError
       except gspread.httpsession.HTTPError, e:
         out("Login appeared successful, but rejected on document open attempt.")
-        #yield 'HTTP ERROR %s occured' % e.code, "", ""
-        yield "Session timed out. Please login again.", "", ""
+        #yield 'HTTP ERROR %s occured' % e.code, "", "", ""
+        yield "Session timed out. Please login again.", "", "", ""
         raise StopIteration
       except gspread.exceptions.NoValidUrlKeyFound:
-        yield "Currently, the URL must be a Google Spreadsheet.", "", ""
-        yield "<a href='https://docs.google.com/spreadsheets/create' target='_new'>Create</a> a new Google Spreadsheet and click Bookmarklet again.", "Google Spreadsheet Not Found.", ""
+        yield "Currently, the URL must be a Google Spreadsheet.", "", "", ""
+        yield "<a href='https://docs.google.com/spreadsheets/create' target='_new'>Create</a> a new Google Spreadsheet and click Bookmarklet again.", "Google Spreadsheet Not Found.", "", ""
         raise StopIteration
       except gspread.exceptions.SpreadsheetNotFound:
-        yield "Please give the document a name to force first save.", "", ""
-        yield "spinoff", "", ""
+        yield "Please give the document a name to force first save.", "", "", ""
+        yield "spinoff", "", "", ""
         raise StopIteration
       except Exception as e:
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
         ename = type(e).__name__
         fixme = "%s, %s, %s" % (ename, fname, exc_tb.tb_lineno)
-        yield fixme, "", ""
-        yield "spinoff", "", ""
+        yield fixme, "", "", ""
+        yield "spinoff", "", "", ""
         raise StopIteration
       else:
         out("Google Spreadsheet successfully opened.")
+        yield "", "", "", "" #whitelock
       out("LOGIN SUCCESS", 70, "L")
       try:
         #!!! Add retry logic
@@ -184,14 +186,14 @@ def Pipulate():
         yme = InitTab(gdoc, 'Pipulate', headers, pipinit())
         onesheet = gdoc.worksheet("Pipulate")
         out("Pipulate tab created.")
-        yield yme, "", ""
+        yield yme, "", "", ""
       finally:
         out("Counting rows in Pipulate tab.")
         #!!! Put retry logic here
         globs.numrows = len(onesheet.col_values(1)) #!!!UnboundLocalError HTTPError OPTIMIZE!
         yme = "%s rows found." % globs.numrows
         out(yme)
-        yield yme, "", ""
+        yield yme, "", "", ""
       try:
         gdoc.worksheet("Config")
       except:
@@ -200,7 +202,7 @@ def Pipulate():
         yme = InitTab(gdoc, 'Config', headers, [['rowthrottlenumber','1']])
         #yme = InitTab(gdoc, 'Config', headers)
         out("Config tab created.")
-        yield yme, "", ""
+        yield yme, "", "", ""
       try:
         out("Reading Config tab into globals.")
         globs.config = refreshconfig(gdoc, "Config") #HTTPError
@@ -214,7 +216,7 @@ def Pipulate():
         headers = ['name', 'type', 'pattern']
         yme = InitTab(gdoc, 'Scrapers', headers, scrapes())
         out("Scrapers tab created.")
-        yield yme, "", ""
+        yield yme, "", "", ""
       try:
         out("Loading Scrapers.")
         sst = gdoc.worksheet("Scrapers")
@@ -289,7 +291,7 @@ def Pipulate():
               trended = True
               out("Found asterisks on row 2 -- trending activated!")
               trendlistoflists.append(onerow)
-              yield "Found trending asterisks in row 2", "Then we look for trending job requests...", json.dumps(onerow)
+              yield "Found trending asterisks in row 2", "Then we look for trending job requests...", json.dumps(onerow), ""
             else:
               break
           elif trendlistoflists and rowdex > 2:
@@ -297,7 +299,7 @@ def Pipulate():
               out("Found astrisks on row %s." % rowdex)
               trendlistoflists.append(onerow)
               yme = ", %s" % rowdex
-              yield yme, "", json.dumps(onerow)
+              yield yme, "", json.dumps(onerow), ""
             else:
               blankrows += 1
               if blankrows > 1:
@@ -308,7 +310,7 @@ def Pipulate():
           if blankrows > 1:
             out("Found second blank row, so trending scan complete.")
             break
-      yield "Trending request understood.", "", ""
+      yield "Trending request understood.", "", "", ""
       trendingrowsfinished = True
       rowthrottlenumber = 0
       if trended and 'count' in globs.row1:
@@ -342,7 +344,7 @@ def Pipulate():
             else:
               s = 's'
             yme = "Current trending interval complete. Inserting %s new row%s..." % (rowthrottlenumber, s)
-            yield yme, "", ""
+            yield yme, "", "", ""
           if 'rowthrottlenumber' in globs.config:
             rowthrottlenumber = globs.config['rowthrottlenumber']
           else:
@@ -356,7 +358,7 @@ def Pipulate():
           else:
             s = 's'
           yme = "Processing next %s row%s from %s time interval." % (rowthrottlenumber, s, currentornew)
-          yield yme, "", ""
+          yield yme, "", "", ""
           if not trendingrowsfinished:
             qstart = globs.numrows - times.count('?') + 1
             trendlistoflists = []
@@ -400,8 +402,8 @@ def Pipulate():
         try:
           onesheet = gdoc.worksheet("Pipulate")
         except:
-          yield "Couldn't reach Google Docs. Try logging in again.", "", ""
-          yield "spinoff", "", ""
+          yield "Couldn't reach Google Docs. Try logging in again.", "", "", ""
+          yield "spinoff", "", "", ""
           raise StopIteration
 
       globs.numrows = len(onesheet.col_values(1))
@@ -413,10 +415,10 @@ def Pipulate():
             break
         if index == 0:
           yme = "Pipulating row: %s" % rowdex
-          yield yme, "Next, we replace question marks. This may take awhile...", ""
+          yield yme, "Next, we replace question marks. This may take awhile...", "", ""
         else:
           yme = ", %s" % rowdex
-          yield yme, "", ""
+          yield yme, "", "", ""
         globs.hobj = None
         globs.html = '' #Blank the global html object. Recylces fetches.
         rowrange = "A%s:%s%s" % (rowdex, globs.letter[len(globs.row1)], rowdex)
@@ -426,7 +428,7 @@ def Pipulate():
           onerow.append(cell.value)
         if '?' in onerow:
           blankrows = 0
-          yield "", "", json.dumps(onerow)
+          yield "", "", json.dumps(onerow), ""
 
           out("About to pipulate row %s." % rowdex)
           rowdexstring = str(rowdex)
@@ -512,7 +514,7 @@ def Pipulate():
 
           out("Finished pipulating replacing questionmarks in memory.")
           newrow = ['' if x==None else x for x in newrow]
-          yield "", "", json.dumps(newrow)
+          yield "", "", json.dumps(newrow), ""
           for index, onecell in enumerate(CellList):
             onecell.value = newrow[index]
             result = None
@@ -530,9 +532,9 @@ def Pipulate():
             break
       out('Finished question marks')
     else:
-      yield 'Please Login to Google', "", ""
-    yield "Pipulation complete.&nbsp;&nbsp;", "Congratulations, pipulation complete! Now, do a little victory dance.", ""
-    yield "spinoffsuccess", "", ""
+      yield 'Please Login to Google', "", "", ""
+    yield "Pipulation complete.&nbsp;&nbsp;", "Congratulations, pipulation complete! Now, do a little victory dance.", "", ""
+    yield "spinoffsuccess", "", "", ""
     out("PIPULATION OVER", 80, "P")
   except Exception as e:
     exc_type, exc_obj, exc_tb = sys.exc_info()
@@ -545,13 +547,13 @@ def Pipulate():
       loginmsg = ""
       if session and 'loggedin' in session and session['loggedin'] != '1':
         loginmsg = "Login link under the upper-left \"burger button\"."
-      yield "Try again or come back later.", loginmsg, ""
+      yield "Try again or come back later.", loginmsg, "", ""
     else:
-      yield fixme, "", ""
-      yield "Pipulation prematurely terminated.", "", ""
-      yield "Please open an issue at https://github.com/miklevin/pipulate", "", ""
-      yield "Or just tap me on the shoulder.", "", ""
-    yield "spinerr", "", ""
+      yield fixme, "", "", ""
+      yield "Pipulation prematurely terminated.", "", "", ""
+      yield "Please open an issue at https://github.com/miklevin/pipulate", "", "", ""
+      yield "Or just tap me on the shoulder.", "", "", ""
+    yield "spinerr", "", "", ""
   out("EXITING GENERATOR", 80, "M")
   out("")
 
