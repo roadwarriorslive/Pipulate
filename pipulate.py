@@ -189,7 +189,9 @@ def Pipulate():
         out("Counting rows in Pipulate tab.")
         #!!! Put retry logic here
         globs.numrows = len(onesheet.col_values(1)) #!!!UnboundLocalError HTTPError OPTIMIZE!
-        out("%s rows found." % globs.numrows)
+        yme = "%s rows found." % globs.numrows
+        out(yme)
+        yield yme, "", ""
       try:
         gdoc.worksheet("Config")
       except:
@@ -308,6 +310,7 @@ def Pipulate():
             break
       yield "Trending request understood.", "", ""
       trendingrowsfinished = True
+      rowthrottlenumber = 0
       if trended and 'count' in globs.row1:
         now = datetime.datetime.now()
         #lastinsertdate = None
@@ -334,25 +337,26 @@ def Pipulate():
           currentornew = 'current'
           if trendingrowsfinished:
             currentornew = 'the new'
-            tnum = len(trendlistoflists)
-            if int(tnum) == 1:
+            rowthrottlenumber = len(trendlistoflists)
+            if int(rowthrottlenumber) == 1:
               s = ''
             else:
               s = 's'
-            yme = "Current trending interval complete. Inserting %s new row%s." % (tnum, s)
+            yme = "Current trending interval complete. Inserting %s new row%s." % (rowthrottlenumber, s)
             yield yme, "", ""
-          tnum = 0
           if 'rowthrottlenumber' in globs.config:
-            tnum = globs.config['rowthrottlenumber']
+            rowthrottlenumber = globs.config['rowthrottlenumber']
           else:
-            tnum = len(trendlistoflists)
-          if int(tnum) == 1:
+            rowthrottlenumber = len(trendlistoflists)
+          try:
+            int(rowthrottlenumber)
+          except:
+            rowthrottlenumber = 1
+          if int(rowthrottlenumber) == 1:
             s = ''
           else:
             s = 's'
-          if 'rowthrottlenumber' in globs.config:
-            tnum = globs.config['rowthrottlenumber']
-          yme = "Processing next %s row%s from %s time interval." % (tnum, s, currentornew)
+          yme = "Processing next %s row%s from %s time interval." % (rowthrottlenumber, s, currentornew)
           yield yme, "", ""
           if not trendingrowsfinished:
             qstart = globs.numrows - times.count('?') + 1
