@@ -187,14 +187,14 @@ def Pipulate():
       finally:
         out("Counting rows in Pipulate tab.")
         #!!! Put retry logic here
-        globs.numrows = len(onesheet.col_values(1)) #!!!UnboundLocalError HTTPError
+        globs.numrows = len(onesheet.col_values(1)) #!!!UnboundLocalError HTTPError OPTIMIZE!
         out("%s rows found." % globs.numrows)
       try:
         gdoc.worksheet("Config")
       except:
         headers = ['name', 'value']
         out("Creating Config tab.")
-        yme = InitTab(gdoc, 'Config', headers, [['throttlerownumber','1']])
+        yme = InitTab(gdoc, 'Config', headers, [['rowthrottlenumber','1']])
         #yme = InitTab(gdoc, 'Config', headers)
         out("Config tab created.")
         yield yme, "", ""
@@ -273,11 +273,13 @@ def Pipulate():
       for rowdex in range(1, onesheet.row_count+1):
         try:
           out("Scanning row %s for asterisks." % rowdex) #This can have a pretty long delay
-          onerow = onesheet.row_values(rowdex) #!!! HTTPError
+          # Put the retry logic here
+          onerow = onesheet.row_values(rowdex) #!!! HTTPError OPTIMIZE THIS!
         except:
           out("Couldn't open row.")
         else:
           out("Successfully opened row.")
+        out("Finished scanning rows.")
         if onerow:
           if rowdex == 2: #Looking for trending requests
             if '*' in onerow:
@@ -296,7 +298,7 @@ def Pipulate():
             else:
               blankrows += 1
               if blankrows > 1:
-                yield "Finished setting up trending. Patience, young Jedi...", "Things may appear to freeze. Wait a minute before re-trying.", ""
+                yield "Trending request understood.", "Things may appear to freeze. Have patience.", ""
                 out("Found second row without asterisks, so stopped looking.")
                 break
         else:
@@ -327,21 +329,30 @@ def Pipulate():
           times = []
           for onecell in CellList:
             times.append(onecell.value)
-          out(times)
           trendingrowsfinished = times.count('?') == 0
           out(trendingrowsfinished)
           if not trendingrowsfinished:
+            tnum = 0
+            if 'rowthrottlenumber' in globs.config:
+              tnum = globs.config['rowthrottlenumber']
+            else:
+              tnum = len(trendlistoflists)
+            if tnum == 1:
+              s = ''
+            else:
+              s = 's'
+            tnum = globs.config['rowthrottlenumber']
+            yme = "Processing next %s row%s from current time interval" % (globs.config['rowthrottlenumber'], s)
+            yield yme, "", ""
             qstart = globs.numrows - times.count('?') + 1
             trendlistoflists = []
           nextnum = int(counts[0]) + 1
           for onelist in trendlistoflists:
             onelist[globs.row1.index('count')] = nextnum
         else: #Don't work on this else condition yet, until the prior condition processes all its rows.
-          out("GOTCHA", 160, "~")
-          if 'throttlerownumber' in globs.config:
-            if int(globs.config['throttlerownumber']):
+          if 'rowthrottlenumber' in globs.config:
+            if int(globs.config['rowthrottlenumber']):
               pass
-        out(trendlistoflists)
         #cell = onesheet.cell(globs.numrows, globs.row1.index('isotimestamp')+1)
         #import dateutil.parser
         #lastinsertdate = dateutil.parser.parse(cell.value)
@@ -352,12 +363,10 @@ def Pipulate():
 
 
       if trended and trendingrowsfinished == True:
-        out("Trapped", 80, "T")
         qstart = globs.numrows + 1
       elif trended:
         pass
       else:
-        out("Slipped", 80, "S")
         qstart = 1
       if trendlistoflists:
         for x in range(0, globs.retrytimes):
@@ -385,8 +394,8 @@ def Pipulate():
       blankrows = 0 #Lets us skip occasional blank rows
       out("Question mark replacement")
       for index, rowdex in enumerate(range(qstart, onesheet.row_count+1)): #Start stepping through every row.
-        if 'throttlerownumber' in globs.config:
-          if index >= int(globs.config['throttlerownumber']):
+        if 'rowthrottlenumber' in globs.config:
+          if index >= int(globs.config['rowthrottlenumber']):
             break
         if index == 0:
           yme = "Pipulating row: %s" % rowdex
