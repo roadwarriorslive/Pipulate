@@ -186,7 +186,8 @@ def Pipulate():
         yield yme, "", ""
       finally:
         out("Counting rows in Pipulate tab.")
-        globs.numrows = len(onesheet.col_values(1)) #!!!UnboundLocalError
+        #!!! Put retry logic here
+        globs.numrows = len(onesheet.col_values(1)) #!!!UnboundLocalError HTTPError
         out("%s rows found." % globs.numrows)
       try:
         gdoc.worksheet("Config")
@@ -319,6 +320,12 @@ def Pipulate():
             counts[0] = 0
           #Here we need to detect if there's rows left over.
           timeletter = globs.letter[globs.row1.index('isotimestamp') + 1]
+          mayhaverun = "%s%s:%s%s" % (timeletter, backintime, timeletter, globs.numrows)
+          CellList = onesheet.range(mayhaverun)
+          times = []
+          for onecell in CellList:
+            times.append(onecell.value)
+          out(times)
           nextnum = int(counts[0]) + 1
           for onelist in trendlistoflists:
             onelist[globs.row1.index('count')] = nextnum
