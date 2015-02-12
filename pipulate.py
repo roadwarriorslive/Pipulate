@@ -305,10 +305,10 @@ def Pipulate():
             break
       if trended and 'count' in globs.row1:
         now = datetime.datetime.now()
-        lastinsertdate = None
+        #lastinsertdate = None
         backintime = globs.numrows - len(trendlistoflists) + 1
-        timeletter = globs.letter[globs.row1.index('count') + 1]
-        mayhaverun = "%s%s:%s%s" % (timeletter, backintime, timeletter, globs.numrows)
+        countletter = globs.letter[globs.row1.index('count') + 1]
+        mayhaverun = "%s%s:%s%s" % (countletter, backintime, countletter, globs.numrows)
         CellList = onesheet.range(mayhaverun)
         counts = []
         for onecell in CellList:
@@ -317,10 +317,11 @@ def Pipulate():
         if same:
           if counts[0] == '*':
             counts[0] = 0
+          #Here we need to detect if there's rows left over.
           nextnum = int(counts[0]) + 1
           for onelist in trendlistoflists:
             onelist[globs.row1.index('count')] = nextnum
-        else:
+        else: #Don't work on this else condition yet, until the prior condition processes all its rows.
           out("GOTCHA", 160, "~")
           if 'throttlerownumber' in globs.config:
             if int(globs.config['throttlerownumber']):
@@ -490,7 +491,7 @@ def Pipulate():
       out('Finished question marks')
     else:
       yield 'Please Login to Google', "", ""
-    yield "Pipulation complete.&nbsp;&nbsp;", "Congratulations, pipulation complete! Do a little victory dance.", ""
+    yield "Pipulation complete.&nbsp;&nbsp;", "Congratulations, pipulation complete! Now, do a little victory dance.", ""
     yield "spinoffsuccess", "", ""
     out("PIPULATION OVER", 80, "P")
   except Exception as e:
