@@ -331,18 +331,26 @@ def Pipulate():
             times.append(onecell.value)
           trendingrowsfinished = times.count('?') == 0
           out(trendingrowsfinished)
-          if not trendingrowsfinished:
+          if trendingrowsfinished:
+            tnum = len(trendlistoflists)
+            if int(tnum) == 1:
+              s = ''
+            else:
+              s = 's'
+            yme = "Current trending interval complete. Inserting %s new row%s." % (tnum, s)
+            yield yme, "", ""
+          else:
             tnum = 0
             if 'rowthrottlenumber' in globs.config:
               tnum = globs.config['rowthrottlenumber']
             else:
               tnum = len(trendlistoflists)
-            if tnum == 1:
+            if int(tnum) == 1:
               s = ''
             else:
               s = 's'
             tnum = globs.config['rowthrottlenumber']
-            yme = "Processing next %s row%s from current time interval" % (globs.config['rowthrottlenumber'], s)
+            yme = "Processing next %s row%s from current time interval." % (globs.config['rowthrottlenumber'], s)
             yield yme, "", ""
             qstart = globs.numrows - times.count('?') + 1
             trendlistoflists = []
