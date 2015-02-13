@@ -206,6 +206,27 @@ def Pipulate():
       for tabtuple in InitTab(gdoc, 'Scrapers', headers, scrapes()):
         yield tabtuple
 
+      sst = None
+      out("Loading Scrapers.")
+      try:
+        sst = gdoc.worksheet("Scrapers")
+      except:
+        out("Failed to load Scrapers.")
+        raise StopIteration
+      if sst:
+        try:
+          lod = sst.get_all_records() #Returns list of dictionaries
+        except:
+          out("Failed to load Scrapers 2")
+        else:
+          pat = [[d['pattern']][0] for d in lod]
+          typ = [[d['type']][0] for d in lod]
+          nam = [[d['name']][0] for d in lod]
+          scrapetypes = ziplckey(nam, typ)
+          scrapepatterns = ziplckey(nam, pat)
+          transscrape = ziplckey(nam, nam)
+          out("Scrapaers loaded.")
+
 
       # Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug
       yield "Deliberate Exit", "", "", ""
@@ -218,21 +239,7 @@ def Pipulate():
 
 
 
-      try:
-        out("Loading Scrapers.")
-        sst = gdoc.worksheet("Scrapers")
-        lod = sst.get_all_records() #Returns list of dictionaries
-        pat = [[d['pattern']][0] for d in lod]
-        typ = [[d['type']][0] for d in lod]
-        nam = [[d['name']][0] for d in lod]
-        scrapetypes = ziplckey(nam, typ)
-        scrapepatterns = ziplckey(nam, pat)
-        transscrape = ziplckey(nam, nam)
-      except:
-        out("Failed to load Scrapers.")
-        raise StopIteration
-      else:
-        out("Scrapaers loaded.")
+
       try:
         out("Loading row1 into globals.")
         globs.row1 = lowercaselist(onesheet.row_values(1))
@@ -677,7 +684,7 @@ def InitTab(gdoc, tabname, headerlist, listoflists=[]):
   except:
     pass
   else:
-    yme = "%s already exists. Exiting InitTab." % tabname
+    yme = "Exiting InitTab. %s already exists." % tabname
     yield yme, "", "", ""
     raise StopIteration
 
