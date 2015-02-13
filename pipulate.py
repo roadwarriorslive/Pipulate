@@ -710,9 +710,9 @@ def timewindow(amiinnewtimewindow):
   tick = dateutil.parser.parse(amiinnewtimewindow)
   out(tick)
   now = datetime.datetime.now()
+  out("now: %s" % now)
   if 'rerunjobevery' in globs.config:
-    pass
-  #  out(globs.config['rerunjobevery'])
+    out(globs.config['rerunjobevery'])
   #if time(10,30) <= now.time() <= time(16,30):
   #  out("It is between the time-window")
   return False
