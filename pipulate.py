@@ -273,14 +273,6 @@ def Pipulate():
 
 
 
-      # Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug
-      yield "Deliberate Exit", "", "", ""
-      out("Deliberate Exit")
-      raise StopIteration
-      # Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug
-
-
-
 
       out("About to scan down Pipulate tab looking for asterisks.")
       for rowdex in range(1, onesheet.row_count+1):
@@ -321,13 +313,22 @@ def Pipulate():
       yield "Trending request understood.", "", "", ""
       trendingrowsfinished = True
       rowthrottlenumber = 0
+
+
+
+
+
       if trended and 'count' in globs.row1:
         now = datetime.datetime.now()
         #lastinsertdate = None
         backintime = globs.numrows - len(trendlistoflists) + 1
         countletter = globs.letter[globs.row1.index('count') + 1]
         mayhaverun = "%s%s:%s%s" % (countletter, backintime, countletter, globs.numrows)
-        CellList = onesheet.range(mayhaverun)
+        try:
+          CellList = onesheet.range(mayhaverun)
+        except:
+          out("Failed to load the trending Count range.")
+          raise StopIteration
         counts = []
         for onecell in CellList:
           counts.append(onecell.value)
@@ -338,7 +339,10 @@ def Pipulate():
           #Here we need to detect if there's rows left over.
           timeletter = globs.letter[globs.row1.index('isotimestamp') + 1]
           mayhaverun = "%s%s:%s%s" % (timeletter, backintime, timeletter, globs.numrows)
-          CellList = onesheet.range(mayhaverun)
+          try:
+            CellList = onesheet.range(mayhaverun)
+          except:
+            out("Failed to load the trending ISOTimeStamp range.")
           times = []
           for onecell in CellList:
             times.append(onecell.value)
@@ -386,6 +390,9 @@ def Pipulate():
       #out(diff.seconds/60)
 
 
+
+
+      out("About to Insert the target rows for new trending cycle.")
       if trended and trendingrowsfinished == True:
         qstart = globs.numrows + 1
       elif trended:
@@ -396,14 +403,17 @@ def Pipulate():
         for x in range(0, globs.retrytimes):
           try:
             InsertRows(onesheet, trendlistoflists)
-            trendlistoflists = []
-            break
           except Exception as e:
             exc_type, exc_value, exc_tb = sys.exc_info()
             pyfi, line_num, func_name, text = traceback.extract_tb(exc_tb)[-1] #NameError
             out('%s, %s, %s, %s' % (pyfi, func_name, line_num, text))
             out("Error on trending, retry %s" % x)
             time.sleep(globs.retryseconds)
+          else:
+            trendlistoflists = []
+            break
+
+
 
       #We need to get it again if trending rows were added.
       if trended:
@@ -416,7 +426,24 @@ def Pipulate():
         else:
           pass
 
-      globs.numrows = len(onesheet.col_values(1))
+
+
+      #globs.numrows = len(onesheet.col_values(1))
+      globs.numrows = globs.numrows + len(trendlistoflists) #faster
+
+
+
+
+      # Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug
+      yield "Deliberate Exit", "", "", ""
+      out("Deliberate Exit")
+      raise StopIteration
+      # Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug
+
+
+
+
+
       blankrows = 0 #Lets us skip occasional blank rows
       out("Question mark replacement")
       for index, rowdex in enumerate(range(qstart, onesheet.row_count+1)): #Start stepping through every row.
