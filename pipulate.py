@@ -41,12 +41,13 @@ def out(msg, symbol='', dent='', mood=":-)"):
       half = ((total - len(msg)) / 2) - 2
       side = half*symbol
       msg = "%s << %s >> %s" % (side, msg, side)
-      msg = msg[:total]
-      tmpmsg = msg[len(globs.nest):]
+      tmpmsg = ''
       if dent:
+        tmpmsg = msg[len(globs.nest)-1:total]
         print(globs.nest)
         globs.nest = globs.nest[:-1]
       else:
+        tmpmsg = msg[len(globs.nest):total]
         print(globs.nest)
       print("%s%s" % (globs.nest, tmpmsg))
       if not dent:
