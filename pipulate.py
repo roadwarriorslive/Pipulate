@@ -81,7 +81,7 @@ class PipForm(Form):
 #
 @app.route("/", methods=['GET', 'POST'])            # Main point of entry when
 def main():                                         # visiting app's homepage.
-  out("ENTERED MAIN FUNCTION", "M")
+  out("ENTERED MAIN FUNCTION", "0")
   STREAMIT = False                                  # Default to not streaming.
   form = PipForm(csrf_enabled=False)                # Initialize form for UI.
   if session:                                       # I've seen you before!
@@ -107,13 +107,13 @@ def main():                                         # visiting app's homepage.
       session['oa2'] = request.args.get("access_token")
       session['loggedin'] = "1"
       session['i'] -= 1 #Don't skip a message, just becuse I redirect.
-      if 'u' in session:
+      if 'u' in session :
         out("Redirecting with a filed-in URL")
-        out("EXITING MAIN FUNCTION REDIRECT", "M", '-')
+        out("EXITING MAIN FUNCTION REDIRECT", "0", '-')
         return redirect(url_for('main', u=session['u']))
       else:
         out("Redirecting, no URL known")
-        out("EXITING MAIN FUNCTION REDIRECT", "M", '-')
+        out("EXITING MAIN FUNCTION REDIRECT", "0", '-')
         return redirect(url_for('main'))
     elif request.args and 'logout' in request.args:
       if session:
@@ -134,11 +134,11 @@ def main():                                         # visiting app's homepage.
       form.pipurl.data = '' #can't pipulate the pipulate site
   out("Selecting template method.")
   if STREAMIT:
-    out("EXITING MAIN FUNCTION STREAM", "M", '-')
     return Response(stream_template('pipulate.html', form=form, data=STREAMIT))
   else:
-    out("EXITING MAIN FUNCTION RENDER", "M", '-')
+    out("EXITING MAIN FUNCTION RENDER", "0", '-')
     return render_template('pipulate.html', form=form)
+  out("EXITING MAIN", "0", '-')
 
 def makemescroll():
   for i in range(0, 10): 
@@ -151,7 +151,7 @@ def makemescroll():
 # |_|   |_| .__/ \__,_|_|\__,_|\__\___|
 #         |_|                          
 def Pipulate():
-  out("PIPULATION BEGINNING", "P")
+  out("PIPULATION BEGINNING", "1")
   #for i in makemescroll():
   #  yield i, "", "", ""
   try:
@@ -164,7 +164,7 @@ def Pipulate():
     import gspread
     login = False
     if session:
-      out("LOGIN ATTEMPT", "L")
+      out("LOGIN ATTEMPT", "2")
       if 'oa2' in session:
         creds = Credentials(access_token=session['oa2'])
         out("Credential object created.")
@@ -207,9 +207,9 @@ def Pipulate():
         out("Google Spreadsheet successfully opened.")
         yield "", "", "", "" #whitelock
       if login:
-        out("LOGIN SUCCESS", "L", '-')
+        out("LOGIN SUCCESS", "2", '-')
       else:
-        out("LOGIN FAILURE", "L", '-')
+        out("LOGIN FAILURE", "2", '-')
         raise StopIteration
 
       headers = ['URL', 'Subscribers', 'ISOTimeStamp', 'Count']
@@ -312,7 +312,7 @@ def Pipulate():
       # | (_| \__ \ ||  __/ |  | \__ \   < 
       #  \__,_|___/\__\___|_|  |_|___/_|\_\
       #
-      out("Scan down Pipulate tab looking for asterisks.", "*")
+      out("Scan down Pipulate tab looking for asterisks.", "2")
       for rowdex in range(1, onesheet.row_count+1):
         try:
           out("Scanning row %s for asterisks." % rowdex) #This can have a pretty long delay
@@ -350,14 +350,14 @@ def Pipulate():
       yield "Trending request understood.", "", "", ""
       trendingrowsfinished = True
       rowthrottlenumber = 0
-      out("Done looking for asterisks", "*", "-")
+      out("Done looking for asterisks", "2", "-")
 
       #  _   _                   ___                           _   
       # | |_(_)_ __ ___   ___   ( _ )     ___ ___  _   _ _ __ | |_ 
       # | __| | '_ ` _ \ / _ \  / _ \/\  / __/ _ \| | | | '_ \| __|
       # | |_| | | | | | |  __/ | (_>  < | (_| (_) | |_| | | | | |_ 
       #  \__|_|_| |_| |_|\___|  \___/\/  \___\___/ \__,_|_| |_|\__|
-      out("Count and ISOTimeStamp columns for trending", 't')
+      out("Count and ISOTimeStamp columns for trending", '2')
       if trended and 'count' in globs.row1:
         now = datetime.datetime.now()
         #lastinsertdate = None
@@ -428,14 +428,14 @@ def Pipulate():
       #out((now-lastinsertdate).days * 24 * 60)
       #diff = now - lastinsertdate
       #out(diff.seconds/60)
-      out("Count and ISOTimeStamp columns for trending", 't', '-')
+      out("Count and ISOTimeStamp columns for trending", '2', '-')
 
       #  _                     _                           
       # (_)_ __  ___  ___ _ __| |_   _ __ _____      _____ 
       # | | '_ \/ __|/ _ \ '__| __| | '__/ _ \ \ /\ / / __|
       # | | | | \__ \  __/ |  | |_  | | | (_) \ V  V /\__ \
       # |_|_| |_|___/\___|_|   \__| |_|  \___/ \_/\_/ |___/
-      out("Insert new rows for new time inrement trending", 'W')
+      out("Insert new rows for new time inrement trending", '2')
       if trended and trendingrowsfinished == True:
         qstart = globs.numrows + 1
       elif trended:
@@ -467,7 +467,7 @@ def Pipulate():
           pass
       #globs.numrows = len(onesheet.col_values(1))
       globs.numrows = globs.numrows + len(trendlistoflists) #faster
-      out("Insert new rows for new tine inrement trending", 'W', '-')
+      out("Insert new rows for new tine inrement trending", '2', '-')
       #                        _   _                                    _        
       #   __ _ _   _  ___  ___| |_(_) ___  _ __    _ __ ___   __ _ _ __| | _____ 
       #  / _` | | | |/ _ \/ __| __| |/ _ \| '_ \  | '_ ` _ \ / _` | '__| |/ / __|
@@ -475,7 +475,7 @@ def Pipulate():
       #  \__, |\__,_|\___||___/\__|_|\___/|_| |_| |_| |_| |_|\__,_|_|  |_|\_\___/
       #     |_|                                                                  
       #
-      out("Question Mark Replacement.", '?')
+      out("Question Mark Replacement.", '2')
       blankrows = 0 #Lets us skip occasional blank rows
       for index, rowdex in enumerate(range(qstart, onesheet.row_count+1)): #Start stepping through every row.
         if 'rowthrottlenumber' in globs.config:
@@ -500,7 +500,7 @@ def Pipulate():
           #  | | | (_) \ V  V / 
           #  |_|  \___/ \_/\_/  
           #
-          out("PROCESSING ROW %s." % rowdex, '~')
+          out("PROCESSING ROW %s." % rowdex, '3')
           blankrows = 0
           yield "", "", json.dumps(onerow), ""
           rowdexstring = str(rowdex)
@@ -523,7 +523,7 @@ def Pipulate():
                     # |  _| |_| | | | | (__| |_| | (_) | | | \__ \
                     # |_|  \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
                     #                                             
-                    out("function start", "f")
+                    out("Function Start", "4")
                     fname = transfuncs[globs.row1[coldex]]
                     farg = fargs[coldex]
                     evalme = "%s(" % fname #Begin building string that will eventually be eval'd
@@ -547,7 +547,7 @@ def Pipulate():
                       out('%s, %s, %s, %s' % (pyfi, func_name, line_num, text))
                       out("Function problem on row %s. Retrying." % rowdexstring)
                       time.sleep(globs.retryseconds)
-                    out("function end", "f", '-')
+                    out("Function End", "4", '-')
                 elif collabel in transscrape.keys():
                   for x in range(0, globs.retrytimes):
                     #  ____                                 
@@ -556,7 +556,7 @@ def Pipulate():
                     #  ___) | (__| | | (_| | |_) |  __/ |   
                     # |____/ \___|_|  \__,_| .__/ \___|_|   
                     #                      |_|              
-                    out("scrape start", "s")
+                    out("Scrape Start", "4")
                     try:
                       out("Entering generic scraper.")
                       sname = transscrape[globs.row1[coldex]]
@@ -591,8 +591,8 @@ def Pipulate():
                       out('%s, %s, %s, %s' % (pyfi, func_name, line_num, text))
                       out("Scrape problem on row %s. Retrying." % rowdexstring)
                       time.sleep(globs.retryseconds)
-                    out("scrape end", "s", '-')
-          out("DONE PROCESSING ROW %s." % rowdex, '~', '-')
+                    out("Scrape End", "4", '-')
+          out("DONE PROCESSING ROW %s." % rowdex, '3', '-')
 
 
 
@@ -615,14 +615,14 @@ def Pipulate():
           blankrows += 1
           if blankrows > skippableblankrows:
             break
-      out("Question Mark Replacement.", '?', '-')
+      out("Question Mark Replacement.", '2', '-')
 
 
     else: #No session object found
       yield 'Please Login to Google', "", "", ""
     yield "Pipulation complete.&nbsp;&nbsp;", "Congratulations, pipulation complete! Now, do a little victory dance.", "", ""
     yield "spinoffsuccess", "", "", ""
-    out("PIPULATION OVER", "P", '-')
+    out("PIPULATION OVER", "1", '-')
   except Exception as e:
     exc_type, exc_obj, exc_tb = sys.exc_info()
     fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
@@ -641,7 +641,8 @@ def Pipulate():
       yield "Please open an issue at https://github.com/miklevin/pipulate", "", "", ""
       yield "Or just tap me on the shoulder.", "", "", ""
     yield "spinerr", "", "", ""
-    out("PIPULATION ERROR", "P", '-')
+    out("PIPULATION ERROR", "1", '-')
+  out("EXITING MAIN", "0", '-') #Special case of function exit reporting
   print("\n")
 
 def url_root(url):
