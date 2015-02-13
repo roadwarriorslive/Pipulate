@@ -140,6 +140,10 @@ def main():                                         # visiting app's homepage.
     out("EXITING MAIN FUNCTION RENDER", "M", '-')
     return render_template('pipulate.html', form=form)
 
+def makemescroll():
+  for i in range(0, 10): 
+    yield "line %s" % i
+
 #  ____  _             _       _       
 # |  _ \(_)_ __  _   _| | __ _| |_ ___ 
 # | |_) | | '_ \| | | | |/ _` | __/ _ \
@@ -148,6 +152,8 @@ def main():                                         # visiting app's homepage.
 #         |_|                          
 def Pipulate():
   out("PIPULATION BEGINNING", "P")
+  for i in makemescroll():
+    yield i, "", "", ""
   try:
     yield "Beginning to pipulate...", "", "", ""
     yield "spinon", "", "", ""
@@ -179,6 +185,8 @@ def Pipulate():
         gdoc = gsp.open_by_url(globs.PIPURL) #HTTPError
       except gspread.httpsession.HTTPError, e:
         out("Login appeared successful, but rejected on document open attempt.")
+        if session and 'loggedin' in session:
+          session.pop('loggedin', None)
         #yield 'HTTP ERROR %s occured' % e.code, "", "", ""
         yield "Session timed out. Please login again.", "", "", ""
       except gspread.exceptions.NoValidUrlKeyFound:
@@ -349,7 +357,7 @@ def Pipulate():
       # | __| | '_ ` _ \ / _ \  / _ \/\  / __/ _ \| | | | '_ \| __|
       # | |_| | | | | | |  __/ | (_>  < | (_| (_) | |_| | | | | |_ 
       #  \__|_|_| |_| |_|\___|  \___/\/  \___\___/ \__,_|_| |_|\__|
-      out("Count and ISOTimeStamp columns for trending", 'T')
+      out("Count and ISOTimeStamp columns for trending", 't')
       if trended and 'count' in globs.row1:
         now = datetime.datetime.now()
         #lastinsertdate = None
@@ -420,7 +428,7 @@ def Pipulate():
       #out((now-lastinsertdate).days * 24 * 60)
       #diff = now - lastinsertdate
       #out(diff.seconds/60)
-      out("Count and ISOTimeStamp columns for trending", 'T', '-')
+      out("Count and ISOTimeStamp columns for trending", 't', '-')
 
       #  _                     _                           
       # (_)_ __  ___  ___ _ __| |_   _ __ _____      _____ 

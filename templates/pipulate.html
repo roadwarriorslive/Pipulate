@@ -8,9 +8,43 @@
     <link href="http://picnicss.com/releases/v2.3.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <style>
-html {
-overflow-y:scroll;
-}
+    body {
+      font-family: Hind;
+      font-size: 16px;
+      color: #333;
+      background: #FFF;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      }
+    #wrapper {
+      position: relative;
+      height: 100%;
+    }
+    #content{
+      position: relative;
+      background-color: #C9E6FF;
+      margin: 0 auto;
+      padding-left: 5px;
+      padding-right: 5px;
+      padding-top: 60px;
+      text-align:center;
+      min-height: 100%
+    }
+    #pipstream{
+      height: 200px;
+      overflow: scroll;
+      background-color: white;
+      margin-bottom: 15px;
+      margin-left:20px;
+      margin-right:20px;
+      text-align: left;
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+    nav{
+      background-color:#EEEEEE;
+    }
     #magicdiv{
       margin-top: 15px;
       width: 600px;
@@ -47,10 +81,6 @@ overflow-y:scroll;
     }
     #pastelabel{
       font-size: 1.3em;
-    }
-    #pipstream{
-      margin-left:20px;
-      margin-right:20px;
     }
     .spinner {
       margin-top: 40px;
@@ -94,21 +124,6 @@ overflow-y:scroll;
         transform: scale(1.0);
         -webkit-transform: scale(1.0);
       }
-    }
-    body {
-      font-family: Hind;
-      font-size: 16px;
-      color: #333;
-      background: #FFF;
-      width: 100%;}
-    nav{
-      background-color:#EEEEEE;
-    }
-    #content{
-      padding-left: 5px;
-      padding-right: 5px;
-      padding-top: 60px;
-      text-align:center;
     }
     #arrow{
       font-weight: bold;
@@ -222,6 +237,7 @@ overflow-y:scroll;
     </script>
   </head>
   <body>
+    <div id="wrapper">
     <nav>
     <!-- responsive -->
     <input id="bmenu" class="burgercheck" type="checkbox">
@@ -266,79 +282,80 @@ overflow-y:scroll;
 
         <textarea id="magicbox" rows="4" cols="60"></textarea>
       </div>
+      <div id="pipstream">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+            <br/><i class="bullet fa fa-circle-o"></i> {{ message }}
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+      {% for lineitem, learn, magic, glock in data: -%}
+        {%- if glock: -%}
+          <script>
+            redlock();
+          </script>
+        {%- else: -%}
+          <script>
+            whitelock();
+          </script>
+        {%- endif -%}
+        {%- if learn or magic: -%}
+        <script>
+          {%- if magic: -%}
+            var pjson = {{ magic|safe }};
+            //$("#magicbox").val(JSON.stringify(pjson, null, '\t'));
+            $("#magicbox").val(JSON.stringify(pjson));
+          {%- endif -%}
+          {%- if learn: -%}$("#learnsomething").html('{{ learn }}');{%- endif -%}
+        </script>
+        {%- endif -%}
+        {%- if lineitem -%}
+          {%- if lineitem == "spinon" -%}
+            <script>
+              // Lock button and display spinner
+              $('#pipulate').prop("disabled", true);
+              $('#pipulate').fadeTo("fast",.5);
+              //$('#spinner').show();
+            </script>
+          {%- elif lineitem == "spinoffsuccess" -%}
+            <script>
+              // Unlock button and remove spinner, successful pipulation
+              $('#spinner').hide();
+              $("i").removeClass("fa-spin fa-circle-o-notch");
+              $("i").addClass("fa-check");
+              document.write('<img id="pbjt" src="static/pipulate.gif" style="vertical-align: top;">');
+              unlockbutton();
+            </script>
+          {%- elif lineitem == "spinoff" -%}
+            <script>
+              // Unlock button and remove spinner, failed pipulation
+              $('#spinner').hide();
+              $("i").removeClass("fa-spin fa-circle-o-notch");
+              $("i").addClass("fa-check");
+              unlockbutton();
+            </script>
+          {%- elif lineitem == "spinerr" -%}
+            <script>
+              // Unlock button and gracefully show user things are fubar.
+              $('#spinner').hide();
+              $("i").removeClass("fa-spin fa-circle-o-notch");
+              $("i.bullet").addClass("fa-circle-o");
+              unlockbutton();
+            </script>
+          {%- elif lineitem[:1] == ',' -%}
+            {{ lineitem }}
+          {%- else -%}
+            <script>
+              $("i").removeClass("fa-spin fa-circle-o-notch");
+              $("i").addClass("fa-check");
+            </script>
+            {%- if loop.index > 1: -%}<br/>{%- endif -%}<i class="bullet fa fa-circle-o-notch fa-spin"></i> {{ lineitem|safe }}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+      </div>
     </div>
-    <div id="pipstream">
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        {% for message in messages %}
-          <br/><i class="bullet fa fa-circle-o"></i> {{ message }}
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
-    {% for lineitem, learn, magic, glock in data: -%}
-      {%- if glock: -%}
-        <script>
-          redlock();
-        </script>
-      {%- else: -%}
-        <script>
-          whitelock();
-        </script>
-      {%- endif -%}
-      {%- if learn or magic: -%}
-      <script>
-        {%- if magic: -%}
-          var pjson = {{ magic|safe }};
-          //$("#magicbox").val(JSON.stringify(pjson, null, '\t'));
-          $("#magicbox").val(JSON.stringify(pjson));
-        {%- endif -%}
-        {%- if learn: -%}$("#learnsomething").html('{{ learn }}');{%- endif -%}
-      </script>
-      {%- endif -%}
-      {%- if lineitem -%}
-        {%- if lineitem == "spinon" -%}
-          <script>
-            // Lock button and display spinner
-            $('#pipulate').prop("disabled", true);
-            $('#pipulate').fadeTo("fast",.5);
-            //$('#spinner').show();
-          </script>
-        {%- elif lineitem == "spinoffsuccess" -%}
-          <script>
-            // Unlock button and remove spinner, successful pipulation
-            $('#spinner').hide();
-            $("i").removeClass("fa-spin fa-circle-o-notch");
-            $("i").addClass("fa-check");
-            document.write('<img id="pbjt" src="static/pipulate.gif" style="vertical-align: top;">');
-            unlockbutton();
-          </script>
-        {%- elif lineitem == "spinoff" -%}
-          <script>
-            // Unlock button and remove spinner, failed pipulation
-            $('#spinner').hide();
-            $("i").removeClass("fa-spin fa-circle-o-notch");
-            $("i").addClass("fa-check");
-            unlockbutton();
-          </script>
-        {%- elif lineitem == "spinerr" -%}
-          <script>
-            // Unlock button and gracefully show user things are fubar.
-            $('#spinner').hide();
-            $("i").removeClass("fa-spin fa-circle-o-notch");
-            $("i.bullet").addClass("fa-circle-o");
-            unlockbutton();
-          </script>
-        {%- elif lineitem[:1] == ',' -%}
-          {{ lineitem }}
-        {%- else -%}
-          <script>
-            $("i").removeClass("fa-spin fa-circle-o-notch");
-            $("i").addClass("fa-check");
-          </script>
-          {%- if loop.index > 1: -%}<br/>{%- endif -%}<i class="bullet fa fa-circle-o-notch fa-spin"></i> {{ lineitem|safe }}
-        {%- endif -%}
-      {%- endif -%}
-    {%- endfor -%}
     </div>
   </body>
 </html>
