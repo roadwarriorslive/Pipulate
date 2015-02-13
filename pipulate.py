@@ -75,7 +75,6 @@ class PipForm(Form):
 
 @app.route("/", methods=['GET', 'POST'])            # Main point of entry when
 def main():                                         # visiting app's homepage.
-  out("")
   out("ENTERED MAIN FUNCTION", "M")
   STREAMIT = False                                  # Default to not streaming.
   form = PipForm(csrf_enabled=False)                # Initialize form for UI.
@@ -125,11 +124,10 @@ def main():                                         # visiting app's homepage.
       form.pipurl.data = '' #can't pipulate the pipulate site
   out("Selecting template method.")
   if STREAMIT:
-    out("Streaming output to user.")
+    out("EXITING MAIN FUNCTION STREAM", "M", '-')
     return Response(stream_template('pipulate.html', form=form, data=STREAMIT))
   else:
-    out("RENDERING TEMPLATE", "R")
-    out("")
+    out("EXITING MAIN FUNCTION RENDER", "M", '-')
     return render_template('pipulate.html', form=form)
 
 def Pipulate():
@@ -142,6 +140,7 @@ def Pipulate():
     transfuncs = ziplckey(funcs, funcs) #Keep translation table
     blankrows = 0
     import gspread
+    login = False
     if session:
       out("LOGIN ATTEMPT", "L")
       if 'oa2' in session:
@@ -151,7 +150,6 @@ def Pipulate():
         out("Expired login.")
         yield "Google Login appears to have expired. Log back in.", "Login under the \"burger button\" in the upper-right.", "", ""
         yield "spinoff", "", "", ""
-        raise StopIteration
       try:
         gsp = gspread.authorize(creds)
       except:
@@ -167,15 +165,12 @@ def Pipulate():
         out("Login appeared successful, but rejected on document open attempt.")
         #yield 'HTTP ERROR %s occured' % e.code, "", "", ""
         yield "Session timed out. Please login again.", "", "", ""
-        raise StopIteration
       except gspread.exceptions.NoValidUrlKeyFound:
         yield "Currently, the URL must be a Google Spreadsheet.", "", "", ""
         yield "<a href='https://docs.google.com/spreadsheets/create' target='_new'>Create</a> a new Google Spreadsheet and click Bookmarklet again.", "Google Spreadsheet Not Found.", "", ""
-        raise StopIteration
       except gspread.exceptions.SpreadsheetNotFound:
         yield "Please give the document a name to force first save.", "", "", ""
         yield "spinoff", "", "", ""
-        raise StopIteration
       except Exception as e:
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
@@ -183,11 +178,15 @@ def Pipulate():
         fixme = "%s, %s, %s" % (ename, fname, exc_tb.tb_lineno)
         yield fixme, "", "", ""
         yield "spinoff", "", "", ""
-        raise StopIteration
       else:
+        login = True
         out("Google Spreadsheet successfully opened.")
         yield "", "", "", "" #whitelock
-      out("LOGIN SUCCESS", "L", '-')
+      if login:
+        out("LOGIN SUCCESS", "L", '-')
+      else:
+        out("LOGIN FAILURE", "L", '-')
+        raise StopIteration
 
       headers = ['URL', 'Subscribers', 'ISOTimeStamp', 'Count']
       for tabtuple in InitTab(gdoc, 'Pipulate', headers, pipinit()):
@@ -602,7 +601,7 @@ def Pipulate():
     ename = type(e).__name__
     fixme = "%s, %s, %s" % (ename, fname, exc_tb.tb_lineno)
     out(fixme)
-    out("PIPULATION FAILURE", "X", ":-(")
+    out("Pipulation Failure")
     if ename == "StopIteration":
       loginmsg = ""
       if session and 'loggedin' in session and session['loggedin'] != '1':
@@ -614,7 +613,8 @@ def Pipulate():
       yield "Please open an issue at https://github.com/miklevin/pipulate", "", "", ""
       yield "Or just tap me on the shoulder.", "", "", ""
     yield "spinerr", "", "", ""
-  out("EXITING GENERATOR", "M", '-')
+  out("EXITING GENERATOR", "P", '-')
+  print("\n")
 
 def url_root(url):
   from urlparse import urlparse
