@@ -443,7 +443,7 @@ def Pipulate():
         pass
       else:
         qstart = 1
-      if trendlistoflists and timewindow():
+      if trendlistoflists and timewindow(times[0]):
         for x in range(0, globs.retrytimes):
           try:
             InsertRows(onesheet, trendlistoflists)
@@ -457,7 +457,7 @@ def Pipulate():
             trendlistoflists = []
             break
       else:
-        out(times[0])
+        out("New time-window has not opened yet. Skipping row insert.")
       #We need to get it again if trending rows were added.
       if trended:
         try:
@@ -709,7 +709,8 @@ def lowercaselist(onelist):
       pass
   return onelist
 
-def timewindow():
+def timewindow(amiinnewtimewindow):
+  out(amiinnewtimewindow)
   return False
 
 def InsertRow(onesheet, onelist):
