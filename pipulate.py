@@ -102,8 +102,12 @@ def main():                                         # visiting app's homepage.
       session['loggedin'] = "1"
       session['i'] -= 1 #Don't skip a message, just becuse I redirect.
       if 'u' in session:
+        out("Redirecting with a filed-in URL")
+        out("EXITING MAIN FUNCTION REDIRECT", "M", '-')
         return redirect(url_for('main', u=session['u']))
       else:
+        out("Redirecting, no URL known")
+        out("EXITING MAIN FUNCTION REDIRECT", "M", '-')
         return redirect(url_for('main'))
     elif request.args and 'logout' in request.args:
       if session:
@@ -406,7 +410,7 @@ def Pipulate():
 
 
 
-      out("Insert new rows for new tine inrement trending", 'W')
+      out("Insert new rows for new time inrement trending", 'W')
       if trended and trendingrowsfinished == True:
         qstart = globs.numrows + 1
       elif trended:
@@ -440,16 +444,16 @@ def Pipulate():
         else:
           pass
 
-
-
       #globs.numrows = len(onesheet.col_values(1))
       globs.numrows = globs.numrows + len(trendlistoflists) #faster
-
       out("Insert new rows for new tine inrement trending", 'W', '-')
 
-
-
-
+      #  ____  _             _       _       
+      # |  _ \(_)_ __  _   _| | __ _| |_ ___ 
+      # | |_) | | '_ \| | | | |/ _` | __/ _ \
+      # |  __/| | |_) | |_| | | (_| | ||  __/
+      # |_|   |_| .__/ \__,_|_|\__,_|\__\___|
+      #         |_|                          
       out("Question Mark Replacement.", '?')
       blankrows = 0 #Lets us skip occasional blank rows
       for index, rowdex in enumerate(range(qstart, onesheet.row_count+1)): #Start stepping through every row.
