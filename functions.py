@@ -13,7 +13,7 @@ def cyclemotto():
   else:
     session['i'] += 1
   s = []
-  s.append("Paste a Google Spreadsheet URL and start pipulating.");
+  s.append("Paste a Google Spreadsheet URL and start pipulating.")
   s.append("Pipulate is a Free and Open Source app for SEO & Social Media.")
   s.append("Drag the bookmarklet to the Bookmark bar for easier pipulating.")
   s.append("To use Spreadsheets is human; to Pipulate, divine.")
