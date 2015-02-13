@@ -422,13 +422,6 @@ def Pipulate():
           if 'rowthrottlenumber' in globs.config:
             if int(globs.config['rowthrottlenumber']):
               pass
-        #cell = onesheet.cell(globs.numrows, globs.row1.index('isotimestamp')+1)
-        #import dateutil.parser
-        #lastinsertdate = dateutil.parser.parse(cell.value)
-      #out("%s %s" % (now, lastinsertdate))
-      #out((now-lastinsertdate).days * 24 * 60)
-      #diff = now - lastinsertdate
-      #out(diff.seconds/60)
       out("Count and ISOTimeStamp columns for trending", '2', '-')
 
       #  _                     _                           
@@ -710,8 +703,16 @@ def lowercaselist(onelist):
   return onelist
 
 def timewindow(amiinnewtimewindow):
-  out(amiinnewtimewindow)
+  import dateutil.parser
+  tick = dateutil.parser.parse(amiinnewtimewindow)
+  out(tick)
   return False
+
+#lastinsertdate = dateutil.parser.parse(cell.value)
+#out("%s %s" % (now, lastinsertdate))
+#out((now-lastinsertdate).days * 24 * 60)
+#diff = now - lastinsertdate
+#out(diff.seconds/60)
 
 def InsertRow(onesheet, onelist):
   column = globs.letter[len(onelist)]
