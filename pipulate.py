@@ -407,7 +407,7 @@ def Pipulate():
 
 
 
-      out("About to Insert the target rows for new trending cycle.", '-')
+      out("Insert new rows for new tine inrement trending", 'W')
       if trended and trendingrowsfinished == True:
         qstart = globs.numrows + 1
       elif trended:
@@ -446,21 +446,13 @@ def Pipulate():
       #globs.numrows = len(onesheet.col_values(1))
       globs.numrows = globs.numrows + len(trendlistoflists) #faster
 
-
-
-
-      # Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug
-      yield "Deliberate Exit", "", "", ""
-      out("Deliberate Exit")
-      raise StopIteration
-      # Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug
+      out("Insert new rows for new tine inrement trending", 'W', '-')
 
 
 
 
-
+      out("Question Mark Replacement.", '?')
       blankrows = 0 #Lets us skip occasional blank rows
-      out("About to start question mark replacement.", '-')
       for index, rowdex in enumerate(range(qstart, onesheet.row_count+1)): #Start stepping through every row.
         if 'rowthrottlenumber' in globs.config:
           if index >= int(rowthrottlenumber):
@@ -582,7 +574,23 @@ def Pipulate():
           blankrows += 1
           if blankrows > skippableblankrows:
             break
-      out('Finished question marks')
+      out("Question Mark Replacement.", '?', '-')
+
+
+
+
+
+
+      # Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug
+      yield "Deliberate Exit", "", "", ""
+      out("Deliberate Exit")
+      raise StopIteration
+      # Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug
+
+
+
+
+
     else:
       yield 'Please Login to Google', "", "", ""
     yield "Pipulation complete.&nbsp;&nbsp;", "Congratulations, pipulation complete! Now, do a little victory dance.", "", ""
@@ -606,8 +614,7 @@ def Pipulate():
       yield "Please open an issue at https://github.com/miklevin/pipulate", "", "", ""
       yield "Or just tap me on the shoulder.", "", "", ""
     yield "spinerr", "", "", ""
-  out("EXITING GENERATOR", "M")
-  out("")
+  out("EXITING GENERATOR", "M", '-')
 
 def url_root(url):
   from urlparse import urlparse
