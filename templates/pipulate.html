@@ -234,24 +234,24 @@ overflow-y:scroll;
     </div>
     </nav>
     <div id="content">
+
+
+      {% if session and 'loggedin' in session and session['loggedin'] == '1': %}
       <form id="pipform" method="POST" action="/">
         <div id="paste"><span id="pastelabel">URL: </span>{{ form.pipurl(size=60) }}</div>
-          {% if not session: %}
-            no session
-          {% elif 'loggedin' in session and session['loggedin'] == '1': %}
-            logged in
-          {% else: %}
-            session but no login
-          {% endif %}
-          <button id="pipulate" class="button" type="submit">
-            Start Pipulating &nbsp;<i id="piplock" class="fa fa-chevron-circle-right"></i>
-          </button>
-          {% if request.method == 'POST': %}
+        <button id="pipulate" class="button" type="submit">
+          Start Pipulating &nbsp;<i id="piplock" class="fa fa-chevron-circle-right"></i>
+        </button>
+      </form>
+      {% else: %}
+        <a class="button" href="{{ loginlink }}">Login to Pipulate &nbsp;<i id="piplock" class="fa fa-chevron-circle-right"></i></a>
+      {% endif %}
+      {% if request.method == 'POST': %}
             <script>
               lockbutton();
             </script>
           {% endif %}
-      </form>
+
       <div id="magicdiv">
         <div id="spinner" class="spinner">
           <div class="bounce1"></div>
