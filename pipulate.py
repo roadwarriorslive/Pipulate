@@ -225,7 +225,10 @@ def Pipulate():
 
 
       headers = ['name', 'value']
-      for tabtuple in InitTab(gdoc, 'Config', headers, [['rowthrottlenumber','1']]):
+      config = []
+      config.append(['rowthrottlenumber','1'])
+      config.append(['rerunjobevery','minute'])
+      for tabtuple in InitTab(gdoc, 'Config', headers, config):
         yield tabtuple
 
 
@@ -361,8 +364,6 @@ def Pipulate():
       out("Count and ISOTimeStamp columns for trending", '2')
       times = []
       if trended and 'count' in globs.row1:
-        now = datetime.datetime.now()
-        #lastinsertdate = None
         backintime = globs.numrows - len(trendlistoflists) + 1
         countletter = globs.letter[globs.row1.index('count') + 1]
         mayhaverun = "%s%s:%s%s" % (countletter, backintime, countletter, globs.numrows)
@@ -706,6 +707,9 @@ def timewindow(amiinnewtimewindow):
   import dateutil.parser
   tick = dateutil.parser.parse(amiinnewtimewindow)
   out(tick)
+  now = datetime.datetime.now()
+  #if time(10,30) <= now.time() <= time(16,30):
+  #  out("It is between the time-window")
   return False
 
 #lastinsertdate = dateutil.parser.parse(cell.value)
