@@ -34,9 +34,10 @@ app = Flask(__name__)                               # Flask init requirement
 
 app.secret_key = "m\x00\r\xa5\\\xbeTW\xb3\xdf\x17\xb0!T\x9b6\x88l\xcf\xa1vmD}"
 
-def out(msg, total=0, symbol="-", mood=":-)"):      # Debug output to server terminal
+def out(msg, symbol='', mood=":-)"):      # Debug output to server terminal
+  total = 80
   if globs.DBUG:
-    if total:
+    if symbol:
       half = ((total - len(msg)) / 2) - 6
       side = half*symbol
       msg = "%s << %s >> %s" % (side, msg, side)
@@ -66,7 +67,7 @@ class PipForm(Form):
 @app.route("/", methods=['GET', 'POST'])            # Main point of entry when
 def main():                                         # visiting app's homepage.
   out("")
-  out("ENTERED MAIN FUNCTION", 80, "M")
+  out("ENTERED MAIN FUNCTION", "M")
   STREAMIT = False                                  # Default to not streaming.
   form = PipForm(csrf_enabled=False)                # Initialize form for UI.
   if session:                                       # I've seen you before!
@@ -118,12 +119,12 @@ def main():                                         # visiting app's homepage.
     out("Streaming output to user.")
     return Response(stream_template('pipulate.html', form=form, data=STREAMIT))
   else:
-    out("RENDERING TEMPLATE", 80)
+    out("RENDERING TEMPLATE", "R")
     out("")
     return render_template('pipulate.html', form=form)
 
 def Pipulate():
-  out("PIPULATION BEGINNING", 80, "P")
+  out("PIPULATION BEGINNING", "P")
   try:
     yield "Beginning to pipulate...", "", "", ""
     yield "spinon", "", "", ""
@@ -133,7 +134,7 @@ def Pipulate():
     blankrows = 0
     import gspread
     if session:
-      out("LOGIN ATTEMPT", 70, "L")
+      out("LOGIN ATTEMPT", "L")
       if 'oa2' in session:
         creds = Credentials(access_token=session['oa2'])
         out("Credential object created.")
@@ -177,7 +178,7 @@ def Pipulate():
       else:
         out("Google Spreadsheet successfully opened.")
         yield "", "", "", "" #whitelock
-      out("LOGIN SUCCESS", 70, "L")
+      out("LOGIN SUCCESS", "L")
 
       headers = ['URL', 'Subscribers', 'ISOTimeStamp', 'Count']
       for tabtuple in InitTab(gdoc, 'Pipulate', headers, pipinit()):
@@ -277,7 +278,7 @@ def Pipulate():
 
 
 
-      out("About to scan down Pipulate tab looking for asterisks.", 70)
+      out("About to scan down Pipulate tab looking for asterisks.", "-")
       for rowdex in range(1, onesheet.row_count+1):
         try:
           out("Scanning row %s for asterisks." % rowdex) #This can have a pretty long delay
@@ -320,7 +321,7 @@ def Pipulate():
 
 
 
-      out("About to analyze Count and ISOTimeStamp columns for trending", 80)
+      out("About to analyze Count and ISOTimeStamp columns for trending", '-')
       if trended and 'count' in globs.row1:
         now = datetime.datetime.now()
         #lastinsertdate = None
@@ -395,7 +396,7 @@ def Pipulate():
 
 
 
-      out("About to Insert the target rows for new trending cycle.", 80)
+      out("About to Insert the target rows for new trending cycle.", '-')
       if trended and trendingrowsfinished == True:
         qstart = globs.numrows + 1
       elif trended:
@@ -448,7 +449,7 @@ def Pipulate():
 
 
       blankrows = 0 #Lets us skip occasional blank rows
-      out("About to start question mark replacement.", 80)
+      out("About to start question mark replacement.", '-')
       for index, rowdex in enumerate(range(qstart, onesheet.row_count+1)): #Start stepping through every row.
         if 'rowthrottlenumber' in globs.config:
           if index >= int(rowthrottlenumber):
@@ -575,14 +576,14 @@ def Pipulate():
       yield 'Please Login to Google', "", "", ""
     yield "Pipulation complete.&nbsp;&nbsp;", "Congratulations, pipulation complete! Now, do a little victory dance.", "", ""
     yield "spinoffsuccess", "", "", ""
-    out("PIPULATION OVER", 80, "P")
+    out("PIPULATION OVER", "P")
   except Exception as e:
     exc_type, exc_obj, exc_tb = sys.exc_info()
     fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
     ename = type(e).__name__
     fixme = "%s, %s, %s" % (ename, fname, exc_tb.tb_lineno)
     out(fixme)
-    out("PIPULATION FAILURE", 80, "X", ":-(")
+    out("PIPULATION FAILURE", "X", ":-(")
     if ename == "StopIteration":
       loginmsg = ""
       if session and 'loggedin' in session and session['loggedin'] != '1':
@@ -594,7 +595,7 @@ def Pipulate():
       yield "Please open an issue at https://github.com/miklevin/pipulate", "", "", ""
       yield "Or just tap me on the shoulder.", "", "", ""
     yield "spinerr", "", "", ""
-  out("EXITING GENERATOR", 80, "M")
+  out("EXITING GENERATOR", "M")
   out("")
 
 def url_root(url):
