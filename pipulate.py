@@ -38,23 +38,22 @@ def out(msg, symbol='', dent='', mood=":-)"):
   total = 80
   if globs.DBUG:
     if symbol:
-      half = ((total - len(msg)) / 2) - 6
+      half = ((total - len(msg)) / 2) - 2
       side = half*symbol
       msg = "%s << %s >> %s" % (side, msg, side)
-      if len(msg) % 2 == 1:
-        msg = msg + symbol
+      msg = msg[:total]
       tmpmsg = msg[len(globs.nest):]
       if dent:
         print(globs.nest)
         globs.nest = globs.nest[:-1]
       else:
         print(globs.nest)
-      print("%s%s %s" % (globs.nest, tmpmsg, mood))
+      print("%s%s" % (globs.nest, tmpmsg))
       if not dent:
         globs.nest = globs.nest + symbol
       print(globs.nest)
     else:
-      print("%s %s" % (globs.nest, msg))
+      print("%s |%s" % (globs.nest, msg))
 
 def stream_template(template_name, **context):      # This is the key to streaming
   app.update_template_context(context)              # output to the user in the
@@ -331,7 +330,7 @@ def Pipulate():
 
 
 
-      out("About to analyze Count and ISOTimeStamp columns for trending", '-')
+      out("Count and ISOTimeStamp columns for trending", 'T')
       if trended and 'count' in globs.row1:
         now = datetime.datetime.now()
         #lastinsertdate = None
@@ -402,6 +401,7 @@ def Pipulate():
       #out((now-lastinsertdate).days * 24 * 60)
       #diff = now - lastinsertdate
       #out(diff.seconds/60)
+      out("Count and ISOTimeStamp columns for trending", 'T', '-')
 
 
 
