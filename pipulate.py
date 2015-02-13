@@ -38,19 +38,23 @@ def out(msg, symbol='', dent='', mood=":-)"):
   total = 80
   if globs.DBUG:
     if symbol:
-      if dent:
-        globs.nest = globs.nest[:-2]
-      else:
-        globs.nest = globs.nest + symbol
       half = ((total - len(msg)) / 2) - 6
       side = half*symbol
       msg = "%s << %s >> %s" % (side, msg, side)
       if len(msg) % 2 == 1:
         msg = msg + symbol
       tmpmsg = msg[len(globs.nest):]
+      if dent:
+        print(globs.nest)
+        globs.nest = globs.nest[:-1]
+      else:
+        print(globs.nest)
       print("%s%s %s" % (globs.nest, tmpmsg, mood))
+      if not dent:
+        globs.nest = globs.nest + symbol
+      print(globs.nest)
     else:
-      print("%s - %s" % (globs.nest, msg))
+      print("%s %s" % (globs.nest, msg))
 
 def stream_template(template_name, **context):      # This is the key to streaming
   app.update_template_context(context)              # output to the user in the
