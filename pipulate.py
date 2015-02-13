@@ -39,7 +39,10 @@ def out(msg, total=0, symbol="-", mood=":-)"):      # Debug output to server ter
     if total:
       half = ((total - len(msg)) / 2) - 6
       side = half*symbol
-      print("%s << %s >> %s %s" % (side, msg, side, mood))
+      msg = "%s << %s >> %s" % (side, msg, side)
+      if len(msg) % 2 == 1:
+        msg = msg + symbol
+      print("%s %s" % (msg, mood))
     else:
       print(msg)
 
@@ -274,7 +277,7 @@ def Pipulate():
 
 
 
-      out("About to scan down Pipulate tab looking for asterisks.")
+      out("About to scan down Pipulate tab looking for asterisks.", 70)
       for rowdex in range(1, onesheet.row_count+1):
         try:
           out("Scanning row %s for asterisks." % rowdex) #This can have a pretty long delay
@@ -317,7 +320,7 @@ def Pipulate():
 
 
 
-
+      out("About to analyze Count and ISOTimeStamp columns for trending", 80)
       if trended and 'count' in globs.row1:
         now = datetime.datetime.now()
         #lastinsertdate = None
@@ -392,7 +395,7 @@ def Pipulate():
 
 
 
-      out("About to Insert the target rows for new trending cycle.")
+      out("About to Insert the target rows for new trending cycle.", 80)
       if trended and trendingrowsfinished == True:
         qstart = globs.numrows + 1
       elif trended:
@@ -445,7 +448,7 @@ def Pipulate():
 
 
       blankrows = 0 #Lets us skip occasional blank rows
-      out("Question mark replacement")
+      out("About to start question mark replacement.", 80)
       for index, rowdex in enumerate(range(qstart, onesheet.row_count+1)): #Start stepping through every row.
         if 'rowthrottlenumber' in globs.config:
           if index >= int(rowthrottlenumber):
