@@ -41,15 +41,16 @@ def out(msg, symbol='', dent='', mood=":-)"):
       if dent:
         globs.nest = globs.nest[:-2]
       else:
-        globs.nest = globs.nest + symbol + ' '
+        globs.nest = globs.nest + symbol
       half = ((total - len(msg)) / 2) - 6
       side = half*symbol
       msg = "%s << %s >> %s" % (side, msg, side)
       if len(msg) % 2 == 1:
         msg = msg + symbol
-      print("%s %s" % (msg, mood))
+      tmpmsg = msg[len(globs.nest):]
+      print("%s%s %s" % (globs.nest, tmpmsg, mood))
     else:
-      print("%s%s" % (globs.nest, msg))
+      print("%s - %s" % (globs.nest, msg))
 
 def stream_template(template_name, **context):      # This is the key to streaming
   app.update_template_context(context)              # output to the user in the
@@ -258,12 +259,12 @@ def Pipulate():
           from inspect import getargspec
           argspec = getargspec(eval(fname))
           if argspec:
-            out("%s has arguments: %s" % (fname, argspec))
+            out("%s has arguments." % (fname))
             myargs = argspec[0]
             mydefs = argspec[3]
             offset = 0
             if mydefs:
-              out("%s has defaults: %s" % (fname, mydefs))
+              out("%s has defaults," % (fname))
               offset = len(myargs) - len(mydefs)
               if offset:
                 for i in range(0, offset-1):
@@ -282,7 +283,7 @@ def Pipulate():
 
 
 
-      out("About to scan down Pipulate tab looking for asterisks.", "*")
+      out("Scan down Pipulate tab looking for asterisks.", "*")
       for rowdex in range(1, onesheet.row_count+1):
         try:
           out("Scanning row %s for asterisks." % rowdex) #This can have a pretty long delay
@@ -321,6 +322,7 @@ def Pipulate():
       yield "Trending request understood.", "", "", ""
       trendingrowsfinished = True
       rowthrottlenumber = 0
+      out("Done looking for asterisks", "*", "-")
 
 
 
