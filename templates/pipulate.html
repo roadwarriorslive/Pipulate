@@ -23,7 +23,7 @@
     }
     #content{
       position: relative;
-      background-color: #C9E6FF;
+      background-color: #E8E8E8;
       margin: 0 auto;
       padding-left: 5px;
       padding-right: 5px;
@@ -32,25 +32,27 @@
       min-height: 100%
     }
     #pipstream{
-      height: 200px;
+      height: 210px;
       overflow: scroll;
       background-color: white;
       margin-bottom: 15px;
       margin-left:20px;
       margin-right:20px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      padding-left: 5px;
       text-align: left;
-      padding-top: 15px;
-      padding-bottom: 15px;
     }
     nav{
       background-color:#EEEEEE;
     }
     #magicdiv{
-      margin-top: 15px;
       width: 600px;
-      text-align:center;
+      margin-top: 15px;
+      margin-bottom: 6px;
       margin-left: auto;
       margin-right: auto;
+      text-align:center;
     }
     #learnsomething{
       background-color: lightgrey;
@@ -352,6 +354,9 @@
             </script>
             {%- if loop.index > 1: -%}<br/>{%- endif -%}<i class="bullet fa fa-circle-o-notch fa-spin"></i> {{ lineitem|safe }}
           {%- endif -%}
+          <script>
+            $("#pipstream").scrollTop($("#pipstream")[0].scrollHeight);
+          </script>
         {%- endif -%}
       {%- endfor -%}
       </div>

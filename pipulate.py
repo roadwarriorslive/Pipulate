@@ -152,8 +152,8 @@ def makemescroll():
 #         |_|                          
 def Pipulate():
   out("PIPULATION BEGINNING", "P")
-  for i in makemescroll():
-    yield i, "", "", ""
+  #for i in makemescroll():
+  #  yield i, "", "", ""
   try:
     yield "Beginning to pipulate...", "", "", ""
     yield "spinon", "", "", ""
