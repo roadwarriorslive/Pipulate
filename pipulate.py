@@ -304,14 +304,15 @@ def Pipulate():
                 fargs[coldex2][anarg] = None
             for argdex, anarg in enumerate(myargs): #For each argument of function
               fargs[coldex2][anarg] = None
-      trended = False
-      qstart = 1
+
       #            _            _     _    
       #   __ _ ___| |_ ___ _ __(_)___| | __
       #  / _` / __| __/ _ \ '__| / __| |/ /
       # | (_| \__ \ ||  __/ |  | \__ \   < 
       #  \__,_|___/\__\___|_|  |_|___/_|\_\
       #
+      trended = False
+      qstart = 1
       out("Scan down Pipulate tab looking for asterisks.", "2")
       for rowdex in range(1, onesheet.row_count+1):
         try:
@@ -442,7 +443,7 @@ def Pipulate():
         pass
       else:
         qstart = 1
-      if trendlistoflists:
+      if trendlistoflists and timewindow():
         for x in range(0, globs.retrytimes):
           try:
             InsertRows(onesheet, trendlistoflists)
@@ -455,6 +456,8 @@ def Pipulate():
           else:
             trendlistoflists = []
             break
+      else:
+        out("Gotcha")
       #We need to get it again if trending rows were added.
       if trended:
         try:
@@ -705,6 +708,9 @@ def lowercaselist(onelist):
     except:
       pass
   return onelist
+
+def timewindow():
+  return False
 
 def InsertRow(onesheet, onelist):
   column = globs.letter[len(onelist)]
