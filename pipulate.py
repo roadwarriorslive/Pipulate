@@ -34,10 +34,14 @@ app = Flask(__name__)                               # Flask init requirement
 
 app.secret_key = "m\x00\r\xa5\\\xbeTW\xb3\xdf\x17\xb0!T\x9b6\x88l\xcf\xa1vmD}"
 
-def out(msg, symbol='', mood=":-)"):      # Debug output to server terminal
+def out(msg, symbol='', dent='', mood=":-)"):
   total = 80
   if globs.DBUG:
     if symbol:
+      if dent:
+        globs.nest = globs.nest[:-2]
+      else:
+        globs.nest = globs.nest + symbol + ' '
       half = ((total - len(msg)) / 2) - 6
       side = half*symbol
       msg = "%s << %s >> %s" % (side, msg, side)
@@ -45,7 +49,7 @@ def out(msg, symbol='', mood=":-)"):      # Debug output to server terminal
         msg = msg + symbol
       print("%s %s" % (msg, mood))
     else:
-      print(msg)
+      print("%s%s" % (globs.nest, msg))
 
 def stream_template(template_name, **context):      # This is the key to streaming
   app.update_template_context(context)              # output to the user in the
@@ -178,7 +182,7 @@ def Pipulate():
       else:
         out("Google Spreadsheet successfully opened.")
         yield "", "", "", "" #whitelock
-      out("LOGIN SUCCESS", "L")
+      out("LOGIN SUCCESS", "L", '-')
 
       headers = ['URL', 'Subscribers', 'ISOTimeStamp', 'Count']
       for tabtuple in InitTab(gdoc, 'Pipulate', headers, pipinit()):
@@ -278,7 +282,7 @@ def Pipulate():
 
 
 
-      out("About to scan down Pipulate tab looking for asterisks.", "-")
+      out("About to scan down Pipulate tab looking for asterisks.", "*")
       for rowdex in range(1, onesheet.row_count+1):
         try:
           out("Scanning row %s for asterisks." % rowdex) #This can have a pretty long delay
