@@ -704,10 +704,15 @@ def lowercaselist(onelist):
   return onelist
 
 def timewindow(amiinnewtimewindow):
+  if amiinnewtimewindow == "*":
+    return True
   import dateutil.parser
   tick = dateutil.parser.parse(amiinnewtimewindow)
   out(tick)
   now = datetime.datetime.now()
+  if 'rerunjobevery' in globs.config:
+    pass
+  #  out(globs.config['rerunjobevery'])
   #if time(10,30) <= now.time() <= time(16,30):
   #  out("It is between the time-window")
   return False
