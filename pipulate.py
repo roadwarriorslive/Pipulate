@@ -359,6 +359,7 @@ def Pipulate():
       # | |_| | | | | | |  __/ | (_>  < | (_| (_) | |_| | | | | |_ 
       #  \__|_|_| |_| |_|\___|  \___/\/  \___\___/ \__,_|_| |_|\__|
       out("Count and ISOTimeStamp columns for trending", '2')
+      times = []
       if trended and 'count' in globs.row1:
         now = datetime.datetime.now()
         #lastinsertdate = None
@@ -384,7 +385,6 @@ def Pipulate():
             CellList = onesheet.range(mayhaverun)
           except:
             out("Failed to load the trending ISOTimeStamp range.")
-          times = []
           for onecell in CellList:
             times.append(onecell.value)
           trendingrowsfinished = times.count('?') == 0
@@ -457,7 +457,7 @@ def Pipulate():
             trendlistoflists = []
             break
       else:
-        out("Gotcha")
+        out(times[0])
       #We need to get it again if trending rows were added.
       if trended:
         try:
