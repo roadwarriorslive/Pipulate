@@ -622,7 +622,7 @@ def Pipulate():
       yield 'Please Login to Google', "", "", ""
     yield "Pipulation complete.&nbsp;&nbsp;", "Congratulations, pipulation complete! Now, do a little victory dance.", "", ""
     yield "spinoffsuccess", "", "", ""
-    out("PIPULATION OVER", "P")
+    out("PIPULATION OVER", "P", '-')
   except Exception as e:
     exc_type, exc_obj, exc_tb = sys.exc_info()
     fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
@@ -641,7 +641,7 @@ def Pipulate():
       yield "Please open an issue at https://github.com/miklevin/pipulate", "", "", ""
       yield "Or just tap me on the shoulder.", "", "", ""
     yield "spinerr", "", "", ""
-  out("EXITING PIPULATE STREAMING GENERATOR", "P", '-')
+    out("PIPULATION ERROR", "P", '-')
   print("\n")
 
 def url_root(url):
