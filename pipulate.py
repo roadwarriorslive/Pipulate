@@ -297,17 +297,16 @@ def Pipulate():
               fargs[coldex2][anarg] = None
       trended = False
       qstart = 1
-
       #            _            _     _    
       #   __ _ ___| |_ ___ _ __(_)___| | __
       #  / _` / __| __/ _ \ '__| / __| |/ /
       # | (_| \__ \ ||  __/ |  | \__ \   < 
       #  \__,_|___/\__\___|_|  |_|___/_|\_\
+      #
       out("Scan down Pipulate tab looking for asterisks.", "*")
       for rowdex in range(1, onesheet.row_count+1):
         try:
           out("Scanning row %s for asterisks." % rowdex) #This can have a pretty long delay
-          # Put the retry logic here
           onerow = onesheet.row_values(rowdex) #!!! HTTPError OPTIMIZE THIS!
         except:
           out("Couldn't open row.")
@@ -344,9 +343,11 @@ def Pipulate():
       rowthrottlenumber = 0
       out("Done looking for asterisks", "*", "-")
 
-
-
-
+      #  _   _                   ___                           _   
+      # | |_(_)_ __ ___   ___   ( _ )     ___ ___  _   _ _ __ | |_ 
+      # | __| | '_ ` _ \ / _ \  / _ \/\  / __/ _ \| | | | '_ \| __|
+      # | |_| | | | | | |  __/ | (_>  < | (_| (_) | |_| | | | | |_ 
+      #  \__|_|_| |_| |_|\___|  \___/\/  \___\___/ \__,_|_| |_|\__|
       out("Count and ISOTimeStamp columns for trending", 'T')
       if trended and 'count' in globs.row1:
         now = datetime.datetime.now()
@@ -420,9 +421,11 @@ def Pipulate():
       #out(diff.seconds/60)
       out("Count and ISOTimeStamp columns for trending", 'T', '-')
 
-
-
-
+      #  _                     _                           
+      # (_)_ __  ___  ___ _ __| |_   _ __ _____      _____ 
+      # | | '_ \/ __|/ _ \ '__| __| | '__/ _ \ \ /\ / / __|
+      # | | | | \__ \  __/ |  | |_  | | | (_) \ V  V /\__ \
+      # |_|_| |_|___/\___|_|   \__| |_|  \___/ \_/\_/ |___/
       out("Insert new rows for new time inrement trending", 'W')
       if trended and trendingrowsfinished == True:
         qstart = globs.numrows + 1
@@ -443,9 +446,6 @@ def Pipulate():
           else:
             trendlistoflists = []
             break
-
-
-
       #We need to get it again if trending rows were added.
       if trended:
         try:
@@ -456,17 +456,16 @@ def Pipulate():
           raise StopIteration
         else:
           pass
-
       #globs.numrows = len(onesheet.col_values(1))
       globs.numrows = globs.numrows + len(trendlistoflists) #faster
       out("Insert new rows for new tine inrement trending", 'W', '-')
-
-      #        _             _       _       
-      #  _ __ (_)_ __  _   _| | __ _| |_ ___ 
-      # | '_ \| | '_ \| | | | |/ _` | __/ _ \
-      # | |_) | | |_) | |_| | | (_| | ||  __/
-      # | .__/|_| .__/ \__,_|_|\__,_|\__\___|
-      # |_|     |_|                          
+      #                        _   _                                    _        
+      #   __ _ _   _  ___  ___| |_(_) ___  _ __    _ __ ___   __ _ _ __| | _____ 
+      #  / _` | | | |/ _ \/ __| __| |/ _ \| '_ \  | '_ ` _ \ / _` | '__| |/ / __|
+      # | (_| | |_| |  __/\__ \ |_| | (_) | | | | | | | | | | (_| | |  |   <\__ \
+      #  \__, |\__,_|\___||___/\__|_|\___/|_| |_| |_| |_| |_|\__,_|_|  |_|\_\___/
+      #     |_|                                                                  
+      #
       out("Question Mark Replacement.", '?')
       blankrows = 0 #Lets us skip occasional blank rows
       for index, rowdex in enumerate(range(qstart, onesheet.row_count+1)): #Start stepping through every row.
@@ -487,10 +486,14 @@ def Pipulate():
         for cell in CellList:
           onerow.append(cell.value)
         if '?' in onerow:
+          #   _ __ _____      __
+          #  | '__/ _ \ \ /\ / /
+          #  | | | (_) \ V  V / 
+          #  |_|  \___/ \_/\_/  
+          #
+          out("PROCESSING ROW %s." % rowdex, '~')
           blankrows = 0
           yield "", "", json.dumps(onerow), ""
-
-          out("About to pipulate row %s." % rowdex)
           rowdexstring = str(rowdex)
           newrow = onerow[:]
           if rowdexstring > 1:
@@ -505,6 +508,12 @@ def Pipulate():
                 collabel = globs.row1[coldex]
                 if collabel in transfuncs.keys():
                   for x in range(0, globs.retrytimes):
+                    #   __                  _   _                 
+                    #  / _|_   _ _ __   ___| |_(_) ___  _ __  ___ 
+                    # | |_| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
+                    # |  _| |_| | | | | (__| |_| | (_) | | | \__ \
+                    # |_|  \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
+                    #                                             
                     fname = transfuncs[globs.row1[coldex]]
                     farg = fargs[coldex]
                     evalme = "%s(" % fname #Begin building string that will eventually be eval'd
@@ -532,7 +541,12 @@ def Pipulate():
                 elif collabel in transscrape.keys():
                   for x in range(0, globs.retrytimes):
                     try:
-
+                      #  ____                                 
+                      # / ___|  ___ _ __ __ _ _ __   ___ _ __ 
+                      # \___ \ / __| '__/ _` | '_ \ / _ \ '__|
+                      #  ___) | (__| | | (_| | |_) |  __/ |   
+                      # |____/ \___|_|  \__,_| .__/ \___|_|   
+                      #                      |_|              
                       out("Entering generic scraper.")
                       sname = transscrape[globs.row1[coldex]]
                       stype = scrapetypes[sname]
@@ -567,7 +581,7 @@ def Pipulate():
                       out('%s, %s, %s, %s' % (pyfi, func_name, line_num, text))
                       out("Scrape problem on row %s. Retrying." % rowdexstring)
                       time.sleep(globs.retryseconds)
-
+          out("DONE PROCESSING ROW %s." % rowdex, '~', '-')
 
 
 
@@ -593,21 +607,7 @@ def Pipulate():
       out("Question Mark Replacement.", '?', '-')
 
 
-
-
-
-
-      # Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug
-      yield "Deliberate Exit", "", "", ""
-      out("Deliberate Exit")
-      raise StopIteration
-      # Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug
-
-
-
-
-
-    else:
+    else: #No session object found
       yield 'Please Login to Google', "", "", ""
     yield "Pipulation complete.&nbsp;&nbsp;", "Congratulations, pipulation complete! Now, do a little victory dance.", "", ""
     yield "spinoffsuccess", "", "", ""
