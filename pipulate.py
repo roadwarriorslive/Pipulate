@@ -73,6 +73,11 @@ def templateglobals():                              # available in Jinja2 templa
 class PipForm(Form):
   pipurl = StringField('Paste a Google Spreadsheet URL:')
 
+#                  _       
+#  _ __ ___   __ _(_)_ __  
+# | '_ ` _ \ / _` | | '_ \ 
+# | | | | | | (_| | | | | |
+# |_| |_| |_|\__,_|_|_| |_|
 @app.route("/", methods=['GET', 'POST'])            # Main point of entry when
 def main():                                         # visiting app's homepage.
   out("ENTERED MAIN FUNCTION", "M")
@@ -134,6 +139,12 @@ def main():                                         # visiting app's homepage.
     out("EXITING MAIN FUNCTION RENDER", "M", '-')
     return render_template('pipulate.html', form=form)
 
+#  ____  _             _       _       
+# |  _ \(_)_ __  _   _| | __ _| |_ ___ 
+# | |_) | | '_ \| | | | |/ _` | __/ _ \
+# |  __/| | |_) | |_| | | (_| | ||  __/
+# |_|   |_| .__/ \__,_|_|\__,_|\__\___|
+#         |_|                          
 def Pipulate():
   out("PIPULATION BEGINNING", "P")
   try:
@@ -287,9 +298,11 @@ def Pipulate():
       trended = False
       qstart = 1
 
-
-
-
+      #            _            _     _    
+      #   __ _ ___| |_ ___ _ __(_)___| | __
+      #  / _` / __| __/ _ \ '__| / __| |/ /
+      # | (_| \__ \ ||  __/ |  | \__ \   < 
+      #  \__,_|___/\__\___|_|  |_|___/_|\_\
       out("Scan down Pipulate tab looking for asterisks.", "*")
       for rowdex in range(1, onesheet.row_count+1):
         try:
@@ -448,12 +461,12 @@ def Pipulate():
       globs.numrows = globs.numrows + len(trendlistoflists) #faster
       out("Insert new rows for new tine inrement trending", 'W', '-')
 
-      #  ____  _             _       _       
-      # |  _ \(_)_ __  _   _| | __ _| |_ ___ 
-      # | |_) | | '_ \| | | | |/ _` | __/ _ \
-      # |  __/| | |_) | |_| | | (_| | ||  __/
-      # |_|   |_| .__/ \__,_|_|\__,_|\__\___|
-      #         |_|                          
+      #        _             _       _       
+      #  _ __ (_)_ __  _   _| | __ _| |_ ___ 
+      # | '_ \| | '_ \| | | | |/ _` | __/ _ \
+      # | |_) | | |_) | |_| | | (_| | ||  __/
+      # | .__/|_| .__/ \__,_|_|\__,_|\__\___|
+      # |_|     |_|                          
       out("Question Mark Replacement.", '?')
       blankrows = 0 #Lets us skip occasional blank rows
       for index, rowdex in enumerate(range(qstart, onesheet.row_count+1)): #Start stepping through every row.
