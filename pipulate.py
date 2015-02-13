@@ -754,14 +754,14 @@ def InsertRows(onesheet, listoflists):
   return
 
 def InitTab(gdoc, tabname, headerlist, listoflists=[]):
-  yield "Entering InitTab", "", "", ""
+  #yield "Entering InitTab", "", "", ""
   initsheet = None
   try:
     initsheet = gdoc.worksheet(tabname)
   except:
     pass
   else:
-    yme = "Exiting InitTab. %s already exists." % tabname
+    yme = "%s tab exists." % tabname
     yield yme, "", "", ""
     raise StopIteration
 
@@ -786,8 +786,14 @@ def InitTab(gdoc, tabname, headerlist, listoflists=[]):
         onecell.value = wholelist[index]
       except:
         pass
-    newtab.update_cells(CellList)
-    yield "Exiting InitTab", "", "", ""
+    try:
+      newtab.update_cells(CellList)
+    except:
+      yield "%s tab creation failed." % tabname, "", "", ""
+
+    else:
+      yield "%s tab created." % tabname, "", "", ""
+    #yield "Exiting InitTab", "", "", ""
   
 
 def questionmark(oldrow, rowdex, coldex):

@@ -32,8 +32,8 @@
       min-height: 100%
     }
     #pipstream{
-      height: 210px;
-      overflow: scroll;
+      height: 225px;
+      overflow: auto;
       background-color: white;
       margin-bottom: 15px;
       margin-left:20px;
@@ -42,6 +42,10 @@
       padding-bottom: 5px;
       padding-left: 5px;
       text-align: left;
+      line-height: 1.4em;
+    }
+    .pl {
+      font-size: .9em;
     }
     nav{
       background-color:#EEEEEE;
@@ -281,14 +285,13 @@
         {% else %}
           <div id="learnsomething">{{ cyclemotto }}</div>
         {% endif %}
-
         <textarea id="magicbox" rows="4" cols="60"></textarea>
       </div>
       <div id="pipstream">
       {% with messages = get_flashed_messages() %}
         {% if messages %}
           {% for message in messages %}
-            <br/><i class="bullet fa fa-circle-o"></i> {{ message }}
+            {%- if loop.index > 1: -%}<br/>{%- endif -%}<span class="pl"><i class="bullet fa fa-circle-o"></i> {{ message }}</span>
           {% endfor %}
         {% endif %}
       {% endwith %}
@@ -346,13 +349,13 @@
               unlockbutton();
             </script>
           {%- elif lineitem[:1] == ',' -%}
-            {{ lineitem }}
+            <span class="pl">{{ lineitem }}</span>
           {%- else -%}
             <script>
               $("i").removeClass("fa-spin fa-circle-o-notch");
               $("i").addClass("fa-check");
             </script>
-            {%- if loop.index > 1: -%}<br/>{%- endif -%}<i class="bullet fa fa-circle-o-notch fa-spin"></i> {{ lineitem|safe }}
+            {%- if loop.index > 1: -%}<br/>{%- endif -%}<span class="pl"><i class="bullet fa fa-circle-o-notch fa-spin"></i> {{ lineitem|safe }}</span>
           {%- endif -%}
           <script>
             $("#pipstream").scrollTop($("#pipstream")[0].scrollHeight);
