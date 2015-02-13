@@ -78,6 +78,7 @@ class PipForm(Form):
 # | '_ ` _ \ / _` | | '_ \ 
 # | | | | | | (_| | | | | |
 # |_| |_| |_|\__,_|_|_| |_|
+#
 @app.route("/", methods=['GET', 'POST'])            # Main point of entry when
 def main():                                         # visiting app's homepage.
   out("ENTERED MAIN FUNCTION", "M")
@@ -514,6 +515,7 @@ def Pipulate():
                     # |  _| |_| | | | | (__| |_| | (_) | | | \__ \
                     # |_|  \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
                     #                                             
+                    out("function start", "f")
                     fname = transfuncs[globs.row1[coldex]]
                     farg = fargs[coldex]
                     evalme = "%s(" % fname #Begin building string that will eventually be eval'd
@@ -531,22 +533,23 @@ def Pipulate():
                     try:
                       newrow[coldex] = eval(evalme)
                       out('%s worked' % collabel)
-                      break
                     except Exception as e:
                       exc_type, exc_value, exc_tb = sys.exc_info()
                       pyfi, line_num, func_name, text = traceback.extract_tb(exc_tb)[-1]
                       out('%s, %s, %s, %s' % (pyfi, func_name, line_num, text))
                       out("Function problem on row %s. Retrying." % rowdexstring)
                       time.sleep(globs.retryseconds)
+                    out("function end", "f", '-')
                 elif collabel in transscrape.keys():
                   for x in range(0, globs.retrytimes):
+                    #  ____                                 
+                    # / ___|  ___ _ __ __ _ _ __   ___ _ __ 
+                    # \___ \ / __| '__/ _` | '_ \ / _ \ '__|
+                    #  ___) | (__| | | (_| | |_) |  __/ |   
+                    # |____/ \___|_|  \__,_| .__/ \___|_|   
+                    #                      |_|              
+                    out("scrape start", "s")
                     try:
-                      #  ____                                 
-                      # / ___|  ___ _ __ __ _ _ __   ___ _ __ 
-                      # \___ \ / __| '__/ _` | '_ \ / _ \ '__|
-                      #  ___) | (__| | | (_| | |_) |  __/ |   
-                      # |____/ \___|_|  \__,_| .__/ \___|_|   
-                      #                      |_|              
                       out("Entering generic scraper.")
                       sname = transscrape[globs.row1[coldex]]
                       stype = scrapetypes[sname]
@@ -574,13 +577,13 @@ def Pipulate():
                             newrow[coldex] = None
 
                       out('%s worked.' % collabel)
-                      break
                     except Exception as e:
                       exc_type, exc_value, exc_tb = sys.exc_info()
                       pyfi, line_num, func_name, text = traceback.extract_tb(exc_tb)[-1]
                       out('%s, %s, %s, %s' % (pyfi, func_name, line_num, text))
                       out("Scrape problem on row %s. Retrying." % rowdexstring)
                       time.sleep(globs.retryseconds)
+                    out("scrape end", "s", '-')
           out("DONE PROCESSING ROW %s." % rowdex, '~', '-')
 
 
@@ -630,7 +633,7 @@ def Pipulate():
       yield "Please open an issue at https://github.com/miklevin/pipulate", "", "", ""
       yield "Or just tap me on the shoulder.", "", "", ""
     yield "spinerr", "", "", ""
-  out("EXITING GENERATOR", "P", '-')
+  out("EXITING PIPULATE STREAMING GENERATOR", "P", '-')
   print("\n")
 
 def url_root(url):
