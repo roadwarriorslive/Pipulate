@@ -236,6 +236,13 @@ overflow-y:scroll;
     <div id="content">
       <form id="pipform" method="POST" action="/">
         <div id="paste"><span id="pastelabel">URL: </span>{{ form.pipurl(size=60) }}</div>
+          {% if not session: %}
+            no session
+          {% elif 'loggedin' in session and session['loggedin'] == '1': %}
+            logged in
+          {% else: %}
+            session but no login
+          {% endif %}
           <button id="pipulate" class="button" type="submit">
             Start Pipulating &nbsp;<i id="piplock" class="fa fa-chevron-circle-right"></i>
           </button>
