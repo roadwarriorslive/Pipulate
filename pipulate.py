@@ -228,20 +228,8 @@ def Pipulate():
           out("Scrapaers loaded.")
 
 
-      # Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug
-      yield "Deliberate Exit", "", "", ""
-      out("Deliberate Exit")
-      raise StopIteration
-      # Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug
-
-
-
-
-
-
-
+      out("Loading row1 into globals.")
       try:
-        out("Loading row1 into globals.")
         globs.row1 = lowercaselist(onesheet.row_values(1))
       except:
         out("Failed to load row 1.")
@@ -282,6 +270,18 @@ def Pipulate():
               fargs[coldex2][anarg] = None
       trended = False
       qstart = 1
+
+
+
+      # Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug
+      yield "Deliberate Exit", "", "", ""
+      out("Deliberate Exit")
+      raise StopIteration
+      # Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug
+
+
+
+
       out("About to scan down Pipulate tab looking for asterisks.")
       for rowdex in range(1, onesheet.row_count+1):
         try:
@@ -733,12 +733,6 @@ def gethtml(url):
   return globs.html
 
 def getargval(anarg, defargval, onerow):
-  """Returns value to set argument equal-to in function invocation string.
-
-  This function returns which value should be used as the arguments to the
-  function invocation string being built. The value found on the row always
-  beats the default provided by the function. Lacking values on the row and a
-  default, the Python value of None will be returned."""
   for coldex, acol in enumerate(globs.row1):
     if acol == anarg: #Found column named same thing as a required argument.
       if onerow[coldex]: #The cell in that column has a non-zero/empty value.
@@ -750,12 +744,6 @@ def getargval(anarg, defargval, onerow):
     return None #We ALWAYS have to return at least None, least errors ensue.
 
 def adq(aval):
-  """Conditionally builds quotes on arg-value for function invocation string.
-
-  This handles the value quoting details when building argument part of the
-  function invocation string when replacing a question mark. For example, the
-  keyword None must not become quoted. Typically, numbers shouldn't be quoted
-  either, but we're feeding everything but None around as strings for now."""
   if aval == None:
     return None #None-in/None-out. This special keyword shouldn't be quoted.
   else:
