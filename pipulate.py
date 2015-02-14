@@ -724,6 +724,14 @@ def timewindow(amiinnewtimewindow):
       intervalparts=intervallanguage.split()
       intervalname = intervalparts[0]
       intervalnumber = intervalparts[1]
+    else:
+      if intervallanguage.isdigit():
+        intervalname = "minute"
+        intervalnumber = intervallanguage
+      else:
+        intervalname = intervallanguage
+        intervalnumber = '1'
+      
   out(intervalname)
   out(intervalnumber)
   import dateutil.parser
