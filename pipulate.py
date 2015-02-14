@@ -759,7 +759,7 @@ def timewindow(amiinnewtimewindow):
       left = tick - datetime.timedelta(hours=tick.hour % intervalnumber, minutes=tick.minute, seconds=tick.second, microseconds=tick.microsecond)
       now = now - datetime.timedelta(hours=now.hour % intervalnumber, minutes=now.minute, seconds=now.second, microseconds=now.microsecond)
       right = left.replace(hour=left.hour+intervalnumber)
-    elif 'day' in intervalname:
+    elif 'day' in intervalname or 'daily' in intervalname: #daily is the one 'ly' pattern exception
       cleanintervalname = 'day'
       out("Processing a %s %s interval." % (intervalnumber, cleanintervalname))
       left = tick - datetime.timedelta(days=tick.day % intervalnumber, hours=tick.hour, minutes=tick.minute, seconds=tick.second, microseconds=tick.microsecond)
@@ -767,10 +767,10 @@ def timewindow(amiinnewtimewindow):
       right = left.replace(day=left.day+intervalnumber)
     elif 'week' in intervalname:
       cleanintervalname = 'week'
-      out("week")
+      out("Processing a %s %s interval." % (intervalnumber, cleanintervalname))
     elif 'month' in intervalname:
       cleanintervalname = 'month'
-      out("month")
+      out("Processing a %s %s interval." % (intervalnumber, cleanintervalname))
     else:
       out("unknown")
     if now > right:
@@ -784,6 +784,22 @@ def timewindow(amiinnewtimewindow):
     out("The last right boundary %s is %s" % (right, cleanintervalname))
     return doinserts
   return True
+
+def add_months(sourcedate, months):
+  import calendar
+  sourcedate = sourcedate.date()
+  month = sourcedate.month - 1 + months
+  year = sourcedate.year + month / 12
+  month = month % 12 + 1
+  day = min(sourcedate.day,calendar.monthrange(year,month)[1])
+  return datetime.date(year,month,day)
+
+def add_weeks(sourcedate, weeks):
+  sourcedate = sourcedate.date()
+  days = weeks * 7
+  daystoadd = datetime.timedelta(days=days)
+  newdate = sourcedate + daystoadd
+  return newdate
 
 def InsertRow(onesheet, onelist):
   column = globs.letter[len(onelist)]
