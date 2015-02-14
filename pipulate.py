@@ -785,6 +785,7 @@ def timewindow(amiinnewtimewindow):
       now = now - datetime.timedelta(hours=now.hour % intervalnumber, minutes=now.minute, seconds=now.second, microseconds=now.microsecond)
       right = left.replace(hour=left.hour+intervalnumber)
     elif intervalname == 'day':
+      #Could be made shorter with use of .date()
       out("Processing a %s %s interval." % (intervalnumber, intervalname))
       left = tick - datetime.timedelta(days=tick.day % intervalnumber, hours=tick.hour, minutes=tick.minute, seconds=tick.second, microseconds=tick.microsecond)
       now = now - datetime.timedelta(days=now.day % intervalnumber, hours=now.hour, minutes=now.minute, seconds=now.second, microseconds=now.microsecond)
@@ -793,7 +794,7 @@ def timewindow(amiinnewtimewindow):
       out("Processing a %s %s interval." % (intervalnumber, intervalname))
     elif intervalname == 'month':
       out("Processing a %s %s interval." % (intervalnumber, intervalname))
-      left = tick.date()
+      left = tick.date().replace(day=1)
       right = left.replace(month=now.month + intervalnumber)
       out(tick)
       out(left)
