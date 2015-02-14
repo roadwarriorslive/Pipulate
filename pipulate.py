@@ -732,9 +732,14 @@ def timewindow(amiinnewtimewindow):
         intervalname = intervallanguage
         intervalnumber = '1'
     now = datetime.datetime.now()
+    left = None
+    right = None
     if 'minute' in intervalname:
-      out(intervalnumber)
-      out(intervalname)
+      left = now - datetime.timedelta(minutes=now.minute % 1, seconds=now.second, microseconds=now.microsecond)
+      right = left.replace(minute=left.minute+1)
+      out(now)
+      out(left)
+      out(right)
     elif 'hour' in intervalname:
       out("hour")
     elif 'day' in intervalname:
