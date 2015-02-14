@@ -731,11 +731,13 @@ def timewindow(amiinnewtimewindow):
       else:
         intervalname = intervallanguage
         intervalnumber = '1'
+    import dateutil.parser
+    tick = dateutil.parser.parse(amiinnewtimewindow)
     now = datetime.datetime.now()
     left = None
     right = None
     if 'minute' in intervalname:
-      left = now - datetime.timedelta(minutes=now.minute % 1, seconds=now.second, microseconds=now.microsecond)
+      left = tick - datetime.timedelta(minutes=tick.minute % 1, seconds=tick.second, microseconds=tick.microsecond)
       right = left.replace(minute=left.minute+1)
       out(now)
       out(left)
@@ -753,8 +755,6 @@ def timewindow(amiinnewtimewindow):
   else:
     return True
       
-  import dateutil.parser
-  tick = dateutil.parser.parse(amiinnewtimewindow)
   #out(tick)
   #out(now.month)
   #out(now.day)
