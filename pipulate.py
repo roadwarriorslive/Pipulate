@@ -34,6 +34,11 @@ app = Flask(__name__)                               # Flask init requirement
 
 app.secret_key = "m\x00\r\xa5\\\xbeTW\xb3\xdf\x17\xb0!T\x9b6\x88l\xcf\xa1vmD}"
 
+def gotcha():
+  out("Gotcha!!! </%s>" % globs.nest[-1:])
+  globs.nest = globs.nest[:-2]
+  raise StopIteration
+
 def out(msg, symbol='', dent=''):
   total = 80
   if globs.DBUG:
@@ -716,6 +721,7 @@ def lowercaselist(onelist):
   return onelist
 
 def timewindow(amiinnewtimewindow):
+  gotcha()
   if amiinnewtimewindow == "*":
     return True
   intervallanguage = ""
