@@ -404,7 +404,7 @@ def Pipulate():
               s = ''
             else:
               s = 's'
-            yme = "Current trending interval complete. Inserting %s new row%s..." % (rowthrottlenumber, s)
+            yme = "Row%s from cycle complete. Checking if in new time window..." % s
             yield yme, "", "", ""
           if 'rowthrottlenumber' in globs.config:
             rowthrottlenumber = globs.config['rowthrottlenumber']
@@ -715,8 +715,13 @@ def timewindow(amiinnewtimewindow):
     return True
   import dateutil.parser
   tick = dateutil.parser.parse(amiinnewtimewindow)
-  out(tick)
+  #out(tick)
   now = datetime.datetime.now()
+  out(now.month)
+  out(now.day)
+  out(now.hour)
+  out(now.minute)
+  out(now.second)
   out("now: %s" % now)
   if 'rerunjobevery' in globs.config:
     out(globs.config['rerunjobevery'])
