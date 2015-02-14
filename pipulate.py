@@ -723,6 +723,8 @@ def timewindow(amiinnewtimewindow):
     if ' ' in intervallanguage:
       intervalparts=intervallanguage.split()
       intervalname = intervalparts[1]
+      if intervalname:
+        intervalname = intervalname.lower()
       intervalnumber = intervalparts[0]
       out("Parsed out interval name: %s" % intervalname)
       out("Parsed out interval number: %s" % intervalnumber)
@@ -753,7 +755,10 @@ def timewindow(amiinnewtimewindow):
       right = left.replace(minute=left.minute+intervalnumber)
     elif 'hour' in intervalname:
       cleanintervalname = 'hour'
-      out("hour")
+      out("Processing a %s %s interval." % (intervalnumber, cleanintervalname))
+      left = tick - datetime.timedelta(hours=tick.hour % intervalnumber, minutes=tick.minute, seconds=tick.second, microseconds=tick.microsecond)
+      now = now - datetime.timedelta(hours=now.hour % intervalnumber, minutes=now.minute, seconds=now.second, microseconds=now.microsecond)
+      right = left.replace(hour=left.hour+intervalnumber)
     elif 'day' in intervalname:
       cleanintervalname = 'day'
       out("day")
