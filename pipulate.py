@@ -738,6 +738,7 @@ def timewindow(amiinnewtimewindow):
     right = None
     if 'minute' in intervalname:
       left = tick - datetime.timedelta(minutes=tick.minute % 1, seconds=tick.second, microseconds=tick.microsecond)
+      now = now - datetime.timedelta(minutes=now.minute % 1, seconds=now.second, microseconds=now.microsecond)
       right = left.replace(minute=left.minute+1)
       out("The current minute is %s" % now)#.strftime("%H:%M"))
       out("The last left boundary minute is %s" % left)#.strftime("%H:%M"))
