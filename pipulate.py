@@ -761,7 +761,10 @@ def timewindow(amiinnewtimewindow):
       right = left.replace(hour=left.hour+intervalnumber)
     elif 'day' in intervalname:
       cleanintervalname = 'day'
-      out("day")
+      out("Processing a %s %s interval." % (intervalnumber, cleanintervalname))
+      left = tick - datetime.timedelta(days=tick.day % intervalnumber, hours=tick.hour, minutes=tick.minute, seconds=tick.second, microseconds=tick.microsecond)
+      now = now - datetime.timedelta(days=now.day % intervalnumber, hours=now.hour, minutes=now.minute, seconds=now.second, microseconds=now.microsecond)
+      right = left.replace(day=left.day+intervalnumber)
     elif 'week' in intervalname:
       cleanintervalname = 'week'
       out("week")
