@@ -721,7 +721,6 @@ def lowercaselist(onelist):
   return onelist
 
 def timewindow(amiinnewtimewindow):
-  gotcha()
   if amiinnewtimewindow == "*":
     return True
   intervallanguage = ""
@@ -729,7 +728,7 @@ def timewindow(amiinnewtimewindow):
   intervalname=""
   intervalparts=[]
   if 'rerunjobevery' in globs.config:
-    intervallanguage = globs.config['rerunjobevery'].trim()
+    intervallanguage = globs.config['rerunjobevery'].strip()
     if ' ' in intervallanguage:
       intervalparts=intervallanguage.split()
       intervalname = intervalparts[1]
