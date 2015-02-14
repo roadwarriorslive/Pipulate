@@ -742,27 +742,33 @@ def timewindow(amiinnewtimewindow):
       intervalnumber = int(intervalnumber)
     except:
       return False
+    cleanintervalname = ''
     if 'minute' in intervalname:
+      cleanintervalname = ''
       out("Processing a %s minute interval." % intervalnumber)
       left = tick - datetime.timedelta(minutes=tick.minute % intervalnumber, seconds=tick.second, microseconds=tick.microsecond)
       now = now - datetime.timedelta(minutes=now.minute % intervalnumber, seconds=now.second, microseconds=now.microsecond)
       right = left.replace(minute=left.minute+intervalnumber)
-      out("The current minute is %s" % now)#.strftime("%H:%M"))
-      out("The last left boundary minute is %s" % left)#.strftime("%H:%M"))
-      out("The last right boundary  minute is %s" % right)#.strftime("%H:%M"))
       if now > right:
         out("We are in a new minute-boundary, so we insert rows.")
         return True
     elif 'hour' in intervalname:
+      cleanintervalname = 'hour'
       out("hour")
     elif 'day' in intervalname:
+      cleanintervalname = 'day'
       out("day")
     elif 'week' in intervalname:
+      cleanintervalname = 'week'
       out("week")
     elif 'month' in intervalname:
+      cleanintervalname = 'month'
       out("month")
     else:
       out("unknown")
+    out("The current %s is %s" % now, cleanintervalname)
+    out("The last left boundary %s is %s" % left, cleanintervalname)
+    out("The last right boundary %s is %s" % right, cleanintervalname)
   else:
     return True
 
