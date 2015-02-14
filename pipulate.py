@@ -742,6 +742,12 @@ def timewindow(amiinnewtimewindow):
       out(now)
       out(left)
       out(right)
+      if now > right:
+        out("Gotcha")
+      #if tick >= right:
+      #  out("We are in the next time-window.")
+      #else:
+      #  out("We are in the same time-window.")
     elif 'hour' in intervalname:
       out("hour")
     elif 'day' in intervalname:
