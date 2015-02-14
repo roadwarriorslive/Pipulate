@@ -741,21 +741,22 @@ def timewindow(amiinnewtimewindow):
       if intervallanguage.isdigit():
         intervalname = "minute"
         intervalnumber = intervallanguage
-      else: #We might have minute, hour, hourly, day, daily, week, weekly, month or monthly
+      else:
+        intervalname = intervallanguage
         intervalnumber = '1'
-        ltr = intervalname[1]
-        if ltr == 'mi':
-          intervalname = "minute"
-        elif ltr == 'ho':
-          intervalname = "hour"
-        elif ltr == 'da':
-          intervalname = "day"
-        elif ltr == 'we':
-          intervalname = "week"
-        elif ltr == 'mo':
-          intervalname = "month"
-        else:
-          intervalname = "minute"
+    ltr = intervalname[1].lower()
+    if ltr == 'mi':
+      intervalname = "minute"
+    elif ltr == 'ho':
+      intervalname = "hour"
+    elif ltr == 'da':
+      intervalname = "day"
+    elif ltr == 'we':
+      intervalname = "week"
+    elif ltr == 'mo':
+      intervalname = "month"
+    else:
+      intervalname = "minute"
     import dateutil.parser
     tick = dateutil.parser.parse(amiinnewtimewindow)
     now = datetime.datetime.now()
@@ -766,44 +767,37 @@ def timewindow(amiinnewtimewindow):
     except:
       out("Caught the type error")
       return False
-    cleanintervalname = ''
     doinserts = False
-    if 'minute' in intervalname:
-      cleanintervalname = 'minute'
-      out("Processing a %s %s interval." % (intervalnumber, cleanintervalname))
+    if intervalname == 'minute':
+      out("Processing a %s %s interval." % (intervalnumber, intervalname))
       left = tick - datetime.timedelta(minutes=tick.minute % intervalnumber, seconds=tick.second, microseconds=tick.microsecond)
       now = now - datetime.timedelta(minutes=now.minute % intervalnumber, seconds=now.second, microseconds=now.microsecond)
       right = left.replace(minute=left.minute+intervalnumber)
-    elif 'hour' in intervalname:
-      cleanintervalname = 'hour'
-      out("Processing a %s %s interval." % (intervalnumber, cleanintervalname))
+    elif intervalname == 'hour':
+      out("Processing a %s %s interval." % (intervalnumber, intervalname))
       left = tick - datetime.timedelta(hours=tick.hour % intervalnumber, minutes=tick.minute, seconds=tick.second, microseconds=tick.microsecond)
       now = now - datetime.timedelta(hours=now.hour % intervalnumber, minutes=now.minute, seconds=now.second, microseconds=now.microsecond)
       right = left.replace(hour=left.hour+intervalnumber)
-    elif 'day' in intervalname or 'daily' in intervalname: #daily is the one 'ly' pattern exception
-      cleanintervalname = 'day'
-      out("Processing a %s %s interval." % (intervalnumber, cleanintervalname))
+    elif intervalname == 'day':
+      out("Processing a %s %s interval." % (intervalnumber, intervalname))
       left = tick - datetime.timedelta(days=tick.day % intervalnumber, hours=tick.hour, minutes=tick.minute, seconds=tick.second, microseconds=tick.microsecond)
       now = now - datetime.timedelta(days=now.day % intervalnumber, hours=now.hour, minutes=now.minute, seconds=now.second, microseconds=now.microsecond)
       right = left.replace(day=left.day+intervalnumber)
-    elif 'week' in intervalname:
-      cleanintervalname = 'week'
-
-      out("Processing a %s %s interval." % (intervalnumber, cleanintervalname))
-    elif 'month' in intervalname:
-      cleanintervalname = 'month'
-      out("Processing a %s %s interval." % (intervalnumber, cleanintervalname))
+    elif intervalname == 'week':
+      out("Processing a %s %s interval." % (intervalnumber, intervalname))
+    elif intervalname == 'month':
+      out("Processing a %s %s interval." % (intervalnumber, intervalname))
     else:
       out("unknown")
     if now > right:
-      out("We are in a new %s-boundary, so we insert rows." % cleanintervalname)
+      out("We are in a new %s-boundary, so we insert rows." % intervalname)
       doinserts = True
     else:
-      out("We are still within the old %s boundary. Skipping insert." % cleanintervalname)
+      out("We are still within the old %s boundary. Skipping insert." % intervalname)
       doinserts = False
-    out("The current %s is %s" % (now, cleanintervalname))
-    out("The last left boundary %s is %s" % (left, cleanintervalname))
-    out("The last right boundary %s is %s" % (right, cleanintervalname))
+    out("The current %s is %s" % (now, intervalname))
+    out("The last left boundary %s is %s" % (left, intervalname))
+    out("The last right boundary %s is %s" % (right, intervalname))
     return doinserts
   return True
 
