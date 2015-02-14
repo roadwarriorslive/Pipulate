@@ -404,7 +404,7 @@ def Pipulate():
               s = ''
             else:
               s = 's'
-            yme = "Row%s from cycle complete. Checking if in new time window..." % s
+            yme = "Row%s from current cycle complete. Checking whether to start a new one..." % s
             yield yme, "", "", ""
           if 'rowthrottlenumber' in globs.config:
             rowthrottlenumber = globs.config['rowthrottlenumber']
@@ -437,7 +437,8 @@ def Pipulate():
       # | | '_ \/ __|/ _ \ '__| __| | '__/ _ \ \ /\ / / __|
       # | | | | \__ \  __/ |  | |_  | | | (_) \ V  V /\__ \
       # |_|_| |_|___/\___|_|   \__| |_|  \___/ \_/\_/ |___/
-      out("Insert new rows for new time inrement trending", '2')
+      #
+      out("Insert new rows for new time increment trending", '2')
       if trended and trendingrowsfinished == True:
         qstart = globs.numrows + 1
       elif trended:
@@ -713,18 +714,27 @@ def lowercaselist(onelist):
 def timewindow(amiinnewtimewindow):
   if amiinnewtimewindow == "*":
     return True
+  intervallanguage = ""
+  intervalnumber= ""
+  intervalname=""
+  intervalparts=[]
+  if 'rerunjobevery' in globs.config:
+    intervallanguage = globs.config['rerunjobevery']
+    if ' ' in intervallanguage:
+      intervalparts=intervallanguage.split()
+      intervalname = intervalparts[0]
+      intervalnumber = intervalparts[1]
+  out(intervalname)
+  out(intervalnumber)
   import dateutil.parser
   tick = dateutil.parser.parse(amiinnewtimewindow)
   #out(tick)
   now = datetime.datetime.now()
-  out(now.month)
-  out(now.day)
-  out(now.hour)
-  out(now.minute)
-  out(now.second)
-  out("now: %s" % now)
-  if 'rerunjobevery' in globs.config:
-    out(globs.config['rerunjobevery'])
+  #out(now.month)
+  #out(now.day)
+  #out(now.hour)
+  #out(now.minute)
+  #out("now: %s" % now)
   #if time(10,30) <= now.time() <= time(16,30):
   #  out("It is between the time-window")
   return False
