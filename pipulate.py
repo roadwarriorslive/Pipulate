@@ -101,8 +101,11 @@ def main():                                         # visiting app's homepage.
           gsp.openall()
           session['loggedin'] = "1"
         except:
-          session.clear()
-          flash("Login expired. Please log back in")
+          session.pop('loggedin', None)
+          if 'u' not in session and globs.PIPURL:
+            session['u'] = globs.PIPURL
+      if 'loggedin' not in session:
+        flash("Login expired. Please log back in")
   if request.method == 'POST':
     if form.pipurl.data:
       globs.PIPURL = form.pipurl.data
@@ -129,7 +132,7 @@ def main():                                         # visiting app's homepage.
           requests.get(revokeurl)
         if 'u' in request.args:
           form.pipurl.data = request.args.get('u')
-        session.clear()
+        session.pop('loggedin', None)
         flash('Logged out from Google.')
     elif request.args:
       if 'u' in request.args:
@@ -194,7 +197,8 @@ def Pipulate():
         out("Login appeared successful, but rejected on document open attempt.")
         if session and 'loggedin' in session:
           session.pop('loggedin', None)
-        #yield 'HTTP ERROR %s occured' % e.code, "", "", ""
+        if 'u' not in session and globs.PIPURL:
+          session['u'] = globs.PIPURL
         yield "Session timed out. Please login again.", "", "", ""
       except gspread.exceptions.NoValidUrlKeyFound:
         yield "Currently, the URL must be a Google Spreadsheet.", "", "", ""
@@ -445,7 +449,7 @@ def Pipulate():
         pass
       else:
         qstart = 1
-      if trendlistoflists and timewindow(times[0]):
+      if trendlistoflists and timewindow(times[0]): #This line will show in errors for any Config scheduling screw-ups.
         for x in range(0, globs.retrytimes):
           try:
             InsertRows(onesheet, trendlistoflists)
@@ -460,7 +464,7 @@ def Pipulate():
             break
       else:
         out("New time-window has not opened yet. Skipping row insert.")
-      #We need to get it again if trending rows were added.
+      #We need to get it again if trending rows were added. !!! Optimize
       if trended:
         try:
           onesheet = gdoc.worksheet("Pipulate")
