@@ -34,24 +34,31 @@ app = Flask(__name__)                               # Flask init requirement
 
 app.secret_key = "m\x00\r\xa5\\\xbeTW\xb3\xdf\x17\xb0!T\x9b6\x88l\xcf\xa1vmD}"
 
-def out(msg, symbol='', dent='', mood=":-)"):
+def out(msg, symbol='', dent=''):
   total = 80
   if globs.DBUG:
     if symbol:
-      half = ((total - len(msg)) / 2) - 2
+      half = ((total-1 - len(msg)) / 2) - 2
       side = half*symbol
       msg = "%s << %s >> %s" % (side, msg, side)
       tmpmsg = ''
       if dent:
-        tmpmsg = msg[len(globs.nest)-1:total]
+        tmpmsg = msg[len(globs.nest)-2:total-1]
         print(globs.nest)
-        globs.nest = globs.nest[:-1]
+        globs.nest = globs.nest[:-2]
       else:
-        tmpmsg = msg[len(globs.nest):total]
         print(globs.nest)
-      print("%s%s" % (globs.nest, tmpmsg))
+      if symbol == '0':
+        tmpmsg = msg[len(globs.nest):total]
+        print("%s%s" % (globs.nest, tmpmsg))
+      else:
+        tmpmsg = msg[len(globs.nest):total-1]
+        print("%s %s" % (globs.nest, tmpmsg))
       if not dent:
-        globs.nest = globs.nest + symbol
+        if symbol == '0':
+          globs.nest = symbol
+        else:
+          globs.nest = '%s %s' % (globs.nest, symbol)
       print(globs.nest)
     else:
       print("%s |%s" % (globs.nest, msg))
