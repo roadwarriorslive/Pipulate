@@ -722,8 +722,10 @@ def timewindow(amiinnewtimewindow):
     intervallanguage = globs.config['rerunjobevery']
     if ' ' in intervallanguage:
       intervalparts=intervallanguage.split()
-      intervalname = intervalparts[0]
-      intervalnumber = intervalparts[1]
+      intervalname = intervalparts[1]
+      intervalnumber = intervalparts[0]
+      out("Parsed out interval name: %s" % intervalname)
+      out("Parsed out interval number: %s" % intervalnumber)
     else:
       if intervallanguage.isdigit():
         intervalname = "minute"
@@ -736,10 +738,15 @@ def timewindow(amiinnewtimewindow):
     now = datetime.datetime.now()
     left = None
     right = None
+    try:
+      intervalnumber = int(intervalnumber)
+    except:
+      return False
     if 'minute' in intervalname:
-      left = tick - datetime.timedelta(minutes=tick.minute % 1, seconds=tick.second, microseconds=tick.microsecond)
-      now = now - datetime.timedelta(minutes=now.minute % 1, seconds=now.second, microseconds=now.microsecond)
-      right = left.replace(minute=left.minute+1)
+      out("Processing a %s minute interval." % intervalnumber)
+      left = tick - datetime.timedelta(minutes=tick.minute % intervalnumber, seconds=tick.second, microseconds=tick.microsecond)
+      now = now - datetime.timedelta(minutes=now.minute % intervalnumber, seconds=now.second, microseconds=now.microsecond)
+      right = left.replace(minute=left.minute+intervalnumber)
       out("The current minute is %s" % now)#.strftime("%H:%M"))
       out("The last left boundary minute is %s" % left)#.strftime("%H:%M"))
       out("The last right boundary  minute is %s" % right)#.strftime("%H:%M"))
