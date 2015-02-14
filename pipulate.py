@@ -731,6 +731,8 @@ def timewindow(amiinnewtimewindow):
       else:
         intervalname = intervallanguage
         intervalnumber = '1'
+  else:
+    return True
       
   out(intervalname)
   out(intervalnumber)
