@@ -739,15 +739,12 @@ def timewindow(amiinnewtimewindow):
     if 'minute' in intervalname:
       left = tick - datetime.timedelta(minutes=tick.minute % 1, seconds=tick.second, microseconds=tick.microsecond)
       right = left.replace(minute=left.minute+1)
-      out(now)
-      out(left)
-      out(right)
+      out("The current minute is %s" % now)#.strftime("%H:%M"))
+      out("The last left boundary minute is %s" % left)#.strftime("%H:%M"))
+      out("The last right boundary  minute is %s" % right)#.strftime("%H:%M"))
       if now > right:
-        out("Gotcha")
-      #if tick >= right:
-      #  out("We are in the next time-window.")
-      #else:
-      #  out("We are in the same time-window.")
+        out("We are in a new minute-boundary, so we insert rows.")
+        return True
     elif 'hour' in intervalname:
       out("hour")
     elif 'day' in intervalname:
