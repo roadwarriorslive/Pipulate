@@ -470,8 +470,6 @@ def Pipulate():
           else:
             trendlistoflists = []
             break
-      else:
-        out("New time-window has not opened yet. Skipping row insert.")
       #We need to get it again if trending rows were added. !!! Optimize
       if trended:
         try:
@@ -796,21 +794,18 @@ def timewindow(amiinnewtimewindow):
       out("Processing a %s %s interval." % (intervalnumber, intervalname))
       left = tick.date().replace(day=1)
       right = left.replace(month=now.month + intervalnumber)
-      out(tick)
-      out(left)
-      out(right)
-      gotcha("month")
+      now = now.date()
     else:
       out("unknown")
-    if now > right:
+    out("The current %s is %s" % (now, intervalname))
+    out("The last left boundary %s is %s" % (left, intervalname))
+    out("The last right boundary %s is %s" % (right, intervalname))
+    if now >= right:
       out("We are in a new %s-boundary, so we insert rows." % intervalname)
       doinserts = True
     else:
       out("We are still within the old %s boundary. Skipping insert." % intervalname)
       doinserts = False
-    out("The current %s is %s" % (now, intervalname))
-    out("The last left boundary %s is %s" % (left, intervalname))
-    out("The last right boundary %s is %s" % (right, intervalname))
     return doinserts
   return True
 
