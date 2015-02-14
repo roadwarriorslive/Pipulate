@@ -731,15 +731,26 @@ def timewindow(amiinnewtimewindow):
       else:
         intervalname = intervallanguage
         intervalnumber = '1'
+    now = datetime.datetime.now()
+    if 'minute' in intervalname:
+      out(intervalnumber)
+      out(intervalname)
+    elif 'hour' in intervalname:
+      out("hour")
+    elif 'day' in intervalname:
+      out("day")
+    elif 'week' in intervalname:
+      out("week")
+    elif 'month' in intervalname:
+      out("month")
+    else:
+      out("unknown")
   else:
     return True
       
-  out(intervalname)
-  out(intervalnumber)
   import dateutil.parser
   tick = dateutil.parser.parse(amiinnewtimewindow)
   #out(tick)
-  now = datetime.datetime.now()
   #out(now.month)
   #out(now.day)
   #out(now.hour)
