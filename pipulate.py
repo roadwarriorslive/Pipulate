@@ -207,7 +207,6 @@ def Pipulate():
           session.pop('loggedin', None)
         if 'u' not in session and globs.PIPURL:
           session['u'] = globs.PIPURL
-        yield "Session timed out. Please login again.", "Session timed out. Login again (under \"burger button\").", "", ""
       except gspread.exceptions.NoValidUrlKeyFound:
         yield "Currently, the URL must be a Google Spreadsheet.", "", "", ""
         yield "<a href='https://docs.google.com/spreadsheets/create' target='_new'>Create</a> a new Google Spreadsheet and click Bookmarklet again.", "Google Spreadsheet Not Found.", "", ""
@@ -649,7 +648,7 @@ def Pipulate():
       loginmsg = ""
       if session and 'loggedin' in session and session['loggedin'] != '1':
         loginmsg = "Login link under the upper-left \"burger button\"."
-      yield "Try again or come back later.", loginmsg, "", ""
+      yield "Session timed out. Please login again.", "Session timed out. Login again (under \"burger button\").", "", ""
     else:
       yield fixme, "", "", ""
       yield "Pipulation prematurely terminated.", "", "", ""
@@ -790,6 +789,9 @@ def timewindow(amiinnewtimewindow):
       right = left.replace(day=left.day+intervalnumber)
     elif intervalname == 'week':
       out("Processing a %s %s interval." % (intervalnumber, intervalname))
+      left = tick.date()
+      right = add_weeks(left, intervalnumber)
+      now = now.date()
     elif intervalname == 'month':
       out("Processing a %s %s interval." % (intervalnumber, intervalname))
       left = tick.date().replace(day=1)
@@ -797,29 +799,19 @@ def timewindow(amiinnewtimewindow):
       now = now.date()
     else:
       out("unknown")
-    out("The current %s is %s" % (now, intervalname))
-    out("The last left boundary %s is %s" % (left, intervalname))
-    out("The last right boundary %s is %s" % (right, intervalname))
+    out("The last %s left boundary is %s." % (intervalname, left))
+    out("The last %s right boundary is %s." % (intervalname, right))
+    out("The current time is %s this %s." % (now, intervalname))
     if now >= right:
       out("We are in a new %s-boundary, so we insert rows." % intervalname)
       doinserts = True
     else:
-      out("We are still within the old %s boundary. Skipping insert." % intervalname)
+      out("We are still within the old %s %s boundary, so skip new rows insert." % (intervalnumber, intervalname))
       doinserts = False
     return doinserts
   return True
 
-def add_months(sourcedate, months):
-  import calendar
-  sourcedate = sourcedate.date()
-  month = sourcedate.month - 1 + months
-  year = sourcedate.year + month / 12
-  month = month % 12 + 1
-  day = min(sourcedate.day,calendar.monthrange(year,month)[1])
-  return datetime.date(year,month,day)
-
 def add_weeks(sourcedate, weeks):
-  sourcedate = sourcedate.date()
   days = weeks * 7
   daystoadd = datetime.timedelta(days=days)
   newdate = sourcedate + daystoadd
