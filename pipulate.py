@@ -793,8 +793,11 @@ def timewindow(amiinnewtimewindow):
       out("Processing a %s %s interval." % (intervalnumber, intervalname))
     elif intervalname == 'month':
       out("Processing a %s %s interval." % (intervalnumber, intervalname))
+      left = tick.date()
+      right = left.replace(month=now.month + intervalnumber)
       out(tick)
-      out(now)
+      out(left)
+      out(right)
       gotcha("month")
     else:
       out("unknown")
