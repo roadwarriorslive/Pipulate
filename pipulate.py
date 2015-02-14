@@ -741,17 +741,16 @@ def timewindow(amiinnewtimewindow):
     try:
       intervalnumber = int(intervalnumber)
     except:
+      out("Caught the type error")
       return False
     cleanintervalname = ''
+    doinserts = False
     if 'minute' in intervalname:
-      cleanintervalname = ''
-      out("Processing a %s minute interval." % intervalnumber)
+      cleanintervalname = 'minute'
+      out("Processing a %s %s interval." % (intervalnumber, cleanintervalname))
       left = tick - datetime.timedelta(minutes=tick.minute % intervalnumber, seconds=tick.second, microseconds=tick.microsecond)
       now = now - datetime.timedelta(minutes=now.minute % intervalnumber, seconds=now.second, microseconds=now.microsecond)
       right = left.replace(minute=left.minute+intervalnumber)
-      if now > right:
-        out("We are in a new minute-boundary, so we insert rows.")
-        return True
     elif 'hour' in intervalname:
       cleanintervalname = 'hour'
       out("hour")
@@ -766,11 +765,17 @@ def timewindow(amiinnewtimewindow):
       out("month")
     else:
       out("unknown")
-    out("The current %s is %s" % now, cleanintervalname)
-    out("The last left boundary %s is %s" % left, cleanintervalname)
-    out("The last right boundary %s is %s" % right, cleanintervalname)
-  else:
-    return True
+    if now > right:
+      out("We are in a new %s-boundary, so we insert rows." % cleanintervalname)
+      doinserts = True
+    else:
+      out("We are still within the old %s boundary. Skipping insert." % cleanintervalname)
+      doinserts = False
+    out("The current %s is %s" % (now, cleanintervalname))
+    out("The last left boundary %s is %s" % (left, cleanintervalname))
+    out("The last right boundary %s is %s" % (right, cleanintervalname))
+    return doinserts
+  return True
 
 def InsertRow(onesheet, onelist):
   column = globs.letter[len(onelist)]
