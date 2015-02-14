@@ -742,8 +742,20 @@ def timewindow(amiinnewtimewindow):
         intervalname = "minute"
         intervalnumber = intervallanguage
       else: #We might have minute, hour, hourly, day, daily, week, weekly, month or monthly
-        intervalname = intervallanguage
         intervalnumber = '1'
+        ltr = intervalname[0]
+        if ltr == 'm':
+          intervalname = "minute"
+        elif ltr == 'h':
+          intervalname = "hour"
+        elif ltr == 'd':
+          intervalname = "day"
+        elif ltr == 'w':
+          intervalname = "week"
+        elif ltr == 'm':
+          intervalname = "month"
+        else:
+          intervalname = "minute"
     import dateutil.parser
     tick = dateutil.parser.parse(amiinnewtimewindow)
     now = datetime.datetime.now()
