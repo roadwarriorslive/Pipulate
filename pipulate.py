@@ -765,22 +765,6 @@ def timewindow(amiinnewtimewindow):
       out("unknown")
   else:
     return True
-      
-  #out(tick)
-  #out(now.month)
-  #out(now.day)
-  #out(now.hour)
-  #out(now.minute)
-  #out("now: %s" % now)
-  #if time(10,30) <= now.time() <= time(16,30):
-  #  out("It is between the time-window")
-  return False
-
-#lastinsertdate = dateutil.parser.parse(cell.value)
-#out("%s %s" % (now, lastinsertdate))
-#out((now-lastinsertdate).days * 24 * 60)
-#diff = now - lastinsertdate
-#out(diff.seconds/60)
 
 def InsertRow(onesheet, onelist):
   column = globs.letter[len(onelist)]
