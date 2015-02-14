@@ -34,8 +34,11 @@ app = Flask(__name__)                               # Flask init requirement
 
 app.secret_key = "m\x00\r\xa5\\\xbeTW\xb3\xdf\x17\xb0!T\x9b6\x88l\xcf\xa1vmD}"
 
-def gotcha():
-  out("Gotcha!!! </%s>" % globs.nest[-1:])
+def gotcha(x=''):
+  if x:
+    out("Gotcha !!! %s !!! </%s>" % (x, globs.nest[-1:]))
+  else:
+    out("Gotcha!!! </%s>" % globs.nest[-1:])
   globs.nest = globs.nest[:-2]
   raise StopIteration
 
@@ -744,7 +747,7 @@ def timewindow(amiinnewtimewindow):
       else:
         intervalname = intervallanguage
         intervalnumber = '1'
-    ltr = intervalname[1].lower()
+    ltr = intervalname[:2].lower()
     if ltr == 'mi':
       intervalname = "minute"
     elif ltr == 'ho':
@@ -757,9 +760,12 @@ def timewindow(amiinnewtimewindow):
       intervalname = "month"
     else:
       intervalname = "minute"
-    import dateutil.parser
-    tick = dateutil.parser.parse(amiinnewtimewindow)
     now = datetime.datetime.now()
+    import dateutil
+    try:
+      tick = dateutil.parser.parse(amiinnewtimewindow)
+    except:
+      tick = now
     left = None
     right = None
     try:
@@ -786,6 +792,7 @@ def timewindow(amiinnewtimewindow):
     elif intervalname == 'week':
       out("Processing a %s %s interval." % (intervalnumber, intervalname))
     elif intervalname == 'month':
+      gotcha("month")
       out("Processing a %s %s interval." % (intervalnumber, intervalname))
     else:
       out("unknown")
