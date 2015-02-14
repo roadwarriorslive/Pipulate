@@ -789,7 +789,7 @@ def timewindow(amiinnewtimewindow):
       right = left.replace(day=left.day+intervalnumber)
     elif intervalname == 'week':
       out("Processing a %s %s interval." % (intervalnumber, intervalname))
-      left = tick.date()
+      left = find_sunday(tick.date())
       right = add_weeks(left, intervalnumber)
       now = now.date()
     elif intervalname == 'month':
@@ -810,6 +810,13 @@ def timewindow(amiinnewtimewindow):
       doinserts = False
     return doinserts
   return True
+
+def find_sunday(day):
+  day_of_week = day.weekday()
+  to_beginning_of_week = datetime.timedelta(days=day_of_week)
+  beginning_of_week = day - to_beginning_of_week
+  beginning_of_week = beginning_of_week - datetime.timedelta(days=1)
+  return (beginning_of_week)
 
 def add_weeks(sourcedate, weeks):
   days = weeks * 7
