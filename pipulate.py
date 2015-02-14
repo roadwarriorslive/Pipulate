@@ -719,7 +719,7 @@ def timewindow(amiinnewtimewindow):
   intervalname=""
   intervalparts=[]
   if 'rerunjobevery' in globs.config:
-    intervallanguage = globs.config['rerunjobevery']
+    intervallanguage = globs.config['rerunjobevery'].trim()
     if ' ' in intervallanguage:
       intervalparts=intervallanguage.split()
       intervalname = intervalparts[1]
@@ -732,7 +732,7 @@ def timewindow(amiinnewtimewindow):
       if intervallanguage.isdigit():
         intervalname = "minute"
         intervalnumber = intervallanguage
-      else:
+      else: #We might have minute, hour, hourly, day, daily, week, weekly, month or monthly
         intervalname = intervallanguage
         intervalnumber = '1'
     import dateutil.parser
@@ -767,6 +767,7 @@ def timewindow(amiinnewtimewindow):
       right = left.replace(day=left.day+intervalnumber)
     elif 'week' in intervalname:
       cleanintervalname = 'week'
+
       out("Processing a %s %s interval." % (intervalnumber, cleanintervalname))
     elif 'month' in intervalname:
       cleanintervalname = 'month'
