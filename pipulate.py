@@ -743,16 +743,16 @@ def timewindow(amiinnewtimewindow):
         intervalnumber = intervallanguage
       else: #We might have minute, hour, hourly, day, daily, week, weekly, month or monthly
         intervalnumber = '1'
-        ltr = intervalname[0]
-        if ltr == 'm':
+        ltr = intervalname[1]
+        if ltr == 'mi':
           intervalname = "minute"
-        elif ltr == 'h':
+        elif ltr == 'ho':
           intervalname = "hour"
-        elif ltr == 'd':
+        elif ltr == 'da':
           intervalname = "day"
-        elif ltr == 'w':
+        elif ltr == 'we':
           intervalname = "week"
-        elif ltr == 'm':
+        elif ltr == 'mo':
           intervalname = "month"
         else:
           intervalname = "minute"
