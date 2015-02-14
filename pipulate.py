@@ -761,11 +761,11 @@ def timewindow(amiinnewtimewindow):
     else:
       intervalname = "minute"
     now = datetime.datetime.now()
-    import dateutil
+    import dateutil.parser
     try:
       tick = dateutil.parser.parse(amiinnewtimewindow)
     except:
-      tick = now
+      tick = now #double-check this fall-over action
     left = None
     right = None
     try:
@@ -792,8 +792,10 @@ def timewindow(amiinnewtimewindow):
     elif intervalname == 'week':
       out("Processing a %s %s interval." % (intervalnumber, intervalname))
     elif intervalname == 'month':
-      gotcha("month")
       out("Processing a %s %s interval." % (intervalnumber, intervalname))
+      out(tick)
+      out(now)
+      gotcha("month")
     else:
       out("unknown")
     if now > right:
