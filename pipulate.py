@@ -244,8 +244,7 @@ def Pipulate():
         raise StopIteration
 
       headers = ['URL', 'Subscribers', 'ISOTimeStamp', 'Count']
-      for tabtuple in InitTab(gdoc, 'Pipulate', headers, pipinit()):
-        yield tabtuple
+      InitTab(gdoc, 'Pipulate', headers, pipinit())
 
       out("Counting rows in Pipulate tab.")
       onesheet = gdoc.worksheet("Pipulate")
@@ -259,9 +258,7 @@ def Pipulate():
       config = []
       config.append(['rowthrottlenumber','1'])
       config.append(['rerunjobevery','minute'])
-      for tabtuple in InitTab(gdoc, 'Config', headers, config):
-        yield tabtuple
-
+      InitTab(gdoc, 'Config', headers, config)
 
       try:
         out("Reading Config tab into globals.")
@@ -273,8 +270,7 @@ def Pipulate():
 
 
       headers = ['name', 'type', 'pattern']
-      for tabtuple in InitTab(gdoc, 'Scrapers', headers, scrapes()):
-        yield tabtuple
+      InitTab(gdoc, 'Scrapers', headers, scrapes())
 
       sst = None
       out("Loading Scrapers.")
@@ -896,9 +892,7 @@ def InitTab(gdoc, tabname, headerlist, listoflists=[]):
   except:
     pass
   else:
-    yme = "%s Tab exists." % tabname
-    yield yme, "", "", ""
-    raise StopIteration
+    out("%s Tab exists." % tabname)
 
   if not initsheet:
     numcols = len(headerlist)
@@ -924,10 +918,9 @@ def InitTab(gdoc, tabname, headerlist, listoflists=[]):
     try:
       newtab.update_cells(CellList)
     except:
-      yield "%s tab creation failed." % tabname, "", "", ""
-
+      out("%s tab creation failed." % tabname)
     else:
-      yield "%s tab created." % tabname, "", "", ""
+      out("%s tab created." % tabname)
     #yield "Exiting InitTab", "", "", ""
   
 
