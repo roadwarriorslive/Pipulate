@@ -459,7 +459,6 @@ def Pipulate():
       yield "%s = Start of last time wndow" % left, "", "", ""
       yield "%s = End of last time window" % right, "", "", ""
       yield "%s = Currrent time" % now, "", "", ""
-      yield (insert, name, number, left, right, now), "", "", ""
       if trendlistoflists and insert: #This line will show in errors for any Config scheduling screw-ups.
         for x in range(0, globs.retrytimes):
           try:
