@@ -40,6 +40,13 @@ app = Flask(__name__)                               # Flask init requirement
 app.secret_key = "m\x00\r\xa5\\\xbeTW\xb3\xdf\x17\xb0!T\x9b6\x88l\xcf\xa1vmD}"
 
 def gotcha(x=''):
+  print('''
+                   ____       _       _             _   _   _ 
+                  / ___| ___ | |_ ___| |__   __ _  | | | | | |
+                 | |  _ / _ \| __/ __| '_ \ / _` | | | | | | |
+                 | |_| | (_) | || (__| | | | (_| | |_| |_| |_|
+                  \____|\___/ \__\___|_| |_|\__,_| (_) (_) (_)
+  ''')
   if x:
     out("Gotcha !!! %s !!! </%s>" % (x, globs.nest[-1:]))
   else:
@@ -348,6 +355,12 @@ def Pipulate():
       trended = False
       qstart = 1
       out("Scan down Pipulate tab looking for asterisks.", "2")
+      rightletter = globs.letter[len(globs.row1)]
+      rightnumber = 100
+      if globs.numrows < 100:
+        rightnumber = globs.numrows
+      inspectrange = "A2:%s%s" % (rightletter, rightnumber)
+      gotcha(inspectrange)
       for rowdex in range(1, globs.numrows+1):
         out("Scanning row %s for asterisks." % rowdex) #This can have a pretty long delay
         for x in range(6):
