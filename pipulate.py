@@ -112,8 +112,8 @@ def main():                                         # visiting app's homepage.
           session.pop('loggedin', None)
           if 'u' not in session and globs.PIPURL:
             session['u'] = globs.PIPURL
-      if 'loggedin' not in session:
-        flash("Login expired. Please log back in")
+      #if 'loggedin' not in session:
+      #  flash("Login expired. Please log back in")
   if request.method == 'POST':
     if form.pipurl.data:
       globs.PIPURL = form.pipurl.data
@@ -802,7 +802,7 @@ def timewindow(amiinnewtimewindow):
     out("The last %s left boundary is %s." % (intervalname, left))
     out("The last %s right boundary is %s." % (intervalname, right))
     out("The current time is %s this %s." % (now, intervalname))
-    if now >= right:
+    if now > right:
       out("We are in a new %s-boundary, so we insert rows." % intervalname)
       doinserts = True
     else:
