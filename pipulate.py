@@ -343,7 +343,7 @@ def Pipulate():
       trended = False
       qstart = 1
       out("Scan down Pipulate tab looking for asterisks.", "2")
-      for rowdex in range(1, onesheet.row_count+1):
+      for rowdex in range(1, globs.numrows+1):
         try:
           out("Scanning row %s for asterisks." % rowdex) #This can have a pretty long delay
           onerow = onesheet.row_values(rowdex) #!!! HTTPError OPTIMIZE THIS!
