@@ -297,13 +297,15 @@ def Pipulate():
 
       #!!! blink
       out("Loading row1 into globals.")
-      try:
-        globs.row1 = lowercaselist(onesheet.row_values(1))
-      except:
-        out("Failed to load row 1.")
-        raise StopIteration
-      else:
-        out("Row 1 succesfully loaded.")
+      for x in range(4):
+        try:
+          globs.row1 = lowercaselist(onesheet.row_values(1))
+          break
+        except Exception as e:
+          print traceback.format_exc()
+          out("Failed to load row 1.")
+          time.sleep(2)
+      out("Row 1 succesfully loaded.")
       trendlistoflists = []
       out("Scanning row 1 for function and scraper names.")
       fargs = {}
@@ -347,8 +349,8 @@ def Pipulate():
       qstart = 1
       out("Scan down Pipulate tab looking for asterisks.", "2")
       for rowdex in range(1, globs.numrows+1):
+        out("Scanning row %s for asterisks." % rowdex) #This can have a pretty long delay
         try:
-          out("Scanning row %s for asterisks." % rowdex) #This can have a pretty long delay
           onerow = onesheet.row_values(rowdex) #!!! HTTPError OPTIMIZE THIS!
         except:
           out("Couldn't open row.")
@@ -419,12 +421,10 @@ def Pipulate():
           for onecell in CellList:
             times.append(onecell.value)
           trendingrowsfinished = times.count('?') == 0
-          currentornew = 'current'
           if trendingrowsfinished:
-            currentornew = 'the new'
             rowthrottlenumber = len(trendlistoflists)
-            yme = "Last set of trending rows complete."
-            yield yme, "", "", ""
+            if not counts[0]:
+              yield "Last set of trending rows complete.", "", "", ""
           if 'rowthrottlenumber' in globs.config:
             rowthrottlenumber = globs.config['rowthrottlenumber']
           else:
@@ -461,9 +461,10 @@ def Pipulate():
       #jobstats = timewindow(times[0])
       insert, name, number, left, right, now = timewindow(times[0])
       yield "Job requested to process %s row(s) every %s %s" % (rowthrottlenumber, number, name), "", "", ""
-      yield "%s = Start of last time wndow" % left, "", "", ""
-      yield "%s = End of last time window" % right, "", "", ""
-      yield "%s = Currrent time" % now, "", "", ""
+      if left and right and now:
+        yield "%s = Start of last time wndow" % left, "", "", ""
+        yield "%s = End of last time window" % right, "", "", ""
+        yield "%s = Currrent time" % now, "", "", ""
       if trendlistoflists and insert: #This line will show in errors for any Config scheduling screw-ups.
         for x in range(4):
           try:
