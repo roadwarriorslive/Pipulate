@@ -1,7 +1,5 @@
 DBUG = True
 PIPURL = ''
-retrytimes = 5
-retryseconds = 2
 numrows = 0
 config = {}
 html = ''

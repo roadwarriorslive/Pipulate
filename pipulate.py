@@ -108,7 +108,7 @@ def main():                                         # visiting app's homepage.
     if 'oa2' in session:                            # and I think you're logged in
       import gspread                                # so I'll grab spreadsheet API
       creds = Credentials(access_token=session['oa2'])
-      for x in range(0, globs.retrytimes):
+      for x in range(0, 5):
         try:
           gsp = gspread.authorize(creds)
           gsp.openall()
@@ -463,7 +463,7 @@ def Pipulate():
       yield "%s = End of last time window" % right, "", "", ""
       yield "%s = Currrent time" % now, "", "", ""
       if trendlistoflists and insert: #This line will show in errors for any Config scheduling screw-ups.
-        for x in range(0, globs.retrytimes):
+        for x in range(0, 5):
           try:
             InsertRows(onesheet, trendlistoflists)
           except Exception as e:
@@ -471,7 +471,7 @@ def Pipulate():
             pyfi, line_num, func_name, text = traceback.extract_tb(exc_tb)[-1] #NameError
             out('%s, %s, %s, %s' % (pyfi, func_name, line_num, text))
             out("Error on trending, retry %s" % x)
-            time.sleep(globs.retryseconds)
+            time.sleep(2)
           else:
             trendlistoflists = []
             break
@@ -536,7 +536,7 @@ def Pipulate():
                     pass
                 collabel = globs.row1[coldex]
                 if collabel in transfuncs.keys():
-                  for x in range(0, globs.retrytimes):
+                  for x in range(0, 5):
                     #   __                  _   _                 
                     #  / _|_   _ _ __   ___| |_(_) ___  _ __  ___ 
                     # | |_| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
@@ -566,10 +566,10 @@ def Pipulate():
                       pyfi, line_num, func_name, text = traceback.extract_tb(exc_tb)[-1]
                       out('%s, %s, %s, %s' % (pyfi, func_name, line_num, text))
                       out("Function problem on row %s. Retrying." % rowdexstring)
-                      time.sleep(globs.retryseconds)
+                      time.sleep(2)
                     out("Function End", "4", '-')
                 elif collabel in transscrape.keys():
-                  for x in range(0, globs.retrytimes):
+                  for x in range(0, 5):
                     #  ____                                 
                     # / ___|  ___ _ __ __ _ _ __   ___ _ __ 
                     # \___ \ / __| '__/ _` | '_ \ / _ \ '__|
@@ -610,7 +610,7 @@ def Pipulate():
                       pyfi, line_num, func_name, text = traceback.extract_tb(exc_tb)[-1]
                       out('%s, %s, %s, %s' % (pyfi, func_name, line_num, text))
                       out("Scrape problem on row %s. Retrying." % rowdexstring)
-                      time.sleep(globs.retryseconds)
+                      time.sleep(2)
                     out("Scrape End", "4", '-')
           out("DONE PROCESSING ROW %s." % rowdex, '3', '-')
 
@@ -623,14 +623,14 @@ def Pipulate():
           for index, onecell in enumerate(CellList):
             onecell.value = newrow[index]
             result = None
-          for x in range(0, globs.retrytimes):
+          for x in range(0, 5):
             try:
               result = onesheet.update_cells(CellList)
               out("Successfully updated row %s" % rowdex)
               break
             except:
               out("API problem on row %s. Retrying." % rowdex)
-              time.sleep(globs.retryseconds)
+              time.sleep(2)
         elif onerow.count('') == len(onerow):
           blankrows += 1
           if blankrows > skippableblankrows:
