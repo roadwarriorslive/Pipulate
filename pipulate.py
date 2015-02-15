@@ -207,42 +207,38 @@ def Pipulate():
       out("Opening Spreadsheet...")
       yield("Opening Spreadsheet...", "", "", "")
       gdoc = None
-      try:
-        for x in range(5):
-          try:
-            gdoc = gsp.open_by_url(globs.PIPURL) #HTTPError
-          except:
-            time.sleep(2)
-            continue
+      for x in range(5):
+        try:
+          gdoc = gsp.open_by_url(globs.PIPURL) #HTTPError
           break
-      except gspread.httpsession.HTTPError, e:
-        out("Login appeared successful, but rejected on document open attempt.")
-        if session and 'loggedin' in session:
-          session.pop('loggedin', None)
-        if 'u' not in session and globs.PIPURL:
-          session['u'] = globs.PIPURL
-      except gspread.exceptions.NoValidUrlKeyFound:
-        yield "Currently, the URL must be a Google Spreadsheet.", "", "", ""
-        yield "<a href='https://docs.google.com/spreadsheets/create' target='_new'>Create</a> a new Google Spreadsheet and click Bookmarklet again.", "Google Spreadsheet Not Found.", "", ""
-      except gspread.exceptions.SpreadsheetNotFound:
-        yield "Please give the document a name to force first save.", "", "", ""
-        yield "spinoff", "", "", ""
-      except Exception as e:
-        exc_type, exc_obj, exc_tb = sys.exc_info()
-        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-        ename = type(e).__name__
-        fixme = "%s, %s, %s" % (ename, fname, exc_tb.tb_lineno)
-        yield fixme, "", "", ""
-        yield "spinoff", "", "", ""
-      else:
-        login = True
-        out("Google Spreadsheet successfully opened.")
-        yield "", "", "", "" #whitelock
-      if login:
-        out("LOGIN SUCCESS", "2", '-')
-      else:
-        out("LOGIN FAILURE", "2", '-')
-        raise StopIteration
+        except gspread.httpsession.HTTPError, e:
+          out("Login appeared successful, but rejected on document open attempt.")
+          if session and 'loggedin' in session:
+            session.pop('loggedin', None)
+          if 'u' not in session and globs.PIPURL:
+            session['u'] = globs.PIPURL
+        except gspread.exceptions.NoValidUrlKeyFound:
+          yield "Currently, the URL must be a Google Spreadsheet.", "", "", ""
+          yield "<a href='https://docs.google.com/spreadsheets/create' target='_new'>Create</a> a new Google Spreadsheet and click Bookmarklet again.", "Google Spreadsheet Not Found.", "", ""
+        except gspread.exceptions.SpreadsheetNotFound:
+          yield "Please give the document a name to force first save.", "", "", ""
+          yield "spinoff", "", "", ""
+        except Exception as e:
+          exc_type, exc_obj, exc_tb = sys.exc_info()
+          fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+          ename = type(e).__name__
+          fixme = "%s, %s, %s" % (ename, fname, exc_tb.tb_lineno)
+          yield fixme, "", "", ""
+          yield "spinoff", "", "", ""
+        else:
+          login = True
+          out("Google Spreadsheet successfully opened.")
+          yield "", "", "", "" #whitelock
+        if login:
+          out("LOGIN SUCCESS", "2", '-')
+        else:
+          out("LOGIN FAILURE", "2", '-')
+          raise StopIteration
 
       headers = ['URL', 'Subscribers', 'ISOTimeStamp', 'Count']
       try:
@@ -881,11 +877,11 @@ def InsertRows(onesheet, listoflists):
   onesheet.update_cells(CellList)
   return
 
-def InitTab(gdoc, tabname, headerlist, listoflists=[]):
+def InitTab(gdoc2, tabname, headerlist, listoflists=[]):
   #yield "Entering InitTab", "", "", ""
   initsheet = None
   try:
-    initsheet = gdoc.worksheet(tabname)
+    initsheet = gdoc2.worksheet(tabname)
   except:
     pass
   else:
@@ -900,7 +896,7 @@ def InitTab(gdoc, tabname, headerlist, listoflists=[]):
     else:
       numrows = 2
     endletter = globs.letter[numcols]
-    newtab = gdoc.add_worksheet(title=tabname, rows=numrows, cols=numcols)
+    newtab = gdoc2.add_worksheet(title=tabname, rows=numrows, cols=numcols)
     CellList = newtab.range('A1:%s%s' % (endletter, numrows))
     initlist = []
     for onelist in listoflists:
