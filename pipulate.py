@@ -496,7 +496,7 @@ def Pipulate():
       #
       out("Question Mark Replacement.", '2')
       blankrows = 0 #Lets us skip occasional blank rows
-      for index, rowdex in enumerate(range(qstart, globs.numrows)): #Start stepping through every row.
+      for index, rowdex in enumerate(range(qstart, onesheet.row_count+1)): #Start stepping through every row.
         if 'rowthrottlenumber' in globs.config:
           if index >= int(rowthrottlenumber):
             break
