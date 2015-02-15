@@ -16,7 +16,7 @@
 
 """
 import sys, os, socket
-socket.setdefaulttimeout(1)
+socket.setdefaulttimeout(10)
 if len(sys.argv) > 1:
   print("Captured invoking from command-line!")
   exit()
@@ -206,6 +206,7 @@ def Pipulate():
         out("Login successful.")
       out("Opening Spreadsheet...")
       yield("Opening Spreadsheet...", "", "", "")
+      gdoc = None
       try:
         for x in range(5):
           try:
@@ -244,7 +245,10 @@ def Pipulate():
         raise StopIteration
 
       headers = ['URL', 'Subscribers', 'ISOTimeStamp', 'Count']
-      InitTab(gdoc, 'Pipulate', headers, pipinit())
+      try:
+        InitTab(gdoc, 'Pipulate', headers, pipinit())
+      except:
+        print traceback.format_exc()
 
       out("Counting rows in Pipulate tab.")
       onesheet = gdoc.worksheet("Pipulate")
