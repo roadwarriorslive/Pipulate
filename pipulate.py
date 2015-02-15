@@ -271,6 +271,8 @@ def Pipulate():
 
       sst = None
       out("Loading Scrapers.")
+      #!!! blink
+      yield("Loading Scrapers...", "", "", "")
       try:
         sst = gdoc.worksheet("Scrapers")
       except:
@@ -290,7 +292,7 @@ def Pipulate():
           transscrape = ziplckey(nam, nam)
           out("Scrapaers loaded.")
 
-
+      #!!! blink
       out("Loading row1 into globals.")
       try:
         globs.row1 = lowercaselist(onesheet.row_values(1))
