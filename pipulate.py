@@ -350,13 +350,14 @@ def Pipulate():
       out("Scan down Pipulate tab looking for asterisks.", "2")
       for rowdex in range(1, globs.numrows+1):
         out("Scanning row %s for asterisks." % rowdex) #This can have a pretty long delay
-        try:
-          onerow = onesheet.row_values(rowdex) #!!! HTTPError OPTIMIZE THIS!
-        except:
-          out("Couldn't open row.")
-        else:
-          out("Successfully opened row.")
-        out("Finished scanning rows.")
+        for x in range(6):
+          try:
+            onerow = onesheet.row_values(rowdex) #!!! HTTPError OPTIMIZE THIS!
+            break
+          except:
+            out("Couldn't open row.")
+            time.sleep(1)
+        out("Successfully opened row.")
         if onerow:
           if rowdex == 2: #Looking for trending requests
             if '*' in onerow:
