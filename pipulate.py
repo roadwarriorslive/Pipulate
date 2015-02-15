@@ -241,7 +241,7 @@ def Pipulate():
       out("Counting rows in Pipulate tab.")
       onesheet = gdoc.worksheet("Pipulate")
       globs.numrows = len(onesheet.col_values(1)) #!!!UnboundLocalError HTTPError OPTIMIZE!
-      yme = "%s rows found." % globs.numrows
+      yme = "%s rows found in Pipulate tab." % globs.numrows
       out(yme)
       yield yme, "", "", ""
 
@@ -354,7 +354,7 @@ def Pipulate():
               trended = True
               out("Found asterisks on row 2 -- trending activated!")
               trendlistoflists.append(onerow)
-              yield "Found trending asterisks in row 2", "Then we look for trending job requests...", json.dumps(onerow), ""
+              yield "Found asterisks indicating trending in row 2", "Then we look for trending job requests...", json.dumps(onerow), ""
             else:
               break
           elif trendlistoflists and rowdex > 2:
@@ -373,7 +373,8 @@ def Pipulate():
           if blankrows > 1:
             out("Found second blank row, so trending scan complete.")
             break
-      yield "Trending request understood.", "", "", ""
+      yme = "%s row trending-job found." % len(trendlistoflists)
+      yield yme, "", "", ""
       trendingrowsfinished = True
       rowthrottlenumber = 0
       out("Done looking for asterisks", "2", "-")
@@ -415,11 +416,7 @@ def Pipulate():
           if trendingrowsfinished:
             currentornew = 'the new'
             rowthrottlenumber = len(trendlistoflists)
-            if int(rowthrottlenumber) == 1:
-              s = ''
-            else:
-              s = 's'
-            yme = "Row%s from current cycle complete. Checking whether to start a new one..." % s
+            yme = "Last set of trending rows complete."
             yield yme, "", "", ""
           if 'rowthrottlenumber' in globs.config:
             rowthrottlenumber = globs.config['rowthrottlenumber']
@@ -429,12 +426,6 @@ def Pipulate():
             int(rowthrottlenumber)
           except:
             rowthrottlenumber = 1
-          if int(rowthrottlenumber) == 1:
-            s = ''
-          else:
-            s = 's'
-          yme = "Processing next %s row%s from %s time interval." % (rowthrottlenumber, s, currentornew)
-          yield yme, "", "", ""
           if not trendingrowsfinished:
             qstart = globs.numrows - times.count('?') + 1
             trendlistoflists = []
@@ -460,7 +451,17 @@ def Pipulate():
         pass
       else:
         qstart = 1
-      if trendlistoflists and timewindow(times[0]): #This line will show in errors for any Config scheduling screw-ups.
+      insert, name, number, left, right, now = timewindow(times[0])
+      yield "Job requested to process %s row(s) every %s %s" % (rowthrottlenumber, number, name), "", "", ""
+      yield "Start of last time wndow: %s" % left, "", "", ""
+      yield "End of last time window: %s" % right, "", "", ""
+      yield "Currrent time: %s" % now, "", "", ""
+      if now > right and insert:
+        yme = "We are in a new %s-boundary, so we insert rows." % name
+      else:
+        yme = "Nothing more to do this time-window."
+      yield yme, "", "", ""
+      if trendlistoflists and insert: #This line will show in errors for any Config scheduling screw-ups.
         for x in range(0, globs.retrytimes):
           try:
             InsertRows(onesheet, trendlistoflists)
@@ -726,7 +727,7 @@ def lowercaselist(onelist):
 
 def timewindow(amiinnewtimewindow):
   if amiinnewtimewindow == "*":
-    return True
+    return (True,'','','','')
   intervallanguage = ""
   intervalnumber= ""
   intervalname=""
@@ -773,7 +774,7 @@ def timewindow(amiinnewtimewindow):
       intervalnumber = int(intervalnumber)
     except:
       out("Caught the type error")
-      return False
+      return (False,'','','','')
     doinserts = False
     if intervalname == 'minute':
       out("Processing a %s %s interval." % (intervalnumber, intervalname))
@@ -812,8 +813,8 @@ def timewindow(amiinnewtimewindow):
     else:
       out("We are still within the old %s %s boundary, so skip new rows insert." % (intervalnumber, intervalname))
       doinserts = False
-    return doinserts
-  return True
+    return (doinserts, intervalname, intervalnumber, left, right, now)
+  return (True,'','','','')
 
 def find_sunday(day):
   day_of_week = day.weekday()
