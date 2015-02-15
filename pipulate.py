@@ -330,12 +330,12 @@ def Pipulate():
             for argdex, anarg in enumerate(myargs): #For each argument of function
               fargs[coldex2][anarg] = None
 
-      #            _            _     _    
-      #   __ _ ___| |_ ___ _ __(_)___| | __
-      #  / _` / __| __/ _ \ '__| / __| |/ /
-      # | (_| \__ \ ||  __/ |  | \__ \   < 
-      #  \__,_|___/\__\___|_|  |_|___/_|\_\
-      #
+      #            _            _     _        
+      #   __ _ ___| |_ ___ _ __(_)___| | _____ 
+      #  / _` / __| __/ _ \ '__| / __| |/ / __|
+      # | (_| \__ \ ||  __/ |  | \__ \   <\__ \
+      #  \__,_|___/\__\___|_|  |_|___/_|\_\___/
+      #                                  
       trended = False
       qstart = 1
       out("Scan down Pipulate tab looking for asterisks.", "2")
