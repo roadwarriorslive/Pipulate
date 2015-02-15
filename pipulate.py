@@ -15,7 +15,8 @@
                            until you do. Greetings!
 
 """
-import sys, os
+import sys, os, socket
+socket.setdefaulttimeout(1)
 if len(sys.argv) > 1:
   print("Captured invoking from command-line!")
   exit()
