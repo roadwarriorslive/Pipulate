@@ -451,15 +451,18 @@ def Pipulate():
         pass
       else:
         qstart = 1
+      #jobstats = timewindow(times[0])
       insert, name, number, left, right, now = timewindow(times[0])
       yield "Job requested to process %s row(s) every %s %s" % (rowthrottlenumber, number, name), "", "", ""
-      yield "Start of last time wndow: %s" % left, "", "", ""
-      yield "End of last time window: %s" % right, "", "", ""
-      yield "Currrent time: %s" % now, "", "", ""
-      if now > right and insert:
-        yme = "We are in a new %s-boundary, so we insert rows." % name
+      yield "%s = Start of last time wndow" % left, "", "", ""
+      yield "%s = End of last time window" % right, "", "", ""
+      yield "%s = Currrent time" % now, "", "", ""
+      if insert and now > right:
+        yme = "We are in a new %s-boundary, so we insert row(s)." % name
+      elif not insert:
+        yme = "Completing current time-window. Processing %s row(s)." % rowthrottlenumber
       else:
-        yme = "Nothing more to do this time-window."
+        yme = "Next %s row(s) will process in the next %s %ss after %s." % (rowthrottlenumber, number, name, right)
       yield yme, "", "", ""
       if trendlistoflists and insert: #This line will show in errors for any Config scheduling screw-ups.
         for x in range(0, globs.retrytimes):
@@ -727,7 +730,7 @@ def lowercaselist(onelist):
 
 def timewindow(amiinnewtimewindow):
   if amiinnewtimewindow == "*":
-    return (True,'','','','')
+    return (True,'','','','','')
   intervallanguage = ""
   intervalnumber= ""
   intervalname=""
@@ -774,24 +777,24 @@ def timewindow(amiinnewtimewindow):
       intervalnumber = int(intervalnumber)
     except:
       out("Caught the type error")
-      return (False,'','','','')
+      return (False,'','','','','')
     doinserts = False
     if intervalname == 'minute':
       out("Processing a %s %s interval." % (intervalnumber, intervalname))
       left = tick - datetime.timedelta(minutes=tick.minute % intervalnumber, seconds=tick.second, microseconds=tick.microsecond)
       now = now - datetime.timedelta(minutes=now.minute % intervalnumber, seconds=now.second, microseconds=now.microsecond)
-      right = left.replace(minute=left.minute+intervalnumber)
+      right = left + datetime.timedelta(minutes=intervalnumber)
     elif intervalname == 'hour':
       out("Processing a %s %s interval." % (intervalnumber, intervalname))
       left = tick - datetime.timedelta(hours=tick.hour % intervalnumber, minutes=tick.minute, seconds=tick.second, microseconds=tick.microsecond)
       now = now - datetime.timedelta(hours=now.hour % intervalnumber, minutes=now.minute, seconds=now.second, microseconds=now.microsecond)
-      right = left.replace(hour=left.hour+intervalnumber)
+      right = left + datetime.timedelta(hours=intervalnumber)
     elif intervalname == 'day':
       #Could be made shorter with use of .date()
       out("Processing a %s %s interval." % (intervalnumber, intervalname))
       left = tick - datetime.timedelta(days=tick.day % intervalnumber, hours=tick.hour, minutes=tick.minute, seconds=tick.second, microseconds=tick.microsecond)
       now = now - datetime.timedelta(days=now.day % intervalnumber, hours=now.hour, minutes=now.minute, seconds=now.second, microseconds=now.microsecond)
-      right = left.replace(day=left.day+intervalnumber)
+      right = left + datetime.timedelta(days=intervalnumber)
     elif intervalname == 'week':
       out("Processing a %s %s interval." % (intervalnumber, intervalname))
       left = find_sunday(tick.date())
@@ -804,17 +807,18 @@ def timewindow(amiinnewtimewindow):
       now = now.date()
     else:
       out("unknown")
-    out("The last %s left boundary is %s." % (intervalname, left))
-    out("The last %s right boundary is %s." % (intervalname, right))
-    out("The current time is %s this %s." % (now, intervalname))
+    out("%s last %s time interval left boundary." % (left, intervalname))
+    out("%s last %s time interval right boundary." % (right, intervalname))
+    out("%s is the current %s." % (now, intervalname))
     if now > right:
       out("We are in a new %s-boundary, so we insert rows." % intervalname)
       doinserts = True
     else:
       out("We are still within the old %s %s boundary, so skip new rows insert." % (intervalnumber, intervalname))
       doinserts = False
-    return (doinserts, intervalname, intervalnumber, left, right, now)
-  return (True,'','','','')
+    rme = (doinserts, intervalname, intervalnumber, left, right, now)
+    return rme
+  return (True,'','','','','')
 
 def find_sunday(day):
   day_of_week = day.weekday()
