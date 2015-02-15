@@ -203,6 +203,8 @@ def Pipulate():
         raise StopIteration
       else:
         out("Login successful.")
+      out("Opening Spreadsheet...")
+      yield("Opening Spreadsheet...", "", "", "")
       try:
         gdoc = gsp.open_by_url(globs.PIPURL) #HTTPError
       except gspread.httpsession.HTTPError, e:
@@ -457,13 +459,7 @@ def Pipulate():
       yield "%s = Start of last time wndow" % left, "", "", ""
       yield "%s = End of last time window" % right, "", "", ""
       yield "%s = Currrent time" % now, "", "", ""
-      if insert and now > right:
-        yme = "We are in a new %s-boundary, so we insert row(s)." % name
-      elif not insert:
-        yme = "Completing current time-window. Processing %s row(s)." % rowthrottlenumber
-      else:
-        yme = "Next %s row(s) will process in the next %s %ss after %s." % (rowthrottlenumber, number, name, right)
-      yield yme, "", "", ""
+      yield (insert, name, number, left, right, now), "", "", ""
       if trendlistoflists and insert: #This line will show in errors for any Config scheduling screw-ups.
         for x in range(0, globs.retrytimes):
           try:
@@ -766,6 +762,7 @@ def timewindow(amiinnewtimewindow):
     else:
       intervalname = "minute"
     now = datetime.datetime.now()
+    now2 = now
     import dateutil.parser
     try:
       tick = dateutil.parser.parse(amiinnewtimewindow)
@@ -810,13 +807,13 @@ def timewindow(amiinnewtimewindow):
     out("%s last %s time interval left boundary." % (left, intervalname))
     out("%s last %s time interval right boundary." % (right, intervalname))
     out("%s is the current %s." % (now, intervalname))
-    if now > right:
+    if now2 > right:
       out("We are in a new %s-boundary, so we insert rows." % intervalname)
       doinserts = True
     else:
       out("We are still within the old %s %s boundary, so skip new rows insert." % (intervalnumber, intervalname))
       doinserts = False
-    rme = (doinserts, intervalname, intervalnumber, left, right, now)
+    rme = (doinserts, intervalname, intervalnumber, left, right, now2)
     return rme
   return (True,'','','','','')
 
@@ -889,7 +886,7 @@ def InitTab(gdoc, tabname, headerlist, listoflists=[]):
   except:
     pass
   else:
-    yme = "%s tab exists." % tabname
+    yme = "%s Tab exists." % tabname
     yield yme, "", "", ""
     raise StopIteration
 
