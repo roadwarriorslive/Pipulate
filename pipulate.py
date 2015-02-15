@@ -15,9 +15,13 @@
                            until you do. Greetings!
 
 """
+import sys, os
+if len(sys.argv) > 1:
+  print("Captured invoking from command-line!")
+  exit()
 
 import globs                                        # Talmudic style commentaries
-import requests, traceback, datetime, time, json, sys, os
+import requests, traceback, datetime, time, json
 from flask_wtf import Form                          # All Flask form examples use it
 from wtforms import StringField
 from flask import (Flask,                           # This app is all about Flask
@@ -88,12 +92,12 @@ def templateglobals():                              # available in Jinja2 templa
 class PipForm(Form):
   pipurl = StringField('Paste a Google Spreadsheet URL:')
 
-#                  _       
-#  _ __ ___   __ _(_)_ __  
-# | '_ ` _ \ / _` | | '_ \ 
-# | | | | | | (_| | | | | |
-# |_| |_| |_|\__,_|_|_| |_|
-#
+#  _____ _           _                      _       
+# |  ___| | __ _ ___| | __  _ __ ___   __ _(_)_ __  
+# | |_  | |/ _` / __| |/ / | '_ ` _ \ / _` | | '_ \ 
+# |  _| | | (_| \__ \   <  | | | | | | (_| | | | | |
+# |_|   |_|\__,_|___/_|\_\ |_| |_| |_|\__,_|_|_| |_|
+#                                                   
 @app.route("/", methods=['GET', 'POST'])            # Main point of entry when
 def main():                                         # visiting app's homepage.
   out("ENTERED MAIN FUNCTION", "0")
