@@ -108,7 +108,7 @@ def main():                                         # visiting app's homepage.
     if 'oa2' in session:                            # and I think you're logged in
       import gspread                                # so I'll grab spreadsheet API
       creds = Credentials(access_token=session['oa2'])
-      for x in range(0, 5):
+      for x in range(4):
         try:
           gsp = gspread.authorize(creds)
           gsp.openall()
@@ -207,7 +207,13 @@ def Pipulate():
       out("Opening Spreadsheet...")
       yield("Opening Spreadsheet...", "", "", "")
       try:
-        gdoc = gsp.open_by_url(globs.PIPURL) #HTTPError
+        for x in range(5):
+          try:
+            gdoc = gsp.open_by_url(globs.PIPURL) #HTTPError
+          except:
+            time.sleep(2)
+            continue
+          break
       except gspread.httpsession.HTTPError, e:
         out("Login appeared successful, but rejected on document open attempt.")
         if session and 'loggedin' in session:
@@ -463,7 +469,7 @@ def Pipulate():
       yield "%s = End of last time window" % right, "", "", ""
       yield "%s = Currrent time" % now, "", "", ""
       if trendlistoflists and insert: #This line will show in errors for any Config scheduling screw-ups.
-        for x in range(0, 5):
+        for x in range(4):
           try:
             InsertRows(onesheet, trendlistoflists)
           except Exception as e:
@@ -536,7 +542,7 @@ def Pipulate():
                     pass
                 collabel = globs.row1[coldex]
                 if collabel in transfuncs.keys():
-                  for x in range(0, 5):
+                  for x in range(4):
                     #   __                  _   _                 
                     #  / _|_   _ _ __   ___| |_(_) ___  _ __  ___ 
                     # | |_| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
@@ -569,7 +575,7 @@ def Pipulate():
                       time.sleep(2)
                     out("Function End", "4", '-')
                 elif collabel in transscrape.keys():
-                  for x in range(0, 5):
+                  for x in range(4):
                     #  ____                                 
                     # / ___|  ___ _ __ __ _ _ __   ___ _ __ 
                     # \___ \ / __| '__/ _` | '_ \ / _ \ '__|
@@ -623,7 +629,7 @@ def Pipulate():
           for index, onecell in enumerate(CellList):
             onecell.value = newrow[index]
             result = None
-          for x in range(0, 5):
+          for x in range(4):
             try:
               result = onesheet.update_cells(CellList)
               out("Successfully updated row %s" % rowdex)
@@ -644,6 +650,8 @@ def Pipulate():
     yield "spinoffsuccess", "", "", ""
     out("PIPULATION OVER", "1", '-')
   except Exception as e:
+    print traceback.format_exc()
+
     exc_type, exc_obj, exc_tb = sys.exc_info()
     fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
     ename = type(e).__name__
@@ -958,6 +966,14 @@ def adq(aval):
     return None #None-in/None-out. This special keyword shouldn't be quoted.
   else:
     return "'%s'" % (aval) #ALMOST everything else should be quoted.
+
+def retry():
+  for x in range(4):
+    try:
+      a = 1
+      break
+    except:
+      time.sleep(2)
 
 from functions import *
 
