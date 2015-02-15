@@ -16,7 +16,7 @@
 
 """
 import sys, os, socket
-socket.setdefaulttimeout(10)
+socket.setdefaulttimeout(5)
 if len(sys.argv) > 1:
   print("Captured invoking from command-line!")
   exit()
@@ -473,9 +473,7 @@ def Pipulate():
           try:
             InsertRows(onesheet, trendlistoflists)
           except Exception as e:
-            exc_type, exc_value, exc_tb = sys.exc_info()
-            pyfi, line_num, func_name, text = traceback.extract_tb(exc_tb)[-1] #NameError
-            out('%s, %s, %s, %s' % (pyfi, func_name, line_num, text))
+            print traceback.format_exc()
             out("Error on trending, retry %s" % x)
             time.sleep(2)
           else:
@@ -568,10 +566,7 @@ def Pipulate():
                       newrow[coldex] = eval(evalme)
                       out('%s worked' % collabel)
                     except Exception as e:
-                      exc_type, exc_value, exc_tb = sys.exc_info()
-                      pyfi, line_num, func_name, text = traceback.extract_tb(exc_tb)[-1]
-                      out('%s, %s, %s, %s' % (pyfi, func_name, line_num, text))
-                      out("Function problem on row %s. Retrying." % rowdexstring)
+                      print traceback.format_exc()
                       time.sleep(2)
                     out("Function End", "4", '-')
                 elif collabel in transscrape.keys():
@@ -612,9 +607,7 @@ def Pipulate():
 
                       out('%s worked.' % collabel)
                     except Exception as e:
-                      exc_type, exc_value, exc_tb = sys.exc_info()
-                      pyfi, line_num, func_name, text = traceback.extract_tb(exc_tb)[-1]
-                      out('%s, %s, %s, %s' % (pyfi, func_name, line_num, text))
+                      print traceback.format_exc()
                       out("Scrape problem on row %s. Retrying." % rowdexstring)
                       time.sleep(2)
                     out("Scrape End", "4", '-')
