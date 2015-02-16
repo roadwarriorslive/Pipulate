@@ -22,7 +22,7 @@
                                       Adi
 """
 import sys, os, socket
-socket.setdefaulttimeout(1)                               # Our story begins with Talmudic style commentaries 
+socket.setdefaulttimeout(2)                               # Our story begins with Talmudic style commentaries 
 if len(sys.argv) > 1:                                     # (in-line columns), which I'm using as a way 
   print("Captured invoking from command-line!")           # of issuing a challenge to myself to master the
   exit()                                                  # vim text editor, so as to make the sort of text
@@ -283,10 +283,13 @@ def Pipulate():
       out("Google Spreadsheet successfully opened.")
       yield "", "", "", "" #whitelock
       headers = ['URL', 'Subscribers', 'ISOTimeStamp', 'Count']
+
+      yield lock
       try:
         InitTab(gdoc, 'Pipulate', headers, pipinit())
       except:
-        print traceback.format_exc()
+        Stop()
+      yield unlock
 
       out("Counting rows in Pipulate tab.")
       stop = True
@@ -328,11 +331,17 @@ def Pipulate():
       config = []
       config.append(['rowthrottlenumber','1'])
       config.append(['rerunjobevery','minute'])
-      InitTab(gdoc, 'Config', headers, config)
+
+      yield lock
+      try:
+        InitTab(gdoc, 'Config', headers, config)
+      except:
+        Stop()
+      yield unlock
 
       try:
         out("Reading Config tab into globals.")
-        globs.config = refreshconfig(gdoc, "Config") #HTTPError
+        globs.config = RefreshConfig(gdoc, "Config") #HTTPError
       except:
         out("Copying Config tag to globals failed.")
       else:
@@ -499,7 +508,7 @@ def Pipulate():
           if blankrows > 1:
             out("Found second blank row, so trending scan complete.")
             break
-      yme = "%s row trending-job found." % len(trendlistoflists)
+      yme = "%s-Row trending-job found. Analyzing job frequency." % len(trendlistoflists)
       yield yme, "", "", ""
       trendingrowsfinished = True
       rowthrottlenumber = 0
@@ -722,23 +731,28 @@ def Pipulate():
                     out("Scrape End", "4", '-')
           out("DONE PROCESSING ROW %s." % rowdex, '3', '-')
 
-
-
-
           out("Finished pipulating replacing questionmarks in memory.")
           newrow = ['' if x==None else x for x in newrow]
           yield "", "", json.dumps(newrow), ""
           for index, onecell in enumerate(CellList):
             onecell.value = newrow[index]
             result = None
-          for x in range(4):
+
+          stop = True
+          for x in range(5):
+            yield lock
             try:
               result = onesheet.update_cells(CellList)
-              out("Successfully updated row %s" % rowdex)
+              stop = False
               break
             except:
-              out("API problem on row %s. Retrying." % rowdex)
-              time.sleep(2)
+              out("Retry %s of %s" %(x, 5))
+              time.sleep(5)
+          if stop:
+            yield badtuple
+            Stop()
+          yield unlock
+
         elif onerow.count('') == len(onerow):
           blankrows += 1
           if blankrows > skippableblankrows:
@@ -817,11 +831,45 @@ class Credentials (object):
   def __init__ (self, access_token=None):
     self.access_token = access_token
 
-def refreshconfig(gdoc, sheetname):
+def RefreshConfig(gdoc, sheetname):
   #!!! Needs optimization
-  onesheet = gdoc.worksheet(sheetname)
-  names = onesheet.col_values(1)
-  values = onesheet.col_values(2)
+
+  stop = True
+  for x in range(5):
+    try:
+      onesheet = gdoc.worksheet(sheetname)
+      stop = False
+      break
+    except:
+      out("Retry %s of %s" %(x, 5))
+      time.sleep(2)
+  if stop:
+    Stop()
+
+  stop = True
+  for x in range(5):
+    try:
+      names = onesheet.col_values(1)
+      stop = False
+      break
+    except:
+      out("Retry %s of %s" %(x, 5))
+      time.sleep(2)
+  if stop:
+    Stop()
+
+  stop = True
+  for x in range(5):
+    try:
+      values = onesheet.col_values(2)
+      stop = False
+      break
+    except:
+      out("Retry %s of %s" %(x, 5))
+      time.sleep(2)
+  if stop:
+    Stop()
+
   return ziplckey(names, values)
 
 def ziplckey(keys, values):
@@ -942,26 +990,6 @@ def add_weeks(sourcedate, weeks):
   newdate = sourcedate + daystoadd
   return newdate
 
-def InsertRow(onesheet, onelist):
-  column = globs.letter[len(onelist)]
-  endrow = globs.numrows + 1
-  rowrange = "A%s:%s%s" % (endrow, column, endrow)
-  if endrow == onesheet.row_count + 1:
-    onesheet.append_row(onelist)
-    #onesheet.add_rows(1)
-  else:
-    CellList = onesheet.range(rowrange)
-    out('Inserting row in range %s' % rowrange)
-    for index, cell in enumerate(CellList):
-      ival = ''
-      if onelist[index] == None:
-        ival = ''
-      else:
-        ival = onelist[index]
-      cell.value = ival
-      onesheet.update_cells(CellList)
-  globs.numrows += 1
-
 def InsertRows(onesheet, listoflists):
   numnewrows = len(listoflists)
   lastrowused = globs.numrows
@@ -1014,14 +1042,15 @@ def InsertRows(onesheet, listoflists):
   return
 
 def InitTab(gdoc2, tabname, headerlist, listoflists=[]):
-  #yield "Entering InitTab", "", "", ""
   initsheet = None
-  try:
-    initsheet = gdoc2.worksheet(tabname)
-  except:
-    pass
-  else:
-    out("%s Tab exists." % tabname)
+  for x in range(3): #not too many times here
+    try:
+      initsheet = gdoc2.worksheet(tabname)
+      out("%s Tab exists." % tabname)
+      break
+    except:
+      out("Retrying %s of %s" % (x, 5))
+      time.sleep(2) #not too long here
 
   if not initsheet:
     numcols = len(headerlist)
@@ -1050,8 +1079,6 @@ def InitTab(gdoc2, tabname, headerlist, listoflists=[]):
       out("%s tab creation failed." % tabname)
     else:
       out("%s tab created." % tabname)
-    #yield "Exiting InitTab", "", "", ""
-  
 
 def questionmark(oldrow, rowdex, coldex):
   if rowdex != 1:
