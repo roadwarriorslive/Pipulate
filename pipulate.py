@@ -1,4 +1,4 @@
-  """      Because life's too short to not collect  ABOUT THE AUTHOR:
+"""        Because life's too short to not collect  ABOUT THE AUTHOR:
            data in the same place you work with it  http://mikelev.in
             _____ _             _       _           http://levinux.com
            |  __ (_)           | |     | |          http://pipulate.com
