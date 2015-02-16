@@ -16,7 +16,7 @@
 
 """
 import sys, os, socket
-socket.setdefaulttimeout(5)
+socket.setdefaulttimeout(10)
 if len(sys.argv) > 1:
   print("Captured invoking from command-line!")
   exit()
@@ -385,7 +385,6 @@ def Pipulate():
       if CellList:
         for cell in CellList:
           onerow.append(cell.value)
-      gotcha(onerow)
       for rowdex in range(1, globs.numrows+1):
         out("Scanning row %s for asterisks." % rowdex) #This can have a pretty long delay
         for x in range(6):
