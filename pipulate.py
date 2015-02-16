@@ -203,6 +203,7 @@ def makemescroll():
 #
 def Pipulate():
   stop = False
+  badtuple = (globs.GBAD, globs.GBAD, "", "")
   out("PIPULATION BEGINNING", "1")
   #for i in makemescroll():
   #  yield i, "", "", ""
@@ -236,12 +237,15 @@ def Pipulate():
       out("Opening Spreadsheet...")
       yield("Opening Spreadsheet...", "", "", "")
       gdoc = None
+      stop = True
       for x in range(5):
         try:
           gdoc = gsp.open_by_url(globs.PIPURL) #HTTPError
+          stop = False
           break
         except gspread.httpsession.HTTPError, e:
           out("Login appeared successful, but rejected on document open attempt.")
+          yield "Please Log In again first.", "Login under the \"burger button\" in the upper-right.", "", ""
           if session and 'loggedin' in session:
             session.pop('loggedin', None)
           if 'u' not in session and globs.PIPURL:
@@ -268,6 +272,9 @@ def Pipulate():
         else:
           out("LOGIN FAILURE", "2", '-')
           raise StopIteration
+      if stop:
+        out(globs.GBAD)
+        yield badtuple
 
       headers = ['URL', 'Subscribers', 'ISOTimeStamp', 'Count']
       try:
@@ -284,9 +291,11 @@ def Pipulate():
           stop = False
           break
         except:
-          out("Reloating column 1 values for global numrows count")
+          out("Reloading column 1 values for global numrows count.")
           time.sleep(3)
       if stop == True:
+        out("Couldn't load column 1 for global numrows.")
+        yield badtuple
         raise StopIteration
       yme = "%s rows found in Pipulate tab." % globs.numrows
       out(yme)
@@ -393,13 +402,18 @@ def Pipulate():
         rightnumber = globs.numrows
       inspectrange = "A2:%s%s" % (rightletter, rightnumber)
       CellList = None
+      stop = True
       for x in range(4):
         try:
           CellList = onesheet.range(inspectrange)
+          stop = False
           break
         except:
           out("Grabbing cells to inspect for asterisks failed.")
-          time.sleep(2)
+          time.sleep(4)
+      if stop:
+        out("Couldn't get cells to inspect for asterisks. Stopping.")
+        raise StopIteration
       onerow = []
       if CellList:
         for cell in CellList:

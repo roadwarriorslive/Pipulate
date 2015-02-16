@@ -1,5 +1,6 @@
 DBUG = True
 PIPURL = ''
+GBAD = "Timed-out on Google Data API. Sorry, try again."
 numrows = 0
 config = {}
 html = ''
