@@ -22,7 +22,7 @@
                                       Adi
 """
 import sys, os, socket
-socket.setdefaulttimeout(10)                              # Our story begins with Talmudic style commentaries 
+socket.setdefaulttimeout(1.2)                             # Our story begins with Talmudic style commentaries 
 if len(sys.argv) > 1:                                     # (in-line columns), which I'm using as a way 
   print("Captured invoking from command-line!")           # of issuing a challenge to myself to master the
   exit()                                                  # vim text editor, so as to make the sort of text
@@ -45,6 +45,17 @@ app = Flask(__name__)
 
 app.secret_key = "m\x00\r\xa5\\\xbeTW\xb3\xdf\x17\xb0!T\x9b6\x88l\xcf\xa1vmD}"
 
+def stop():
+  print('''
+    ____ ____    _  _____  _    _____ _                    _    ___        _   
+   / ___|  _ \  / \|_   _|/ \  |_   _(_)_ __ ___   ___  __| |  / _ \ _   _| |_ 
+  | |  _| | | |/ _ \ | | / _ \   | | | | '_ ` _ \ / _ \/ _` | | | | | | | | __|
+  | |_| | |_| / ___ \| |/ ___ \  | | | | | | | | |  __/ (_| | | |_| | |_| | |_ 
+   \____|____/_/   \_\_/_/   \_\ |_| |_|_| |_| |_|\___|\__,_|  \___/ \__,_|\__|
+                                                                               
+  ''')
+  raise SystemExit
+
 def gotcha(x=''):
   print('''
                    ____       _       _             _   _   _ 
@@ -64,7 +75,7 @@ def gotcha(x=''):
   else:
     out("Gotcha!!! </%s>" % globs.nest[-1:])
   globs.nest = globs.nest[:-2]
-  raise StopIteration
+  raise SystemExit
 
 def out(msg, symbol='', dent=''):
   total = 80
@@ -273,8 +284,8 @@ def Pipulate():
           out("LOGIN FAILURE", "2", '-')
           raise StopIteration
       if stop:
-        out(globs.GBAD)
         yield badtuple
+        stop()
 
       headers = ['URL', 'Subscribers', 'ISOTimeStamp', 'Count']
       try:
@@ -294,9 +305,8 @@ def Pipulate():
           out("Reloading column 1 values for global numrows count.")
           time.sleep(3)
       if stop == True:
-        out("Couldn't load column 1 for global numrows.")
         yield badtuple
-        raise StopIteration
+        stop()
       yme = "%s rows found in Pipulate tab." % globs.numrows
       out(yme)
       yield yme, "", "", ""
