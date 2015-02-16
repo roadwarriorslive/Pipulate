@@ -48,10 +48,13 @@ def gotcha(x=''):
                   \____|\___/ \__\___|_| |_|\__,_| (_) (_) (_)
   ''')
   if x:
-    print(type(x))
-    if type(x) in ('dict', 'list'):
-      print("I can prettyprint")
-    out("Gotcha !!! %s !!! </%s>" % (x, globs.nest[-1:]))
+    if type(x) == list or type(x) == dict or type(x) == tuple:
+      import pprint
+      print("\n")
+      pprint.pprint(x)
+      print("\n")
+    else:
+      out("Gotcha !!! %s !!! </%s>" % (x, globs.nest[-1:]))
   else:
     out("Gotcha!!! </%s>" % globs.nest[-1:])
   globs.nest = globs.nest[:-2]
