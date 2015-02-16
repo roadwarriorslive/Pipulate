@@ -22,7 +22,7 @@
                                       Adi
 """
 import sys, os, socket
-socket.setdefaulttimeout(1.1)                             # Our story begins with Talmudic style commentaries 
+socket.setdefaulttimeout(1)                               # Our story begins with Talmudic style commentaries 
 if len(sys.argv) > 1:                                     # (in-line columns), which I'm using as a way 
   print("Captured invoking from command-line!")           # of issuing a challenge to myself to master the
   exit()                                                  # vim text editor, so as to make the sort of text
@@ -227,7 +227,6 @@ def Pipulate():
     transfuncs = ziplckey(funcs, funcs) #Keep translation table
     blankrows = 0
     import gspread
-    login = False
     if session:
       out("LOGIN ATTEMPT", "2")
       if 'oa2' in session:
@@ -271,12 +270,12 @@ def Pipulate():
           yield "Please give the document a name to force first save.", "", "", ""
           break
         except Exception as e:
-          continue
+          out("Retry %s of %s" % (x, 10))
+          time.sleep(5)
       if stop:
         yield "spinoff", "", "", ""
         yield badtuple
         Stop()
-      login = True
       out("Google Spreadsheet successfully opened.")
       yield "", "", "", "" #whitelock
       headers = ['URL', 'Subscribers', 'ISOTimeStamp', 'Count']
@@ -367,14 +366,14 @@ def Pipulate():
 
       out("Loading row1 into globals.")
       stop = True
-      for x in range(5):
+      for x in range(10):
         try:
           globs.row1 = lowercaselist(onesheet.row_values(1))
           stop = False
           break
         except:
-          out("Retry %s of %s" % (x, 5))
-          time.sleep(2)
+          out("Retry %s of %s" % (x, 10))
+          time.sleep(5)
       if stop:
         yield badtuple
         Stop()
