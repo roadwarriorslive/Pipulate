@@ -48,6 +48,9 @@ def gotcha(x=''):
                   \____|\___/ \__\___|_| |_|\__,_| (_) (_) (_)
   ''')
   if x:
+    print(type(x))
+    if type(x) in ('dict', 'list'):
+      print("I can prettyprint")
     out("Gotcha !!! %s !!! </%s>" % (x, globs.nest[-1:]))
   else:
     out("Gotcha!!! </%s>" % globs.nest[-1:])
@@ -108,6 +111,15 @@ class PipForm(Form):
 #                                                   
 @app.route("/", methods=['GET', 'POST'])            # Main point of entry when
 def main():                                         # visiting app's homepage.
+  print('''
+               ____  _             _       _   _                          
+              |  _ \(_)_ __  _   _| | __ _| |_(_)_ __   __ _              
+              | |_) | | '_ \| | | | |/ _` | __| | '_ \ / _` |             
+              |  __/| | |_) | |_| | | (_| | |_| | | | | (_| |  _   _   _  
+              |_|   |_| .__/ \__,_|_|\__,_|\__|_|_| |_|\__, | (_) (_) (_) 
+                      |_|                              |___/              
+  ''')
+
   out("ENTERED MAIN FUNCTION", "0")
   STREAMIT = False                                  # Default to not streaming.
   form = PipForm(csrf_enabled=False)                # Initialize form for UI.
@@ -361,9 +373,10 @@ def Pipulate():
       CellList = None
       for x in range(4):
         try:
-          CellList = onesheet.range(mayhaverun)
+          CellList = onesheet.range(inspectrange)
           break
         except:
+          out("Grabbing cells to inspect for asterisks failed.")
           time.sleep(2)
       onerow = []
       if CellList:
