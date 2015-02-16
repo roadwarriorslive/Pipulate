@@ -124,8 +124,6 @@ def main():                                         # visiting app's homepage.
           session.pop('loggedin', None)
           if 'u' not in session and globs.PIPURL:
             session['u'] = globs.PIPURL
-      #if 'loggedin' not in session:
-      #  flash("Login expired. Please log back in")
   if request.method == 'POST':
     if form.pipurl.data:
       globs.PIPURL = form.pipurl.data
@@ -360,7 +358,18 @@ def Pipulate():
       if globs.numrows < 100:
         rightnumber = globs.numrows
       inspectrange = "A2:%s%s" % (rightletter, rightnumber)
-      gotcha(inspectrange)
+      CellList = None
+      for x in range(4):
+        try:
+          CellList = onesheet.range(mayhaverun)
+          break
+        except:
+          time.sleep(2)
+      onerow = []
+      if CellList:
+        for cell in CellList:
+          onerow.append(cell.value)
+      gotcha(onerow)
       for rowdex in range(1, globs.numrows+1):
         out("Scanning row %s for asterisks." % rowdex) #This can have a pretty long delay
         for x in range(6):
@@ -666,7 +675,7 @@ def Pipulate():
       loginmsg = ""
       if session and 'loggedin' in session and session['loggedin'] != '1':
         loginmsg = "Login link under the upper-left \"burger button\"."
-      yield "Session timed out. Please login again.", "Session timed out. Login again (under \"burger button\").", "", ""
+      yield "Session timed out. Try again", "If at first you don't succeed, pipulate again.", "", ""
     else:
       yield fixme, "", "", ""
       yield "Pipulation prematurely terminated.", "", "", ""
