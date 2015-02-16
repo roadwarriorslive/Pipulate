@@ -114,6 +114,7 @@ class PipForm(Form):
 #                                                   
 @app.route("/", methods=['GET', 'POST'])            # Main point of entry when
 def main():                                         # visiting app's homepage.
+  stop = False
   print('''
                ____  _             _       _   _                          
               |  _ \(_)_ __  _   _| | __ _| |_(_)_ __   __ _              
@@ -194,6 +195,7 @@ def makemescroll():
 # |_|   |_| .__/ \__,_|_|\__,_|\__\___|
 #         |_|                          
 def Pipulate():
+  stop = False
   out("PIPULATION BEGINNING", "1")
   #for i in makemescroll():
   #  yield i, "", "", ""
