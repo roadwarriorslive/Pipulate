@@ -277,7 +277,17 @@ def Pipulate():
 
       out("Counting rows in Pipulate tab.")
       onesheet = gdoc.worksheet("Pipulate")
-      globs.numrows = len(onesheet.col_values(1)) #!!!UnboundLocalError HTTPError OPTIMIZE!
+      stop = True
+      for x in range(10):
+        try:
+          globs.numrows = len(onesheet.col_values(1)) #!!!UnboundLocalError HTTPError OPTIMIZE!
+          stop = False
+          break
+        except:
+          out("Reloating column 1 values for global numrows count")
+          time.sleep(3)
+      if stop == True:
+        raise StopIteration
       yme = "%s rows found in Pipulate tab." % globs.numrows
       out(yme)
       yield yme, "", "", ""
@@ -475,22 +485,16 @@ def Pipulate():
               yield "Last set of trending rows complete.", "", "", ""
           if 'rowthrottlenumber' in globs.config:
             rowthrottlenumber = globs.config['rowthrottlenumber']
-          else:
-            rowthrottlenumber = len(trendlistoflists)
           try:
             int(rowthrottlenumber)
           except:
-            rowthrottlenumber = 1
+            rowthrottlenumber = 0
           if not trendingrowsfinished:
             qstart = globs.numrows - times.count('?') + 1
             trendlistoflists = []
           nextnum = int(counts[0]) + 1
           for onelist in trendlistoflists:
             onelist[globs.row1.index('count')] = nextnum
-        else: #Don't work on this else condition yet, until the prior condition processes all its rows.
-          if 'rowthrottlenumber' in globs.config:
-            if int(globs.config['rowthrottlenumber']):
-              pass
       out("Count and ISOTimeStamp columns for trending", '2', '-')
 
       #  _                     _                           
@@ -547,7 +551,7 @@ def Pipulate():
       out("Question Mark Replacement.", '2')
       blankrows = 0 #Lets us skip occasional blank rows
       for index, rowdex in enumerate(range(qstart, onesheet.row_count+1)): #Start stepping through every row.
-        if 'rowthrottlenumber' in globs.config:
+        if rowthrottlenumber: # if rowthrottlenumber is 0, this won't trap
           if index >= int(rowthrottlenumber):
             break
         if index == 0:
