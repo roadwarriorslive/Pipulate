@@ -22,7 +22,7 @@
                                       Adi
 """
 import sys, os, socket
-socket.setdefaulttimeout(1.2)                             # Our story begins with Talmudic style commentaries 
+socket.setdefaulttimeout(1.1)                             # Our story begins with Talmudic style commentaries 
 if len(sys.argv) > 1:                                     # (in-line columns), which I'm using as a way 
   print("Captured invoking from command-line!")           # of issuing a challenge to myself to master the
   exit()                                                  # vim text editor, so as to make the sort of text
@@ -45,7 +45,7 @@ app = Flask(__name__)
 
 app.secret_key = "m\x00\r\xa5\\\xbeTW\xb3\xdf\x17\xb0!T\x9b6\x88l\xcf\xa1vmD}"
 
-def stop():
+def Stop():
   print('''
     ____ ____    _  _____  _    _____ _                    _    ___        _   
    / ___|  _ \  / \|_   _|/ \  |_   _(_)_ __ ___   ___  __| |  / _ \ _   _| |_ 
@@ -285,7 +285,7 @@ def Pipulate():
           raise StopIteration
       if stop:
         yield badtuple
-        stop()
+        Stop()
 
       headers = ['URL', 'Subscribers', 'ISOTimeStamp', 'Count']
       try:
@@ -294,7 +294,19 @@ def Pipulate():
         print traceback.format_exc()
 
       out("Counting rows in Pipulate tab.")
-      onesheet = gdoc.worksheet("Pipulate")
+      stop = True
+      for x in range(10):
+        try:
+          onesheet = gdoc.worksheet("Pipulate")
+          stop = False
+          break
+        except:
+          out("Trying to count rows in Pipulate tab again.")
+          time.sleep(5)
+      if stop:
+        yield badtuple
+        Stop()
+
       stop = True
       for x in range(10):
         try:
@@ -303,10 +315,10 @@ def Pipulate():
           break
         except:
           out("Reloading column 1 values for global numrows count.")
-          time.sleep(3)
+          time.sleep(10)
       if stop == True:
         yield badtuple
-        stop()
+        Stop()
       yme = "%s rows found in Pipulate tab." % globs.numrows
       out(yme)
       yield yme, "", "", ""
@@ -329,29 +341,34 @@ def Pipulate():
 
       headers = ['name', 'type', 'pattern']
       InitTab(gdoc, 'Scrapers', headers, scrapes())
-
       sst = None
+
       out("Loading Scrapers.")
-      #!!! blink
-      yield("Loading Scrapers...", "", "", "")
-      try:
-        sst = gdoc.worksheet("Scrapers")
-      except:
-        out("Failed to load Scrapers.")
-        raise StopIteration
-      if sst:
+      stop = True
+      for x in range(5):
         try:
-          lod = sst.get_all_records() #Returns list of dictionaries
+          sst = gdoc.worksheet("Scrapers")
+          stop = False
+          break
         except:
-          out("Failed to load Scrapers 2")
-        else:
-          pat = [[d['pattern']][0] for d in lod]
-          typ = [[d['type']][0] for d in lod]
-          nam = [[d['name']][0] for d in lod]
-          scrapetypes = ziplckey(nam, typ)
-          scrapepatterns = ziplckey(nam, pat)
-          transscrape = ziplckey(nam, nam)
-          out("Scrapaers loaded.")
+          out("Failed to load Scrapers.")
+          time.sleep(3)
+      if stop:
+        yield badtuple
+        Stop()
+
+      try:
+        lod = sst.get_all_records() #Returns list of dictionaries
+      except:
+        out("Failed to load Scrapers 2")
+      else:
+        pat = [[d['pattern']][0] for d in lod]
+        typ = [[d['type']][0] for d in lod]
+        nam = [[d['name']][0] for d in lod]
+        scrapetypes = ziplckey(nam, typ)
+        scrapepatterns = ziplckey(nam, pat)
+        transscrape = ziplckey(nam, nam)
+        out("Scrapaers loaded.")
 
       #!!! blink
       out("Loading row1 into globals.")
@@ -422,21 +439,26 @@ def Pipulate():
           out("Grabbing cells to inspect for asterisks failed.")
           time.sleep(4)
       if stop:
-        out("Couldn't get cells to inspect for asterisks. Stopping.")
-        raise StopIteration
+        yield badtuple
+        Stop()
       onerow = []
       if CellList:
         for cell in CellList:
           onerow.append(cell.value)
       for rowdex in range(1, globs.numrows+1):
         out("Scanning row %s for asterisks." % rowdex) #This can have a pretty long delay
-        for x in range(6):
+        stop = True
+        for x in range(8):
           try:
             onerow = onesheet.row_values(rowdex) #!!! HTTPError OPTIMIZE THIS!
+            stop = False
             break
           except:
             out("Couldn't open row.")
-            time.sleep(1)
+            time.sleep(5)
+        if stop:
+          yield badtuple
+          Stop()
         out("Successfully opened row.")
         if onerow:
           if rowdex == 2: #Looking for trending requests
