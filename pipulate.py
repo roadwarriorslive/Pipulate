@@ -303,6 +303,7 @@ def Pipulate():
       yield unlock
 
       stop = True
+      yield lock
       for x in range(10):
         try:
           globs.numrows = len(onesheet.col_values(1)) #!!!UnboundLocalError HTTPError OPTIMIZE!
@@ -314,6 +315,7 @@ def Pipulate():
       if stop == True:
         yield badtuple
         Stop()
+      yield unlock
 
       yme = "%s rows found in Pipulate tab." % globs.numrows
       out(yme)
@@ -341,6 +343,7 @@ def Pipulate():
 
       out("Loading Scrapers.")
       stop = True
+      yield lock
       for x in range(5):
         try:
           sst = gdoc.worksheet("Scrapers")
@@ -352,6 +355,7 @@ def Pipulate():
       if stop:
         yield badtuple
         Stop()
+      yield unlock
 
       try:
         lod = sst.get_all_records() #Returns list of dictionaries
@@ -370,6 +374,7 @@ def Pipulate():
 
       out("Loading row1 into globals.")
       stop = True
+      yield lock
       for x in range(10):
         try:
           globs.row1 = lowercaselist(onesheet.row_values(1))
@@ -381,6 +386,7 @@ def Pipulate():
       if stop:
         yield badtuple
         Stop()
+      yield unlock
 
       trendlistoflists = []
       out("Scanning row 1 for function and scraper names.")
@@ -431,6 +437,7 @@ def Pipulate():
       inspectrange = "A2:%s%s" % (rightletter, rightnumber)
       CellList = None
       stop = True
+      yield lock
       for x in range(5):
         try:
           CellList = onesheet.range(inspectrange)
@@ -442,6 +449,7 @@ def Pipulate():
       if stop:
         yield badtuple
         Stop()
+      yield unlock
 
       onerow = []
       if CellList:
@@ -450,6 +458,7 @@ def Pipulate():
       for rowdex in range(1, globs.numrows+1):
         out("Scanning row %s for asterisks." % rowdex) #This can have a pretty long delay
         stop = True
+        yield lock
         for x in range(8):
           try:
             onerow = onesheet.row_values(rowdex) #!!! HTTPError OPTIMIZE THIS!
@@ -461,6 +470,7 @@ def Pipulate():
         if stop:
           yield badtuple
           Stop()
+        yield unlock
 
         if onerow:
           if rowdex == 2: #Looking for trending requests
