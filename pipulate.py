@@ -1,19 +1,25 @@
-"""
-          _____ _             _       _
-         |  __ (_)           | |     | |
-         | |__) | _ __  _   _| | __ _| |_ ___     ___ ___  _ __ ___
-         |  ___/ | '_ \| | | | |/ _` | __/ _ \   / __/ _ \| '_ ` _ \
-         | |   | | |_) | |_| | | (_| | ||  __/  | (_| (_) | | | | | |
-         |_|   |_| .__/ \__,_|_|\__,_|\__\___| (_)___\___/|_| |_| |_|
-                 | |
-            It do|_|'t look like much, but looks can be deceiving.
-           I center these lines in the vim editor by hitting shift-V
+  """      Because life's too short to not collect  ABOUT THE AUTHOR:
+           data in the same place you work with it  http://mikelev.in
+            _____ _             _       _           http://levinux.com
+           |  __ (_)           | |     | |          http://pipulate.com
+           | |__) | _ __  _   _| | __ _| |_ ___    ___ ___  _ __ ___
+           |  ___/ | '_ \| | | | |/ _` | __/ _ \  / __/ _ \| '_ ` _ \
+           | |   | | |_) | |_| | | (_| | ||  __/ | (_| (_) | | | | | |
+           |_|   |_| .__/ \__,_|_|\__,_|\__\___|(_)___\___/|_| |_| |_|
+                   | |
+            It does|_| look like much, but looks can be deceiving.
+           I center these lines in the vim editor by hitting Shift-V
             to highlight the text and then hitting :center[Enter].
               This is important to remember. I program in Python
-                 primarily so that I can work on this project.
-                     You will not understand this message
-                           until you do. Greetings!
-
+                 primarily so that I can work on this project
+                   and generally think more clearly in life.
+                    I crave super-powers in an age before,
+                        yet obsessed with, super heros.
+                          So, with the clock ticking
+                             I have made this, my
+                               best attempt, for
+                                  my daughter
+                                      Adi
 """
 import sys, os, socket
 socket.setdefaulttimeout(10)
@@ -194,6 +200,7 @@ def makemescroll():
 # |  __/| | |_) | |_| | | (_| | ||  __/
 # |_|   |_| .__/ \__,_|_|\__,_|\__\___|
 #         |_|                          
+#
 def Pipulate():
   stop = False
   out("PIPULATION BEGINNING", "1")
@@ -433,6 +440,7 @@ def Pipulate():
       # | __| | '_ ` _ \ / _ \  / _ \/\  / __/ _ \| | | | '_ \| __|
       # | |_| | | | | | |  __/ | (_>  < | (_| (_) | |_| | | | | |_ 
       #  \__|_|_| |_| |_|\___|  \___/\/  \___\___/ \__,_|_| |_|\__|
+      #
       out("Count and ISOTimeStamp columns for trending", '2')
       times = []
       if trended and 'count' in globs.row1:
