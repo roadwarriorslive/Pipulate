@@ -381,7 +381,7 @@ def Pipulate():
         transscrape = ziplckey(nam, nam)
         out("Scrapaers loaded.")
 
-      yield "Analyzing spreadsheet for request", "Reading spreadsheet", "", ""
+      yield "Analyzing spreadsheet for request...", "Reading spreadsheet", "", ""
 
       out("Loading row1 into globals.")
       stop = True
@@ -632,7 +632,20 @@ def Pipulate():
         globs.hobj = None
         globs.html = '' #Blank the global html object. Recylces fetches.
         rowrange = "A%s:%s%s" % (rowdex, globs.letter[len(globs.row1)], rowdex)
-        CellList = onesheet.range(rowrange)
+
+        stop = True
+        for x in range(5):
+          yield lock
+          try:
+            CellList = onesheet.range(rowrange)
+            stop = False
+          except:
+            out("Retry %s of %s" % (x, 5))
+            time.sleep(2)
+        if stop:
+          Stop()
+        yield unlock
+
         onerow = []
         for cell in CellList:
           onerow.append(cell.value)
