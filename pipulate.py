@@ -22,7 +22,7 @@
                                       Adi
 """
 import sys, os, socket
-socket.setdefaulttimeout(2)                               # Our story begins with Talmudic style commentaries 
+socket.setdefaulttimeout(5)                               # Our story begins with Talmudic style commentaries 
 if len(sys.argv) > 1:                                     # (in-line columns), which I'm using as a way 
   print("Captured invoking from command-line!")           # of issuing a challenge to myself to master the
   exit()                                                  # vim text editor, so as to make the sort of text
@@ -273,6 +273,7 @@ def Pipulate():
           yield "Please give the document a name to force first save.", "", "", ""
           break
         except Exception as e:
+          yield dontgetfrustrated(x)
           out("Retry %s of %s" % (x, 10))
           time.sleep(6)
       if stop:
@@ -300,6 +301,7 @@ def Pipulate():
           stop = False
           break
         except:
+          yield dontgetfrustrated(x)
           out("Retry %s of %s" % (x, 10))
           time.sleep(5)
       if stop:
@@ -315,6 +317,7 @@ def Pipulate():
           stop = False
           break
         except:
+          yield dontgetfrustrated(x)
           out("Retry %s of %s" % (x, 10))
           time.sleep(10)
       if stop == True:
@@ -361,6 +364,7 @@ def Pipulate():
           stop = False
           break
         except:
+          yield dontgetfrustrated(x)
           out("Retry %s of %s" % (x, 5))
           time.sleep(3)
       if stop:
@@ -381,7 +385,7 @@ def Pipulate():
         transscrape = ziplckey(nam, nam)
         out("Scrapaers loaded.")
 
-      yield "Analyzing spreadsheet for request...", "Reading spreadsheet", "", ""
+      yield "Analyzing spreadsheet for request...", "Reading spreadsheet...", "", ""
 
       out("Loading row1 into globals.")
       stop = True
@@ -392,6 +396,7 @@ def Pipulate():
           stop = False
           break
         except:
+          yield dontgetfrustrated(x)
           out("Retry %s of %s" % (x, 10))
           time.sleep(5)
       if stop:
@@ -455,6 +460,7 @@ def Pipulate():
           stop = False
           break
         except:
+          yield dontgetfrustrated(x)
           out("Retry %s of %s" % (x, 5))
           time.sleep(4)
       if stop:
@@ -476,6 +482,7 @@ def Pipulate():
             stop = False
             break
           except:
+            yield dontgetfrustrated(x)
             out("Retry %s of %s" % (x, 8))
             time.sleep(5)
         if stop:
@@ -590,8 +597,8 @@ def Pipulate():
         for x in range(4):
           try:
             InsertRows(onesheet, trendlistoflists)
-          except Exception as e:
-            print traceback.format_exc()
+          except:
+            yield dontgetfrustrated(x)
             out("Error on trending, retry %s" % x)
             time.sleep(2)
           else:
@@ -642,6 +649,7 @@ def Pipulate():
           except:
             out("Retry %s of %s" % (x, 5))
             time.sleep(2)
+            yield dontgetfrustrated(x)
         if stop:
           Stop()
         yield unlock
@@ -741,10 +749,11 @@ def Pipulate():
                       print traceback.format_exc()
                       out("Scrape problem on row %s. Retrying." % rowdexstring)
                       time.sleep(2)
+                      yield dontgetfrustrated(x)
                     out("Scrape End", "4", '-')
           out("DONE PROCESSING ROW %s." % rowdex, '3', '-')
 
-          out("Finished pipulating replacing questionmarks in memory.")
+          out("Finished pipulating replacing questionmarks in memory. Updating spreadsheet...")
           newrow = ['' if x==None else x for x in newrow]
           yield "", "", json.dumps(newrow), ""
           for index, onecell in enumerate(CellList):
@@ -759,8 +768,9 @@ def Pipulate():
               stop = False
               break
             except:
-              out("Retry %s of %s" %(x, 5))
+              out("Writing row to spreadsheet, retry %s of %s" %(x, 5))
               time.sleep(5)
+              yield dontgetfrustrated(x)
           if stop:
             yield badtuple
             Stop()
@@ -1086,12 +1096,18 @@ def InitTab(gdoc2, tabname, headerlist, listoflists=[]):
         onecell.value = wholelist[index]
       except:
         pass
-    try:
-      newtab.update_cells(CellList)
-    except:
-      out("%s tab creation failed." % tabname)
-    else:
-      out("%s tab created." % tabname)
+
+    stop = True
+    for x in range(5):
+      try:
+        newtab.update_cells(CellList)
+        stop = False
+        break
+      except:
+        out("Retry %s of %s" % (x, 5))
+        time.sleep(5)
+    if stop:
+      Stop()
 
 def questionmark(oldrow, rowdex, coldex):
   if rowdex != 1:

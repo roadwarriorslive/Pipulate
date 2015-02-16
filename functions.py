@@ -5,6 +5,34 @@ import globs
 def count():
   return 1
 
+def dontgetfrustrated(x):
+  #if x == 0:
+  #  session['z'] = 0
+  try:
+    session['z']
+  except:
+    session['z'] = 0
+  else:
+    session['z'] += 1
+  s = []
+  s.append("Heavy traffic on the Inter-Webs tonight.")
+  s.append("Hang on a sec... I feel your pain.")
+  s.append("You know, it's a miracle this is working at all.")
+  s.append("tap, tap, tap, tap, tap, tap, tap, tap, tap")
+  s.append("I cannot teach him. The boy has no patience.")
+  s.append("Sometimes, you just gotta know when to call it quits.")
+  s.append("I know your time is valuable. I'm not ignoring you..")
+  s.append("Have confidence, girl! I accounted for this.")
+  s.append("I'll time-out after about 30 seconds.")
+  s.append("Google, I'm asking you a question!")
+  s.append("Maybe go check your Facebook, Twitter or something.")
+  s.append("I don't like this any more than you do.")
+  snicker = session['i'] % len(s)
+  try:
+    return "", s[snicker], "", ""
+  except:
+    return "", s[0], "", ""
+
 def cyclemotto():
   try:
     session['i']
