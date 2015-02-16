@@ -22,26 +22,26 @@
                                       Adi
 """
 import sys, os, socket
-socket.setdefaulttimeout(10)
-if len(sys.argv) > 1:
-  print("Captured invoking from command-line!")
-  exit()
-
-import globs                                        # Talmudic style commentaries
-import requests, traceback, datetime, time, json
-from flask_wtf import Form                          # All Flask form examples use it
-from wtforms import StringField
-from flask import (Flask,                           # This app is all about Flask
-  stream_with_context,                              # Yes, comments even work here
+socket.setdefaulttimeout(10)                              # Our story begins with Talmudic style commentaries 
+if len(sys.argv) > 1:                                     # (in-line columns), which I'm using as a way 
+  print("Captured invoking from command-line!")           # of issuing a challenge to myself to master the
+  exit()                                                  # vim text editor, so as to make the sort of text
+                                                          # manipulation skills required to pull this off no
+import globs                                              # big thing. Oh yeah, and we import Python modules 
+import requests, traceback, datetime, time, json          # here that should be available globally (everywhere)
+from flask_wtf import Form                                # in the program. Oh, also that detection of sys.args
+from wtforms import StringField                           # forks the behavior to the non-Flask command-line
+from flask import (Flask,                                 # mode of Pipulate. This is required for the
+  stream_with_context,                                    # Scheduler-behavior (versus webserver behavior).
   render_template,
-  Response,                                         # Occasionally, open the Python
-  request,                                          # interactive interpreter and
-  session,                                          # then type: import this
-  redirect,                                         # Internalize those messages
-  url_for,                                          # and then wonder why exit()
-  flash)                                            # needs those parentheses.
+  Response,                                         
+  request,                                          
+  session,                                          
+  redirect,                                         
+  url_for,                                          
+  flash)                                            
 
-app = Flask(__name__)                               # Flask init requirement
+app = Flask(__name__)                               
 
 app.secret_key = "m\x00\r\xa5\\\xbeTW\xb3\xdf\x17\xb0!T\x9b6\x88l\xcf\xa1vmD}"
 
