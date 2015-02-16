@@ -216,6 +216,8 @@ def makemescroll():
 def Pipulate():
   stop = False
   badtuple = (globs.GBAD, globs.GBAD, "", "")
+  lock = ("", "", "", "+")
+  unlock = ("", "", "", "")
   out("PIPULATION BEGINNING", "1")
   #for i in makemescroll():
   #  yield i, "", "", ""
@@ -271,7 +273,7 @@ def Pipulate():
           break
         except Exception as e:
           out("Retry %s of %s" % (x, 10))
-          time.sleep(5)
+          time.sleep(6)
       if stop:
         yield "spinoff", "", "", ""
         yield badtuple
@@ -286,6 +288,7 @@ def Pipulate():
 
       out("Counting rows in Pipulate tab.")
       stop = True
+      yield lock
       for x in range(10):
         try:
           onesheet = gdoc.worksheet("Pipulate")
@@ -297,6 +300,7 @@ def Pipulate():
       if stop:
         yield badtuple
         Stop()
+      yield unlock
 
       stop = True
       for x in range(10):
