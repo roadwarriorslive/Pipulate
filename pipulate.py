@@ -54,7 +54,8 @@ def Stop():
    \____|____/_/   \_\_/_/   \_\ |_| |_|_| |_| |_|\___|\__,_|  \___/ \__,_|\__|
                                                                                
   ''')
-  raise SystemExit
+  #raise SystemExit
+  raise StopIteration
 
 def gotcha(x=''):
   print('''
@@ -249,7 +250,7 @@ def Pipulate():
       yield("Opening Spreadsheet...", "", "", "")
       gdoc = None
       stop = True
-      for x in range(5):
+      for x in range(10):
         try:
           gdoc = gsp.open_by_url(globs.PIPURL) #HTTPError
           stop = False
@@ -261,32 +262,23 @@ def Pipulate():
             session.pop('loggedin', None)
           if 'u' not in session and globs.PIPURL:
             session['u'] = globs.PIPURL
+          break
         except gspread.exceptions.NoValidUrlKeyFound:
           yield "Currently, the URL must be a Google Spreadsheet.", "", "", ""
           yield "<a href='https://docs.google.com/spreadsheets/create' target='_new'>Create</a> a new Google Spreadsheet and click Bookmarklet again.", "Google Spreadsheet Not Found.", "", ""
+          break
         except gspread.exceptions.SpreadsheetNotFound:
           yield "Please give the document a name to force first save.", "", "", ""
-          yield "spinoff", "", "", ""
+          break
         except Exception as e:
-          exc_type, exc_obj, exc_tb = sys.exc_info()
-          fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-          ename = type(e).__name__
-          fixme = "%s, %s, %s" % (ename, fname, exc_tb.tb_lineno)
-          yield fixme, "", "", ""
-          yield "spinoff", "", "", ""
-        else:
-          login = True
-          out("Google Spreadsheet successfully opened.")
-          yield "", "", "", "" #whitelock
-        if login:
-          out("LOGIN SUCCESS", "2", '-')
-        else:
-          out("LOGIN FAILURE", "2", '-')
-          raise StopIteration
+          continue
       if stop:
+        yield "spinoff", "", "", ""
         yield badtuple
         Stop()
-
+      login = True
+      out("Google Spreadsheet successfully opened.")
+      yield "", "", "", "" #whitelock
       headers = ['URL', 'Subscribers', 'ISOTimeStamp', 'Count']
       try:
         InitTab(gdoc, 'Pipulate', headers, pipinit())
@@ -301,7 +293,7 @@ def Pipulate():
           stop = False
           break
         except:
-          out("Trying to count rows in Pipulate tab again.")
+          out("Retry %s of %s" % (x, 10))
           time.sleep(5)
       if stop:
         yield badtuple
@@ -314,11 +306,12 @@ def Pipulate():
           stop = False
           break
         except:
-          out("Reloading column 1 values for global numrows count.")
+          out("Retry %s of %s" % (x, 10))
           time.sleep(10)
       if stop == True:
         yield badtuple
         Stop()
+
       yme = "%s rows found in Pipulate tab." % globs.numrows
       out(yme)
       yield yme, "", "", ""
@@ -351,7 +344,7 @@ def Pipulate():
           stop = False
           break
         except:
-          out("Failed to load Scrapers.")
+          out("Retry %s of %s" % (x, 5))
           time.sleep(3)
       if stop:
         yield badtuple
@@ -370,17 +363,22 @@ def Pipulate():
         transscrape = ziplckey(nam, nam)
         out("Scrapaers loaded.")
 
-      #!!! blink
+      yield "Analyzing spreadsheet for request", "Reading spreadsheet", "", ""
+
       out("Loading row1 into globals.")
-      for x in range(4):
+      stop = True
+      for x in range(5):
         try:
           globs.row1 = lowercaselist(onesheet.row_values(1))
+          stop = False
           break
-        except Exception as e:
-          print traceback.format_exc()
-          out("Failed to load row 1.")
+        except:
+          out("Retry %s of %s" % (x, 5))
           time.sleep(2)
-      out("Row 1 succesfully loaded.")
+      if stop:
+        yield badtuple
+        Stop()
+
       trendlistoflists = []
       out("Scanning row 1 for function and scraper names.")
       fargs = {}
@@ -430,17 +428,18 @@ def Pipulate():
       inspectrange = "A2:%s%s" % (rightletter, rightnumber)
       CellList = None
       stop = True
-      for x in range(4):
+      for x in range(5):
         try:
           CellList = onesheet.range(inspectrange)
           stop = False
           break
         except:
-          out("Grabbing cells to inspect for asterisks failed.")
+          out("Retry %s of %s" % (x, 5))
           time.sleep(4)
       if stop:
         yield badtuple
         Stop()
+
       onerow = []
       if CellList:
         for cell in CellList:
@@ -454,12 +453,12 @@ def Pipulate():
             stop = False
             break
           except:
-            out("Couldn't open row.")
+            out("Retry %s of %s" % (x, 8))
             time.sleep(5)
         if stop:
           yield badtuple
           Stop()
-        out("Successfully opened row.")
+
         if onerow:
           if rowdex == 2: #Looking for trending requests
             if '*' in onerow:
@@ -967,13 +966,36 @@ def InsertRows(onesheet, listoflists):
     for onecell in onelist:
       flattenitlist.append(onecell)
   flattenitlist = ['?' if x=='*' else x for x in flattenitlist]
-  CellList = onesheet.range(rowrange)
+
+  stop = True
+  for x in range(5):
+    try:
+      CellList = onesheet.range(rowrange)
+      stop = False
+      break
+    except:
+      out("Retry %s of %s" % (x, 5))
+      time.sleep(5)
+  if stop:
+    Stop()
+      
   for index, onecell in enumerate(CellList):
     try:
       onecell.value = flattenitlist[index]
     except:
       pass
-  onesheet.update_cells(CellList)
+
+  for x in range(5):
+    try:
+      onesheet.update_cells(CellList)
+      stop = False
+      break
+    except:
+      out("Retry %s of %s" % (x, 5))
+      time.sleep(5)
+  if stop:
+    Stop()
+    
   return
 
 def InitTab(gdoc2, tabname, headerlist, listoflists=[]):
