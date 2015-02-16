@@ -252,6 +252,7 @@ def Pipulate():
       gdoc = None
       stop = True
       for x in range(10):
+        yield lock
         try:
           gdoc = gsp.open_by_url(globs.PIPURL) #HTTPError
           stop = False
@@ -278,6 +279,7 @@ def Pipulate():
         yield "spinoff", "", "", ""
         yield badtuple
         Stop()
+      yield unlock
       out("Google Spreadsheet successfully opened.")
       yield "", "", "", "" #whitelock
       headers = ['URL', 'Subscribers', 'ISOTimeStamp', 'Count']
@@ -288,8 +290,8 @@ def Pipulate():
 
       out("Counting rows in Pipulate tab.")
       stop = True
-      yield lock
       for x in range(10):
+        yield lock
         try:
           onesheet = gdoc.worksheet("Pipulate")
           stop = False
@@ -303,8 +305,8 @@ def Pipulate():
       yield unlock
 
       stop = True
-      yield lock
       for x in range(10):
+        yield lock
         try:
           globs.numrows = len(onesheet.col_values(1)) #!!!UnboundLocalError HTTPError OPTIMIZE!
           stop = False
@@ -343,8 +345,8 @@ def Pipulate():
 
       out("Loading Scrapers.")
       stop = True
-      yield lock
       for x in range(5):
+        yield lock
         try:
           sst = gdoc.worksheet("Scrapers")
           stop = False
@@ -374,8 +376,8 @@ def Pipulate():
 
       out("Loading row1 into globals.")
       stop = True
-      yield lock
       for x in range(10):
+        yield lock
         try:
           globs.row1 = lowercaselist(onesheet.row_values(1))
           stop = False
@@ -437,8 +439,8 @@ def Pipulate():
       inspectrange = "A2:%s%s" % (rightletter, rightnumber)
       CellList = None
       stop = True
-      yield lock
       for x in range(5):
+        yield lock
         try:
           CellList = onesheet.range(inspectrange)
           stop = False
@@ -458,8 +460,8 @@ def Pipulate():
       for rowdex in range(1, globs.numrows+1):
         out("Scanning row %s for asterisks." % rowdex) #This can have a pretty long delay
         stop = True
-        yield lock
         for x in range(8):
+          yield lock
           try:
             onerow = onesheet.row_values(rowdex) #!!! HTTPError OPTIMIZE THIS!
             stop = False
