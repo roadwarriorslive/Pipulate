@@ -276,9 +276,9 @@ def Pipulate():
         Stop()
       yield unlock
       out("Google Spreadsheet successfully opened.")
-      yield "", "", "", "" #whitelock
-      headers = ['URL', 'Subscribers', 'ISOTimeStamp', 'Count']
 
+      # Pipulate Tab
+      headers = ['URL', 'Subscribers', 'ISOTimeStamp', 'Count']
       yield "Creating tabs: Pipulate: ", "Then we check for tabs...", "", ""
       yield lock
       try:
@@ -286,6 +286,47 @@ def Pipulate():
       except:
         Stop()
       yield unlock
+
+      # Config Tab
+      headers = ['NAME', 'VALUE']
+      config = []
+      config.append(['RowThrottleNumber','1'])
+      config.append(['RunJobEvery','minute'])
+      yield lock
+      try:
+        InitTab(gdoc, 'Config', headers, config)
+      except:
+        Stop()
+      yield unlock
+
+      # Scrapers Tab
+      headers = ['name', 'type', 'pattern']
+      InitTab(gdoc, 'Scrapers', headers, scrapes())
+      sst = None
+      out("Loading Scrapers.")
+      stop = True
+      for x in range(5):
+        yield lock
+        try:
+          sst = gdoc.worksheet("Scrapers")
+          stop = False
+          break
+        except:
+          yield dontgetfrustrated(x)
+          out("Retry get Scraper sheet %s of %s" % (x, 5))
+          time.sleep(3)
+      if stop:
+        yield badtuple
+        Stop()
+      yield unlock
+
+      try:
+        out("Reading Config tab into globals.")
+        globs.config = RefreshConfig(gdoc, "Config") #HTTPError
+      except:
+        out("Copying Config tag to globals failed.")
+      else:
+        out("Config tab copied to globals.")
 
       out("Counting rows in Pipulate tab.")
       stop = True
@@ -323,48 +364,6 @@ def Pipulate():
       yme = "%s rows found in Pipulate tab." % globs.numrows
       out(yme)
       yield yme, "", "", ""
-
-      headers = ['NAME', 'VALUE']
-      config = []
-      config.append(['RowThrottleNumber','1'])
-      config.append(['RunJobEvery','minute'])
-
-      yield lock
-      try:
-        InitTab(gdoc, 'Config', headers, config)
-      except:
-        Stop()
-      yield unlock
-
-      try:
-        out("Reading Config tab into globals.")
-        globs.config = RefreshConfig(gdoc, "Config") #HTTPError
-      except:
-        out("Copying Config tag to globals failed.")
-      else:
-        out("Config tab copied to globals.")
-
-
-      headers = ['name', 'type', 'pattern']
-      InitTab(gdoc, 'Scrapers', headers, scrapes())
-      sst = None
-
-      out("Loading Scrapers.")
-      stop = True
-      for x in range(5):
-        yield lock
-        try:
-          sst = gdoc.worksheet("Scrapers")
-          stop = False
-          break
-        except:
-          yield dontgetfrustrated(x)
-          out("Retry get Scraper sheet %s of %s" % (x, 5))
-          time.sleep(3)
-      if stop:
-        yield badtuple
-        Stop()
-      yield unlock
 
       try:
         lod = sst.get_all_records() #Returns list of dictionaries
