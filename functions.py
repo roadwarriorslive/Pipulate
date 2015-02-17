@@ -2,16 +2,13 @@ import requests, datetime
 from flask import session
 import globs
 
-def count():
-  return 1
-
 def dontgetfrustrated(x):
-  num = 0
   s = []
   s.append("Heavy traffic on the Inter-Webs tonight.")
   s.append("Hang on a sec... I feel your pain.")
   s.append("You know, it's a miracle this is working at all.")
-  s.append("tap, tap, tap, tap, tap, tap, tap, tap, tap")
+  s.append("But then again, maybe it's not.")
+  s.append("Tap, tap, tap, tap, tap, tap, tap...")
   s.append("I cannot teach him. The boy has no patience.")
   s.append("Sometimes, you just gotta know when to call it quits.")
   s.append("I know your time is valuable. I'm not ignoring you..")
@@ -20,10 +17,7 @@ def dontgetfrustrated(x):
   s.append("Google, I'm asking you a question!")
   s.append("Maybe go check your Facebook, Twitter or something.")
   s.append("I don't like this any more than you do.")
-  yield "", s[num], "", ""
-  num += 1
-  if num == len(s):
-    num = 0
+  return '',s[x%len(s)],'',''
 
 def cyclemotto():
   try:

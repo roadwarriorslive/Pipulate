@@ -22,7 +22,7 @@
                                       Adi
 """
 import sys, os, socket
-socket.setdefaulttimeout(10)                              # Our story begins with Talmudic style commentaries 
+socket.setdefaulttimeout(0.8)                             # Our story begins with Talmudic style commentaries 
 if len(sys.argv) > 1:                                     # (in-line columns), which I'm using as a way 
   print("Captured invoking from command-line!")           # of issuing a challenge to myself to master the
   exit()                                                  # vim text editor, so as to make the sort of text
@@ -202,10 +202,6 @@ def main():                                         # visiting app's homepage.
     return render_template('pipulate.html', form=form)
   out("EXITING MAIN", "0", '-')
 
-def makemescroll():
-  for i in range(0, 10): 
-    yield "line %s" % i
-
 #  ____  _             _       _       
 # |  _ \(_)_ __  _   _| | __ _| |_ ___ 
 # | |_) | | '_ \| | | | |/ _` | __/ _ \
@@ -219,8 +215,6 @@ def Pipulate():
   lock = ("", "", "", "+")
   unlock = ("", "", "", "-")
   out("PIPULATION BEGINNING", "1")
-  #for i in makemescroll():
-  #  yield i, "", "", ""
   try:
     yield "Beginning to pipulate...", "", "", ""
     yield "spinon", "", "", ""
@@ -273,7 +267,7 @@ def Pipulate():
           yield "Please give the document a name to force first save.", "", "", ""
           break
         except Exception as e:
-          yield dontgetfrustrated(x).next()
+          yield dontgetfrustrated(x)
           out("Retry login %s of %s" % (x, 10))
           time.sleep(6)
       if stop:
@@ -301,7 +295,7 @@ def Pipulate():
           stop = False
           break
         except:
-          yield dontgetfrustrated(x).next()
+          yield dontgetfrustrated(x)
           out("Retry get Pipulate sheet %s of %s" % (x, 10))
           time.sleep(5)
       if stop:
@@ -317,7 +311,7 @@ def Pipulate():
           stop = False
           break
         except:
-          yield dontgetfrustrated(x).next()
+          yield dontgetfrustrated(x)
           out("Retry count rows %s of %s" % (x, 10))
           time.sleep(10)
       if stop == True:
@@ -364,7 +358,7 @@ def Pipulate():
           stop = False
           break
         except:
-          yield dontgetfrustrated(x).next()
+          yield dontgetfrustrated(x)
           out("Retry get Scraper sheet %s of %s" % (x, 5))
           time.sleep(3)
       if stop:
@@ -396,7 +390,7 @@ def Pipulate():
           stop = False
           break
         except:
-          yield dontgetfrustrated(x).next()
+          yield dontgetfrustrated(x)
           out("Retry load Row1 %s of %s" % (x, 10))
           time.sleep(5)
       if stop:
@@ -458,7 +452,7 @@ def Pipulate():
             stop = False
             break
           except:
-            yield dontgetfrustrated(x).next()
+            yield dontgetfrustrated(x)
             out("Retry %s of %s" % (x, 8))
             time.sleep(5)
         if stop:
@@ -580,7 +574,7 @@ def Pipulate():
           try:
             InsertRows(onesheet, trendlistoflists)
           except:
-            yield dontgetfrustrated(x).next()
+            yield dontgetfrustrated(x)
             out("Error on trending, retry %s" % x)
             time.sleep(2)
           else:
@@ -631,7 +625,7 @@ def Pipulate():
           except:
             out("Retry %s of %s" % (x, 5))
             time.sleep(2)
-            yield dontgetfrustrated(x).next()
+            yield dontgetfrustrated(x)
         if stop:
           Stop()
         yield unlock
@@ -731,7 +725,7 @@ def Pipulate():
                       print traceback.format_exc()
                       out("Scrape problem on row %s. Retrying." % rowdexstring)
                       time.sleep(2)
-                      yield dontgetfrustrated(x).next()
+                      yield dontgetfrustrated(x)
                     out("Scrape End", "4", '-')
           out("DONE PROCESSING ROW %s." % rowdex, '3', '-')
 
@@ -752,7 +746,7 @@ def Pipulate():
             except:
               out("Writing row to spreadsheet, retry %s of %s" %(x, 5))
               time.sleep(5)
-              yield dontgetfrustrated(x).next()
+              yield dontgetfrustrated(x)
           if stop:
             yield badtuple
             Stop()
