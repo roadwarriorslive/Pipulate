@@ -279,7 +279,7 @@ def Pipulate():
 
       # Pipulate Tab
       headers = ['URL', 'Subscribers', 'ISOTimeStamp', 'Count']
-      yield "Creating tabs: Pipulate: ", "Then we check for tabs...", "", ""
+      yield "Checking Tabs: Pipulate", "Then we check for tabs...", "", ""
       yield lock
       try:
         InitTab(gdoc, 'Pipulate', headers, pipinit())
@@ -288,6 +288,7 @@ def Pipulate():
       yield unlock
 
       # Config Tab
+      yield ", Config", "", "", ""
       headers = ['NAME', 'VALUE']
       config = []
       config.append(['RowThrottleNumber','1'])
@@ -300,6 +301,7 @@ def Pipulate():
       yield unlock
 
       # Scrapers Tab
+      yield ", Scrapers", "", "", ""
       headers = ['name', 'type', 'pattern']
       InitTab(gdoc, 'Scrapers', headers, scrapes())
       sst = None
@@ -322,7 +324,7 @@ def Pipulate():
 
       try:
         out("Reading Config tab into globals.")
-        globs.config = RefreshConfig(gdoc, "Config") #HTTPError
+        globs.config = TefreshConfig(gdoc, "Config") #HTTPError
       except:
         out("Copying Config tag to globals failed.")
       else:
@@ -365,18 +367,27 @@ def Pipulate():
       out(yme)
       yield yme, "", "", ""
 
-      try:
-        lod = sst.get_all_records() #Returns list of dictionaries
-      except:
-        out("Failed to load Scrapers 2")
-      else:
-        pat = [[d['pattern']][0] for d in lod]
-        typ = [[d['type']][0] for d in lod]
-        nam = [[d['name']][0] for d in lod]
-        scrapetypes = ziplckey(nam, typ)
-        scrapepatterns = ziplckey(nam, pat)
-        transscrape = ziplckey(nam, nam)
-        out("Scrapaers loaded.")
+      stop = True
+      for x in range(5):
+        try:
+          lod = sst.get_all_records() #Returns list of dictionaries
+          stop = False
+          break
+        except:
+          yield dontgetfrustrated(x)
+          out("Retry count rows %s of %s" % (x, 10))
+          time.sleep(10)
+      if stop == True:
+        yield badtuple
+        Stop()
+      yield unlock
+      pat = [[d['pattern']][0] for d in lod]
+      typ = [[d['type']][0] for d in lod]
+      nam = [[d['name']][0] for d in lod]
+      scrapetypes = ziplckey(nam, typ)
+      scrapepatterns = ziplckey(nam, pat)
+      transscrape = ziplckey(nam, nam)
+      out("Scrapers loaded.")
 
       yield "Analyzing spreadsheet for request...", "Reading spreadsheet...", "", ""
 
