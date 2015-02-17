@@ -223,11 +223,13 @@ def Pipulate(username='', password='', dockey=''):
     transfuncs = ziplckey(funcs, funcs) #Keep translation table
     blankrows = 0
     import gspread
+    gsp = None
+    gdoc = None
     if session or (username and password and dockey):
       out("LOGIN ATTEMPT", "2")
-      
       if (username and password and dockey):
-        gotcha()
+        gsp = gspread.login(username, password)
+        gdoc = gsp.open_by_key(dockey)
       else:
         if 'oa2' in session:
           creds = Credentials(access_token=session['oa2'])
@@ -247,7 +249,6 @@ def Pipulate(username='', password='', dockey=''):
           out("Login successful.")
         out("Opening Spreadsheet...")
         yield("Opening Spreadsheet...", "", "", "")
-        gdoc = None
         stop = True
         for x in range(10):
           yield lock
