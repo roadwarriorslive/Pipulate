@@ -1226,10 +1226,12 @@ if len(sys.argv) > 1:
   if arg1 == 'c':
     Configure()        
   elif arg1 == 's':
+    globs.mode = "cli"
     Scheduler()
   else:
     print("Unsupported argument")
     exit()             
 elif __name__ == "__main__":
+  globs.mode = "web"
   app.run(host='0.0.0.0', port=8888, debug=True)
 
