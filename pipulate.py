@@ -23,9 +23,9 @@
 """
 import sys, os, socket
 socket.setdefaulttimeout(10.0)                            # Our story begins with Talmudic style commentaries 
-if len(sys.argv) > 1:                                     # (in-line columns), which I'm using as a way 
-  print("Captured invoking from command-line!")           # of issuing a challenge to myself to master the
-  exit()                                                  # vim text editor, so as to make the sort of text
+                                     # (in-line columns), which I'm using as a way 
+                                     # of issuing a challenge to myself to master the
+                                     # vim text editor, so as to make the sort of text
                                                           # manipulation skills required to pull this off no
 import globs                                              # big thing. Oh yeah, and we import Python modules 
 import requests, traceback, datetime, time, json          # here that should be available globally (everywhere)
@@ -1131,16 +1131,71 @@ def adq(aval):
   else:
     return "'%s'" % (aval) #ALMOST everything else should be quoted.
 
-def retry():
-  for x in range(4):
-    try:
-      a = 1
-      break
-    except:
-      time.sleep(2)
+def askquestions(filename):
+  questions = dictofquestions()
+  answers = {}
+  previousanswers = showanswers(filename)
+  sortedquestions = sorted(questions.keys())
+  for question in sortedquestions:
+    if isinstance(previousanswers, dict):
+      answer = raw_input(question + ' (Hit Enter to keep "' + previousanswers[questions[question]] + '"): ')
+    else:
+      answer = raw_input(question + ': ')
+    if answer:
+      answers[questions[question]] = answer
+    elif isinstance(previousanswers, dict):
+      answers[questions[question]] = previousanswers[questions[question]]
+    else:
+      answers[questions[question]] = ''
+  return answers
+
+def saveanswers(pickleme, filename):
+  import pickle
+  output = open(filename, 'wb')
+  pickle.dump(pickleme, output)
+  output.close()
+
+def showanswers(filename):
+  import os.path, pickle
+  answers = ''
+  if os.path.isfile(filename):
+    input = open(filename, 'rb')
+    answers = pickle.load(input)
+    input.close()
+  else:
+    answers = "Username and Password has not been assigned to this server yet."
+  return answers
+
+def dictofquestions():
+  return {
+    'GMail Username' : 'username',
+    'GMail Password' : 'password'
+  }
+
+warning = ('''
+Welcome to Pipulate. Generally, you want to avoid putting any username and
+password information on a server, in case it's hacked, or in the unique case of
+Pipulate, you pass your Levinux virtual machine file or Raspbery Pi SD card
+image around. None-the-less, it is curreintly the best way to achieve reliable
+scheduling. I recommend setting up a GMail account just for Pipulate, and then
+turning on 2-Step Verification, and then selecting App-specific passwords. 
+https://security.google.com/settings/security/apppasswords?pli=1
+Select App: Other, Device: Other and Generate. Use the specially generated
+password with Pipulate so that any time you can revoke that server's access
+without having to use the GMail account's master password.
+''')
+
+def configure():
+  print warning
+  topickle = askquestions("../opt/pipulate.pkl")
+  saveanswers(topickle, "../opt/pipulate.pkl")
+  print "\n Username and Password recorded!"
 
 from functions import *
 
-if __name__ == "__main__":
+if len(sys.argv) > 1:
+  configure()        
+  exit()             
+elif __name__ == "__main__":
   app.run(host='0.0.0.0', port=8888, debug=True)
 
