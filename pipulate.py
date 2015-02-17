@@ -22,7 +22,7 @@
                                       Adi
 """
 import sys, os, socket
-socket.setdefaulttimeout(5)                               # Our story begins with Talmudic style commentaries 
+socket.setdefaulttimeout(10)                              # Our story begins with Talmudic style commentaries 
 if len(sys.argv) > 1:                                     # (in-line columns), which I'm using as a way 
   print("Captured invoking from command-line!")           # of issuing a challenge to myself to master the
   exit()                                                  # vim text editor, so as to make the sort of text
@@ -274,7 +274,7 @@ def Pipulate():
           break
         except Exception as e:
           yield dontgetfrustrated(x)
-          out("Retry %s of %s" % (x, 10))
+          out("Retry login %s of %s" % (x, 10))
           time.sleep(6)
       if stop:
         yield "spinoff", "", "", ""
@@ -302,7 +302,7 @@ def Pipulate():
           break
         except:
           yield dontgetfrustrated(x)
-          out("Retry %s of %s" % (x, 10))
+          out("Retry get Pipulate sheet %s of %s" % (x, 10))
           time.sleep(5)
       if stop:
         yield badtuple
@@ -318,7 +318,7 @@ def Pipulate():
           break
         except:
           yield dontgetfrustrated(x)
-          out("Retry %s of %s" % (x, 10))
+          out("Retry count rows %s of %s" % (x, 10))
           time.sleep(10)
       if stop == True:
         yield badtuple
@@ -330,7 +330,7 @@ def Pipulate():
       yield yme, "", "", ""
 
 
-      headers = ['name', 'value']
+      headers = ['NAME', 'VALUE']
       config = []
       config.append(['RowThrottleNumber','1'])
       config.append(['RunJobEvery','minute'])
@@ -365,7 +365,7 @@ def Pipulate():
           break
         except:
           yield dontgetfrustrated(x)
-          out("Retry %s of %s" % (x, 5))
+          out("Retry get Scraper sheet %s of %s" % (x, 5))
           time.sleep(3)
       if stop:
         yield badtuple
@@ -397,7 +397,7 @@ def Pipulate():
           break
         except:
           yield dontgetfrustrated(x)
-          out("Retry %s of %s" % (x, 10))
+          out("Retry load Row1 %s of %s" % (x, 10))
           time.sleep(5)
       if stop:
         yield badtuple
@@ -446,34 +446,10 @@ def Pipulate():
       trended = False
       qstart = 1
       out("Scan down Pipulate tab looking for asterisks.", "2")
-      rightletter = globs.letter[len(globs.row1)]
-      rightnumber = 100
-      if globs.numrows < 100:
-        rightnumber = globs.numrows
-      inspectrange = "A2:%s%s" % (rightletter, rightnumber)
-      CellList = None
-      stop = True
-      for x in range(5):
-        yield lock
-        try:
-          CellList = onesheet.range(inspectrange)
-          stop = False
-          break
-        except:
-          yield dontgetfrustrated(x)
-          out("Retry %s of %s" % (x, 5))
-          time.sleep(4)
-      if stop:
-        yield badtuple
-        Stop()
-      yield unlock
-
-      onerow = []
-      if CellList:
-        for cell in CellList:
-          onerow.append(cell.value)
+          
       for rowdex in range(1, globs.numrows+1):
         out("Scanning row %s for asterisks." % rowdex) #This can have a pretty long delay
+
         stop = True
         for x in range(8):
           yield lock
@@ -759,7 +735,7 @@ def Pipulate():
                     out("Scrape End", "4", '-')
           out("DONE PROCESSING ROW %s." % rowdex, '3', '-')
 
-          out("Finished pipulating replacing questionmarks in memory. Updating spreadsheet...")
+          out("Finished processing row. Updating spreadsheet...")
           newrow = ['' if x==None else x for x in newrow]
           yield "", "", json.dumps(newrow), ""
           for index, onecell in enumerate(CellList):

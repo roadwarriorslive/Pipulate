@@ -211,6 +211,7 @@
         $('#piplock').addClass("fa-lock");
       }
       function unlockbutton() {
+        whitelock();
         $('#pipulate').prop("disabled", false);
         $('#pipulate').fadeTo("fast",1);
         $('#piplock').addClass("fa-chevron-circle-right");
