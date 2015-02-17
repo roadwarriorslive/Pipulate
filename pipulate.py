@@ -22,7 +22,7 @@
                                       Adi
 """
 import sys, os, socket
-socket.setdefaulttimeout(0.8)                             # Our story begins with Talmudic style commentaries 
+socket.setdefaulttimeout(10.0)                            # Our story begins with Talmudic style commentaries 
 if len(sys.argv) > 1:                                     # (in-line columns), which I'm using as a way 
   print("Captured invoking from command-line!")           # of issuing a challenge to myself to master the
   exit()                                                  # vim text editor, so as to make the sort of text
@@ -279,6 +279,7 @@ def Pipulate():
       yield "", "", "", "" #whitelock
       headers = ['URL', 'Subscribers', 'ISOTimeStamp', 'Count']
 
+      yield "Creating tabs: Pipulate: ", "Then we check for tabs...", "", ""
       yield lock
       try:
         InitTab(gdoc, 'Pipulate', headers, pipinit())
@@ -322,7 +323,6 @@ def Pipulate():
       yme = "%s rows found in Pipulate tab." % globs.numrows
       out(yme)
       yield yme, "", "", ""
-
 
       headers = ['NAME', 'VALUE']
       config = []
