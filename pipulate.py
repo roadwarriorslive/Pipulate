@@ -273,7 +273,7 @@ def Pipulate():
           yield "Please give the document a name to force first save.", "", "", ""
           break
         except Exception as e:
-          yield dontgetfrustrated(x)
+          yield dontgetfrustrated(x).next()
           out("Retry login %s of %s" % (x, 10))
           time.sleep(6)
       if stop:
@@ -301,7 +301,7 @@ def Pipulate():
           stop = False
           break
         except:
-          yield dontgetfrustrated(x)
+          yield dontgetfrustrated(x).next()
           out("Retry get Pipulate sheet %s of %s" % (x, 10))
           time.sleep(5)
       if stop:
@@ -317,7 +317,7 @@ def Pipulate():
           stop = False
           break
         except:
-          yield dontgetfrustrated(x)
+          yield dontgetfrustrated(x).next()
           out("Retry count rows %s of %s" % (x, 10))
           time.sleep(10)
       if stop == True:
@@ -364,7 +364,7 @@ def Pipulate():
           stop = False
           break
         except:
-          yield dontgetfrustrated(x)
+          yield dontgetfrustrated(x).next()
           out("Retry get Scraper sheet %s of %s" % (x, 5))
           time.sleep(3)
       if stop:
@@ -396,7 +396,7 @@ def Pipulate():
           stop = False
           break
         except:
-          yield dontgetfrustrated(x)
+          yield dontgetfrustrated(x).next()
           out("Retry load Row1 %s of %s" % (x, 10))
           time.sleep(5)
       if stop:
@@ -458,7 +458,7 @@ def Pipulate():
             stop = False
             break
           except:
-            yield dontgetfrustrated(x)
+            yield dontgetfrustrated(x).next()
             out("Retry %s of %s" % (x, 8))
             time.sleep(5)
         if stop:
@@ -580,7 +580,7 @@ def Pipulate():
           try:
             InsertRows(onesheet, trendlistoflists)
           except:
-            yield dontgetfrustrated(x)
+            yield dontgetfrustrated(x).next()
             out("Error on trending, retry %s" % x)
             time.sleep(2)
           else:
@@ -631,7 +631,7 @@ def Pipulate():
           except:
             out("Retry %s of %s" % (x, 5))
             time.sleep(2)
-            yield dontgetfrustrated(x)
+            yield dontgetfrustrated(x).next()
         if stop:
           Stop()
         yield unlock
@@ -731,7 +731,7 @@ def Pipulate():
                       print traceback.format_exc()
                       out("Scrape problem on row %s. Retrying." % rowdexstring)
                       time.sleep(2)
-                      yield dontgetfrustrated(x)
+                      yield dontgetfrustrated(x).next()
                     out("Scrape End", "4", '-')
           out("DONE PROCESSING ROW %s." % rowdex, '3', '-')
 
@@ -752,7 +752,7 @@ def Pipulate():
             except:
               out("Writing row to spreadsheet, retry %s of %s" %(x, 5))
               time.sleep(5)
-              yield dontgetfrustrated(x)
+              yield dontgetfrustrated(x).next()
           if stop:
             yield badtuple
             Stop()
@@ -1054,7 +1054,7 @@ def InitTab(gdoc2, tabname, headerlist, listoflists=[]):
       out("%s Tab exists." % tabname)
       break
     except:
-      out("Retrying %s of %s" % (x, 5))
+      out("Retrying make %s Tab %s of %s" % (tabname, x, 5))
       time.sleep(2) #not too long here
 
   if not initsheet:

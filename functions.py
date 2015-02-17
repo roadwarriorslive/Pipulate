@@ -6,14 +6,7 @@ def count():
   return 1
 
 def dontgetfrustrated(x):
-  #if x == 0:
-  #  session['z'] = 0
-  try:
-    session['z']
-  except:
-    session['z'] = 0
-  else:
-    session['z'] += 1
+  num = 0
   s = []
   s.append("Heavy traffic on the Inter-Webs tonight.")
   s.append("Hang on a sec... I feel your pain.")
@@ -27,11 +20,10 @@ def dontgetfrustrated(x):
   s.append("Google, I'm asking you a question!")
   s.append("Maybe go check your Facebook, Twitter or something.")
   s.append("I don't like this any more than you do.")
-  snicker = session['i'] % len(s)
-  try:
-    return "", s[snicker], "", ""
-  except:
-    return "", s[0], "", ""
+  yield "", s[num], "", ""
+  num += 1
+  if num == len(s):
+    num = 0
 
 def cyclemotto():
   try:
