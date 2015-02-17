@@ -324,7 +324,7 @@ def Pipulate():
 
       try:
         out("Reading Config tab into globals.")
-        globs.config = TefreshConfig(gdoc, "Config") #HTTPError
+        globs.config = RefreshConfig(gdoc, "Config") #HTTPError
       except:
         out("Copying Config tag to globals failed.")
       else:
