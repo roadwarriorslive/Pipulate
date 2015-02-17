@@ -23,23 +23,19 @@
 """
 import sys, os, socket
 socket.setdefaulttimeout(10.0)                            # Our story begins with Talmudic style commentaries 
-                                     # (in-line columns), which I'm using as a way 
-                                     # of issuing a challenge to myself to master the
-                                     # vim text editor, so as to make the sort of text
-                                                          # manipulation skills required to pull this off no
-import globs                                              # big thing. Oh yeah, and we import Python modules 
-import requests, traceback, datetime, time, json          # here that should be available globally (everywhere)
-from flask_wtf import Form                                # in the program. Oh, also that detection of sys.args
-from wtforms import StringField                           # forks the behavior to the non-Flask command-line
-from flask import (Flask,                                 # mode of Pipulate. This is required for the
-  stream_with_context,                                    # Scheduler-behavior (versus webserver behavior).
-  render_template,
-  Response,                                         
-  request,                                          
-  session,                                          
-  redirect,                                         
-  url_for,                                          
-  flash)                                            
+import globs                                              # (in-line columns), which I'm using as a way 
+import requests, traceback, datetime, time, json          # of issuing a challenge to myself to master the
+from flask_wtf import Form                                # vim text editor, so as to make the sort of text
+from wtforms import StringField                           # manipulation skills required to pull this off no
+from flask import (Flask,                                 # big thing. Oh yeah, and we import Python modules   
+  stream_with_context,                                    # here that should be available globally (everywhere)
+  render_template,                                        # in the program. Oh, also that detection of sys.args
+  Response,                                               # forks the behavior to the non-Flask command-line
+  request,                                                # mode of Pipulate. This is required for the
+  session,                                                # Scheduler-behavior (versus webserver behavior).
+  redirect,                                     
+  url_for,                                         
+  flash)                                           
 
 app = Flask(__name__)                               
 
@@ -55,7 +51,10 @@ def Stop():
                                                                                
   ''')
   #raise SystemExit
-  raise StopIteration
+  if globs.mode == 'web':
+    raise StopIteration
+  else:
+    raise GeneratorExit
 
 def gotcha(x=''):
   print('''
