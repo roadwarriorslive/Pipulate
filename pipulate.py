@@ -209,7 +209,7 @@ def main():                                         # visiting app's homepage.
 # |_|   |_| .__/ \__,_|_|\__,_|\__\___|
 #         |_|                          
 #
-def Pipulate():
+def Pipulate(username='', password='', dockey=''):
   stop = False
   badtuple = (globs.GBAD, globs.GBAD, "", "")
   lock = ("", "", "", "+")
@@ -223,7 +223,7 @@ def Pipulate():
     transfuncs = ziplckey(funcs, funcs) #Keep translation table
     blankrows = 0
     import gspread
-    if session:
+    if session or (username and password and dockey):
       out("LOGIN ATTEMPT", "2")
       if 'oa2' in session:
         creds = Credentials(access_token=session['oa2'])
@@ -274,6 +274,10 @@ def Pipulate():
         yield "spinoff", "", "", ""
         yield badtuple
         Stop()
+
+
+
+
       yield unlock
       out("Google Spreadsheet successfully opened.")
 
