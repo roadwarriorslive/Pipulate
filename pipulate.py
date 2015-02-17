@@ -1212,7 +1212,11 @@ def Scheduler():
   gc = gspread.login(username, password)
   doclist = gc.openall()
   for onedoc in doclist:
-    print(onedoc.get_id_fields()['spreadsheet_id'])
+    dockey = onedoc.get_id_fields()['spreadsheet_id']
+    print(dockey)
+    STREAMIT = Pipulate(username, password, dockey)
+    for thebits in STREAMIT:
+      print(thebits)
 
 from functions import *
 
