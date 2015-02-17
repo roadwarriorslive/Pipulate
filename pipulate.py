@@ -1138,7 +1138,7 @@ def askquestions(filename):
   sortedquestions = sorted(questions.keys())
   for question in sortedquestions:
     if isinstance(previousanswers, dict):
-      answer = raw_input(question + ' (Hit Enter to keep "' + previousanswers[questions[question]] + '"): ')
+      answer = raw_input(question + ' (Hit ENTER to keep "' + previousanswers[questions[question]] + '"): ')
     else:
       answer = raw_input(question + ': ')
     if answer:
@@ -1186,16 +1186,23 @@ without having to use the GMail account's master password.
 ''')
 
 def configure():
-  print warning
+  print(warning)
   topickle = askquestions("../opt/pipulate.pkl")
   saveanswers(topickle, "../opt/pipulate.pkl")
-  print "\n Username and Password recorded!"
+  print("\nUsername and Password recorded!")
 
 from functions import *
 
 if len(sys.argv) > 1:
-  configure()        
-  exit()             
+  arg1 = sys.argv[1][0].lower()
+  if arg1 == 'c':
+    configure()        
+    exit()             
+  elif arg1 == 's':
+    print("Run as Scheduler")
+  else:
+    print("Unsupported argument")
+    exit()             
 elif __name__ == "__main__":
   app.run(host='0.0.0.0', port=8888, debug=True)
 
