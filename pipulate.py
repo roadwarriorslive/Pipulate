@@ -1168,8 +1168,8 @@ def showanswers(filename):
 
 def dictofquestions():
   return {
-    'GMail Username' : 'username',
-    'GMail Password' : 'password'
+    '1. GMail Username' : 'username',
+    '2. GMail Password' : 'password'
   }
 
 warning = ('''
@@ -1185,21 +1185,30 @@ password with Pipulate so that any time you can revoke that server's access
 without having to use the GMail account's master password.
 ''')
 
-def configure():
+def Configure():
   print(warning)
   topickle = askquestions("../opt/pipulate.pkl")
   saveanswers(topickle, "../opt/pipulate.pkl")
   print("\nUsername and Password recorded!")
+
+def Scheduler():
+  import pickle
+  unpickleme = open("../opt/pipulate.pkl", "rb")
+  answers = pickle.load(unpickleme)
+  unpickleme.close()
+  username = answers['username']
+  password = answers['password']
+  print username
+  print password
 
 from functions import *
 
 if len(sys.argv) > 1:
   arg1 = sys.argv[1][0].lower()
   if arg1 == 'c':
-    configure()        
-    exit()             
+    Configure()        
   elif arg1 == 's':
-    print("Run as Scheduler")
+    Scheduler()
   else:
     print("Unsupported argument")
     exit()             
