@@ -54,7 +54,7 @@ def Stop():
   if globs.mode == 'web':
     raise StopIteration
   else:
-    raise GeneratorExit
+    pass
 
 def gotcha(x=''):
   print('''
@@ -1211,12 +1211,15 @@ def Scheduler():
   # Login with your Google account
   gc = gspread.login(username, password)
   doclist = gc.openall()
-  for onedoc in doclist:
-    dockey = onedoc.get_id_fields()['spreadsheet_id']
-    print(dockey)
-    STREAMIT = Pipulate(username, password, dockey)
-    for thebits in STREAMIT:
-      print(thebits)
+  while True:
+    for onedoc in doclist:
+      dockey = onedoc.get_id_fields()['spreadsheet_id']
+      print(dockey)
+      STREAMIT = Pipulate(username, password, dockey)
+      for thebits in STREAMIT:
+        print(thebits)
+    print("*******************************************")
+    time.sleep(10)
 
 from functions import *
 
@@ -1225,6 +1228,7 @@ if len(sys.argv) > 1:
   if arg1 == 'c':
     Configure()        
   elif arg1 == 's':
+    socket.setdefaulttimeout(25)
     globs.mode = "cli"
     Scheduler()
   else:
