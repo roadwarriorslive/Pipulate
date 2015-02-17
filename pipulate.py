@@ -1198,8 +1198,13 @@ def Scheduler():
   unpickleme.close()
   username = answers['username']
   password = answers['password']
-  print username
-  print password
+  import gspread
+
+  # Login with your Google account
+  gc = gspread.login(username, password)
+  doclist = gc.openall()
+  for onedoc in doclist:
+    print(onedoc)
 
 from functions import *
 
