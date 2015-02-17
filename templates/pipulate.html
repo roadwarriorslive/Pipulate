@@ -296,11 +296,11 @@
         {% endif %}
       {% endwith %}
       {% for lineitem, learn, magic, glock in data: -%}
-        {%- if glock: -%}
+        {%- if glock == '+' : -%}
           <script>
             redlock();
           </script>
-        {%- else: -%}
+        {%- elif glock == '-': -%}
           <script>
             whitelock();
           </script>

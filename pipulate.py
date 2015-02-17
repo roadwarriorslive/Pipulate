@@ -217,7 +217,7 @@ def Pipulate():
   stop = False
   badtuple = (globs.GBAD, globs.GBAD, "", "")
   lock = ("", "", "", "+")
-  unlock = ("", "", "", "")
+  unlock = ("", "", "", "-")
   out("PIPULATION BEGINNING", "1")
   #for i in makemescroll():
   #  yield i, "", "", ""
@@ -332,8 +332,8 @@ def Pipulate():
 
       headers = ['name', 'value']
       config = []
-      config.append(['rowthrottlenumber','1'])
-      config.append(['rerunjobevery','minute'])
+      config.append(['RowThrottleNumber','1'])
+      config.append(['RunJobEvery','minute'])
 
       yield lock
       try:
@@ -588,7 +588,13 @@ def Pipulate():
         qstart = 1
       #jobstats = timewindow(times[0])
       insert, name, number, left, right, now = timewindow(times[0])
-      yield "Job requested to process %s row(s) every %s %s" % (rowthrottlenumber, number, name), "", "", ""
+      if name and number:
+        tellrow = rowthrottlenumber
+        if tellrow == 0:
+          tellrow = 'all'
+        yield "Job requested to process %s row(s) every %s %s" % (tellrow, number, name), "", "", ""
+      else:
+        yield "Set a RunJobEvery value in Config, such as day, month or 10 minutes.", "", "", ""
       if left and right and now:
         yield "%s = Start of last time wndow" % left, "", "", ""
         yield "%s = End of last time window" % right, "", "", ""
@@ -914,8 +920,8 @@ def timewindow(amiinnewtimewindow):
   intervalnumber= ""
   intervalname=""
   intervalparts=[]
-  if 'rerunjobevery' in globs.config:
-    intervallanguage = globs.config['rerunjobevery'].strip()
+  if 'runjobevery' in globs.config:
+    intervallanguage = globs.config['runjobevery'].strip()
     if ' ' in intervallanguage:
       intervalparts=intervallanguage.split()
       intervalname = intervalparts[1]
