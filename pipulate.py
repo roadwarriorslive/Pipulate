@@ -225,55 +225,59 @@ def Pipulate(username='', password='', dockey=''):
     import gspread
     if session or (username and password and dockey):
       out("LOGIN ATTEMPT", "2")
-      if 'oa2' in session:
-        creds = Credentials(access_token=session['oa2'])
-        out("Credential object created.")
+      
+      if (username and password and dockey):
+        gotcha()
       else:
-        out("Expired login.")
-        yield "Google Login appears to have expired. Log back in.", "Login under the \"burger button\" in the upper-right.", "", ""
-        yield "spinoff", "", "", ""
-      try:
-        gsp = gspread.authorize(creds)
-      except:
-        out("Login failed.")
-        yield "Google Login unsuccessful.", "", "", ""
-        yield "spinoff", "", "", ""
-        raise StopIteration
-      else:
-        out("Login successful.")
-      out("Opening Spreadsheet...")
-      yield("Opening Spreadsheet...", "", "", "")
-      gdoc = None
-      stop = True
-      for x in range(10):
-        yield lock
+        if 'oa2' in session:
+          creds = Credentials(access_token=session['oa2'])
+          out("Credential object created.")
+        else:
+          out("Expired login.")
+          yield "Google Login appears to have expired. Log back in.", "Login under the \"burger button\" in the upper-right.", "", ""
+          yield "spinoff", "", "", ""
         try:
-          gdoc = gsp.open_by_url(globs.PIPURL) #HTTPError
-          stop = False
-          break
-        except gspread.httpsession.HTTPError, e:
-          out("Login appeared successful, but rejected on document open attempt.")
-          yield "Please Log In again first.", "Login under the \"burger button\" in the upper-right.", "", ""
-          if session and 'loggedin' in session:
-            session.pop('loggedin', None)
-          if 'u' not in session and globs.PIPURL:
-            session['u'] = globs.PIPURL
-          break
-        except gspread.exceptions.NoValidUrlKeyFound:
-          yield "Currently, the URL must be a Google Spreadsheet.", "", "", ""
-          yield "<a href='https://docs.google.com/spreadsheets/create' target='_new'>Create</a> a new Google Spreadsheet and click Bookmarklet again.", "Google Spreadsheet Not Found.", "", ""
-          break
-        except gspread.exceptions.SpreadsheetNotFound:
-          yield "Please give the document a name to force first save.", "", "", ""
-          break
-        except Exception as e:
-          yield dontgetfrustrated(x)
-          out("Retry login %s of %s" % (x, 10))
-          time.sleep(6)
-      if stop:
-        yield "spinoff", "", "", ""
-        yield badtuple
-        Stop()
+          gsp = gspread.authorize(creds)
+        except:
+          out("Login failed.")
+          yield "Google Login unsuccessful.", "", "", ""
+          yield "spinoff", "", "", ""
+          raise StopIteration
+        else:
+          out("Login successful.")
+        out("Opening Spreadsheet...")
+        yield("Opening Spreadsheet...", "", "", "")
+        gdoc = None
+        stop = True
+        for x in range(10):
+          yield lock
+          try:
+            gdoc = gsp.open_by_url(globs.PIPURL) #HTTPError
+            stop = False
+            break
+          except gspread.httpsession.HTTPError, e:
+            out("Login appeared successful, but rejected on document open attempt.")
+            yield "Please Log In again first.", "Login under the \"burger button\" in the upper-right.", "", ""
+            if session and 'loggedin' in session:
+              session.pop('loggedin', None)
+            if 'u' not in session and globs.PIPURL:
+              session['u'] = globs.PIPURL
+            break
+          except gspread.exceptions.NoValidUrlKeyFound:
+            yield "Currently, the URL must be a Google Spreadsheet.", "", "", ""
+            yield "<a href='https://docs.google.com/spreadsheets/create' target='_new'>Create</a> a new Google Spreadsheet and click Bookmarklet again.", "Google Spreadsheet Not Found.", "", ""
+            break
+          except gspread.exceptions.SpreadsheetNotFound:
+            yield "Please give the document a name to force first save.", "", "", ""
+            break
+          except Exception as e:
+            yield dontgetfrustrated(x)
+            out("Retry login %s of %s" % (x, 10))
+            time.sleep(6)
+        if stop:
+          yield "spinoff", "", "", ""
+          yield badtuple
+          Stop()
 
 
 
