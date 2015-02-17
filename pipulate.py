@@ -1204,7 +1204,7 @@ def Scheduler():
   gc = gspread.login(username, password)
   doclist = gc.openall()
   for onedoc in doclist:
-    print(onedoc)
+    print(onedoc.get_id_fields()['spreadsheet_id'])
 
 from functions import *
 
