@@ -54,7 +54,6 @@ back to the project here on Github. Not comfortable with programming Python?
 Copy and paste the examples under the Scrapers tab, experimenting with he XPath
 and RegEx patterns to grab anything you like off a page. 
 
---------------------------------------------------------------------------------
 # Installation Procedure:
 
 Pipulate is made available ready-to-run on your desktop without an install.
@@ -110,7 +109,6 @@ From a CygWin Shell (MinTTY):
 - python pipulate.py
 - Visit http://localhost:8888
 
---------------------------------------------------------------------------------
 # Caveats
 
 ## OAuth2 For Your Security
@@ -162,13 +160,12 @@ dropped into /etc/cron.hourly/ to ensure that the Pipulate webserver is always
 running, even if some glitch made it stop. The way the daemon is written makes
 it safe to keep trying to re-start the webserver. It won't create multiple
 instances.
---------------------------------------------------------------------------------
+
 # Where Can I Learn More?
 
 - The Levinux Virutal Server: http://levinux.com
 - The Pipulate Main Website: (coming soon)
 
---------------------------------------------------------------------------------
 # To Do List
 - Add the built-in documentation (introspect docstrings vs. simple TabInit)
 - Turn Scheduler into Linux start-stop daemon
@@ -190,7 +187,6 @@ instances.
   - User your imagination
   - Can't wait for community dynamics to kick-in
 
---------------------------------------------------------------------------------
 # License
 
 The MIT License (MIT)
