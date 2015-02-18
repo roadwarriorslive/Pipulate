@@ -16,9 +16,11 @@ using a bookmarklet approach, broadly applicable to SEO and Social Media tasks.
 
 ## What is Pipulate?
 This is a lightweight, customizable and easily scheduled approach to collecting
-data directly into Google Spreadsheets by using a bookmarklet to infuses it
-with magic data-collection powers. This is based on the premise that it's just
-going to end up there anyway, so why not make the spreadsheet the collector?
+data directly into Google Spreadsheets by using a bookmarklet that appears to
+infuse it with magic data-collection powers. This is based on the premise that
+it's just going to end up there anyway, so why not make the spreadsheet the
+collector? The types of things it can collect are limited only by your
+imagination.
 
 > Compelling, no?
 
