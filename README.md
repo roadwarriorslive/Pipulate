@@ -138,10 +138,10 @@ roughly working, run pipulate like this:
 
 ## Linux Auto-Start Daemon & Cron Job
 Currently, the documentation on how to fully turn a Linux server into a
-Pipulate server is contained in the files in the directory:
+Pipulate server is contained in these files in the repository:
 
-- pipulate (daemon script)
-- pipuweb (cron script)
+- pipulate
+- pipuweb
 
 The first file pipulate goes into /etc/init.d/ and then have the command:
 
