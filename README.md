@@ -162,6 +162,11 @@ dropped into /etc/cron.hourly/ to ensure that the Pipulate webserver is always
 running, even if some glitch made it stop. The way the daemon is written makes
 it safe to keep trying to re-start the webserver. It won't create multiple
 instances.
+--------------------------------------------------------------------------------
+# Where Can I Learn More?
+
+- The Levinux Virutal Server: http://levinux.com
+- The Pipulate Main Website: (coming soon)
 
 --------------------------------------------------------------------------------
 # To Do List
