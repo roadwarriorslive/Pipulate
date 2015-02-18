@@ -136,6 +136,23 @@ roughly working, run pipulate like this:
 
     python pipulate.py scheduler
 
+## Linux Auto-Start Daemon & Cron Job
+Currently, the documentation on how to fully turn a Linux server into a
+Pipulate server is contained in the files in the directory:
+
+- pipulate (daemon script)
+- pipuweb (cron script)
+
+The first file pipulate goes into /etc/init.d/ and then have the command:
+
+    update-rc.d pipulate enable
+
+...run once to set Pipulate to run in webserver mode, like Apache does, every
+time the server is started up or reboots. The second file, pipuweb, gets
+dropped into /etc/cron.hourly/ to ensure that the Pipulate webserver is always
+running, even if some glitch made it stop.
+
+--------------------------------------------------------------------------------
 # To Do List
 - Add the built-in documentation (introspect docstrings vs. simple TabInit)
 - Turn Scheduler into Linux start-stop daemon
