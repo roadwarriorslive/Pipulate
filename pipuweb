@@ -1,4 +1,14 @@
 #!/bin/bash
 
+# This simply gets dopped into the /etc/cron.hourly/ location to ensure that if
+# Pipulate crashes for whatever reason, it will automatically be made available
+# again within the hour. I'm considering putting a git pull command here so
+# that every instance of Pipulate is running the latest, but I don't think I'll
+# do that until I create proper stable and experimential branches in Github.
+# This file has to have the correct execution permisissions, which you can give
+# it with this command, which will give it these permissions: -rwxr-xr-x
+
+# chmod 755 pipuweb
+
 /etc/init.d/pipulate start
 
