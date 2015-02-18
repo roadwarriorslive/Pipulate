@@ -3,6 +3,7 @@ Pipulate
 
 Pipulate lets you collect data straight off of the Web into Google Spreadsheets
 using a bookmarklet approach, broadly applicable to SEO and Social Media tasks.
+<pre>
           _____ _             _       _                              
          |  __ (_)           | |     | |                             
          | |__) | _ __  _   _| | __ _| |_ ___     ___ ___  _ __ ___  
@@ -11,6 +12,7 @@ using a bookmarklet approach, broadly applicable to SEO and Social Media tasks.
          |_|   |_| .__/ \__,_|_|\__,_|\__\___| (_)___\___/|_| |_| |_|
                  | |                                                 
                  |_|                                                 
+</pre>
 
 ## What is Pipulate?
 This is a lightweight, customizable and easily scheduled approach to collecting
