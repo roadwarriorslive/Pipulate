@@ -150,7 +150,9 @@ The first file pipulate goes into /etc/init.d/ and then have the command:
 ...run once to set Pipulate to run in webserver mode, like Apache does, every
 time the server is started up or reboots. The second file, pipuweb, gets
 dropped into /etc/cron.hourly/ to ensure that the Pipulate webserver is always
-running, even if some glitch made it stop.
+running, even if some glitch made it stop. The way the daemon is written makes
+it safe to keep trying to re-start the webserver. It won't create multiple
+instances.
 
 --------------------------------------------------------------------------------
 # To Do List
