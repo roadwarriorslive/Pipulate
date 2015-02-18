@@ -28,7 +28,7 @@ imagination.
 Get it running on your Mac, Windows or Linux desktop, from a ready-made virtual
 machine, a cloud server, or even a Raspberry Pi or other teensy tiny computer.
 It basically runs on anything. Then, visit the site you just created from a web
-browser (usually at http://localhost:8888), dragc the bookmarklet to your
+browser (usually at http://localhost:8888), drag the bookmarklet to your
 Bookmark Bar, open a Google Spreadsheet, click the bookmarklet and get
 Pipulating! The data-collecting job that the initial job defines just starts
 twinkling in as new rows.
