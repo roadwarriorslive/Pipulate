@@ -35,9 +35,15 @@ I've set up the initial Pipulate job to collect some very common Web Social
 Media metrics, like the counts of a Twitter Profile page, views and subscribers
 off a YouTube channel page, and Facebook Shares, Likes and Google +1s of a URL.
 You can customize this example to your own pages and profile, or read through
-the built-in documentation on setting up your own job. Once you're happy with
-it, replace the question marks with asterisks, and invite in a special gmail
-address that you set up, and watch the job get processed daily (or whatever).
+the built-in documentation (coming soon) on setting up your own job. Once
+you're happy with it, replace the question marks with asterisks, and invite in
+a special gmail address that you set up, and watch the job get processed daily
+(or whatever). More documentation coming on the use of the question marks and
+asterisks to test, then schedule jobs coming soon. Also, look in the Config tab
+to see the RowThrottleNumber setting that keeps more than this number of rows
+from processing at once (great for SERP checking), and the RunJobEvery setting
+that you can set to values like 1 day, 1 week, 1 month, 3 days, 10 minutes, and
+variations thereof.
 
 ## How Do I Customize It?
 Not happy with the built-in functions? Write your own, and contributing them
