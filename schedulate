@@ -29,7 +29,7 @@
 # /etc/init.d/pipulate stop
 
 DAEMON=/usr/bin/python
-ARGS=/var/pipulate/webpipulate.py
+ARGS=/var/pipulate/loopipulate.py
 PIDFILE=/var/run/serve.pid
 
 case "$1" in
