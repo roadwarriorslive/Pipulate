@@ -64,12 +64,9 @@ hey, it's free. Better-yet, install it on some real hardware:
 
 ## Debian/Ubuntu
 From a Terminal:
-- sudo apt-get install python2.7
-- sudo apt-get install python-distribute
-- sudo easy_install pip
-- sudo pip install flask
-- sudo pip install flask_wtf
+- sudo apt-get install python-pip python-dev
 - sudo pip install requests
+- sudo pip install flask_wtf
 - sudo pip install gspread
 - cd /var
 - git clone https://github.com/miklevin/pipulate.git
@@ -81,9 +78,8 @@ From a Terminal:
 From a Terminal:
 - (Python 2.7 & Distribute usually already installed)
 - sudo easy_install pip
-- sudo pip install flask
-- sudo pip install flask_wtf
 - sudo pip install requests
+- sudo pip install flask_wtf
 - sudo pip install gspread
 - cd ~/Desktop (or wherever)
 - git clone https://github.com/miklevin/pipulate.git
@@ -100,9 +96,8 @@ From a CygWin Shell (MinTTY):
 - Download and run to get easy_install:
   - wget --no-check-certificate https://bootstrap.pypa.io/ez_setup.py
 - easy_install pip
-- pip install flask
-- pip install flask_wtf
 - pip install requests
+- pip install flask_wtf
 - pip install gspread
 - git clone https://github.com/miklevin/pipulate.git
 - cd pipulate
