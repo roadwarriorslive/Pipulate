@@ -69,8 +69,8 @@ From a Terminal:
 - sudo easy_install pip
 - sudo pip install flask
 - sudo pip install flask_wtf
-- sudo pip install install requests
-- sudo pip install install gspread
+- sudo pip install requests
+- sudo pip install gspread
 - cd /var
 - git clone https://github.com/miklevin/pipulate.git
 - cd pipulate
@@ -83,8 +83,8 @@ From a Terminal:
 - sudo easy_install pip
 - sudo pip install flask
 - sudo pip install flask_wtf
-- sudo pip install install requests
-- sudo pip install install gspread
+- sudo pip install requests
+- sudo pip install gspread
 - cd ~/Desktop (or wherever)
 - git clone https://github.com/miklevin/pipulate.git
 - cd pipulate
@@ -102,8 +102,8 @@ From a CygWin Shell (MinTTY):
 - easy_install pip
 - pip install flask
 - pip install flask_wtf
-- pip install install requests
-- pip install install gspread
+- pip install requests
+- pip install gspread
 - git clone https://github.com/miklevin/pipulate.git
 - cd pipulate
 - python pipulate.py
