@@ -2,7 +2,7 @@ from dapipulate import *
 
 def Scheduler(filename):
   import os.path
-  if os.path.isfile(filename):
+  if os.path.isfile(filename) and os.path.getsize(filename) > 0:
     import pickle
     unpickleme = open(filename, "rb")
     answers = pickle.load(unpickleme)
