@@ -1236,5 +1236,8 @@ if len(sys.argv) > 1:
     exit()             
 elif __name__ == "__main__":
   globs.mode = "web"
-  app.run(host='0.0.0.0', port=8888, debug=False)
+  if 'pipulate' in socket.gethostname():
+    app.run(host='0.0.0.0', port=80, debug=False)
+  else:
+    app.run(host='0.0.0.0', port=8888, debug=False)
 
