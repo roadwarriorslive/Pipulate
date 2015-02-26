@@ -30,7 +30,7 @@
 
 DAEMON=/usr/bin/python
 ARGS=/var/pipulate/webpipulate.py
-PIDFILE=/var/run/serve.pid
+PIDFILE=/var/run/webpipulate.pid
 
 case "$1" in
   start)
