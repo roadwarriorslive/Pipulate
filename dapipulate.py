@@ -1146,8 +1146,6 @@ from functions import *
 #   if arg1 == 'c':
 #     Configure()        
 #   elif arg1 == 's':
-#     socket.setdefaulttimeout(25)
-#     globs.mode = "cli"
 #     Scheduler()
 #   else:
 #     print("Unsupported argument")
