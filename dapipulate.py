@@ -1139,28 +1139,6 @@ def adq(aval):
   else:
     return "'%s'" % (aval) #ALMOST everything else should be quoted.
 
-def Scheduler():
-  import pickle
-  unpickleme = open("../opt/pipulate.pkl", "rb")
-  answers = pickle.load(unpickleme)
-  unpickleme.close()
-  username = answers['username']
-  password = answers['password']
-  import gspread
-
-  # Login with your Google account
-  gc = gspread.login(username, password)
-  doclist = gc.openall()
-  while True:
-    for onedoc in doclist:
-      dockey = onedoc.get_id_fields()['spreadsheet_id']
-      print(dockey)
-      STREAMIT = Pipulate(username, password, dockey)
-      for thebits in STREAMIT:
-        print(thebits)
-    print("*******************************************")
-    time.sleep(10)
-
 from functions import *
 
 # if len(sys.argv) > 1:
@@ -1174,10 +1152,4 @@ from functions import *
 #   else:
 #     print("Unsupported argument")
 #     exit()             
-if __name__ == "__main__":
-  globs.mode = "web"
-  if 'pipulate' in socket.gethostname():
-    app.run(host='0.0.0.0', port=80, debug=False)
-  else:
-    app.run(host='0.0.0.0', port=8888, debug=False)
 
