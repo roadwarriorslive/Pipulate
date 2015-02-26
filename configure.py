@@ -1,3 +1,5 @@
+import os, os.path, pickle
+
 def askquestions(filename):
   questions = dictofquestions()
   answers = {}
@@ -17,15 +19,13 @@ def askquestions(filename):
   return answers
 
 def saveanswers(pickleme, filename):
-  import pickle
   output = open(filename, 'wb')
   pickle.dump(pickleme, output)
   output.close()
 
 def showanswers(filename):
-  import os.path, pickle
   answers = ''
-  if os.path.isfile(filename):
+  if os.path.isfile(filename) and os.path.getsize(filename) > 0:
     input = open(filename, 'rb')
     answers = pickle.load(input)
     input.close()
