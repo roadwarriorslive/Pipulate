@@ -1,4 +1,4 @@
-from dapipulate import *
+from pipulate import *
 
 if __name__ == "__main__":
   globs.mode = "web"

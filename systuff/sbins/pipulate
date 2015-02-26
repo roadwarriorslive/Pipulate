@@ -1,0 +1,2 @@
+/etc/init.d/webulate stop
+/usr/bin/python /var/pipulate/webpipulate.py

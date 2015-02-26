@@ -8,7 +8,7 @@
 # This file has to have the correct execution permisissions, which you can give
 # it with this command, which will give it these permissions: -rwxr-xr-x
 
-# chmod 755 pipuweb
+# chmod 755 webpipulate
 
-/etc/init.d/pipulate start
+/etc/init.d/webpipulate start
 

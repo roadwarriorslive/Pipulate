@@ -15,18 +15,18 @@
 # This is the startstop daemon script that goes in /etc/init.d/ by executing
 # this command with the pipulate repsitory as your current directory:
 
-# cp pipulate /etc/init.d/pipulate
+# cp systuff/daemons/webpipulate /etc/init.d/webpipulate
 
 # Once it's in location, you have to make the dameon activate on startup by
 # executing this command one time on the server:
 
-# update-rc.d pipulate enable
+# update-rc.d webpipulate enable
 
 # In additon to Pipulate web server automatically starting on server reboots,
 # You will now be able to stop or start the Ppulate web server with:
 
-# /etc/init.d/pipulate start
-# /etc/init.d/pipulate stop
+# /etc/init.d/webpipulate start
+# /etc/init.d/webpipulate stop
 
 DAEMON=/usr/bin/python
 ARGS=/var/pipulate/webpipulate.py
@@ -47,7 +47,7 @@ case "$1" in
     # /sbin/start-stop-daemon --stop --name python --verbose
     ;;
   *)
-    echo "Usage: /etc/init.d/pipulate {start|stop}"
+    echo "Usage: /etc/init.d/webpipulate {start|stop}"
     exit 1
     ;;
 esac
