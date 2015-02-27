@@ -1,4 +1,12 @@
-#!/bin/bash
+### BEGIN INIT INFO
+# Provides:          loopipulate
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start Pipulate in looping mode at startup
+# Description:       Enable
+### END INIT INFO
 
 # WARNING: These instructions apply to Debian-style Linuxes, like Ubuntu.
 # You may have to update the /var/pipulate/ path to reflect your repository
