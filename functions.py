@@ -86,7 +86,7 @@ def scrapes():
   s = []
   s.append(['title',       'xpath', "//title/text()"])
   s.append(['description', 'xpath', "//meta[@name='description']/@content"])
-  s.append(['tweets',      'xpath', "//span[.='Tweets']/following-sibling::span/text()"])
+  s.append(['tweettotal',  'xpath', "//span[.='Tweets']/following-sibling::span/text()"])
   s.append(['following',   'xpath', "//span[.='Following']/following-sibling::span/text()"])
   s.append(['followers',   'xpath', "//span[.='Followers']/following-sibling::span/text()"])
   s.append(['views',       'xpath', "//div[@class='watch-view-count']/text()"])
@@ -128,7 +128,7 @@ def response(url):
     except:
       return "Error"
 
-def plussed(url):
+def plusses(url):
   api = "https://clients6.google.com/rpc"
   jobj = '''{
     "method":"pos.plusones.get",
@@ -150,18 +150,18 @@ def plussed(url):
   # return adict['result']['metadata']['globalCounts']['count']
   return walkdict(adict, 'count')
 
-def tweeted(url):
+def tweets(url):
   api = "http://urls.api.twitter.com/1/urls/count.json?url="
   respobj = requests.get(api + url)
   adict = respobj.json()
   return walkdict(adict, 'count')
 
-def shared(url):
+def shares(url):
   respobj = requests.get('https://graph.facebook.com/' + url) 
   adict = respobj.json()
   return walkdict(adict, 'shares')
 
-def liked(url): 
+def likes(url): 
   respobj = requests.get('https://graph.facebook.com/' + url) 
   adict = respobj.json()
   return walkdict(adict, 'likes')
