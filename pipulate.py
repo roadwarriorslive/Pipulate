@@ -940,9 +940,10 @@ def timewindow(amiinnewtimewindow):
       intervalname = "minute"
     now = datetime.datetime.now()
     now2 = now
-    import dateutil.parser
     try:
-      tick = dateutil.parser.parse(amiinnewtimewindow)
+      #import dateutil.parser
+      #tick = dateutil.parser.parse(amiinnewtimewindow)
+      tick = datetime.datetime.strptime(amiinnewtimewindow, "%Y-%m-%dT%H:%M:%S")
     except:
       tick = now #double-check this fall-over action
     left = None
