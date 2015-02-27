@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# python
+chmod 755 webpipulate.py
+chmod 755 loopipulate.py
+
 # daemons
 cp systuff/daemons/webpipulate /etc/init.d
 cp systuff/daemons/loopipulate /etc/init.d
@@ -18,3 +22,4 @@ chmod 755 /etc/cron.hourly/loopipulate
 cp systuff/sbins/pipulate /usr/local/sbin
 chmod 755 /usr/local/sbin/pipulate
 
+/etc/init.d/webpipulate start
