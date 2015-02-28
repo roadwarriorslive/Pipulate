@@ -941,9 +941,8 @@ def timewindow(amiinnewtimewindow):
     now = datetime.datetime.now()
     now2 = now
     try:
-      #import dateutil.parser
-      #tick = dateutil.parser.parse(amiinnewtimewindow)
-      tick = datetime.datetime.strptime(amiinnewtimewindow, "%Y-%m-%dT%H:%M:%S")
+      import re
+      tick = datetime.datetime(*map(int, re.split('[^\d]', amiinnewtimewindow)[:-1]))
     except:
       tick = now #double-check this fall-over action
     left = None
