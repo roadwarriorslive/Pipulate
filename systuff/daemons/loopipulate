@@ -51,8 +51,8 @@ case "$1" in
     ;;
   stop)
     echo "Stopping server"
-    /sbin/start-stop-daemon --stop --pidfile $PIDFILE --verbose
-    # /sbin/start-stop-daemon --stop --name python --verbose
+    # /sbin/start-stop-daemon --stop --pidfile $PIDFILE --verbose
+    /sbin/start-stop-daemon --stop --name python --verbose
     ;;
   *)
     echo "Usage: /etc/init.d/loopipulate {start|stop}"
