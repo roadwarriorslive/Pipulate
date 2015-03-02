@@ -286,14 +286,14 @@ def Pipulate(username='', password='', dockey=''):
       out("Google Spreadsheet successfully opened.")
 
       # Pipulate Tab
-      headers = ['URL', 'Subscribers', 'ISOTimeStamp', 'Count']
-      yield "Checking Tabs: Pipulate", "Then we check for tabs...", "", ""
-      yield lock
-      try:
-        InitTab(gdoc, 'Pipulate', headers, pipinit())
-      except:
-        Stop()
-      yield unlock
+      # headers = ['URL', 'Subscribers', 'ISOTimeStamp', 'Count']
+      # yield "Checking Tabs: Pipulate", "Then we check for tabs...", "", ""
+      # yield lock
+      # try:
+      #   InitTab(gdoc, "Pipulate", headers, pipinit())
+      # except:
+      #   Stop()
+      # yield unlock
 
       # Config Tab
       yield ", Config", "", "", ""
@@ -343,7 +343,8 @@ def Pipulate(username='', password='', dockey=''):
       for x in range(10):
         yield lock
         try:
-          onesheet = gdoc.worksheet("Pipulate")
+          #onesheet = gdoc.worksheet("Pipulate")
+          onesheet = gdoc.sheet1
           stop = False
           break
         except:
@@ -575,7 +576,10 @@ def Pipulate(username='', password='', dockey=''):
       else:
         qstart = 1
       #jobstats = timewindow(times[0])
-      insert, name, number, left, right, now = timewindow(times[0])
+      if times:
+        insert, name, number, left, right, now = timewindow(times[0])
+      else:
+        insert, name, number, left, right, now = False, False, False, False, False, False
       if name and number:
         tellrow = rowthrottlenumber
         if tellrow == 0:
@@ -601,7 +605,8 @@ def Pipulate(username='', password='', dockey=''):
       #We need to get it again if trending rows were added. !!! Optimize
       if trended:
         try:
-          onesheet = gdoc.worksheet("Pipulate")
+          #onesheet = gdoc.worksheet("Pipulate")
+          onesheet = gdoc.sheet1
         except:
           yield "Couldn't reach Google Docs. Try logging in again.", "", "", ""
           yield "spinoff", "", "", ""
@@ -772,7 +777,7 @@ def Pipulate(username='', password='', dockey=''):
 
         elif onerow.count('') == len(onerow):
           blankrows += 1
-          if blankrows > skippableblankrows:
+          if blankrows > 1:
             break
       out("Question Mark Replacement.", '2', '-')
 
