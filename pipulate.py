@@ -286,7 +286,7 @@ def Pipulate(username='', password='', dockey=''):
       out("Google Spreadsheet successfully opened.")
 
       # Pipulate Tab
-      # headers = ['URL', 'Subscribers', 'ISOTimeStamp', 'Count']
+      # headers = ['URL', 'Subscribers', 'datetimestamp', 'Count']
       # yield "Checking Tabs: Pipulate", "Then we check for tabs...", "", ""
       # yield lock
       # try:
@@ -300,8 +300,8 @@ def Pipulate(username='', password='', dockey=''):
       yield "Checking Tabs: Config", "Then we check for tabs...", "", ""
       headers = ['NAME', 'VALUE']
       config = []
-      config.append(['RowThrottleNumber','1'])
-      config.append(['RunJobEvery','minute'])
+      config.append(['RunJobEvery','hour'])
+      #config.append(['RowThrottleNumber','1'])
       yield lock
       try:
         InitTab(gdoc, 'Config', headers, config)
@@ -517,7 +517,7 @@ def Pipulate(username='', password='', dockey=''):
       # | |_| | | | | | |  __/ | (_>  < | (_| (_) | |_| | | | | |_ 
       #  \__|_|_| |_| |_|\___|  \___/\/  \___\___/ \__,_|_| |_|\__|
       #
-      out("Count and ISOTimeStamp columns for trending", '2')
+      out("Count and datetimestamp columns for trending", '2')
       times = []
       if trended and 'count' in globs.row1:
         backintime = globs.numrows - len(trendlistoflists) + 1
@@ -536,12 +536,12 @@ def Pipulate(username='', password='', dockey=''):
           if counts[0] == '*':
             counts[0] = 0
           #Here we need to detect if there's rows left over.
-          timeletter = globs.letter[globs.row1.index('isotimestamp') + 1]
+          timeletter = globs.letter[globs.row1.index('datetimestamp') + 1]
           mayhaverun = "%s%s:%s%s" % (timeletter, backintime, timeletter, globs.numrows)
           try:
             CellList = onesheet.range(mayhaverun)
           except:
-            out("Failed to load the trending ISOTimeStamp range.")
+            out("Failed to load the trending datetimestamp range.")
           for onecell in CellList:
             times.append(onecell.value)
           trendingrowsfinished = times.count('?') == 0
@@ -561,7 +561,7 @@ def Pipulate(username='', password='', dockey=''):
           nextnum = int(counts[0]) + 1
           for onelist in trendlistoflists:
             onelist[globs.row1.index('count')] = nextnum
-      out("Count and ISOTimeStamp columns for trending", '2', '-')
+      out("Count and datetimestamp columns for trending", '2', '-')
 
       #  _                     _                           
       # (_)_ __  ___  ___ _ __| |_   _ __ _____      _____ 
@@ -587,7 +587,7 @@ def Pipulate(username='', password='', dockey=''):
           tellrow = 'all'
         yield "Job requested to process %s row(s) every %s %s" % (tellrow, number, name), "", "", ""
       else:
-        yield "Set a RunJobEvery value in Config, such as day, month or 10 minutes.", "", "", ""
+        yield "Set a RunJobEvery value in Config, such as week, day or hour.", "", "", ""
       if left and right and now:
         yield "%s = Start of last time wndow" % left, "", "", ""
         yield "%s = End of last time window" % right, "", "", ""
@@ -1146,6 +1146,7 @@ def adq(aval):
     return "'%s'" % (aval) #ALMOST everything else should be quoted.
 
 from functions import *
+from managelists import *
 
 # if len(sys.argv) > 1:
 #   arg1 = sys.argv[1][0].lower()
