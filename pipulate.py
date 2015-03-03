@@ -1070,8 +1070,10 @@ def InsertRows(onesheet, listoflists):
 
 def InitTab(gdoc2, tabname, headerlist, listoflists=[]):
   initsheet = None
+  isSheet1 = False
   for x in range(3): #not too many times here
     if tabname == "sheet1":
+      isSheet1 = True
       try:
         initsheet = gdoc2.sheet1
       except:
@@ -1086,7 +1088,7 @@ def InitTab(gdoc2, tabname, headerlist, listoflists=[]):
         out("Retrying make %s Tab %s of %s" % (tabname, x, 5))
         time.sleep(2) #not too long here
 
-  if not initsheet:
+  if isSheet1 or not initsheet:
     numcols = len(headerlist)
     if listoflists and len(listoflists) > 1 and '*' in listoflists[1]:
       numrows = len(listoflists)+1
@@ -1095,7 +1097,10 @@ def InitTab(gdoc2, tabname, headerlist, listoflists=[]):
     else:
       numrows = 2
     endletter = globs.letter[numcols]
-    newtab = gdoc2.add_worksheet(title=tabname, rows=numrows, cols=numcols)
+    if isSheet1:
+      newtab = gdoc2.sheet1
+    else:
+      newtab = gdoc2.add_worksheet(title=tabname, rows=numrows, cols=numcols)
     CellList = newtab.range('A1:%s%s' % (endletter, numrows))
     initlist = []
     for onelist in listoflists:
