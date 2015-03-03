@@ -22,7 +22,7 @@ def Scheduler(filename):
         for thebits in STREAMIT:
           print(thebits)
       print("*******************************************")
-      time.sleep(10)
+      time.sleep(1800)
   else:
     print("Please run: python configure.py")
 

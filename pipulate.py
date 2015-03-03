@@ -296,7 +296,8 @@ def Pipulate(username='', password='', dockey=''):
       # yield unlock
 
       # Config Tab
-      yield ", Config", "", "", ""
+      # yield ", Config", "", "", ""
+      yield "Checking Tabs: Config", "Then we check for tabs...", "", ""
       headers = ['NAME', 'VALUE']
       config = []
       config.append(['RowThrottleNumber','1'])
