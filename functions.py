@@ -14,7 +14,7 @@ def walkdict(obj, key):
         return v
   return None
 
-def isotimestamp():
+def datetimestamp():
   i = datetime.datetime.now()
   return "%s" % i.isoformat() 
 

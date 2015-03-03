@@ -281,23 +281,22 @@ def Pipulate(username='', password='', dockey=''):
 
 
 
-
       yield unlock
       out("Google Spreadsheet successfully opened.")
 
-      # Pipulate Tab
-      # headers = ['URL', 'Subscribers', 'datetimestamp', 'Count']
-      # yield "Checking Tabs: Pipulate", "Then we check for tabs...", "", ""
-      # yield lock
-      # try:
-      #   InitTab(gdoc, "Pipulate", headers, pipinit())
-      # except:
-      #   Stop()
-      # yield unlock
+      # Questionmark replacement tab
+      headers = ['URL', 'Subscribers', 'datetimestamp', 'Count']
+      yield "Checking Tabs: Sheet 1", "Then we check for tabs...", "", ""
+      yield lock
+      #try:
+      InitTab(gdoc, "sheet1", headers, pipinit())
+      #except:
+      #  Stop()
+      #yield unlock
 
       # Config Tab
-      # yield ", Config", "", "", ""
-      yield "Checking Tabs: Config", "Then we check for tabs...", "", ""
+      yield ", Config", "", "", ""
+      #yield "Checking Tabs: Config", "Then we check for tabs...", "", ""
       headers = ['NAME', 'VALUE']
       config = []
       config.append(['RunJobEvery','hour'])
@@ -1066,16 +1065,25 @@ def InsertRows(onesheet, listoflists):
 
 def InitTab(gdoc2, tabname, headerlist, listoflists=[]):
   initsheet = None
+  isSheet1 = False
   for x in range(3): #not too many times here
-    try:
-      initsheet = gdoc2.worksheet(tabname)
-      out("%s Tab exists." % tabname)
-      break
-    except:
-      out("Retrying make %s Tab %s of %s" % (tabname, x, 5))
-      time.sleep(2) #not too long here
+    if tabname == "sheet1":
+      isSheet1 = True
+      try:
+        initsheet = gdoc2.sheet1
+      except:
+        out("Retrying connecting to Sheet 1")
+        time.sleep(2) 
+    else:
+      try:
+        initsheet = gdoc2.worksheet(tabname)
+        out("%s Tab exists." % tabname)
+        break
+      except:
+        out("Retrying make %s Tab %s of %s" % (tabname, x, 5))
+        time.sleep(2) #not too long here
 
-  if not initsheet:
+  if isSheet1 or not initsheet:
     numcols = len(headerlist)
     if listoflists and len(listoflists) > 1 and '*' in listoflists[1]:
       numrows = len(listoflists)+1
@@ -1084,7 +1092,10 @@ def InitTab(gdoc2, tabname, headerlist, listoflists=[]):
     else:
       numrows = 2
     endletter = globs.letter[numcols]
-    newtab = gdoc2.add_worksheet(title=tabname, rows=numrows, cols=numcols)
+    if isSheet1:
+      newtab = gdoc2.sheet1
+    else:
+      newtab = gdoc2.add_worksheet(title=tabname, rows=numrows, cols=numcols)
     CellList = newtab.range('A1:%s%s' % (endletter, numrows))
     initlist = []
     for onelist in listoflists:
