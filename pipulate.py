@@ -286,21 +286,18 @@ def Pipulate(username='', password='', dockey=''):
 
       import re
       anything = re.compile('.+')
+      yield "Checking Tabs: Sheet 1", "Then we check for tabs...", "", ""
       try:
         cell = gdoc.sheet1.find(anything)
       except gspread.exceptions.CellNotFound:
-        #Here's the condition trap for a Sheet1 Init
-        gotcha("Nothing here")
-
-      # Questionmark replacement tab
-      headers = ['URL', 'Subscribers', 'datetimestamp', 'Count']
-      yield "Checking Tabs: Sheet 1", "Then we check for tabs...", "", ""
-      yield lock
-      #try:
-      #InitTab(gdoc, "sheet1", headers, pipinit())
-      #except:
-      #  Stop()
-      #yield unlock
+        # Questionmark replacement tab
+        headers = ['URL', 'Subscribers', 'datetimestamp', 'Count']
+        yield lock
+        try:
+          InitTab(gdoc, "sheet1", headers, pipinit())
+        except:
+          Stop()
+        yield unlock
 
       # Config Tab
       yield ", Config", "", "", ""
