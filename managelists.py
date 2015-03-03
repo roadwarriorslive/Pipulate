@@ -1,5 +1,10 @@
 from flask import session
 
+def documentation():
+  s = []
+  s.append(['Pipulate Slides', 'http://goo.gl/QPQb3t'])
+  return s
+
 def pipinit():
   s = []
   s.append(['https://www.youtube.com/user/miklevin','*','*','*'])

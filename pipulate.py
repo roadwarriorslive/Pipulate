@@ -299,6 +299,11 @@ def Pipulate(username='', password='', dockey=''):
           Stop()
         yield unlock
 
+      # Documentation Tab
+      yield ", Docs", "", "", ""
+      headers = ['Topic', 'DocumentationLink']
+      InitTab(gdoc, 'Docs', headers, documentation())
+
       # Config Tab
       yield ", Config", "", "", ""
       #yield "Checking Tabs: Config", "Then we check for tabs...", "", ""
