@@ -10,5 +10,7 @@
 
 # chmod 755 loopipulate
 
-/etc/init.d/loopipulate start
+# /etc/init.d/loopipulate start
+
+/usr/bin/python /var/pipulate/loopipulate.py
 

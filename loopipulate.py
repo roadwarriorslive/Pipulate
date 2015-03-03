@@ -14,15 +14,13 @@ def Scheduler(filename):
     # Login with your Google account
     gc = gspread.login(username, password)
     doclist = gc.openall()
-    while True:
-      for onedoc in doclist:
-        dockey = onedoc.get_id_fields()['spreadsheet_id']
-        print(dockey)
-        STREAMIT = Pipulate(username, password, dockey)
-        for thebits in STREAMIT:
-          print(thebits)
-      print("*******************************************")
-      time.sleep(1800)
+    for onedoc in doclist:
+      dockey = onedoc.get_id_fields()['spreadsheet_id']
+      print(dockey)
+      STREAMIT = Pipulate(username, password, dockey)
+      for thebits in STREAMIT:
+        print(thebits)
+    print("*******************************************")
   else:
     print("Please run: python configure.py")
 
