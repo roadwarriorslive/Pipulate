@@ -27,5 +27,5 @@ def Scheduler(filename):
 if __name__ == '__main__':
   socket.setdefaulttimeout(25)
   globs.mode = "cli"
-  filename = "../opt/pipulate.pkl"
+  filename = "/var/opt/pipulate.pkl"
   Scheduler(filename)
