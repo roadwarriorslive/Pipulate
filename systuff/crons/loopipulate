@@ -12,5 +12,7 @@
 
 # /etc/init.d/loopipulate start
 
+cd /var/pipulate
+git pull
 /usr/bin/python /var/pipulate/loopipulate.py
 
