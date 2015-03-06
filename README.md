@@ -1,4 +1,4 @@
-Pipulate!
+Pipulate
 ========
 
 Pipulate lets you collect data straight off of the Web into Google Spreadsheets
