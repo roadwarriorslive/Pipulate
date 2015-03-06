@@ -1,3 +1,4 @@
+PCOM = False
 DBUG = True
 PIPURL = ''
 GBAD = "Timed-out on Google Data API. Sorry, try again."

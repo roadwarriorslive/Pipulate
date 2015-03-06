@@ -831,7 +831,7 @@ def getLoginlink():
   if request.args and 'u' in request.args:
     session['u'] = request.args.get('u')
   baseurl = "https://accounts.google.com/o/oauth2/auth"
-  qsdict = {  'scope': 'https://docs.google.com/feeds/ https://docs.googleusercontent.com/ https://spreadsheets.google.com/feeds/',
+  qsdict = {  'scope': 'profile email https://docs.google.com/feeds/ https://docs.googleusercontent.com/ https://spreadsheets.google.com/feeds/',
               'response_type': 'token',
               'redirect_uri': redir,
               'approval_prompt': 'force',
