@@ -218,17 +218,23 @@ def LogUser(authkey):
     username = answers['username']
     password = answers['password']
     import gspread
-    gc2 = gspread.login(username, password)
-    usersheet = gc2.open("Users").sheet1
-    emails = usersheet.col_values(1)
+    try:
+      gc2 = gspread.login(username, password)
+      usersheet = gc2.open("Users").sheet1
+      emails = usersheet.col_values(1)
+    except:
+      return
     email = adict["email"].lower()
     emaildex = emails.index(email) + 1
     if email in emails:
       userange = 'H%s:I%s' % (emaildex, emaildex)
-      CellList = usersheet.range(userange)
-      CellList[0].value = datetimestamp()
-      CellList[1].value = str(int(CellList[1].value) + 1)
-      usersheet.update_cells(CellList)
+      try:
+        CellList = usersheet.range(userange)
+        CellList[0].value = datetimestamp()
+        CellList[1].value = str(int(CellList[1].value) + 1)
+        usersheet.update_cells(CellList)
+      except:
+        return
     else:
       user = []
       user.append(adict["email"].lower())
@@ -240,7 +246,10 @@ def LogUser(authkey):
       user.append(datetimestamp())
       user.append('')
       user.append('1')
-      InsertRows(usersheet, [user], len(emails))
+      try:
+        InsertRows(usersheet, [user], len(emails))
+      except:
+        return
 
 #  ____  _             _       _       
 # |  _ \(_)_ __  _   _| | __ _| |_ ___ 
