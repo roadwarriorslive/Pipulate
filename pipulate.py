@@ -221,7 +221,15 @@ def LogUser(authkey):
     gc2 = gspread.login(username, password)
     usersheet = gc2.open("Users").sheet1
     emails = usersheet.col_values(1)
-    if adict["email"].lower() not in emails:
+    email = adict["email"].lower()
+    emaildex = emails.index(email) + 1
+    if email in emails:
+      userange = 'H%s:I%s' % (emaildex, emaildex)
+      CellList = usersheet.range(userange)
+      CellList[0].value = datetimestamp()
+      CellList[1].value = str(int(CellList[1].value) + 1)
+      usersheet.update_cells(CellList)
+    else:
       user = []
       user.append(adict["email"].lower())
       user.append(adict["name"])
@@ -1185,6 +1193,18 @@ def gethtml(url):
       return None
     globs.html = globs.hobj.text
   return globs.html
+
+def datetimestamp():
+  i = datetime.datetime.now()
+  return "%s" % i.isoformat() 
+
+def datestamp():
+  now = datetime.datetime.now()
+  now = now.strftime("%B %d, %Y")
+  return now
+  
+def timestamp():
+  return datetime.datetime.today().strftime('%X')
 
 def getargval(anarg, defargval, onerow):
   for coldex, acol in enumerate(globs.row1):

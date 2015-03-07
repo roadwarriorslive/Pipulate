@@ -14,18 +14,6 @@ def walkdict(obj, key):
         return v
   return None
 
-def datetimestamp():
-  i = datetime.datetime.now()
-  return "%s" % i.isoformat() 
-
-def datestamp():
-  now = datetime.datetime.now()
-  now = now.strftime("%B %d, %Y")
-  return now
-  
-def timestamp():
-  return datetime.datetime.today().strftime('%X')
-
 def response(url):
   if globs.hobj:
     return globs.hobj.status_code
