@@ -168,6 +168,10 @@ def main():                                         # visiting app's homepage.
       session['oa2'] = request.args.get("access_token")
       session['loggedin'] = "1"
       session['i'] -= 1 #Don't skip a message, just becuse I redirect.
+      api = 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='
+      api = api + request.args.get("access_token")
+      ujson = requests.get(api)
+      gotcha(ujson.text)
       if 'u' in session :
         out("Redirecting with a filed-in URL")
         out("EXITING MAIN FUNCTION REDIRECT", "0", '-')
