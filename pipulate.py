@@ -207,6 +207,7 @@ def LogUser(authkey):
   api = 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='
   api = api + authkey
   ujson = requests.get(api)
+  adict = ujson.json()
   import os.path
   filename = "/var/opt/pipulate.pkl"
   if os.path.isfile(filename) and os.path.getsize(filename) > 0:
@@ -220,18 +221,18 @@ def LogUser(authkey):
     gc2 = gspread.login(username, password)
     usersheet = gc2.open("Users").sheet1
     emails = usersheet.col_values(1)
-    adict = ujson.json()
-    user = []
-    user.append(adict["email"])
-    user.append(adict["name"])
-    user.append(adict["link"])
-    user.append(adict["locale"])
-    user.append(adict["gender"])
-    user.append(adict["id"])
-    user.append(datetimestamp())
-    user.append('')
-    user.append('1')
-    InsertRows(usersheet, [user], len(emails))
+    if adict["email"].lower() not in emails:
+      user = []
+      user.append(adict["email"].lower())
+      user.append(adict["name"])
+      user.append(adict["link"])
+      user.append(adict["locale"])
+      user.append(adict["gender"])
+      user.append(adict["id"])
+      user.append(datetimestamp())
+      user.append('')
+      user.append('1')
+      InsertRows(usersheet, [user], len(emails))
 
 #  ____  _             _       _       
 # |  _ \(_)_ __  _   _| | __ _| |_ ___ 
