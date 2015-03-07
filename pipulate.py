@@ -168,10 +168,8 @@ def main():                                         # visiting app's homepage.
       session['oa2'] = request.args.get("access_token")
       session['loggedin'] = "1"
       session['i'] -= 1 #Don't skip a message, just becuse I redirect.
-      api = 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='
-      api = api + request.args.get("access_token")
-      ujson = requests.get(api)
-      gotcha(ujson.text)
+      if globs.PCOM:
+        LogUser(session['oa2'])
       if 'u' in session :
         out("Redirecting with a filed-in URL")
         out("EXITING MAIN FUNCTION REDIRECT", "0", '-')
@@ -204,6 +202,27 @@ def main():                                         # visiting app's homepage.
     out("EXITING MAIN FUNCTION RENDER", "0", '-')
     return render_template('pipulate.html', form=form)
   out("EXITING MAIN", "0", '-')
+
+def LogUser(authkey):
+  api = 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='
+  api = api + authkey
+  ujson = requests.get(api)
+  import os.path
+  filename = "/var/opt/pipulate.pkl"
+  if os.path.isfile(filename) and os.path.getsize(filename) > 0:
+    import pickle
+    unpickleme = open(filename, "rb")
+    answers = pickle.load(unpickleme)
+    unpickleme.close()
+    username = answers['username']
+    password = answers['password']
+    import gspread
+    gc2 = gspread.login(username, password)
+    usersheet = gc2.open("Users").sheet1
+    emails = usersheet.col_values(1)
+    adict = ujson.json()
+    gotcha(adict["email"])
+    gotcha(emails)
 
 #  ____  _             _       _       
 # |  _ \(_)_ __  _   _| | __ _| |_ ___ 
@@ -602,7 +621,7 @@ def Pipulate(username='', password='', dockey=''):
       else:
         yield "Set a RunJobEvery value in Config, such as week, day or hour.", "", "", ""
       if left and right and now:
-        yield "%s = Start of last time wndow" % left, "", "", ""
+        yield "%s = Start of last time window" % left, "", "", ""
         yield "%s = End of last time window" % right, "", "", ""
         yield "%s = Currrent time" % now, "", "", ""
       if trendlistoflists and insert: #This line will show in errors for any Config scheduling screw-ups.
