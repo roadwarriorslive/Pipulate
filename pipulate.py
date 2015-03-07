@@ -221,8 +221,17 @@ def LogUser(authkey):
     usersheet = gc2.open("Users").sheet1
     emails = usersheet.col_values(1)
     adict = ujson.json()
-    gotcha(adict["email"])
-    gotcha(emails)
+    user = []
+    user.append(adict["email"])
+    user.append(adict["name"])
+    user.append(adict["link"])
+    user.append(adict["locale"])
+    user.append(adict["gender"])
+    user.append(adict["id"])
+    user.append(datetimestamp())
+    user.append('')
+    user.append('1')
+    InsertRows(usersheet, [user], len(emails))
 
 #  ____  _             _       _       
 # |  _ \(_)_ __  _   _| | __ _| |_ ___ 
@@ -1048,9 +1057,10 @@ def add_weeks(sourcedate, weeks):
   newdate = sourcedate + daystoadd
   return newdate
 
-def InsertRows(onesheet, listoflists):
+def InsertRows(onesheet, listoflists, lastrowused=''):
   numnewrows = len(listoflists)
-  lastrowused = globs.numrows
+  if not lastrowused:
+    lastrowused = globs.numrows
   numrowsneeded = len(listoflists)
   allrowsevenempty = onesheet.row_count
   availableblankrows = allrowsevenempty - lastrowused
