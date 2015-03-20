@@ -544,6 +544,9 @@ def Pipulate(username='', password='', dockey=''):
         if onerow:
           if rowdex == 2: #Looking for trending requests
             if '*' in onerow:
+              #for i, x in enumerate(onerow):
+              #  if x is None:
+              #    onerow[i] = ''
               trended = True
               out("Found asterisks on row 2 -- trending activated!")
               trendlistoflists.append(onerow)

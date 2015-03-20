@@ -2,7 +2,7 @@ from flask import session
 
 def documentation():
   s = []
-  s.append(['Pipulate Slides', 'http://goo.gl/QPQb3t'])
+  s.append(['Introductory Demo', 'http://goo.gl/QPQb3t'])
   return s
 
 def pipinit():
