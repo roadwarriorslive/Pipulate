@@ -7,17 +7,10 @@ def documentation():
 
 def pipinit():
   s = []
-  s.append(['https://www.youtube.com/user/miklevin','*','*','*'])
-  s.append(['https://www.youtube.com/user/ForeverG5','*','*','*'])
-  s.append(['https://www.youtube.com/user/PewDiePie','*','*','*'])
-  return s
-
-def pipinit2():
-  s = []
-  s.append(['http://mikelev.in','*','*','*','*','*','*'])
-  s.append(['http://levinux.com','*','*','*','*','*','*'])
-  s.append(['http://pipulate.com','*','*','*','*','*','*'])
-  s.append(['http://www.flyingpointdigital.com','*','*','*','*','*','*'])
+  s.append(['YouTube Subscribers', 'https://www.youtube.com/user/miklevin','*','','','*','*','*','*'])
+  s.append(['Twitter Followers', 'https://twitter.com/miklevin','','*','','','','*','*'])
+  s.append(['FB page Likes & Shares', 'https://www.facebook.com/mikelevinux','','','*','*','*','*','*'])
+  s.append(['Homepage Counters', 'http://mikelev.in','','','*','','*','*','*'])
   return s
 
 def dontgetfrustrated(x):

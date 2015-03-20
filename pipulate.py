@@ -224,9 +224,11 @@ def LogUser(authkey):
       emails = usersheet.col_values(1)
     except:
       return
-    email = adict["email"].lower()
-    emaildex = emails.index(email) + 1
+    email = ''
+    if "email" in adict:
+      email = adict["email"].lower()
     if email in emails:
+      emaildex = emails.index(email) + 1
       userange = 'H%s:I%s' % (emaildex, emaildex)
       try:
         CellList = usersheet.range(userange)
@@ -319,7 +321,7 @@ def Pipulate(username='', password='', dockey=''):
             break
           except gspread.exceptions.SpreadsheetNotFound:
             yield "Please give the document a name to force first save.", "", "", ""
-            break
+            Stop()
           except Exception as e:
             yield dontgetfrustrated(x)
             out("Retry login %s of %s" % (x, 10))
@@ -341,7 +343,7 @@ def Pipulate(username='', password='', dockey=''):
         cell = gdoc.sheet1.find(anything)
       except gspread.exceptions.CellNotFound:
         # Questionmark replacement tab
-        headers = ['URL', 'Subscribers', 'datetimestamp', 'Count']
+        headers = ['Example Name', 'URL',  'Subscribers', 'Followers', 'Likes', 'Shares', 'Plusses', 'DateTimeStamp', 'Count']
         yield lock
         try:
           InitTab(gdoc, "sheet1", headers, pipinit())
@@ -710,6 +712,7 @@ def Pipulate(username='', password='', dockey=''):
             time.sleep(2)
             yield dontgetfrustrated(x)
         if stop:
+          yield "GData Timed Out","Sorry, GDATA Failed. Try again.","",""
           Stop()
         yield unlock
 
@@ -860,7 +863,7 @@ def Pipulate(username='', password='', dockey=''):
       loginmsg = ""
       if session and 'loggedin' in session and session['loggedin'] != '1':
         loginmsg = "Login link under the upper-left \"burger button\"."
-      yield "Session timed out. Try again", "If at first you don't succeed, pipulate again.", "", ""
+      # yield "Session timed out. Try again", "If at first you don't succeed, pipulate again.", "", ""
     else:
       yield fixme, "", "", ""
       yield "Pipulation prematurely terminated.", "", "", ""
@@ -894,7 +897,7 @@ def getLoginlink():
   return "%s?%s" % (baseurl, urlencode(qsdict))
 
 def getBookmarklet():
-  return '''javascript:(function(){window.open('http://%s/?u='+encodeURIComponent(document.location.href), 'Pipulate', 'toolbar=0,resizable=1,scrollbars=1,status=1,width=640,height=600');})();''' % (request.headers['Host'])
+  return '''javascript:(function(){window.open('http://%s/?u='+encodeURIComponent(document.location.href), 'Pipulate', 'toolbar=0,resizable=1,scrollbars=1,status=1,width=640,height=650');})();''' % (request.headers['Host'])
 
 def getLogoutlink():
   from urllib import quote_plus

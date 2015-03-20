@@ -64,7 +64,7 @@ hey, it's free. Better-yet, install it on some real hardware:
 
 ## Debian/Ubuntu
 From a Terminal:
-- sudo apt-get install python-pip python-dev
+- sudo apt-get install python-pip python-dev python-lxml
 - sudo pip install requests
 - sudo pip install flask_wtf
 - sudo pip install gspread
@@ -77,6 +77,7 @@ From a Terminal:
 ## Mac OS X
 From a Terminal:
 - (Python 2.7 & Distribute usually already installed)
+- lxml? Must check if Macs have that by default.
 - sudo easy_install pip
 - sudo pip install requests
 - sudo pip install flask_wtf
@@ -91,6 +92,7 @@ From a Terminal:
 - Install CygWin with the following selected:
   - python 2.7
   - git
+  - (lxml? Must check cygwin installer)
 - Set Windows path to include Python (I will document better)
 From a CygWin Shell (MinTTY):
 - Download and run to get easy_install:
