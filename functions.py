@@ -2,6 +2,12 @@ import requests, datetime
 from flask import session
 import globs
 
+def positions():
+  api = "http://ajax.googleapis.com/ajax/services/search/web?rsz=large&v=1.0&q="
+  respobj = requests.get(api+'Mike+Levin')
+  adict = respobj.json()
+  return adict
+
 #This is only here to remind myself it's available for user functions.
 def walkdict(obj, key):
   stack = obj.items()
