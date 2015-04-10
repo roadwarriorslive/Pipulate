@@ -1,9 +1,9 @@
-import requests, datetime
+import requests, datetime, json
 from flask import session
 import globs
 
 def rawserps(keyword):
-  import time, json
+  import time
   times = 4
   api = "http://ajax.googleapis.com/ajax/services/search/web"
   returnme = []
@@ -15,7 +15,6 @@ def rawserps(keyword):
   return json.dumps(returnme)
 
 def positions(rawserps=''):
-  import json
   if rawserps:
     rawserps = json.loads(rawserps)
     easydict = {}
@@ -26,9 +25,15 @@ def positions(rawserps=''):
         easydict[serpos] = result['url']
         serpos += 1
     return json.dumps(easydict)
-
   else:
     return "I would execute rawserps"
+
+def position(site, positions=''):
+  if positions:
+    urldict = json.loads(positions)
+    for thepos, aurl in urldict.iteritems():
+      if site in aurl:
+        return thepos
 
 #This is only here to remind myself it's available for user functions.
 def walkdict(obj, key):
