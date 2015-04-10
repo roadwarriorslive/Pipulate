@@ -17,12 +17,15 @@ def rawserps(keyword):
 def positions(rawserps=''):
   import json
   if rawserps:
-    serplist = json.loads(rawserps)
-    serplist = serplist[0]["responseData"]["results"]
-    shortdict = {}
-    for i, result in enumerate(serplist):
-      shortdict[i+1] = result['url']
-    return json.dumps(shortdict)
+    rawserps = json.loads(rawserps)
+    easydict = {}
+    serpos = 1
+    for serpage in rawserps:
+      serpage = serpage["responseData"]["results"]
+      for result in serpage:
+        easydict[serpos] = result['url']
+        serpos += 1
+    return json.dumps(easydict)
 
   else:
     return "I would execute rawserps"
