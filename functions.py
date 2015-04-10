@@ -35,6 +35,13 @@ def position(site, positions=''):
       if site in aurl:
         return thepos
 
+def topurl(site, positions=''):
+  if positions:
+    urldict = json.loads(positions)
+    for thepos, aurl in urldict.iteritems():
+      if site in aurl:
+        return aurl
+
 #This is only here to remind myself it's available for user functions.
 def walkdict(obj, key):
   stack = obj.items()
