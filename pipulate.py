@@ -1236,7 +1236,7 @@ def adq(aval):
   if aval == None:
     return None #None-in/None-out. This special keyword shouldn't be quoted.
   else:
-    return "'%s'" % (aval) #ALMOST everything else should be quoted.
+    return "r'%s'" % (aval) #ALMOST everything else should be quoted.
 
 from functions import *
 from managelists import *

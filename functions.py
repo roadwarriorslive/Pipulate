@@ -2,11 +2,30 @@ import requests, datetime
 from flask import session
 import globs
 
-def positions():
-  api = "http://ajax.googleapis.com/ajax/services/search/web?rsz=large&v=1.0&q="
-  respobj = requests.get(api+'Mike+Levin')
-  adict = respobj.json()
-  return adict
+def rawserps(keyword):
+  import time, json
+  times = 4
+  api = "http://ajax.googleapis.com/ajax/services/search/web"
+  returnme = []
+  for start in [8*n for n in range(0,times)]:
+    pdict = {'rsz':'large', 'v':'1.0', 'q': keyword, 'start':start}
+    respobj = requests.get(api, params=pdict)
+    returnme.append(respobj.json())
+    time.sleep(1)
+  return json.dumps(returnme)
+
+def positions(rawserps=''):
+  import json
+  if rawserps:
+    serplist = json.loads(rawserps)
+    serplist = serplist[0]["responseData"]["results"]
+    shortdict = {}
+    for i, result in enumerate(serplist):
+      shortdict[i+1] = result['url']
+    return json.dumps(shortdict)
+
+  else:
+    return "I would execute rawserps"
 
 #This is only here to remind myself it's available for user functions.
 def walkdict(obj, key):
