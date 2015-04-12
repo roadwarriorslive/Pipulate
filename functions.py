@@ -43,7 +43,12 @@ def positions(keyword, rawserps=''):
   else:
     return "Error"
 
-def position(site, positions=''):
+def position(keyword, site='', positions=''):
+  if not positions:
+    def gpositions(keyword):
+      global positions
+      return positions(keyword)
+    positions = gpositions(keyword)
   if positions:
     urldict = json.loads(positions)
     for thepos, aurl in urldict.iteritems():
