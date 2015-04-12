@@ -13,7 +13,7 @@ def walkdict(obj, key):
         return v
   return None
 
-def rawserps(keyword):
+def serps(keyword):
   times = 2
   api = "http://ajax.googleapis.com/ajax/services/search/web"
   returnme = []
@@ -24,17 +24,17 @@ def rawserps(keyword):
     time.sleep(1)
   return json.dumps(returnme)
 
-def positions(keyword, rawserps=''):
-  if not rawserps:
-    def grawserps(keyword):
-      global rawserps
-      return rawserps(keyword)
-    rawserps = grawserps(keyword)
-  if rawserps:
-    rawserps = json.loads(rawserps)
+def positions(keyword, serps=''):
+  if not serps:
+    def gserps(keyword):
+      global serps
+      return serps(keyword)
+    serps = gserps(keyword)
+  if serps:
+    serps = json.loads(serps)
     easydict = {}
     serpos = 1
-    for serpage in rawserps:
+    for serpage in serps:
       serpage = serpage["responseData"]["results"]
       for result in serpage:
         easydict[serpos] = result['url']
@@ -43,7 +43,7 @@ def positions(keyword, rawserps=''):
   else:
     return "Error"
 
-def position(keyword, site='', positions=''):
+def position(keyword, site, positions=''):
   if not positions:
     def gpositions(keyword):
       global positions
@@ -54,6 +54,7 @@ def position(keyword, site='', positions=''):
     for thepos, aurl in urldict.iteritems():
       if site in aurl:
         return thepos
+    #return "> " % len(positions)
 
 def topurl(site, positions=''):
   if positions:
