@@ -1,9 +1,19 @@
-import requests, datetime, json
+import requests, datetime, json, time
 from flask import session
 import globs
 
+def walkdict(obj, key):
+  stack = obj.items()
+  while stack:
+    k, v = stack.pop()
+    if isinstance(v, dict):
+      stack.extend(v.iteritems())
+    else:
+      if k == key:
+        return v
+  return None
+
 def rawserps(keyword):
-  import time
   times = 4
   api = "http://ajax.googleapis.com/ajax/services/search/web"
   returnme = []
@@ -41,18 +51,6 @@ def topurl(site, positions=''):
     for thepos, aurl in urldict.iteritems():
       if site in aurl:
         return aurl
-
-#This is only here to remind myself it's available for user functions.
-def walkdict(obj, key):
-  stack = obj.items()
-  while stack:
-    k, v = stack.pop()
-    if isinstance(v, dict):
-      stack.extend(v.iteritems())
-    else:
-      if k == key:
-        return v
-  return None
 
 def response(url):
   if globs.hobj:
