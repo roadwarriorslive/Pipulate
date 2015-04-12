@@ -2,7 +2,7 @@ from flask import session
 
 def documentation():
   s = []
-  s.append(['Slideshow Introduuction', 'http://goo.gl/QPQb3t'])
+  s.append(['Slideshow Introduction', 'http://goo.gl/QPQb3t'])
   s.append(['Documentation', 'http://goo.gl/p2zQa4'])
   return s
 
