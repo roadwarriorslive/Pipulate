@@ -1210,8 +1210,9 @@ def gethtml(url):
   return globs.html
 
 def datetimestamp():
+  #i = datetime.datetime.now()
   i = datetime.datetime.now()
-  return "%s" % i.isoformat() 
+  return i.strftime("%c") 
 
 def datestamp():
   now = datetime.datetime.now()
@@ -1240,14 +1241,4 @@ def adq(aval):
 
 from functions import *
 from managelists import *
-
-# if len(sys.argv) > 1:
-#   arg1 = sys.argv[1][0].lower()
-#   if arg1 == 'c':
-#     Configure()        
-#   elif arg1 == 's':
-#     Scheduler()
-#   else:
-#     print("Unsupported argument")
-#     exit()             
 
