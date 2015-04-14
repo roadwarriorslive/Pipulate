@@ -1210,8 +1210,8 @@ def gethtml(url):
   return globs.html
 
 def datetimestamp():
-  #i = datetime.datetime.now()
   i = datetime.datetime.now()
+  i = i - datetime.timedelta(hours=4)
   return i.strftime("%c") 
 
 def datestamp():
