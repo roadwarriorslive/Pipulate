@@ -232,7 +232,7 @@ def LogUser(authkey):
       userange = 'H%s:I%s' % (emaildex, emaildex)
       try:
         CellList = usersheet.range(userange)
-        CellList[0].value = datetimestamp()
+        CellList[0].value = timestamp()
         CellList[1].value = str(int(CellList[1].value) + 1)
         usersheet.update_cells(CellList)
       except:
@@ -245,7 +245,7 @@ def LogUser(authkey):
       user.append(adict["locale"])
       user.append(adict["gender"])
       user.append(adict["id"])
-      user.append(datetimestamp())
+      user.append(timestamp())
       user.append('')
       user.append('1')
       try:
@@ -343,7 +343,7 @@ def Pipulate(username='', password='', dockey=''):
         cell = gdoc.sheet1.find(anything)
       except gspread.exceptions.CellNotFound:
         # Questionmark replacement tab
-        headers = ['Example Name', 'URL',  'Subscribers', 'Followers', 'Likes', 'Shares', 'Plusses', 'DateTimeStamp', 'Count']
+        headers = ['Example Name', 'URL',  'Subscribers', 'Followers', 'Likes', 'Shares', 'Plusses', 'TimeStamp', 'Count']
         yield lock
         try:
           InitTab(gdoc, "sheet1", headers, pipinit())
@@ -581,7 +581,7 @@ def Pipulate(username='', password='', dockey=''):
       # | |_| | | | | | |  __/ | (_>  < | (_| (_) | |_| | | | | |_ 
       #  \__|_|_| |_| |_|\___|  \___/\/  \___\___/ \__,_|_| |_|\__|
       #
-      out("Count and datetimestamp columns for trending", '2')
+      out("Count and timestamp columns for trending", '2')
       times = []
       if trended and 'count' in globs.row1:
         backintime = globs.numrows - len(trendlistoflists) + 1
@@ -600,12 +600,12 @@ def Pipulate(username='', password='', dockey=''):
           if counts[0] == '*':
             counts[0] = 0
           #Here we need to detect if there's rows left over.
-          timeletter = globs.letter[globs.row1.index('datetimestamp') + 1]
+          timeletter = globs.letter[globs.row1.index('timestamp') + 1]
           mayhaverun = "%s%s:%s%s" % (timeletter, backintime, timeletter, globs.numrows)
           try:
             CellList = onesheet.range(mayhaverun)
           except:
-            out("Failed to load the trending datetimestamp range.")
+            out("Failed to load the trending timestamp range.")
           for onecell in CellList:
             times.append(onecell.value)
           trendingrowsfinished = times.count('?') == 0
@@ -625,7 +625,7 @@ def Pipulate(username='', password='', dockey=''):
           nextnum = int(counts[0]) + 1
           for onelist in trendlistoflists:
             onelist[globs.row1.index('count')] = nextnum
-      out("Count and datetimestamp columns for trending", '2', '-')
+      out("Count and timestamp columns for trending", '2', '-')
 
       #  _                     _                           
       # (_)_ __  ___  ___ _ __| |_   _ __ _____      _____ 
@@ -1211,12 +1211,12 @@ def gethtml(url):
     globs.html = globs.hobj.text
   return globs.html
 
-def convertisotime(datetimestamp):
+def convertisotime(timestamp):
   import re
-  i = datetime.datetime(*map(int, re.split('[^\d]', datetimestamp)[:-1]))
+  i = datetime.datetime(*map(int, re.split('[^\d]', timestamp)[:-1]))
   return i.strftime("%m/%d/%Y %H:%M:%S") 
 
-def datetimestamp():
+def timestamp():
   i = datetime.datetime.now()
   #i = i - datetime.timedelta(hours=4)
   return i.strftime("%m/%d/%Y %H:%M:%S") 
@@ -1226,9 +1226,6 @@ def datestamp():
   now = now.strftime("%B %d, %Y")
   return now
   
-def timestamp():
-  return datetime.datetime.today().strftime('%X')
-
 def getargval(anarg, defargval, onerow):
   for coldex, acol in enumerate(globs.row1):
     if acol == anarg: #Found column named same thing as a required argument.
