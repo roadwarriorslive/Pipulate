@@ -639,7 +639,10 @@ def Pipulate(username='', password='', dockey=''):
       elif trended:
         pass
       else:
-        qstart = 1
+        try:
+          qstart = onesheet.find("?").row
+        except:
+          qstart = 1
       #jobstats = timewindow(times[0])
       if times:
         insert, name, number, left, right, now = timewindow(times[0])
