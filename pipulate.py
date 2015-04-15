@@ -680,7 +680,7 @@ def Pipulate(username='', password='', dockey=''):
           pass
       #globs.numrows = len(onesheet.col_values(1))
       globs.numrows = globs.numrows + len(trendlistoflists) #faster
-      out("Insert new rows for new tine inrement trending", '2', '-')
+      out("Insert new rows for new time inrement trending", '2', '-')
       #                        _   _                                    _        
       #   __ _ _   _  ___  ___| |_(_) ___  _ __    _ __ ___   __ _ _ __| | _____ 
       #  / _` | | | |/ _ \/ __| __| |/ _ \| '_ \  | '_ ` _ \ / _` | '__| |/ / __|
@@ -1015,8 +1015,6 @@ def timewindow(amiinnewtimewindow):
     now = datetime.datetime.now()
     now2 = now
     try:
-      #import re
-      #tick = datetime.datetime(*map(int, re.split('[^\d]', amiinnewtimewindow)[:-1]))
       tick = datetime.datetime.strptime(amiinnewtimewindow, "%m/%d/%Y %H:%M:%S") 
     except:
       tick = now #double-check this fall-over action
@@ -1209,6 +1207,11 @@ def gethtml(url):
       return None
     globs.html = globs.hobj.text
   return globs.html
+
+def convertisotime(datetimestamp):
+  import re
+  i = datetime.datetime(*map(int, re.split('[^\d]', datetimestamp)[:-1]))
+  return i.strftime("%m/%d/%Y %H:%M:%S") 
 
 def datetimestamp():
   i = datetime.datetime.now()
