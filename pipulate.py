@@ -1015,8 +1015,9 @@ def timewindow(amiinnewtimewindow):
     now = datetime.datetime.now()
     now2 = now
     try:
-      import re
-      tick = datetime.datetime(*map(int, re.split('[^\d]', amiinnewtimewindow)[:-1]))
+      #import re
+      #tick = datetime.datetime(*map(int, re.split('[^\d]', amiinnewtimewindow)[:-1]))
+      tick = datetime.datetime.strptime(amiinnewtimewindow, "%m/%d/%Y %H:%M:%S") 
     except:
       tick = now #double-check this fall-over action
     left = None
@@ -1211,7 +1212,7 @@ def gethtml(url):
 
 def datetimestamp():
   i = datetime.datetime.now()
-  i = i - datetime.timedelta(hours=4)
+  #i = i - datetime.timedelta(hours=4)
   return i.strftime("%m/%d/%Y %H:%M:%S") 
 
 def datestamp():
