@@ -1212,7 +1212,7 @@ def gethtml(url):
 def datetimestamp():
   i = datetime.datetime.now()
   i = i - datetime.timedelta(hours=4)
-  return i.strftime("%c") 
+  return i.strftime("%m/%d/%Y %H:%M:%S") 
 
 def datestamp():
   now = datetime.datetime.now()
