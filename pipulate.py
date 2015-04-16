@@ -20,6 +20,8 @@
                                best attempt, for
                                   my daughter
                                       Adi
+
+                            Succeed With Pipulate!
 """
 import sys, os, socket
 socket.setdefaulttimeout(10.0)                            # Our story begins with Talmudic style commentaries 
@@ -318,7 +320,7 @@ def Pipulate(username='', password='', dockey=''):
           except gspread.exceptions.NoValidUrlKeyFound:
             yield "Currently, the URL must be a Google Spreadsheet.", "", "", ""
             yield "<a href='https://docs.google.com/spreadsheets/create' target='_new'>Create</a> a new Google Spreadsheet and click Bookmarklet again.", "Google Spreadsheet Not Found.", "", ""
-            break
+            Stop()
           except gspread.exceptions.SpreadsheetNotFound:
             yield "Please give the document a name to force first save.", "", "", ""
             Stop()
