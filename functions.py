@@ -1,6 +1,7 @@
 import requests, datetime, json, time
 from flask import session
 import globs
+from common import *
 
 def walkdict(obj, key):
   stack = obj.items()
@@ -12,6 +13,11 @@ def walkdict(obj, key):
       if k == key:
         return v
   return None
+
+def crawl():
+  onesheet = globs.sheet
+  InsertRows(onesheet, [['foo1', 'x'],['foo2', 'y'],['foo3', 'z']], 2)
+  return "Hello"
 
 def serps(keyword):
   times = 2
