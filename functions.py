@@ -14,7 +14,17 @@ def walkdict(obj, key):
         return v
   return None
 
-def crawl():
+def crawl(url):
+  import lxml.html
+  ro = requests.get(url)
+  doc = lxml.html.fromstring(ro.text)
+  links = doc.xpath('//a')
+  return links
+  for link in links:
+    text = link.xpath("//text()")
+    href = link.xpath("//@href")
+    print(href)
+  gotcha(links)
   onesheet = globs.sheet
   InsertRows(onesheet, [['foo1', 'x'],['foo2', 'y'],['foo3', 'z']], 2)
   return "Hello"

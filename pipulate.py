@@ -59,27 +59,6 @@ def Stop():
   else:
     pass
 
-def gotcha(x=''):
-  print('''
-                   ____       _       _             _   _   _ 
-                  / ___| ___ | |_ ___| |__   __ _  | | | | | |
-                 | |  _ / _ \| __/ __| '_ \ / _` | | | | | | |
-                 | |_| | (_) | || (__| | | | (_| | |_| |_| |_|
-                  \____|\___/ \__\___|_| |_|\__,_| (_) (_) (_)
-  ''')
-  if x:
-    if type(x) == list or type(x) == dict or type(x) == tuple:
-      import pprint
-      print("\n")
-      pprint.pprint(x)
-      print("\n")
-    else:
-      out("Gotcha !!! %s !!! </%s>" % (x, globs.nest[-1:]))
-  else:
-    out("Gotcha!!! </%s>" % globs.nest[-1:])
-  globs.nest = globs.nest[:-2]
-  raise SystemExit
-
 def out(msg, symbol='', dent=''):
   total = 80
   if globs.DBUG:
@@ -827,7 +806,10 @@ def Pipulate(username='', password='', dockey=''):
 
           out("Finished processing row. Updating spreadsheet...")
           newrow = ['' if x==None else x for x in newrow]
-          yield "", "", json.dumps(newrow), ""
+          try:
+            yield "", "", json.dumps(newrow), ""
+          except:
+            yield "", "", newrow, ""
           for index, onecell in enumerate(CellList):
             onecell.value = newrow[index]
             result = None
