@@ -82,6 +82,7 @@ From a Terminal:
 - sudo pip install requests
 - sudo pip install flask_wtf
 - sudo pip install gspread
+- sudo pip install lxml
 - cd ~/Desktop (or wherever)
 - git clone https://github.com/miklevin/pipulate.git
 - cd pipulate

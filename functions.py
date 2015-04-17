@@ -18,16 +18,13 @@ def crawl(url):
   import lxml.html
   ro = requests.get(url)
   doc = lxml.html.fromstring(ro.text)
-  links = doc.xpath('//a')
-  return links
-  for link in links:
-    text = link.xpath("//text()")
-    href = link.xpath("//@href")
-    print(href)
-  gotcha(links)
+  somelinks = doc.xpath('/html/body//a/@href')
+  links = []
+  for alink in somelinks:
+    links.append([alink, ''])
   onesheet = globs.sheet
-  InsertRows(onesheet, [['foo1', 'x'],['foo2', 'y'],['foo3', 'z']], 2)
-  return "Hello"
+  InsertRows(onesheet, links, 2)
+  return "done"
 
 def serps(keyword):
   times = 2
