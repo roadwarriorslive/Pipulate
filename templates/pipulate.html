@@ -261,8 +261,6 @@
     </div>
     </nav>
     <div id="content">
-
-
       {% if session and 'loggedin' in session and session['loggedin'] == '1': %}
         <form id="pipform" method="POST" action="/">
           <div id="paste"><span id="pastelabel">URL: </span>{{ form.pipurl(size=60) }}</div>
@@ -271,11 +269,10 @@
           </button>
         </form>
         {% if request.method == 'POST': %}
-              <script>
-                lockbutton();
-              </script>
-            {% endif %}
-
+          <script>
+            lockbutton();
+          </script>
+        {% endif %}
         <div id="magicdiv">
           <div id="spinner" class="spinner">
             <div class="bounce1"></div>

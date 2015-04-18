@@ -96,6 +96,7 @@ def main():                                         # visiting app's homepage.
 
   out("ENTERED MAIN FUNCTION", "0")
   STREAMIT = False                                  # Default to not streaming.
+  ONSHEET = False                                   # Convince me we're on a sheet
   form = PipForm(csrf_enabled=False)                # Initialize form for UI.
   if session:                                       # I've seen you before!
     if 'oa2' in session:                            # and I think you're logged in
@@ -144,6 +145,8 @@ def main():                                         # visiting app's homepage.
       if 'u' in request.args:
         form.pipurl.data = request.args.get('u')
         session['u'] = request.args.get('u')
+        if 'https://docs.google.com/spreadsheets' in form.pipurl.data:
+          ONSHEET = True
       if session and 'u' in session:
         form.pipurl.data = session['u']
     if form.pipurl.data and request.url_root == url_root(form.pipurl.data):
@@ -151,8 +154,11 @@ def main():                                         # visiting app's homepage.
   out("Selecting template method.")
   if STREAMIT:
     return Response(stream_template('pipulate.html', form=form, data=STREAMIT))
+  elif ONSHEET:
+    out("SPREADSHEET: EXITING MAIN FUNCTION RENDER", "0", '-')
+    return render_template('pipulate.html', form=form)
   else:
-    out("EXITING MAIN FUNCTION RENDER", "0", '-')
+    out("OFF-SHEET: EXITING MAIN FUNCTION RENDER", "0", '-')
     return render_template('pipulate.html', form=form)
   out("EXITING MAIN", "0", '-')
 
@@ -271,7 +277,7 @@ def Pipulate(username='', password='', dockey=''):
             Stop()
           except gspread.exceptions.NoValidUrlKeyFound:
             yield "Currently, the URL must be a Google Spreadsheet.", "", "", ""
-            yield "<a href='https://docs.google.com/spreadsheets/create' target='_new'>Create</a> and name a new Google Spreadsheet and click the Pipulate Bookmarklet again.", "Google Spreadsheet Not Found.", "", ""
+            yield "<a href='https://docs.google.com/spreadsheets/create' target='_new'>Create</a> and name a new Spreadsheet and click the Pipulate Bookmarklet again.", "Google Spreadsheet Not Found.", "", ""
             yield 'New to Pipulate? Watch the <a target="_blank" href="http://goo.gl/v71kw8">Demo</a> and read the <a target="_blank" href="http://goo.gl/p2zQa4">Docs</a>.', "", "", ""
             Stop()
           except gspread.exceptions.SpreadsheetNotFound:
