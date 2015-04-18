@@ -286,12 +286,13 @@ def Pipulate(username='', password='', dockey=''):
         for x in range(10):
           yield lock
           try:
-            gdoc = gsp.open_by_url(globs.PIPURL) #HTTPError
+            gdoc = gsp.open_by_url(globs.PIPURL)
             stop = False
             break
           except gspread.httpsession.HTTPError, e:
             out("Login appeared successful, but rejected on document open attempt.")
-            yield "Please Log In again first.", "Login under the \"burger button\" in the upper-right.", "", ""
+            yme = 'Please <a href="%s">Log In</a> again first.' % getLoginlink()
+            yield yme, "Login under the \"burger button\" in the upper-right.", "", ""
             if session and 'loggedin' in session:
               session.pop('loggedin', None)
             if 'u' not in session and globs.PIPURL:
@@ -312,8 +313,6 @@ def Pipulate(username='', password='', dockey=''):
           yield "spinoff", "", "", ""
           yield badtuple
           Stop()
-
-
 
       yield unlock
       out("Google Spreadsheet successfully opened.")
@@ -340,11 +339,10 @@ def Pipulate(username='', password='', dockey=''):
 
       # Config Tab
       yield ", Config", "", "", ""
-      #yield "Checking Tabs: Config", "Then we check for tabs...", "", ""
       headers = ['NAME', 'VALUE']
       config = []
       config.append(['RunJobEvery','hour'])
-      #config.append(['RowThrottleNumber','1'])
+      config.append(['MaxRowsPerHour','1'])
       yield lock
       try:
         InitTab(gdoc, 'Config', headers, config)
@@ -555,7 +553,7 @@ def Pipulate(username='', password='', dockey=''):
       yme = "%s-Row trending-job found. Analyzing job frequency." % len(trendlistoflists)
       yield yme, "", "", ""
       trendingrowsfinished = True
-      rowthrottlenumber = 0
+      maxrowsperhour = 0
       out("Done looking for asterisks", "2", "-")
 
       #  _   _                   ___                           _   
@@ -593,15 +591,15 @@ def Pipulate(username='', password='', dockey=''):
             times.append(onecell.value)
           trendingrowsfinished = times.count('?') == 0
           if trendingrowsfinished:
-            rowthrottlenumber = len(trendlistoflists)
+            maxrowsperhour = len(trendlistoflists)
             if not counts[0]:
               yield "Last set of trending rows complete.", "", "", ""
-          if 'rowthrottlenumber' in globs.config:
-            rowthrottlenumber = globs.config['rowthrottlenumber']
+          if 'maxrowsperhour' in globs.config:
+            maxrowsperhour = globs.config['maxrowsperhour']
           try:
-            int(rowthrottlenumber)
+            int(maxrowsperhour)
           except:
-            rowthrottlenumber = 0
+            maxrowsperhour = 0
           if not trendingrowsfinished:
             qstart = globs.numrows - times.count('?') + 1
             trendlistoflists = []
@@ -632,7 +630,7 @@ def Pipulate(username='', password='', dockey=''):
       else:
         insert, name, number, left, right, now = False, False, False, False, False, False
       if name and number:
-        tellrow = rowthrottlenumber
+        tellrow = maxrowsperhour
         if tellrow == 0:
           tellrow = 'all'
         yield "Job requested to process %s row(s) every %s %s" % (tellrow, number, name), "", "", ""
@@ -677,8 +675,8 @@ def Pipulate(username='', password='', dockey=''):
       out("Question Mark Replacement.", '2')
       blankrows = 0 #Lets us skip occasional blank rows
       for index, rowdex in enumerate(range(qstart, onesheet.row_count+1)): #Start stepping through every row.
-        if rowthrottlenumber: # if rowthrottlenumber is 0, this won't trap
-          if index >= int(rowthrottlenumber):
+        if maxrowsperhour: # if maxrowsperhour is 0, this won't trap
+          if index >= int(maxrowsperhour):
             break
         if index == 0:
           yme = "Pipulating row: %s" % rowdex
