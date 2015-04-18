@@ -265,10 +265,12 @@
         <form id="pipform" method="POST" action="/">
           <div id="paste"><span id="pastelabel">URL: </span>{{ form.pipurl(size=60) }}</div>
           {% if onsheet %}
+          {{ form.mode(value="sheet") }}
           <button id="pipulate" class="button" type="submit">
             Pipulate &nbsp;<i id="piplock" class="fa fa-chevron-circle-right"></i>
           </button>
           {% else %}
+          {{ form.mode(value="crawl") }}
           <button id="pipulate" class="button" type="submit">
             Get Links &nbsp;<i id="piplock" class="fa fa-chevron-circle-right"></i>
           </button>

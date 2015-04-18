@@ -29,7 +29,7 @@ import globs                                              # (in-line columns), w
 from common import *
 import requests, traceback, datetime, time, json          # of issuing a challenge to myself to master the
 from flask_wtf import Form                                # vim text editor, so as to make the sort of text
-from wtforms import StringField                           # manipulation skills required to pull this off no
+from wtforms import StringField, HiddenField              # manipulation skills required to pull this off no
 from flask import (Flask,                                 # big thing. Oh yeah, and we import Python modules   
   stream_with_context,                                    # here that should be available globally (everywhere)
   render_template,                                        # in the program. Oh, also that detection of sys.args
@@ -75,6 +75,7 @@ def templateglobals():                              # available in Jinja2 templa
 
 class PipForm(Form):
   pipurl = StringField('Paste a Google Spreadsheet URL:')
+  mode = HiddenField('mode')
 
 #  _____ _           _                      _       
 # |  ___| | __ _ ___| | __  _ __ ___   __ _(_)_ __  
@@ -117,6 +118,9 @@ def main():                                         # visiting app's homepage.
       STREAMIT = stream_with_context(Pipulate())
     else:
       flash('Please enter a URL to Pipulate (or click bookmarklet again)')
+    if form.mode.data:
+      #gotcha(form.mode.data)
+      pass
   else:
     if request.args and "access_token" in request.args:
       session['oa2'] = request.args.get("access_token")
