@@ -139,7 +139,7 @@ def main():                                         # visiting app's homepage.
         if 'u' in request.args:
           form.pipurl.data = request.args.get('u')
         session.pop('loggedin', None)
-        flash('Logged out from Google.')
+        #flash('Logged out from Google.')
     elif request.args:
       if 'u' in request.args:
         form.pipurl.data = request.args.get('u')
