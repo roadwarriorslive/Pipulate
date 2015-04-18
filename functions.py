@@ -24,7 +24,7 @@ def crawl(url):
     links.append([alink, ''])
   onesheet = globs.sheet
   InsertRows(onesheet, links, 2)
-  return "done"
+  return "1"
 
 def serps(keyword):
   times = 2
