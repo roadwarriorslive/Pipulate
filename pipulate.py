@@ -398,6 +398,12 @@ def Pipulate(username='', password='', dockey=''):
         Stop()
       yield unlock
 
+      if not qset:
+        yield "No question marks found. Try putting a question mark in a cell.", "Move along. There's nothing to pipulate here.", "", ""
+        yield 'New to Pipulate? Watch the <a target="_blank" href="http://goo.gl/v71kw8">Demo</a> and read the <a target="_blank" href="http://goo.gl/p2zQa4">Docs</a>.', "", "", ""
+        yield "spinoff", "", "", ""
+        Stop()
+
       stop = True
       for x in range(10):
         yield lock
@@ -620,7 +626,7 @@ def Pipulate(username='', password='', dockey=''):
         pass
       else:
         try:
-          qstart = globs.sheet.find("?").row
+          qstart = min(qset)
         except:
           qstart = 1
       #jobstats = timewindow(times[0])
@@ -671,13 +677,6 @@ def Pipulate(username='', password='', dockey=''):
       #     |_|                                                                  
       #
       out("Question Mark Replacement.", '2')
-      try:
-        qstart = globs.sheet.find("?").row
-      except:
-        yield "No question marks found. Try putting a question mark in a cell.", "Move along. There's nothing to pipulate here.", "", ""
-        yield 'New to Pipulate? Watch the <a target="_blank" href="http://goo.gl/v71kw8">Demo</a> and read the <a target="_blank" href="http://goo.gl/p2zQa4">Docs</a>.', "", "", ""
-        yield "spinoff", "", "", ""
-        Stop()
       blankrows = 0 #Lets us skip occasional blank rows
       for index, rowdex in enumerate(range(qstart, globs.numrows + 1)): #Start stepping through every row.
         if maxrowsperhour: # if maxrowsperhour is 0, this won't trap
