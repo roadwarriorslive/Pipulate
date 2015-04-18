@@ -157,7 +157,7 @@ def main():                                         # visiting app's homepage.
       form.pipurl.data = '' #can't pipulate the pipulate site
   out("Selecting template method.")
   if STREAMIT:
-    return Response(stream_template('pipulate.html', form=form, data=STREAMIT))
+    return Response(stream_template('pipulate.html', form=form, data=STREAMIT, onsheet="True"))
   elif ONSHEET:
     out("SPREADSHEET: EXITING MAIN FUNCTION RENDER", "0", '-')
     return render_template('pipulate.html', form=form, onsheet="True")
