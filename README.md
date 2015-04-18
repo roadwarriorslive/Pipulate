@@ -9,26 +9,20 @@ search results and social media.
 Watch the [Google Slides](http://goo.gl/v71kw8) or read the 
 [Google Docs](http://goo.gl/p2zQa4).
 
-<pre>
-          _____ _             _       _                              
-         |  __ (_)           | |     | |                             
-         | |__) | _ __  _   _| | __ _| |_ ___     ___ ___  _ __ ___  
-         |  ___/ | '_ \| | | | |/ _` | __/ _ \   / __/ _ \| '_ ` _ \ 
-         | |   | | |_) | |_| | | (_| | ||  __/  | (_| (_) | | | | | |
-         |_|   |_| .__/ \__,_|_|\__,_|\__\___| (_)___\___/|_| |_| |_|
-                 | |                                                 
-                 |_|                                                 
-</pre>
+To accomplish this, Pipulate utilizes an extremely lightweight Python code
+execution environment, leaning heavily on Google Spreadsheets for the data
+layer. As such, you can use Levinux-powered virtual servers on the desktop of
+your Mac, Windows or other Linux machine to kickstart gettting your own server,
+and later moving to the cloud or a microserver like the Raspberry Pi.
 
-## What is Pipulate?
-This is a lightweight, customizable and easily scheduled approach to collecting
-data directly into Google Spreadsheets by using a bookmarklet that appears to
-infuse it with magic data-collection powers. This is based on the premise that
-it's just going to end up there anyway, so why not make the spreadsheet the
-collector? The types of things it can collect are limited only by your
-imagination.
+These servers are where Pipulate functions are invoked from, first through a
+web browser bookmarklet, which appears to infuse it with magic data-collection
+powers, and later through a Unix/Linux cron job that gets its instructions from
+the Google Doc itself, turning Pipulate servers into something as stateless and
+interchangable as webheads. No data resides on these servers. They are only
+there to Pipulate the Google Spreadsheets.
 
-> Compelling, no?
+Yes, this is something different.
 
 ## How Does it Work?
 Get it running on your Mac, Windows or Linux desktop, from a ready-made virtual
@@ -37,7 +31,8 @@ It basically runs on anything. Then, visit the site you just created from a web
 browser (usually at http://localhost:8888), drag the bookmarklet to your
 Bookmark Bar, open a Google Spreadsheet, click the bookmarklet and get
 Pipulating! The data-collecting job that the initial job defines just starts
-twinkling in as new rows.
+twinkling in as new rows. You can get a taste of this from pipulate.com, where
+you can use my demo instance to kick the tires.
 
 ## How Do I Define a Job?
 I've set up the initial Pipulate job to collect some very common Web Social
