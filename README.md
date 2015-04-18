@@ -3,6 +3,8 @@ Pipulate!
 
 Pipulate lets you collect data straight off of the Web into Google Spreadsheets
 using a bookmarklet approach, broadly applicable to SEO and Social Media tasks.
+Watch the [Google Slides](http://goo.gl/v71kw8) or read the 
+[Google Docs](http://goo.gl/p2zQa4).
 <pre>
           _____ _             _       _                              
          |  __ (_)           | |     | |                             
