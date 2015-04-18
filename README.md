@@ -1,4 +1,4 @@
-Pipulate!
+Pipulate Free And Open Source SEO Software
 ========
 
 Pipulate extends the way you use spreadsheets by allowing you to use functions
@@ -8,6 +8,8 @@ perfect for tracking your progress from just starting out to dominating both
 search results and social media.
 Watch the [Google Slides](http://goo.gl/v71kw8) or read the 
 [Google Docs](http://goo.gl/p2zQa4).
+
+<img src="http://mikelevinseo.com/free-and-open-source-seo-software.png"/>
 
 To accomplish this, Pipulate utilizes an extremely lightweight Python code
 execution environment, leaning heavily on Google Spreadsheets for the data
