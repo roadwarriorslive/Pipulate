@@ -226,6 +226,8 @@ def LogUser(authkey):
 def Pipulate(username='', password='', dockey=''):
   stop = False
   qset = set()
+  qstart = 1
+  qend = 1
   badtuple = (globs.GBAD, globs.GBAD, "", "")
   lock = ("", "", "", "+")
   unlock = ("", "", "", "-")
@@ -505,7 +507,6 @@ def Pipulate(username='', password='', dockey=''):
       #  \__,_|___/\__\___|_|  |_|___/_|\_\___/
       #                                  
       trended = False
-      qstart = 1
       out("Scan down Pipulate tab looking for asterisks.", "2")
           
       for rowdex in range(1, globs.numrows+1):
@@ -622,13 +623,10 @@ def Pipulate(username='', password='', dockey=''):
       out("Insert new rows for new time increment trending", '2')
       if trended and trendingrowsfinished == True:
         qstart = globs.numrows + 1
-      elif trended:
-        pass
+        qend = globs.numrows + 1
       else:
-        try:
-          qstart = min(qset)
-        except:
-          qstart = 1
+        qstart = min(qset)
+        qend = max(qset) + 1
       #jobstats = timewindow(times[0])
       if times:
         insert, name, number, left, right, now = timewindow(times[0])
@@ -678,7 +676,7 @@ def Pipulate(username='', password='', dockey=''):
       #
       out("Question Mark Replacement.", '2')
       blankrows = 0 #Lets us skip occasional blank rows
-      for index, rowdex in enumerate(range(qstart, globs.numrows + 1)): #Start stepping through every row.
+      for index, rowdex in enumerate(range(qstart, qend)): #Start stepping through every row.
         if maxrowsperhour: # if maxrowsperhour is 0, this won't trap
           if index >= int(maxrowsperhour):
             break
