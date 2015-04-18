@@ -13,21 +13,26 @@ Watch the [Google Slides](http://goo.gl/v71kw8) or read the
 
 To accomplish this, Pipulate utilizes an extremely lightweight Python code
 execution environment, leaning heavily on Google Spreadsheets for the data
-layer. As such, you can use Levinux-powered virtual servers on the desktop of
-your Mac, Windows or other Linux machine to kickstart gettting your own server,
-and later moving to the cloud or a microserver like the Raspberry Pi.
+layer. There is no Apache, nginx or nodejs. Just the Python language.  As such,
+you can use Levinux-powered virtual servers on the desktop of your Mac, Windows
+or other Linux machine to kickstart gettting your own server, and later moving
+to the cloud or a microserver like the Raspberry Pi.
 
-These servers are where Pipulate functions are invoked from, first through a
-web browser bookmarklet, which appears to infuse it with magic data-collection
-powers, and later through a Unix/Linux cron job that gets its instructions from
-the Google Doc itself, turning Pipulate servers into something as stateless and
-interchangable as webheads. No data resides on these servers. They are only
-there to Pipulate the Google Spreadsheets.
+A web browser bookmarklet grabbed from the Pipulate user interface is how the
+functions residing on Pipulate servers get invoked, and appear to infuse the
+spreadsheet with magic data-collection powers, enabling such tasks crawling
+websites directly into a spreadsheet. Once you're happy with a particular data
+look-up task having worked interactively in the spreadsheet, it can be
+automated. Job instructions come from the Google Doc itself, turning Pipulate
+servers into something as stateless and interchangable as webheads. No data
+resides on these servers. They are only there to Pipulate the Google
+Spreadsheets. Get a Pipulate server from anywhere, fire-off a job, and then
+destroy the server if you care to. Nothing's lost!
 
-It is a totally extendable system, plug-in compatible with Pipulate-unaware
-standalone Python functions, making it totally suitable for amateur coders
-looking to "extend a system" even as a Python beginners and newbs to
-programming.
+Pipulate is also a totally extendable system, plug-in compatible with
+Pipulate-unaware standalone Python functions, making it totally suitable for
+amateur coders looking to "extend a system" even as a Python beginners and
+newbs to programming.
 
 Yes, this is something different.
 
