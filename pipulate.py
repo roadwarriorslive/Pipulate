@@ -225,6 +225,7 @@ def LogUser(authkey):
 #
 def Pipulate(username='', password='', dockey=''):
   stop = False
+  qset = set()
   badtuple = (globs.GBAD, globs.GBAD, "", "")
   lock = ("", "", "", "+")
   unlock = ("", "", "", "-")
@@ -364,7 +365,7 @@ def Pipulate(username='', password='', dockey=''):
 
       out("Counting rows in Pipulate tab.")
       stop = True
-      for x in range(10):
+      for x in range(5):
         yield lock
         try:
           globs.sheet = gdoc.sheet1
@@ -373,6 +374,24 @@ def Pipulate(username='', password='', dockey=''):
         except:
           yield dontgetfrustrated(x)
           out("Retry get Pipulate sheet %s of %s" % (x, 10))
+          time.sleep(5)
+      if stop:
+        yield badtuple
+        Stop()
+      yield unlock
+
+      stop = True
+      for x in range(5):
+        yield lock
+        try:
+          CellList = globs.sheet.findall("?")
+          for cell in CellList:
+            qset.add(cell.row)
+          stop = False
+          break
+        except:
+          yield dontgetfrustrated(x)
+          out("Retry get rows with question marks %s of %s" % (x, 10))
           time.sleep(5)
       if stop:
         yield badtuple
