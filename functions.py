@@ -15,8 +15,9 @@ def walkdict(obj, key):
   return None
 
 def crawl(url):
-  CellList = globs.sheet.range('C1:D2')
-  vals = ['Title', 'Description', '?', '?']
+  CellList = globs.sheet.range('B1:D2')
+  fcols = ['Depth', 'Title', 'Description']
+  vals = fcols + ['0'] + ['?']*(len(fcols)-1)
   for i, val in enumerate(vals):
     CellList[i].value = val
   globs.sheet.update_cells(CellList)
