@@ -15,7 +15,11 @@ def walkdict(obj, key):
   return None
 
 def crawl(url):
-  globs.sheet.update_acell('C1', 'Title')
+  CellList = globs.sheet.range('C1:D2')
+  vals = ['Title', 'Description', '?', '?']
+  for i, val in enumerate(vals):
+    CellList[i].value = val
+  globs.sheet.update_cells(CellList)
   from urlparse import urlparse
   apex = urlparse(url).hostname.split(".")
   apex = ".".join(len(apex[-2]) < 4 and apex[-3:] or apex[-2:])
@@ -30,7 +34,7 @@ def crawl(url):
       links.add(alink)
   links = list(links)
   y = len(links)
-  linkslist = zip(links,['1']*y,['?']*y)
+  linkslist = zip(links,['1']*y,['?']*y,['?']*y)
   InsertRows(globs.sheet, linkslist, 2)
   return "0"
 
