@@ -385,9 +385,7 @@ def Pipulate(username='', password='', dockey=''):
       for x in range(10):
         yield lock
         try:
-          #onesheet = gdoc.worksheet("Pipulate")
-          onesheet = gdoc.sheet1
-          globs.sheet = onesheet
+          globs.sheet = gdoc.sheet1
           stop = False
           break
         except:
@@ -403,7 +401,7 @@ def Pipulate(username='', password='', dockey=''):
       for x in range(10):
         yield lock
         try:
-          globs.numrows = len(onesheet.col_values(1)) #!!!UnboundLocalError HTTPError OPTIMIZE!
+          globs.numrows = len(globs.sheet.col_values(1)) #!!!UnboundLocalError HTTPError OPTIMIZE!
           stop = False
           break
         except:
@@ -448,7 +446,7 @@ def Pipulate(username='', password='', dockey=''):
       for x in range(10):
         yield lock
         try:
-          globs.row1 = lowercaselist(onesheet.row_values(1))
+          globs.row1 = lowercaselist(globs.sheet.row_values(1))
           stop = False
           break
         except:
@@ -510,7 +508,7 @@ def Pipulate(username='', password='', dockey=''):
         for x in range(8):
           yield lock
           try:
-            onerow = onesheet.row_values(rowdex) #!!! HTTPError OPTIMIZE THIS!
+            onerow = globs.sheet.row_values(rowdex) #!!! HTTPError OPTIMIZE THIS!
             stop = False
             break
           except:
@@ -569,7 +567,7 @@ def Pipulate(username='', password='', dockey=''):
         countletter = globs.letter[globs.row1.index('count') + 1]
         mayhaverun = "%s%s:%s%s" % (countletter, backintime, countletter, globs.numrows)
         try:
-          CellList = onesheet.range(mayhaverun)
+          CellList = globs.sheet.range(mayhaverun)
         except:
           out("Failed to load the trending Count range.")
           raise StopIteration
@@ -584,7 +582,7 @@ def Pipulate(username='', password='', dockey=''):
           timeletter = globs.letter[globs.row1.index('timestamp') + 1]
           mayhaverun = "%s%s:%s%s" % (timeletter, backintime, timeletter, globs.numrows)
           try:
-            CellList = onesheet.range(mayhaverun)
+            CellList = globs.sheet.range(mayhaverun)
           except:
             out("Failed to load the trending timestamp range.")
           for onecell in CellList:
@@ -621,7 +619,7 @@ def Pipulate(username='', password='', dockey=''):
         pass
       else:
         try:
-          qstart = onesheet.find("?").row
+          qstart = globs.sheet.find("?").row
         except:
           qstart = 1
       #jobstats = timewindow(times[0])
@@ -643,7 +641,7 @@ def Pipulate(username='', password='', dockey=''):
       if trendlistoflists and insert: #This line will show in errors for any Config scheduling screw-ups.
         for x in range(4):
           try:
-            InsertRows(onesheet, trendlistoflists)
+            InsertRows(globs.sheet, trendlistoflists)
           except:
             yield dontgetfrustrated(x)
             out("Error on trending, retry %s" % x)
@@ -654,15 +652,14 @@ def Pipulate(username='', password='', dockey=''):
       #We need to get it again if trending rows were added. !!! Optimize
       if trended:
         try:
-          #onesheet = gdoc.worksheet("Pipulate")
-          onesheet = gdoc.sheet1
+          globs.sheet = gdoc.sheet1
         except:
           yield "Couldn't reach Google Docs. Try logging in again.", "", "", ""
           yield "spinoff", "", "", ""
           raise StopIteration
         else:
           pass
-      #globs.numrows = len(onesheet.col_values(1))
+      #globs.numrows = len(globs.sheet.col_values(1))
       globs.numrows = globs.numrows + len(trendlistoflists) #faster
       out("Insert new rows for new time inrement trending", '2', '-')
       #                        _   _                                    _        
@@ -674,7 +671,7 @@ def Pipulate(username='', password='', dockey=''):
       #
       out("Question Mark Replacement.", '2')
       blankrows = 0 #Lets us skip occasional blank rows
-      for index, rowdex in enumerate(range(qstart, onesheet.row_count+1)): #Start stepping through every row.
+      for index, rowdex in enumerate(range(qstart, globs.sheet.row_count+1)): #Start stepping through every row.
         if maxrowsperhour: # if maxrowsperhour is 0, this won't trap
           if index >= int(maxrowsperhour):
             break
@@ -692,7 +689,7 @@ def Pipulate(username='', password='', dockey=''):
         for x in range(5):
           yield lock
           try:
-            CellList = onesheet.range(rowrange)
+            CellList = globs.sheet.range(rowrange)
             stop = False
           except:
             out("Retry %s of %s" % (x, 5))
@@ -816,7 +813,7 @@ def Pipulate(username='', password='', dockey=''):
           for x in range(5):
             yield lock
             try:
-              result = onesheet.update_cells(CellList)
+              result = globs.sheet.update_cells(CellList)
               stop = False
               break
             except:
