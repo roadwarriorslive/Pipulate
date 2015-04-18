@@ -24,6 +24,11 @@ the Google Doc itself, turning Pipulate servers into something as stateless and
 interchangable as webheads. No data resides on these servers. They are only
 there to Pipulate the Google Spreadsheets.
 
+It is a totally extendable system, plug-in compatible with Pipulate-unaware
+standalone Python functions, making it totally suitable for amateur coders
+looking to "extend a system" even as a Python beginners and newbs to
+programming.
+
 Yes, this is something different.
 
 ## How Does it Work?
