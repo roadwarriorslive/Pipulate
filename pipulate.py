@@ -156,10 +156,10 @@ def main():                                         # visiting app's homepage.
     return Response(stream_template('pipulate.html', form=form, data=STREAMIT))
   elif ONSHEET:
     out("SPREADSHEET: EXITING MAIN FUNCTION RENDER", "0", '-')
-    return render_template('pipulate.html', form=form)
+    return render_template('pipulate.html', form=form, onsheet="True")
   else:
     out("OFF-SHEET: EXITING MAIN FUNCTION RENDER", "0", '-')
-    return render_template('pipulate.html', form=form)
+    return render_template('pipulate.html', form=form, onsheet="")
   out("EXITING MAIN", "0", '-')
 
 def LogUser(authkey):
