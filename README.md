@@ -3,11 +3,12 @@ Pipulate!
 
 Pipulate extends the way you use spreadsheets by allowing you to use functions
 written and executed outside of the spreadsheet—allowing you to perform quick
-investigations and optionally turn them into automated monitoring tasks. This
-makes it perfect for tracking your progress from beginning to search result and
-social media dominance.
+investigations and turn them into automated monitoring tasks. This makes it
+perfect for tracking your progress from beginning to search result and social
+media dominance.
 Watch the [Google Slides](http://goo.gl/v71kw8) or read the 
 [Google Docs](http://goo.gl/p2zQa4).
+
 <pre>
           _____ _             _       _                              
          |  __ (_)           | |     | |                             
