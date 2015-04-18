@@ -604,7 +604,7 @@ def Pipulate(username='', password='', dockey=''):
           tellrow = 'all'
         yield "Job requested to process %s row(s) every %s %s" % (tellrow, number, name), "", "", ""
       else:
-        yield "Set a RepeatJobEvery value in Config, such as week, day or hour.", "", "", ""
+        yield "Pipulate running in ad hoc investigation mode (no scheduled tasks).", "", "", ""
       if left and right and now:
         yield "%s = Start of last time window" % left, "", "", ""
         yield "%s = End of last time window" % right, "", "", ""
@@ -644,7 +644,10 @@ def Pipulate(username='', password='', dockey=''):
       try:
         qstart = globs.sheet.find("?").row
       except:
-        gotcha("No questionmarks")
+        yield "No question marks found. Try putting a question mark in a cell.", "Move along. There's nothing to pipulate here.", "", ""
+        yield 'New to Pipulate? Watch the <a target="_blank" href="http://goo.gl/v71kw8">Demo</a> and read the <a target="_blank" href="http://goo.gl/p2zQa4">Docs</a>.', "", "", ""
+        yield "spinoff", "", "", ""
+        Stop()
       blankrows = 0 #Lets us skip occasional blank rows
       for index, rowdex in enumerate(range(qstart, globs.sheet.row_count)): #Start stepping through every row.
         showrow = rowdex - 1
