@@ -341,8 +341,8 @@ def Pipulate(username='', password='', dockey=''):
       yield ", Config", "", "", ""
       headers = ['NAME', 'VALUE']
       config = []
-      config.append(['RunJobEvery','hour'])
-      config.append(['MaxRowsPerHour','1'])
+      config.append(['RepeatJobEvery','hour'])
+      config.append(['MaxRowsPerHour',''])
       yield lock
       try:
         InitTab(gdoc, 'Config', headers, config)
@@ -635,7 +635,7 @@ def Pipulate(username='', password='', dockey=''):
           tellrow = 'all'
         yield "Job requested to process %s row(s) every %s %s" % (tellrow, number, name), "", "", ""
       else:
-        yield "Set a RunJobEvery value in Config, such as week, day or hour.", "", "", ""
+        yield "Set a RepeatJobEvery value in Config, such as week, day or hour.", "", "", ""
       if left and right and now:
         yield "%s = Start of last time window" % left, "", "", ""
         yield "%s = End of last time window" % right, "", "", ""
@@ -969,8 +969,8 @@ def timewindow(amiinnewtimewindow):
   intervalnumber= ""
   intervalname=""
   intervalparts=[]
-  if 'runjobevery' in globs.config:
-    intervallanguage = globs.config['runjobevery'].strip()
+  if 'repeatjobevery' in globs.config:
+    intervallanguage = globs.config['repeatjobevery'].strip()
     if ' ' in intervallanguage:
       intervalparts=intervallanguage.split()
       intervalname = intervalparts[1]
