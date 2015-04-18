@@ -1,4 +1,5 @@
-Pipulate Free And Open Source SEO Software
+<img src="http://mikelevinseo.com/Pipulate-Logo.png" style="text-align:center"/><br/>
+Free And Open Source SEO Software
 ========
 
 Pipulate extends the way you use spreadsheets by allowing you to use functions
