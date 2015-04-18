@@ -69,6 +69,7 @@ From a Terminal:
 - sudo pip install requests
 - sudo pip install flask_wtf
 - sudo pip install gspread
+- sudo pip install lxml
 - cd /var
 - git clone https://github.com/miklevin/pipulate.git
 - cd pipulate
@@ -103,6 +104,7 @@ From a CygWin Shell (MinTTY):
 - pip install requests
 - pip install flask_wtf
 - pip install gspread
+- pip install lxml
 - git clone https://github.com/miklevin/pipulate.git
 - cd pipulate
 - python pipulate.py
