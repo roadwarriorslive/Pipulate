@@ -296,7 +296,7 @@ def Pipulate(username='', password='', dockey=''):
               session.pop('loggedin', None)
             if 'u' not in session and globs.PIPURL:
               session['u'] = globs.PIPURL
-            break
+            Stop()
           except gspread.exceptions.NoValidUrlKeyFound:
             yield "Currently, the URL must be a Google Spreadsheet.", "", "", ""
             yield "<a href='https://docs.google.com/spreadsheets/create' target='_new'>Create</a> a new Google Spreadsheet and click Bookmarklet again.", "Google Spreadsheet Not Found.", "", ""
