@@ -15,13 +15,18 @@ def walkdict(obj, key):
   return None
 
 def crawl(url):
+  from urlparse import urlparse
+  apex = urlparse(url).hostname.split(".")
+  apex = ".".join(len(apex[-2]) < 4 and apex[-3:] or apex[-2:])
   import lxml.html
   ro = requests.get(url)
   doc = lxml.html.fromstring(ro.text)
   somelinks = doc.xpath('/html/body//a/@href')
   links = set()
   for alink in somelinks:
-    links.add(alink)
+    print(urlparse(alink)[1][-len(apex):])
+    if urlparse(alink)[1][-len(apex):] == apex:
+      links.add(alink)
   links = list(links)
   linkslist = zip(links,['1'] * len(links))
   onesheet = globs.sheet
