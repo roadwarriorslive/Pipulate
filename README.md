@@ -1,4 +1,4 @@
-<img src="http://mikelevinseo.com/Pipulate-Logo.png" style="margin-left: auto; margin-right: auto;"/>
+<img src="http://mikelevinseo.com/Pipulate-Logo.png" align="ceter"/>
 Free And Open Source SEO Software
 ========
 
