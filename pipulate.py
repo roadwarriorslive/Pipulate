@@ -271,7 +271,8 @@ def Pipulate(username='', password='', dockey=''):
             Stop()
           except gspread.exceptions.NoValidUrlKeyFound:
             yield "Currently, the URL must be a Google Spreadsheet.", "", "", ""
-            yield "<a href='https://docs.google.com/spreadsheets/create' target='_new'>Create</a> a new Google Spreadsheet and click Bookmarklet again.", "Google Spreadsheet Not Found.", "", ""
+            yield "<a href='https://docs.google.com/spreadsheets/create' target='_new'>Create</a> and name a new Google Spreadsheet and click the Pipulate Bookmarklet again.", "Google Spreadsheet Not Found.", "", ""
+            yield 'New to Pipulate? Watch the <a target="_blank" href="http://goo.gl/v71kw8">Demo</a> and read the <a target="_blank" href="http://goo.gl/p2zQa4">Docs</a>.', "", "", ""
             Stop()
           except gspread.exceptions.SpreadsheetNotFound:
             yield "Please give the document a name to force first save.", "", "", ""
