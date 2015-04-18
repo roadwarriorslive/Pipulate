@@ -19,12 +19,14 @@ def crawl(url):
   ro = requests.get(url)
   doc = lxml.html.fromstring(ro.text)
   somelinks = doc.xpath('/html/body//a/@href')
-  links = []
+  links = set()
   for alink in somelinks:
-    links.append([alink, ''])
+    links.add(alink)
+  links = list(links)
+  linkslist = zip(links,['1'] * len(links))
   onesheet = globs.sheet
-  InsertRows(onesheet, links, 2)
-  return "1"
+  InsertRows(onesheet, linkslist, 2)
+  return "0"
 
 def serps(keyword):
   times = 2
