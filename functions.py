@@ -15,6 +15,7 @@ def walkdict(obj, key):
   return None
 
 def crawl(url):
+  globs.sheet.update_acell('C1', 'Title')
   from urlparse import urlparse
   apex = urlparse(url).hostname.split(".")
   apex = ".".join(len(apex[-2]) < 4 and apex[-3:] or apex[-2:])
@@ -28,9 +29,9 @@ def crawl(url):
     if urlparse(alink)[1][-len(apex):] == apex:
       links.add(alink)
   links = list(links)
-  linkslist = zip(links,['1'] * len(links))
-  onesheet = globs.sheet
-  InsertRows(onesheet, linkslist, 2)
+  y = len(links)
+  linkslist = zip(links,['1']*y,['?']*y)
+  InsertRows(globs.sheet, linkslist, 2)
   return "0"
 
 def serps(keyword):
