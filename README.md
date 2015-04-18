@@ -11,6 +11,7 @@ Watch the [Google Slides](http://goo.gl/v71kw8) or read the
 
 <img src="http://mikelevinseo.com/free-and-open-source-seo-software.png"/>
 
+### Python
 To accomplish this, Pipulate utilizes an extremely lightweight Python code
 execution environment, leaning heavily on Google Spreadsheets for the data
 layer. There is no Apache, nginx or nodejs. Just the Python language.  As such,
@@ -18,6 +19,7 @@ you can use Levinux-powered virtual servers on the desktop of your Mac, Windows
 or other Linux machine to kickstart gettting your own server, and later moving
 to the cloud or a microserver like the Raspberry Pi.
 
+### Bookmarklet
 A web browser bookmarklet grabbed from the Pipulate user interface is how the
 functions residing on Pipulate servers get invoked, and appear to infuse the
 spreadsheet with magic data-collection powers, enabling such tasks crawling
@@ -29,10 +31,11 @@ resides on these servers. They are only there to Pipulate the Google
 Spreadsheets. Get a Pipulate server from anywhere, fire-off a job, and then
 destroy the server if you care to. Nothing's lost!
 
+### Great for newbs!
 Pipulate is also a totally extendable system, plug-in compatible with
 Pipulate-unaware standalone Python functions, making it totally suitable for
-amateur coders looking to "extend a system" even as a Python beginners and
-newbs to programming.
+amateur coders looking to extend a system even as a Python beginners and newbs
+to programming. Just write "Hello World" and plug it in.
 
 Yes, this is something different.
 
