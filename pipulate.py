@@ -649,16 +649,15 @@ def Pipulate(username='', password='', dockey=''):
         yield "spinoff", "", "", ""
         Stop()
       blankrows = 0 #Lets us skip occasional blank rows
-      for index, rowdex in enumerate(range(qstart, globs.sheet.row_count)): #Start stepping through every row.
-        showrow = rowdex - 1
+      for index, rowdex in enumerate(range(qstart, globs.numrows + 1)): #Start stepping through every row.
         if maxrowsperhour: # if maxrowsperhour is 0, this won't trap
           if index >= int(maxrowsperhour):
             break
         if index == 0:
-          yme = "Pipulating row: %s" % showrow
+          yme = "Pipulating row: %s" % rowdex
           yield yme, "Next, we replace question marks. This may take awhile...", "", ""
         else:
-          yme = ", %s" % showrow
+          yme = ", %s" % rowdex
           yield yme, "", "", ""
         globs.hobj = None
         globs.html = '' #Blank the global html object. Recylces fetches.
