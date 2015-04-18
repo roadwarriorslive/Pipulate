@@ -59,35 +59,6 @@ def Stop():
   else:
     pass
 
-def out(msg, symbol='', dent=''):
-  total = 80
-  if globs.DBUG:
-    if symbol:
-      half = ((total-1 - len(msg)) / 2) - 2
-      side = half*symbol
-      msg = "%s << %s >> %s" % (side, msg, side)
-      tmpmsg = ''
-      if dent:
-        tmpmsg = msg[len(globs.nest)-2:total-1]
-        print(globs.nest)
-        globs.nest = globs.nest[:-2]
-      else:
-        print(globs.nest)
-      if symbol == '0':
-        tmpmsg = msg[len(globs.nest):total]
-        print("%s%s" % (globs.nest, tmpmsg))
-      else:
-        tmpmsg = msg[len(globs.nest):total-1]
-        print("%s %s" % (globs.nest, tmpmsg))
-      if not dent:
-        if symbol == '0':
-          globs.nest = symbol
-        else:
-          globs.nest = '%s %s' % (globs.nest, symbol)
-      print(globs.nest)
-    else:
-      print("%s |%s" % (globs.nest, msg))
-
 def stream_template(template_name, **context):      # This is the key to streaming
   app.update_template_context(context)              # output to the user in the
   t = app.jinja_env.get_template(template_name)     # web browser much like a
@@ -670,8 +641,12 @@ def Pipulate(username='', password='', dockey=''):
       #     |_|                                                                  
       #
       out("Question Mark Replacement.", '2')
+      try:
+        qstart = globs.sheet.find("?").row
+      except:
+        gotcha("No questionmarks")
       blankrows = 0 #Lets us skip occasional blank rows
-      for index, rowdex in enumerate(range(qstart, globs.sheet.row_count+1)): #Start stepping through every row.
+      for index, rowdex in enumerate(range(qstart, globs.sheet.row_count)): #Start stepping through every row.
         showrow = rowdex - 1
         if maxrowsperhour: # if maxrowsperhour is 0, this won't trap
           if index >= int(maxrowsperhour):

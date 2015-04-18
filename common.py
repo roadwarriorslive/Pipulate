@@ -1,5 +1,34 @@
 import globs
 
+def out(msg, symbol='', dent=''):
+  total = 80
+  if globs.DBUG:
+    if symbol:
+      half = ((total-1 - len(msg)) / 2) - 2
+      side = half*symbol
+      msg = "%s << %s >> %s" % (side, msg, side)
+      tmpmsg = ''
+      if dent:
+        tmpmsg = msg[len(globs.nest)-2:total-1]
+        print(globs.nest)
+        globs.nest = globs.nest[:-2]
+      else:
+        print(globs.nest)
+      if symbol == '0':
+        tmpmsg = msg[len(globs.nest):total]
+        print("%s%s" % (globs.nest, tmpmsg))
+      else:
+        tmpmsg = msg[len(globs.nest):total-1]
+        print("%s %s" % (globs.nest, tmpmsg))
+      if not dent:
+        if symbol == '0':
+          globs.nest = symbol
+        else:
+          globs.nest = '%s %s' % (globs.nest, symbol)
+      print(globs.nest)
+    else:
+      print("%s |%s" % (globs.nest, msg))
+
 def gotcha(x=''):
   print('''
                    ____       _       _             _   _   _ 
