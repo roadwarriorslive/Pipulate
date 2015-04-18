@@ -56,7 +56,7 @@ def positions(keyword, serps=''):
       global serps
       return serps(keyword)
     serps = gserps(keyword)
-  if serps:
+  elif serps:
     serps = json.loads(serps)
     easydict = {}
     serpos = 1
@@ -75,7 +75,7 @@ def position(keyword, site, positions=''):
       global positions
       return positions(keyword)
     positions = gpositions(keyword)
-  if positions:
+  elif positions:
     urldict = json.loads(positions)
     for thepos, aurl in urldict.iteritems():
       if site in aurl:
