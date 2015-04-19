@@ -44,21 +44,6 @@ app = Flask(__name__)
 
 app.secret_key = "m\x00\r\xa5\\\xbeTW\xb3\xdf\x17\xb0!T\x9b6\x88l\xcf\xa1vmD}"
 
-def Stop():
-  print('''
-    ____ ____    _  _____  _    _____ _                    _    ___        _   
-   / ___|  _ \  / \|_   _|/ \  |_   _(_)_ __ ___   ___  __| |  / _ \ _   _| |_ 
-  | |  _| | | |/ _ \ | | / _ \   | | | | '_ ` _ \ / _ \/ _` | | | | | | | | __|
-  | |_| | |_| / ___ \| |/ ___ \  | | | | | | | | |  __/ (_| | | |_| | |_| | |_ 
-   \____|____/_/   \_\_/_/   \_\ |_| |_|_| |_| |_|\___|\__,_|  \___/ \__,_|\__|
-                                                                               
-  ''')
-  #raise SystemExit
-  if globs.mode == 'web':
-    raise StopIteration
-  else:
-    pass
-
 def stream_template(template_name, **context):      # This is the key to streaming
   app.update_template_context(context)              # output to the user in the
   t = app.jinja_env.get_template(template_name)     # web browser much like a
