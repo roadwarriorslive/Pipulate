@@ -612,6 +612,12 @@ def Pipulate(username='', password='', dockey=''):
           nextnum = int(counts[0]) + 1
           for onelist in trendlistoflists:
             onelist[globs.row1.index('count')] = nextnum
+      if trended and trendingrowsfinished == True:
+        qstart = globs.numrows + 1
+        qend = globs.numrows + 1
+      else:
+        qstart = min(qset)
+        qend = max(qset) + 1
       out("Count and timestamp columns for trending", '2', '-')
 
       #  _                     _                           
@@ -621,12 +627,6 @@ def Pipulate(username='', password='', dockey=''):
       # |_|_| |_|___/\___|_|   \__| |_|  \___/ \_/\_/ |___/
       #
       out("Insert new rows for new time increment trending", '2')
-      if trended and trendingrowsfinished == True:
-        qstart = globs.numrows + 1
-        qend = globs.numrows + 1
-      else:
-        qstart = min(qset)
-        qend = max(qset) + 1
       #jobstats = timewindow(times[0])
       if times:
         insert, name, number, left, right, now = timewindow(times[0])
@@ -677,163 +677,164 @@ def Pipulate(username='', password='', dockey=''):
       out("Question Mark Replacement.", '2')
       blankrows = 0 #Lets us skip occasional blank rows
       for index, rowdex in enumerate(range(qstart, qend)): #Start stepping through every row.
-        if maxrowsperhour: # if maxrowsperhour is 0, this won't trap
-          if index >= int(maxrowsperhour):
-            break
-        if index == 0:
-          yme = "Pipulating row: %s" % rowdex
-          yield yme, "Next, we replace question marks. This may take awhile...", "", ""
-        else:
-          yme = ", %s" % rowdex
-          yield yme, "", "", ""
-        globs.hobj = None
-        globs.html = '' #Blank the global html object. Recylces fetches.
-        rowrange = "A%s:%s%s" % (rowdex, globs.letter[len(globs.row1)], rowdex)
-
-        stop = True
-        for x in range(5):
-          yield lock
-          try:
-            CellList = globs.sheet.range(rowrange)
-            stop = False
-          except:
-            out("Retry %s of %s" % (x, 5))
-            time.sleep(2)
-            yield dontgetfrustrated(x)
-        if stop:
-          yield "GData Timed Out","Sorry, GDATA Failed. Try again.","",""
-          Stop()
-        yield unlock
-
-        onerow = []
-        for cell in CellList:
-          onerow.append(cell.value)
-        if '?' in onerow:
-          #   _ __ _____      __
-          #  | '__/ _ \ \ /\ / /
-          #  | | | (_) \ V  V / 
-          #  |_|  \___/ \_/\_/  
-          #
-          out("PROCESSING ROW %s." % rowdex, '3')
-          blankrows = 0
-          yield "", "", json.dumps(onerow), ""
-          rowdexstring = str(rowdex)
-          newrow = onerow[:]
-          if rowdexstring > 1:
-            #All subsequent rows are checked for question mark replacement requests.
-            for coldex, acell in enumerate(newrow):
-              if questionmark(onerow, rowdexstring, coldex):
-                if 'url' in globs.row1: #Only fetch html once per row if possible
-                  try:
-                    globs.html = gethtml(onerow[globs.row1.index('url')])
-                  except:
-                    pass
-                collabel = globs.row1[coldex]
-                if collabel in transfuncs.keys():
-                  for x in range(4):
-                    #   __                  _   _                 
-                    #  / _|_   _ _ __   ___| |_(_) ___  _ __  ___ 
-                    # | |_| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
-                    # |  _| |_| | | | | (__| |_| | (_) | | | \__ \
-                    # |_|  \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
-                    #                                             
-                    out("Function Start", "4")
-                    fname = transfuncs[globs.row1[coldex]]
-                    farg = fargs[coldex]
-                    evalme = "%s(" % fname #Begin building string that will eventually be eval'd
-                    if farg:
-                      #The function we're looking at DOES have required arguments.
-                      for anarg in farg:
-                        #Add an arg=value to string for each required argument.
-                        anarg = anarg.lower()
-                        argval = getargval(anarg, farg[anarg], newrow)
-                        evalme = "%s%s=%s, " % (evalme, anarg, argval)
-                      evalme = evalme[:-2] + ')' #Finish building string for the eval statement.
-                    else:
-                      #No arguments required, so just immediately close the parenthesis.
-                      evalme = evalme + ')'
-                    try:
-                      newrow[coldex] = eval(evalme)
-                      out('%s worked' % collabel)
-                    except Exception as e:
-                      print traceback.format_exc()
-                      time.sleep(2)
-                    out("Function End", "4", '-')
-                elif collabel in transscrape.keys():
-                  for x in range(4):
-                    #  ____                                 
-                    # / ___|  ___ _ __ __ _ _ __   ___ _ __ 
-                    # \___ \ / __| '__/ _` | '_ \ / _ \ '__|
-                    #  ___) | (__| | | (_| | |_) |  __/ |   
-                    # |____/ \___|_|  \__,_| .__/ \___|_|   
-                    #                      |_|              
-                    out("Scrape Start", "4")
-                    try:
-                      out("Entering generic scraper.")
-                      sname = transscrape[globs.row1[coldex]]
-                      stype = scrapetypes[sname]
-                      spattern = scrapepatterns[sname]
-                      if 'url' in globs.row1:
-                        url = onerow[globs.row1.index('url')]
-                        html = gethtml(url)
-                        if stype.lower() == 'xpath':
-                          import lxml.html
-                          searchme = lxml.html.fromstring(html)
-                          match = searchme.xpath(spattern)
-                          if match:
-                            newrow[coldex] = match[0]
-                          else:
-                            newrow[coldex] =  None
-                        elif stype.lower() == 'regex':
-                          import re
-                          match = re.search(spattern, html, re.S | re.I)
-                          if match:
-                            if "scrape" in match.groupdict().keys():
-                              newrow[coldex] = match.group("scrape")
-                            else:
-                              newrow[coldex] = None
-                          else:
-                            newrow[coldex] = None
-
-                      out('%s worked.' % collabel)
-                    except Exception as e:
-                      print traceback.format_exc()
-                      out("Scrape problem on row %s. Retrying." % rowdexstring)
-                      time.sleep(2)
-                      yield dontgetfrustrated(x)
-                    out("Scrape End", "4", '-')
-          out("DONE PROCESSING ROW %s." % rowdex, '3', '-')
-
-          out("Finished processing row. Updating spreadsheet...")
-          newrow = ['' if x==None else x for x in newrow]
-          try:
-            yield "", "", json.dumps(newrow), ""
-          except:
-            yield "", "", newrow, ""
-          for index, onecell in enumerate(CellList):
-            onecell.value = newrow[index]
-            result = None
+        if rowdex in qset:
+          if maxrowsperhour: # if maxrowsperhour is 0, this won't trap
+            if index >= int(maxrowsperhour):
+              break
+          if index == 0:
+            yme = "Pipulating row: %s" % rowdex
+            yield yme, "Next, we replace question marks. This may take awhile...", "", ""
+          else:
+            yme = ", %s" % rowdex
+            yield yme, "", "", ""
+          globs.hobj = None
+          globs.html = '' #Blank the global html object. Recylces fetches.
+          rowrange = "A%s:%s%s" % (rowdex, globs.letter[len(globs.row1)], rowdex)
 
           stop = True
           for x in range(5):
             yield lock
             try:
-              result = globs.sheet.update_cells(CellList)
+              CellList = globs.sheet.range(rowrange)
               stop = False
-              break
             except:
-              out("Writing row to spreadsheet, retry %s of %s" %(x, 5))
-              time.sleep(5)
+              out("Retry %s of %s" % (x, 5))
+              time.sleep(2)
               yield dontgetfrustrated(x)
           if stop:
-            yield badtuple
+            yield "GData Timed Out","Sorry, GDATA Failed. Try again.","",""
             Stop()
           yield unlock
 
-        elif onerow.count('') == len(onerow):
-          blankrows += 1
-          if blankrows > 1:
-            break
+          onerow = []
+          for cell in CellList:
+            onerow.append(cell.value)
+          if '?' in onerow:
+            #   _ __ _____      __
+            #  | '__/ _ \ \ /\ / /
+            #  | | | (_) \ V  V / 
+            #  |_|  \___/ \_/\_/  
+            #
+            out("PROCESSING ROW %s." % rowdex, '3')
+            blankrows = 0
+            yield "", "", json.dumps(onerow), ""
+            rowdexstring = str(rowdex)
+            newrow = onerow[:]
+            if rowdexstring > 1:
+              #All subsequent rows are checked for question mark replacement requests.
+              for coldex, acell in enumerate(newrow):
+                if questionmark(onerow, rowdexstring, coldex):
+                  if 'url' in globs.row1: #Only fetch html once per row if possible
+                    try:
+                      globs.html = gethtml(onerow[globs.row1.index('url')])
+                    except:
+                      pass
+                  collabel = globs.row1[coldex]
+                  if collabel in transfuncs.keys():
+                    for x in range(4):
+                      #   __                  _   _                 
+                      #  / _|_   _ _ __   ___| |_(_) ___  _ __  ___ 
+                      # | |_| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
+                      # |  _| |_| | | | | (__| |_| | (_) | | | \__ \
+                      # |_|  \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
+                      #                                             
+                      out("Function Start", "4")
+                      fname = transfuncs[globs.row1[coldex]]
+                      farg = fargs[coldex]
+                      evalme = "%s(" % fname #Begin building string that will eventually be eval'd
+                      if farg:
+                        #The function we're looking at DOES have required arguments.
+                        for anarg in farg:
+                          #Add an arg=value to string for each required argument.
+                          anarg = anarg.lower()
+                          argval = getargval(anarg, farg[anarg], newrow)
+                          evalme = "%s%s=%s, " % (evalme, anarg, argval)
+                        evalme = evalme[:-2] + ')' #Finish building string for the eval statement.
+                      else:
+                        #No arguments required, so just immediately close the parenthesis.
+                        evalme = evalme + ')'
+                      try:
+                        newrow[coldex] = eval(evalme)
+                        out('%s worked' % collabel)
+                      except Exception as e:
+                        print traceback.format_exc()
+                        time.sleep(2)
+                      out("Function End", "4", '-')
+                  elif collabel in transscrape.keys():
+                    for x in range(4):
+                      #  ____                                 
+                      # / ___|  ___ _ __ __ _ _ __   ___ _ __ 
+                      # \___ \ / __| '__/ _` | '_ \ / _ \ '__|
+                      #  ___) | (__| | | (_| | |_) |  __/ |   
+                      # |____/ \___|_|  \__,_| .__/ \___|_|   
+                      #                      |_|              
+                      out("Scrape Start", "4")
+                      try:
+                        out("Entering generic scraper.")
+                        sname = transscrape[globs.row1[coldex]]
+                        stype = scrapetypes[sname]
+                        spattern = scrapepatterns[sname]
+                        if 'url' in globs.row1:
+                          url = onerow[globs.row1.index('url')]
+                          html = gethtml(url)
+                          if stype.lower() == 'xpath':
+                            import lxml.html
+                            searchme = lxml.html.fromstring(html)
+                            match = searchme.xpath(spattern)
+                            if match:
+                              newrow[coldex] = match[0]
+                            else:
+                              newrow[coldex] =  None
+                          elif stype.lower() == 'regex':
+                            import re
+                            match = re.search(spattern, html, re.S | re.I)
+                            if match:
+                              if "scrape" in match.groupdict().keys():
+                                newrow[coldex] = match.group("scrape")
+                              else:
+                                newrow[coldex] = None
+                            else:
+                              newrow[coldex] = None
+
+                        out('%s worked.' % collabel)
+                      except Exception as e:
+                        print traceback.format_exc()
+                        out("Scrape problem on row %s. Retrying." % rowdexstring)
+                        time.sleep(2)
+                        yield dontgetfrustrated(x)
+                      out("Scrape End", "4", '-')
+            out("DONE PROCESSING ROW %s." % rowdex, '3', '-')
+
+            out("Finished processing row. Updating spreadsheet...")
+            newrow = ['' if x==None else x for x in newrow]
+            try:
+              yield "", "", json.dumps(newrow), ""
+            except:
+              yield "", "", newrow, ""
+            for index, onecell in enumerate(CellList):
+              onecell.value = newrow[index]
+              result = None
+
+            stop = True
+            for x in range(5):
+              yield lock
+              try:
+                result = globs.sheet.update_cells(CellList)
+                stop = False
+                break
+              except:
+                out("Writing row to spreadsheet, retry %s of %s" %(x, 5))
+                time.sleep(5)
+                yield dontgetfrustrated(x)
+            if stop:
+              yield badtuple
+              Stop()
+            yield unlock
+
+          elif onerow.count('') == len(onerow):
+            blankrows += 1
+            if blankrows > 1:
+              break
       out("Question Mark Replacement.", '2', '-')
 
 
