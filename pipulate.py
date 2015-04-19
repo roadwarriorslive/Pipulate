@@ -400,12 +400,6 @@ def Pipulate(username='', password='', dockey=''):
         Stop()
       yield unlock
 
-      if not qset:
-        yield "No question marks found. Try putting a question mark in a cell.", "Move along. There's nothing to pipulate here.", "", ""
-        yield 'New to Pipulate? Watch the <a target="_blank" href="http://goo.gl/v71kw8">Demo</a> and read the <a target="_blank" href="http://goo.gl/p2zQa4">Docs</a>.', "", "", ""
-        yield "spinoff", "", "", ""
-        Stop()
-
       stop = True
       for x in range(10):
         yield lock
@@ -612,12 +606,16 @@ def Pipulate(username='', password='', dockey=''):
           nextnum = int(counts[0]) + 1
           for onelist in trendlistoflists:
             onelist[globs.row1.index('count')] = nextnum
+
       if trended and trendingrowsfinished == True:
         qstart = globs.numrows + 1
         qend = globs.numrows + 1
-      else:
+      elif qset:
         qstart = min(qset)
         qend = max(qset) + 1
+      else:
+        qstart = 1
+        qend = globs.numrows + 1
       out("Count and timestamp columns for trending", '2', '-')
 
       #  _                     _                           
@@ -675,6 +673,12 @@ def Pipulate(username='', password='', dockey=''):
       #     |_|                                                                  
       #
       out("Question Mark Replacement.", '2')
+      if not qset and not trended:
+        yield "No question marks found. Try putting a question mark in a cell.", "Move along. There's nothing to pipulate here.", "", ""
+        yield 'New to Pipulate? Watch the <a target="_blank" href="http://goo.gl/v71kw8">Demo</a> and read the <a target="_blank" href="http://goo.gl/p2zQa4">Docs</a>.', "", "", ""
+        yield "spinoff", "", "", ""
+        Stop()
+
       blankrows = 0 #Lets us skip occasional blank rows
       for index, rowdex in enumerate(range(qstart, qend)): #Start stepping through every row.
         if rowdex in qset:
