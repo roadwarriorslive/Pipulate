@@ -1145,7 +1145,13 @@ def datestamp():
   now = datetime.datetime.now()
   now = now.strftime("%B %d, %Y")
   return now
-  
+
+def apex(url):
+  from urlparse import urlparse
+  apex = urlparse(url).hostname.split(".")
+  apex = ".".join(len(apex[-2]) < 4 and apex[-3:] or apex[-2:])
+  return apex
+
 def getargval(anarg, defargval, onerow):
   for coldex, acol in enumerate(globs.row1):
     if acol == anarg: #Found column named same thing as a required argument.
