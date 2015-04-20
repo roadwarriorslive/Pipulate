@@ -67,8 +67,8 @@ class PipForm(Form):
 # |  _| | | (_| \__ \   <  | | | | | | (_| | | | | |
 # |_|   |_|\__,_|___/_|\_\ |_| |_| |_|\__,_|_|_| |_|
 #                                                   
-@app.route("/", methods=['GET', 'POST'])            # Main point of entry when
-def main():                                         # visiting app's homepage.
+@app.route("/", methods=['GET', 'POST'])                  # Main point of entry when
+def main():                                               # visiting app's homepage.
   stop = False
   print('''
                ____  _             _       _   _                          
@@ -80,12 +80,12 @@ def main():                                         # visiting app's homepage.
   ''')
 
   out("ENTERED MAIN FUNCTION", "0")
-  STREAMIT = False                                  # Default to not streaming.
-  INVOKEMODE = False                                  # Convince me we're on a sheet
-  form = PipForm(csrf_enabled=False)                # Initialize form for UI.
-  if session:                                       # I've seen you before!
-    if 'oa2' in session:                            # and I think you're logged in
-      import gspread                                # so I'll grab spreadsheet API
+  STREAMIT = False                                        # Default to not streaming.
+  INVOKEMODE = False                                      # Convince me we're on a sheet
+  form = PipForm(csrf_enabled=False)                      # Initialize form for UI.
+  if session:                                             # I've seen you before!
+    if 'oa2' in session:                                  # and I think you're logged in
+      import gspread                                      # so I'll grab spreadsheet API
       creds = Credentials(access_token=session['oa2'])
       for x in range(4):
         try:
@@ -103,8 +103,7 @@ def main():                                         # visiting app's homepage.
     else:
       flash('Please enter a URL to Pipulate (or click bookmarklet again)')
     if form.mode.data:
-      gotcha(form.mode.data)
-      #pass
+      InitSheet(form.mode.data)
   else:
     if request.args and "access_token" in request.args:
       session['oa2'] = request.args.get("access_token")
@@ -1057,6 +1056,9 @@ def add_weeks(sourcedate, weeks):
   daystoadd = datetime.timedelta(days=days)
   newdate = sourcedate + daystoadd
   return newdate
+
+def InitSheet(behavior):
+  gotcha(behavior)
 
 def InitTab(gdoc2, tabname, headerlist, listoflists=[]):
   initsheet = None
