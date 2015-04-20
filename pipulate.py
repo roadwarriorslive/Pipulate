@@ -97,11 +97,10 @@ def main():                                               # visiting app's homep
           if 'u' not in session and globs.PIPURL:
             session['u'] = globs.PIPURL
   if request.method == 'POST':
+    if form.mode.data and form.mode.data in behaviors.keys():
+      globs.PIPURL = behaviors[form.mode.data](gsp)     # Setup a new Spreadsheet
     if form.pipurl.data:
-      if form.mode.data in behaviors.keys():
-        globs.PIPURL = behaviors[form.mode.data]()
-      else:
-        globs.PIPURL = form.pipurl.data
+      globs.PIPURL = form.pipurl.data
       STREAMIT = stream_with_context(Pipulate())
     else:
       flash('Please enter a URL to Pipulate (or click bookmarklet again)')

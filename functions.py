@@ -14,9 +14,10 @@ def walkdict(obj, key):
         return v
   return None
 
-def crawlinit():
-  print("I would do whatever is here")
-  gotcha("Init")
+def crawlinit(gsp):
+  #gsp.open("foo")
+  pass
+
   #Create a spreadsheet using GSpread
   #Populate the four cells required to initiate a 1-page crawl
   #Return a PIPURL or equivalent for Pipulate to use it like it was always there
