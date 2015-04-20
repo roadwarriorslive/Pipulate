@@ -3,12 +3,6 @@ from flask import session
 import globs
 from common import *
 
-def foo():
-  gotcha("FOO")
-
-def bar():
-  gotcha("BAR")
-
 def walkdict(obj, key):
   stack = obj.items()
   while stack:
@@ -19,6 +13,10 @@ def walkdict(obj, key):
       if k == key:
         return v
   return None
+
+def crawlinit():
+  print("I would do whatever is here")
+  gotcha("Init")
 
 def crawl(url):
   CellList = globs.sheet.range('B1:D2')
@@ -140,7 +138,6 @@ def likes(url):
   return walkdict(adict, 'likes')
 
 behaviors = {
-  'Get Links' : foo,
-  'Get Videos' : bar
+  'Get Links' : crawlinit
 }
 
