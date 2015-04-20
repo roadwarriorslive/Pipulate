@@ -84,12 +84,6 @@ def main():                                               # visiting app's homep
   INVOKEMODE = False                                      # Convince me we're on a sheet
   form = PipForm(csrf_enabled=False)                      # Initialize form for UI.
   if form.mode.data:
-    behaviors = {
-      'Pipulate' : foo,
-      'Get Links' : bar,
-      'Get Videos' : bar,
-      'Get Tweets' : bar
-    }
     behaviors[form.mode.data]()
   if session:                                             # I've seen you before!
     if 'oa2' in session:                                  # and I think you're logged in

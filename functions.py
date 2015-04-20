@@ -138,3 +138,11 @@ def likes(url):
   respobj = requests.get('https://graph.facebook.com/' + url) 
   adict = respobj.json()
   return walkdict(adict, 'likes')
+
+behaviors = {
+  'Pipulate' : foo,
+  'Get Links' : bar,
+  'Get Videos' : bar,
+  'Get Tweets' : bar
+}
+
