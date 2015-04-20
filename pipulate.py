@@ -43,16 +43,16 @@ from flask import (Flask,                                 # big thing. Oh yeah, 
 app = Flask(__name__)                               
 app.secret_key = "m\x00\r\xa5\\\xbeTW\xb3\xdf\x17\xb0!T\x9b6\x88l\xcf\xa1vmD}"
 
-def stream_template(template_name, **context):      # This is the key to streaming
-  app.update_template_context(context)              # output to the user in the
-  t = app.jinja_env.get_template(template_name)     # web browser much like a
-  rv = t.stream(context)                            # long page load, but with
-  return rv                                         # better memory efficiency.
+def stream_template(template_name, **context):            # This is the key to streaming
+  app.update_template_context(context)                    # output to the user in the
+  t = app.jinja_env.get_template(template_name)           # web browser much like a
+  rv = t.stream(context)                                  # long page load, but with
+  return rv                                               # better memory efficiency.
 
-@app.context_processor                              # Anything that I want to be
-def templateglobals():                              # available in Jinja2 templates
-  return dict(loginlink=getLoginlink(),             # without having to always
-  bookmarklet=getBookmarklet(),                     # pass them as parameters
+@app.context_processor                                    # Anything that I want to be
+def templateglobals():                                    # available in Jinja2 templates
+  return dict(loginlink=getLoginlink(),                   # without having to always
+  bookmarklet=getBookmarklet(),                           # pass them as parameters
   logoutlink=getLogoutlink(),
   cyclemotto=cyclemotto(),
   )
@@ -81,7 +81,7 @@ def main():                                         # visiting app's homepage.
 
   out("ENTERED MAIN FUNCTION", "0")
   STREAMIT = False                                  # Default to not streaming.
-  OFFSHEET = False                                  # Convince me we're on a sheet
+  INVOKEMODE = False                                  # Convince me we're on a sheet
   form = PipForm(csrf_enabled=False)                # Initialize form for UI.
   if session:                                       # I've seen you before!
     if 'oa2' in session:                            # and I think you're logged in
@@ -103,8 +103,8 @@ def main():                                         # visiting app's homepage.
     else:
       flash('Please enter a URL to Pipulate (or click bookmarklet again)')
     if form.mode.data:
-      #gotcha(form.mode.data)
-      pass
+      gotcha(form.mode.data)
+      #pass
   else:
     if request.args and "access_token" in request.args:
       session['oa2'] = request.args.get("access_token")
@@ -133,19 +133,21 @@ def main():                                         # visiting app's homepage.
       if 'u' in request.args:
         form.pipurl.data = request.args.get('u')
         session['u'] = request.args.get('u')
-        if 'https://docs.google.com/spreadsheets' not in form.pipurl.data:
-          OFFSHEET = apex(form.pipurl.data)
+        if 'https://docs.google.com/spreadsheets' in form.pipurl.data:
+          INVOKEMODE = "sheets"
+        else:
+          INVOKEMODE = apex(form.pipurl.data)
       if session and 'u' in session:
         form.pipurl.data = session['u']
     if form.pipurl.data and request.url_root == url_root(form.pipurl.data):
       form.pipurl.data = '' #can't pipulate the pipulate site
   out("Selecting template method.")
   if STREAMIT:
-    return Response(stream_template('pipulate.html', form=form, data=STREAMIT, offsheet=""))
+    return Response(stream_template('pipulate.html', form=form, data=STREAMIT, invokemode="Pipulate"))
   else:
     out("OFF-SHEET: EXITING MAIN FUNCTION RENDER", "0", '-')
-    showbutton = globs.modes.get(OFFSHEET,'Get Links')
-    return render_template('pipulate.html', form=form, offsheet=showbutton)
+    showbutton = globs.modes.get(INVOKEMODE,'Get Links')
+    return render_template('pipulate.html', form=form, invokemode=showbutton)
   out("EXITING MAIN", "0", '-')
 
 def LogUser(authkey):

@@ -264,17 +264,10 @@
       {% if session and 'loggedin' in session and session['loggedin'] == '1': %}
         <form id="pipform" method="POST" action="/">
           <div id="paste"><span id="pastelabel">URL: </span>{{ form.pipurl(size=60) }}</div>
-          {% if offsheet %}
-            {{ form.mode(value="crawl") }}
-            <button id="pipulate" class="button" type="submit">
-              {{ offsheet }} &nbsp;<i id="piplock" class="fa fa-chevron-circle-right"></i>
-            </button>
-          {% else %}
-            {{ form.mode(value="sheet") }}
-            <button id="pipulate" class="button" type="submit">
-              Pipulate &nbsp;<i id="piplock" class="fa fa-chevron-circle-right"></i>
-            </button>
-          {% endif %}
+          {{ form.mode(value=invokemode) }}
+          <button id="pipulate" class="button" type="submit">
+            {{ invokemode }} &nbsp;<i id="piplock" class="fa fa-chevron-circle-right"></i>
+          </button>
         </form>
         {% if request.method == 'POST': %}
           <script>
