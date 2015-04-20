@@ -83,8 +83,6 @@ def main():                                               # visiting app's homep
   STREAMIT = False                                        # Default to not streaming.
   INVOKEMODE = False                                      # Convince me we're on a sheet
   form = PipForm(csrf_enabled=False)                      # Initialize form for UI.
-  if form.mode.data and form.mode.data in behaviors.keys():
-    behaviors[form.mode.data]()
   if session:                                             # I've seen you before!
     if 'oa2' in session:                                  # and I think you're logged in
       import gspread                                      # so I'll grab spreadsheet API
@@ -100,7 +98,10 @@ def main():                                               # visiting app's homep
             session['u'] = globs.PIPURL
   if request.method == 'POST':
     if form.pipurl.data:
-      globs.PIPURL = form.pipurl.data
+      if form.mode.data in behaviors.keys():
+        globs.PIPURL = behaviors[form.mode.data]()
+      else:
+        globs.PIPURL = form.pipurl.data
       STREAMIT = stream_with_context(Pipulate())
     else:
       flash('Please enter a URL to Pipulate (or click bookmarklet again)')

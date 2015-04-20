@@ -17,6 +17,9 @@ def walkdict(obj, key):
 def crawlinit():
   print("I would do whatever is here")
   gotcha("Init")
+  #Create a spreadsheet using GSpread
+  #Populate the four cells required to initiate a 1-page crawl
+  #Return a PIPURL or equivalent for Pipulate to use it like it was always there
 
 def crawl(url):
   CellList = globs.sheet.range('B1:D2')
