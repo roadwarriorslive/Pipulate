@@ -83,6 +83,14 @@ def main():                                               # visiting app's homep
   STREAMIT = False                                        # Default to not streaming.
   INVOKEMODE = False                                      # Convince me we're on a sheet
   form = PipForm(csrf_enabled=False)                      # Initialize form for UI.
+  if form.mode.data:
+    behaviors = {
+      'Pipulate' : foo,
+      'Get Links' : bar,
+      'Get Videos' : bar,
+      'Get Tweets' : bar
+    }
+    behaviors[form.mode.data]()
   if session:                                             # I've seen you before!
     if 'oa2' in session:                                  # and I think you're logged in
       import gspread                                      # so I'll grab spreadsheet API
@@ -102,8 +110,6 @@ def main():                                               # visiting app's homep
       STREAMIT = stream_with_context(Pipulate())
     else:
       flash('Please enter a URL to Pipulate (or click bookmarklet again)')
-    if form.mode.data:
-      InitSheet(form.mode.data)
   else:
     if request.args and "access_token" in request.args:
       session['oa2'] = request.args.get("access_token")
@@ -1056,9 +1062,6 @@ def add_weeks(sourcedate, weeks):
   daystoadd = datetime.timedelta(days=days)
   newdate = sourcedate + daystoadd
   return newdate
-
-def InitSheet(behavior):
-  gotcha(behavior)
 
 def InitTab(gdoc2, tabname, headerlist, listoflists=[]):
   initsheet = None

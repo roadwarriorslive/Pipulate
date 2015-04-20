@@ -3,6 +3,12 @@ from flask import session
 import globs
 from common import *
 
+def foo():
+  gotcha("FOO")
+
+def bar():
+  gotcha("BAR")
+
 def walkdict(obj, key):
   stack = obj.items()
   while stack:
@@ -30,7 +36,6 @@ def crawl(url):
   somelinks = doc.xpath('/html/body//a/@href')
   links = set()
   for alink in somelinks:
-    print(urlparse(alink)[1][-len(apex):])
     if urlparse(alink)[1][-len(apex):] == apex:
       links.add(alink)
   links = list(links)
