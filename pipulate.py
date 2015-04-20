@@ -83,7 +83,7 @@ def main():                                               # visiting app's homep
   STREAMIT = False                                        # Default to not streaming.
   INVOKEMODE = False                                      # Convince me we're on a sheet
   form = PipForm(csrf_enabled=False)                      # Initialize form for UI.
-  if form.mode.data:
+  if form.mode.data and form.mode.data in behaviors.keys():
     behaviors[form.mode.data]()
   if session:                                             # I've seen you before!
     if 'oa2' in session:                                  # and I think you're logged in

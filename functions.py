@@ -140,9 +140,7 @@ def likes(url):
   return walkdict(adict, 'likes')
 
 behaviors = {
-  'Pipulate' : foo,
-  'Get Links' : bar,
-  'Get Videos' : bar,
-  'Get Tweets' : bar
+  'Get Links' : foo,
+  'Get Videos' : bar
 }
 
