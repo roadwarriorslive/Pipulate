@@ -134,7 +134,7 @@ def main():                                         # visiting app's homepage.
         form.pipurl.data = request.args.get('u')
         session['u'] = request.args.get('u')
         if 'https://docs.google.com/spreadsheets' not in form.pipurl.data:
-          OFFSHEET = "Testing"
+          OFFSHEET = apex(form.pipurl.data)
       if session and 'u' in session:
         form.pipurl.data = session['u']
     if form.pipurl.data and request.url_root == url_root(form.pipurl.data):
@@ -144,7 +144,8 @@ def main():                                         # visiting app's homepage.
     return Response(stream_template('pipulate.html', form=form, data=STREAMIT, offsheet=""))
   else:
     out("OFF-SHEET: EXITING MAIN FUNCTION RENDER", "0", '-')
-    return render_template('pipulate.html', form=form, offsheet=OFFSHEET)
+    showbutton = globs.modes.get(OFFSHEET,'Get Links')
+    return render_template('pipulate.html', form=form, offsheet=showbutton)
   out("EXITING MAIN", "0", '-')
 
 def LogUser(authkey):
