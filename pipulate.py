@@ -41,7 +41,6 @@ from flask import (Flask,                                 # big thing. Oh yeah, 
   flash)                                           
 
 app = Flask(__name__)                               
-
 app.secret_key = "m\x00\r\xa5\\\xbeTW\xb3\xdf\x17\xb0!T\x9b6\x88l\xcf\xa1vmD}"
 
 def stream_template(template_name, **context):      # This is the key to streaming
@@ -82,7 +81,7 @@ def main():                                         # visiting app's homepage.
 
   out("ENTERED MAIN FUNCTION", "0")
   STREAMIT = False                                  # Default to not streaming.
-  ONSHEET = False                                   # Convince me we're on a sheet
+  OFFSHEET = False                                  # Convince me we're on a sheet
   form = PipForm(csrf_enabled=False)                # Initialize form for UI.
   if session:                                       # I've seen you before!
     if 'oa2' in session:                            # and I think you're logged in
@@ -134,21 +133,18 @@ def main():                                         # visiting app's homepage.
       if 'u' in request.args:
         form.pipurl.data = request.args.get('u')
         session['u'] = request.args.get('u')
-        if 'https://docs.google.com/spreadsheets' in form.pipurl.data:
-          ONSHEET = True
+        if 'https://docs.google.com/spreadsheets' not in form.pipurl.data:
+          OFFSHEET = "Testing"
       if session and 'u' in session:
         form.pipurl.data = session['u']
     if form.pipurl.data and request.url_root == url_root(form.pipurl.data):
       form.pipurl.data = '' #can't pipulate the pipulate site
   out("Selecting template method.")
   if STREAMIT:
-    return Response(stream_template('pipulate.html', form=form, data=STREAMIT, onsheet="True"))
-  elif ONSHEET:
-    out("SPREADSHEET: EXITING MAIN FUNCTION RENDER", "0", '-')
-    return render_template('pipulate.html', form=form, onsheet="True")
+    return Response(stream_template('pipulate.html', form=form, data=STREAMIT, offsheet=""))
   else:
     out("OFF-SHEET: EXITING MAIN FUNCTION RENDER", "0", '-')
-    return render_template('pipulate.html', form=form, onsheet="")
+    return render_template('pipulate.html', form=form, offsheet=OFFSHEET)
   out("EXITING MAIN", "0", '-')
 
 def LogUser(authkey):
