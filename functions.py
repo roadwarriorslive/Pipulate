@@ -35,12 +35,8 @@ def mobilecanonical(mobile):
 def mobilicious(alternate, altcanonical):
   return "%s : %s" % (alternate, altcanonical)
 
-def crawlinit(gsp):
-  #gsp.open("Crawl")
-  pass
-
 def crawl(url):
-  fcols = ['Depth', 'Title', 'Description', 'Alternate', 'AltCanonical', 'Mobilicious']
+  fcols = ['Depth', 'Title', 'Description', 'PageRank', 'Mobile', 'MobileCanonical', 'Mobilicious']
   therange = 'B1:%s2' % globs.letter[len(fcols)+1]
   CellList = globs.sheet.range(therange)
   vals = fcols + ['0'] + ['?']*(len(fcols)-1)
@@ -60,10 +56,13 @@ def crawl(url):
       links.add(alink)
   links = list(links)
   y = len(links)
-  q = ['?']*y
-  linkslist = zip(links,['1']*y,q,q,q,q,q)
+  q = ['']*y
+  linkslist = zip(links,['1']*y,q,q,q,q,q,q)
   InsertRows(globs.sheet, linkslist, 2)
   return "0"
+
+def crawlinit(gsp):
+  pass
 
 def serps(keyword):
   times = 2
