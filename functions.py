@@ -14,17 +14,20 @@ def walkdict(obj, key):
         return v
   return None
 
+def altcanonical(altmobile):
+  return altmobile
+
+def mobilicious(altmobile, altcanonical):
+  return "%s : %s" % (altmobile, altcanonical)
+
 def crawlinit(gsp):
-  #gsp.open("foo")
+  #gsp.open("Crawl")
   pass
 
-  #Create a spreadsheet using GSpread
-  #Populate the four cells required to initiate a 1-page crawl
-  #Return a PIPURL or equivalent for Pipulate to use it like it was always there
-
 def crawl(url):
-  CellList = globs.sheet.range('B1:D2')
-  fcols = ['Depth', 'Title', 'Description']
+  fcols = ['Depth', 'Title', 'Description', 'AltMobile', 'AltCanonical', 'Mobilicious']
+  therange = 'B1:%s2' % globs.letter[len(fcols)+1]
+  CellList = globs.sheet.range(therange)
   vals = fcols + ['0'] + ['?']*(len(fcols)-1)
   for i, val in enumerate(vals):
     CellList[i].value = val
@@ -42,7 +45,8 @@ def crawl(url):
       links.add(alink)
   links = list(links)
   y = len(links)
-  linkslist = zip(links,['1']*y,['?']*y,['?']*y)
+  q = ['?']*y
+  linkslist = zip(links,['1']*y,q,q,q,q,q)
   InsertRows(globs.sheet, linkslist, 2)
   return "0"
 

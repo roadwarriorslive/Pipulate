@@ -301,7 +301,10 @@ def Pipulate(username='', password='', dockey=''):
       except gspread.exceptions.CellNotFound:
         # Questionmark replacement tab
         headers = ['URL',  'Crawl']
-        initrows = [['http://paulrobesonfreedomschool.org/', '?']]
+        crawlsite = 'http://paulrobesonfreedomschool.org/'
+        if globs.PIPURL:
+          crawlsite = globs.PIPURL
+        initrows = [[crawlsite, '?']]
         yield lock
         try:
           InitTab(gdoc, "sheet1", headers, initrows)
