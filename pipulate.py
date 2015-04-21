@@ -123,7 +123,7 @@ def main():                                               # visiting app's homep
       if session:
         if 'oa2' in session:
           revokeurl = 'https://accounts.google.com/o/oauth2/revoke?token=' + session['oa2']
-          requests.get(revokeurl)
+          requests.get(revokeurl, timeout=5)
         if 'u' in request.args:
           form.pipurl.data = request.args.get('u')
         session.pop('loggedin', None)
@@ -152,7 +152,7 @@ def main():                                               # visiting app's homep
 def LogUser(authkey):
   api = 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='
   api = api + authkey
-  ujson = requests.get(api)
+  ujson = requests.get(api, timeout=5)
   adict = ujson.json()
   import os.path
   filename = "/var/opt/pipulate.pkl"
@@ -725,10 +725,12 @@ def Pipulate(username='', password='', dockey=''):
               for coldex, acell in enumerate(newrow):
                 if questionmark(onerow, rowdexstring, coldex):
                   if 'url' in globs.row1: #Only fetch html once per row if possible
+                    yield lock
                     try:
                       globs.html = gethtml(onerow[globs.row1.index('url')])
                     except:
                       pass
+                    yield unlock
                   collabel = globs.row1[coldex]
                   if collabel in transfuncs.keys():
                     for x in range(4):
@@ -776,7 +778,12 @@ def Pipulate(username='', password='', dockey=''):
                         spattern = scrapepatterns[sname]
                         if 'url' in globs.row1:
                           url = onerow[globs.row1.index('url')]
-                          html = gethtml(url)
+                          yield lock
+                          try:
+                            html = gethtml(url)
+                          except:
+                            pass
+                          yield unlock
                           if stype.lower() == 'xpath':
                             import lxml.html
                             searchme = lxml.html.fromstring(html)
@@ -1140,10 +1147,18 @@ def gethtml(url):
   else:
     out("Doing first HTML fetch for row.")
     try:
-      globs.hobj = requests.get(url)
+      defend = requests.head(url)
     except:
       return None
-    globs.html = globs.hobj.text
+    ct = defend.headers['Content-Type']
+    if 'text' in ct:
+      try:
+        globs.hobj = requests.get(url, timeout=(5, 10))
+      except:
+        return None
+      globs.html = globs.hobj.text
+    else:
+      return "Error: can't fetch %s " % ct
   return globs.html
 
 def convertisotime(timestamp):

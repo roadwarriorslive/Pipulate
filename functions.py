@@ -47,7 +47,7 @@ def crawl(url):
   apex = urlparse(url).hostname.split(".")
   apex = ".".join(len(apex[-2]) < 4 and apex[-3:] or apex[-2:])
   import lxml.html
-  ro = requests.get(url)
+  ro = requests.get(url, timeout=5)
   doc = lxml.html.fromstring(ro.text)
   somelinks = doc.xpath('/html/body//a/@href')
   links = set()
@@ -70,7 +70,7 @@ def serps(keyword):
   returnme = []
   for start in [8*n for n in range(0,times)]:
     pdict = {'rsz':'large', 'v':'1.0', 'q': keyword, 'start':start}
-    respobj = requests.get(api, params=pdict)
+    respobj = requests.get(api, params=pdict, timeout=5)
     returnme.append(respobj.json())
     time.sleep(1)
   return json.dumps(returnme)
@@ -119,7 +119,7 @@ def response(url):
     return globs.hobj.status_code
   else:
     try:
-      return requests.get(url).status_code
+      return requests.get(url, timeout=5).status_code
     except:
       return "Error"
 
@@ -145,17 +145,17 @@ def plusses(url):
 
 def tweets(url):
   api = "http://urls.api.twitter.com/1/urls/count.json?url="
-  respobj = requests.get(api + url)
+  respobj = requests.get(api + url, timeout=5)
   adict = respobj.json()
   return walkdict(adict, 'count')
 
 def shares(url):
-  respobj = requests.get('https://graph.facebook.com/' + url) 
+  respobj = requests.get('https://graph.facebook.com/' + url, timeout=5) 
   adict = respobj.json()
   return walkdict(adict, 'shares')
 
 def likes(url): 
-  respobj = requests.get('https://graph.facebook.com/' + url) 
+  respobj = requests.get('https://graph.facebook.com/' + url, timeout=5)
   adict = respobj.json()
   return walkdict(adict, 'likes')
 
