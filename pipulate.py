@@ -266,9 +266,12 @@ def Pipulate(username='', password='', dockey=''):
               session['u'] = globs.PIPURL
             Stop()
           except gspread.exceptions.NoValidUrlKeyFound:
-            yield "Currently, the URL must be a Google Spreadsheet.", "", "", ""
-            yield "<a href='https://docs.google.com/spreadsheets/create' target='_new'>Create</a> and name a new Spreadsheet and click the Pipulate Bookmarklet again.", "Google Spreadsheet Not Found.", "", ""
-            yield 'New to Pipulate? Watch the <a target="_blank" href="http://goo.gl/v71kw8">Demo</a> and read the <a target="_blank" href="http://goo.gl/p2zQa4">Docs</a>.', "", "", ""
+            yield "I see you're on a URL that is not a Google Spreadsheet. Would you like to grab links?", "", "", ""
+            yield "If so, just <a href='https://docs.google.com/spreadsheets/create' target='_new'>create</a> a new Spreadsheet, name it \"Crawl\" and click Pipulate again.", "Google Spreadsheet Not Found.", "", ""
+            yield "During this file creation process, try to keep working out of the same Pipulate window.", "", "", ""
+            yield "It contains the URL you were on when you clicked the bookmarklet. Welcome!!!", "", "", ""
+            yield 'New to this odd but awesome approach? Watch the <a target="_blank" href="http://goo.gl/v71kw8">Demo</a> and read the <a target="_blank" href="http://goo.gl/p2zQa4">Docs</a>.', "", "", ""
+            yield "I am hereby launched on Mobilegeddeon as day-to-day useful.", "", "", ""
             Stop()
           except gspread.exceptions.SpreadsheetNotFound:
             yield "Please give the document a name to force first save.", "", "", ""
