@@ -7,6 +7,9 @@ def documentation():
   return s
 
 def pipinit():
+  return [['http://paulrobesonfreedomschool.org/', '?']]
+
+def pipinit_depricated():
   s = []
   s.append(['YouTube Subscribers', 'https://www.youtube.com/user/miklevin','*','','','*','*','*','*'])
   s.append(['Twitter Followers', 'https://twitter.com/miklevin','','*','','','','*','*'])

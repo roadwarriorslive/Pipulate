@@ -300,12 +300,13 @@ def Pipulate(username='', password='', dockey=''):
         cell = gdoc.sheet1.find(anything)
       except gspread.exceptions.CellNotFound:
         # Questionmark replacement tab
-        headers = ['Example Name', 'URL',  'Subscribers', 'Followers', 'Likes', 'Shares', 'Plusses', 'TimeStamp', 'Count']
+        headers = ['URL',  'Crawl']
         yield lock
         try:
           InitTab(gdoc, "sheet1", headers, pipinit())
         except:
-          Stop()
+          #Stop()
+          pass
         yield unlock
 
       # Documentation Tab
