@@ -23,14 +23,19 @@ can use http://pipulate.com.
 ### Bookmarklet
 A web browser bookmarklet grabbed from the Pipulate user interface is how the
 functions residing on Pipulate servers get invoked, and appear to infuse the
-spreadsheet with magic data-collection powers, enabling such tasks crawling
-websites directly into a spreadsheet. Once you're happy with a particular data
-look-up task having worked interactively in the spreadsheet, it can be
-automated. Job instructions come from the Google Doc itself, turning Pipulate
-servers into something as stateless and interchangable as webheads. No data
-resides on these servers. They are only there to Pipulate the Google
+spreadsheet with magic data-collection powers&#151;enabling such tasks crawling
+websites directly into a spreadsheet. This alone makes it noteworthy and useful
+for day-today tasks, needing very little thought about extra methodology. It
+just slips seamlessly into your daily work-flow.
+
+### Scheduling
+But Pipulate isn't just for ad hoc investigations in spreadsheets. Once you're
+happy with a particular data look-up task having worked out interactively, it
+can be automated. Job instructions come from the Google Doc itself, turning
+Pipulate servers into something as stateless and interchangable as webheads. No
+data resides on these servers.  They are only there to Pipulate the Google
 Spreadsheets. Get a Pipulate server from anywhere, fire-off a job, and then
-destroy the server if you care to. Nothing's lost!
+destroy the server if you care to.  Nothing's lost!
 
 ### Great for newbs!
 Pipulate is also a totally extendable system, plug-in compatible with
