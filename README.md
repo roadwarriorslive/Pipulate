@@ -18,7 +18,7 @@ layer. There is no Apache, nginx or nodejs. Just the Python language.  As such,
 you can use Levinux-powered virtual servers on the desktop of your Mac, Windows
 or other Linux machine to kickstart gettting your own server, and later moving
 to the cloud or a microserver like the Raspberry Pi. For the time being, you
-can use my instance at http://pipulate.com.
+can use http://pipulate.com.
 
 ### Bookmarklet
 A web browser bookmarklet grabbed from the Pipulate user interface is how the
