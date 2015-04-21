@@ -1,20 +1,5 @@
 from flask import session
 
-def scrapes():
-  s = []
-  s.append(['title',       'xpath', "//title/text()"])
-  s.append(['description', 'xpath', "//meta[@name='description']/@content"])
-  s.append(['altmobile'    'xpath', "/html/head/link/@href[@rel='alternate']"])
-  s.append(['tweettotal',  'xpath', "//span[.='Tweets']/following-sibling::span/text()"])
-  s.append(['following',   'xpath', "//span[.='Following']/following-sibling::span/text()"])
-  s.append(['followers',   'xpath', "//span[.='Followers']/following-sibling::span/text()"])
-  s.append(['views',       'xpath', "//div[@class='watch-view-count']/text()"])
-  s.append(['thumbsup',    'xpath', "//button[@id='watch-like']/span/text()"])
-  s.append(['thumbsdown',  'xpath', "//button[@id='watch-dislike']/span/text()"])
-  s.append(['subscribers', 'regex', r"subscriber-count.*?>(?P<scrape>[0-9,]+?)<"])
-  s.append(['ga',          'regex', r"(?:\'|\")(?P<scrape>UA-.*?)(?:\'|\")"])
-  return s
-
 def documentation():
   s = []
   s.append(['Slideshow Introduction', 'http://goo.gl/QPQb3t'])

@@ -3,6 +3,21 @@ from flask import session
 import globs
 from common import *
 
+def scrapes():
+  s = []
+  s.append(['title',       'xpath', "//title/text()"])
+  s.append(['description', 'xpath', "//meta[@name='description']/@content"])
+  s.append(['mobile',      'xpath', "/html/head/link[@media = 'only screen and (max-width: 640px)']/@href"])
+  s.append(['tweettotal',  'xpath', "//span[.='Tweets']/following-sibling::span/text()"])
+  s.append(['following',   'xpath', "//span[.='Following']/following-sibling::span/text()"])
+  s.append(['followers',   'xpath', "//span[.='Followers']/following-sibling::span/text()"])
+  s.append(['views',       'xpath', "//div[@class='watch-view-count']/text()"])
+  s.append(['thumbsup',    'xpath', "//button[@id='watch-like']/span/text()"])
+  s.append(['thumbsdown',  'xpath', "//button[@id='watch-dislike']/span/text()"])
+  s.append(['subscribers', 'regex', r"subscriber-count.*?>(?P<scrape>[0-9,]+?)<"])
+  s.append(['ga',          'regex', r"(?:\'|\")(?P<scrape>UA-.*?)(?:\'|\")"])
+  return s
+
 def walkdict(obj, key):
   stack = obj.items()
   while stack:
@@ -14,18 +29,18 @@ def walkdict(obj, key):
         return v
   return None
 
-def altcanonical(altmobile):
-  return altmobile
+def mobilecanonical(mobile):
+  return mobile
 
-def mobilicious(altmobile, altcanonical):
-  return "%s : %s" % (altmobile, altcanonical)
+def mobilicious(alternate, altcanonical):
+  return "%s : %s" % (alternate, altcanonical)
 
 def crawlinit(gsp):
   #gsp.open("Crawl")
   pass
 
 def crawl(url):
-  fcols = ['Depth', 'Title', 'Description', 'AltMobile', 'AltCanonical', 'Mobilicious']
+  fcols = ['Depth', 'Title', 'Description', 'Alternate', 'AltCanonical', 'Mobilicious']
   therange = 'B1:%s2' % globs.letter[len(fcols)+1]
   CellList = globs.sheet.range(therange)
   vals = fcols + ['0'] + ['?']*(len(fcols)-1)
