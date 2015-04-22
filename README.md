@@ -20,7 +20,23 @@ SEO or Social Media professionals to give them superpowers. Watch the
     - [Bookmarklet](#bookmarklet)
     - [Great For Newbs!](#great-for-newbs)
 2. [Installation](#2-installation)
+    - [Runs On Anything](runs-on-anything)
+    - [Debian/Ubuntu](debian-ubuntu)
+    - [Mac OS X](mac-os-x)
+    - [Windows](windows)
 3. [Conventions](#3-conventions)
+    - [Drag to Bookmarks Bar](drag-to-bookmarks-bar)
+    - [Create New Spreadsheet](create-new-spreadsheet)
+    - [Clicking The Bookmarklet](clicking-the-bookmarklet)
+    - [Logging In](logging-in)
+    - [Initializing Sheet](initializing-sheet)
+    - [The Tabs](the-tabs)
+    - [Function Names](function-names)
+    - [Input Columns](input-columns)
+    - [Question Marks](question-marks)
+    - [Ad Hoc Investigations](ad-hoc-investigations)
+    - [Grab Links](grab-links)
+    - [Stormy Weather](stormy-weather)
 4. [Functions](#4-functions)
 5. [Scheduling](#5-scheduling)
 6. [Customizing](#6-customizing)
@@ -124,7 +140,7 @@ around and modify it yourself. And after you've had the Levinux experience, I
 suggest you get it running on your own real hardware, from your main machine's
 desktop to a Raspberry Pi.
 
-### Pipulate Runs on Just About Anything
+### Runs On Anything
 Get it running on your Mac, Windows or Linux desktop, from a ready-made virtual
 machine, a cloud server, or even a Raspberry Pi or other teensy tiny computer.
 It basically runs on anything. Then, visit the site you just created from a web
@@ -184,32 +200,41 @@ From a CygWin Shell (MinTTY):
 - Visit http://localhost:8888
 
 ## 3\. Conventions
-### How Do I Define a Job?
-I've set up the initial Pipulate job to collect some very common Web Social
-Media metrics, like the counts of a Twitter Profile page, views and subscribers
-off a YouTube channel page, and Facebook Shares, Likes and Google +1s of a URL.
-You can customize this example to your own pages and profile, or read through
-the built-in documentation (coming soon) on setting up your own job. Once
-you're happy with it, replace the question marks with asterisks, and invite in
-a special gmail address that you set up, and watch the job get processed daily
-(or whatever). More documentation coming on the use of the question marks and
-asterisks to test, then schedule jobs coming soon. Also, look in the Config tab
-to see the RowThrottleNumber setting that keeps more than this number of rows
-from processing at once (great for SERP checking), and the RunJobEvery setting
-that you can set to values like 1 day, 1 week, 1 month, 3 days, 10 minutes, and
-variations thereof.
+### Drag to Bookmarks Bar
+### Create New Spreadsheet
+### Clicking The Bookmarklet
+### Logging In
+### Initializing Sheet
+### The Tabs
+### Function Names
+### Input Columns
+### Question Marks
+### Ad Hoc Investigations
+### Grab Links
+### Stormy Weather
 
 ## 4\. Functions
-WIP
+### Scrapers
+### User Functions
 
 ## 5\. Scheduling
 But Pipulate isn't just for ad hoc investigations in spreadsheets. Once you're
 happy with a particular data look-up task having worked out interactively, it
 can be automated. Job instructions come from the Google Doc itself, turning
-Pipulate servers into something as stateless and interchangable as webheads. No
-data resides on these servers.  They are only there to Pipulate the Google
+Pipulate servers into something as stateless and interchangeable as webheads.
+No data resides on these servers. They are only there to Pipulate the Google
 Spreadsheets. Get a Pipulate server from anywhere, fire-off a job, and then
-destroy the server if you care to.  Nothing's lost!
+destroy the server if you care to. Nothing's lost!
+
+Once you're happy with the results of an ad hoc investigation (using question
+marks), replace the question marks with asterisks, and invite in a special
+gmail address that you set up, and watch the job get processed daily (or
+whatever). More documentation coming on the use of the question marks and
+asterisks to test, then schedule jobs coming soon. Also, look in the Config tab
+to see the RowThrottleNumber setting that keeps more than this number of rows
+from processing at once (great for SERP checking), and the RunJobEvery setting
+that you can set to values like 1 day, 1 week, 1 month, 3 days, 10 minutes, and
+variations thereof.
 
 ## 6\. Customizing
 Not happy with the built-in functions? Write your own, and contributing them
@@ -218,14 +243,14 @@ Copy and paste the examples under the Scrapers tab, experimenting with he XPath
 and RegEx patterns to grab anything you like off a page. 
 
 ## 7\. FAQ
-## OAuth2 For Your Security
+### OAuth2 For Your Security
 Because this employs OAuth2 by default to avoid configuration files and storing
 usernames and passwords, it will only work from localhost, or on machines
 resolving from a registered domain. If you go the registered domain route,
 you'll have to update the client_id under the getLoginlink to your own, under
 Google's Developer Console: https://console.developers.google.com/project
 
-## Username & Password For Scheduling
+### Username & Password For Scheduling
 I don't have the web user interface built yet to query the admin for a GMail
 username and password, and probably wouldn't be a good idea anyway, as I'm not
 running the Web UI in https mode, to keep server configuration as simple as
@@ -242,7 +267,7 @@ password, so that you can always revoke the password for that server. This is
 all only an issue if you want scheduling. "Manual" pipulating works just fine
 out of the box.
 
-## Scheduling
+### Scheduling
 I'm still working out the details of scheduling, specifically how to get the
 scheduler to run as a background daemon the same way the Python webserver is.
 There's nothing hard about it. Just haven't finished the work yet. To see it
@@ -250,7 +275,7 @@ roughly working, run pipulate like this:
 
     python pipulate.py scheduler
 
-## Linux Auto-Start Daemon & Cron Job
+### Linux Auto-Start Daemon & Cron Job
 Currently, the documentation on how to fully turn a Linux server into a
 Pipulate server is contained in these files in the repository:
 

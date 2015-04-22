@@ -133,18 +133,17 @@ def main():                                               # visiting app's homep
         form.pipurl.data = request.args.get('u')
         session['u'] = request.args.get('u')
         if 'https://docs.google.com/spreadsheets' in form.pipurl.data:
+          # Consider checking if sheet exists for an "Initialize Sheet" button.
           INVOKEMODE = "sheets"
         else:
           INVOKEMODE = apex(form.pipurl.data)
       if session and 'u' in session:
         form.pipurl.data = session['u']
-    if form.pipurl.data and request.url_root == url_root(form.pipurl.data):
-      form.pipurl.data = '' #can't pipulate the pipulate site
   out("Selecting template method.")
   if STREAMIT:
     return Response(stream_template('pipulate.html', form=form, data=STREAMIT, invokemode="Pipulate"))
   else:
-    out("OFF-SHEET: EXITING MAIN FUNCTION RENDER", "0", '-')
+    out("EXITING MAIN FUNCTION RENDER", "0", '-')
     showbutton = globs.modes.get(INVOKEMODE,'Get Links')
     return render_template('pipulate.html', form=form, invokemode=showbutton)
   out("EXITING MAIN", "0", '-')
@@ -313,10 +312,10 @@ def Pipulate(username='', password='', dockey=''):
           pass
         yield unlock
 
-      # Documentation Tab
-      yield ", Docs", "", "", ""
+      # How To Tab
+      yield ", How To", "", "", ""
       headers = ['Topic', 'DocumentationLink']
-      InitTab(gdoc, 'Docs', headers, documentation())
+      InitTab(gdoc, 'How To', headers, documentation())
 
       # Config Tab
       yield ", Config", "", "", ""
@@ -1079,7 +1078,7 @@ def add_weeks(sourcedate, weeks):
 def InitTab(gdoc2, tabname, headerlist, listoflists=[]):
   initsheet = None
   isSheet1 = False
-  for x in range(3): #not too many times here
+  for x in range(7): #not too many times here
     if tabname == "sheet1":
       isSheet1 = True
       try:
@@ -1093,7 +1092,7 @@ def InitTab(gdoc2, tabname, headerlist, listoflists=[]):
         out("%s Tab exists." % tabname)
         break
       except:
-        out("Retrying make %s Tab %s of %s" % (tabname, x, 5))
+        out("Retrying make %s Tab %s of %s" % (tabname, x, 7))
         time.sleep(2) #not too long here
 
   if isSheet1 or not initsheet:
