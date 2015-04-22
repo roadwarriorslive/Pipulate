@@ -20,6 +20,7 @@ def scrapes():
   return s
 
 def walkdict(obj, key):
+  """Take a JSON object and key and return the first matched value from the object."""
   stack = obj.items()
   while stack:
     k, v = stack.pop()
@@ -30,13 +31,8 @@ def walkdict(obj, key):
         return v
   return None
 
-def mcanonical(mobile):
-  return mobile
-
-def mobilicious(alternate, altcanonical):
-  return "%s : %s" % (alternate, altcanonical)
-
 def crawl(url):
+  """Grab HTML from a URL, parse links and add a row per link to spreadsheet."""
   fcols = ['Depth', 'Title', 'Description', 'PageRank', 'Mobile', 'Mcanonical', 'Mobilicious']
   therange = 'B1:%s2' % globs.letter[len(fcols)+1]
   CellList = globs.sheet.range(therange)
@@ -63,9 +59,11 @@ def crawl(url):
   return "0"
 
 def crawlinit(gsp):
+  """Do the spreadsheet setup requried by crawl function."""
   pass
 
 def serps(keyword):
+  """Return non-customized JSON search results for keyword from Google."""
   times = 2
   api = "http://ajax.googleapis.com/ajax/services/search/web"
   returnme = []
@@ -77,6 +75,7 @@ def serps(keyword):
   return json.dumps(returnme)
 
 def positions(keyword, serps=''):
+  """Return a position/url paired JSON dict of all results for keyword."""
   if not serps:
     def gserps(keyword):
       global serps
@@ -96,6 +95,7 @@ def positions(keyword, serps=''):
     return "Error"
 
 def position(keyword, site, positions=''):
+  """Return the position a provided site is in for a given keyword."""
   if not positions:
     def gpositions(keyword):
       global positions
@@ -214,6 +214,12 @@ def pagerank(url):
   except:
     st = 0
   return st
+
+def mcanonical(mobile):
+  return mobile
+
+def mobilicious(alternate, altcanonical):
+  return "%s : %s" % (alternate, altcanonical)
 
 behaviors = {
   'Get Links' : crawlinit

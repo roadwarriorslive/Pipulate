@@ -49,7 +49,7 @@ because when Google Spreadsheets came along, I saw 99% of the web apps I build
 as becoming not necessary... except for how to sprinkle in the secret-sauce.
 
 So, freed from the UI-designing world (right as it went into massive flux from
-HTML5/CSS3/Browser Wars), I took the opportunity to, and had the pleasure of,
+HTML5/CSS3/Browser Wars), I took the opportunity to (and had the pleasure of)
 doing a complete re-write as my second major project on my new
 Linux/Python/vim/git stack. All the fancy algorithm stuff that I used to plug
 in on the back-end of a pre-ROR-like CRUD/MVC/blahblah app-builing framework
