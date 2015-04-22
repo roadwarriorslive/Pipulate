@@ -5,8 +5,8 @@ Pipulate expands your mind and the way spreadsheets work by using functions
 written and executed in Python entirely outside of the spreadsheet, cleanly
 passing the values back and forth, replacing question marks for output. This
 approach facilitates quick data-investigations from the comfortable and
-ubiquitous spreadsheet, effectively slapping an Ironman suit onto aspiring SEO
-or Social Media professionals to give them superpowers. Watch the 
+ubiquitous spreadsheet&#151;effectively slapping an Ironman suit onto aspiring
+SEO or Social Media professionals to give them superpowers. Watch the 
 [Google Slides](http://goo.gl/v71kw8) or read the [Google Docs](http://goo.gl/p2zQa4).
 
 <img src="http://mikelevinseo.com/free-and-open-source-seo-software.png"/>
@@ -27,10 +27,11 @@ or Social Media professionals to give them superpowers. Watch the
 ## 1\. Introduction
 ### Overview
 Well, you pretty much got the overview in that opening paragraph, no? At any
-rate, I combine together a lot of unexpected things here in this project,
-achieving great things and making a few enemies along the way. My main lesson
-is: "Don't care about how much conventional wisdom dictates a thing, if you
-have good reason to believe otherwise". My reasons? Oh, they amount to:
+rate, I connect a lot of unexpected tots here in this project, from Python to
+bookmarklets, to tiny servers, to leveraging massive Web API infrastructure, in
+order to achieve great things. My main lesson is: "Don't care about how much
+conventional wisdom dictates a thing, if you have good reason to believe
+otherwise". My reasons? Oh, they amount to:
 
 1. Master a minimal parts that let you achieve the most things.
 2. Choose parts that are as disruption-proof as reasonably possible.
