@@ -1,14 +1,14 @@
 <img src="http://mikelevinseo.com/Pipulate-FOSS-SEO-Logo.png"><br>Free And Open Source SEO Software
 ========
 
-Pipulate expands your mind, along with the way  spreadsheets work by allowing
-you to use functions written and executed in Python entirely outside of the
-spreadsheet, cleanly passing the values back and forth, replacing question
-marks for output. This approach facilitates quick data-investigations from the
-comfortable and ubiquitous spreadsheet, effectively slapping an Ironman suit
-for superpowers onto the SEO or Social Media (aspiring) professional using
-Pipulate. Watch the [Google Slides](http://goo.gl/v71kw8) or read the 
-[Google Docs](http://goo.gl/p2zQa4).
+Pipulate expands your mind and the way spreadsheets work by using functions
+written and executed in Python entirely outside of the spreadsheet, cleanly
+passing the values back and forth, replacing question marks for output. This
+approach facilitates quick data-investigations from the comfortable and
+ubiquitous spreadsheet, effectively slapping an Ironman suit onto to instill
+superpowers into SEO or Social Media (aspiring) professional using Pipulate. 
+
+Watch the [Google Slides](http://goo.gl/v71kw8) or read the [Google Docs](http://goo.gl/p2zQa4).
 
 <img src="http://mikelevinseo.com/free-and-open-source-seo-software.png"/>
 
