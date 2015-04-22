@@ -19,27 +19,6 @@ def scrapes():
   s.append(['ga',          'regex', r"(?:\'|\")(?P<scrape>UA-.*?)(?:\'|\")"])
   return s
 
-def walkdict(obj, key):
-  """Take a JSON object and key and return the first matched value from the object."""
-  stack = obj.items()
-  while stack:
-    k, v = stack.pop()
-    if isinstance(v, dict):
-      stack.extend(v.iteritems())
-    else:
-      if k == key:
-        return v
-  return None
-
-def extension(url):
-  """Return the file extension, given (typically) a URL."""
-  if url:
-    path = urlparse.urlparse(url).path
-    ext = os.path.splitext(path)[1]
-    return ext
-  else:
-    return None
-
 def crawl(url):
   """Grab HTML from a URL, parse links and add a row per link to spreadsheet."""
   fcols = ['Depth', 'Title', 'Description', 'PageRank', 'Mobile', 'mCanonical', 'Mobilicious']
@@ -117,6 +96,7 @@ def position(keyword, site, positions=''):
     #return "> " % len(positions)
 
 def topurl(site, positions=''):
+  """Return the top performing URL for a site given a positions object."""
   if positions:
     urldict = json.loads(positions)
     for thepos, aurl in urldict.iteritems():
@@ -124,6 +104,7 @@ def topurl(site, positions=''):
         return aurl
 
 def response(url):
+  """Return a numeric http response code for given URL."""
   if globs.hobj:
     return globs.hobj.status_code
   else:

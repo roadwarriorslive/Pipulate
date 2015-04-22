@@ -1181,6 +1181,15 @@ def apex(url):
   else:
     return None
 
+def extension(url):
+  """Return the file extension, given (typically) a URL."""
+  if url:
+    path = urlparse.urlparse(url).path
+    ext = os.path.splitext(path)[1]
+    return ext
+  else:
+    return None
+
 def getargval(anarg, defargval, onerow):
   for coldex, acol in enumerate(globs.row1):
     if acol == anarg: #Found column named same thing as a required argument.
@@ -1197,6 +1206,18 @@ def adq(aval):
     return None #None-in/None-out. This special keyword shouldn't be quoted.
   else:
     return "r'%s'" % (aval) #ALMOST everything else should be quoted.
+
+def walkdict(obj, key):
+  """Take a JSON object and key and return the first matched value from the object."""
+  stack = obj.items()
+  while stack:
+    k, v = stack.pop()
+    if isinstance(v, dict):
+      stack.extend(v.iteritems())
+    else:
+      if k == key:
+        return v
+  return None
 
 from functions import *
 from managelists import *
