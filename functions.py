@@ -287,6 +287,7 @@ def mcanonical(mobile):
 def mobilicious(alternate, altcanonical):
   return "%s : %s" % (alternate, altcanonical)
 
+# This is how we hook in the row inserter's init functions.
 behaviors = {
   'Get Links' : crawlinit
 }
