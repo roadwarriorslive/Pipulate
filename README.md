@@ -18,43 +18,56 @@ Watch the [Google Slides](http://goo.gl/v71kw8) or read the [Google Docs](http:/
 5. [Scheduling](#scheduling)
 6. [Customizing](#customizing)
 7. [FAQ](#faq)
+8. [Roadmap](#roadmap)
+9. [License](#license)
 
 <a name="introduction"></a>
 
 ## 1\. Introduction
+### Overview
+Well, you pretty much got the overview in that opening paragraph, no? At any
+rate, I combine together a lot of unexpected things here in this project,
+achieving great things and making a few enemies along the way. My main lesson
+is: "Don't care about how much conventional wisdom dictates a thing, if you
+have good reason to believe otherwise". My reasons? Oh, they amount to:
 
-<a name="installation"></a>
+1. Master a minimal parts that let you achieve the most things.
+2. Choose parts that are as disruption-proof as reasonably possible.
+3. Do something interesting and useful that nobody's done before.
+4. Design it so you'll actually want to use every single day.
+4. Make it as approachable by newbs as possible.
 
-## 2\. Installation
-
-<a name="conventions"></a>
-
-## 3\. Conventions
-
-<a name="functions"></a>
-
-## 4\. Functions
-
-<a name="scheduling"></a>
-
-## 5\. Scheduling
-
-<a name="customizing"></a>
-
-## 6\. Customizing
-
-<a name="faq"></a>
-
-## 7\. FAQ
+### Abstractions & Data Layers
+I've been at this since 1994 with Microsoft idc/htx files, which is pretty much
+when Web-accessible databases first became accessible to hacks like me that
+haven't taken the plunge into Linux yet. The system has undergone many
+iterations, becoming very Ruby-on-Rails-like long before ROR ever hit the
+scene. But I'm not a compsci guy like David Heinemeier Hansson, and that's good
+because when Google Spreadsheets came along, I saw 99% of the web apps I build
+as becoming not necessary... except for the secret-sauce algorithm stuff that I
+plugged in on the back-end. And that's Pipulate. It sucks to have Google
+Spreadsheet as a dependency today, but as you use it, and it worms its way into
+your day-to-day habits, you'll see the wisdom of this approach, and why I await
+so anxiously a FOSS data layer with a built-in UI, permissions, ecosystem,
+sharing and the like that Google Spreadsheets brings to the picture.
 
 ### Python
-To accomplish this, Pipulate utilizes an extremely lightweight Python code
-execution environment, leaning heavily on Google Spreadsheets for the data
-layer. There is no Apache, nginx or nodejs. Just the Python language.  As such,
-you can use Levinux-powered virtual servers on the desktop of your Mac, Windows
-or other Linux machine to kickstart gettting your own server, and later moving
-to the cloud or a microserver like the Raspberry Pi. For the time being, you
-can use http://pipulate.com.
+Pouring secret sauce over a platter like Google Spreadsheets really only
+requires sucking out the input-values and plugging back in the output-values.
+I've done this about a zillion ways over the years, but the Python language has
+this double-whammy advantage of being such a lovely language for beginners, and
+having a variety of APIs already developed and available for interacting with
+the majority of Google services. So, after much internal soul-wrenching debate
+and experimenting to jury rigging the seemingly more appropriate JavaScript
+language to this purpose, I yielded to Python and am so glad I did.
+
+So today, Pipulate utilizes the extremely lightweight Python code execution
+environment for everything, right down to the web hosting environment. There is
+no Apache, nginx or node.js. Just the Python language. As such, you can use
+Levinux-powered virtual servers on the desktop of your Mac, Windows or other
+Linux machine to kickstart getting your own server, and later moving to the
+cloud or a microserver like the Raspberry Pi. For the time being, you can use
+http://pipulate.com.
 
 ### Bookmarklet
 A web browser bookmarklet grabbed from the Pipulate user interface is how the
@@ -64,63 +77,28 @@ websites directly into a spreadsheet. This alone makes it noteworthy and useful
 for day-today tasks, needing very little thought about extra methodology. It
 just slips seamlessly into your daily work-flow.
 
-### Scheduling
-But Pipulate isn't just for ad hoc investigations in spreadsheets. Once you're
-happy with a particular data look-up task having worked out interactively, it
-can be automated. Job instructions come from the Google Doc itself, turning
-Pipulate servers into something as stateless and interchangable as webheads. No
-data resides on these servers.  They are only there to Pipulate the Google
-Spreadsheets. Get a Pipulate server from anywhere, fire-off a job, and then
-destroy the server if you care to.  Nothing's lost!
-
 ### Great for newbs!
-Pipulate is also a totally extendable system, plug-in compatible with
-Pipulate-unaware standalone Python functions, making it totally suitable for
-amateur coders looking to extend a system even as a Python beginners and newbs
-to programming. Just write "Hello World" and plug it in.
+Pipulate is an extendable system, plug-in compatible with Pipulate-unaware
+standalone Python functions, making it wonderful for amateur coders looking to
+extend a system. That's a long way of saying: just write a Python function
+anywhere, anyhow you like (on your Mac or Windows desktop, for example), and
+you can edit it into functions.py, and it'll magically become available from
+the spreadsheet! Your function should take in input and return output for a
+single value. In Pipulate (and thereby in Google Spreadsheets), your function
+will be able to apply against a whole column of input values, sparing you the
+need to code "for loops" and provide lists of input from text files and other
+sources.
 
-Yes, this is something different.
+<a name="installation"></a>
 
-## How Does it Work?
-Get it running on your Mac, Windows or Linux desktop, from a ready-made virtual
-machine, a cloud server, or even a Raspberry Pi or other teensy tiny computer.
-It basically runs on anything. Then, visit the site you just created from a web
-browser (usually at http://localhost:8888), drag the bookmarklet to your
-Bookmark Bar, open a Google Spreadsheet, click the bookmarklet and get
-Pipulating! The data-collecting job that the initial job defines just starts
-twinkling in as new rows. You can get a taste of this from pipulate.com, where
-you can use my demo instance to kick the tires.
-
-## How Do I Define a Job?
-I've set up the initial Pipulate job to collect some very common Web Social
-Media metrics, like the counts of a Twitter Profile page, views and subscribers
-off a YouTube channel page, and Facebook Shares, Likes and Google +1s of a URL.
-You can customize this example to your own pages and profile, or read through
-the built-in documentation (coming soon) on setting up your own job. Once
-you're happy with it, replace the question marks with asterisks, and invite in
-a special gmail address that you set up, and watch the job get processed daily
-(or whatever). More documentation coming on the use of the question marks and
-asterisks to test, then schedule jobs coming soon. Also, look in the Config tab
-to see the RowThrottleNumber setting that keeps more than this number of rows
-from processing at once (great for SERP checking), and the RunJobEvery setting
-that you can set to values like 1 day, 1 week, 1 month, 3 days, 10 minutes, and
-variations thereof.
-
-## How Do I Customize It?
-Not happy with the built-in functions? Write your own, and contributing them
-back to the project here on Github. Not comfortable with programming Python?
-Copy and paste the examples under the Scrapers tab, experimenting with he XPath
-and RegEx patterns to grab anything you like off a page. 
-
-# Installation Procedure:
-
+## 2\. Installation
 Pipulate is made available ready-to-run on your desktop without an install.
 Just download a copy of Levinux, the Tiny Virtual Server for Education, and
 select Option #4. It'll take awhile, but it'll build into a Pipulate Server
 (minus scheduling, until you give it a gmail). Also, it'll run dirt-slow... but
 hey, it's free. Better-yet, install it on some real hardware:
 
-## Debian/Ubuntu
+### Debian/Ubuntu
 From a Terminal:
 - sudo apt-get install python-pip python-dev python-lxml
 - sudo pip install requests
@@ -133,7 +111,7 @@ From a Terminal:
 - python pipulate.py
 - Visit http://localhost:8888
 
-## Mac OS X
+### Mac OS X
 From a Terminal:
 - (Python 2.7 & Distribute usually already installed)
 - lxml? Must check if Macs have that by default.
@@ -148,7 +126,7 @@ From a Terminal:
 - python pipulate.py
 - Visit http://localhost:8888
 
-## Windows
+### Windows
 - Install CygWin with the following selected:
   - python 2.7
   - git
@@ -167,8 +145,62 @@ From a CygWin Shell (MinTTY):
 - python pipulate.py
 - Visit http://localhost:8888
 
-# Caveats
 
+<a name="conventions"></a>
+
+## 3\. Conventions
+### How Does it Work?
+Get it running on your Mac, Windows or Linux desktop, from a ready-made virtual
+machine, a cloud server, or even a Raspberry Pi or other teensy tiny computer.
+It basically runs on anything. Then, visit the site you just created from a web
+browser (usually at http://localhost:8888), drag the bookmarklet to your
+Bookmark Bar, open a Google Spreadsheet, click the bookmarklet and get
+Pipulating! The data-collecting job that the initial job defines just starts
+twinkling in as new rows. You can get a taste of this from pipulate.com, where
+you can use my demo instance to kick the tires.
+
+### How Do I Define a Job?
+I've set up the initial Pipulate job to collect some very common Web Social
+Media metrics, like the counts of a Twitter Profile page, views and subscribers
+off a YouTube channel page, and Facebook Shares, Likes and Google +1s of a URL.
+You can customize this example to your own pages and profile, or read through
+the built-in documentation (coming soon) on setting up your own job. Once
+you're happy with it, replace the question marks with asterisks, and invite in
+a special gmail address that you set up, and watch the job get processed daily
+(or whatever). More documentation coming on the use of the question marks and
+asterisks to test, then schedule jobs coming soon. Also, look in the Config tab
+to see the RowThrottleNumber setting that keeps more than this number of rows
+from processing at once (great for SERP checking), and the RunJobEvery setting
+that you can set to values like 1 day, 1 week, 1 month, 3 days, 10 minutes, and
+variations thereof.
+
+<a name="functions"></a>
+
+## 4\. Functions
+WIP
+
+<a name="scheduling"></a>
+
+## 5\. Scheduling
+But Pipulate isn't just for ad hoc investigations in spreadsheets. Once you're
+happy with a particular data look-up task having worked out interactively, it
+can be automated. Job instructions come from the Google Doc itself, turning
+Pipulate servers into something as stateless and interchangable as webheads. No
+data resides on these servers.  They are only there to Pipulate the Google
+Spreadsheets. Get a Pipulate server from anywhere, fire-off a job, and then
+destroy the server if you care to.  Nothing's lost!
+
+<a name="customizing"></a>
+
+## 6\. Customizing
+Not happy with the built-in functions? Write your own, and contributing them
+back to the project here on Github. Not comfortable with programming Python?
+Copy and paste the examples under the Scrapers tab, experimenting with he XPath
+and RegEx patterns to grab anything you like off a page. 
+
+<a name="faq"></a>
+
+## 7\. FAQ
 ## OAuth2 For Your Security
 Because this employs OAuth2 by default to avoid configuration files and storing
 usernames and passwords, it will only work from localhost, or on machines
@@ -219,12 +251,9 @@ running, even if some glitch made it stop. The way the daemon is written makes
 it safe to keep trying to re-start the webserver. It won't create multiple
 instances.
 
-# Where Can I Learn More?
+<a name="roadmap"></a>
 
-- The Levinux Virutal Server: http://levinux.com
-- The Pipulate Main Website: (coming soon)
-
-# To Do List
+## 8\. Roadmap
 - Add the built-in documentation (introspect docstrings vs. simple TabInit)
 - Turn Scheduler into Linux start-stop daemon
 - Fill in tons of useful functions for SEO and Social Media
@@ -245,8 +274,9 @@ instances.
   - User your imagination
   - Can't wait for community dynamics to kick-in
 
-# License
+<a name="license"></a>
 
+## 9\. License
 The MIT License (MIT)
 
 Copyright (c) 2015 Michael Jay Levin
