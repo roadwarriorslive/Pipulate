@@ -11,6 +11,7 @@ Watch the [Google Slides](http://goo.gl/v71kw8) or read the [Google Docs](http:/
 
 <img src="http://mikelevinseo.com/free-and-open-source-seo-software.png"/>
 
+## Table of Contents
 1. [Introduction](#introduction)
 2. [Installation](#installation)
 3. [Conventions](#conventions)
@@ -93,10 +94,26 @@ sources.
 
 ## 2\. Installation
 Pipulate is made available ready-to-run on your desktop without an install.
-Just download a copy of Levinux, the Tiny Virtual Server for Education, and
-select Option #4. It'll take awhile, but it'll build into a Pipulate Server
-(minus scheduling, until you give it a gmail). Also, it'll run dirt-slow... but
-hey, it's free. Better-yet, install it on some real hardware:
+Just download a copy of [Levinux](http://levinux.com), the Tiny Virtual Server
+for Education, and select Option #4. It'll take awhile, but it'll build into a
+Pipulate Server (minus scheduling, until you give it a gmail). I could
+pre-build the server for you, but it's only one-time process, and I'd hate to
+take away the opportunity for you to witness the process, perchance to poke
+around and modify it yourself. And after you've had the Levinux experience, I
+suggest you get it running on your own real hardware, from your main machine's
+desktop to a Raspberry Pi.
+
+### Pipulate Runs on Just About Anything
+Get it running on your Mac, Windows or Linux desktop, from a ready-made virtual
+machine, a cloud server, or even a Raspberry Pi or other teensy tiny computer.
+It basically runs on anything. Then, visit the site you just created from a web
+browser (usually at http://localhost:8888), drag the bookmarklet to your
+Bookmark Bar, open a Google Spreadsheet, click the bookmarklet and get
+Pipulating! The data-collecting job that the initial job defines just starts
+twinkling in as new rows. You can get a taste of this from pipulate.com, where
+you can use my demo instance to kick the tires. Here are the preferred
+platforms for Pipulate in descending order of ease-of-installation and avoidance
+of nuanced issues (like lxml on Windows under CygWin!):
 
 ### Debian/Ubuntu
 From a Terminal:
@@ -149,15 +166,6 @@ From a CygWin Shell (MinTTY):
 <a name="conventions"></a>
 
 ## 3\. Conventions
-### How Does it Work?
-Get it running on your Mac, Windows or Linux desktop, from a ready-made virtual
-machine, a cloud server, or even a Raspberry Pi or other teensy tiny computer.
-It basically runs on anything. Then, visit the site you just created from a web
-browser (usually at http://localhost:8888), drag the bookmarklet to your
-Bookmark Bar, open a Google Spreadsheet, click the bookmarklet and get
-Pipulating! The data-collecting job that the initial job defines just starts
-twinkling in as new rows. You can get a taste of this from pipulate.com, where
-you can use my demo instance to kick the tires.
 
 ### How Do I Define a Job?
 I've set up the initial Pipulate job to collect some very common Web Social
