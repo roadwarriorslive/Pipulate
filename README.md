@@ -27,7 +27,7 @@ SEO or Social Media professionals to give them superpowers. Watch the
 ## 1\. Introduction
 ### Overview
 Well, you pretty much got the overview in that opening paragraph, no? At any
-rate, I connect a lot of unexpected tots here in this project, from Python, to
+rate, I connect a lot of unexpected dots here in this project, from Python, to
 bookmarklets, to tiny servers, to leveraging massive Web API
 infrastructure&#151;all in order to achieve great things. My main lesson is:
 "Don't care about how much conventional wisdom dictates a thing, if you have
