@@ -91,7 +91,10 @@ everything out again each time you want to do some investigation of some site,
 instead of just surfing to the site and clicking the bookmarklet. The
 convention of using a bookmarklet to initiate investigations is a major
 habit-forming boon that I suspect will contribute a lot to this project's
-success and accumulation of followers. 
+success and accumulation of followers. Combined with the data it collects being
+instantly available, graph-able and share-able with your clients... well, wow!
+I think only [my YouTube videos](https://www.youtube.com/user/miklevin) will be
+able to convey the awesomeness of these particular dots being connected.
 
 ### Great for newbs!
 Pipulate is an extendable system, plug-in compatible with Pipulate-unaware
