@@ -4,6 +4,7 @@ import globs
 from common import *
 
 def scrapes():
+  """Define the functions available and modifiable from the Scrapers tab."""
   s = []
   s.append(['title',       'xpath', "//title/text()"])
   s.append(['description', 'xpath', "//meta[@name='description']/@content"])
