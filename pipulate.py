@@ -23,7 +23,7 @@
 
                             Succeed With Pipulate!
 """
-import sys, os, socket
+import sys, os, socket, urlparse
 socket.setdefaulttimeout(10.0)                            # Our story begins with Talmudic style commentaries 
 import globs                                              # (in-line columns), which I'm using as a way 
 from common import *
@@ -875,8 +875,7 @@ def Pipulate(username='', password='', dockey=''):
   print("\n")
 
 def url_root(url):
-  from urlparse import urlparse
-  parsed = urlparse(url)
+  parsed = urlparse.urlparse(url)
   return "%s://%s%s" % (parsed[0], parsed[1], parsed[2])
 
 def getLoginlink():
@@ -1146,19 +1145,21 @@ def gethtml(url):
     return globs.html
   else:
     out("Doing first HTML fetch for row.")
-    try:
-      defend = requests.head(url)
-    except:
-      return None
-    ct = defend.headers['Content-Type']
-    if 'text' in ct:
+    path = urlparse.urlparse(url).path
+    ext = os.path.splitext(path)[1]
+    if ext not in globs.texttypes:
       try:
-        globs.hobj = requests.get(url, timeout=(5, 10))
+        defend = requests.head(url)
       except:
         return None
-      globs.html = globs.hobj.text
-    else:
-      return "Error: can't fetch %s " % ct
+      ct = defend.headers['Content-Type']
+      if 'text' not in ct:
+        return "Error: can't fetch %s " % ct
+    try:
+      globs.hobj = requests.get(url, timeout=(5, 10))
+    except:
+      return None
+    globs.html = globs.hobj.text
   return globs.html
 
 def convertisotime(timestamp):
@@ -1177,8 +1178,7 @@ def datestamp():
   return now
 
 def apex(url):
-  from urlparse import urlparse
-  apex = urlparse(url).hostname.split(".")
+  apex = urlparse.urlparse(url).hostname.split(".")
   apex = ".".join(len(apex[-2]) < 4 and apex[-3:] or apex[-2:])
   return apex
 

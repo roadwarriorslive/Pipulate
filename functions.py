@@ -31,6 +31,13 @@ def walkdict(obj, key):
         return v
   return None
 
+def extension(url):
+  """Return the file extension, given (typically) a URL."""
+  import os, urlparse
+  path = urlparse.urlparse(url).path
+  ext = os.path.splitext(path)[1]
+  return ext
+
 def crawl(url):
   """Grab HTML from a URL, parse links and add a row per link to spreadsheet."""
   fcols = ['Depth', 'Title', 'Description', 'PageRank', 'Mobile', 'Mcanonical', 'Mobilicious']
