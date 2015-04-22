@@ -23,7 +23,7 @@
 
                             Succeed With Pipulate!
 """
-import sys, os, socket, urlparse
+import sys, os, socket, urlparse, re
 socket.setdefaulttimeout(10.0)                            # Our story begins with Talmudic style commentaries 
 import globs                                              # (in-line columns), which I'm using as a way 
 from common import *
@@ -292,7 +292,6 @@ def Pipulate(username='', password='', dockey=''):
       yield unlock
       out("Google Spreadsheet successfully opened.")
 
-      import re
       anything = re.compile('.+')
       yield "Checking Tabs: Sheet 1", "Then we check for tabs...", "", ""
       try:
@@ -792,7 +791,6 @@ def Pipulate(username='', password='', dockey=''):
                             else:
                               newrow[coldex] =  None
                           elif stype.lower() == 'regex':
-                            import re
                             match = re.search(spattern, html, re.S | re.I)
                             if match:
                               if "scrape" in match.groupdict().keys():
@@ -1162,7 +1160,6 @@ def gethtml(url):
   return globs.html
 
 def convertisotime(timestamp):
-  import re
   i = datetime.datetime(*map(int, re.split('[^\d]', timestamp)[:-1]))
   return i.strftime("%m/%d/%Y %H:%M:%S") 
 

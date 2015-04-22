@@ -1,4 +1,4 @@
-import os, requests, datetime, json, time, urlparse
+import os, requests, datetime, json, time, urlparse, re
 from flask import session
 import globs
 from common import *
@@ -42,15 +42,14 @@ def extension(url):
 
 def crawl(url):
   """Grab HTML from a URL, parse links and add a row per link to spreadsheet."""
-  fcols = ['Depth', 'Title', 'Description', 'PageRank', 'Mobile', 'Mcanonical', 'Mobilicious']
+  fcols = ['Depth', 'Title', 'Description', 'PageRank', 'Mobile', 'mCanonical', 'Mobilicious']
   therange = 'B1:%s2' % globs.letter[len(fcols)+1]
   CellList = globs.sheet.range(therange)
   vals = fcols + ['0'] + ['?']*(len(fcols)-1)
   for i, val in enumerate(vals):
     CellList[i].value = val
   globs.sheet.update_cells(CellList)
-  from urlparse import urlparse
-  apex = urlparse(url).hostname.split(".")
+  apex = urlparse.urlparse(url).hostname.split(".")
   apex = ".".join(len(apex[-2]) < 4 and apex[-3:] or apex[-2:])
   import lxml.html
   ro = requests.get(url, timeout=5)
@@ -168,6 +167,18 @@ def likes(url):
   respobj = requests.get('https://graph.facebook.com/' + url, timeout=5)
   adict = respobj.json()
   return walkdict(adict, 'likes')
+
+def linkedin(url):
+  api = "https://www.linkedin.com/countserv/count/share?url=" + url
+  respobj = requests.get(api, timeout=5)
+  rtext = respobj.text
+  spattern = '"count":(?P<scrape>[0-9,]+?),'
+  match = re.search(spattern, rtext, re.S | re.I)
+  if match:
+    if "scrape" in match.groupdict().keys():
+      return match.group("scrape")
+  else:
+    return None
 
 def pagerank(url):
   import urllib
