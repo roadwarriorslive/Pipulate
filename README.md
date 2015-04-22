@@ -27,11 +27,11 @@ SEO or Social Media professionals to give them superpowers. Watch the
 ## 1\. Introduction
 ### Overview
 Well, you pretty much got the overview in that opening paragraph, no? At any
-rate, I connect a lot of unexpected tots here in this project, from Python to
-bookmarklets, to tiny servers, to leveraging massive Web API infrastructure, in
-order to achieve great things. My main lesson is: "Don't care about how much
-conventional wisdom dictates a thing, if you have good reason to believe
-otherwise". My reasons? Oh, they amount to:
+rate, I connect a lot of unexpected tots here in this project, from Python, to
+bookmarklets, to tiny servers, to leveraging massive Web API
+infrastructure&#151;all in order to achieve great things. My main lesson is:
+"Don't care about how much conventional wisdom dictates a thing, if you have
+good reason to believe otherwise". My reasons? Oh, they amount to:
 
 1. Master a minimal parts that let you achieve the most things.
 2. Choose parts that are as disruption-proof as reasonably possible.
@@ -39,19 +39,28 @@ otherwise". My reasons? Oh, they amount to:
 4. Design it so you'll actually want to use every single day.
 4. Make it as approachable by newbs as possible.
 
-### Abstractions & Data Layers
+### Project Background
 I've been at this since 1994 with Microsoft idc/htx files, which is pretty much
 when Web-accessible databases first became accessible to hacks like me that
 haven't taken the plunge into Linux yet. The system has undergone many
 iterations, becoming very Ruby-on-Rails-like long before ROR ever hit the
 scene. But I'm not a compsci guy like David Heinemeier Hansson, and that's good
 because when Google Spreadsheets came along, I saw 99% of the web apps I build
-as becoming not necessary... except for the secret-sauce algorithm stuff that I
-plugged in on the back-end. And that's Pipulate. It sucks to have Google
-Spreadsheet as a dependency today, but as you use it, and it worms its way into
-your day-to-day habits, you'll see the wisdom of this approach, and why I await
-so anxiously a FOSS data layer with a built-in UI, permissions, ecosystem,
-sharing and the like that Google Spreadsheets brings to the picture.
+as becoming not necessary... except for how to sprinkle in the secret-sauce.
+
+So, freed from the UI-designing world (right as it went into massive flux from
+HTML5/CSS3/Browser Wars), I took the opportunity to, and had the pleasure of,
+doing a complete re-write as my second major project on my new
+Linux/Python/vim/git stack. All the fancy algorithm stuff that I used to plug
+in on the back-end of a pre-ROR-like CRUD/MVC/blahblah app-builing framework
+that I built. 
+
+The extracted secret sauce became Pipulate&#151;the non-framework framework. It
+sucks to have Google Spreadsheet as a dependency today, but as you use it, and
+it worms its way into your day-to-day habits, you'll see the wisdom of this
+approach, and why I await so anxiously a FOSS data layer with a built-in UI,
+permissions, ecosystem, sharing and the like that Google Spreadsheets brings to
+the picture.
 
 ### Python
 Pouring secret sauce over a platter like Google Spreadsheets really only
