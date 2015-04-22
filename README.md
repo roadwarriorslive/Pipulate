@@ -13,6 +13,11 @@ SEO or Social Media professionals to give them superpowers. Watch the
 
 ## Table of Contents
 1. [Introduction](#1-introduction)
+1.1 [Overview](#overview)
+1.2 [Project Background](#project-background)
+1.1 [Python](#python)
+1.1 [Bookmarklet](#bookmarklet)
+1.1 [Great For Newbs!](#great-for-newbs)
 2. [Installation](#2-installation)
 3. [Conventions](#3-conventions)
 4. [Functions](#4-functions)
@@ -35,7 +40,7 @@ good reason to believe otherwise". My reasons? Oh, they amount to:
 2. Choose parts that are as disruption-proof as reasonably possible.
 3. Do something interesting and useful that nobody's done before.
 4. Design it so you'll actually want to use every single day.
-4. Make it as approachable by newbs as possible.
+5. Make it as approachable by newbs as possible.
 
 ### Project Background
 I've been at this since 1994 with Microsoft idc/htx files, which is pretty much
