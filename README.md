@@ -84,9 +84,14 @@ http://pipulate.com.
 A web browser bookmarklet grabbed from the Pipulate user interface is how the
 functions residing on Pipulate servers get invoked, and appear to infuse the
 spreadsheet with magic data-collection powers&#151;enabling such tasks crawling
-websites directly into a spreadsheet. This alone makes it noteworthy and useful
-for day-today tasks, needing very little thought about extra methodology. It
-just slips seamlessly into your daily work-flow.
+websites directly into a spreadsheet. The prevalent use of a bookmarklet in the
+functioning of this app alone makes Pipulate a noteworthy project in Github,
+but even more useful in actual day-to-day use. Imagining having to re-figure
+everything out again each time you want to do some investigation of some site,
+instead of just surfing to the site and clicking the bookmarklet. The
+convention of using a bookmarklet to initiate investigations is a major
+habit-forming boon that I suspect will contribute a lot to this project's
+success and accumulation of followers. 
 
 ### Great for newbs!
 Pipulate is an extendable system, plug-in compatible with Pipulate-unaware
