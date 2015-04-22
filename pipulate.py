@@ -1207,18 +1207,6 @@ def adq(aval):
   else:
     return "r'%s'" % (aval) #ALMOST everything else should be quoted.
 
-def walkdict(obj, key):
-  """Take a JSON object and key and return the first matched value from the object."""
-  stack = obj.items()
-  while stack:
-    k, v = stack.pop()
-    if isinstance(v, dict):
-      stack.extend(v.iteritems())
-    else:
-      if k == key:
-        return v
-  return None
-
 from functions import *
 from managelists import *
 

@@ -1,7 +1,55 @@
+#  _   _                 _____                 _   _                 
+# | | | |___  ___ _ __  |  ___|   _ _ __   ___| |_(_) ___  _ __  ___ 
+# | | | / __|/ _ \ '__| | |_ | | | | '_ \ / __| __| |/ _ \| '_ \/ __|
+# | |_| \__ \  __/ |    |  _|| |_| | | | | (__| |_| | (_) | | | \__ \
+#  \___/|___/\___|_|    |_|   \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
+#                                                                    
+# Welcome to User Functions, a file that lets you extend Pipulate's capability.
+# Let's meet some libraries and modules we make available to every function.
+
 import os, requests, datetime, json, time, urlparse, re
 from flask import session
 import globs
 from common import *
+
+#  _   _      _                   _____                 _   _                 
+# | | | | ___| |_ __   ___ _ __  |  ___|   _ _ __   ___| |_(_) ___  _ __  ___ 
+# | |_| |/ _ \ | '_ \ / _ \ '__| | |_ | | | | '_ \ / __| __| |/ _ \| '_ \/ __|
+# |  _  |  __/ | |_) |  __/ |    |  _|| |_| | | | | (__| |_| | (_) | | | \__ \
+# |_| |_|\___|_| .__/ \___|_|    |_|   \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
+#              |_|                                                            
+# Take a look at some support-functions you can call from your own functions.
+# The jobs done by these are so common, they get used almost everywhere.
+
+def walkdict(obj, key):
+  """Take a JSON object and key and return the first matched value from the object."""
+  stack = obj.items()
+  while stack:
+    k, v = stack.pop()
+    if isinstance(v, dict):
+      stack.extend(v.iteritems())
+    else:
+      if k == key:
+        return v
+  return None
+
+def regex(text, pattern):
+  """Take text and a Regular Expression using a group named scrape, and returns match."""
+  match = re.search(pattern, text, re.S | re.I)
+  if match:
+    if "scrape" in match.groupdict().keys():
+      return match.group("scrape")
+  else:
+    return None
+
+#  ____                                   ____        __ _       _ _   _                 
+# / ___|  ___ _ __ __ _ _ __   ___ _ __  |  _ \  ___ / _(_)_ __ (_) |_(_) ___  _ __  ___ 
+# \___ \ / __| '__/ _` | '_ \ / _ \ '__| | | | |/ _ \ |_| | '_ \| | __| |/ _ \| '_ \/ __|
+#  ___) | (__| | | (_| | |_) |  __/ |    | |_| |  __/  _| | | | | | |_| | (_) | | | \__ \
+# |____/ \___|_|  \__,_| .__/ \___|_|    |____/ \___|_| |_|_| |_|_|\__|_|\___/|_| |_|___/
+#                      |_|                                                               
+# Many times, you don't even need to write a function when a scraper will do.
+# If you did something nifty in the Scrapers tab, just make a new entry here.
 
 def scrapes():
   """Define the functions available and modifiable from the Scrapers tab."""
@@ -18,6 +66,15 @@ def scrapes():
   s.append(['subscribers', 'regex', r"subscriber-count.*?>(?P<scrape>[0-9,]+?)<"])
   s.append(['ga',          'regex', r"(?:\'|\")(?P<scrape>UA-.*?)(?:\'|\")"])
   return s
+
+#  ____                 ___                     _                
+# |  _ \ _____      __ |_ _|_ __  ___  ___ _ __| |_ ___ _ __ ___ 
+# | |_) / _ \ \ /\ / /  | || '_ \/ __|/ _ \ '__| __/ _ \ '__/ __|
+# |  _ < (_) \ V  V /   | || | | \__ \  __/ |  | ||  __/ |  \__ \
+# |_| \_\___/ \_/\_/   |___|_| |_|___/\___|_|   \__\___|_|  |___/
+#                                                                
+# Not all functions you encounter here will have the ability to add new rows.
+# They require special init functions to set up the column names beforehand.
 
 def crawl(url):
   """Grab HTML from a URL, parse links and add a row per link to spreadsheet."""
@@ -48,6 +105,15 @@ def crawl(url):
 def crawlinit(gsp):
   """Do the spreadsheet setup requried by crawl function."""
   pass
+
+#      _       _     _   ____  _          __  __   _   _               
+#     / \   __| | __| | / ___|| |_ _   _ / _|/ _| | | | | ___ _ __ ___ 
+#    / _ \ / _` |/ _` | \___ \| __| | | | |_| |_  | |_| |/ _ \ '__/ _ \
+#   / ___ \ (_| | (_| |  ___) | |_| |_| |  _|  _| |  _  |  __/ | |  __/
+#  /_/   \_\__,_|\__,_| |____/ \__|\__,_|_| |_|   |_| |_|\___|_|  \___|
+#                                                                      
+# And now what you've all been waiting for! If you write a Python function that
+# just works stand-alone elsewhere, simply paste it here to extend Pipulate.
 
 def serps(keyword):
   """Return non-customized JSON search results for keyword from Google."""
@@ -154,12 +220,10 @@ def linkedin(url):
   respobj = requests.get(api, timeout=5)
   rtext = respobj.text
   spattern = '"count":(?P<scrape>[0-9,]+?),'
-  match = re.search(spattern, rtext, re.S | re.I)
-  if match:
-    if "scrape" in match.groupdict().keys():
-      return match.group("scrape")
-  else:
-    return None
+  return regex(rtext, spattern)
+
+def canonical(url):
+  return
 
 def pagerank(url):
   import urllib
@@ -217,6 +281,7 @@ def pagerank(url):
   return st
 
 def mcanonical(mobile):
+  ro = request.get(mobile)
   return mobile
 
 def mobilicious(alternate, altcanonical):
