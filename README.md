@@ -41,7 +41,7 @@ good reason to believe otherwise". My reasons? Oh, they amount to:
 
 ### Project Background
 I've been at this since 1994 with Microsoft idc/htx files, which is pretty much
-when Web-accessible databases first became accessible to hacks like me that
+when Web-accessible databases first became accessible to hackers like me that
 haven't taken the plunge into Linux yet. The system has undergone many
 iterations, becoming very Ruby-on-Rails-like long before ROR ever hit the
 scene. But I'm not a compsci guy like David Heinemeier Hansson, and that's good
