@@ -1178,9 +1178,12 @@ def datestamp():
   return now
 
 def apex(url):
-  apex = urlparse.urlparse(url).hostname.split(".")
-  apex = ".".join(len(apex[-2]) < 4 and apex[-3:] or apex[-2:])
-  return apex
+  if url:
+    apex = urlparse.urlparse(url).hostname.split(".")
+    apex = ".".join(len(apex[-2]) < 4 and apex[-3:] or apex[-2:])
+    return apex
+  else:
+    return None
 
 def getargval(anarg, defargval, onerow):
   for coldex, acol in enumerate(globs.row1):

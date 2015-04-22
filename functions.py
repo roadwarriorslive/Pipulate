@@ -1,4 +1,4 @@
-import requests, datetime, json, time
+import os, requests, datetime, json, time, urlparse
 from flask import session
 import globs
 from common import *
@@ -33,10 +33,12 @@ def walkdict(obj, key):
 
 def extension(url):
   """Return the file extension, given (typically) a URL."""
-  import os, urlparse
-  path = urlparse.urlparse(url).path
-  ext = os.path.splitext(path)[1]
-  return ext
+  if url:
+    path = urlparse.urlparse(url).path
+    ext = os.path.splitext(path)[1]
+    return ext
+  else:
+    return None
 
 def crawl(url):
   """Grab HTML from a URL, parse links and add a row per link to spreadsheet."""
