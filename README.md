@@ -12,15 +12,15 @@ SEO or Social Media professionals to give them superpowers. Watch the
 <img src="http://mikelevinseo.com/free-and-open-source-seo-software.png"/>
 
 ## Table of Contents
-1. [Introduction](#Introduction)
-2. [Installation](#Installation)
-3. [Conventions](#Conventions)
-4. [Functions](#Functions)
-5. [Scheduling](#Scheduling)
-6. [Customizing](#Customizing)
-7. [FAQ](#FAQ)
-8. [Roadmap](#Roadmap)
-9. [License](#License)
+1. [Introduction](#1-introduction)
+2. [Installation](#2-installation)
+3. [Conventions](#3-conventions)
+4. [Functions](#4-functions)
+5. [Scheduling](#5-scheduling)
+6. [Customizing](#6-customizing)
+7. [FAQ](#7-faq)
+8. [Roadmap](#8-roadmap)
+9. [License](#9-license)
 
 ## 1\. Introduction
 ### Overview
