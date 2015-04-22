@@ -12,6 +12,8 @@ SEO or Social Media professionals to give them superpowers. Watch the
 <img src="http://mikelevinseo.com/free-and-open-source-seo-software.png"/>
 
 ## Table of Contents
+
+- - -
 1. [Introduction](#1-introduction)
     1.1. [Overview](#overview)
     1.2. [Project Background](#project-background)
@@ -26,6 +28,7 @@ SEO or Social Media professionals to give them superpowers. Watch the
 7. [FAQ](#7-faq)
 8. [Roadmap](#8-roadmap)
 9. [License](#9-license)
+- - -
 
 ## 1\. Introduction
 ### Overview
