@@ -5,9 +5,9 @@ Pipulate expands your mind and the way spreadsheets work by using functions
 written and executed in Python entirely outside of the spreadsheet, cleanly
 passing the values back and forth, replacing question marks for output. This
 approach facilitates quick data-investigations from the comfortable and
-ubiquitous spreadsheet, effectively slapping an Ironman suit onto to instill
-superpowers into SEO or Social Media (aspiring) professional using Pipulate. 
-Watch the [Google Slides](http://goo.gl/v71kw8) or read the [Google Docs](http://goo.gl/p2zQa4).
+ubiquitous spreadsheet, effectively slapping an Ironman suit onto aspiring SEO
+or Social Media professionals to give them superpowers. Watch the 
+[Google Slides](http://goo.gl/v71kw8) or read the [Google Docs](http://goo.gl/p2zQa4).
 
 <img src="http://mikelevinseo.com/free-and-open-source-seo-software.png"/>
 
@@ -146,7 +146,7 @@ From a Terminal:
 ### Windows
 - Install CygWin with the following selected:
   - python 2.7
-  - git
+   git
   - (lxml? Must check cygwin installer)
 - Set Windows path to include Python (I will document better)
 From a CygWin Shell (MinTTY):
