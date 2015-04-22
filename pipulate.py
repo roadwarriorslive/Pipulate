@@ -1154,7 +1154,7 @@ def gethtml(url):
         return None
       ct = defend.headers['Content-Type']
       if 'text' not in ct:
-        return "Error: can't fetch %s " % ct
+        return None
     try:
       globs.hobj = requests.get(url, timeout=(5, 10))
     except:
