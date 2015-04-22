@@ -7,10 +7,45 @@ passing the values back and forth, replacing question marks for output. This
 approach facilitates quick data-investigations from the comfortable and
 ubiquitous spreadsheet, effectively slapping an Ironman suit onto to instill
 superpowers into SEO or Social Media (aspiring) professional using Pipulate. 
-
 Watch the [Google Slides](http://goo.gl/v71kw8) or read the [Google Docs](http://goo.gl/p2zQa4).
 
 <img src="http://mikelevinseo.com/free-and-open-source-seo-software.png"/>
+
+1. [Introduction](#introduction)
+2. [Installation](#installation)
+3. [Conventions](#conventions)
+4. [Functions](#functions)
+5. [Scheduling](#scheduling)
+6. [Customizing](#customizing)
+7. [FAQ](#faq)
+
+<a name="introduction"></a>
+
+## 1\. Introduction
+
+<a name="installation"></a>
+
+## 2\. Installation
+
+<a name="conventions"></a>
+
+## 3\. Conventions
+
+<a name="functions"></a>
+
+## 4\. Functions
+
+<a name="scheduling"></a>
+
+## 5\. Scheduling
+
+<a name="customizing"></a>
+
+## 6\. Customizing
+
+<a name="faq"></a>
+
+## 7\. FAQ
 
 ### Python
 To accomplish this, Pipulate utilizes an extremely lightweight Python code
