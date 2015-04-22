@@ -13,13 +13,12 @@ SEO or Social Media professionals to give them superpowers. Watch the
 
 ## Table of Contents
 
-- - -
 1. [Introduction](#1-introduction)
-    1.1. [Overview](#overview)
-    1.2. [Project Background](#project-background)
-    1.3. [Python](#python)
-    1.4. [Bookmarklet](#bookmarklet)
-    1.5. [Great For Newbs!](#great-for-newbs)
+    - [Overview](#overview)
+    - [Project Background](#project-background)
+    - [Python](#python)
+    - [Bookmarklet](#bookmarklet)
+    - [Great For Newbs!](#great-for-newbs)
 2. [Installation](#2-installation)
 3. [Conventions](#3-conventions)
 4. [Functions](#4-functions)
@@ -28,7 +27,6 @@ SEO or Social Media professionals to give them superpowers. Watch the
 7. [FAQ](#7-faq)
 8. [Roadmap](#8-roadmap)
 9. [License](#9-license)
-- - -
 
 ## 1\. Introduction
 ### Overview
