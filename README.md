@@ -12,17 +12,15 @@ SEO or Social Media professionals to give them superpowers. Watch the
 <img src="http://mikelevinseo.com/free-and-open-source-seo-software.png"/>
 
 ## Table of Contents
-1. [Introduction](#introduction)
-2. [Installation](#installation)
-3. [Conventions](#conventions)
-4. [Functions](#functions)
-5. [Scheduling](#scheduling)
-6. [Customizing](#customizing)
-7. [FAQ](#faq)
-8. [Roadmap](#roadmap)
-9. [License](#license)
-
-<a name="introduction"></a>
+1. [Introduction](#Introduction)
+2. [Installation](#Installation)
+3. [Conventions](#Conventions)
+4. [Functions](#Functions)
+5. [Scheduling](#Scheduling)
+6. [Customizing](#Customizing)
+7. [FAQ](#FAQ)
+8. [Roadmap](#Roadmap)
+9. [License](#License)
 
 ## 1\. Introduction
 ### Overview
@@ -109,8 +107,6 @@ will be able to apply against a whole column of input values, sparing you the
 need to code "for loops" and provide lists of input from text files and other
 sources.
 
-<a name="installation"></a>
-
 ## 2\. Installation
 Pipulate is made available ready-to-run on your desktop without an install.
 Just download a copy of [Levinux](http://levinux.com), the Tiny Virtual Server
@@ -181,11 +177,7 @@ From a CygWin Shell (MinTTY):
 - python pipulate.py
 - Visit http://localhost:8888
 
-
-<a name="conventions"></a>
-
 ## 3\. Conventions
-
 ### How Do I Define a Job?
 I've set up the initial Pipulate job to collect some very common Web Social
 Media metrics, like the counts of a Twitter Profile page, views and subscribers
@@ -201,12 +193,8 @@ from processing at once (great for SERP checking), and the RunJobEvery setting
 that you can set to values like 1 day, 1 week, 1 month, 3 days, 10 minutes, and
 variations thereof.
 
-<a name="functions"></a>
-
 ## 4\. Functions
 WIP
-
-<a name="scheduling"></a>
 
 ## 5\. Scheduling
 But Pipulate isn't just for ad hoc investigations in spreadsheets. Once you're
@@ -217,15 +205,11 @@ data resides on these servers.  They are only there to Pipulate the Google
 Spreadsheets. Get a Pipulate server from anywhere, fire-off a job, and then
 destroy the server if you care to.  Nothing's lost!
 
-<a name="customizing"></a>
-
 ## 6\. Customizing
 Not happy with the built-in functions? Write your own, and contributing them
 back to the project here on Github. Not comfortable with programming Python?
 Copy and paste the examples under the Scrapers tab, experimenting with he XPath
 and RegEx patterns to grab anything you like off a page. 
-
-<a name="faq"></a>
 
 ## 7\. FAQ
 ## OAuth2 For Your Security
@@ -278,8 +262,6 @@ running, even if some glitch made it stop. The way the daemon is written makes
 it safe to keep trying to re-start the webserver. It won't create multiple
 instances.
 
-<a name="roadmap"></a>
-
 ## 8\. Roadmap
 - Add the built-in documentation (introspect docstrings vs. simple TabInit)
 - Turn Scheduler into Linux start-stop daemon
@@ -300,8 +282,6 @@ instances.
   - Yadda, yadda, the fun never stops
   - User your imagination
   - Can't wait for community dynamics to kick-in
-
-<a name="license"></a>
 
 ## 9\. License
 The MIT License (MIT)
