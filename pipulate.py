@@ -873,7 +873,9 @@ def url_root(url):
   return "%s://%s%s" % (parsed[0], parsed[1], parsed[2])
 
 def getLoginlink():
-  redir = 'http://'+request.headers['Host']
+  redir = "http://pipulate.com"
+  if 'Host' in request.headers:
+    redir = 'http://'+request.headers['Host']
   if request.args and 'u' in request.args:
     session['u'] = request.args.get('u')
   scope = 'https://docs.google.com/feeds/ https://docs.googleusercontent.com/ https://spreadsheets.google.com/feeds/'
