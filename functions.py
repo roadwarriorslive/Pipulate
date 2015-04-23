@@ -101,6 +101,7 @@ def crawl(url):
   import lxml.html
   ro = requests.get(url, timeout=5)
   doc = lxml.html.fromstring(ro.text)
+  doc.make_links_absolute(url)
   somelinks = doc.xpath('/html/body//a/@href')
   links = set()
   for alink in somelinks:
