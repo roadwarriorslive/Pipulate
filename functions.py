@@ -66,7 +66,7 @@ def scrapes():
   s = []
   s.append(['title',       'xpath', "//title/text()"])
   s.append(['description', 'xpath', "//meta[@name='description']/@content"])
-  s.append(['canonical',   'xpath', "/html/head/link[@alt = 'canonical'"])
+  s.append(['canonical',   'xpath', "/html/head/link[@rel = 'canonical']/@href"])
   s.append(['mobile',      'xpath', "/html/head/link[@media = 'only screen and (max-width: 640px)']/@href"])
   s.append(['tweettotal',  'xpath', "//span[.='Tweets']/following-sibling::span/text()"])
   s.append(['following',   'xpath', "//span[.='Following']/following-sibling::span/text()"])
@@ -295,7 +295,7 @@ def pagerank(url):
   return st
 
 def mcanonical(mobile):
-  ro = request.get(mobile, timeout=5)
+  ro = requests.get(mobile, timeout=5)
   return mobile
 
 def mobilicious(alternate, altcanonical):
