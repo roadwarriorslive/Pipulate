@@ -295,11 +295,23 @@ def pagerank(url):
   return st
 
 def mcanonical(mobile):
-  #ro = requests.get(mobile, timeout=5)
-  return mobile
+  try:
+    ro = requests.get(mobile, timeout=5)
+    text = ro.text
+    xpth = "/html/head/link[@rel = 'canonical']/@href"
+    revcon = scraper(text, xpth)
+    return revcon
+  except:
+    return None
 
-def mobilicious(alternate, altcanonical):
-  return "%s : %s" % (alternate, altcanonical)
+def mobilicious(url, mobile, mcanonical):
+  if mobile:
+    if url == mcanonical:
+      return "Pass"
+    else:
+      return "Fail"
+  else:
+    return "Fail"
 
 # This is how we hook in the row inserter's init functions.
 behaviors = {
