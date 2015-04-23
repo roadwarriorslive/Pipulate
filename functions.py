@@ -139,16 +139,6 @@ def tweets(url):
   endpoint = "http://urls.api.twitter.com/1/urls/count.json?url="
   return jsonapi(endpoint, url, 'count')
 
-def shares(url):
-  """Return the number of times a given URL was shared in Facebook."""
-  endpoint = 'https://graph.facebook.com/'
-  return jsonapi(endpoint, url, 'shares')
-
-def likes(url):
-  """Return the number of times a given URL was liked in Facebook."""
-  endpoint = 'https://graph.facebook.com/'
-  return jsonapi(endpoint, url, 'likes')
-
 def stumbles(url):
   """Return the number of times a given URL was viewed in StumbleUpon."""
   endpoint = 'http://www.stumbleupon.com/services/1.01/badge.getinfo?url='
@@ -254,10 +244,47 @@ def plusses(url):
   return walkdict(adict, 'count')
 
 def fb(url):
+  """Return Facebook likes, shares, clicks and comment counts for a given URL."""
   thecall = "https://graph.facebook.com/fql?q=SELECT+like_count,total_count,share_count,click_count,comment_count+FROM+link_stat+WHERE+url=%22"+url+"%22"
-  respobj = requests.get(thecall, timeout=5)
-  adict = respobj.json()
-  return json.dumps(adict)
+  try:
+    respobj = requests.get(thecall, timeout=5)
+    adict = respobj.json()
+    return json.dumps(adict['data'][0])
+  except:
+    return None
+
+def shares(url, fb=''):
+  """Return the number of times a given URL was shared in Facebook."""
+  if not fb:
+    def gfb(url):
+      global fb
+      return fb(url)
+    fb = json.loads(gfb(url))
+  else:
+    fb = json.loads(fb)
+  return walkdict(fb, "share_count")
+
+def likes(url, fb=''):
+  """Return the number of times a given URL was liked in Facebook."""
+  if not fb:
+    def gfb(url):
+      global fb
+      return fb(url)
+    fb = json.loads(gfb(url))
+  else:
+    fb = json.loads(fb)
+  return walkdict(fb, "like_count")
+
+def comments(url, fb=''):
+  """Return the number of times a URL was commented on in Facebook."""
+  if not fb:
+    def gfb(url):
+      global fb
+      return fb(url)
+    fb = json.loads(gfb(url))
+  else:
+    fb = json.loads(fb)
+  return walkdict(fb, "comment_count")
 
 def linkedin(url):
   """Return the number of times a given URL was shared in LinkedIn."""
