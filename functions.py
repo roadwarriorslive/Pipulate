@@ -52,6 +52,13 @@ def scraper(html, anxpath):
   else:
     return None
 
+def jsonapi(endpoint, url, jkey):
+  """Take a JSON API endpoint, a URL as a parameter and key name to return value pair."""
+  thecall = endpoint + url
+  respobj = requests.get(thecall, timeout=5)
+  adict = respobj.json()
+  return walkdict(adict, jkey)
+
 #  ____                                   ____        __ _       _ _   _                 
 # / ___|  ___ _ __ __ _ _ __   ___ _ __  |  _ \  ___ / _(_)_ __ (_) |_(_) ___  _ __  ___ 
 # \___ \ / __| '__/ _` | '_ \ / _ \ '__| | | | |/ _ \ |_| | '_ \| | __| |/ _ \| '_ \/ __|
@@ -117,6 +124,35 @@ def crawl(url):
 def crawlinit(gsp):
   """Do the spreadsheet setup requried by crawl function."""
   pass
+
+#   ___                         _ ____   ___  _   _      _    ____ ___     
+#  / _ \ _ __   ___ _ __       | / ___| / _ \| \ | |    / \  |  _ \_ _|___ 
+# | | | | '_ \ / _ \ '_ \   _  | \___ \| | | |  \| |   / _ \ | |_) | |/ __|
+# | |_| | |_) |  __/ | | | | |_| |___) | |_| | |\  |  / ___ \|  __/| |\__ \
+#  \___/| .__/ \___|_| |_|  \___/|____/ \___/|_| \_| /_/   \_\_|  |___|___/
+#       |_|                                                                
+# All these have high volume, publically available (no login) endpoints
+# meaning they're almost as simple as the Scraper functions.
+
+def tweets(url):
+  """Return the number of times a given URL had been tweeted."""
+  endpoint = "http://urls.api.twitter.com/1/urls/count.json?url="
+  return jsonapi(endpoint, url, 'count')
+
+def shares(url):
+  """Return the number of times a given URL was shared in Facebook."""
+  endpoint = 'https://graph.facebook.com/'
+  return jsonapi(endpoint, url, 'shares')
+
+def likes(url):
+  """Return the number of times a given URL was liked in Facebook."""
+  endpoint = 'https://graph.facebook.com/'
+  return jsonapi(endpoint, url, 'likes')
+
+def pins(url):
+  """Return the number of times a given URL has been pinned in Pinterest."""
+  endpoint = 'http://api.pinterest.com/v1/urls/count.json?url='
+  return jsonapi(endpoint, url, 'count')
 
 #      _       _     _   ____  _          __  __   _   _               
 #     / \   __| | __| | / ___|| |_ _   _ / _|/ _| | | | | ___ _ __ ___ 
@@ -212,25 +248,6 @@ def plusses(url):
   adict = respobj.json()
   return walkdict(adict, 'count')
 
-def tweets(url):
-  """Return the number of times a given URL had been tweeted."""
-  api = "http://urls.api.twitter.com/1/urls/count.json?url="
-  respobj = requests.get(api + url, timeout=5)
-  adict = respobj.json()
-  return walkdict(adict, 'count')
-
-def shares(url):
-  """Return the number of times a given URL was shared in Facebook."""
-  respobj = requests.get('https://graph.facebook.com/' + url, timeout=5) 
-  adict = respobj.json()
-  return walkdict(adict, 'shares')
-
-def likes(url):
-  """Return the number of times a given URL was liked in Facebook."""
-  respobj = requests.get('https://graph.facebook.com/' + url, timeout=5)
-  adict = respobj.json()
-  return walkdict(adict, 'likes')
-
 def linkedin(url):
   """Return the number of times a given URL was shared in LinkedIn."""
   api = "https://www.linkedin.com/countserv/count/share?url=" + url
@@ -296,6 +313,7 @@ def pagerank(url):
   return st
 
 def mcanonical(mobile):
+  """Return the canonical tag found in the URL referred to by under the mobile column."""
   try:
     ro = requests.get(mobile, timeout=5)
     text = ro.text
@@ -306,6 +324,7 @@ def mcanonical(mobile):
     return None
 
 def mobilicious(url, mobile, mcanonical):
+  """Compare the URL of desktop version with the mobile canonical and return Pass if the same."""
   if mobile:
     if url == mcanonical:
       return "Pass"

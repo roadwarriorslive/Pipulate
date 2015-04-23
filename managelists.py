@@ -3,11 +3,20 @@ from flask import session
 def documentation():
   s = []
   s.append(['Expand column... Welcome to Pipulate!', 'This column contains useful links.'])
+  s.append(['',''])
   s.append(['Learn to use Pipulate in 5 easy steps.', ''])
+  s.append(['1: ', ''])
+  s.append(['2: ', ''])
+  s.append(['3: ', ''])
+  s.append(['4: ', ''])
+  s.append(['5: ', ''])
+  s.append(['',''])
   s.append(['Watch A High-level Google Slides Intro -->', 'http://goo.gl/QPQb3t'])
   s.append(['Read Main Documentation at Github -->', 'http://goo.gl/IOHjTJ'])
   s.append(['Read Additional Documentation in Google Docs -->', 'http://goo.gl/p2zQa4'])
   s.append(['Watch YouTube Video Tutorials -->', 'http://goo.gl/Nh3z7U'])
+  s.append(['Get List-of-Functions Tab -->',''])
+  s.append(['Get JSON API Tab -->',''])
   return s
 
 def pipinit_depricated():
