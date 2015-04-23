@@ -53,7 +53,7 @@ infrastructure&#151;all in order to achieve great things. My main lesson is:
 "Don't care about how much conventional wisdom dictates a thing, if you have
 good reason to believe otherwise". My reasons? Oh, they amount to:
 
-1. Master a minimal parts that let you achieve the most things.
+1. Master a minimal set of parts that let you achieve the most things.
 2. Choose parts that are as disruption-proof as reasonably possible.
 3. Do something interesting and useful that nobody's done before.
 4. Design it so you'll actually want to use every single day.
