@@ -149,6 +149,11 @@ def likes(url):
   endpoint = 'https://graph.facebook.com/'
   return jsonapi(endpoint, url, 'likes')
 
+def stumbles(url):
+  """Return the number of times a given URL was viewed in StumbleUpon."""
+  endpoint = 'http://www.stumbleupon.com/services/1.01/badge.getinfo?url='
+  return jsonapi(endpoint, url, 'views')
+
 def pins(url):
   """Return the number of times a given URL has been pinned in Pinterest."""
   endpoint = 'http://api.pinterest.com/v1/urls/count.json?url='
