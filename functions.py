@@ -7,10 +7,10 @@
 # Welcome to User Functions, a file that lets you extend Pipulate's capability.
 # Let's meet some libraries and modules we make available to every function.
 
-import os, requests, datetime, json, time, urlparse, re
-from flask import session
-import globs
-from common import *
+import os, requests, datetime, json, time, urlparse, re   #All standard system libraries
+from flask import session                                 #For if user function needs session info
+import globs                                              #All objects treated as global variables (but somehow less despised)
+from common import *                                      #For if user function neeeds framework functions
 
 #  _   _      _                   _____                 _   _                 
 # | | | | ___| |_ __   ___ _ __  |  ___|   _ _ __   ___| |_(_) ___  _ __  ___ 
@@ -180,6 +180,7 @@ def response(url):
       return "Error"
 
 def plusses(url):
+  """Return the number of times the given URL was plussed in Google+"""
   api = "https://clients6.google.com/rpc"
   jobj = '''{
     "method":"pos.plusones.get",
@@ -200,22 +201,26 @@ def plusses(url):
   return walkdict(adict, 'count')
 
 def tweets(url):
+  """Return the number of times a given URL had been tweeted."""
   api = "http://urls.api.twitter.com/1/urls/count.json?url="
   respobj = requests.get(api + url, timeout=5)
   adict = respobj.json()
   return walkdict(adict, 'count')
 
 def shares(url):
+  """Return the number of times a given URL was shared in Facebook."""
   respobj = requests.get('https://graph.facebook.com/' + url, timeout=5) 
   adict = respobj.json()
   return walkdict(adict, 'shares')
 
-def likes(url): 
+def likes(url):
+  """Return the number of times a given URL was liked in Facebook."""
   respobj = requests.get('https://graph.facebook.com/' + url, timeout=5)
   adict = respobj.json()
   return walkdict(adict, 'likes')
 
 def linkedin(url):
+  """Return the number of times a given URL was shared in LinkedIn."""
   api = "https://www.linkedin.com/countserv/count/share?url=" + url
   respobj = requests.get(api, timeout=5)
   rtext = respobj.text
@@ -226,6 +231,7 @@ def canonical(url):
   return
 
 def pagerank(url):
+  """Return the PageRank number that would show for this URL in Google Toolbar."""
   import urllib
   def CheckHash(HashInt):
     HashStr = "%u" % (HashInt)
