@@ -313,7 +313,7 @@ def Pipulate(username='', password='', dockey=''):
 
       # How To Tab
       yield ", How To", "", "", ""
-      headers = ['Topic', 'DocumentationLink']
+      headers = ['Topic', 'Link']
       InitTab(gdoc, 'How To', headers, documentation())
 
       # Config Tab
