@@ -34,11 +34,21 @@ def walkdict(obj, key):
   return None
 
 def regex(text, pattern):
-  """Take text and a Regular Expression using a group named scrape, and returns match."""
+  """Take text and a Regular Expression using a group named scrape, and return match."""
   match = re.search(pattern, text, re.S | re.I)
   if match:
     if "scrape" in match.groupdict().keys():
       return match.group("scrape")
+  else:
+    return None
+
+def scraper(html, anxpath):
+  """Take html and an XPATH, and return match."""
+  import lxml.html
+  searchme = lxml.html.fromstring(html)
+  match = searchme.xpath(anxpath)
+  if match:
+    return match[0]
   else:
     return None
 
@@ -56,6 +66,7 @@ def scrapes():
   s = []
   s.append(['title',       'xpath', "//title/text()"])
   s.append(['description', 'xpath', "//meta[@name='description']/@content"])
+  s.append(['canonical',   'xpath', "/html/head/link[@alt = 'canonical'"])
   s.append(['mobile',      'xpath', "/html/head/link[@media = 'only screen and (max-width: 640px)']/@href"])
   s.append(['tweettotal',  'xpath', "//span[.='Tweets']/following-sibling::span/text()"])
   s.append(['following',   'xpath', "//span[.='Following']/following-sibling::span/text()"])
@@ -93,7 +104,7 @@ def crawl(url):
   somelinks = doc.xpath('/html/body//a/@href')
   links = set()
   for alink in somelinks:
-    if urlparse(alink)[1][-len(apex):] == apex:
+    if urlparse.urlparse(alink)[1][-len(apex):] == apex:
       links.add(alink)
   links = list(links)
   y = len(links)
@@ -227,9 +238,6 @@ def linkedin(url):
   spattern = '"count":(?P<scrape>[0-9,]+?),'
   return regex(rtext, spattern)
 
-def canonical(url):
-  return
-
 def pagerank(url):
   """Return the PageRank number that would show for this URL in Google Toolbar."""
   import urllib
@@ -287,7 +295,7 @@ def pagerank(url):
   return st
 
 def mcanonical(mobile):
-  ro = request.get(mobile)
+  ro = request.get(mobile, timeout=5)
   return mobile
 
 def mobilicious(alternate, altcanonical):

@@ -519,9 +519,6 @@ def Pipulate(username='', password='', dockey=''):
         if onerow:
           if rowdex == 2: #Looking for trending requests
             if '*' in onerow:
-              #for i, x in enumerate(onerow):
-              #  if x is None:
-              #    onerow[i] = ''
               trended = True
               out("Found asterisks on row 2 -- trending activated!")
               trendlistoflists.append(onerow)
@@ -789,7 +786,7 @@ def Pipulate(username='', password='', dockey=''):
                             if match:
                               newrow[coldex] = match[0]
                             else:
-                              newrow[coldex] =  None
+                              newrow[coldex] = None
                           elif stype.lower() == 'regex':
                             match = re.search(spattern, html, re.S | re.I)
                             if match:
