@@ -113,7 +113,7 @@ convention of using a bookmarklet to initiate investigations is a major
 habit-forming boon that I suspect will contribute a lot to this project's
 success and accumulation of followers. Combined with the data it collects being
 instantly available, graph-able and share-able with your clients via Google
-SPreadsheets... well, wow!  I think only [my YouTube videos](https://www.youtube.com/user/miklevin)
+Spreadsheets... well, wow!  I think only [my YouTube videos](https://www.youtube.com/user/miklevin)
 will be able to convey the awesomeness of these particular dots being
 connected.
 
@@ -294,15 +294,15 @@ it safe to keep trying to re-start the webserver. It won't create multiple
 instances.
 
 ## 8\. Roadmap
+- Make links absolute on crawl
+- Add Menu tab and finalize Row Inserter init process
 - Add the built-in documentation (introspect docstrings vs. simple TabInit)
-- Turn Scheduler into Linux start-stop daemon
 - Fill in tons of useful functions for SEO and Social Media
 - Improve the Console Debugging Output when run as Scheduler
 - Let Levinux show Pipulate Console Debugging Output by selecting menu option
 - Optimize all over the place to reduce GData API calls
 - Behind-login support (fetching & crawling AS Facebook user, etc.)
 - Awesome UI & bookmarklet behavior from mobile
-- Write the very deliberately controlled SEO spider
 - Make the spider a general row inserter from any Web/Net iterable item:
   - Blog posts
   - RSS feeds

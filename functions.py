@@ -295,7 +295,7 @@ def pagerank(url):
   return st
 
 def mcanonical(mobile):
-  ro = requests.get(mobile, timeout=5)
+  #ro = requests.get(mobile, timeout=5)
   return mobile
 
 def mobilicious(alternate, altcanonical):
