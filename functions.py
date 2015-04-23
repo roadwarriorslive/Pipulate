@@ -253,6 +253,12 @@ def plusses(url):
   adict = respobj.json()
   return walkdict(adict, 'count')
 
+def fb(url):
+  thecall = "https://graph.facebook.com/fql?q=SELECT+like_count,total_count,share_count,click_count,comment_count+FROM+link_stat+WHERE+url=%22"+url+"%22"
+  respobj = requests.get(thecall, timeout=5)
+  adict = respobj.json()
+  return json.dumps(adict)
+
 def linkedin(url):
   """Return the number of times a given URL was shared in LinkedIn."""
   api = "https://www.linkedin.com/countserv/count/share?url=" + url
