@@ -313,7 +313,7 @@ def Pipulate(username='', password='', dockey=''):
 
       # How To Tab
       yield ", How To", "", "", ""
-      headers = ['Topic', 'Link']
+      headers = ['Expand column. Hey, you did it! Good job so far.', 'Welcome to Pipulate!']
       InitTab(gdoc, 'How To', headers, documentation())
 
       # Config Tab
@@ -1075,7 +1075,7 @@ def add_weeks(sourcedate, weeks):
 def InitTab(gdoc2, tabname, headerlist, listoflists=[]):
   initsheet = None
   isSheet1 = False
-  for x in range(7): #not too many times here
+  for x in range(4): #not too many times here
     if tabname == "sheet1":
       isSheet1 = True
       try:
@@ -1089,7 +1089,7 @@ def InitTab(gdoc2, tabname, headerlist, listoflists=[]):
         out("%s Tab exists." % tabname)
         break
       except:
-        out("Retrying make %s Tab %s of %s" % (tabname, x, 7))
+        out("Retrying make %s Tab %s of %s" % (tabname, x, 4))
         time.sleep(2) #not too long here
 
   if isSheet1 or not initsheet:

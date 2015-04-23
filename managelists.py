@@ -2,7 +2,6 @@ from flask import session
 
 def documentation():
   s = []
-  s.append(['Expand column... Welcome to Pipulate!', 'This column contains useful links.'])
   s.append(['',''])
   s.append(['Learn to use Pipulate in 5 easy steps.', ''])
   s.append(['1: ', ''])
