@@ -320,8 +320,8 @@ def Pipulate(username='', password='', dockey=''):
       yield ", Config", "", "", ""
       headers = ['NAME', 'VALUE']
       config = []
-      config.append(['RepeatJobEvery','hour'])
-      config.append(['MaxRowsPerHour',''])
+      config.append(['RepeatJobEvery','day'])
+      config.append(['MaxRowsPerHour','3'])
       yield lock
       try:
         InitTab(gdoc, 'Config', headers, config)
