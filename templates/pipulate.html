@@ -204,6 +204,10 @@
       transform:skew(20deg) rotate(6deg);
       -webkit-box-shadow:0 10px 8px rgba(0,0,0,.6);
       box-shadow:0 10px 8px rgba(0,0,0,.6)}
+      @media (max-width: 500px) {
+        #drag {
+          display: none;
+        }
     </style>
 
     <script>
@@ -275,6 +279,12 @@
         <form id="pipform" method="POST" action="/">
           <div id="paste"><span id="pastelabel">URL: </span>{{ form.pipurl(size=60) }}</div>
           {{ form.mode(value=invokemode) }}
+            <select>
+              <option>foo</option>
+              <option>bar</option>
+              <option>spam</option>
+              <option>eggs</option>
+            </select>
           <button id="pipulate" class="button" type="submit">
             {{ invokemode }} &nbsp;<i id="piplock" class="fa fa-chevron-circle-right"></i>
           </button>
