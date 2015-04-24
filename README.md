@@ -8,9 +8,9 @@ approach facilitates quick data-investigations from the comfortable and
 ubiquitous spreadsheet&#151;effectively slapping an Ironman suit onto aspiring
 SEO or Social Media professionals to give them superpowers. Watch the 
 [Google Slides](http://goo.gl/v71kw8) or read the [Google Docs](http://goo.gl/p2zQa4).
-My sister-project, Levinux, ties-in as a nomadic execution environment,
-synthesizing the promises of QEMU and Tiny Core Linux with some super-well
-written, super smart server build scripts that you should examine and hack.
+My sister-project, Levinux, synthesizes the promises of QEMU and Tiny Core
+Linux with some super-well written, super smart server build scripts that you
+should examine and hack.
 
 <img src="http://mikelevinseo.com/free-and-open-source-seo-software.png"/>
 
