@@ -208,6 +208,12 @@
         #drag {
           display: none;
         }
+      }
+      @media (min-width: 960px) {
+        .pip {
+          margin-top: 50px;
+        }
+      }
     </style>
 
     <script>
@@ -271,23 +277,23 @@
       <a target="_blank" href="https://github.com/miklevin/pipulate/blob/master/README.md">Documentation</a>
       <a target="_blank" href="https://docs.google.com/document/d/1BWh72vCHbLjFsiIQVYpDa56zb8yUyFIO7M-qmBozYmc/edit?usp=sharing">More Documentation</a>
       <a target="_blank" href="https://www.youtube.com/playlist?list=PLy-AlqZFg6G_bo5bH_wLBdxx-TNfB_yXT">Video Tutorials</a>
-      <a target="_blank" href="http://levinux.com">Levinux Virtual Server</a>
+      <a target="_blank" href="http://levinux.com">Levinux</a>
     </div>
     </nav>
     <div id="content">
       {% if session and 'loggedin' in session and session['loggedin'] == '1': %}
         <form id="pipform" method="POST" action="/">
-          <div id="paste"><span id="pastelabel">URL: </span>{{ form.pipurl(size=60) }}</div>
           {{ form.mode(value=invokemode) }}
-            <select>
-              <option>foo</option>
-              <option>bar</option>
-              <option>spam</option>
-              <option>eggs</option>
-            </select>
+          <div id="paste" class="row"><span id="pastelabel">URL: </span>{{ form.pipurl(size=60) }}</div>
+          <div class="row" style="background-color: red;">
+            <div>
+          <!-- {{ widget|safe }} -->
+            </div><div>
           <button id="pipulate" class="button" type="submit">
             {{ invokemode }} &nbsp;<i id="piplock" class="fa fa-chevron-circle-right"></i>
           </button>
+            </div>
+          </div>
         </form>
         {% if request.method == 'POST': %}
           <script>
