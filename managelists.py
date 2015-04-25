@@ -13,7 +13,6 @@ def documentation():
   s.append(["ADDITIONAL RESOURCES:",''])
   s.append(['Watch A High-level Google Slides Intro -->', 'http://goo.gl/QPQb3t'])
   s.append(['Read Main Documentation at Github -->', 'http://goo.gl/IOHjTJ'])
-  s.append(['Read Additional Documentation in Google Docs -->', 'http://goo.gl/p2zQa4'])
   s.append(['Watch YouTube Video Tutorials -->', 'http://goo.gl/Nh3z7U'])
   s.append(['',''])
   s.append(["EASTER EGGS:",''])
