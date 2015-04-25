@@ -96,6 +96,7 @@
     }
     #pastelabel{
       font-size: 1.3em;
+      text-align: right;
     }
     .spinner {
       margin-top: 40px;
@@ -210,6 +211,15 @@
         }
       }
       @media (min-width: 960px) {
+        #pastelabel{
+          width:4em;
+        }
+        #paste{
+          width: 97%;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top:50px;
+        }
         .pip {
           margin-top: 50px;
         }
@@ -284,11 +294,14 @@
       {% if session and 'loggedin' in session and session['loggedin'] == '1': %}
         <form id="pipform" method="POST" action="/">
           {{ form.mode(value=invokemode) }}
+          <div id="centerme">
           <div id="paste" class="row"><span id="pastelabel">URL: </span>{{ form.pipurl(size=60) }}</div>
+          </div>
           <div class="row">
-            <div>
-          <!-- {{ widget|safe }} -->
-            </div><div>
+          <!--  <div>
+          {{ widget|safe }}
+            </div>  -->
+          <div>
           <button id="pipulate" class="button" type="submit">
             {{ invokemode }} &nbsp;<i id="piplock" class="fa fa-chevron-circle-right"></i>
           </button>
