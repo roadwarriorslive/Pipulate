@@ -1,4 +1,4 @@
-<img src="http://mikelevinseo.com/Pipulate-FOSS-SEO-Logo.png"><br>Free And Open Source SEO Software
+<img src="http://mikelevinseo.com/images/pipulate-logo.png" alt="FOSS SEO Software"/>
 ========
 
 Pipulate expands your mind and the way spreadsheets work by using functions
@@ -12,7 +12,7 @@ My sister-project, [Levinux](http://levinux.com), synthesizes the promises of
 QEMU and Tiny Core Linux with some super-well written, super smart server build
 scripts that you should examine and hack.
 
-<img src="http://mikelevinseo.com/images/pipulate-logo.png" />
+<img src="http://mikelevinseo.com/free-and-open-source-seo-software.png" alt="Free and Open Source SEO Software" />
 
 ## Table of Contents
 
