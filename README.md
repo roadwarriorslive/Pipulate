@@ -12,7 +12,7 @@ My sister-project, [Levinux](http://levinux.com), synthesizes the promises of
 QEMU and Tiny Core Linux with some super-well written, super smart server build
 scripts that you should examine and hack.
 
-<img src="http://mikelevinseo.com/free-and-open-source-seo-software.png"/>
+<img src="http://mikelevinseo.com/images/pipulate-logo.png" />
 
 ## Table of Contents
 
