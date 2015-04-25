@@ -1184,8 +1184,11 @@ def datestamp():
 def apex(url):
   if url:
     apex = urlparse.urlparse(url).hostname.split(".")
-    apex = ".".join(len(apex[-2]) < 4 and apex[-3:] or apex[-2:])
-    return apex
+    try:
+      apex = ".".join(len(apex[-2]) < 4 and apex[-3:] or apex[-2:])
+      return apex
+    except:
+      return None
   else:
     return None
 
