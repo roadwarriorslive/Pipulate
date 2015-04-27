@@ -38,11 +38,7 @@
       height: 100%;
     }
     #content{
-      {% if session and 'loggedin' in session and session['loggedin'] == '1': -%}
-      background-color: #E8E8E8;
-      {%- else -%}
       background-color: #000;
-      {%- endif %}
       position: relative;
       margin: 0 auto;
       padding-left: 5px;
@@ -103,15 +99,16 @@
     #pipulate{font-family:Paytone One}
     #pipurl{margin-bottom:14px}
     #paste{
-      width: 97%;
+      width: 95%;
       white-space:nowrap;
       margin-left: auto;
       margin-right: auto;
-      padding-right: 60px;
+      padding-right: 75px;
     }
     #pastelabel{
       font-size: 1.3em;
       text-align: right;
+      color: white;
     }
     .spinner {
       margin-top: 40px;
@@ -353,7 +350,7 @@
         <form id="pipform" method="POST" action="/">
           {{ form.mode(value=invokemode) }}
           <div id="centerme">
-          <div id="paste" class="row"><span id="pastelabel">URL: </span>{{ form.pipurl(size=60) }}</div>
+          <div id="paste" class="row"><span id="pastelabel"><i class="pip-icon pip-doc">&#xe836;</i>URL: </span>{{ form.pipurl(size=60) }}</div>
           </div>
           <div class="row">
           <!--  <div>
