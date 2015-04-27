@@ -169,6 +169,13 @@
       top:.1em;
       white-space: nowrap;
     }
+    #piplogo {
+      max-height: 285px;
+      max-width: 560px;
+      position: relative;
+      top: 40%;
+      transform: translateY(-50%);
+    }
     .bookmarklet{padding: 0px;}
     .pressthis{
       margin:5px 40px 8px 5px;
@@ -454,6 +461,7 @@
         {%- endfor -%}
       {% else: %}
         <a class="button pip" href="{{ loginlink }}">LOGIN... &nbsp;<i id="piplock" class="pip-icon pip-googleplus">&#xe837;</i></a>
+        <div style="height: 100%"><img id="piplogo" alt="Pipulate Free and Open Source SEO Software" src="static/pipulate-logo-white-transparent.png" /></div>
       {% endif %}
       </div>
     </div>
