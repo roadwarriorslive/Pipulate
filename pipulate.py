@@ -26,17 +26,17 @@
 import sys, os, socket, urlparse, re
 socket.setdefaulttimeout(10.0)                            # Our story begins with Talmudic style commentaries 
 import globs                                              # (in-line columns), which I'm using as a way 
-from common import *
-import requests, traceback, datetime, time, json          # of issuing a challenge to myself to master the
-from flask_wtf import Form                                # vim text editor, so as to make the sort of text
-from wtforms import StringField, HiddenField              # manipulation skills required to pull this off no
-from flask import (Flask,                                 # big thing. Oh yeah, and we import Python modules   
-  stream_with_context,                                    # here that should be available globally (everywhere)
-  render_template,                                        # in the program. Oh, also that detection of sys.args
-  Response,                                               # forks the behavior to the non-Flask command-line
-  request,                                                # mode of Pipulate. This is required for the
-  session,                                                # Scheduler-behavior (versus webserver behavior).
-  redirect,                                     
+from common import *                                      # of issuing a challenge to myself to master the
+import requests, traceback, datetime, time, json          # vim text editor, so as to make the sort of text
+from flask_wtf import Form                                # manipulation skills required to pull this off no
+from wtforms import StringField, HiddenField              # big thing. Oh yeah, and we import Python modules   
+from flask import (Flask,                                 # here that should be available globally (everywhere)
+  stream_with_context,                                    # in this module. 
+  render_template, 
+  Response,        
+  request,         
+  session,         
+  redirect,       
   url_for,                                         
   flash)                                           
 
