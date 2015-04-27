@@ -6,7 +6,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <link href='http://fonts.googleapis.com/css?family=Paytone+One' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Nunito:300' rel='stylesheet' type='text/css'>
-    <!-- <link href="http://picnicss.com/releases/v2.3.min.css" rel="stylesheet" type="text/css"> -->
     <link rel="stylesheet" href="http://www.picnicss.com/nut/picnic_3_2+nav_2+stack.min.fresh.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <style>
@@ -27,7 +26,6 @@
       font-family: Nunito;
       font-size: 15px;
       color: #333;
-      background: #FFF;
       width: 100%;
       height: 100%;
       overflow: hidden;
@@ -40,8 +38,12 @@
       height: 100%;
     }
     #content{
-      position: relative;
+      {% if session and 'loggedin' in session and session['loggedin'] == '1': -%}
       background-color: #E8E8E8;
+      {%- else -%}
+      background-color: #000;
+      {%- endif %}
+      position: relative;
       margin: 0 auto;
       padding-left: 5px;
       padding-right: 5px;
