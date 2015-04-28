@@ -971,7 +971,7 @@ def ziplckey(keys, values):
 def lowercaselist(onelist):
   for index, item in enumerate(onelist):
     try:
-      onelist[index] = item.lower()
+      onelist[index] = item.lower().strip()
     except:
       pass
   return onelist
