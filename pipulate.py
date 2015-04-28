@@ -146,7 +146,7 @@ def main():                                               # visiting app's homep
   else:
     #Handle non-streaming user interface build resulting from a GET method call.
     out("EXITING MAIN FUNCTION RENDER", "0", '-')
-    showbutton = globs.modes.get(INVOKEMODE,'Get Links')
+    showbutton = globs.modes.get(INVOKEMODE,'Pipulate')
 
     menu = """        <select class="select pipmenu" name="options">
               <option>foo foo foo foo foo foo</option>
@@ -901,7 +901,7 @@ def getLoginlink():
   return "%s?%s" % (baseurl, urlencode(qsdict))
 
 def getBookmarklet():
-  return '''javascript:(function(){window.open('http://%s/?u='+encodeURIComponent(document.location.href), 'Pipulate', 'toolbar=0,resizable=1,scrollbars=1,status=1,width=640,height=650');})();''' % (request.headers['Host'])
+  return '''javascript:(function(){window.open('http://%s/?u='+encodeURIComponent(document.location.href)+'&d='+Date.now(), 'Pipulate', 'toolbar=0,resizable=1,scrollbars=1,status=1,width=640,height=650');})();''' % (request.headers['Host'])
 
 def getLogoutlink():
   from urllib import quote_plus
