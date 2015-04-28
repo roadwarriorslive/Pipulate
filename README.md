@@ -4,13 +4,13 @@
 Pipulate expands your mind... and the way spreadsheets work by using functions
 written and executed in Python entirely outside of the spreadsheet, cleanly
 passing the values back and forth, replacing question marks for output. This
-approach facilitates quick data-investigations from the comfortable and
-ubiquitous spreadsheet&#151;effectively slapping an Ironman suit onto aspiring
-SEO or Social Media professionals to give them superpowers. Watch the 
-[Google Slides](http://goo.gl/v71kw8) and visit the sister-project, 
-[Levinux](http://levinux.com), which combines QEMU and Tiny Core Linux to give
-you a hackable tiny virtual server on your Windows, Mac or Ubuntu desktop,
-designed to start your life-long love affair with Linux, Python and vim.
+approach facilitates quick data-investigations from the comfortable of your own
+spreadsheet&#151;effectively slapping an Ironman suit onto aspiring SEO or
+Social Media professionals to give them superpowers. Watch the 
+[Google Slides](http://goo.gl/v71kw8) and visit the sister-project,
+[Levinux](http://levinux.com), which you a hackable tiny virtual server on your
+Windows, Mac or Ubuntu desktop, designed to start your life-long love affair
+with Linux, Python and vim.
 
 <img src="http://mikelevinseo.com/free-and-open-source-seo-software.png" alt="Free and Open Source SEO Software" />
 
