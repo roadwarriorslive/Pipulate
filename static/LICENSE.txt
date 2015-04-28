@@ -82,12 +82,12 @@ Font license info
    Homepage:  http://www.mfglabs.com/
 
 
-## Brandico
+## Maki
 
-   (C) 2012 by Vitaly Puzrin
+   Copyright (C) Mapbox, LCC
 
-   Author:    Crowdsourced, for Fontello project
-   License:   SIL (http://scripts.sil.org/OFL)
-   Homepage:  
+   Author:    Mapbox
+   License:   BSD (https://github.com/mapbox/maki/blob/gh-pages/LICENSE.txt)
+   Homepage:  http://mapbox.com/maki/
 
 
