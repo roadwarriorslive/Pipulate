@@ -1,7 +1,7 @@
 <img src="http://mikelevinseo.com/images/pipulate-interface.png" alt="FOSS SEO Software"/>
 ========
 
-Pipulate expands your mind and the way spreadsheets work by using functions
+Pipulate expands your mind... and the way spreadsheets work by using functions
 written and executed in Python entirely outside of the spreadsheet, cleanly
 passing the values back and forth, replacing question marks for output. This
 approach facilitates quick data-investigations from the comfortable and
