@@ -7,10 +7,9 @@ passing the values back and forth, replacing question marks for output. This
 approach facilitates quick data-investigations from the comfortable and
 ubiquitous spreadsheet&#151;effectively slapping an Ironman suit onto aspiring
 SEO or Social Media professionals to give them superpowers. Watch the 
-[Google Slides](http://goo.gl/v71kw8) or read the [Google Docs](http://goo.gl/p2zQa4).
-My sister-project, [Levinux](http://levinux.com), synthesizes the promises of
-QEMU and Tiny Core Linux with some super-well written, super smart server build
-scripts that you should examine and hack.
+[Google Slides](http://goo.gl/v71kw8) and visit the sister-project, 
+[Levinux](http://levinux.com), which combines QEMU and Tiny Core Linux with
+some very creative file curating and hackable server-build scripts.
 
 <img src="http://mikelevinseo.com/free-and-open-source-seo-software.png" alt="Free and Open Source SEO Software" />
 
