@@ -14,11 +14,11 @@
     }
     @font-face {
       font-family: 'mikelevin';
-      src: url('static/font/mikelevin.eot?25834342');
-      src: url('static/font/mikelevin.eot?25834342#iefix') format('embedded-opentype'),
-           url('static/font/mikelevin.woff?25834342') format('woff'),
-           url('static/font/mikelevin.ttf?25834342') format('truetype'),
-           url('static/font/mikelevin.svg?25834342#mikelevin') format('svg');
+      src: url('./static/font/mikelevin.eot?25834342');
+      src: url('./static/font/mikelevin.eot?25834342#iefix') format('embedded-opentype'),
+           url('./static/font/mikelevin.woff?25834342') format('woff'),
+           url('./static/font/mikelevin.ttf?25834342') format('truetype'),
+           url('./static/font/mikelevin.svg?25834342#mikelevin') format('svg');
       font-weight: normal;
       font-style: normal;
     }
@@ -244,7 +244,9 @@
           margin-top: 50px;
         }
       }
-    .pip-icon
+      
+
+    .demo-icon
     {
       font-family: "mikelevin";
       font-style: normal;
@@ -279,6 +281,8 @@
       /* Uncomment for 3D effect */
       /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
     }
+
+      
     </style>
 
     <script>
@@ -332,18 +336,18 @@
     <nav>
     <!-- responsive -->
     <input id="bmenu" type="checkbox" class="show">
-    <label for="bmenu" class="burger"><i class="pip-icon pip-menu">&#xe831;</i></label>
-    <div class="pressthis" style="text-align: center"><a class="bookmarklet" href="{{ bookmarklet }}" onclick="return false;" oncontextmenu="if(window.navigator.userAgent.indexOf('WebKit')!=-1||window.navigator.userAgent.indexOf('MSIE')!=-1){jQuery('.pressthis-code').show().find('textarea').focus().select();return false;}"><span>Pipulate</span></a> <img src="static/foss-seo.png" style="vertical-align: middle;"/> <span id="drag">Drag to Boomarks Bar.</span></div>
+    <label for="bmenu" class="burger"><i class="demo-icon pip-menu">&#xe831;</i></label>
+    <div class="pressthis" style="text-align: center"><a class="bookmarklet" href="{{ bookmarklet }}" onclick="return false;" oncontextmenu="if(window.navigator.userAgent.indexOf('WebKit')!=-1||window.navigator.userAgent.indexOf('MSIE')!=-1){jQuery('.pressthis-code').show().find('textarea').focus().select();return false;}"><span>Pipulate</span></a> <img src="./static/foss-seo.png" style="vertical-align: middle;"/> <span id="drag">Drag to Boomarks Bar.</span></div>
     <div class="menu">
       {% if session and 'loggedin' in session and session['loggedin'] == '1': %}
-        <a href="{{ logoutlink }}">Logout</a>
+        <a class="pseudo button" href="{{ logoutlink }}">Logout</a>
       {% else %}
-        <a href="{{ loginlink }}">Login</a>
+        <a class="pseudo button" href="{{ loginlink }}" class="demo-icon pip-googleplus"><i class="demo-icon pip-googleplus">&#xe837;</i> Login</a>
       {% endif %}
-      <a target="_blank" href="https://docs.google.com/presentation/d/10lr_d1uyLMOnWsMzbenKiPlFE5-BIt9bxVucw7O4GSI/edit?usp=sharing">Intro &amp; Philosophy</a>
-      <a target="_blank" href="https://github.com/miklevin/pipulate/blob/master/README.md">Documentation</a>
-      <a target="_blank" href="https://www.youtube.com/playlist?list=PLy-AlqZFg6G_bo5bH_wLBdxx-TNfB_yXT">Video Tutorials</a>
-      <a target="_blank" href="http://levinux.com">Levinux</a>
+      <a class="pseudo button" target="_blank" href="https://docs.google.com/presentation/d/10lr_d1uyLMOnWsMzbenKiPlFE5-BIt9bxVucw7O4GSI/edit?usp=sharing"><i class="demo-icon pip-chrome">&#xe805;</i>Intro &amp; Philosophy</a>
+    <a class="pseudo button" target="_blank" href="https://github.com/miklevin/pipulate/blob/master/README.md"><i class="demo-icon pip-github">&#xe82f;</i>Documentation</a>
+      <a class="pseudo button" target="_blank" href="https://www.youtube.com/playlist?list=PLy-AlqZFg6G_bo5bH_wLBdxx-TNfB_yXT"><i class="demo-icon pip-github">&#xe821;</i>Video Tutorials</a>
+      <a class="pseudo button" target="_blank" href="http://levinux.com"><i class="demo-icon pip-mikelevin-dot">&#xe806;</i>Levinux</a>
     </div>
     </nav>
     <div id="content">
@@ -424,7 +428,7 @@
                 $('#spinner').hide();
                 $("i").removeClass("fa-spin fa-circle-o-notch");
                 $("i").addClass("fa-check");
-                document.write('<img id="pbjt" src="static/pipulate.gif" style="vertical-align: top;">');
+                document.write('<img id="pbjt" src="./static/pipulate.gif" style="vertical-align: top;">');
                 unlockbutton();
               </script>
             {%- elif lineitem == "spinoff" -%}
@@ -458,7 +462,7 @@
           {%- endif -%}
         {%- endfor -%}
       {% else: %}
-        <a class="button pip" href="{{ loginlink }}">LOGIN... &nbsp;<i id="piplock" class="pip-icon pip-googleplus">&#xe837;</i></a>
+        <a class="button pip" href="{{ loginlink }}">LOGIN... &nbsp;<i id="piplock" class="demo-icon pip-googleplus">&#xe837;</i></a>
         <div style="height: 100%"><img id="piplogo" alt="Pipulate Free and Open Source SEO Software" src="static/pipulate-logo-white-transparent.png" /></div>
       {% endif %}
       </div>
