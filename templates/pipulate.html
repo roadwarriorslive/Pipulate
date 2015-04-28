@@ -264,6 +264,16 @@
       /* Uncomment for 3D effect */
       /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
     }
+    .pipmenu {
+      background-color:#DDDDDD;
+      width: 115px;
+      height: 2.1em;
+    }
+    #piphelp {
+      position:absolute;
+      right:30px;
+      margin-top:16px;
+    }
     @media (min-width: 960px) {
       #pastelabel{
         width:4em;
@@ -277,11 +287,9 @@
       .pip {
         margin-top: 50px;
       }
-    }
-    .pipmenu {
-      background-color:#DDDDDD;
-      width: 115px;
-      height: 2.1em;
+      #piphelp{
+        right: auto;
+      }
     }
     </style>
 
@@ -338,13 +346,14 @@
     <input id="bmenu" type="checkbox" class="show">
     <label for="bmenu" class="burger"><i class="pip-icon pip-menu"></i></label>
     <div class="pressthis" style="text-align: center"><a class="bookmarklet" href="{{ bookmarklet }}" onclick="return false;" oncontextmenu="if(window.navigator.userAgent.indexOf('WebKit')!=-1||window.navigator.userAgent.indexOf('MSIE')!=-1){jQuery('.pressthis-code').show().find('textarea').focus().select();return false;}"><span>Pipulate</span></a> <img src="./static/foss-seo.png" style="vertical-align: middle;"/> <span id="drag">Drag to Boomarks Bar.</span></div>
+    <i id="piphelp" class="pip-help-circled"></i>
     <div class="menu">
       {% if session and 'loggedin' in session and session['loggedin'] == '1': %}
         <a class="button pip-block" href="{{ logoutlink }}">Logout</a>
       {% else %}
         <a class="button pip-googleplus" href="{{ loginlink }}">Login</a>
       {% endif %}
-      <a class="button pip-book" target="_blank" href="https://docs.google.com/presentation/d/10lr_d1uyLMOnWsMzbenKiPlFE5-BIt9bxVucw7O4GSI/edit?usp=sharing">Intro &amp; Philosophy</a>
+      <a class="button pip-play" target="_blank" href="https://docs.google.com/presentation/d/10lr_d1uyLMOnWsMzbenKiPlFE5-BIt9bxVucw7O4GSI/edit?usp=sharing">Intro &amp; Philosophy</a>
       <a class="button pip-github-1" target="_blank" href="https://github.com/miklevin/pipulate/blob/master/README.md">Documentation</a>
       <a class="button pip-youtube-play" target="_blank" href="https://www.youtube.com/playlist?list=PLy-AlqZFg6G_bo5bH_wLBdxx-TNfB_yXT">Video Tutorials</a>
       <a class="button pip-mikelevin-fatcircle" target="_blank" href="http://levinux.com">Levinux</a>
