@@ -8,8 +8,9 @@ approach facilitates quick data-investigations from the comfortable and
 ubiquitous spreadsheet&#151;effectively slapping an Ironman suit onto aspiring
 SEO or Social Media professionals to give them superpowers. Watch the 
 [Google Slides](http://goo.gl/v71kw8) and visit the sister-project, 
-[Levinux](http://levinux.com), which combines QEMU and Tiny Core Linux with
-some very creative file curating and hackable server-build scripts.
+[Levinux](http://levinux.com), which combines QEMU and Tiny Core Linux to give
+you a hackable tiny virtual server on your Windows, Mac or Ubuntu desktop,
+designed to start your life-long love affair with Linux, Python and vim.
 
 <img src="http://mikelevinseo.com/free-and-open-source-seo-software.png" alt="Free and Open Source SEO Software" />
 
