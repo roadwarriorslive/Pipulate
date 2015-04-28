@@ -264,21 +264,25 @@
       /* Uncomment for 3D effect */
       /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
     }
-      @media (min-width: 960px) {
-        #pastelabel{
-          width:4em;
-        }
-        #paste{
-          width: 97%;
-          margin-left: auto;
-          margin-right: auto;
-          margin-top:50px;
-        }
-        .pip {
-          margin-top: 50px;
-        }
+    @media (min-width: 960px) {
+      #pastelabel{
+        width:4em;
       }
-      
+      #paste{
+        width: 97%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top:50px;
+      }
+      .pip {
+        margin-top: 50px;
+      }
+    }
+    .menu {
+      background-color:#AAAAAA;
+      width: 100px;
+      height: 2.1em;
+    }
     </style>
 
     <script>
@@ -353,15 +357,11 @@
           <div id="centerme">
           <div id="paste" class="row"><span id="pastelabel">URL: </span>{{ form.pipurl(size=80) }}</div>
           </div>
-          <div class="row">
-          <!--  <div>
-          {{ widget|safe }}
-            </div>  -->
           <div>
+          {{ widget|safe }}
           <button id="pipulate" class="button" type="submit">
             {{ invokemode }} &nbsp;<i id="piplock" class="fa fa-chevron-circle-right"></i>
           </button>
-            </div>
           </div>
         </form>
         {% if request.method == 'POST': %}

@@ -148,8 +148,8 @@ def main():                                               # visiting app's homep
     out("EXITING MAIN FUNCTION RENDER", "0", '-')
     showbutton = globs.modes.get(INVOKEMODE,'Get Links')
 
-    menu = """        <select name="options">
-              <option>foo</option>
+    menu = """        <select class="select menu" name="options">
+              <option>foo foo foo foo foo foo</option>
               <option>bar</option>
               <option>spam</option>
               <option>eggs</option>
