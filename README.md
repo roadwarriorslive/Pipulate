@@ -1,4 +1,4 @@
-<img src="http://mikelevinseo.com/images/pipulate-logo.png" alt="FOSS SEO Software"/>
+<img src="http://mikelevinseo.com/images/pipulate-interface.png" alt="FOSS SEO Software"/>
 ========
 
 Pipulate expands your mind and the way spreadsheets work by using functions
