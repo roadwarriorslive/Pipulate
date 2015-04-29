@@ -10,7 +10,7 @@ Social Media professionals to give them superpowers. Watch the
 [Google Slides](http://goo.gl/v71kw8) and visit the sister-project,
 [Levinux](http://levinux.com).
 
-<img src="http://mikelevinseo.com/free-and-open-source-seo-software.png" alt="Free and Open Source SEO Software" />
+<img src="http://mikelevinseo.com/images/free-and-open-source-seo-software.png" alt="Free and Open Source SEO Software" />
 
 ## Table of Contents
 
