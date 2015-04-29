@@ -311,7 +311,7 @@
       function unlockbutton() {
         whitelock();
         $('#pipulate').prop("disabled", false);
-        $('#pipulate').fadeTo("fast",1);
+        $('#pipulate').fadeTo(0,1);
         $('#piplock').addClass("pip-angle-circled-right");
         $('#piplock').removeClass("pip-lock");
       }
@@ -427,7 +427,6 @@
                 // Lock button and display spinner
                 $('#pipulate').prop("disabled", true);
                 $('#pipulate').fadeTo("fast",.5);
-                //$('#spinner').show();
               </script>
             {%- elif lineitem == "spinoffsuccess" -%}
               <script>
