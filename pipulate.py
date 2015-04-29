@@ -901,7 +901,7 @@ def getLoginlink():
   return "%s?%s" % (baseurl, urlencode(qsdict))
 
 def getBookmarklet():
-  return '''javascript:(function(){window.open('http://%s/?u='+encodeURIComponent(document.location.href)+'&d='+Date.now()+'&c='+window.btoa(unescape(encodeURIComponent(document.cookie))), 'Pipulate', 'toolbar=0,resizable=1,scrollbars=1,status=1,width=640,height=640');})();''' % (request.headers['Host'])
+  return '''javascript:(function(){window.open('http://%s/?u='+encodeURIComponent(document.location.href)+'&d='+Date.now()+'&c='+window.btoa(unescape(encodeURIComponent(document.cookie))), 'Pipulate', 'toolbar=0,resizable=1,scrollbars=1,status=1,width=630,height=630');})();''' % (request.headers['Host'])
 
 def getLogoutlink():
   from urllib import quote_plus
