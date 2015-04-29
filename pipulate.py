@@ -224,7 +224,7 @@ def Pipulate(username='', password='', dockey=''):
   unlock = ("", "", "", "-")
   out("PIPULATION BEGINNING", "1")
   try:
-    yield "Beginning to pipulate...", "", "", ""
+    yield "Beginning to Pipulate...", "", "", ""
     yield "spinon", "", "", ""
     out("Reading in functions.")
     funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
@@ -636,7 +636,7 @@ def Pipulate(username='', password='', dockey=''):
           tellrow = 'all'
         yield "Job requested to process %s row(s) every %s %s" % (tellrow, number, name), "", "", ""
       else:
-        yield "Pipulate running in ad hoc investigation mode (no scheduled tasks).", "", "", ""
+        yield "Pipulate running in questionmark replacement mode.", "", "", ""
       if left and right and now:
         yield "%s = Start of last time window" % left, "", "", ""
         yield "%s = End of last time window" % right, "", "", ""
@@ -674,8 +674,8 @@ def Pipulate(username='', password='', dockey=''):
       #
       out("Question Mark Replacement.", '2')
       if not qset and not trended:
-        yield "No question marks found. Try putting a question mark in a cell.", "Move along. There's nothing to pipulate here.", "", ""
-        yield 'New to Pipulate? Watch the <a target="_blank" href="http://goo.gl/v71kw8">Demo</a> and read the <a target="_blank" href="http://goo.gl/p2zQa4">Docs</a>.', "", "", ""
+        yield "No question marks found.", "Move along. There's nothing to pipulate here.", "", ""
+        yield 'New to Pipulate? Watch <a target="_blank" href="https://docs.google.com/presentation/d/10lr_d1uyLMOnWsMzbenKiPlFE5-BIt9bxVucw7O4GSI/edit?usp=sharing">Demo</a> and read <a target="_blank" href="https://github.com/miklevin/pipulate/blob/master/README.md">Docs</a>.', "", "", ""
         yield "spinoff", "", "", ""
         Stop()
 

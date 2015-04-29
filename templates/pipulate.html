@@ -305,15 +305,15 @@
       function lockbutton() {
         $('#pipulate').fadeTo(0,.5);
         $('#pipulate').prop("disabled", true);
-        $('#piplock').removeClass("fa-chevron-circle-right");
-        $('#piplock').addClass("fa-lock");
+        $('#piplock').removeClass("pip-angle-circled-right");
+        $('#piplock').addClass("pip-lock");
       }
       function unlockbutton() {
         whitelock();
         $('#pipulate').prop("disabled", false);
         $('#pipulate').fadeTo("fast",1);
-        $('#piplock').addClass("fa-chevron-circle-right");
-        $('#piplock').removeClass("fa-lock");
+        $('#piplock').addClass("pip-angle-circled-right");
+        $('#piplock').removeClass("pip-lock");
       }
       $(document).ready(function(){  
         {% if request.method == 'GET': %}
@@ -328,7 +328,7 @@
           $('#pipstream').html('');
           $('#spinner').show();
           $('#magicbox').val('');
-          $('#learnsomething').html("Sit back and relax. I'm starting to pipulate...");
+          $('#learnsomething').html("Sit back and relax. I'm starting to Pipulate...");
           $('#pipform').submit();
         });
       });
@@ -371,7 +371,7 @@
           <div>
           {{ widget|safe }}
           <button id="pipulate" class="button" type="submit">
-            {{ invokemode }} &nbsp;<i id="piplock" class="fa fa-chevron-circle-right"></i>
+            {{ invokemode }} &nbsp;<i id="piplock" class="pip-angle-circled-right"></i>
           </button>
           </div>
         </form>
