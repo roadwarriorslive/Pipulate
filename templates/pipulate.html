@@ -397,7 +397,7 @@
         {% with messages = get_flashed_messages() %}
           {% if messages %}
             {% for message in messages %}
-              {%- if loop.index > 1: -%}<br/>{%- endif -%}<span class="pl"><i class="bullet fa fa-circle-o"></i> {{ message }}</span>
+              {%- if loop.index > 1: -%}<br/>{%- endif -%}<span class="pl"><i class="bullet pip circle"></i> {{ message }}</span>
             {% endfor %}
           {% endif %}
         {% endwith %}
@@ -434,7 +434,7 @@
                 // Unlock button and remove spinner, successful pipulation
                 $('#spinner').hide();
                 $("i").removeClass("fa-spin fa-circle-o-notch");
-                $("i").addClass("fa-check");
+                $("i").addClass("pip-ok");
                 document.write('<img id="pbjt" src="./static/pipulate.gif" style="vertical-align: top;">');
                 unlockbutton();
               </script>
@@ -443,7 +443,7 @@
                 // Unlock button and remove spinner, failed pipulation
                 $('#spinner').hide();
                 $("i").removeClass("fa-spin fa-circle-o-notch");
-                $("i").addClass("fa-check");
+                $("i").addClass("pip-ok");
                 unlockbutton();
               </script>
             {%- elif lineitem == "spinerr" -%}
@@ -451,7 +451,7 @@
                 // Unlock button and gracefully show user things are fubar.
                 $('#spinner').hide();
                 $("i").removeClass("fa-spin fa-circle-o-notch");
-                $("i.bullet").addClass("fa-circle-o");
+                $("i.bullet").addClass("pip-circle-empty");
                 unlockbutton();
               </script>
             {%- elif lineitem[:1] == ',' -%}
@@ -459,7 +459,7 @@
             {%- else -%}
               <script>
                 $("i").removeClass("fa-spin fa-circle-o-notch");
-                $("i").addClass("fa-check");
+                $("i").addClass("pip-ok");
               </script>
               {%- if loop.index > 1: -%}<br/>{%- endif -%}<span class="pl"><i class="bullet fa fa-circle-o-notch fa-spin"></i> {{ lineitem|safe }}</span>
             {%- endif -%}
