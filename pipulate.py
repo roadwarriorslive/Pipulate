@@ -103,7 +103,7 @@ def main():                                               # visiting app's homep
       globs.PIPURL = form.pipurl.data
       STREAMIT = stream_with_context(Pipulate())
     else:
-      flash('Please enter a URL to Pipulate (or click bookmarklet again)')
+      flash('Please enter a URL to Pipulate.')
   else:
     if request.args and "access_token" in request.args:
       session['oa2'] = request.args.get("access_token")

@@ -321,7 +321,7 @@
         {% elif form.pipurl.data == '': %}
           $("#spinner").hide();
           unlockbutton();
-          $("#learnsomething").html('Copy and paste Google Spreadsheet URL into URL field.');
+          $("#learnsomething").html('Copy and paste a URL into field (even on mobile).');
         {% endif %}
         $("#pipulate").click(function() {
           lockbutton();
