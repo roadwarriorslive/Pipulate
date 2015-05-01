@@ -146,14 +146,8 @@ def main():                                               # visiting app's homep
   else:
     #Handle non-streaming user interface build resulting from a GET method call.
     out("EXITING MAIN FUNCTION RENDER", "0", '-')
-
-    menu = """        <select class="select pipmenu" name="options">
-              <option>foo foo foo foo foo foo</option>
-              <option>bar</option>
-              <option>spam</option>
-              <option>eggs</option>
-            </select>"""
-    return render_template('pipulate.html', form=form, widget=menu)
+    options = optionmaker(CLICKTEXT)
+    return render_template('pipulate.html', form=form, select=options)
   out("EXITING MAIN", "0", '-')
 
 def LogUser(authkey):

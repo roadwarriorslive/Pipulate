@@ -376,3 +376,11 @@ behaviors = {
   'Get Links' : crawlinit
 }
 
+def optionmaker(url):
+  return  """        
+              <option>foo foo foo foo foo foo</option>
+              <option>bar</option>
+              <option>spam</option>
+              <option>eggs</option>
+            </select>"""
+

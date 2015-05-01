@@ -368,7 +368,7 @@
           <div id="paste" class="row"><span id="pastelabel">URL: </span>{{ form.pipurl(size=80) }}</div>
           </div>
           <div>
-          {{ widget|safe }}
+          <select class="select pipmenu" name="options">{{ select|safe }}</select>
           <button id="pipulate" class="button" type="submit">
             Pipulate &nbsp;<i id="piplock" class="pip-angle-circled-right"></i>
           </button>
