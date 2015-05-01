@@ -159,8 +159,14 @@ def optionmaker(url):
       urlparts = urlparse.urlparse(url)
       netloc = urlparts[1]
       path = urlparts[2]
+      query = urlparts[4]
       if apexdom == 'google.com':
-        optlist = ['Some', 'Google', 'Site']
+        if query == 'gws_rd=ssl':
+          optlist = ['Safe Google web search', 'Some', 'Google', 'Site']
+        elif path == '/search':
+          optlist = ['Traditional Google search', 'Some', 'Google', 'Site']
+        else:
+          optlist = [query, 'Some', 'Google', 'Site']
       elif apexdom == 'youtube.com':
         if path[:6] == '/user/':
           optlist = ['Some', 'YouTube', 'Channel']
