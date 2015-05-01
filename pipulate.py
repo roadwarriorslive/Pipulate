@@ -81,7 +81,7 @@ def main():                                               # visiting app's homep
 
   out("ENTERED MAIN FUNCTION", "0")
   STREAMIT = False                                        # Default to not streaming.
-  INVOKEMODE = False                                      # Convince me we're on a sheet
+  CONTEXT = False                                      # Convince me we're on a sheet
   form = PipForm(csrf_enabled=False)                      # Initialize form for UI.
   if session:                                             # I've seen you before!
     if 'oa2' in session:                                  # and I think you're logged in
@@ -134,19 +134,18 @@ def main():                                               # visiting app's homep
         session['u'] = request.args.get('u')
         if 'https://docs.google.com/spreadsheets' in form.pipurl.data:
           # Consider checking if sheet exists for an "Initialize Sheet" button.
-          INVOKEMODE = "sheets"
+          CONTEXT = "sheets"
         else:
-          INVOKEMODE = apex(form.pipurl.data)
+          CONTEXT = apex(form.pipurl.data)
       if session and 'u' in session:
         form.pipurl.data = session['u']
   out("Selecting template method.")
   if STREAMIT:
     #Handle streaming user interface updates resulting from a POST method call.
-    return Response(stream_template('pipulate.html', form=form, data=STREAMIT, invokemode="Pipulate"))
+    return Response(stream_template('pipulate.html', form=form, data=STREAMIT))
   else:
     #Handle non-streaming user interface build resulting from a GET method call.
     out("EXITING MAIN FUNCTION RENDER", "0", '-')
-    showbutton = globs.modes.get(INVOKEMODE,'Pipulate')
 
     menu = """        <select class="select pipmenu" name="options">
               <option>foo foo foo foo foo foo</option>
@@ -154,7 +153,7 @@ def main():                                               # visiting app's homep
               <option>spam</option>
               <option>eggs</option>
             </select>"""
-    return render_template('pipulate.html', form=form, invokemode=showbutton, widget=menu)
+    return render_template('pipulate.html', form=form, widget=menu)
   out("EXITING MAIN", "0", '-')
 
 def LogUser(authkey):

@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Pipulate Free and Open Source SEO Software</title>
+    <title>Pipulate Free and Open Source (FOSS) SEO Software</title>
     <meta name="description" content="Pipulate Collects Data directly into Spreadsheets for SEO and Social Media monitoring.">
     <meta name="viewport" content="width=device-width, initial-scale=.90">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -364,14 +364,13 @@
     <div id="content">
       {% if session and 'loggedin' in session and session['loggedin'] == '1': %}
         <form id="pipform" method="POST" action="/">
-          {{ form.mode(value=invokemode) }}
           <div id="centerme">
           <div id="paste" class="row"><span id="pastelabel">URL: </span>{{ form.pipurl(size=80) }}</div>
           </div>
           <div>
           {{ widget|safe }}
           <button id="pipulate" class="button" type="submit">
-            {{ invokemode }} &nbsp;<i id="piplock" class="pip-angle-circled-right"></i>
+            Pipulate &nbsp;<i id="piplock" class="pip-angle-circled-right"></i>
           </button>
           </div>
         </form>
