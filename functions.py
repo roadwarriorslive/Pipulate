@@ -392,7 +392,7 @@ def keymaster(url):
       path = urlparts[2]
       query = urlparts[4]
       if apexdom == 'google.com':
-        if query == 'gws_rd=ssl':
+        if path == '/webhp' or query == 'gws_rd=ssl':
           key = 'google safe web search'
         elif path == '/search':
           key = 'google traditional search'
@@ -434,7 +434,7 @@ def keymaster(url):
 def gatekeeper(keymaster):
   mdict = {}
   mdict['sheets'] = ['Menu', "On", "Google", "Spreadsheets"]
-  mdict['google safe websearch'] = ['Safe Google web search', 'Some', 'Google', 'Site']
+  mdict['google safe web search'] = ['Safe Google web search', 'Some', 'Google', 'Site']
   mdict['google traditinal search'] = ['Traditional Google search', 'Some', 'Google', 'Site']
   mdict['google other'] = ['Some', 'Google', 'Site']
   mdict['youtube channel'] = ['Get Subscriber Count', 'Get Views Count', 'Grab Video Links']
