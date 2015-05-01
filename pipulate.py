@@ -155,7 +155,14 @@ def optionmaker(url):
     if url == 'sheets':
       optlist = ['Menu', "On", "Google", "Spreadsheets"]
     else:
-      optlist = ['foo', 'bar', 'spam', 'eggs']
+      apexdom = apex(url)
+      urlparts = urlparse.urlparse(url)
+      netloc = urlparts[1]
+      path = urlparts[2]
+      if apexdom == 'google.com':
+        optlist = ['Some', 'Google', 'Site']
+      else:
+        optlist = ['Not', 'Google', 'Site']
   else:
     optlist = ['No', 'URL', 'Found']
   menu = ''
