@@ -169,13 +169,20 @@ def optionmaker(url):
           optlist = [query, 'Some', 'Google', 'Site']
       elif apexdom == 'youtube.com':
         if path[:6] == '/user/':
-          optlist = ['Some', 'YouTube', 'Channel']
+          optlist = ['Get Subscriber Count', 'Grab Video Links']
+        elif path[:6] == '/watch':
+          optlist = ['Get Video View Count', 'Grab Comments']
         else:
-          optlist = ['YouTube', 'But not', 'Channel']
+          optlist = ['Other YouTube']
       elif apexdom == 'twitter.com':
-        optlist = ['Some', 'Twitter', 'Site']
+        if path == '/search':
+          optlist = ['Capture Twitter Search']
+        elif path:
+          optlist = ['Get Profile Stats']
+        else:
+          optlist = ['Other Twitter', 'Twitter', 'Site']
       else:
-        optlist = ['Not', 'Google', 'Site']
+        optlist = ['SEO Data', 'Social Counters', 'Mobile Audit', 'Open Graph']
   else:
     optlist = ['No', 'URL', 'Found']
   menu = ''
