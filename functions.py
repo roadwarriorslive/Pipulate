@@ -419,6 +419,8 @@ def keymaster(url):
           key = 'github profile'
         elif path.count('/') == 2:
           key = 'github repository'
+        else:
+          key = "github other"
       else:
         key = 'seo'
   else:
@@ -444,6 +446,7 @@ def gatekeeper(keymaster):
   mdict['facebook'] = ['Something for Facebook']
   mdict['github profile'] = ['Get User Stats']
   mdict['github repository'] = ['Get Repository Stats']
+  mdict['github other'] = ['Github Other']
   mdict['seo'] = ['Get SEO Data', 'Get Social Data', 'Get Open Graph Data', 'Do Mobile Audit']
   mdict['empty'] = ['No URL found']
   try:
