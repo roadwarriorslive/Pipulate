@@ -151,7 +151,13 @@ def main():                                               # visiting app's homep
   out("EXITING MAIN", "0", '-')
 
 def optionmaker(url):
-  optlist = ['foo', 'bar', 'spam', 'eggs']
+  if url:
+    if url == 'sheets':
+      optlist = ['Menu', "On", "Google", "Spreadsheets"]
+    else:
+      optlist = ['foo', 'bar', 'spam', 'eggs']
+  else:
+    optlist = ['No', 'URL', 'Found']
   menu = ''
   for option in optlist:
     menu += "<option>%s</options>\n" % option
