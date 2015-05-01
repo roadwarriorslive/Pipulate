@@ -371,3 +371,76 @@ def mobilicious(url, mobile, mcanonical):
   else:
     return "Fail"
 
+#  ____  _               _     ___       _ _   _       _ _                  
+# / ___|| |__   ___  ___| |_  |_ _|_ __ (_) |_(_) __ _| (_)_______ _ __ 
+# \___ \| '_ \ / _ \/ _ \ __|  | || '_ \| | __| |/ _` | | |_  / _ \ '__/
+#  ___) | | | |  __/  __/ |_   | || | | | | |_| | (_| | | |/ /  __/ |
+# |____/|_| |_|\___|\___|\__| |___|_| |_|_|\__|_|\__,_|_|_/___\___|_|
+#                                                                           
+# The keymaster and gatekeeper functions work together to define keys for
+# common contexts, and the menus that should be accordingly presented.
+
+def keymaster(url):
+  key = ''
+  if url:
+    if url == 'sheets':
+      key = 'sheets'
+    else:
+      apexdom = apex(url)
+      urlparts = urlparse.urlparse(url)
+      netloc = urlparts[1]
+      path = urlparts[2]
+      query = urlparts[4]
+      if apexdom == 'google.com':
+        if query == 'gws_rd=ssl':
+          key = 'google safe web search'
+        elif path == '/search':
+          key = 'google traditional search'
+        else:
+          key = 'google other'
+      elif apexdom == 'youtube.com':
+        if path[:6] == '/user/':
+          key = 'youtube channel'
+        elif path[:6] == '/watch':
+          key = 'youtube video'
+        else:
+          key = 'youtube other'
+      elif apexdom == 'twitter.com':
+        if path == '/search':
+          key = 'twitter search'
+        elif path:
+          key = 'twitter profile'
+        else:
+          key = 'twitter other'
+      elif apexdom == 'facebook.com':
+        key = 'facebook'
+      else:
+        key = 'seo'
+  else:
+    key = 'empty'
+  optlist = gatekeeper(key)
+  menu = ''
+  for option in optlist:
+    menu += "<option>%s</options>\n" % option
+  return menu
+
+def gatekeeper(keymaster):
+  mdict = {}
+  mdict['sheets'] = ['Menu', "On", "Google", "Spreadsheets"]
+  mdict['google safe websearch'] = ['Safe Google web search', 'Some', 'Google', 'Site']
+  mdict['google traditinal search'] = ['Traditional Google search', 'Some', 'Google', 'Site']
+  mdict['google other'] = ['Some', 'Google', 'Site']
+  mdict['youtube channel'] = ['Get Subscriber Count', 'Get Views Count', 'Grab Video Links']
+  mdict['youtube video'] = ['Get Video View Count', 'Grab Comments']
+  mdict['youtube other'] = ['Other YouTube']
+  mdict['twitter search'] = ['Capture Twitter Search']
+  mdict['twitter profile'] = ['Get Profile Stats']
+  mdict['twitter other'] = ['Other Twitter', 'Twitter', 'Site']
+  mdict['facebook'] = ['Something for Facebook']
+  mdict['seo'] = ['Get SEO Data', 'Get Social Data', 'Get Open Graph Data', 'Do Mobile Audit']
+  mdict['empty'] = ['No URL found']
+  try:
+    return mdict[keymaster]
+  except:
+    return ['No Context Found']
+

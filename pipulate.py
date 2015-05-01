@@ -150,70 +150,6 @@ def main():                                               # visiting app's homep
     return render_template('pipulate.html', form=form, select=options)
   out("EXITING MAIN", "0", '-')
 
-def keymaster(url):
-  key = ''
-  if url:
-    if url == 'sheets':
-      key = 'sheets'
-    else:
-      apexdom = apex(url)
-      urlparts = urlparse.urlparse(url)
-      netloc = urlparts[1]
-      path = urlparts[2]
-      query = urlparts[4]
-      if apexdom == 'google.com':
-        if query == 'gws_rd=ssl':
-          key = 'google safe web search'
-        elif path == '/search':
-          key = 'google traditional search'
-        else:
-          key = 'google other'
-      elif apexdom == 'youtube.com':
-        if path[:6] == '/user/':
-          key = 'youtube channel'
-        elif path[:6] == '/watch':
-          key = 'youtube video'
-        else:
-          key = 'youtube other'
-      elif apexdom == 'twitter.com':
-        if path == '/search':
-          key = 'twitter search'
-        elif path:
-          key = 'twitter profile'
-        else:
-          key = 'twitter other'
-      elif apexdom == 'facebook.com':
-        key = 'facebook'
-      else:
-        key = 'seo'
-  else:
-    key = 'empty'
-  optlist = gatekeeper(key)
-  menu = ''
-  for option in optlist:
-    menu += "<option>%s</options>\n" % option
-  return menu
-
-def gatekeeper(keymaster):
-  mdict = {}
-  mdict['sheets'] = ['Menu', "On", "Google", "Spreadsheets"]
-  mdict['google safe websearch'] = ['Safe Google web search', 'Some', 'Google', 'Site']
-  mdict['google traditinal search'] = ['Traditional Google search', 'Some', 'Google', 'Site']
-  mdict['google other'] = ['Some', 'Google', 'Site']
-  mdict['youtube channel'] = ['Get Subscriber Count', 'Grab Video Links']
-  mdict['youtube video'] = ['Get Video View Count', 'Grab Comments']
-  mdict['youtube other'] = ['Other YouTube']
-  mdict['twitter search'] = ['Capture Twitter Search']
-  mdict['twitter profile'] = ['Get Profile Stats']
-  mdict['twitter other'] = ['Other Twitter', 'Twitter', 'Site']
-  mdict['facebook'] = ['Something for Facebook']
-  mdict['seo'] = ['Get SEO Data', 'Get Social Data', 'Get Open Graph Data', 'Do Mobile Audit']
-  mdict['empty'] = ['No URL found']
-  try:
-    return mdict[keymaster]
-  except:
-    return ['No Context Found']
-
 def LogUser(authkey):
   api = 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='
   api = api + authkey
@@ -1237,17 +1173,6 @@ def datestamp():
   now = datetime.datetime.now()
   now = now.strftime("%B %d, %Y")
   return now
-
-def apex(url):
-  if url:
-    apex = urlparse.urlparse(url).hostname.split(".")
-    try:
-      apex = ".".join(len(apex[-2]) < 4 and apex[-3:] or apex[-2:])
-      return apex
-    except:
-      return None
-  else:
-    return None
 
 def extension(url):
   """Return the file extension, given (typically) a URL."""

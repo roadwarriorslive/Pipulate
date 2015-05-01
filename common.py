@@ -117,3 +117,15 @@ def InsertRows(onesheet, listoflists, lastrowused=''):
     
   return
 
+def apex(url):
+  from urlparse import urlparse
+  if url:
+    apex = urlparse(url).hostname.split(".")
+    try:
+      apex = ".".join(len(apex[-2]) < 4 and apex[-3:] or apex[-2:])
+      return apex
+    except:
+      return None
+  else:
+    return None
+
