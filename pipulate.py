@@ -161,6 +161,13 @@ def optionmaker(url):
       path = urlparts[2]
       if apexdom == 'google.com':
         optlist = ['Some', 'Google', 'Site']
+      elif apexdom == 'youtube.com':
+        if path[:6] == '/user/':
+          optlist = ['Some', 'YouTube', 'Channel']
+        else:
+          optlist = ['YouTube', 'But not', 'Channel']
+      elif apexdom == 'twitter.com':
+        optlist = ['Some', 'Twitter', 'Site']
       else:
         optlist = ['Not', 'Google', 'Site']
   else:
