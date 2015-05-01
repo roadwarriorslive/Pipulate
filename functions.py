@@ -414,6 +414,11 @@ def keymaster(url):
           key = 'twitter other'
       elif apexdom == 'facebook.com':
         key = 'facebook'
+      elif apexdom == 'github.com':
+        if path.count('/') == 1 and len(path) > 1:
+          key = 'github profile'
+        elif path.count('/') == 2:
+          key = 'github repository'
       else:
         key = 'seo'
   else:
@@ -437,6 +442,8 @@ def gatekeeper(keymaster):
   mdict['twitter profile'] = ['Get Profile Stats']
   mdict['twitter other'] = ['Other Twitter', 'Twitter', 'Site']
   mdict['facebook'] = ['Something for Facebook']
+  mdict['github profile'] = ['Get User Stats']
+  mdict['github repository'] = ['Get Repository Stats']
   mdict['seo'] = ['Get SEO Data', 'Get Social Data', 'Get Open Graph Data', 'Do Mobile Audit']
   mdict['empty'] = ['No URL found']
   try:
