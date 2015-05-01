@@ -150,6 +150,13 @@ def main():                                               # visiting app's homep
     return render_template('pipulate.html', form=form, select=options)
   out("EXITING MAIN", "0", '-')
 
+def optionmaker(url):
+  optlist = ['foo', 'bar', 'spam', 'eggs']
+  menu = ''
+  for option in optlist:
+    menu += "<option>%s</options>\n" % option
+  return menu
+
 def LogUser(authkey):
   api = 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='
   api = api + authkey
