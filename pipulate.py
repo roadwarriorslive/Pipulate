@@ -146,14 +146,15 @@ def main():                                               # visiting app's homep
   else:
     #Handle non-streaming user interface build resulting from a GET method call.
     out("EXITING MAIN FUNCTION RENDER", "0", '-')
-    options = optionmaker(CLICKTEXT)
+    options = keymaster(CLICKTEXT)
     return render_template('pipulate.html', form=form, select=options)
   out("EXITING MAIN", "0", '-')
 
-def optionmaker(url):
+def keymaster(url):
+  key = ''
   if url:
     if url == 'sheets':
-      optlist = ['Menu', "On", "Google", "Spreadsheets"]
+      key = 'sheets'
     else:
       apexdom = apex(url)
       urlparts = urlparse.urlparse(url)
@@ -162,33 +163,56 @@ def optionmaker(url):
       query = urlparts[4]
       if apexdom == 'google.com':
         if query == 'gws_rd=ssl':
-          optlist = ['Safe Google web search', 'Some', 'Google', 'Site']
+          key = 'google safe web search'
         elif path == '/search':
-          optlist = ['Traditional Google search', 'Some', 'Google', 'Site']
+          key = 'google traditional search'
         else:
-          optlist = [query, 'Some', 'Google', 'Site']
+          key = 'google other'
       elif apexdom == 'youtube.com':
         if path[:6] == '/user/':
-          optlist = ['Get Subscriber Count', 'Grab Video Links']
+          key = 'youtube channel'
         elif path[:6] == '/watch':
-          optlist = ['Get Video View Count', 'Grab Comments']
+          key = 'youtube video'
         else:
-          optlist = ['Other YouTube']
+          key = 'youtube other'
       elif apexdom == 'twitter.com':
         if path == '/search':
-          optlist = ['Capture Twitter Search']
+          key = 'twitter search'
         elif path:
-          optlist = ['Get Profile Stats']
+          key = 'twitter profile'
         else:
-          optlist = ['Other Twitter', 'Twitter', 'Site']
+          key = 'twitter other'
+      elif apexdom == 'facebook.com':
+        key = 'facebook'
       else:
-        optlist = ['SEO Data', 'Social Counters', 'Mobile Audit', 'Open Graph']
+        key = 'seo'
   else:
-    optlist = ['No', 'URL', 'Found']
+    key = 'empty'
+  optlist = gatekeeper(key)
   menu = ''
   for option in optlist:
     menu += "<option>%s</options>\n" % option
   return menu
+
+def gatekeeper(keymaster):
+  mdict = {}
+  mdict['sheets'] = ['Menu', "On", "Google", "Spreadsheets"]
+  mdict['google safe websearch'] = ['Safe Google web search', 'Some', 'Google', 'Site']
+  mdict['google traditinal search'] = ['Traditional Google search', 'Some', 'Google', 'Site']
+  mdict['google other'] = ['Some', 'Google', 'Site']
+  mdict['youtube channel'] = ['Get Subscriber Count', 'Grab Video Links']
+  mdict['youtube video'] = ['Get Video View Count', 'Grab Comments']
+  mdict['youtube other'] = ['Other YouTube']
+  mdict['twitter search'] = ['Capture Twitter Search']
+  mdict['twitter profile'] = ['Get Profile Stats']
+  mdict['twitter other'] = ['Other Twitter', 'Twitter', 'Site']
+  mdict['facebook'] = ['Something for Facebook']
+  mdict['seo'] = ['Get SEO Data', 'Get Social Data', 'Get Open Graph Data', 'Do Mobile Audit']
+  mdict['empty'] = ['No URL found']
+  try:
+    return mdict[keymaster]
+  except:
+    return ['No Context Found']
 
 def LogUser(authkey):
   api = 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='

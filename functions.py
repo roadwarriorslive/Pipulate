@@ -371,8 +371,3 @@ def mobilicious(url, mobile, mcanonical):
   else:
     return "Fail"
 
-# This is how we hook in the row inserter's init functions.
-behaviors = {
-  'Get Links' : crawlinit
-}
-
