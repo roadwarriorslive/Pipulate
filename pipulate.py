@@ -81,7 +81,7 @@ def main():                                               # visiting app's homep
 
   out("ENTERED MAIN FUNCTION", "0")
   STREAMIT = False                                        # Default to not streaming.
-  CONTEXT = False                                      # Convince me we're on a sheet
+  CLICKTEXT = False                                      # Convince me we're on a sheet
   form = PipForm(csrf_enabled=False)                      # Initialize form for UI.
   if session:                                             # I've seen you before!
     if 'oa2' in session:                                  # and I think you're logged in
@@ -134,9 +134,9 @@ def main():                                               # visiting app's homep
         session['u'] = request.args.get('u')
         if 'https://docs.google.com/spreadsheets' in form.pipurl.data:
           # Consider checking if sheet exists for an "Initialize Sheet" button.
-          CONTEXT = "sheets"
+          CLICKTEXT = "sheets"
         else:
-          CONTEXT = apex(form.pipurl.data)
+          CLICKTEXT = form.pipurl.data
       if session and 'u' in session:
         form.pipurl.data = session['u']
   out("Selecting template method.")
