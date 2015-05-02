@@ -385,6 +385,8 @@ def keymaster(url):
   if url:
     if url == 'sheets':
       key = 'sheets'
+    elif url == 'default':
+      key = 'default'
     else:
       apexdom = apex(url)
       urlparts = urlparse.urlparse(url)
@@ -448,6 +450,7 @@ def gatekeeper(keymaster):
   mdict['github repository'] = ['Get Repository Stats']
   mdict['github other'] = ['Github Other']
   mdict['seo'] = ['Get SEO Data', 'Get Social Data', 'Get Open Graph Data', 'Do Mobile Audit']
+  mdict['default'] = ['Replace Question Marks', 'Learn About Pipulate']
   mdict['empty'] = ['No URL found']
   try:
     return mdict[keymaster]

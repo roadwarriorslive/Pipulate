@@ -142,7 +142,8 @@ def main():                                               # visiting app's homep
   out("Selecting template method.")
   if STREAMIT:
     #Handle streaming user interface updates resulting from a POST method call.
-    return Response(stream_template('pipulate.html', form=form, data=STREAMIT))
+    options = keymaster('default')
+    return Response(stream_template('pipulate.html', form=form, select=options, data=STREAMIT))
   else:
     #Handle non-streaming user interface build resulting from a GET method call.
     out("EXITING MAIN FUNCTION RENDER", "0", '-')
