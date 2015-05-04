@@ -29,7 +29,7 @@ import globs                                              # (in-line columns), w
 from common import *                                      # of issuing a challenge to myself to master the
 import requests, traceback, datetime, time, json          # vim text editor, so as to make the sort of text
 from flask_wtf import Form                                # manipulation skills required to pull this off no
-from wtforms import StringField, HiddenField              # big thing. Oh yeah, and we import Python modules   
+from wtforms import StringField, HiddenField, TextAreaField    # big thing. Oh yeah, and we import Python modules   
 from flask import (Flask,                                 # here that should be available globally (everywhere)
   stream_with_context,                                    # in this module. 
   render_template, 
@@ -60,6 +60,7 @@ def templateglobals():                                    # available in Jinja2 
 class PipForm(Form):
   pipurl = StringField('Paste a Google Spreadsheet URL:')
   mode = HiddenField('mode')
+  magicbox = TextAreaField("magicbox") 
 
 #  _____ _           _                      _       
 # |  ___| | __ _ ___| | __  _ __ ___   __ _(_)_ __  
@@ -139,6 +140,8 @@ def main():                                               # visiting app's homep
           CLICKTEXT = form.pipurl.data
       if session and 'u' in session:
         form.pipurl.data = session['u']
+      if 's' in request.args:
+        pass
   out("Selecting template method.")
   if STREAMIT:
     #Handle streaming user interface updates resulting from a POST method call.
@@ -895,7 +898,7 @@ def getLoginlink():
   return "%s?%s" % (baseurl, urlencode(qsdict))
 
 def getBookmarklet():
-  return '''javascript:(function(){window.open('http://%s/?u='+encodeURIComponent(document.location.href)+'&d='+Date.now()+'&c='+window.btoa(unescape(encodeURIComponent(document.cookie))), 'Pipulate', 'toolbar=0,resizable=1,scrollbars=1,status=1,width=630,height=630');})();''' % (request.headers['Host'])
+  return '''javascript:(function(){window.open('http://%s/?u='+encodeURIComponent(document.location.href)+'&d='+Date.now()+'&s=bar&c='+window.btoa(unescape(encodeURIComponent(document.cookie))), 'Pipulate', 'toolbar=0,resizable=1,scrollbars=1,status=1,width=630,height=630');})();''' % (request.headers['Host'])
 
 def getLogoutlink():
   from urllib import quote_plus
