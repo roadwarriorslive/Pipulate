@@ -435,7 +435,9 @@ def keymaster(url):
 
 def gatekeeper(keymaster):
   mdict = {}
-  mdict['sheets'] = ['Menu', "On", "Google", "Spreadsheets"]
+  mdict['sheets'] = ['Relace Question Marks']
+  mdict['seo'] = ['Small SEO Crawl', 'Small Social Crawl', 'Small Open Graph Crawl', 'Small Mobile Crawl']
+
   mdict['google web search'] = ['Google web search', 'Some', 'Google', 'Site']
   mdict['google traditional search'] = ['Google Search Traditional', 'Some', 'Google', 'Site']
   mdict['google other'] = ['Some', 'Google', 'Site']
@@ -449,7 +451,6 @@ def gatekeeper(keymaster):
   mdict['github profile'] = ['Get User Stats']
   mdict['github repository'] = ['Get Repository Stats']
   mdict['github other'] = ['Github Other']
-  mdict['seo'] = ['SEO Small Crawl', 'Social Small Crawl', 'Open Graph Small Crawl', 'Mobile Small Crawl']
   mdict['default'] = ['Replace Question Marks', 'Learn About Pipulate']
   mdict['empty'] = ['No URL found']
   try:
