@@ -29,7 +29,7 @@ import globs                                              # (in-line columns), w
 from common import *                                      # of issuing a challenge to myself to master the
 import requests, traceback, datetime, time, json          # vim text editor, so as to make the sort of text
 from flask_wtf import Form                                # manipulation skills required to pull this off no
-from wtforms import StringField, HiddenField, TextAreaField    # big thing. Oh yeah, and we import Python modules   
+from wtforms import StringField, HiddenField, TextAreaField, SelectField    # big thing. Oh yeah, and we import Python modules   
 from flask import (Flask,                                 # here that should be available globally (everywhere)
   stream_with_context,                                    # in this module. 
   render_template, 
@@ -60,6 +60,7 @@ def templateglobals():                                    # available in Jinja2 
 class PipForm(Form):
   pipurl = StringField('Paste a Google Spreadsheet URL:')
   magicbox = TextAreaField("magicbox") 
+  options = SelectField("options")
 
 #  _____ _           _                      _       
 # |  ___| | __ _ ___| | __  _ __ ___   __ _(_)_ __  
@@ -102,6 +103,7 @@ def main():                                               # visiting app's homep
     #  globs.PIPURL = behaviors[form.mode.data](gsp)     # Setup a new Spreadsheet
     if form.pipurl.data:
       globs.PIPURL = form.pipurl.data
+      globs.PIPMODE = form.options.data
       STREAMIT = stream_with_context(Pipulate())
     else:
       flash('Please enter a URL to Pipulate.')
@@ -316,6 +318,8 @@ def Pipulate(username='', password='', dockey=''):
         # Questionmark replacement tab
         initSheet1 = True
       if initSheet1:
+        # We know we have sheet one available. Report menu selection.
+        # gotcha(globs.PIPMODE)
         headers = ['URL',  'Crawl']
         crawlsite = 'http://paulrobesonfreedomschool.org/'
         if globs.PIPURL:
@@ -325,7 +329,6 @@ def Pipulate(username='', password='', dockey=''):
         try:
           InitTab(gdoc, "sheet1", headers, initrows)
         except:
-          #Stop()
           pass
         yield unlock
 

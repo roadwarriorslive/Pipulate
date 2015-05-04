@@ -1,6 +1,7 @@
 PCOM = False
 DBUG = True
 PIPURL = ''
+PIPMODE = ''
 GBAD = "Timed-out on Google Data API. Sorry, try again."
 numrows = 0
 config = {}
