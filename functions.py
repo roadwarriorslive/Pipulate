@@ -437,7 +437,7 @@ def gatekeeper(keymaster):
   mdict = {}
   mdict['sheets'] = ['Menu', "On", "Google", "Spreadsheets"]
   mdict['google web search'] = ['Google web search', 'Some', 'Google', 'Site']
-  mdict['google traditinal search'] = ['Traditional Google search', 'Some', 'Google', 'Site']
+  mdict['google traditional search'] = ['Google Search Traditional', 'Some', 'Google', 'Site']
   mdict['google other'] = ['Some', 'Google', 'Site']
   mdict['youtube channel'] = ['Get Subscriber Count', 'Get Views Count', 'Grab Video Links']
   mdict['youtube video'] = ['Get Video View Count', 'Grab Comments']
@@ -449,7 +449,7 @@ def gatekeeper(keymaster):
   mdict['github profile'] = ['Get User Stats']
   mdict['github repository'] = ['Get Repository Stats']
   mdict['github other'] = ['Github Other']
-  mdict['seo'] = ['Get SEO Data', 'Get Social Data', 'Get Open Graph Data', 'Do Mobile Audit']
+  mdict['seo'] = ['SEO Small Crawl', 'Social Small Crawl', 'Open Graph Small Crawl', 'Mobile Small Crawl']
   mdict['default'] = ['Replace Question Marks', 'Learn About Pipulate']
   mdict['empty'] = ['No URL found']
   try:
@@ -457,3 +457,6 @@ def gatekeeper(keymaster):
   except:
     return ['No Context Found']
 
+def guardianofforever(williamriker):
+  thomasriker = williamriker
+  return thomasriker
