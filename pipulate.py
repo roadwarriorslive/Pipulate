@@ -96,6 +96,7 @@ def main():                                               # visiting app's homep
           session.pop('loggedin', None)
           if 'u' not in session and globs.PIPURL:
             session['u'] = globs.PIPURL
+  stext = ''
   if request.method == 'POST':
     # if form.mode.data and form.mode.data in behaviors.keys():
     #  globs.PIPURL = behaviors[form.mode.data](gsp)     # Setup a new Spreadsheet
@@ -107,6 +108,7 @@ def main():                                               # visiting app's homep
   else:
     if request.args and 's' in request.args:
       form.magicbox.data = request.args.get('s')
+      stext = request.args.get('s')
     if request.args and "access_token" in request.args:
       session['oa2'] = request.args.get("access_token")
       session['loggedin'] = "1"
@@ -141,8 +143,6 @@ def main():                                               # visiting app's homep
           CLICKTEXT = form.pipurl.data
       if session and 'u' in session:
         form.pipurl.data = session['u']
-      if 's' in request.args:
-        pass
   out("Selecting template method.")
   if STREAMIT:
     #Handle streaming user interface updates resulting from a POST method call.
@@ -151,7 +151,7 @@ def main():                                               # visiting app's homep
   else:
     #Handle non-streaming user interface build resulting from a GET method call.
     out("EXITING MAIN FUNCTION RENDER", "0", '-')
-    options = keymaster(CLICKTEXT)
+    options = keymaster(CLICKTEXT, stext)
     return render_template('pipulate.html', form=form, select=options)
   out("EXITING MAIN", "0", '-')
 

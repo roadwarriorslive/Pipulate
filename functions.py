@@ -380,10 +380,12 @@ def mobilicious(url, mobile, mcanonical):
 # The keymaster and gatekeeper functions work together to define keys for
 # common contexts, and the menus that should be accordingly presented.
 
-def keymaster(url):
+def keymaster(url, keywords=False):
   key = ''
   if url:
-    if url == 'sheets':
+    if keywords:
+      key = 'keywords'
+    elif url == 'sheets':
       key = 'sheets'
     elif url == 'default':
       key = 'default'
@@ -436,8 +438,8 @@ def keymaster(url):
 def gatekeeper(keymaster):
   mdict = {}
   mdict['sheets'] = ['Relace Question Marks']
+  mdict['keywords'] = ['Record Keywords']
   mdict['seo'] = ['Small SEO Crawl', 'Small Social Crawl', 'Small Open Graph Crawl', 'Small Mobile Crawl']
-
   mdict['google web search'] = ['Google web search', 'Some', 'Google', 'Site']
   mdict['google traditional search'] = ['Google Search Traditional', 'Some', 'Google', 'Site']
   mdict['google other'] = ['Some', 'Google', 'Site']
