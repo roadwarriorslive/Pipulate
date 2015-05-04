@@ -59,7 +59,6 @@ def templateglobals():                                    # available in Jinja2 
 
 class PipForm(Form):
   pipurl = StringField('Paste a Google Spreadsheet URL:')
-  mode = HiddenField('mode')
   magicbox = TextAreaField("magicbox") 
 
 #  _____ _           _                      _       
@@ -98,14 +97,16 @@ def main():                                               # visiting app's homep
           if 'u' not in session and globs.PIPURL:
             session['u'] = globs.PIPURL
   if request.method == 'POST':
-    if form.mode.data and form.mode.data in behaviors.keys():
-      globs.PIPURL = behaviors[form.mode.data](gsp)     # Setup a new Spreadsheet
+    # if form.mode.data and form.mode.data in behaviors.keys():
+    #  globs.PIPURL = behaviors[form.mode.data](gsp)     # Setup a new Spreadsheet
     if form.pipurl.data:
       globs.PIPURL = form.pipurl.data
       STREAMIT = stream_with_context(Pipulate())
     else:
       flash('Please enter a URL to Pipulate.')
   else:
+    if request.args and 's' in request.args:
+      form.magicbox.data = request.args.get('s')
     if request.args and "access_token" in request.args:
       session['oa2'] = request.args.get("access_token")
       session['loggedin'] = "1"
