@@ -103,8 +103,7 @@ def crawl(url):
   for i, val in enumerate(vals):
     CellList[i].value = val
   globs.sheet.update_cells(CellList)
-  apex = urlparse.urlparse(url).hostname.split(".")
-  apex = ".".join(len(apex[-2]) < 4 and apex[-3:] or apex[-2:])
+  apexdom = apex(url)
   import lxml.html
   ro = requests.get(url, timeout=5)
   doc = lxml.html.fromstring(ro.text)
@@ -112,7 +111,7 @@ def crawl(url):
   somelinks = doc.xpath('/html/body//a/@href')
   links = set()
   for alink in somelinks:
-    if urlparse.urlparse(alink)[1][-len(apex):] == apex:
+    if urlparse.urlparse(alink)[1][-len(apexdom):] == apexdom:
       links.add(alink)
   links = list(links)
   y = len(links)
@@ -441,7 +440,7 @@ def gatekeeper(keymaster):
   mdict['keywords'] = ['Record Keywords']
   mdict['seo'] = ['Small SEO Crawl', 'Small Social Crawl', 'Small Open Graph Crawl', 'Small Mobile Crawl']
   mdict['google web search'] = ['Google web search', 'Some', 'Google', 'Site']
-  mdict['google traditional search'] = ['Google Search Traditional', 'Some', 'Google', 'Site']
+  mdict['google traditional search'] = ['Record Search Results']
   mdict['google other'] = ['Some', 'Google', 'Site']
   mdict['youtube channel'] = ['Get Subscriber Count', 'Get Views Count', 'Grab Video Links']
   mdict['youtube video'] = ['Get Video View Count', 'Grab Comments']
