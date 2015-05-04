@@ -299,12 +299,23 @@ def Pipulate(username='', password='', dockey=''):
       yield unlock
       out("Google Spreadsheet successfully opened.")
 
+      #           _                       _               _     _ 
+      #  ___  ___| |_   _   _ _ __    ___| |__   ___  ___| |_  / |
+      # / __|/ _ \ __| | | | | '_ \  / __| '_ \ / _ \/ _ \ __| | |
+      # \__ \  __/ |_  | |_| | |_) | \__ \ | | |  __/  __/ |_  | |
+      # |___/\___|\__|  \__,_| .__/  |___/_| |_|\___|\___|\__| |_|
+      #                      |_|                                  
+      # This is where special behavior like crawls get wedged in
+
       anything = re.compile('.+')
       yield "Checking Tabs: Sheet 1", "Then we check for tabs...", "", ""
+      initSheet1 = False
       try:
         cell = gdoc.sheet1.find(anything)
       except gspread.exceptions.CellNotFound:
         # Questionmark replacement tab
+        initSheet1 = True
+      if initSheet1:
         headers = ['URL',  'Crawl']
         crawlsite = 'http://paulrobesonfreedomschool.org/'
         if globs.PIPURL:
