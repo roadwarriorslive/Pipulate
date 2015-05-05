@@ -284,7 +284,6 @@ def Pipulate(username='', password='', dockey=''):
               yield "During this file creation process, try to keep working out of the same Pipulate window.", "", "", ""
               yield "It contains the URL you were on when you clicked the bookmarklet. Welcome!!!", "", "", ""
               yield 'New to this odd but awesome approach? Watch the <a target="_blank" href="http://goo.gl/v71kw8">Demo</a> and read the <a target="_blank" href="http://goo.gl/p2zQa4">Docs</a>.', "", "", ""
-              yield "I am hereby launched on Mobilegeddeon as day-to-day useful.", "", "", ""
               Stop()
           except gspread.exceptions.SpreadsheetNotFound:
             yield "Please give the document a name to force first save.", "", "", ""
@@ -300,7 +299,6 @@ def Pipulate(username='', password='', dockey=''):
 
       yield unlock
       out("Google Spreadsheet successfully opened.")
-
       #           _                       _               _     _ 
       #  ___  ___| |_   _   _ _ __    ___| |__   ___  ___| |_  / |
       # / __|/ _ \ __| | | | | '_ \  / __| '_ \ / _ \/ _ \ __| | |
@@ -308,7 +306,6 @@ def Pipulate(username='', password='', dockey=''):
       # |___/\___|\__|  \__,_| .__/  |___/_| |_|\___|\___|\__| |_|
       #                      |_|                                  
       # This is where special behavior like crawls get wedged in
-
       anything = re.compile('.+')
       yield "Checking Tabs: Sheet 1", "Then we check for tabs...", "", ""
       initSheet1 = False
