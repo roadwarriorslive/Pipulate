@@ -3,6 +3,7 @@ DBUG = True
 PIPURL = ''
 PIPMODE = ''
 GBAD = "Timed-out on Google Data API. Sorry, try again."
+keywords = ''
 numrows = 0
 config = {}
 html = ''

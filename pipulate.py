@@ -103,7 +103,10 @@ def main():                                               # visiting app's homep
     #  globs.PIPURL = behaviors[form.mode.data](gsp)     # Setup a new Spreadsheet
     if form.pipurl.data:
       globs.PIPURL = form.pipurl.data
-      globs.PIPMODE = form.options.data
+      if form.options.data:
+        globs.PIPMODE = form.options.data
+      if form.magicbox.data:
+        globs.keywords = form.magicbox.data
       STREAMIT = stream_with_context(Pipulate())
     else:
       flash('Please enter a URL to Pipulate.')
@@ -299,6 +302,10 @@ def Pipulate(username='', password='', dockey=''):
 
       yield unlock
       out("Google Spreadsheet successfully opened.")
+
+      if globs.keywords:
+        gotcha(globs.keywords)
+
       #           _                       _               _     _ 
       #  ___  ___| |_   _   _ _ __    ___| |__   ___  ___| |_  / |
       # / __|/ _ \ __| | | | | '_ \  / __| '_ \ / _ \/ _ \ __| | |
@@ -307,7 +314,6 @@ def Pipulate(username='', password='', dockey=''):
       #                      |_|                                  
       # This is where special behavior like crawls get wedged in
       anything = re.compile('.+')
-      yield "Checking Tabs: Sheet 1", "Then we check for tabs...", "", ""
       initSheet1 = False
       try:
         cell = gdoc.sheet1.find(anything)
@@ -315,16 +321,21 @@ def Pipulate(username='', password='', dockey=''):
         # Questionmark replacement tab
         initSheet1 = True
       if initSheet1:
-        bothrows = sheetinitializer(globs.PIPMODE)
-        row1 = bothrows[0]
-        row2 = [bothrows[1]]
-        yield lock
         try:
-          InitTab(gdoc, "sheet1", row1, row2)
+          bothrows = sheetinitializer(globs.PIPMODE)
+          row1 = bothrows[0]
+          row2 = [bothrows[1]]
+          yield lock
+          try:
+            InitTab(gdoc, "sheet1", row1, row2)
+          except:
+            pass
+          yield unlock
         except:
-          pass
-        yield unlock
+          yme = "Action for %s not defined." % globs.PIPMODE
+          yield yme, "Action not defined.", "", ""
 
+      yield "Checking Tabs: Sheet 1", "Then we check for tabs...", "", ""
       # How To Tab
       yield ", How To", "", "", ""
       headers = ['Expand column. Hey, you did it! Good job so far.', 'Welcome to Pipulate!']
