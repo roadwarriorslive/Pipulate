@@ -318,16 +318,12 @@ def Pipulate(username='', password='', dockey=''):
         # Questionmark replacement tab
         initSheet1 = True
       if initSheet1:
-        # We know we have sheet one available. Report menu selection.
-        # gotcha(globs.PIPMODE)
-        headers = ['URL',  'Crawl']
-        crawlsite = 'http://paulrobesonfreedomschool.org/'
-        if globs.PIPURL:
-          crawlsite = globs.PIPURL
-        initrows = [[crawlsite, '?']]
+        bothrows = sheetinitializer(globs.PIPMODE)
+        row1 = bothrows[0]
+        row2 = [bothrows[1]]
         yield lock
         try:
-          InitTab(gdoc, "sheet1", headers, initrows)
+          InitTab(gdoc, "sheet1", row1, row2)
         except:
           pass
         yield unlock
@@ -859,7 +855,6 @@ def Pipulate(username='', password='', dockey=''):
               break
       out("Question Mark Replacement.", '2', '-')
 
-
     else: #No session object found
       yield 'Please Login to Google', "", "", ""
     yield "Pipulation complete.&nbsp;&nbsp;", "Congratulations, pipulation complete! Now, do a little victory dance.", "", ""
@@ -1185,7 +1180,6 @@ def convertisotime(timestamp):
 
 def timestamp():
   i = datetime.datetime.now()
-  #i = i - datetime.timedelta(hours=4)
   return i.strftime("%m/%d/%Y %H:%M:%S") 
 
 def datestamp():

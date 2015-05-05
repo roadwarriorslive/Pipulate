@@ -96,7 +96,7 @@ def scrapes():
 
 def crawl(url):
   """Grab HTML from a URL, parse links and add a row per link to spreadsheet."""
-  fcols = ['Depth', 'Title', 'Description', 'PageRank', 'Mobile', 'mCanonical', 'Mobilicious']
+  fcols = ['Depth', 'Title', 'Description', 'PageRank']
   therange = 'B1:%s2' % globs.letter[len(fcols)+1]
   CellList = globs.sheet.range(therange)
   vals = fcols + ['0'] + ['?']*(len(fcols)-1)
@@ -116,7 +116,7 @@ def crawl(url):
   links = list(links)
   y = len(links)
   q = ['']*y
-  linkslist = zip(links,['1']*y,q,q,q,q,q,q)
+  linkslist = zip(links,['1']*y,q,q,q)
   InsertRows(globs.sheet, linkslist, 2)
   return "0"
 
@@ -380,9 +380,10 @@ def mobilicious(url, mobile, mcanonical):
 # common contexts, and the menus that should be accordingly presented.
 
 def keymaster(url, keywords=False):
+  """ For any given URL, return a what-to-do-next menu-key."""
   key = ''
   if url:
-    if keywords:
+    if keywords and keywords.strip() != '':
       key = 'keywords'
     elif url == 'sheets':
       key = 'sheets'
@@ -435,8 +436,9 @@ def keymaster(url, keywords=False):
   return menu
 
 def gatekeeper(keymaster):
+  """ For any given menu-key, return the actual menu that should appear."""
   mdict = {}
-  mdict['sheets'] = ['Relace Question Marks']
+  mdict['sheets'] = ['Replace Question Marks']
   mdict['keywords'] = ['Record Keywords']
   mdict['seo'] = ['Small SEO Crawl', 'Small Social Crawl', 'Small Open Graph Crawl', 'Small Mobile Crawl']
   mdict['google web search'] = ['Google web search', 'Some', 'Google', 'Site']
@@ -459,6 +461,8 @@ def gatekeeper(keymaster):
   except:
     return ['No Context Found']
 
-def guardianofforever(williamriker):
-  thomasriker = williamriker
-  return thomasriker
+def sheetinitializer(sheet1key):
+  """ For any given menu-selection, return lists to become row 1 and 2."""
+  tworows = {}
+  tworows['Small SEO Crawl'] = (['url', 'crawl'], [globs.PIPURL, '?'])
+  return tworows[sheet1key]
