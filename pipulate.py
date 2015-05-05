@@ -99,8 +99,6 @@ def main():                                               # visiting app's homep
             session['u'] = globs.PIPURL
   stext = ''
   if request.method == 'POST':
-    # if form.mode.data and form.mode.data in behaviors.keys():
-    #  globs.PIPURL = behaviors[form.mode.data](gsp)     # Setup a new Spreadsheet
     if form.pipurl.data:
       globs.PIPURL = form.pipurl.data
       if form.options.data:
@@ -303,8 +301,8 @@ def Pipulate(username='', password='', dockey=''):
       yield unlock
       out("Google Spreadsheet successfully opened.")
 
-      if globs.keywords:
-        gotcha(globs.keywords)
+      #if globs.keywords:
+      #  gotcha(globs.keywords)
 
       #           _                       _               _     _ 
       #  ___  ___| |_   _   _ _ __    ___| |__   ___  ___| |_  / |

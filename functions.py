@@ -439,7 +439,7 @@ def gatekeeper(keymaster):
   """ For any given menu-key, return the actual menu that should appear."""
   mdict = {}
   mdict['sheets'] = ['Replace Question Marks']
-  mdict['keywords'] = ['Record Keywords']
+  mdict['keywords'] = ['Collect Keywords']
   mdict['seo'] = ['Small SEO Crawl', 'Small Social Crawl', 'Small Open Graph Crawl', 'Small Mobile Crawl']
   mdict['google web search'] = ['Google web search', 'Some', 'Google', 'Site']
   mdict['google traditional search'] = ['Record Search Results']
@@ -463,6 +463,6 @@ def gatekeeper(keymaster):
 
 def sheetinitializer(sheet1key):
   """ For any given menu-selection, return lists to become row 1 and 2."""
-  tworows = {}
-  tworows['Small SEO Crawl'] = (['url', 'crawl'], [globs.PIPURL, '?'])
-  return tworows[sheet1key]
+  sinit = {}
+  sinit['Small SEO Crawl'] = (['url', 'crawl'], [globs.PIPURL, '?'])
+  return sinit[sheet1key]
