@@ -305,13 +305,19 @@ def Pipulate(username='', password='', dockey=''):
       if globs.keywords:
         # Config Tab
         yield "Keyword Collection Detected", "Making Keywords Tab If Needed", "", ""
-        headers = ['Source', 'Keyword']
+        headers = ['Keyword', 'Source']
         yield lock
         try:
-          InitTab(gdoc, 'Keywords', headers, [[]])
+          InitTab(gdoc, 'Keywords', headers, [])
         except:
           pass
         yield unlock
+        ksheet = gdoc.worksheet("Keywords")
+        kcount = ksheet.row_count - 1
+        try:
+          InsertRows(ksheet, [[globs.keywords, globs.PIPURL]], kcount)
+        except:
+          pass
 
       #           _                       _               _     _ 
       #  ___  ___| |_   _   _ _ __    ___| |__   ___  ___| |_  / |
