@@ -105,6 +105,7 @@ def main():                                               # visiting app's homep
         globs.PIPMODE = form.options.data
       if form.magicbox.data:
         globs.keywords = form.magicbox.data
+        form.magicbox.data = None
       STREAMIT = stream_with_context(Pipulate())
     else:
       flash('Please enter a URL to Pipulate.')
@@ -301,8 +302,16 @@ def Pipulate(username='', password='', dockey=''):
       yield unlock
       out("Google Spreadsheet successfully opened.")
 
-      #if globs.keywords:
-      #  gotcha(globs.keywords)
+      if globs.keywords:
+        # Config Tab
+        yield "Keyword Collection Detected", "Making Keywords Tab If Needed", "", ""
+        headers = ['Source', 'Keyword']
+        yield lock
+        try:
+          InitTab(gdoc, 'Keywords', headers, [[]])
+        except:
+          pass
+        yield unlock
 
       #           _                       _               _     _ 
       #  ___  ___| |_   _   _ _ __    ___| |__   ___  ___| |_  / |
