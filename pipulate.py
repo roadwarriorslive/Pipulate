@@ -103,7 +103,7 @@ def main():                                               # visiting app's homep
       globs.PIPURL = form.pipurl.data
       if form.options.data:
         globs.PIPMODE = form.options.data
-      if form.magicbox:
+      if form.magicbox.data:
         globs.keywords = form.magicbox.data
       STREAMIT = stream_with_context(Pipulate())
     else:
