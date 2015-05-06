@@ -72,7 +72,7 @@ def scrapes():
   """Define the functions available and modifiable from the Scrapers tab."""
   s = []
   s.append(['title',       'xpath', "//title/text()"])
-  s.append(['description', 'xpath', "//meta[@name='description']/@content"])
+  s.append(['description', 'xpath', "//meta[translate(@name, 'ABCDEFGHJIKLMNOPQRSTUVWXYZ', 'abcdefghjiklmnopqrstuvwxyz')='description']/@content"])
   s.append(['canonical',   'xpath', "/html/head/link[@rel = 'canonical']/@href"])
   s.append(['mobile',      'xpath', "/html/head/link[@media = 'only screen and (max-width: 640px)']/@href"])
   s.append(['tweettotal',  'xpath', "//span[.='Tweets']/following-sibling::span/text()"])

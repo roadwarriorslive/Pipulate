@@ -804,14 +804,14 @@ def Pipulate(username='', password='', dockey=''):
                             searchme = lxml.html.fromstring(html)
                             match = searchme.xpath(spattern)
                             if match:
-                              newrow[coldex] = match[0]
+                              newrow[coldex] = match[0].strip()
                             else:
                               newrow[coldex] = None
                           elif stype.lower() == 'regex':
                             match = re.search(spattern, html, re.S | re.I)
                             if match:
                               if "scrape" in match.groupdict().keys():
-                                newrow[coldex] = match.group("scrape")
+                                newrow[coldex] = match.group("scrape").strip()
                               else:
                                 newrow[coldex] = None
                             else:
