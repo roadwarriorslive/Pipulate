@@ -113,15 +113,20 @@ def main():                                               # visiting app's homep
     if request.args and 's' in request.args:
       form.magicbox.data = request.args.get('s')
       stext = request.args.get('s')
+    elif session and 's' in session:
+      form.magicbox.data = session['s']
+      stext = session['s']
     if request.args and "access_token" in request.args:
       session['oa2'] = request.args.get("access_token")
       session['loggedin'] = "1"
       session['i'] -= 1 #Don't skip a message, just becuse I redirect.
       if globs.PCOM:
         LogUser(session['oa2'])
-      if 'u' in session :
-        out("Redirecting with a filed-in URL")
-        out("EXITING MAIN FUNCTION REDIRECT", "0", '-')
+      if 'u' in session and 's' in session:
+        out("EXITING MAIN FUNCTION REDIRECT WITH URL AND TEXT", "0", '-')
+        return redirect(url_for('main', u=session['u'], s=session['s']))
+      elif 'u' in session:
+        out("EXITING MAIN FUNCTION REDIRECT WITH URL", "0", '-')
         return redirect(url_for('main', u=session['u']))
       else:
         out("Redirecting, no URL known")
@@ -137,6 +142,8 @@ def main():                                               # visiting app's homep
         session.pop('loggedin', None)
         #flash('Logged out from Google.')
     elif request.args:
+      if 's' in request.args:
+        session['s'] = request.args.get('s')
       if 'u' in request.args:
         form.pipurl.data = request.args.get('u')
         session['u'] = request.args.get('u')
@@ -1108,7 +1115,7 @@ def add_weeks(sourcedate, weeks):
 def InitTab(gdoc2, tabname, headerlist, listoflists=[]):
   initsheet = None
   isSheet1 = False
-  for x in range(4): #not too many times here
+  for x in range(3): #not too many times here (always tried for new tabs too)
     if tabname == "sheet1":
       isSheet1 = True
       try:
