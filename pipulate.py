@@ -104,7 +104,7 @@ def main():                                               # visiting app's homep
       if form.options.data:
         globs.PIPMODE = form.options.data
       if form.magicbox.data:
-        globs.keywords = form.magicbox.data
+        globs.KEYWORDS = form.magicbox.data
         form.magicbox.data = None
       STREAMIT = stream_with_context(Pipulate())
     else:
@@ -302,7 +302,7 @@ def Pipulate(username='', password='', dockey=''):
       yield unlock
       out("Google Spreadsheet successfully opened.")
 
-      if globs.keywords:
+      if globs.KEYWORDS:
         # Config Tab
         yield "Keyword Collection Detected", "Making Keywords Tab If Needed", "", ""
         headers = ['Keyword', 'Source']
@@ -315,7 +315,7 @@ def Pipulate(username='', password='', dockey=''):
         ksheet = gdoc.worksheet("Keywords")
         kcount = ksheet.row_count - 1
         try:
-          InsertRows(ksheet, [[globs.keywords, globs.PIPURL]], kcount)
+          InsertRows(ksheet, [[globs.KEYWORDS, globs.PIPURL]], kcount)
         except:
           pass
 
@@ -907,7 +907,7 @@ def url_root(url):
   return "%s://%s%s" % (parsed[0], parsed[1], parsed[2])
 
 def getLoginlink():
-  redir = "http://pipulate.com"
+  redir = globs.CANONICAL
   if 'Host' in request.headers:
     redir = 'http://'+request.headers['Host']
   if request.args and 'u' in request.args:

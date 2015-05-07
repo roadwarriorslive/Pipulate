@@ -1,9 +1,10 @@
-PCOM = False
-DBUG = True
-PIPURL = ''
-PIPMODE = ''
+CANONICAL = "http://pipulate.com" # Default for Login Button
+PCOM = False                      # Turns True if pipulate in hostname. Tracks usage.
+DBUG = True                       # Turns on and off verbose console output.
+PIPURL = ''                       # Constant containing URL from bookmarklet click.
+PIPMODE = ''                      # Constant containing menu selection upon bookmarklet click.
+KEYWORDS = ''                     # Constant containing selected text when bookmarklet clicked.
 GBAD = "Timed-out on Google Data API. Sorry, try again."
-keywords = ''
 numrows = 0
 config = {}
 html = ''
