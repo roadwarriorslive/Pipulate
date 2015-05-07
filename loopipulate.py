@@ -1,3 +1,14 @@
+#   ____                   ____  _     _           
+#  / ___|_ __ ___  _ __   / ___|| |__ (_)_ __ ___  
+# | |   | '__/ _ \| '_ \  \___ \| '_ \| | '_ ` _ \ 
+# | |___| | | (_) | | | |  ___) | | | | | | | | | |
+#  \____|_|  \___/|_| |_| |____/|_| |_|_|_| |_| |_|
+#                                                  
+#   It'd be a cryin' shame to tie timing things
+#                 To schedule-APIs
+#     When a mere cron shim is much more sane
+#            For tasks that death defies!
+
 from pipulate import *
 
 def Scheduler(filename):

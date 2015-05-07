@@ -1,3 +1,15 @@
+#   ____                                        __  __           _       _      
+#  / ___|___  _ __ ___  _ __ ___   ___  _ __   |  \/  | ___   __| |_   _| | ___ 
+# | |   / _ \| '_ ` _ \| '_ ` _ \ / _ \| '_ \  | |\/| |/ _ \ / _` | | | | |/ _ \
+# | |__| (_) | | | | | | | | | | | (_) | | | | | |  | | (_) | (_| | |_| | |  __/
+#  \____\___/|_| |_| |_|_| |_| |_|\___/|_| |_| |_|  |_|\___/ \__,_|\__,_|_|\___|
+#                                                                               
+#                         In every job that must be done,
+#                           There is an element of fun.
+#                   You find the fun and snap, the job's a game
+#                          And every task you undertake
+#                            Becomes a piece of cake...
+
 import globs
 
 def out(msg, symbol='', dent=''):
