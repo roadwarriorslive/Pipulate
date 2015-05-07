@@ -1,18 +1,30 @@
+#   ____ _       _           _  __     __         _       _     _           
+#  / ___| | ___ | |__   __ _| | \ \   / /_ _ _ __(_) __ _| |__ | | ___  ___ 
+# | |  _| |/ _ \| '_ \ / _` | |  \ \ / / _` | '__| |/ _` | '_ \| |/ _ \/ __|
+# | |_| | | (_) | |_) | (_| | |   \ V / (_| | |  | | (_| | |_) | |  __/\__ \
+#  \____|_|\___/|_.__/ \__,_|_|    \_/ \__,_|_|  |_|\__,_|_.__/|_|\___||___/
+#                                                                           
+#                             Welcome to the globals
+#                           You can reach them any way
+#                        But to do so, use a globs prefix
+#                         It's the price you have to pay
+
+PCOM = False  # Turns True if pipulate in hostname. Tracks usage.
+DBUG = True   # Turns on and off verbose console output.
+PIPURL = ''   # Constant containing URL from bookmarklet click.
+PIPMODE = ''  # Constant containing menu selection upon bookmarklet click.
+KEYWORDS = '' # Constant containing selected text when bookmarklet clicked.
+numrows = 0   # Tracks latest number of rows in sheet1 (for InsertRows)
+config = {}   # In-memory copy of everything from Config tab
+html = ''     # Avoids re-fetching HTML multiple times for same row.
+hobj = ''     # Original Requests object for row's HTML with response headers.
+row1 = []     # Copy of contents of sheet1, row 1 for many uses.
+nest = ''     # Controls nested indents of debug output.
+sheet = ''    # Makes sheet1 worksheet object accessible to user functions.
 CANONICAL = "http://pipulate.com" # Default for Login Button
-PCOM = False                      # Turns True if pipulate in hostname. Tracks usage.
-DBUG = True                       # Turns on and off verbose console output.
-PIPURL = ''                       # Constant containing URL from bookmarklet click.
-PIPMODE = ''                      # Constant containing menu selection upon bookmarklet click.
-KEYWORDS = ''                     # Constant containing selected text when bookmarklet clicked.
-GBAD = "Timed-out on Google Data API. Sorry, try again."
-numrows = 0
-config = {}
-html = ''
-hobj = ''
-row1 = []
-nest = ''
-letter = {1:'A',2:'B',3:'C',4:'D',5:'E',6:'F',7:'G',8:'H',9:'I',10:'J',11:'K'}
-sheet = ''
+GBAD = "Timed-out on Google Data API. Sorry, try again." # Default message for GDocs unreachable.
+letter = {1:'A',2:'B',3:'C',4:'D',5:'E',6:'F',7:'G',8:'H',9:'I',10:'J',11:'K'} # Spreadsheet-style mapping
+# gethtml will not do a head request for Content-Type on URLs with these extensions.
 texttypes = ['.asmx', '.asp', '.aspx', '.atom', '.cfm', '.cgi', '.css', '.htm',
   '.htm', '.html', '.js', '.json', '.jsp', '.php', '.php3', '.php4', '.php5',
   '.rss', '.shtm', '.shtml', '.xht', '.xhtm', '.xhtml', '.xml']

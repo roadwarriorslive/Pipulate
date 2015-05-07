@@ -318,7 +318,6 @@ def Pipulate(username='', password='', dockey=''):
           InsertRows(ksheet, [[globs.KEYWORDS, globs.PIPURL]], kcount)
         except:
           pass
-
       #           _                       _               _     _ 
       #  ___  ___| |_   _   _ _ __    ___| |__   ___  ___| |_  / |
       # / __|/ _ \ __| | | | | '_ \  / __| '_ \ / _ \/ _ \ __| | |
