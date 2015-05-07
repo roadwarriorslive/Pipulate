@@ -397,34 +397,25 @@ def keymaster(url, keywords=False):
       query = urlparts[4]
       if apexdom == 'google.com':
         if path == '/webhp' or query == 'gws_rd=ssl':
-          key = 'google web search'
+          key = 'gsearch'
         elif path == '/search':
-          key = 'google traditional search'
+          key = 'googleold'
         else:
-          key = 'google other'
+          key = 'googleother'
       elif apexdom == 'youtube.com':
         if path[:6] == '/user/':
-          key = 'youtube channel'
+          key = 'ytchannel'
         elif path[:6] == '/watch':
-          key = 'youtube video'
+          key = 'ytvideo'
         else:
-          key = 'youtube other'
+          key = 'ytother'
       elif apexdom == 'twitter.com':
         if path == '/search':
-          key = 'twitter search'
+          key = 'twsearch'
         elif path:
-          key = 'twitter profile'
+          key = 'twprofile'
         else:
-          key = 'twitter other'
-      elif apexdom == 'facebook.com':
-        key = 'facebook'
-      elif apexdom == 'github.com':
-        if path.count('/') == 1 and len(path) > 1:
-          key = 'github profile'
-        elif path.count('/') == 2:
-          key = 'github repository'
-        else:
-          key = "github other"
+          key = 'twother'
       else:
         key = 'seo'
   else:
@@ -441,8 +432,15 @@ def nn(key):
   nd['socialcrawl'] = '1-Page Social Crawl'
   nd['ogcrawl'] = '1-Page Open Graph Crawl'
   nd['mobilecrawl'] = '1-Page Mobile Crawl'
-  nd['collectkws'] = 'Collect Keywords'
-  nd['learn'] = "Learn More"
+  nd['keywords'] = 'Collect Keywords'
+  nd['learn'] = "Learn To Pipulate"
+  nd['search'] = "Capture Search Results"
+  nd['qm'] = "Do Question Marks"
+  nd['ytsubs'] = "Get Subscriber Count"
+  nd['ytviews'] = "Get View Count"
+  nd['ytvids'] = "Get Video Links"
+  nd['twsearch'] = "Capture Twitter Search"
+  nd['twstats'] = "Get Profile Stats"
   return nd[key]
 
 def gatekeeper(keymaster):
@@ -450,35 +448,45 @@ def gatekeeper(keymaster):
   mdict = {}
 
   # Menu when the bookmarklet is clicked from inside Google Spreadsheets.
-  mdict['sheets'] = ["Do Question Marks", 'Expand Your Mind', 'Collect Keywords']
-  mdict['default'] = mdict['sheets']
-  mdict['empty'] = mdict['sheets']
+  mdict['sheets'] =       [nn('qm'), 
+                          nn('keywords'), 
+                          nn("learn")]
+  mdict['default'] =      mdict['sheets']
+  mdict['empty'] =        mdict['sheets']
 
   # Menu when page text is highlighte on bookmarklet click.
-  mdict['keywords'] = ['Collect Keywords']
+  mdict['keywords'] =     [nn('keywords')]
 
   # Menu for fall-through menu on bookmarklet when no sites are recognized.
-  mdict['seo'] = [nn('seocrawl'), 
-                  nn('socialcrawl'), 
-                  nn('ogcrawl'), 
-                  nn('mobilecrawl'),
-                  nn('collectkws'),
-                  nn('learn')]
+  mdict['seo'] =          [nn('seocrawl'), 
+                          nn('socialcrawl'), 
+                          nn('ogcrawl'), 
+                          nn('mobilecrawl'),
+                          nn('keywords'),
+                          nn('learn')]
 
   # Menu when clicked on a Google search result page.
-  mdict['google web search'] = ['Capture Search']
-  mdict['google traditional search'] = mdict['google web search']
-  mdict['google other'] = mdict['google web search']
+  mdict['gsearch'] =      [nn('search'), 
+                          nn('keywords'), 
+                          nn("learn")]
+  mdict['googleold'] =    mdict['gsearch']
+  mdict['googleother'] =  mdict['gsearch']
 
   # Menu for the various things you might want to do in YouTube.
-  mdict['youtube channel'] = ['Get Subscriber Count', 'Get Views Count', 'Grab Video Links']
-  mdict['youtube video'] = ['Get Video View Count', 'Grab Comments']
-  mdict['youtube other'] = ['Other YouTube']
+  mdict['ytchannel'] =    [nn('ytsubs'),
+                          nn('ytviews'),
+                          nn('ytvids'),
+                          nn('learn')]
+  mdict['ytvideo'] =      [nn('ytvids'), 
+                          nn('learn')]
+  mdict['ytother'] =      mdict['ytvideo']
 
   # Menu for the various things you  might want to do in Twitter.  
-  mdict['twitter search'] = ['Capture Twitter Search']
-  mdict['twitter profile'] = ['Get Profile Stats']
-  mdict['twitter other'] = ['Other Twitter', 'Twitter', 'Site']
+  mdict['twsearch'] =     [nn('twsearch'), 
+                          nn('learn')] 
+  mdict['twprofile'] =    [nn('twstats'),
+                          nn('learn')]
+  mdict['twother'] =      mdict['twprofile'] 
 
   try:
     return mdict[keymaster]
