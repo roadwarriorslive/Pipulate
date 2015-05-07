@@ -310,19 +310,29 @@ def Pipulate(username='', password='', dockey=''):
       out("Google Spreadsheet successfully opened.")
 
       if globs.KEYWORDS:
-        # Config Tab
+        # Keywords Tab
         yield "Keyword Collection Detected", "Making Keywords Tab If Needed", "", ""
         headers = ['Keyword', 'Source']
         yield lock
+        offset = 0
+        newTab = False
         try:
-          InitTab(gdoc, 'Keywords', headers, [])
+          newTab = InitTab(gdoc, 'Keywords', headers)
         except:
           pass
+        if newTab:
+          offset = -1
         yield unlock
         ksheet = gdoc.worksheet("Keywords")
-        kcount = ksheet.row_count - 1
+        kcount = ksheet.row_count + offset
+        kwlist = globs.KEYWORDS.split(',')
+        kwrows = []
+        yme = "Collecting %s keywords." % len(kwlist)
+        yield yme, "Collecting keywords", "", ""
+        for kw in kwlist:
+          kwrows.append([kw.strip(), globs.PIPURL])
         try:
-          InsertRows(ksheet, [[globs.KEYWORDS, globs.PIPURL]], kcount)
+          InsertRows(ksheet, kwrows, kcount)
         except:
           pass
       #           _                       _               _     _ 
@@ -1122,15 +1132,15 @@ def InitTab(gdoc2, tabname, headerlist, listoflists=[]):
         initsheet = gdoc2.sheet1
       except:
         out("Retrying connecting to Sheet 1")
-        time.sleep(2) 
+        time.sleep(1) 
     else:
       try:
         initsheet = gdoc2.worksheet(tabname)
         out("%s Tab exists." % tabname)
         break
       except:
-        out("Retrying make %s Tab %s of %s" % (tabname, x, 4))
-        time.sleep(2) #not too long here
+        out("Retrying make %s Tab %s of %s" % (tabname, x, 3))
+        time.sleep(1) #not too long here
 
   if isSheet1 or not initsheet:
     numcols = len(headerlist)
@@ -1168,6 +1178,9 @@ def InitTab(gdoc2, tabname, headerlist, listoflists=[]):
         time.sleep(5)
     if stop:
       Stop()
+    return True
+  else:
+    return False
 
 def questionmark(oldrow, rowdex, coldex):
   if rowdex != 1:

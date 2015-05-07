@@ -438,7 +438,7 @@ def keymaster(url, keywords=False):
 def gatekeeper(keymaster):
   """ For any given menu-key, return the actual menu that should appear."""
   mdict = {}
-  mdict['sheets'] = ['Replace Question Marks']
+  mdict['sheets'] = ['Replace Question Marks', 'Collect Keywords']
   mdict['keywords'] = ['Collect Keywords']
   mdict['seo'] = ['Small SEO Crawl', 'Small Social Crawl', 'Small Open Graph Crawl', 'Small Mobile Crawl']
   mdict['google web search'] = ['Google web search', 'Some', 'Google', 'Site']
@@ -454,7 +454,7 @@ def gatekeeper(keymaster):
   mdict['github profile'] = ['Get User Stats']
   mdict['github repository'] = ['Get Repository Stats']
   mdict['github other'] = ['Github Other']
-  mdict['default'] = ['Replace Question Marks', 'Learn About Pipulate']
+  mdict['default'] = ['Replace Question Marks', 'Learn About Pipulate', 'Collect Keywords']
   mdict['empty'] = ['No URL found']
   try:
     return mdict[keymaster]
