@@ -435,6 +435,16 @@ def keymaster(url, keywords=False):
     menu += "<option>%s</options>\n" % option
   return menu
 
+def nn(key):
+  nd = {}
+  nd['seocrawl'] = "1-Page SEO Crawl"
+  nd['socialcrawl'] = '1-Page Social Crawl'
+  nd['ogcrawl'] = '1-Page Open Graph Crawl'
+  nd['mobilecrawl'] = '1-Page Mobile Crawl'
+  nd['collectkws'] = 'Collect Keywords'
+  nd['learn'] = "Learn More"
+  return nd[key]
+
 def gatekeeper(keymaster):
   """ For any given menu-key, return the actual menu that should appear."""
   mdict = {}
@@ -442,32 +452,38 @@ def gatekeeper(keymaster):
   # Menu when the bookmarklet is clicked from inside Google Spreadsheets.
   mdict['sheets'] = ["Do Question Marks", 'Expand Your Mind', 'Collect Keywords']
   mdict['default'] = mdict['sheets']
+  mdict['empty'] = mdict['sheets']
 
   # Menu when page text is highlighte on bookmarklet click.
   mdict['keywords'] = ['Collect Keywords']
 
-  # Fall-through menu on bookmarklet when no sites are recognized.
-  mdict['seo'] = ['Small SEO Crawl', 'Small Social Crawl', 'Small Open Graph Crawl', 'Small Mobile Crawl']
+  # Menu for fall-through menu on bookmarklet when no sites are recognized.
+  mdict['seo'] = [nn('seocrawl'), 
+                  nn('socialcrawl'), 
+                  nn('ogcrawl'), 
+                  nn('mobilecrawl'),
+                  nn('collectkws'),
+                  nn('learn')]
 
+  # Menu when clicked on a Google search result page.
+  mdict['google web search'] = ['Capture Search']
+  mdict['google traditional search'] = mdict['google web search']
+  mdict['google other'] = mdict['google web search']
 
-  mdict['google web search'] = ['Google web search', 'Some', 'Google', 'Site']
-  mdict['google traditional search'] = ['Record Search Results']
-  mdict['google other'] = ['Some', 'Google', 'Site']
+  # Menu for the various things you might want to do in YouTube.
   mdict['youtube channel'] = ['Get Subscriber Count', 'Get Views Count', 'Grab Video Links']
   mdict['youtube video'] = ['Get Video View Count', 'Grab Comments']
   mdict['youtube other'] = ['Other YouTube']
+
+  # Menu for the various things you  might want to do in Twitter.  
   mdict['twitter search'] = ['Capture Twitter Search']
   mdict['twitter profile'] = ['Get Profile Stats']
   mdict['twitter other'] = ['Other Twitter', 'Twitter', 'Site']
-  mdict['facebook'] = ['Something for Facebook']
-  mdict['github profile'] = ['Get User Stats']
-  mdict['github repository'] = ['Get Repository Stats']
-  mdict['github other'] = ['Github Other']
-  mdict['empty'] = ['No URL found']
+
   try:
     return mdict[keymaster]
   except:
-    return ['No Context Found']
+    return mdict['seo']
 
 def sheetinitializer(sheet1key):
   """ For any given menu-selection, return lists to become row 1 and 2."""
