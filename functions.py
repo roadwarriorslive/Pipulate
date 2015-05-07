@@ -438,9 +438,18 @@ def keymaster(url, keywords=False):
 def gatekeeper(keymaster):
   """ For any given menu-key, return the actual menu that should appear."""
   mdict = {}
-  mdict['sheets'] = ['Replace Question Marks', 'Collect Keywords']
+
+  # Menu when the bookmarklet is clicked from inside Google Spreadsheets.
+  mdict['sheets'] = ["Do Question Marks", 'Expand Your Mind', 'Collect Keywords']
+  mdict['default'] = mdict['sheets']
+
+  # Menu when page text is highlighte on bookmarklet click.
   mdict['keywords'] = ['Collect Keywords']
+
+  # Fall-through menu on bookmarklet when no sites are recognized.
   mdict['seo'] = ['Small SEO Crawl', 'Small Social Crawl', 'Small Open Graph Crawl', 'Small Mobile Crawl']
+
+
   mdict['google web search'] = ['Google web search', 'Some', 'Google', 'Site']
   mdict['google traditional search'] = ['Record Search Results']
   mdict['google other'] = ['Some', 'Google', 'Site']
@@ -454,7 +463,6 @@ def gatekeeper(keymaster):
   mdict['github profile'] = ['Get User Stats']
   mdict['github repository'] = ['Get Repository Stats']
   mdict['github other'] = ['Github Other']
-  mdict['default'] = ['Replace Question Marks', 'Learn About Pipulate', 'Collect Keywords']
   mdict['empty'] = ['No URL found']
   try:
     return mdict[keymaster]
