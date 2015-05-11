@@ -428,6 +428,7 @@ def keymaster(url, keywords=False):
 
 def nn(key):
   nd = {}
+  nd['clear'] = "Clear Sheet 1"
   nd['seocrawl'] = "1-Page SEO Crawl"
   nd['socialcrawl'] = '1-Page Social Crawl'
   nd['ogcrawl'] = '1-Page Open Graph Crawl'
@@ -449,9 +450,12 @@ def gatekeeper(keymaster):
 
   # Menu when the bookmarklet is clicked from inside Google Spreadsheets.
   mdict['sheets'] =       [nn('qm'), 
-                          nn('keywords'), 
+                          nn('keywords'),
+                          nn('clear'),
                           nn("learn")]
+
   mdict['default'] =      mdict['sheets']
+  
   mdict['empty'] =        mdict['sheets']
 
   # Menu when page text is highlighte on bookmarklet click.
@@ -463,29 +467,40 @@ def gatekeeper(keymaster):
                           nn('ogcrawl'), 
                           nn('mobilecrawl'),
                           nn('keywords'),
+                          nn('clear'),
                           nn('learn')]
 
   # Menu when clicked on a Google search result page.
   mdict['gsearch'] =      [nn('search'), 
                           nn('keywords'), 
+                          nn('clear'),
                           nn("learn")]
+
   mdict['googleold'] =    mdict['gsearch']
+
   mdict['googleother'] =  mdict['gsearch']
 
   # Menu for the various things you might want to do in YouTube.
   mdict['ytchannel'] =    [nn('ytsubs'),
                           nn('ytviews'),
                           nn('ytvids'),
+                          nn('clear'),
                           nn('learn')]
-  mdict['ytvideo'] =      [nn('ytvids'), 
+
+  mdict['ytvideo'] =      [nn('ytvids'),
+                          nn('clear'),
                           nn('learn')]
+
   mdict['ytother'] =      mdict['ytvideo']
 
   # Menu for the various things you  might want to do in Twitter.  
   mdict['twsearch'] =     [nn('twsearch'), 
+                          nn('clear'),
                           nn('learn')] 
+
   mdict['twprofile'] =    [nn('twstats'),
                           nn('learn')]
+
   mdict['twother'] =      mdict['twprofile'] 
 
   try:
