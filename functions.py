@@ -450,8 +450,8 @@ def gatekeeper(keymaster):
 
   # Menu when the bookmarklet is clicked from inside Google Spreadsheets.
   mdict['sheets'] =       [nn('qm'), 
-                          nn('keywords'),
                           nn('clear'),
+                          nn('keywords'),
                           nn("learn")]
 
   mdict['default'] =      mdict['sheets']
@@ -463,17 +463,17 @@ def gatekeeper(keymaster):
 
   # Menu for fall-through menu on bookmarklet when no sites are recognized.
   mdict['seo'] =          [nn('seocrawl'), 
+                          nn('clear'),
                           nn('socialcrawl'), 
                           nn('ogcrawl'), 
                           nn('mobilecrawl'),
                           nn('keywords'),
-                          nn('clear'),
                           nn('learn')]
 
   # Menu when clicked on a Google search result page.
   mdict['gsearch'] =      [nn('search'), 
-                          nn('keywords'), 
                           nn('clear'),
+                          nn('keywords'), 
                           nn("learn")]
 
   mdict['googleold'] =    mdict['gsearch']
@@ -482,9 +482,9 @@ def gatekeeper(keymaster):
 
   # Menu for the various things you might want to do in YouTube.
   mdict['ytchannel'] =    [nn('ytsubs'),
+                          nn('clear'),
                           nn('ytviews'),
                           nn('ytvids'),
-                          nn('clear'),
                           nn('learn')]
 
   mdict['ytvideo'] =      [nn('ytvids'),
@@ -499,6 +499,7 @@ def gatekeeper(keymaster):
                           nn('learn')] 
 
   mdict['twprofile'] =    [nn('twstats'),
+                          nn('clear'),
                           nn('learn')]
 
   mdict['twother'] =      mdict['twprofile'] 
@@ -511,5 +512,5 @@ def gatekeeper(keymaster):
 def sheetinitializer(sheet1key):
   """ For any given menu-selection, return lists to become row 1 and 2."""
   sinit = {}
-  sinit['Small SEO Crawl'] = (['url', 'crawl'], [globs.PIPURL, '?'])
+  sinit['1-Page SEO Crawl'] = (['url', 'crawl'], [globs.PIPURL, '?'])
   return sinit[sheet1key]

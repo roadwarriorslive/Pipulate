@@ -344,6 +344,7 @@ def Pipulate(username='', password='', dockey=''):
       # This is where special behavior like crawls get wedged in
       anything = re.compile('.+')
       initSheet1 = False
+      cell = None
       try:
         cell = gdoc.sheet1.find(anything)
       except gspread.exceptions.CellNotFound:
@@ -363,6 +364,17 @@ def Pipulate(username='', password='', dockey=''):
         except:
           yme = "Action for %s not defined." % globs.PIPMODE
           yield yme, "Action not defined.", "", ""
+      else:
+        out("Clearing Tab 1...")
+        anything = re.compile('.+')
+        try:
+          CellList = gdoc.sheet1.findall(anything)
+          for cell in CellList:
+            cell.value = ''
+          result = gdoc.sheet1.update_cells(CellList)
+        except:
+          out("Could not clear tap one.")
+          Stop()
 
       yield "Checking Tabs: Sheet 1", "Then we check for tabs...", "", ""
       # How To Tab
