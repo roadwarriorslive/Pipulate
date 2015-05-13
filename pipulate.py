@@ -368,10 +368,11 @@ def Pipulate(username='', password='', dockey=''):
         out("Clearing Tab 1...")
         anything = re.compile('.+')
         try:
-          CellList = gdoc.sheet1.findall(anything)
-          for cell in CellList:
-            cell.value = ''
-          result = gdoc.sheet1.update_cells(CellList)
+          # CellList = gdoc.sheet1.findall(anything)
+          # for cell in CellList:
+          #   cell.value = ''
+          # result = gdoc.sheet1.update_cells(CellList)
+          pass
         except:
           out("Could not clear tap one.")
           Stop()
