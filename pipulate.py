@@ -366,7 +366,7 @@ def Pipulate(username='', password='', dockey=''):
           yield yme, "Action not defined.", "", ""
       else:
         anything = re.compile('.+')
-        if globs.PIPMODE == 'Clear Sheet 1':
+        if globs.PIPMODE == 'clear':
           out("Clearing Tab 1...")
           yield "Clearing Sheet 1. Use revision history if a mistake.", "Clearing Sheet 1", "", ""
           try:

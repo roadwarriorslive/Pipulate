@@ -423,7 +423,7 @@ def keymaster(url, keywords=False):
   optlist = gatekeeper(key)
   menu = ''
   for option in optlist:
-    menu += "<option>%s</options>\n" % option
+    menu += '<option value="%s">%s</options>\n' % (globs.invmenu[option], option)
   return menu
 
 def gatekeeper(keymaster):
@@ -495,5 +495,5 @@ def gatekeeper(keymaster):
 def sheetinitializer(sheet1key):
   """ For any given menu-selection, return lists to become row 1 and 2."""
   sinit = {}
-  sinit['1-Page SEO Crawl'] = (['url', 'crawl'], [globs.PIPURL, '?'])
+  sinit['seocrawl'] = (['url', 'crawl'], [globs.PIPURL, '?'])
   return sinit[sheet1key]
