@@ -28,3 +28,22 @@ letter = {1:'A',2:'B',3:'C',4:'D',5:'E',6:'F',7:'G',8:'H',9:'I',10:'J',11:'K'} #
 texttypes = ['.asmx', '.asp', '.aspx', '.atom', '.cfm', '.cgi', '.css', '.htm',
   '.htm', '.html', '.js', '.json', '.jsp', '.php', '.php3', '.php4', '.php5',
   '.rss', '.shtm', '.shtml', '.xht', '.xhtm', '.xhtml', '.xml']
+
+menu = {
+'clear':        "Clear Sheet 1",
+'seocrawl':     "1-Page SEO Crawl",
+'socialcrawl':  '1-Page Social Crawl',
+'ogcrawl':      '1-Page Open Graph Crawl',
+'mobilecrawl':  '1-Page Mobile Crawl',
+'keywords':     'Collect Keywords',
+'learn':        "Learn To Pipulate",
+'search':       "Capture Search Results",
+'qm':           "Do Question Marks",
+'ytsubs':       "Get Subscriber Count",
+'ytviews':      "Get View Count",
+'ytvids':       "Get Video Links",
+'twsearch':     "Capture Twitter Search",
+'twstats':      "Get Profile Stats"
+}
+
+invmenu = {v: k for k, v in menu.items()}

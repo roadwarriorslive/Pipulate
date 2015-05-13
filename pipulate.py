@@ -365,17 +365,19 @@ def Pipulate(username='', password='', dockey=''):
           yme = "Action for %s not defined." % globs.PIPMODE
           yield yme, "Action not defined.", "", ""
       else:
-        out("Clearing Tab 1...")
         anything = re.compile('.+')
-        try:
-          # CellList = gdoc.sheet1.findall(anything)
-          # for cell in CellList:
-          #   cell.value = ''
-          # result = gdoc.sheet1.update_cells(CellList)
-          pass
-        except:
-          out("Could not clear tap one.")
-          Stop()
+        if globs.PIPMODE == 'Clear Sheet 1':
+          out("Clearing Tab 1...")
+          yield "Clearing Sheet 1. Use revision history if a mistake.", "Clearing Sheet 1", "", ""
+          try:
+            CellList = gdoc.sheet1.findall(anything)
+            for cell in CellList:
+              cell.value = ''
+            result = gdoc.sheet1.update_cells(CellList)
+            pass
+          except:
+            out("Could not clear tap one.")
+            Stop()
 
       yield "Checking Tabs: Sheet 1", "Then we check for tabs...", "", ""
       # How To Tab

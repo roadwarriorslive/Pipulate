@@ -426,81 +426,64 @@ def keymaster(url, keywords=False):
     menu += "<option>%s</options>\n" % option
   return menu
 
-def nn(key):
-  nd = {}
-  nd['clear'] = "Clear Sheet 1"
-  nd['seocrawl'] = "1-Page SEO Crawl"
-  nd['socialcrawl'] = '1-Page Social Crawl'
-  nd['ogcrawl'] = '1-Page Open Graph Crawl'
-  nd['mobilecrawl'] = '1-Page Mobile Crawl'
-  nd['keywords'] = 'Collect Keywords'
-  nd['learn'] = "Learn To Pipulate"
-  nd['search'] = "Capture Search Results"
-  nd['qm'] = "Do Question Marks"
-  nd['ytsubs'] = "Get Subscriber Count"
-  nd['ytviews'] = "Get View Count"
-  nd['ytvids'] = "Get Video Links"
-  nd['twsearch'] = "Capture Twitter Search"
-  nd['twstats'] = "Get Profile Stats"
-  return nd[key]
-
 def gatekeeper(keymaster):
   """ For any given menu-key, return the actual menu that should appear."""
   mdict = {}
+  menu = globs.menu
 
   # Menu when the bookmarklet is clicked from inside Google Spreadsheets.
-  mdict['sheets'] =       [nn('qm'), 
-                          nn('clear'),
-                          nn('keywords'),
-                          nn("learn")]
+  mdict['sheets'] =       [menu['qm'], 
+                          menu['clear'],
+                          menu['keywords'],
+                          menu["learn"]]
 
   mdict['default'] =      mdict['sheets']
   
   mdict['empty'] =        mdict['sheets']
 
   # Menu when page text is highlighte on bookmarklet click.
-  mdict['keywords'] =     [nn('keywords')]
+  mdict['keywords'] =     [menu['keywords']]
 
   # Menu for fall-through menu on bookmarklet when no sites are recognized.
-  mdict['seo'] =          [nn('seocrawl'), 
-                          nn('clear'),
-                          nn('socialcrawl'), 
-                          nn('ogcrawl'), 
-                          nn('mobilecrawl'),
-                          nn('keywords'),
-                          nn('learn')]
+  mdict['seo'] =          [menu['seocrawl'], 
+                          menu['clear'],
+                          menu['socialcrawl'], 
+                          menu['ogcrawl'], 
+                          menu['mobilecrawl'],
+                          menu['keywords'],
+                          menu['learn']]
 
   # Menu when clicked on a Google search result page.
-  mdict['gsearch'] =      [nn('search'), 
-                          nn('clear'),
-                          nn('keywords'), 
-                          nn("learn")]
+  mdict['gsearch'] =      [menu['search'], 
+                          menu['clear'],
+                          menu['keywords'], 
+                          menu["learn"]]
 
   mdict['googleold'] =    mdict['gsearch']
 
   mdict['googleother'] =  mdict['gsearch']
 
   # Menu for the various things you might want to do in YouTube.
-  mdict['ytchannel'] =    [nn('ytsubs'),
-                          nn('clear'),
-                          nn('ytviews'),
-                          nn('ytvids'),
-                          nn('learn')]
+  mdict['ytchannel'] =    [menu['ytsubs'],
+                          menu['clear'],
+                          menu['ytviews'],
+                          menu['ytvids'],
+                          menu['learn']]
 
-  mdict['ytvideo'] =      [nn('ytvids'),
-                          nn('clear'),
-                          nn('learn')]
+  mdict['ytvideo'] =      [menu['ytvids'],
+                          menu['clear'],
+                          menu['learn']]
 
   mdict['ytother'] =      mdict['ytvideo']
 
   # Menu for the various things you  might want to do in Twitter.  
-  mdict['twsearch'] =     [nn('twsearch'), 
-                          nn('clear'),
-                          nn('learn')] 
+  mdict['twsearch'] =     [menu['twsearch'], 
+                          menu['clear'],
+                          menu['learn']] 
 
-  mdict['twprofile'] =    [nn('twstats'),
-                          nn('clear'),
-                          nn('learn')]
+  mdict['twprofile'] =    [menu['twstats'],
+                          menu['clear'],
+                          menu['learn']]
 
   mdict['twother'] =      mdict['twprofile'] 
 
