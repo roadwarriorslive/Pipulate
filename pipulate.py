@@ -76,8 +76,9 @@ class PipForm(Form):
 # |  _| | | (_| \__ \   <  | | | | | | (_| | | | | |
 # |_|   |_|\__,_|___/_|\_\ |_| |_| |_|\__,_|_|_| |_|
 #
-@app.route("/", methods=['GET', 'POST'])                  # Main point of entry when
-def main():                                               # visiting app's homepage.
+@app.route("/", methods=['GET', 'POST'])
+def main():
+  """Create OAuth2 token saved browser-side for cool work-flow possibilities."""
   stop = False
   print('''
                ____  _             _       _   _
@@ -175,6 +176,7 @@ def main():                                               # visiting app's homep
   out("EXITING MAIN", "0", '-')
 
 def LogUser(authkey):
+  """Track usage of the Pipulate bookmarklet per user on main domain instance."""
   api = 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='
   api = api + authkey
   ujson = requests.get(api, timeout=5)
@@ -232,6 +234,7 @@ def LogUser(authkey):
 #         |_|
 #
 def Pipulate(username='', password='', dockey=''):
+  """Process data, educate users, divest losers."""
   stop = False
   qset = set()
   qstart = 1
@@ -942,10 +945,12 @@ def Pipulate(username='', password='', dockey=''):
   print("\n")
 
 def url_root(url):
+  """Return root domain from url"""
   parsed = urlparse.urlparse(url)
   return "%s://%s%s" % (parsed[0], parsed[1], parsed[2])
 
 def getLoginlink():
+  """Return the HTML code required for an OAuth2 login link."""
   redir = globs.CANONICAL
   if 'Host' in request.headers:
     redir = 'http://'+request.headers['Host']
@@ -965,9 +970,11 @@ def getLoginlink():
   return "%s?%s" % (baseurl, urlencode(qsdict))
 
 def getBookmarklet():
+  """Return the HTML required to create a draggable Pipulate bookmarklet link."""
   return '''javascript:(function(){window.open('http://%s/?u='+encodeURIComponent(document.location.href)+'&d='+Date.now()+'&s='+encodeURIComponent(window.getSelection?window.getSelection():document.selection.createRange().text)+'&c='+window.btoa(unescape(encodeURIComponent(document.cookie))), 'Pipulate', 'toolbar=0,resizable=1,scrollbars=1,status=1,width=630,height=630');})();''' % (request.headers['Host'])
 
 def getLogoutlink():
+  """Return the HTML required to clear and expire the current OAuth2 token."""
   from urllib import quote_plus
   u = ''
   host = request.headers['Host']
