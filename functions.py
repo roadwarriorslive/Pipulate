@@ -421,7 +421,7 @@ def keymaster(url, keywords=False):
   else:
     key = 'empty'
   optlist = gatekeeper(key)
-  menu = ''
+  menu = '<option value="#">Select Deliverable Type...</option>'
   for option in optlist:
     menu += '<option value="%s">%s</options>\n' % (globs.invmenu[option], option)
   return menu
@@ -432,10 +432,12 @@ def gatekeeper(keymaster):
   menu = globs.menu
 
   # Menu when the bookmarklet is clicked from inside Google Spreadsheets.
-  mdict['sheets'] =       [menu['qm'], 
-                          menu['clear'],
-                          menu['keywords'],
-                          menu["learn"]]
+  mdict['sheets'] =       [
+                          menu['learn'],
+                          menu['clear'], 
+                          menu['qm'],
+                          menu["keywords"]
+                          ]
 
   mdict['default'] =      mdict['sheets']
   
@@ -445,45 +447,57 @@ def gatekeeper(keymaster):
   mdict['keywords'] =     [menu['keywords']]
 
   # Menu for fall-through menu on bookmarklet when no sites are recognized.
-  mdict['seo'] =          [menu['seocrawl'], 
-                          menu['clear'],
+  mdict['seo'] =          [
+                          menu['learn'],
+                          menu['clear'], 
+                          menu['seocrawl'],
                           menu['socialcrawl'], 
                           menu['ogcrawl'], 
                           menu['mobilecrawl'],
-                          menu['keywords'],
-                          menu['learn']]
+                          menu['keywords']
+                          ]
 
   # Menu when clicked on a Google search result page.
-  mdict['gsearch'] =      [menu['search'], 
-                          menu['clear'],
-                          menu['keywords'], 
-                          menu["learn"]]
+  mdict['gsearch'] =      [
+                          menu["learn"],
+                          menu['clear'], 
+                          menu['search'],
+                          menu['keywords']
+                          ]
 
   mdict['googleold'] =    mdict['gsearch']
 
   mdict['googleother'] =  mdict['gsearch']
 
   # Menu for the various things you might want to do in YouTube.
-  mdict['ytchannel'] =    [menu['ytsubs'],
+  mdict['ytchannel'] =    [
+                          menu['learn'],
                           menu['clear'],
+                          menu['ytsubs'],
                           menu['ytviews'],
-                          menu['ytvids'],
-                          menu['learn']]
+                          menu['ytvids']
+                          ]
 
-  mdict['ytvideo'] =      [menu['ytvids'],
+  mdict['ytvideo'] =      [
+                          menu['learn'],
                           menu['clear'],
-                          menu['learn']]
+                          menu['ytvids']
+                          ]
 
   mdict['ytother'] =      mdict['ytvideo']
 
   # Menu for the various things you  might want to do in Twitter.  
-  mdict['twsearch'] =     [menu['twsearch'], 
-                          menu['clear'],
-                          menu['learn']] 
+  mdict['twsearch'] =     [
+                          menu['learn'],
+                          menu['clear'], 
+                          menu['twsearch']
+                          ]
 
-  mdict['twprofile'] =    [menu['twstats'],
+  mdict['twprofile'] =    [
+                          menu['learn'],
                           menu['clear'],
-                          menu['learn']]
+                          menu['twstats']
+                          ]
 
   mdict['twother'] =      mdict['twprofile'] 
 

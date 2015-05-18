@@ -30,13 +30,13 @@ texttypes = ['.asmx', '.asp', '.aspx', '.atom', '.cfm', '.cgi', '.css', '.htm',
   '.rss', '.shtm', '.shtml', '.xht', '.xhtm', '.xhtml', '.xml']
 
 menu = {
-'clear':        "Clear Sheet 1",
+'learn':        "Learn How To Pipulate!",
+'clear':        "Clear Pipulate/Sheet1",
 'seocrawl':     "1-Page SEO Crawl",
 'socialcrawl':  '1-Page Social Crawl',
 'ogcrawl':      '1-Page Open Graph Crawl',
 'mobilecrawl':  '1-Page Mobile Crawl',
 'keywords':     'Collect Keywords',
-'learn':        "Learn To Pipulate",
 'search':       "Capture Search Results",
 'qm':           "Do Question Marks",
 'ytsubs':       "Get Subscriber Count",
