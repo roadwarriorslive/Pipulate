@@ -22,31 +22,32 @@
                                       Adi
 
                             Succeed With Pipulate!
-"""
-import sys, os, socket, urlparse, re
-socket.setdefaulttimeout(10.0)                            # Our story begins with Talmudic style commentaries
-import globs                                              # (in-line columns), which I'm using as a way
-from common import *                                      # of issuing a challenge to myself to master the
-import                requests,                           # vim text editor, so as to make the sort of text
-                      traceback,                          # manipulation skills required to pull this off no
-                      datetime,                           # big thing. Oh yeah, and we import Python modules
-                      time,                               # here that should be available globally (everywhere)
-                      json                                # in this module.
-from flask_wtf import Form
-from wtforms import   StringField,
-                      HiddenField,
-                      TextAreaField,
-                      SelectField
-from flask import     Flask,
-                      stream_with_context,
-                      render_template,
-                      Response,
-                      request,
-                      session,
-                      redirect,
-                      url_for,
-                      flash
 
+"""
+import sys, os, socket, urlparse, re                      # Hello World! I'm glad you found your way
+socket.setdefaulttimeout(10.0)                            # to pipulate.py. While this is not the
+import globs                                              # exact file that kicks off the Pipulate
+from common import *                                      # process, it is the most important to the
+import                requests,                           # pipulating process. Those other files,
+                      traceback,                          # like webpipulate.py and loopipulate.py
+                      datetime,                           # are merely shims for different Python
+                      time,                               # code execution contexts. Webpipulate
+                      json                                # creates an instance of the Flask
+from flask_wtf import Form                                # webserving app object, perhaps somewhat
+from wtforms import   StringField,                        # controversially directly native in
+                      HiddenField,                        # Python. Yes, there's gunicorn, nginx,
+                      TextAreaField,                      # and all that wonderful webserver
+                      SelectField                         # extra context, but who needs it?
+from flask import     Flask,                              # I'll just have to run it because after all
+                      stream_with_context,                # A Python's a Python, no matter how small.
+                      render_template,                    # The enemy's cruft; that's why I declare
+                      Response,                           # That code over-stuffed is lacking a prayer
+                      request,                            # And what I include here is fairly lightweight
+                      session,                            # Flask SocketIO is too much and too late
+                      redirect,                           # Because by the time we're on the next screen
+                      url_for,                            # The user's informed about all we have seen
+                      flash                               # One more fat library's not what you need
+                                                          # When making a platform as small as a seed.
 app = Flask(__name__)
 app.secret_key = "m\x00\r\xa5\\\xbeTW\xb3\xdf\x17\xb0!T\x9b6\x88l\xcf\xa1vmD}"
 
