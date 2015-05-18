@@ -302,6 +302,16 @@
       function whitelock() {
         $('#piplock').css('color', 'white');
       }
+      function yellowlock() {
+        $('#pipulate').css('color', 'yellow');
+        $('#piplock').removeClass("pip-angle-circled-right");
+        $('#piplock').addClass("pip-attention");
+      }
+      function readytogo() {
+        $('#pipulate').css('color', 'white');
+        $('#piplock').removeClass("pip-attention");
+        $('#piplock').addClass("pip-angle-circled-right");
+      }
       function lockbutton() {
         $('#pipulate').fadeTo(0,.5);
         $('#pipulate').prop("disabled", true);
@@ -316,6 +326,9 @@
         $('#piplock').removeClass("pip-lock");
       }
       $(document).ready(function(){  
+        $( "#options" ).bind( "change", function() {
+          alert( "Selection changed" );
+        });
         {% if request.method == 'GET': %}
           $("#spinner").hide();
         {% elif form.pipurl.data == '': %}
@@ -375,6 +388,10 @@
           {% if request.method == 'POST': %}
             <script>
               lockbutton();
+            </script>
+          {% else %}
+            <script>
+              yellowlock();
             </script>
           {% endif %}
           <div id="magicdiv">

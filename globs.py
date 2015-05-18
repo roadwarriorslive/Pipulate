@@ -38,7 +38,7 @@ menu = {
 'mobilecrawl':  '1-Page Mobile Crawl',
 'keywords':     'Collect Keywords',
 'search':       "Capture Search Results",
-'qm':           "Do Question Marks",
+'qm':           "Replace Question Marks",
 'ytsubs':       "Get Subscriber Count",
 'ytviews':      "Get View Count",
 'ytvids':       "Get Video Links",

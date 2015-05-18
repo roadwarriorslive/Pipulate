@@ -20,14 +20,6 @@ def documentation():
   s.append(['Get JSON API Tab -->',''])
   return s
 
-def pipinit_depricated():
-  s = []
-  s.append(['YouTube Subscribers', 'https://www.youtube.com/user/miklevin','*','','','*','*','*','*'])
-  s.append(['Twitter Followers', 'https://twitter.com/miklevin','','*','','','','*','*'])
-  s.append(['FB page Likes & Shares', 'https://www.facebook.com/mikelevinux','','','*','*','*','*','*'])
-  s.append(['Homepage Counters', 'http://mikelev.in','','','*','','*','*','*'])
-  return s
-
 def dontgetfrustrated(x):
   s = []
   s.append("Heavy traffic on the Inter-Webs tonight.")
