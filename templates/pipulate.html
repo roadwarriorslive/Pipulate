@@ -327,7 +327,7 @@
       }
       $(document).ready(function(){  
         $( "#options" ).bind( "change", function() {
-          alert( "Selection changed" );
+          readytogo();
         });
         {% if request.method == 'GET': %}
           $("#spinner").hide();
