@@ -45,9 +45,7 @@ from flask import     (Flask,                             # controversially dire
                       flash)                              # And what I include here is fairly lightweight
                                                           # Flask SocketIO is too much and too late
                                                           # Because by the time we're on the next screen
-                                                          # The user's informed about all we have seen
-                                                          # One more fat library's not what you need
-                                                          # When making a platform as small as a seed.
+                                                          # The user's informed about all they have seen.
 app = Flask(__name__)
 app.secret_key = "m\x00\r\xa5\\\xbeTW\xb3\xdf\x17\xb0!T\x9b6\x88l\xcf\xa1vmD}"
 
