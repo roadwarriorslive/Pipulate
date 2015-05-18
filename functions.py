@@ -421,7 +421,7 @@ def keymaster(url, keywords=False):
   else:
     key = 'empty'
   optlist = gatekeeper(key)
-  menu = '<option value="#">Select Deliverable Type...</option>'
+  menu = '<option value="off">Select Deliverable Type...</option>'
   for option in optlist:
     menu += '<option value="%s">%s</options>\n' % (globs.invmenu[option], option)
   return menu
