@@ -28,25 +28,25 @@ import sys, os, socket, urlparse, re                      # Hello World! I'm gla
 socket.setdefaulttimeout(10.0)                            # to pipulate.py. While this is not the
 import globs                                              # exact file that kicks off the Pipulate
 from common import *                                      # process, it is the most important to the
-import                requests,                           # pipulating process. Those other files,
-                      traceback,                          # like webpipulate.py and loopipulate.py
-                      datetime,                           # are merely shims for different Python
-                      time,                               # code execution contexts. Webpipulate
-                      json                                # creates an instance of the Flask
-from flask_wtf import Form                                # webserving app object, perhaps somewhat
-from wtforms import   StringField,                        # controversially directly native in
-                      HiddenField,                        # Python. Yes, there's gunicorn, nginx,
-                      TextAreaField,                      # and all that wonderful webserver
-                      SelectField                         # extra context, but who needs it?
-from flask import     Flask,                              # I'll just have to run it because after all
-                      stream_with_context,                # A Python's a Python, no matter how small.
-                      render_template,                    # The enemy's cruft; that's why I declare
-                      Response,                           # That code over-stuffed is lacking a prayer
-                      request,                            # And what I include here is fairly lightweight
-                      session,                            # Flask SocketIO is too much and too late
-                      redirect,                           # Because by the time we're on the next screen
-                      url_for,                            # The user's informed about all we have seen
-                      flash                               # One more fat library's not what you need
+import requests, traceback, datetime, time, json          # pipulating process. Those other files,
+from flask_wtf import Form                                # like webpipulate.py and loopipulate.py
+from wtforms import   (StringField,                       # are merely shims for different Python
+                      HiddenField,                        # code execution contexts. Webpipulate
+                      TextAreaField,                      # creates an instance of the Flask
+                      SelectField)                        # webserving app object, perhaps somewhat
+from flask import     (Flask,                             # controversially directly native in
+                      stream_with_context,                # Python. Yes, there's gunicorn, nginx,
+                      render_template,                    # and all that wonderful webserver
+                      Response,                           # extra context, but who needs it?
+                      request,                            # I'll just have to run it because after all
+                      session,                            # A Python's a Python, no matter how small.
+                      redirect,                           # The enemy's cruft; that's why I declare
+                      url_for,                            # That code over-stuffed is lacking a prayer
+                      flash)                              # And what I include here is fairly lightweight
+                                                          # Flask SocketIO is too much and too late
+                                                          # Because by the time we're on the next screen
+                                                          # The user's informed about all we have seen
+                                                          # One more fat library's not what you need
                                                           # When making a platform as small as a seed.
 app = Flask(__name__)
 app.secret_key = "m\x00\r\xa5\\\xbeTW\xb3\xdf\x17\xb0!T\x9b6\x88l\xcf\xa1vmD}"
