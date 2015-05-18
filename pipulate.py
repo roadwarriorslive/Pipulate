@@ -27,18 +27,25 @@ import sys, os, socket, urlparse, re
 socket.setdefaulttimeout(10.0)                            # Our story begins with Talmudic style commentaries 
 import globs                                              # (in-line columns), which I'm using as a way 
 from common import *                                      # of issuing a challenge to myself to master the
-import requests, traceback, datetime, time, json          # vim text editor, so as to make the sort of text
-from flask_wtf import Form                                # manipulation skills required to pull this off no
-from wtforms import StringField, HiddenField, TextAreaField, SelectField    # big thing. Oh yeah, and we import Python modules   
-from flask import (Flask,                                 # here that should be available globally (everywhere)
-  stream_with_context,                                    # in this module. 
-  render_template, 
-  Response,        
-  request,         
-  session,         
-  redirect,       
-  url_for,                                         
-  flash)                                           
+import                requests,                           # vim text editor, so as to make the sort of text      
+                      traceback,                          # manipulation skills required to pull this off no
+                      datetime,                           # big thing. Oh yeah, and we import Python modules    
+                      time,                               # here that should be available globally (everywhere)
+                      json                                # in this module. 
+from flask_wtf import Form                                
+from wtforms import   StringField,                        
+                      HiddenField,                        
+                      TextAreaField,                      
+                      SelectField                           
+from flask import     Flask,
+                      stream_with_context,                                    
+                      render_template, 
+                      Response,        
+                      request,         
+                      session,         
+                      redirect,       
+                      url_for,                                         
+                      flash
 
 app = Flask(__name__)                               
 app.secret_key = "m\x00\r\xa5\\\xbeTW\xb3\xdf\x17\xb0!T\x9b6\x88l\xcf\xa1vmD}"
