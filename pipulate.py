@@ -24,67 +24,70 @@
                             Succeed With Pipulate!
 """
 import sys, os, socket, urlparse, re
-socket.setdefaulttimeout(10.0)                            # Our story begins with Talmudic style commentaries 
-import globs                                              # (in-line columns), which I'm using as a way 
+socket.setdefaulttimeout(10.0)                            # Our story begins with Talmudic style commentaries
+import globs                                              # (in-line columns), which I'm using as a way
 from common import *                                      # of issuing a challenge to myself to master the
-import                requests,                           # vim text editor, so as to make the sort of text      
+import                requests,                           # vim text editor, so as to make the sort of text
                       traceback,                          # manipulation skills required to pull this off no
-                      datetime,                           # big thing. Oh yeah, and we import Python modules    
+                      datetime,                           # big thing. Oh yeah, and we import Python modules
                       time,                               # here that should be available globally (everywhere)
-                      json                                # in this module. 
-from flask_wtf import Form                                
-from wtforms import   StringField,                        
-                      HiddenField,                        
-                      TextAreaField,                      
-                      SelectField                           
+                      json                                # in this module.
+from flask_wtf import Form
+from wtforms import   StringField,
+                      HiddenField,
+                      TextAreaField,
+                      SelectField
 from flask import     Flask,
-                      stream_with_context,                                    
-                      render_template, 
-                      Response,        
-                      request,         
-                      session,         
-                      redirect,       
-                      url_for,                                         
+                      stream_with_context,
+                      render_template,
+                      Response,
+                      request,
+                      session,
+                      redirect,
+                      url_for,
                       flash
 
-app = Flask(__name__)                               
+app = Flask(__name__)
 app.secret_key = "m\x00\r\xa5\\\xbeTW\xb3\xdf\x17\xb0!T\x9b6\x88l\xcf\xa1vmD}"
 
-def stream_template(template_name, **context):            # This is the key to streaming
-  app.update_template_context(context)                    # output to the user in the
-  t = app.jinja_env.get_template(template_name)           # web browser much like a
-  rv = t.stream(context)                                  # long page load, but with
-  return rv                                               # better memory efficiency.
+def stream_template(template_name, **context):
+  """Open the most inexpensive Flask-based streaming you ever did see."""
+  app.update_template_context(context)
+  t = app.jinja_env.get_template(template_name)
+  rv = t.stream(context)
+  return rv
 
-@app.context_processor                                    # Anything that I want to be
-def templateglobals():                                    # available in Jinja2 templates
-  return dict(loginlink=getLoginlink(),                   # without having to always
-  bookmarklet=getBookmarklet(),                           # pass them as parameters
+@app.context_processor
+def templateglobals():
+  """Make output of certain functions available in jinja2 dynamic templates."""
+  return dict(loginlink=getLoginlink(),
+  bookmarklet=getBookmarklet(),
   logoutlink=getLogoutlink(),
   cyclemotto=cyclemotto(),
   )
 
 class PipForm(Form):
+  """Instantiates flask_wtf form object for use by a jina2 template."""
   pipurl = StringField('Paste a Google Spreadsheet URL:')
-  magicbox = TextAreaField("magicbox") 
+  magicbox = TextAreaField("magicbox")
   options = SelectField("options")
 
-#  _____ _           _                      _       
-# |  ___| | __ _ ___| | __  _ __ ___   __ _(_)_ __  
-# | |_  | |/ _` / __| |/ / | '_ ` _ \ / _` | | '_ \ 
+#  _____ _           _                      _
+# |  ___| | __ _ ___| | __  _ __ ___   __ _(_)_ __
+# | |_  | |/ _` / __| |/ / | '_ ` _ \ / _` | | '_ \
 # |  _| | | (_| \__ \   <  | | | | | | (_| | | | | |
 # |_|   |_|\__,_|___/_|\_\ |_| |_| |_|\__,_|_|_| |_|
-#                                                   
+#
 @app.route("/", methods=['GET', 'POST'])                  # Main point of entry when
 def main():                                               # visiting app's homepage.
   stop = False
   print('''
-               ____  _             _       _   _                          
-              |  _ \(_)_ __  _   _| | __ _| |_(_)_ __   __ _              
-              | |_) | | '_ \| | | | |/ _` | __| | '_ \ / _` |             
-              |  __/| | |_) | |_| | | (_| | |_| | | | | (_| |  _   _   _  
-              |_|   |_| .__/ \__,_|_|\__,_|\__|_|_| |_|\__, | (_) (_) (_) 
-                      |_|                              |___/              
+               ____  _             _       _   _
+              |  _ \(_)_ __  _   _| | __ _| |_(_)_ __   __ _
+              | |_) | | '_ \| | | | |/ _` | __| | '_ \ / _` |
+              |  __/| | |_) | |_| | | (_| | |_| | | | | (_| |  _   _   _
+              |_|   |_| .__/ \__,_|_|\__,_|\__|_|_| |_|\__, | (_) (_) (_)
+                      |_|                              |___/
   ''')
 
   out("ENTERED MAIN FUNCTION", "0")
@@ -223,12 +226,12 @@ def LogUser(authkey):
       except:
         return
 
-#  ____  _             _       _       
-# |  _ \(_)_ __  _   _| | __ _| |_ ___ 
+#  ____  _             _       _
+# |  _ \(_)_ __  _   _| | __ _| |_ ___
 # | |_) | | '_ \| | | | |/ _` | __/ _ \
 # |  __/| | |_) | |_| | | (_| | ||  __/
 # |_|   |_| .__/ \__,_|_|\__,_|\__\___|
-#         |_|                          
+#         |_|
 #
 def Pipulate(username='', password='', dockey=''):
   stop = False
@@ -342,12 +345,12 @@ def Pipulate(username='', password='', dockey=''):
           InsertRows(ksheet, kwrows, kcount)
         except:
           pass
-      #           _                       _               _     _ 
+      #           _                       _               _     _
       #  ___  ___| |_   _   _ _ __    ___| |__   ___  ___| |_  / |
       # / __|/ _ \ __| | | | | '_ \  / __| '_ \ / _ \/ _ \ __| | |
       # \__ \  __/ |_  | |_| | |_) | \__ \ | | |  __/  __/ |_  | |
       # |___/\___|\__|  \__,_| .__/  |___/_| |_|\___|\___|\__| |_|
-      #                      |_|                                  
+      #                      |_|
       # This is where special behavior like crawls get wedged in
       anything = re.compile('.+')
       initSheet1 = False
@@ -563,15 +566,15 @@ def Pipulate(username='', password='', dockey=''):
                 fargs[coldex2][anarg] = None
             for argdex, anarg in enumerate(myargs): #For each argument of function
               fargs[coldex2][anarg] = None
-      #            _            _     _        
-      #   __ _ ___| |_ ___ _ __(_)___| | _____ 
+      #            _            _     _
+      #   __ _ ___| |_ ___ _ __(_)___| | _____
       #  / _` / __| __/ _ \ '__| / __| |/ / __|
       # | (_| \__ \ ||  __/ |  | \__ \   <\__ \
       #  \__,_|___/\__\___|_|  |_|___/_|\_\___/
-      #                                  
+      #
       trended = False
       out("Scan down Pipulate tab looking for asterisks.", "2")
-          
+
       for rowdex in range(1, globs.numrows+1):
         out("Scanning row %s for asterisks." % rowdex) #This can have a pretty long delay
 
@@ -621,10 +624,10 @@ def Pipulate(username='', password='', dockey=''):
       trendingrowsfinished = True
       maxrowsperhour = 0
       out("Done looking for asterisks", "2", "-")
-      #  _   _                   ___                           _   
-      # | |_(_)_ __ ___   ___   ( _ )     ___ ___  _   _ _ __ | |_ 
+      #  _   _                   ___                           _
+      # | |_(_)_ __ ___   ___   ( _ )     ___ ___  _   _ _ __ | |_
       # | __| | '_ ` _ \ / _ \  / _ \/\  / __/ _ \| | | | '_ \| __|
-      # | |_| | | | | | |  __/ | (_>  < | (_| (_) | |_| | | | | |_ 
+      # | |_| | | | | | |  __/ | (_>  < | (_| (_) | |_| | | | | |_
       #  \__|_|_| |_| |_|\___|  \___/\/  \___\___/ \__,_|_| |_|\__|
       #
       out("Count and timestamp columns for trending", '2')
@@ -682,8 +685,8 @@ def Pipulate(username='', password='', dockey=''):
         qstart = 1
         qend = globs.numrows + 1
       out("Count and timestamp columns for trending", '2', '-')
-      #  _                     _                           
-      # (_)_ __  ___  ___ _ __| |_   _ __ _____      _____ 
+      #  _                     _
+      # (_)_ __  ___  ___ _ __| |_   _ __ _____      _____
       # | | '_ \/ __|/ _ \ '__| __| | '__/ _ \ \ /\ / / __|
       # | | | | \__ \  __/ |  | |_  | | | (_) \ V  V /\__ \
       # |_|_| |_|___/\___|_|   \__| |_|  \___/ \_/\_/ |___/
@@ -729,12 +732,12 @@ def Pipulate(username='', password='', dockey=''):
       #globs.numrows = len(globs.sheet.col_values(1))
       globs.numrows = globs.numrows + len(trendlistoflists) #faster
       out("Insert new rows for new time inrement trending", '2', '-')
-      #                        _   _                                    _        
-      #   __ _ _   _  ___  ___| |_(_) ___  _ __    _ __ ___   __ _ _ __| | _____ 
+      #                        _   _                                    _
+      #   __ _ _   _  ___  ___| |_(_) ___  _ __    _ __ ___   __ _ _ __| | _____
       #  / _` | | | |/ _ \/ __| __| |/ _ \| '_ \  | '_ ` _ \ / _` | '__| |/ / __|
       # | (_| | |_| |  __/\__ \ |_| | (_) | | | | | | | | | | (_| | |  |   <\__ \
       #  \__, |\__,_|\___||___/\__|_|\___/|_| |_| |_| |_| |_|\__,_|_|  |_|\_\___/
-      #     |_|                                                                  
+      #     |_|
       #
       out("Question Mark Replacement.", '2')
       if not qset and not trended:
@@ -780,8 +783,8 @@ def Pipulate(username='', password='', dockey=''):
           if '?' in onerow:
             #   _ __ _____      __
             #  | '__/ _ \ \ /\ / /
-            #  | | | (_) \ V  V / 
-            #  |_|  \___/ \_/\_/  
+            #  | | | (_) \ V  V /
+            #  |_|  \___/ \_/\_/
             #
             out("PROCESSING ROW %s." % rowdex, '3')
             blankrows = 0
@@ -802,12 +805,12 @@ def Pipulate(username='', password='', dockey=''):
                   collabel = globs.row1[coldex]
                   if collabel in transfuncs.keys():
                     for x in range(4):
-                      #   __                  _   _                 
-                      #  / _|_   _ _ __   ___| |_(_) ___  _ __  ___ 
+                      #   __                  _   _
+                      #  / _|_   _ _ __   ___| |_(_) ___  _ __  ___
                       # | |_| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
                       # |  _| |_| | | | | (__| |_| | (_) | | | \__ \
                       # |_|  \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
-                      #                                             
+                      #
                       out("Function Start", "4")
                       fname = transfuncs[globs.row1[coldex]]
                       farg = fargs[coldex]
@@ -832,12 +835,12 @@ def Pipulate(username='', password='', dockey=''):
                       out("Function End", "4", '-')
                   elif collabel in transscrape.keys():
                     for x in range(4):
-                      #  ____                                 
-                      # / ___|  ___ _ __ __ _ _ __   ___ _ __ 
+                      #  ____
+                      # / ___|  ___ _ __ __ _ _ __   ___ _ __
                       # \___ \ / __| '__/ _` | '_ \ / _ \ '__|
-                      #  ___) | (__| | | (_| | |_) |  __/ |   
-                      # |____/ \___|_|  \__,_| .__/ \___|_|   
-                      #                      |_|              
+                      #  ___) | (__| | | (_| | |_) |  __/ |
+                      # |____/ \___|_|  \__,_| .__/ \___|_|
+                      #                      |_|
                       out("Scrape Start", "4")
                       try:
                         out("Entering generic scraper.")
@@ -1079,7 +1082,7 @@ def timewindow(amiinnewtimewindow):
     now = datetime.datetime.now()
     now2 = now
     try:
-      tick = datetime.datetime.strptime(amiinnewtimewindow, "%m/%d/%Y %H:%M:%S") 
+      tick = datetime.datetime.strptime(amiinnewtimewindow, "%m/%d/%Y %H:%M:%S")
     except:
       tick = now #double-check this fall-over action
     left = None
@@ -1154,7 +1157,7 @@ def InitTab(gdoc2, tabname, headerlist, listoflists=[]):
         initsheet = gdoc2.sheet1
       except:
         out("Retrying connecting to Sheet 1")
-        time.sleep(1) 
+        time.sleep(1)
     else:
       try:
         initsheet = gdoc2.worksheet(tabname)
@@ -1235,11 +1238,11 @@ def gethtml(url):
 
 def convertisotime(timestamp):
   i = datetime.datetime(*map(int, re.split('[^\d]', timestamp)[:-1]))
-  return i.strftime("%m/%d/%Y %H:%M:%S") 
+  return i.strftime("%m/%d/%Y %H:%M:%S")
 
 def timestamp():
   i = datetime.datetime.now()
-  return i.strftime("%m/%d/%Y %H:%M:%S") 
+  return i.strftime("%m/%d/%Y %H:%M:%S")
 
 def datestamp():
   now = datetime.datetime.now()
