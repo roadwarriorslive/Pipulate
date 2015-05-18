@@ -26,24 +26,23 @@
 """
 import sys, os, socket, urlparse, re                      # Hello World! I'm glad you found your way
 socket.setdefaulttimeout(10.0)                            # to pipulate.py. While this is not the
-import globs                                              # exact file that kicks off the Pipulate
-from common import *                                      # process, it is the most important to the
-import requests, traceback, datetime, time, json          # pipulating process. Those other files,
-from flask_wtf import Form                                # like webpipulate.py and loopipulate.py
-from wtforms import   (StringField,                       # are merely shims for different Python
-                      HiddenField,                        # code execution contexts. Webpipulate
-                      TextAreaField,                      # creates an instance of the Flask
-                      SelectField)                        # webserving app object, perhaps somewhat
-from flask import     (Flask,                             # controversially directly native in
-                      stream_with_context,                # Python. Yes, there's gunicorn, nginx,
-                      render_template,                    # and all that wonderful webserver
-                      Response,                           # extra context, but who needs it?
-                      request,                            # I'll just have to run it because after all
-                      session,                            # A Python's a Python, no matter how small.
-                      redirect,                           # The enemy's cruft; that's why I declare
-                      url_for,                            # That code over-stuffed is lacking a prayer
-                      flash)                              # And what I include here is fairly lightweight
-                                                          # Flask SocketIO is too much and too late
+import globs                                              # exact file that kicks off Pipulate, it
+from common import *                                      # is the most important to the process.
+import requests, traceback, datetime, time, json          # Those other files, like webpipulate.py
+from flask_wtf import Form                                # and loopipulate.py are merely shims for
+from wtforms import   (StringField,                       # different Python code execution contexts. 
+                      HiddenField,                        # Webpipulate creates an instance of the
+                      TextAreaField,                      # Flask webserving app object, perhaps
+                      SelectField)                        # somewhat controversially directly native
+from flask import     (Flask,                             # in Python. Yes, there's gunicorn, nginx,
+                      stream_with_context,                # and all that wonderful webserver extra
+                      render_template,                    # context, but who needs it?
+                      Response,                           # I'll just have to run it because after all
+                      request,                            # A Python's a Python, no matter how small.
+                      session,                            # The enemy's cruft; that's why I declare
+                      redirect,                           # That code over-stuffed is lacking a prayer
+                      url_for,                            # And what I include here is fairly lightweight
+                      flash)                              # Flask SocketIO is too much and too late
                                                           # Because by the time we're on the next screen
                                                           # The user's informed about all they have seen.
 app = Flask(__name__)
