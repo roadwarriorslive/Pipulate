@@ -44,6 +44,14 @@ def out(msg, symbol='', dent=''):
 
 def Stop():
   """Stops Iterating, usually used in looping Pipulate function."""
+  print('''
+                            ____  _              _ 
+                           / ___|| |_ ___  _ __ | |
+                           \___ \| __/ _ \| '_ \| |
+                            ___) | || (_) | |_) |_|
+                           |____/ \__\___/| .__/(_)
+                                          |_|      
+  ''')
   if globs.mode == 'web':
     raise StopIteration
   else:
