@@ -298,6 +298,8 @@ def Pipulate(username='', password='', dockey=''):
               gdoc = gsp.open("Pipulate")
               stop = False
               break
+            except gspread.httpsession.HTTPError, e:
+              pass
             except:
               yield "I see you're on a URL that is not a Google Spreadsheet. Would you like to grab links?", "", "", ""
               yield "If so, just <a href='https://docs.google.com/spreadsheets/create' target='_new'>create</a> a new Spreadsheet, name it \"Pipulate\" and click Pipulate again.", "Google Spreadsheet Not Found.", "", ""
