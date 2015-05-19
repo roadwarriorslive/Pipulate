@@ -502,6 +502,10 @@ def Pipulate(username='', password='', dockey=''):
       out(yme)
       yield yme, "", "", ""
 
+      if globs.numrows == 0:
+        yield "spinoff", "", "", ""
+        Stop()
+
       stop = True
       for x in range(5):
         try:

@@ -94,7 +94,9 @@
       -moz-box-sizing: border-box;    /* Firefox, other Gecko */
       box-sizing: border-box;         /* Opera/IE 8+ */
     }
-    #pipulate{font-family:Paytone One}
+    #pipulate{
+      font-family:Paytone One
+    }
     #pipurl{margin-bottom:14px}
     #paste{
       width: 95%;
@@ -296,6 +298,25 @@
     </style>
 
     <script>
+      $(document).ready(function(){  
+        $( "#options" ).bind( "change", function() {
+          readytogo();
+        });
+        $("#pipulate").click(function() {
+          lockbutton();
+          $('#pipstream').html('');
+          $('#spinner').show();
+          $('#learnsomething').html("Sit back and relax. I'm starting to Pipulate...");
+          $('#pipform').submit();
+        });
+        {% if request.method == 'GET': %}
+          $("#spinner").hide();
+        {% elif form.pipurl.data == '': %}
+          $("#spinner").hide();
+          unlockbutton();
+          $("#learnsomething").html('Copy and paste a URL into field (even on mobile).');
+        {% endif %}
+      });
       function redlock() {
         $('#piplock').css('color', 'red');
       }
@@ -319,7 +340,7 @@
         }
       }
       function lockbutton() {
-        $('#pipulate').fadeTo(0,.5);
+        $('#pipulate').css("opacity", .5);
         $('#pipulate').prop("disabled", true);
         $('#piplock').removeClass("pip-angle-circled-right");
         $('#piplock').addClass("pip-lock");
@@ -331,25 +352,6 @@
         $('#piplock').addClass("pip-angle-circled-right");
         $('#piplock').removeClass("pip-lock");
       }
-      $(document).ready(function(){  
-        $( "#options" ).bind( "change", function() {
-          readytogo();
-        });
-        {% if request.method == 'GET': %}
-          $("#spinner").hide();
-        {% elif form.pipurl.data == '': %}
-          $("#spinner").hide();
-          unlockbutton();
-          $("#learnsomething").html('Copy and paste a URL into field (even on mobile).');
-        {% endif %}
-        $("#pipulate").click(function() {
-          lockbutton();
-          $('#pipstream').html('');
-          $('#spinner').show();
-          $('#learnsomething').html("Sit back and relax. I'm starting to Pipulate...");
-          $('#pipform').submit();
-        });
-      });
       if (location.hash) {
         var myhash = location.hash
         if (myhash.indexOf('access_token') > 0) {
