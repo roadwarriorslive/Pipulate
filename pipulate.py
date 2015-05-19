@@ -947,7 +947,8 @@ def Pipulate(username='', password='', dockey=''):
       yield "Pipulation prematurely terminated.", "", "", ""
       yield "Please open an issue at https://github.com/miklevin/pipulate", "", "", ""
       yield "Or just tap me on the shoulder.", "", "", ""
-    yield "spinerr", "", "", ""
+    if globs.PIPMODE != 'clear':
+      yield "spinerr", "", "", ""
     out("PIPULATION ERROR", "1", '-')
   out("EXITING MAIN", "0", '-') #Special case of function exit reporting
   print("\n")
