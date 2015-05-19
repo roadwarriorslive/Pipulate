@@ -276,7 +276,8 @@ def Pipulate(username='', password='', dockey=''):
         else:
           out("Login successful.")
         out("Opening Spreadsheet...")
-        yield("Opening Spreadsheet...", "", "", "")
+        yme = 'Opening <a target="_blank" href="%s">Spreadsheet</a>...' % globs.PIPURL
+        yield(yme, "", "", "")
         stop = True
         for x in range(10):
           yield lock
@@ -364,19 +365,22 @@ def Pipulate(username='', password='', dockey=''):
         # Questionmark replacement tab
         initSheet1 = True
       if initSheet1:
-        try:
-          bothrows = sheetinitializer(globs.PIPMODE)
-          row1 = bothrows[0]
-          row2 = [bothrows[1]]
-          yield lock
+        if globs.PIPMODE == 'clear':
+          pass
+        else:
           try:
-            InitTab(gdoc, "sheet1", row1, row2)
+            bothrows = sheetinitializer(globs.PIPMODE)
+            row1 = bothrows[0]
+            row2 = [bothrows[1]]
+            yield lock
+            try:
+              InitTab(gdoc, "sheet1", row1, row2)
+            except:
+              pass
+            yield unlock
           except:
-            pass
-          yield unlock
-        except:
-          yme = "Action for %s not defined." % globs.PIPMODE
-          yield yme, "Action not defined.", "", ""
+            yme = "Action for %s not defined." % globs.PIPMODE
+            yield yme, "Action not defined.", "", ""
       else:
         anything = re.compile('.+')
         if globs.PIPMODE == 'clear':
@@ -387,7 +391,9 @@ def Pipulate(username='', password='', dockey=''):
             for cell in CellList:
               cell.value = ''
             result = gdoc.sheet1.update_cells(CellList)
-            pass
+            yield "Sheet1 Cleared.", "", "", ""
+            yield "spinoffsuccess", "", "", ""
+            Stop()
           except:
             out("Could not clear tap one.")
             Stop()

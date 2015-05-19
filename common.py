@@ -13,6 +13,7 @@
 import globs
 
 def out(msg, symbol='', dent=''):
+  """Return message as command line debug output when in debug mode."""
   total = 80
   if globs.DBUG:
     if symbol:
@@ -42,21 +43,14 @@ def out(msg, symbol='', dent=''):
       print("%s |%s" % (globs.nest, msg))
 
 def Stop():
-  print('''
-    ____ ____    _  _____  _    _____ _                    _    ___        _   
-   / ___|  _ \  / \|_   _|/ \  |_   _(_)_ __ ___   ___  __| |  / _ \ _   _| |_ 
-  | |  _| | | |/ _ \ | | / _ \   | | | | '_ ` _ \ / _ \/ _` | | | | | | | | __|
-  | |_| | |_| / ___ \| |/ ___ \  | | | | | | | | |  __/ (_| | | |_| | |_| | |_ 
-   \____|____/_/   \_\_/_/   \_\ |_| |_|_| |_| |_|\___|\__,_|  \___/ \__,_|\__|
-                                                                               
-  ''')
-  #raise SystemExit
+  """Stops Iterating, usually used in looping Pipulate function."""
   if globs.mode == 'web':
     raise StopIteration
   else:
     pass
 
 def gotcha(x=''):
+  """Use to progressively zero in on return value issues."""
   print('''
                    ____       _       _             _   _   _ 
                   / ___| ___ | |_ ___| |__   __ _  | | | | | |
@@ -78,6 +72,7 @@ def gotcha(x=''):
   raise SystemExit
 
 def InsertRows(onesheet, listoflists, lastrowused=''):
+  """Inserts a list-of-lists as rows into spreadsheet from lastrowused."""
   numnewrows = len(listoflists)
   if not lastrowused:
     lastrowused = globs.numrows
@@ -97,7 +92,6 @@ def InsertRows(onesheet, listoflists, lastrowused=''):
     for onecell in onelist:
       flattenitlist.append(onecell)
   flattenitlist = ['?' if x=='*' else x for x in flattenitlist]
-
   stop = True
   for x in range(5):
     try:
@@ -109,13 +103,11 @@ def InsertRows(onesheet, listoflists, lastrowused=''):
       time.sleep(5)
   if stop:
     Stop()
-      
   for index, onecell in enumerate(CellList):
     try:
       onecell.value = flattenitlist[index]
     except:
       pass
-
   for x in range(5):
     try:
       onesheet.update_cells(CellList)
@@ -126,10 +118,10 @@ def InsertRows(onesheet, listoflists, lastrowused=''):
       time.sleep(5)
   if stop:
     Stop()
-    
   return
 
 def apex(url):
+  """Usually returns the apex or registered domain, given a URL."""
   from urlparse import urlparse
   if url:
     apex = urlparse(url).hostname.split(".")

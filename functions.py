@@ -435,8 +435,7 @@ def gatekeeper(keymaster):
   mdict['sheets'] =       [
                           menu['learn'],
                           menu['clear'], 
-                          menu['qm'],
-                          menu["keywords"]
+                          menu['qm']
                           ]
 
   mdict['default'] =      mdict['sheets']
