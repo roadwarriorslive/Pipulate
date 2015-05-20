@@ -299,10 +299,12 @@
 
     <script>
       $(document).ready(function(){  
-        if ($("#magicbox").val()) {
-          $('#magicbox').css('background-color', 'yellow');
-          $("#learnsomething").html('Put commas between separate keywords, then Select <b>Collect Keywords!</b>');
-        }
+        {%- if request.method == 'GET': -%}
+          if ($("#magicbox").val()) {
+            $('#magicbox').css('background-color', 'yellow');
+            $("#learnsomething").html('Put commas between separate keywords, then Select <b>Collect Keywords!</b>');
+          }
+        {%- endif -%}
         $( "#options" ).bind( "change", function() {
           readytogo();
         });
