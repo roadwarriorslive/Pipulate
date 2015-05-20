@@ -324,7 +324,7 @@ def Pipulate(username='', password='', dockey=''):
       yield unlock
       out("Google Spreadsheet successfully opened.")
 
-      if globs.KEYWORDS:
+      if globs.KEYWORDS and globs.KEYWORDS[:1] != '[' and globs.KEYWORDS[-1:] != ']':
         # Keywords Tab
         yield "Keyword Collection Detected", "Making Keywords Tab If Needed", "", ""
         headers = ['Keyword', 'Source']
