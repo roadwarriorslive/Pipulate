@@ -212,12 +212,13 @@ def LogUser(authkey):
         return
     else:
       user = []
-      user.append(adict["email"].lower())
-      user.append(adict["name"])
-      user.append(adict["link"])
-      user.append(adict["locale"])
-      user.append(adict["gender"])
-      user.append(adict["id"])
+      if 'email' in adict:
+        user.append(adict["email"].lower())
+      for item in ['name', 'link', 'locale', 'gender', 'id']:
+        try:
+          user.append(adict[item])
+        except:
+          user.append('')
       user.append(timestamp())
       user.append('')
       user.append('1')
