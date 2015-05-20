@@ -256,6 +256,7 @@ def Pipulate(username='', password='', dockey=''):
     gdoc = None
     if session or (username and password and dockey):
       out("LOGIN ATTEMPT", "2")
+      sheet = ''
       if (username and password and dockey):
         gsp = gspread.login(username, password)
         gdoc = gsp.open_by_key(dockey)
@@ -265,7 +266,7 @@ def Pipulate(username='', password='', dockey=''):
           out("Credential object created.")
         else:
           out("Expired login.")
-          yield "Google Login appears to have expired. Log back in.", "Login under the \"burger button\" in the upper-right.", "", ""
+          yield "Google Login expired. Log back in.", "Login under the \"burger button\" in the upper-right.", "", ""
           yield "spinoff", "", "", ""
         try:
           gsp = gspread.authorize(creds)
@@ -277,9 +278,9 @@ def Pipulate(username='', password='', dockey=''):
         else:
           out("Login successful.")
         out("Opening Spreadsheet...")
-        yme = 'Opening <a target="_blank" href="%s">Spreadsheet</a>...' % globs.PIPURL
-        yield(yme, "", "", "")
+        yield("Opening Spreadsheet...", "", "", "")
         stop = True
+        sheet = ''
         for x in range(10):
           yield lock
           try:
@@ -320,7 +321,12 @@ def Pipulate(username='', password='', dockey=''):
           yield "spinoff", "", "", ""
           yield badtuple
           Stop()
-
+      try:
+        sheet = gdoc.id
+        sheetlink = '<a target="_blank" href="https://docs.google.com/spreadsheets/d/%s/edit">Click Here to Open Pipulate Spreadsheet</a>.' % sheet
+        yield sheetlink, "", "", ""
+      except:
+        pass
       yield unlock
       out("Google Spreadsheet successfully opened.")
 
