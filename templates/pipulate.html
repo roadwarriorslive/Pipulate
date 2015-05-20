@@ -299,6 +299,10 @@
 
     <script>
       $(document).ready(function(){  
+        if ($("#magicbox").val()) {
+          $('#magicbox').css('background-color', 'yellow');
+          $("#learnsomething").html('Put commas between separate keywords, then Select <b>Collect Keywords!</b>');
+        }
         $( "#options" ).bind( "change", function() {
           readytogo();
         });
