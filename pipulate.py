@@ -306,8 +306,6 @@ def Pipulate(username='', password='', dockey=''):
             except:
               yield "I see you're on a URL that is not a Google Spreadsheet. Would you like to grab links?", "", "", ""
               yield "If so, just <a href='https://docs.google.com/spreadsheets/create' target='_new'>create</a> a new Spreadsheet, name it \"Pipulate\" and click Pipulate again.", "Google Spreadsheet Not Found.", "", ""
-              yield "During this file creation process, try to keep working out of the same Pipulate window.", "", "", ""
-              yield "It contains the URL you were on when you clicked the bookmarklet. Welcome!!!", "", "", ""
               yield 'New to this odd but awesome approach? Watch the <a target="_blank" href="http://goo.gl/v71kw8">Demo</a> and read the <a target="_blank" href="http://goo.gl/p2zQa4">Docs</a>.', "", "", ""
               Stop()
           except gspread.exceptions.SpreadsheetNotFound:
@@ -323,12 +321,15 @@ def Pipulate(username='', password='', dockey=''):
           Stop()
       try:
         sheet = gdoc.id
-        sheetlink = '<a target="_blank" href="https://docs.google.com/spreadsheets/d/%s/edit">Click Here to Open Pipulate Spreadsheet</a>.' % sheet
+        sheetlink = '<a target="_blank" href="https://docs.google.com/spreadsheets/d/%s/edit">Click here to open Pipulate Spreadsheet</a>.' % sheet
         yield sheetlink, "", "", ""
       except:
         pass
       yield unlock
       out("Google Spreadsheet successfully opened.")
+
+      if globs.PIPMODE == 'learn':
+        out("<script>alert('hit');</script>")
 
       if globs.KEYWORDS and globs.KEYWORDS[:1] != '[' and globs.KEYWORDS[-1:] != ']':
         # Keywords Tab
