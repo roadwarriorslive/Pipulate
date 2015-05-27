@@ -323,6 +323,10 @@
           $("#learnsomething").html('Copy and paste a URL into field (even on mobile).');
         {% endif %}
       });
+      function pickme() {
+        // window.blur();
+        // setTimeout(window.focus, 0);
+      }
       function redlock() {
         $('#piplock').css('color', 'red');
       }
@@ -367,7 +371,7 @@
       }
     </script>
   </head>
-  <body>
+  <body onblur="pickme();">
     <div id="wrapper">
     <nav>
     <!-- responsive -->
