@@ -156,7 +156,7 @@ of nuanced issues (like lxml on Windows under CygWin!):
 
 ### Debian/Ubuntu
 From a Terminal:
-- sudo apt-get install python-pip python-dev python-lxml
+- sudo apt-get install python-pip python-dev python-lxml git
 - sudo pip install requests
 - sudo pip install flask_wtf
 - sudo pip install gspread
@@ -164,7 +164,7 @@ From a Terminal:
 - cd /var
 - git clone https://github.com/miklevin/pipulate.git
 - cd pipulate
-- python pipulate.py
+- python webpipulate.py
 - Visit http://localhost:8888
 
 ### Mac OS X
@@ -179,7 +179,7 @@ From a Terminal:
 - cd ~/Desktop (or wherever)
 - git clone https://github.com/miklevin/pipulate.git
 - cd pipulate
-- python pipulate.py
+- python webpipulate.py
 - Visit http://localhost:8888
 
 ### Windows
@@ -198,7 +198,7 @@ From a CygWin Shell (MinTTY):
 - pip install lxml
 - git clone https://github.com/miklevin/pipulate.git
 - cd pipulate
-- python pipulate.py
+- python webpipulate.py
 - Visit http://localhost:8888
 
 ## 3\. Conventions
