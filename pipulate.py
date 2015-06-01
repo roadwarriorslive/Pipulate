@@ -130,7 +130,10 @@ def main():
       session['loggedin'] = "1"
       session['i'] -= 1 #Don't skip a message, just becuse I redirect.
       if globs.PCOM:
-        LogUser(session['oa2'])
+        try:
+          LogUser(session['oa2'])
+        except:
+          pass
       if 'u' in session and 's' in session:
         out("EXITING MAIN FUNCTION REDIRECT WITH URL AND TEXT", "0", '-')
         return redirect(url_for('main', u=session['u'], s=session['s']))
