@@ -377,7 +377,7 @@
     <!-- responsive -->
     <input id="bmenu" type="checkbox" class="show">
     <label for="bmenu" class="burger"><i class="pip-icon pip-menu"></i></label>
-    <div class="pressthis" style="text-align: center"><a class="bookmarklet" href="{{ bookmarklet }}" onclick="return false;" oncontextmenu="if(window.navigator.userAgent.indexOf('WebKit')!=-1||window.navigator.userAgent.indexOf('MSIE')!=-1){jQuery('.pressthis-code').show().find('textarea').focus().select();return false;}"><span>Pipulate</span></a> <img src="./static/foss-seo.png" style="vertical-align: middle;"/> <span id="drag">Drag to Boomarks Bar.</span></div>
+    <div class="pressthis" style="text-align: center"><a class="bookmarklet" href="{{ bookmarklet }}" onclick="return false;" oncontextmenu="if(window.navigator.userAgent.indexOf('WebKit')!=-1||window.navigator.userAgent.indexOf('MSIE')!=-1){jQuery('.pressthis-code').show().find('textarea').focus().select();return false;}"><span>{{ blabel }}</span></a> <img src="./static/foss-seo.png" style="vertical-align: middle;"/> <span id="drag">Drag to Boomarks Bar.</span></div>
     <a id="piphelp" class="pip-help-circled" href="./static/help.html"></a>
     <div class="menu">
       {% if session and 'loggedin' in session and session['loggedin'] == '1': %}

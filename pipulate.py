@@ -60,6 +60,7 @@ def templateglobals():
   """Make output of certain functions available in jinja2 dynamic templates."""
   return dict(loginlink=getLoginlink(),
   bookmarklet=getBookmarklet(),
+  blabel=getLabel(),
   logoutlink=getLogoutlink(),
   cyclemotto=cyclemotto(),
   )
@@ -993,9 +994,24 @@ def getLoginlink():
   from urllib import urlencode
   return "%s?%s" % (baseurl, urlencode(qsdict))
 
+def getLabel():
+  url = request.base_url
+  parsed = urlparse.urlparse(url)
+  subdomain = parsed.hostname.split('.')[0]
+  blab = ""
+  if subdomain == 'localhost':
+    blab = "Pipulate 8888"
+  elif subdomain == 'pipulate':
+    blab = 'Pipulate'
+  else:
+    blab = "Pipulate %s" % subdomain
+  return blab
+
 def getBookmarklet():
   """Return the HTML required to create a draggable Pipulate bookmarklet link."""
-  return '''javascript:(function(){window.open('http://%s/?u='+encodeURIComponent(document.location.href)+'&d='+Date.now()+'&s='+encodeURIComponent(window.getSelection?window.getSelection():document.selection.createRange().text)+'&c='+window.btoa(unescape(encodeURIComponent(document.cookie))), 'Pipulate', 'toolbar=0,resizable=1,scrollbars=1,status=1,width=630,height=630');})();''' % (request.headers['Host'])
+  host = request.headers['Host']
+  bname = "Pipulate"
+  return '''javascript:(function(){window.open('http://%s/?u='+encodeURIComponent(document.location.href)+'&d='+Date.now()+'&s='+encodeURIComponent(window.getSelection?window.getSelection():document.selection.createRange().text)+'&c='+window.btoa(unescape(encodeURIComponent(document.cookie))), '%s', 'toolbar=0,resizable=1,scrollbars=1,status=1,width=630,height=630');})();''' % (host, bname)
 
 def getLogoutlink():
   """Return the HTML required to clear and expire the current OAuth2 token."""
