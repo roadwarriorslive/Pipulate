@@ -322,12 +322,12 @@ def Pipulate(username='', password='', dockey=''):
           yield "spinoff", "", "", ""
           yield badtuple
           Stop()
-      try:
-        sheet = gdoc.id
-        sheetlink = '<a target="_blank" href="https://docs.google.com/spreadsheets/d/%s/edit">Click here to open Pipulate Spreadsheet</a>.' % sheet
-        yield sheetlink, "", "", ""
-      except:
-        pass
+      # try:
+      #   sheet = gdoc.id
+      #   sheetlink = '<a target="_blank" href="https://docs.google.com/spreadsheets/d/%s/edit">Click here to open Pipulate Spreadsheet</a>.' % sheet
+      #   yield sheetlink, "", "", ""
+      # except:
+      #   pass
       yield unlock
       out("Google Spreadsheet successfully opened.")
 

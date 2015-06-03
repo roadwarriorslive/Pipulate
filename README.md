@@ -161,6 +161,7 @@ From a Terminal:
 - sudo pip install flask_wtf
 - sudo pip install gspread
 - sudo pip install lxml
+- pip install requests -U
 - cd /var
 - git clone https://github.com/miklevin/pipulate.git
 - cd pipulate
