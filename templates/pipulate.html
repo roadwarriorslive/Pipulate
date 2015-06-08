@@ -164,9 +164,12 @@
     }
     #drag{
       font-size: 1em;
-      position : relative;
+      position : absolute;
+      z-index: 1000;
       top:.1em;
       white-space: nowrap;
+      margin-top: 9px;
+      margin-left: 175px;
     }
     #piplogo {
       max-width: 380px;
@@ -274,7 +277,7 @@
       font-size: 1.2em;
       color: black;
     }
-    @media (max-width: 500px) {
+    @media (max-width: 1140px) and (min-width: 960px) {
       #drag {
         display: none;
       }
@@ -290,7 +293,7 @@
         margin-top:50px;
       }
       #piphelp{
-        right: auto;
+        display: none;
       }
     }
     </style>
@@ -320,12 +323,7 @@
           unlockbutton();
           $("#learnsomething").html('Copy and paste a URL into field (even on mobile).');
         {% endif %}
-        $("#drag").fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
       });
-      function pickme() {
-        // window.blur();
-        // setTimeout(window.focus, 0);
-      }
       function redlock() {
         $('#piplock').css('color', 'red');
       }
@@ -370,13 +368,13 @@
       }
     </script>
   </head>
-  <body onblur="pickme();">
+  <body>
     <div id="wrapper">
     <nav>
     <!-- responsive -->
     <input id="bmenu" type="checkbox" class="show">
     <label for="bmenu" class="burger"><i class="pip-icon pip-menu"></i></label>
-    <div class="pressthis" style="text-align: center"><a class="bookmarklet" href="{{ bookmarklet }}" onclick="return false;" oncontextmenu="if(window.navigator.userAgent.indexOf('WebKit')!=-1||window.navigator.userAgent.indexOf('MSIE')!=-1){jQuery('.pressthis-code').show().find('textarea').focus().select();return false;}"><span>{{ blabel }}</span></a> <img src="./static/foss-seo.png" style="vertical-align: middle;"/> <span id="drag">Drag to Boomarks Bar.</span></div>
+    <div class="pressthis" style="text-align: center"><a class="bookmarklet" href="{{ bookmarklet }}" onclick="return false;" oncontextmenu="if(window.navigator.userAgent.indexOf('WebKit')!=-1||window.navigator.userAgent.indexOf('MSIE')!=-1){jQuery('.pressthis-code').show().find('textarea').focus().select();return false;}"><span>{{ blabel }}</span></a></div>
     <a id="piphelp" class="pip-help-circled" href="./static/help.html"></a>
     <div class="menu">
       <a class="button pseudo pip-play" target="_blank" href="https://docs.google.com/presentation/d/10lr_d1uyLMOnWsMzbenKiPlFE5-BIt9bxVucw7O4GSI/edit?usp=sharing">Intro &amp; Philosophy</a>
@@ -391,6 +389,7 @@
     </div>
     </nav>
     <div id="content">
+      <div id="drag"> <img src="./static/foss-seo.png" style="vertical-align: middle;"/> Drag to Boomarks Bar.</div>
       {% if session and 'loggedin' in session and session['loggedin'] == '1': %}
         <form id="pipform" method="POST" action="/">
           <div id="centerme">
