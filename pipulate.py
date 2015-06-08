@@ -998,12 +998,12 @@ def getLabel():
   url = request.base_url
   parsed = urlparse.urlparse(url)
   subdomain = parsed.hostname.split('.')[0]
-  blab = ""
+  blab = "Pipulate"
   if subdomain == 'localhost':
     blab = "Pipulate 8888"
   elif subdomain == 'pipulate':
     blab = 'Pipulate'
-  else:
+  elif subdomain:
     blab = "Pipulate %s" % subdomain
   return blab
 
