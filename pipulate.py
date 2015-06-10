@@ -119,14 +119,10 @@ def main():
           needsPipulate = False
         except:
           pass
-
         # Indoctrinate new Pipulate users here
-
-        # if needsPipulate:
-        #   gotcha("Needs Pipualte")
-        # else:
-        #   gotcha("Already has Pipulate")
-
+        if needsPipulate:
+          out("EXITING MAIN FUNCTION RENDER INDOCTRINATE", "0", '-')
+          return render_template('pipulate.html', form=form, select=None)
   stext = ''
   if request.method == 'POST':
     if form.pipurl.data:

@@ -404,6 +404,9 @@
     </div>
     </nav>
     <div id="content">
+      {% if not select: %}
+        <h1>Gotcha</h1>
+      {% endif %}
       {% if session and 'loggedin' in session and session['loggedin'] == '1': %}
         <form id="pipform" method="POST" action="/">
           <div id="centerme">
