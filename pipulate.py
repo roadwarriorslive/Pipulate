@@ -30,7 +30,7 @@ import globs                                              # exact file that kick
 from common import *                                      # is the most important to the process.
 import requests, traceback, datetime, time, json          # Those other files, like webpipulate.py
 from flask_wtf import Form                                # and loopipulate.py are merely shims for
-from wtforms import   (StringField,                       # different Python code execution contexts. 
+from wtforms import   (StringField,                       # different Python code execution contexts.
                       HiddenField,                        # Webpipulate creates an instance of the
                       TextAreaField,                      # Flask webserving app object, perhaps
                       SelectField)                        # somewhat controversially directly native
@@ -91,21 +91,39 @@ def main():
   ''')
 
   out("ENTERED MAIN FUNCTION", "0")
-  STREAMIT = False                                        # Default to not streaming.
-  CLICKTEXT = False                                      # Convince me we're on a sheet
-  form = PipForm(csrf_enabled=False)                      # Initialize form for UI.
-  if session:                                             # I've seen you before!
-    if 'oa2' in session:                                  # and I think you're logged in
+  STREAMIT = False
+  CLICKTEXT = False
+  form = PipForm(csrf_enabled=False)
+  #   _            _                 _
+  #  | |_ ___  ___| |_    __ _ _ __ (_)
+  #  | __/ _ \/ __| __|  / _` | '_ \| |
+  #  | ||  __/\__ \ |_  | (_| | |_) | |
+  #   \__\___||___/\__|  \__,_| .__/|_|
+  #                           |_|
+  if session:
+    if 'oa2' in session:
       creds = Credentials(access_token=session['oa2'])
-      for x in range(4):
+      try:
+        gsp = gspread.authorize(creds)
+        gsp.openall()
+        session['loggedin'] = "1"
+      except:
+        session.pop('loggedin', None)
+        if 'u' not in session and globs.PIPURL:
+          session['u'] = globs.PIPURL
+
+      if session['loggedin'] == "1":
+        needsPipulate = True
         try:
-          gsp = gspread.authorize(creds)
-          gsp.openall()
-          session['loggedin'] = "1"
+          gdoc = gsp.open("Pipulate")
+          needsPipulate = False
         except:
-          session.pop('loggedin', None)
-          if 'u' not in session and globs.PIPURL:
-            session['u'] = globs.PIPURL
+          pass
+        if needsPipulate:
+          gotcha("Needs Pipualte")
+        else:
+          gotcha("Already has Pipulate")
+
   stext = ''
   if request.method == 'POST':
     if form.pipurl.data:
