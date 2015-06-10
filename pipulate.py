@@ -24,7 +24,7 @@
                             Succeed With Pipulate!
 
 """
-import sys, os, socket, urlparse, re                      # Hello World! I'm glad you found your way
+import sys, os, socket, urlparse, re, gspread             # Hello World! I'm glad you found your way
 socket.setdefaulttimeout(10.0)                            # to pipulate.py. While this is not the
 import globs                                              # exact file that kicks off Pipulate, it
 from common import *                                      # is the most important to the process.
@@ -96,7 +96,6 @@ def main():
   form = PipForm(csrf_enabled=False)                      # Initialize form for UI.
   if session:                                             # I've seen you before!
     if 'oa2' in session:                                  # and I think you're logged in
-      import gspread                                      # so I'll grab spreadsheet API
       creds = Credentials(access_token=session['oa2'])
       for x in range(4):
         try:
@@ -194,7 +193,6 @@ def LogUser(authkey):
     unpickleme.close()
     username = answers['username']
     password = answers['password']
-    import gspread
     try:
       gc2 = gspread.login(username, password)
       usersheet = gc2.open("Users").sheet1
@@ -255,7 +253,6 @@ def Pipulate(username='', password='', dockey=''):
     funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
     transfuncs = ziplckey(funcs, funcs) #Keep translation table
     blankrows = 0
-    import gspread
     gsp = None
     gdoc = None
     if session or (username and password and dockey):

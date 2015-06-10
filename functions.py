@@ -433,9 +433,9 @@ def gatekeeper(keymaster):
 
   # Menu when the bookmarklet is clicked from inside Google Spreadsheets.
   mdict['sheets'] =       [
-                          menu['learn'],
                           menu['clear'], 
-                          menu['qm']
+                          menu['qm'],
+                          menu['learn']
                           ]
 
   mdict['default'] =      mdict['sheets']
@@ -447,21 +447,21 @@ def gatekeeper(keymaster):
 
   # Menu for fall-through menu on bookmarklet when no sites are recognized.
   mdict['seo'] =          [
-                          menu['learn'],
                           menu['clear'], 
                           menu['seocrawl'],
                           menu['socialcrawl'], 
                           menu['ogcrawl'], 
                           menu['mobilecrawl'],
-                          menu['keywords']
+                          menu['keywords'],
+                          menu['learn']
                           ]
 
   # Menu when clicked on a Google search result page.
   mdict['gsearch'] =      [
-                          menu["learn"],
                           menu['clear'], 
                           menu['search'],
-                          menu['keywords']
+                          menu['keywords'],
+                          menu["learn"]
                           ]
 
   mdict['googleold'] =    mdict['gsearch']
@@ -470,32 +470,32 @@ def gatekeeper(keymaster):
 
   # Menu for the various things you might want to do in YouTube.
   mdict['ytchannel'] =    [
-                          menu['learn'],
                           menu['clear'],
                           menu['ytsubs'],
                           menu['ytviews'],
-                          menu['ytvids']
+                          menu['ytvids'],
+                          menu['learn']
                           ]
 
   mdict['ytvideo'] =      [
-                          menu['learn'],
                           menu['clear'],
-                          menu['ytvids']
+                          menu['ytvids'],
+                          menu['learn']
                           ]
 
   mdict['ytother'] =      mdict['ytvideo']
 
   # Menu for the various things you  might want to do in Twitter.  
   mdict['twsearch'] =     [
-                          menu['learn'],
                           menu['clear'], 
-                          menu['twsearch']
+                          menu['twsearch'],
+                          menu['learn']
                           ]
 
   mdict['twprofile'] =    [
-                          menu['learn'],
                           menu['clear'],
-                          menu['twstats']
+                          menu['twstats'],
+                          menu['learn']
                           ]
 
   mdict['twother'] =      mdict['twprofile'] 
