@@ -119,10 +119,13 @@ def main():
           needsPipulate = False
         except:
           pass
-        if needsPipulate:
-          gotcha("Needs Pipualte")
-        else:
-          gotcha("Already has Pipulate")
+
+        # Indoctrinate new Pipulate users here
+
+        # if needsPipulate:
+        #   gotcha("Needs Pipualte")
+        # else:
+        #   gotcha("Already has Pipulate")
 
   stext = ''
   if request.method == 'POST':
