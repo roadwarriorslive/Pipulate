@@ -112,7 +112,7 @@ def main():
         if 'u' not in session and globs.PIPURL:
           session['u'] = globs.PIPURL
 
-      if session['loggedin'] == "1":
+      if session and 'loggedin' in session and session['loggedin'] == "1":
         needsPipulate = True
         try:
           gdoc = gsp.open("Pipulate")

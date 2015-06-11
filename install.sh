@@ -12,8 +12,8 @@ update-rc.d webpipulate defaults
 /etc/init.d/webpipulate start
 
 # looping daemon (not activated)
-#cp systuff/daemons/loopipulate /etc/init.d
-#chmod 755 /etc/init.d/loopipulate
+cp systuff/daemons/loopipulate /etc/init.d
+chmod 755 /etc/init.d/loopipulate
 #update-rc.d loopipulate defaults
 
 # cron jobs
