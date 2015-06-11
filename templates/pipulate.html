@@ -404,123 +404,124 @@
     </div>
     </nav>
     <div id="content">
-      {% if not select: %}
-        <h1>Gotcha</h1>
-      {% endif %}
-      {% if session and 'loggedin' in session and session['loggedin'] == '1': %}
-        <form id="pipform" method="POST" action="/">
-          <div id="centerme">
-          <div id="paste" class="row"><span id="pastelabel">URL: </span>{{ form.pipurl(size=80) }}</div>
-          </div>
-          <div>
-          <select class="select pipmenu" id="options" name="options">{{ select|safe }}</select>
-          <button id="pipulate" class="button" type="submit">
-            Pipulate &nbsp;<i id="piplock" class="pip-angle-circled-right"></i>
-          </button>
-          </div>
-          {% if request.method == 'POST': %}
-            <script>
-              lockbutton();
-            </script>
-          {% else %}
-            <script>
-              yellowlock();
-            </script>
-          {% endif %}
-          <div id="magicdiv">
-            <div id="spinner" class="spinner">
-              <div class="bounce1"></div>
-              <div class="bounce2"></div>
-              <div class="bounce3"></div>
+      {% if select: %}
+        {% if session and 'loggedin' in session and session['loggedin'] == '1': %}
+          <form id="pipform" method="POST" action="/">
+            <div id="centerme">
+            <div id="paste" class="row"><span id="pastelabel">URL: </span>{{ form.pipurl(size=80) }}</div>
+            </div>
+            <div>
+            <select class="select pipmenu" id="options" name="options">{{ select|safe }}</select>
+            <button id="pipulate" class="button" type="submit">
+              Pipulate &nbsp;<i id="piplock" class="pip-angle-circled-right"></i>
+            </button>
             </div>
             {% if request.method == 'POST': %}
-              <div id="learnsomething">First, we connect to Google Docs...</div>
+              <script>
+                lockbutton();
+              </script>
             {% else %}
-              <div id="learnsomething">{{ cyclemotto }}</div>
+              <script>
+                yellowlock();
+              </script>
             {% endif %}
-            {{ form.magicbox(cols="60", rows="4") }}
-          </div>
-        </form>
-        <div id="pipstream">
-        {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            {% for message in messages %}
-              {%- if loop.index > 1: -%}<br/>{%- endif -%}<span class="pl"><i class="pip-circle-thin"></i> {{ message }}</span>
-            {% endfor %}
-          {% endif %}
-        {% endwith %}
-        {% for lineitem, learn, magic, glock in data: -%}
-          {%- if glock == '+' : -%}
-            <script>
-              redlock();
-            </script>
-          {%- elif glock == '-': -%}
-            <script>
-              whitelock();
-            </script>
-          {%- endif -%}
-          {%- if learn or magic: -%}
-          <script>
-            {%- if magic: -%}
-              var pjson = {{ magic|safe }};
-              //$("#magicbox").val(JSON.stringify(pjson, null, '\t'));
-              $("#magicbox").val(JSON.stringify(pjson));
+            <div id="magicdiv">
+              <div id="spinner" class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+              </div>
+              {% if request.method == 'POST': %}
+                <div id="learnsomething">First, we connect to Google Docs...</div>
+              {% else %}
+                <div id="learnsomething">{{ cyclemotto }}</div>
+              {% endif %}
+              {{ form.magicbox(cols="60", rows="4") }}
+            </div>
+          </form>
+          <div id="pipstream">
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              {% for message in messages %}
+                {%- if loop.index > 1: -%}<br/>{%- endif -%}<span class="pl"><i class="pip-circle-thin"></i> {{ message }}</span>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+          {% for lineitem, learn, magic, glock in data: -%}
+            {%- if glock == '+' : -%}
+              <script>
+                redlock();
+              </script>
+            {%- elif glock == '-': -%}
+              <script>
+                whitelock();
+              </script>
             {%- endif -%}
-            {%- if learn: -%}$("#learnsomething").html('{{ learn }}');{%- endif -%}
-          </script>
-          {%- endif -%}
-          {%- if lineitem -%}
-            {%- if lineitem == "spinon" -%}
-              <script>
-                // Lock button and display spinner
-                $('#pipulate').prop("disabled", true);
-                $('#pipulate').fadeTo("fast",.5);
-              </script>
-            {%- elif lineitem == "spinoffsuccess" -%}
-              <script>
-                // Unlock button and remove spinner, successful pipulation
-                $('#spinner').hide();
-                $("i").removeClass("pip-circle-notch animate-spin");
-                $("i").addClass("pip-ok");
-                document.write('<img id="pbjt" src="./static/pipulate.gif" style="vertical-align: top;">');
-                unlockbutton();
-              </script>
-            {%- elif lineitem == "spinoff" -%}
-              <script>
-                // Unlock button and remove spinner, failed pipulation
-                $('#spinner').hide();
-                $("i").removeClass("pip-circle-notch animate-spin");
-                $("i").addClass("pip-ok");
-                unlockbutton();
-              </script>
-            {%- elif lineitem == "spinerr" -%}
-              <script>
-                // Unlock button and gracefully show user things are fubar.
-                $('#spinner').hide();
-                $("i").removeClass("pip-circle-notch animate-spin");
-                $("i.bullet").addClass("pip-circle-thin");
-                unlockbutton();
-              </script>
-            {%- elif lineitem[:1] == ',' -%}
-              <span class="pl">{{ lineitem }}</span>
-            {%- else -%}
-              <script>
-                $("i").removeClass("pip-circle-notch animate-spin");
-                $("i").addClass("pip-ok");
-              </script>
-              {%- if loop.index > 1: -%}<br/>{%- endif -%}<span class="pl"><i class="bullet pip-icon pip-circle-notch animate-spin"></i> {{ lineitem|safe }}</span>
-            {%- endif -%}
+            {%- if learn or magic: -%}
             <script>
-              $("#pipstream").scrollTop($("#pipstream")[0].scrollHeight);
+              {%- if magic: -%}
+                var pjson = {{ magic|safe }};
+                //$("#magicbox").val(JSON.stringify(pjson, null, '\t'));
+                $("#magicbox").val(JSON.stringify(pjson));
+              {%- endif -%}
+              {%- if learn: -%}$("#learnsomething").html('{{ learn }}');{%- endif -%}
             </script>
-          {%- endif -%}
-        {%- endfor -%}
-      {% else: %}
-        <a class="button pip" href="{{ loginlink }}">LOGIN... &nbsp;<i id="piplock" class="pip-icon pip-googleplus"></i></a>
-        <div style="height: 100%"><img id="piplogo" alt="Pipulate Free and Open Source SEO Software" src="static/pipulate-logo-white-transparent.png" /></div>
-      {% endif %}
+            {%- endif -%}
+            {%- if lineitem -%}
+              {%- if lineitem == "spinon" -%}
+                <script>
+                  // Lock button and display spinner
+                  $('#pipulate').prop("disabled", true);
+                  $('#pipulate').fadeTo("fast",.5);
+                </script>
+              {%- elif lineitem == "spinoffsuccess" -%}
+                <script>
+                  // Unlock button and remove spinner, successful pipulation
+                  $('#spinner').hide();
+                  $("i").removeClass("pip-circle-notch animate-spin");
+                  $("i").addClass("pip-ok");
+                  document.write('<img id="pbjt" src="./static/pipulate.gif" style="vertical-align: top;">');
+                  unlockbutton();
+                </script>
+              {%- elif lineitem == "spinoff" -%}
+                <script>
+                  // Unlock button and remove spinner, failed pipulation
+                  $('#spinner').hide();
+                  $("i").removeClass("pip-circle-notch animate-spin");
+                  $("i").addClass("pip-ok");
+                  unlockbutton();
+                </script>
+              {%- elif lineitem == "spinerr" -%}
+                <script>
+                  // Unlock button and gracefully show user things are fubar.
+                  $('#spinner').hide();
+                  $("i").removeClass("pip-circle-notch animate-spin");
+                  $("i.bullet").addClass("pip-circle-thin");
+                  unlockbutton();
+                </script>
+              {%- elif lineitem[:1] == ',' -%}
+                <span class="pl">{{ lineitem }}</span>
+              {%- else -%}
+                <script>
+                  $("i").removeClass("pip-circle-notch animate-spin");
+                  $("i").addClass("pip-ok");
+                </script>
+                {%- if loop.index > 1: -%}<br/>{%- endif -%}<span class="pl"><i class="bullet pip-icon pip-circle-notch animate-spin"></i> {{ lineitem|safe }}</span>
+              {%- endif -%}
+              <script>
+                $("#pipstream").scrollTop($("#pipstream")[0].scrollHeight);
+              </script>
+            {%- endif -%}
+          {%- endfor -%}
+        {% else: %}
+          <a class="button pip" href="{{ loginlink }}">LOGIN... &nbsp;<i id="piplock" class="pip-icon pip-googleplus"></i></a>
+          <div style="height: 100%"><img id="piplogo" alt="Pipulate Free and Open Source SEO Software" src="static/pipulate-logo-white-transparent.png" /></div>
+        {% endif %}
+        </div>
       </div>
-    </div>
+      {% else: %}
+        <h1>Harsh</h1>
+      {% endif %}
     </div>
   </body>
 </html>
