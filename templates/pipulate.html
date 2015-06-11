@@ -33,6 +33,13 @@
     .pip {
       font-family: Paytone One;
     }
+    #indoctrinate {
+      text-align: left;
+      margin-left: auto;
+      margin-right: auto;
+      color: white;
+      width: 350px;
+    }
     #wrapper {
       position: relative;
       height: 100%;
@@ -44,7 +51,7 @@
       padding-left: 5px;
       padding-right: 5px;
       padding-top: 60px;
-      text-align:center;
+      text-align: center;
       min-height: 100%
     }
     #pipstream{
@@ -521,6 +528,10 @@
       </div>
       {% else: %}
         <img src="./static/stop-before-you-pipulate.svg" width="300px" height="300px">
+        <ol id="indoctrinate">
+          <li>Create a Google spreadsheet named <b>&quot;Pipulate&quot;</b>.
+              You can <a href="http://spreadsheets.google.com/ccc?new" target="_blank">click here to create</a>, then rename it.<br/></li>
+        </ol>
       {% endif %}
     </div>
   </body>
