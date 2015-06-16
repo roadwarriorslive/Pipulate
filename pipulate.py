@@ -172,6 +172,7 @@ def main():
         #flash('Logged out from Google.')
     elif request.args:
       if 's' in request.args:
+        gotcha("hit")
         session['s'] = request.args.get('s')
       if 'u' in request.args:
         form.pipurl.data = request.args.get('u')
