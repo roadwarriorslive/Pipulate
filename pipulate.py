@@ -120,7 +120,9 @@ def main():
         except:
           pass
         # Indoctrinate new Pipulate users here
-        if needsPipulate:
+        if request.args and 'logout' in request.args:
+          pass
+        elif needsPipulate:
           out("EXITING MAIN FUNCTION RENDER INDOCTRINATE", "0", '-')
           return render_template('pipulate.html', form=form, select=None)
   stext = ''
@@ -172,7 +174,6 @@ def main():
         #flash('Logged out from Google.')
     elif request.args:
       if 's' in request.args:
-        gotcha("hit")
         session['s'] = request.args.get('s')
       if 'u' in request.args:
         form.pipurl.data = request.args.get('u')

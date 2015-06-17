@@ -433,8 +433,8 @@ def gatekeeper(keymaster):
 
   # Menu when the bookmarklet is clicked from inside Google Spreadsheets.
   mdict['sheets'] =       [
-                          menu['clear'], 
                           menu['qm'],
+                          menu['clear'], 
                           menu['learn']
                           ]
 
@@ -447,20 +447,20 @@ def gatekeeper(keymaster):
 
   # Menu for fall-through menu on bookmarklet when no sites are recognized.
   mdict['seo'] =          [
-                          menu['clear'], 
                           menu['seocrawl'],
                           menu['socialcrawl'], 
                           menu['ogcrawl'], 
                           menu['mobilecrawl'],
                           menu['keywords'],
+                          menu['clear'], 
                           menu['learn']
                           ]
 
   # Menu when clicked on a Google search result page.
   mdict['gsearch'] =      [
-                          menu['clear'], 
                           menu['search'],
                           menu['keywords'],
+                          menu['clear'], 
                           menu["learn"]
                           ]
 
@@ -470,16 +470,16 @@ def gatekeeper(keymaster):
 
   # Menu for the various things you might want to do in YouTube.
   mdict['ytchannel'] =    [
-                          menu['clear'],
                           menu['ytsubs'],
                           menu['ytviews'],
                           menu['ytvids'],
+                          menu['clear'],
                           menu['learn']
                           ]
 
   mdict['ytvideo'] =      [
-                          menu['clear'],
                           menu['ytvids'],
+                          menu['clear'],
                           menu['learn']
                           ]
 
@@ -487,14 +487,14 @@ def gatekeeper(keymaster):
 
   # Menu for the various things you  might want to do in Twitter.  
   mdict['twsearch'] =     [
-                          menu['clear'], 
                           menu['twsearch'],
+                          menu['clear'], 
                           menu['learn']
                           ]
 
   mdict['twprofile'] =    [
-                          menu['clear'],
                           menu['twstats'],
+                          menu['clear'],
                           menu['learn']
                           ]
 
