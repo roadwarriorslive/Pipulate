@@ -891,10 +891,11 @@ def Pipulate(username='', password='', dockey=''):
                         if 'url' in globs.row1:
                           url = onerow[globs.row1.index('url')]
                           yield lock
-                          try:
-                            html = gethtml(url)
-                          except:
-                            pass
+                          html = gethtml(url)
+                          if not html:
+                            yield "HTML not available. Possible Content-Type error.", "", "", ""
+                            out("HTML NOT AVAILABLE")
+                            Stop()
                           yield unlock
                           if stype.lower() == 'xpath':
                             import lxml.html
@@ -913,7 +914,6 @@ def Pipulate(username='', password='', dockey=''):
                                 newrow[coldex] = None
                             else:
                               newrow[coldex] = None
-
                         out('%s worked.' % collabel)
                       except Exception as e:
                         print traceback.format_exc()
@@ -1287,7 +1287,10 @@ def gethtml(url):
         defend = requests.head(url)
       except:
         return None
-      ct = defend.headers['Content-Type']
+      if 'Content-Type' in defend.headers:
+        ct = defend.headers['Content-Type']
+      else:
+        return None
       if 'text' not in ct:
         return None
     try:

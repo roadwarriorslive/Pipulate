@@ -331,6 +331,7 @@
 
     <script>
       $(document).ready(function(){  
+        stopsignlock();
         {%- if request.method == 'GET': -%}
           if ($("#magicbox").val()) {
             $('#magicbox').css('background-color', 'yellow');
@@ -361,15 +362,15 @@
       function whitelock() {
         $('#piplock').css('color', 'white');
       }
-      function yellowlock() {
+      function stopsignlock() {
+        $('#piplock').removeClass("pip-angle-circled-right");
         $('#pipulate').prop("disabled", true);
         $('#pipulate').css('color', 'red');
-        $('#piplock').removeClass("pip-angle-circled-right");
         $('#piplock').addClass("pip-stopsign");
       }
       function readytogo() {
         if ($( "#options option:selected" ).val() == 'off') {
-          yellowlock();
+          stopsignlock();
         } else {
           $('#pipulate').prop("disabled", false);
           $('#pipulate').css('color', 'white');
@@ -439,7 +440,7 @@
               </script>
             {% else %}
               <script>
-                yellowlock();
+                stopsignlock();
               </script>
             {% endif %}
             <div id="magicdiv">
@@ -495,8 +496,8 @@
                 <script>
                   // Unlock button and remove spinner, successful pipulation
                   $('#spinner').hide();
-                  $("i").removeClass("pip-circle-notch animate-spin");
-                  $("i").addClass("pip-ok");
+                  $("i.bullet").removeClass("pip-circle-notch animate-spin");
+                  $("i.bullet").addClass("pip-ok");
                   document.write('<img id="pbjt" src="./static/pipulate.gif" style="vertical-align: top;">');
                   unlockbutton();
                 </script>
@@ -504,15 +505,15 @@
                 <script>
                   // Unlock button and remove spinner, failed pipulation
                   $('#spinner').hide();
-                  $("i").removeClass("pip-circle-notch animate-spin");
-                  $("i").addClass("pip-ok");
+                  $("i.bullet").removeClass("pip-circle-notch animate-spin");
+                  $("i.bullet").addClass("pip-ok");
                   unlockbutton();
                 </script>
               {%- elif lineitem == "spinerr" -%}
                 <script>
                   // Unlock button and gracefully show user things are fubar.
                   $('#spinner').hide();
-                  $("i").removeClass("pip-circle-notch animate-spin");
+                  $("i.bullet").removeClass("pip-circle-notch animate-spin");
                   $("i.bullet").addClass("pip-circle-thin");
                   unlockbutton();
                 </script>
@@ -520,8 +521,8 @@
                 <span class="pl">{{ lineitem }}</span>
               {%- else -%}
                 <script>
-                  $("i").removeClass("pip-circle-notch animate-spin");
-                  $("i").addClass("pip-ok");
+                  $("i.bullet").removeClass("pip-circle-notch animate-spin");
+                  $("i.bullet").addClass("pip-ok");
                 </script>
                 {%- if loop.index > 1: -%}<br/>{%- endif -%}<span class="pl"><i class="bullet pip-icon pip-circle-notch animate-spin"></i> {{ lineitem|safe }}</span>
               {%- endif -%}
@@ -541,7 +542,7 @@
         <ol id="indoctrinate">
           <li>Create a Google spreadsheet named <b>&quot;Pipulate&quot;</b>.
               You can <a href="http://spreadsheets.google.com/ccc?new" target="_blank">click here to create</a>, then name it Pipulate.</li>
-          <li><a href="javascript:history.go(0)">Click to reload this window</a>.</li>
+          <li>Return to this window and <a href="javascript:history.go(0)">click to reload</a>.</li>
         </ol>
       {% endif %}
     </div>
