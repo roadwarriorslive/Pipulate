@@ -435,6 +435,7 @@ def gatekeeper(keymaster):
   mdict['sheets'] =       [
                           menu['qm'],
                           menu['clear'], 
+                          menu['test'], 
                           menu['learn']
                           ]
 
@@ -453,6 +454,7 @@ def gatekeeper(keymaster):
                           menu['mobilecrawl'],
                           menu['keywords'],
                           menu['clear'], 
+                          menu['test'], 
                           menu['learn']
                           ]
 
@@ -461,6 +463,7 @@ def gatekeeper(keymaster):
                           menu['search'],
                           menu['keywords'],
                           menu['clear'], 
+                          menu['test'], 
                           menu["learn"]
                           ]
 
@@ -474,12 +477,14 @@ def gatekeeper(keymaster):
                           menu['ytviews'],
                           menu['ytvids'],
                           menu['clear'],
+                          menu['test'], 
                           menu['learn']
                           ]
 
   mdict['ytvideo'] =      [
                           menu['ytvids'],
                           menu['clear'],
+                          menu['test'], 
                           menu['learn']
                           ]
 
@@ -489,12 +494,14 @@ def gatekeeper(keymaster):
   mdict['twsearch'] =     [
                           menu['twsearch'],
                           menu['clear'], 
+                          menu['test'], 
                           menu['learn']
                           ]
 
   mdict['twprofile'] =    [
                           menu['twstats'],
                           menu['clear'],
+                          menu['test'], 
                           menu['learn']
                           ]
 

@@ -31,6 +31,7 @@ texttypes = ['.asmx', '.asp', '.aspx', '.atom', '.cfm', '.cgi', '.css', '.htm',
 
 menu = {
 'learn':        "Learn How To Pipulate!",
+'test':         "Run System Tests",
 'clear':        "Clear sheet1 (initialize)",
 'seocrawl':     "1-Page SEO Crawl",
 'socialcrawl':  '1-Page Social Crawl',
