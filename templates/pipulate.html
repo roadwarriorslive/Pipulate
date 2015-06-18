@@ -367,6 +367,7 @@
         $('#pipulate').prop("disabled", true);
         $('#pipulate').css('color', 'red');
         $('#piplock').addClass("pip-stopsign");
+        $('#piplock').css('color', 'red');
       }
       function readytogo() {
         if ($( "#options option:selected" ).val() == 'off') {
@@ -376,6 +377,7 @@
           $('#pipulate').css('color', 'white');
           $('#piplock').removeClass("pip-attention");
           $('#piplock').addClass("pip-angle-circled-right");
+          $('#piplock').css('color', 'white');
         }
       }
       function lockbutton() {

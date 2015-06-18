@@ -1291,7 +1291,7 @@ def gethtml(url):
         ct = defend.headers['Content-Type']
       else:
         return None
-      if 'text' not in ct:
+      if ct != '' and 'text' not in ct:
         return None
     try:
       globs.hobj = requests.get(url, timeout=(5, 10))
