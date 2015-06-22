@@ -36,7 +36,7 @@
     .pip {
       font-family: Paytone One;
     }
-    #indoctrinate {
+    .indoctrinate {
       text-align: left;
       margin-left: auto;
       margin-right: auto;
@@ -134,6 +134,21 @@
       color: white;
       padding-left: 8px;
       font-weight: bold;
+    }
+    .cloud {
+      color: white;
+      font-size: 4em;
+      left:
+    }
+    #stormyweather {
+      margin-top: 30px;
+      margin-left: auto;
+      margin-right:auto;
+      width: 70px;
+      position: absolute;
+      line-height: 6.5;
+      left: 0;
+      right: 0;
     }
     .spinner {
       margin-top: 30px;
@@ -448,6 +463,9 @@
               </script>
             {% endif %}
             <div id="magicdiv">
+              <div id="stormyweather" class="stormyweather">
+                <i class="pip-cloud-flash-alt cloud"></i>
+              </div>
               <div id="spinner" class="spinner">
                 <div class="bounce1"></div>
                 <div class="bounce2"></div>
@@ -543,7 +561,9 @@
       </div>
       {% else: %}
         <img src="./static/stop-before-you-pipulate.svg" width="300px" height="300px">
-        <ol id="indoctrinate">
+        <p class="indoctrinate">Pipulate must always target an existing Google
+        Spreadsheet.</p>
+        <ol class="indoctrinate">
           <li>Create a Google spreadsheet named <b>&quot;Pipulate&quot;</b>.
               You can <a href="http://spreadsheets.google.com/ccc?new" target="_blank">click here to create</a>, then name it Pipulate.</li>
           <li>Return to this window and <a href="javascript:history.go(0)">click to reload</a>.</li>

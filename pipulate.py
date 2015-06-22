@@ -114,11 +114,14 @@ def main():
 
       if session and 'loggedin' in session and session['loggedin'] == "1":
         needsPipulate = True
-        try:
-          gdoc = gsp.open("Pipulate")
+        if request.args and 'u' in request.args and 'https://docs.google.com/spreadsheets' in request.args.get('u'):
           needsPipulate = False
-        except:
-          pass
+        else:
+          try:
+            gdoc = gsp.open("Pipulate")
+            needsPipulate = False
+          except:
+            pass
         # Indoctrinate new Pipulate users here
         if request.args and 'logout' in request.args:
           pass
