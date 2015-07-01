@@ -116,6 +116,8 @@ def main():
         needsPipulate = True
         if request.args and 'u' in request.args and 'https://docs.google.com/spreadsheets' in request.args.get('u'):
           needsPipulate = False
+        elif request.method == 'POST':
+          needsPipulate = False
         else:
           try:
             gdoc = gsp.open("Pipulate")
