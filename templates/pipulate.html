@@ -141,7 +141,6 @@
       padding-top: 17px;
       position: absolute;
       margin-left: -40px;
-      display: none;
     }
     #stormyweather {
       margin-top: 30px;
@@ -375,7 +374,11 @@
           unlockbutton();
           $("#learnsomething").html('Copy and paste a URL into field (even on mobile).');
         {% endif %}
+        setTimeout(stormyweather, 2000);
       });
+      function stormyweather() {
+        $('#stormyweather').fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100);
+      }
       function redlock() {
         $('#piplock').css('color', 'red');
       }
