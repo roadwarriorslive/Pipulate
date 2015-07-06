@@ -261,7 +261,25 @@ def LogUser(authkey):
 #         |_|
 #
 def Pipulate(username='', password='', dockey=''):
-  """Process data, educate users, divest losers."""
+  """I never met a generator I couldn't nest. That doesn't mean you should. A
+  few words of explanation are necessary about how these yield statements work,
+  and where better than here to explain it? This "funciton" is actually a
+  Python generator and not a normal function. That means it can return values
+  in small tuple-like packages each having 4 values. The reason for this is to
+  provide constant streaming feedback to the user through the web user
+  interface under the lightweight Python framework, utilizing the very same
+  page-load response that builds the intial user interface itself. In this way,
+  we can achieve very slick results that simulate the advantages of more
+  heavyweight approaches, such as websockets. It is beautiful, although it
+  takes a special eye to see it. Each value represents a different "channel"
+  to keep the user informed in the user interface. The first adds to the
+  log-like list at the bottom of the Pipulate interface. The second represents
+  the entertaining messages inserted above the JSON-display area. And the third
+  contains the JSON data that I want the user to be able to visualize as "data
+  being zapped around". And finally the fourth channel controls the flashing of
+  the little lock icon in the button to give some flashing visual feedback to
+  the user tied to actual busy-states."""
+
   stop = False
   qset = set()
   qstart = 1
