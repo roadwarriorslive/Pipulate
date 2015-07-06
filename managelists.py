@@ -32,7 +32,7 @@ def dontgetfrustrated(x):
   s.append("I know your time is valuable. I'm not ignoring you.")
   s.append("Google, I'm talking to you. Is anybody home?")
   s.append("I don't like this any more than you do.")
-  return '',s[x%len(s)],'',''
+  return 'stormyweather',s[x%len(s)],'',''
 
 def cyclemotto():
   try:

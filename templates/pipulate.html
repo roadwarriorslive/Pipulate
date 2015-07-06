@@ -375,7 +375,6 @@
           unlockbutton();
           $("#learnsomething").html('Copy and paste a URL into field (even on mobile).');
         {% endif %}
-        setTimeout(stormyweather, 2000);
       });
       function stormyweather() {
         $('#stormyweather').fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100);
@@ -545,6 +544,11 @@
                   $("i.bullet").removeClass("pip-circle-notch animate-spin");
                   $("i.bullet").addClass("pip-circle-thin");
                   unlockbutton();
+                </script>
+              {%- elif lineitem == "stormyweather" -%}
+                <script>
+                  // Flash stormy weather (gdata) problem-with-api symbol
+                  stormyweather();
                 </script>
               {%- elif lineitem[:1] == ',' -%}
                 <span class="pl">{{ lineitem }}</span>
