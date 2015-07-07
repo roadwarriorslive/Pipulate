@@ -52,6 +52,13 @@ def scraper(html, anxpath):
   else:
     return None
 
+def xml(url):
+  text = requests.get(url).text
+  import lxml.html
+  xobj = lxml.html.document_fromstring(text)
+  from lxml import etree
+  return (etree.tostring(xobj, pretty_print=True))
+
 def jsonapi(endpoint, url, jkey):
   """Take a JSON API endpoint, a URL as a parameter and key name to return value pair."""
   thecall = endpoint + url

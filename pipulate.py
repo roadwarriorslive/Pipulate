@@ -1323,6 +1323,9 @@ def gethtml(url):
     globs.html = globs.hobj.text
   return globs.html
 
+def html(url):
+  return gethtml(url)
+
 def convertisotime(timestamp):
   i = datetime.datetime(*map(int, re.split('[^\d]', timestamp)[:-1]))
   return i.strftime("%m/%d/%Y %H:%M:%S")
