@@ -925,7 +925,7 @@ def Pipulate(username='', password='', dockey=''):
                             searchme = lxml.html.fromstring(html)
                             match = searchme.xpath(spattern)
                             if match:
-                              newrow[coldex] = match[0].strip()
+                              newrow[coldex] = match[0]
                             else:
                               newrow[coldex] = None
                           elif stype.lower() == 'regex':
