@@ -939,9 +939,17 @@ def Pipulate(username='', password='', dockey=''):
                               if len(match) == 1:
                                 newrow[coldex] = match[0]
                               else:
-                                out(match[4].__class__.__name__) #HtmlElement
-                                out(stringify_children(match[4]))
-                                gotcha(match)
+                                frag = ''
+                                for item in match:
+                                  if item.__class__.__name__ in ('HtmlElement', 'HtmlComment'):
+                                    frag += stringify_children(item)
+                                  else:
+                                    try:
+                                      frag += item
+                                    except:
+                                      pass
+                                  frag += '\r\n'
+                              newrow[coldex] = frag
                             else:
                               newrow[coldex] = "<Error>no match</Error>"
                           elif stype.lower() == 'regex':
@@ -1387,9 +1395,7 @@ def adq(aval):
 def stringify_children(node):
   from lxml.etree import tostring
   from itertools import chain
-  parts = ([node.text] +
-    list(chain(*([c.text, tostring(c), c.tail] for c in node.getchildren()))) +
-    [node.tail])
+  parts = ([node.text] + list(chain(*([c.text, tostring(c, with_tail=False), c.tail] for c in node.getchildren()))) + [node.tail])
   # filter removes possible Nones in texts and tails
   return ''.join(filter(None, parts))
 
