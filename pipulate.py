@@ -926,9 +926,10 @@ def Pipulate(username='', password='', dockey=''):
                             searchme = lxml.html.fromstring(html)
                             match = searchme.xpath(spattern)
                             if match:
+                              gotcha(match)
                               newrow[coldex] = match[0]
                             else:
-                              newrow[coldex] = None
+                              newrow[coldex] = "<Error>no match</Error>"
                           elif stype.lower() == 'regex':
                             match = re.search(spattern, html, re.S | re.I)
                             if match:
