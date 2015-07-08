@@ -920,6 +920,7 @@ def Pipulate(username='', password='', dockey=''):
                             out("HTML NOT AVAILABLE")
                             Stop()
                           yield unlock
+                          #add another elif condition for PyQuery https://pypi.python.org/pypi/pyquery
                           if stype.lower() == 'xpath':
                             import lxml.html
                             searchme = lxml.html.fromstring(html)
