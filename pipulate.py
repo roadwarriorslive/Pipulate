@@ -939,7 +939,9 @@ def Pipulate(username='', password='', dockey=''):
                               if len(match) == 1:
                                 newrow[coldex] = match[0]
                               else:
-                                pass
+                                out(match[4].__class__.__name__) #HtmlElement
+                                out(stringify_children(match[4]))
+                                gotcha(match)
                             else:
                               newrow[coldex] = "<Error>no match</Error>"
                           elif stype.lower() == 'regex':
@@ -1381,6 +1383,15 @@ def adq(aval):
     return None #None-in/None-out. This special keyword shouldn't be quoted.
   else:
     return "r'%s'" % (aval) #ALMOST everything else should be quoted.
+
+def stringify_children(node):
+  from lxml.etree import tostring
+  from itertools import chain
+  parts = ([node.text] +
+    list(chain(*([c.text, tostring(c), c.tail] for c in node.getchildren()))) +
+    [node.tail])
+  # filter removes possible Nones in texts and tails
+  return ''.join(filter(None, parts))
 
 from functions import *
 from managelists import *
