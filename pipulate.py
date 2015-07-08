@@ -936,8 +936,10 @@ def Pipulate(username='', password='', dockey=''):
                               yield "LXML parser problem. Check URL source", "LXML Problem!", "", ""
                               Stop()
                             if match:
-                              gotcha(match)
-                              newrow[coldex] = match[0]
+                              if len(match) == 1:
+                                newrow[coldex] = match[0]
+                              else:
+                                pass
                             else:
                               newrow[coldex] = "<Error>no match</Error>"
                           elif stype.lower() == 'regex':
@@ -960,10 +962,13 @@ def Pipulate(username='', password='', dockey=''):
 
             out("Finished processing row. Updating spreadsheet...")
             newrow = ['' if x==None else x for x in newrow]
-            try:
-              yield "", "", json.dumps(newrow), ""
-            except:
-              yield "", "", newrow, ""
+            if len(str(newrow)) > 10000:
+              yield "", "", "['Too big to display']", ""
+            else:
+              try:
+                yield "", "", json.dumps(newrow), ""
+              except:
+                yield "", "", newrow, ""
             for index, onecell in enumerate(CellList):
               onecell.value = newrow[index]
               result = None
