@@ -924,7 +924,17 @@ def Pipulate(username='', password='', dockey=''):
                           if stype.lower() == 'xpath':
                             import lxml.html
                             searchme = lxml.html.fromstring(html)
-                            match = searchme.xpath(spattern)
+                            try:
+                              match = searchme.xpath(spattern)
+                            except lxml.etree.XPathEvalError:
+                              out("BAD XPATH PATTERN")
+                              yme = "Bad xpath: %s" % spattern
+                              yield yme, "Bad XPATH Pattern!", "", ""
+                              Stop()
+                            except:
+                              out("OTHER LXML ERROR")
+                              yield "LXML parser problem. Check URL source", "LXML Problem!", "", ""
+                              Stop()
                             if match:
                               gotcha(match)
                               newrow[coldex] = match[0]
