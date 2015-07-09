@@ -972,8 +972,8 @@ def Pipulate(username='', password='', dockey=''):
 
             out("Finished processing row. Updating spreadsheet...")
             newrow = ['' if x==None else x for x in newrow]
-            if len(str(newrow)) > 10000:
-              yield "", "", "['Too big to display']", ""
+            if len(str(newrow)) > globs.ROWMAX:
+              yield "", "", "['TOO BIG']", ""
             else:
               try:
                 yield "", "", json.dumps(newrow), ""
@@ -981,7 +981,7 @@ def Pipulate(username='', password='', dockey=''):
                 yield "", "", newrow, ""
             for index, onecell in enumerate(CellList):
               onecell.value = newrow[index]
-              result = None
+            result = None
 
             stop = True
             for x in range(5):
