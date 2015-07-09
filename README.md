@@ -1,8 +1,7 @@
 # Free And Open Source SEO Software
 <img src="http://mikelevinseo.com/images/pipulate-interface.png" alt="FOSS SEO Software"/>
 ========
-
-[Join the Levinux Team on Slack](http://goo.gl/forms/mx6eVSOINv)
+[Join the Pipulate Team on Slack](http://goo.gl/forms/nh3WM6bPle)
 
 Pipulate expands your mind... and the way spreadsheets work by using functions
 written and executed in Python entirely outside of the spreadsheet, cleanly
