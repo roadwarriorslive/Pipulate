@@ -153,8 +153,8 @@ def main():
       session['oa2'] = request.args.get("access_token")
       session['loggedin'] = "1"
       session['i'] -= 1 #Don't skip a message, just becuse I redirect.
-      if globs.PCOM:
-        LogUser(session['oa2'])
+      # if globs.PCOM:
+      #   LogUser(session['oa2'])
       if 'u' in session and 's' in session:
         out("EXITING MAIN FUNCTION REDIRECT WITH URL AND TEXT", "0", '-')
         return redirect(url_for('main', u=session['u'], s=session['s']))
@@ -202,6 +202,7 @@ def main():
 def LogUser(authkey):
   """Track usage of the Pipulate bookmarklet per user on main domain instance."""
   api = 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='
+  out("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
   api = api + authkey
   ujson = requests.get(api, timeout=5)
   adict = ujson.json()
@@ -214,41 +215,43 @@ def LogUser(authkey):
     unpickleme.close()
     username = answers['username']
     password = answers['password']
-    try:
-      gc2 = gspread.login(username, password)
-      usersheet = gc2.open("Users").sheet1
-      emails = usersheet.col_values(1)
-    except:
-      return
+    #try:
+    gc2 = gspread.login(username, password)
+    usersheet = gc2.open("Users").sheet1
+    emails = usersheet.col_values(1)
+    #except:
+    #  return
     email = ''
     if "email" in adict:
       email = adict["email"].lower()
     if email in emails:
       emaildex = emails.index(email) + 1
       userange = 'H%s:I%s' % (emaildex, emaildex)
-      try:
-        CellList = usersheet.range(userange)
-        CellList[0].value = timestamp()
-        CellList[1].value = str(int(CellList[1].value) + 1)
-        usersheet.update_cells(CellList)
-      except:
-        return
+      #try:
+      CellList = usersheet.range(userange)
+      CellList[0].value = timestamp()
+      CellList[1].value = str(int(CellList[1].value) + 1)
+      usersheet.update_cells(CellList)
+      #except:
+      #  return
     else:
       user = []
       if 'email' in adict:
         user.append(adict["email"].lower())
       for item in ['name', 'link', 'locale', 'gender', 'id']:
-        try:
-          user.append(adict[item])
-        except:
-          user.append('')
+        #try:
+        user.append(adict[item])
+        #except:
+        #  user.append('')
       user.append(timestamp())
       user.append('')
       user.append('1')
-      try:
-        InsertRows(usersheet, [user], len(emails))
-      except:
-        return
+      #try:
+      InsertRows(usersheet, [user], len(emails))
+      #except:
+      #  return
+  else:
+    out("/var/opt/pipulate.pkl not found. Run python configure.py")
 
 #  ____  _             _       _
 # |  _ \(_)_ __  _   _| | __ _| |_ ___
@@ -359,12 +362,6 @@ def Pipulate(username='', password='', dockey=''):
           yield "spinoff", "", "", ""
           yield badtuple
           Stop()
-      # try:
-      #   sheet = gdoc.id
-      #   sheetlink = '<a target="_blank" href="https://docs.google.com/spreadsheets/d/%s/edit">Click here to open Pipulate Spreadsheet</a>.' % sheet
-      #   yield sheetlink, "", "", ""
-      # except:
-      #   pass
       yield unlock
       out("Google Spreadsheet successfully opened.")
 
