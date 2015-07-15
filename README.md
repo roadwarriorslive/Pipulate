@@ -229,6 +229,11 @@ No data resides on these servers. They are only there to Pipulate the Google
 Spreadsheets. Get a Pipulate server from anywhere, fire-off a job, and then
 destroy the server if you care to. Nothing's lost!
 
+Scheduling is currently the only feature in Pipulate that needs configuration
+values (username and password), but it is unwise to put your main username and
+password in a file. Thankfully, Google provides this app specific way of
+issuing passwords: https://security.google.com/settings/security/apppasswords?pli=1
+
 Once you're happy with the results of an ad hoc investigation (using question
 marks), replace the question marks with asterisks, and invite in a special
 gmail address that you set up, and watch the job get processed daily (or

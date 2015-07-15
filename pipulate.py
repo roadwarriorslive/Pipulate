@@ -153,11 +153,8 @@ def main():
       session['oa2'] = request.args.get("access_token")
       session['loggedin'] = "1"
       session['i'] -= 1 #Don't skip a message, just becuse I redirect.
-      #if globs.PCOM:
-      #  try:
-      LogUser(session['oa2'])
-      #  except:
-      #    pass
+      if globs.PCOM:
+        LogUser(session['oa2'])
       if 'u' in session and 's' in session:
         out("EXITING MAIN FUNCTION REDIRECT WITH URL AND TEXT", "0", '-')
         return redirect(url_for('main', u=session['u'], s=session['s']))
