@@ -9,7 +9,7 @@
 #                        But to do so, use a globs prefix
 #                         It's the price you have to pay
 
-PCOM = False    # Turns True if pipulate in hostname. Tracks usage.
+PCOM = True     # Turns True if pipulate in hostname. Tracks usage.
 DBUG = True     # Turns on and off verbose console output.
 PIPURL = ''     # Constant containing URL from bookmarklet click.
 PIPMODE = ''    # Constant containing menu selection upon bookmarklet click.
