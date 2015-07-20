@@ -73,11 +73,11 @@ class PipForm(Form):
 
 @app.route("/configure", methods=['GET'])
 def configure():
-  filename = "/opt/foo.pkl"
+  filename = "/opt/pipulate.pkl"
   if os.path.isfile(filename) and os.path.getsize(filename) > 0:
-    return render_template('configure.html', configured=True)
+    return render_template('configure.html', configlink=getConfiglink(), configured=True)
   else:
-    return render_template('configure.html', configured=False)
+    return render_template('configure.html', configlink=getConfiglink(), configured=False)
 
 #  _____ _           _                      _
 # |  ___| | __ _ ___| | __  _ __ ___   __ _(_)_ __
@@ -134,6 +134,8 @@ def main():
             pass
         # Indoctrinate new Pipulate users here
         if request.args and 'logout' in request.args:
+          pass
+        elif request.args and 'code' in request.args:
           pass
         elif needsPipulate:
           out("EXITING MAIN FUNCTION RENDER INDOCTRINATE", "0", '-')
@@ -1042,6 +1044,27 @@ def url_root(url):
   parsed = urlparse.urlparse(url)
   return "%s://%s%s" % (parsed[0], parsed[1], parsed[2])
 
+def getConfiglink():
+  """Return the HTML code required for an OAuth2 renewal token."""
+  redir = globs.CANONICAL
+  if 'Host' in request.headers:
+    redir = 'http://'+request.headers['Host']
+  if request.args and 'u' in request.args:
+    session['u'] = request.args.get('u')
+  scope = 'https://spreadsheets.google.com/feeds/'
+  if globs.PCOM:
+    scope = 'profile email ' + scope
+  baseurl = "https://accounts.google.com/o/oauth2/auth"
+  qsdict = {  'scope': scope,
+              'response_type': 'code',
+              'access_type': 'offline',
+              'redirect_uri': redir,
+              'approval_prompt': 'force',
+              'client_id': '394883714902-h3fjk3u6rb4jr4ntpeft41kov6et2nve.apps.googleusercontent.com'
+            }
+  from urllib import urlencode
+  return "%s?%s" % (baseurl, urlencode(qsdict))
+
 def getLoginlink():
   """Return the HTML code required for an OAuth2 login link."""
   redir = globs.CANONICAL
@@ -1056,7 +1079,6 @@ def getLoginlink():
   qsdict = {  'scope': scope,
               'response_type': 'token',
               'redirect_uri': redir,
-              'approval_prompt': 'force',
               'client_id': '394883714902-h3fjk3u6rb4jr4ntpeft41kov6et2nve.apps.googleusercontent.com'
             }
   from urllib import urlencode
