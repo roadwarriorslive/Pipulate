@@ -71,6 +71,10 @@ class PipForm(Form):
   magicbox = TextAreaField("magicbox")
   options = SelectField("options")
 
+@app.route("/configure", methods=['GET'])
+def configure():
+  return render_template('configure.html')
+
 #  _____ _           _                      _
 # |  ___| | __ _ ___| | __  _ __ ___   __ _(_)_ __
 # | |_  | |/ _` / __| |/ / | '_ ` _ \ / _` | | '_ \
@@ -1071,7 +1075,8 @@ def getBookmarklet():
   """Return the HTML required to create a draggable Pipulate bookmarklet link."""
   host = request.headers['Host']
   bname = "Pipulate"
-  return '''javascript:(function(){window.open('http://%s/?u='+encodeURIComponent(document.location.href)+'&d='+Date.now()+'&s='+encodeURIComponent(window.getSelection?window.getSelection():document.selection.createRange().text)+'&c='+window.btoa(unescape(encodeURIComponent(document.cookie))), '%s', 'toolbar=0,resizable=1,scrollbars=1,status=1,width=630,height=600');})();''' % (host, bname)
+  #return '''javascript:(function(){window.open('http://%s/?u='+encodeURIComponent(document.location.href)+'&d='+Date.now()+'&s='+encodeURIComponent(window.getSelection?window.getSelection():document.selection.createRange().text)+'&c='+window.btoa(unescape(encodeURIComponent(document.cookie))), '%s', 'toolbar=0,resizable=1,scrollbars=1,status=1,width=630,height=600');})();''' % (host, bname)
+  return '''javascript:(function(){open('http://%s/?u='+encodeURIComponent(document.location.href)+'&d='+Date.now()+'&s='+encodeURIComponent(window.getSelection?window.getSelection():document.selection.createRange().text)+'&c='+window.btoa(unescape(encodeURIComponent(document.cookie))));})();''' % (host)
 
 def getLogoutlink():
   """Return the HTML required to clear and expire the current OAuth2 token."""
