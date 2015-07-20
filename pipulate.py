@@ -73,7 +73,11 @@ class PipForm(Form):
 
 @app.route("/configure", methods=['GET'])
 def configure():
-  return render_template('configure.html')
+  filename = "/opt/foo.pkl"
+  if os.path.isfile(filename) and os.path.getsize(filename) > 0:
+    return render_template('configure.html', configured=True)
+  else:
+    return render_template('configure.html', configured=False)
 
 #  _____ _           _                      _
 # |  ___| | __ _ ___| | __  _ __ ___   __ _(_)_ __

@@ -16,7 +16,7 @@ body {
   height: 100%;
   overflow: hidden;
 }
-h1 {
+h1, h2 {
   color: white;
 }
 a {
