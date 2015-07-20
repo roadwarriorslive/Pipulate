@@ -1,0 +1,333 @@
+@font-face {
+  font-family: 'mikelevin';
+  src: url('./static/font/mikelevin.eot?73762107');
+  src: url('./static/font/mikelevin.eot?73762107#iefix') format('embedded-opentype'),
+       url('./static/font/mikelevin.woff?73762107') format('woff'),
+       url('./static/font/mikelevin.ttf?73762107') format('truetype'),
+       url('./static/font/mikelevin.svg?73762107#mikelevin') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  font-family: Nunito;
+  font-size: 14px;
+  color: #333;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+a {
+  color: #76BFFF;
+}
+.pip {
+  font-family: Paytone One;
+}
+.indoctrinate {
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  width: 360px;
+}
+#wrapper {
+  position: relative;
+  height: 100%;
+}
+#content{
+  background-color: #000;
+  position: relative;
+  margin: 0 auto;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 50px;
+  text-align: center;
+  min-height: 100%
+}
+#pipstream{
+  border: 2px solid lightgrey;
+  height: 250px;
+  overflow: auto;
+  background-color: slategrey;
+  margin-bottom: 15px;
+  margin-left: 15px;
+  margin-right: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  text-align: left;
+  line-height: 1.4em;
+}
+.pl {
+  color: white;
+  font-size: .9em;
+}
+nav{
+  background-color: #EEEEEE;
+}
+#pipurl {
+  background-color: bisque;
+  font-weight: bold;
+}
+#magicdiv{
+  margin-top: 12px;
+  margin-bottom: 6px;
+  margin-left: 15px;
+  margin-right: 14px;
+  text-align:center;
+}
+#learnsomething{
+  font-size: 10px;
+  height: 24px;
+  background-color: lightgrey;
+  margin-bottom: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0px;
+  line-height: 2.7;
+  width: 100%;
+}
+#magicbox{
+  -webkit-border-radius:0px;
+  background-color: darkslategray;
+  color: white;
+  border-radius:0px;
+  border: 2px solid lightgrey;
+  margin-top: 0px;
+  margin-left: auto;
+  margin-right:auto;
+  width: 100%;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+}
+#pipulate{
+  font-family:Paytone One
+}
+#paste{
+  margin-bottom: 3px;
+  white-space:nowrap;
+  margin-left: auto;
+  margin-right: auto;
+  padding-right: 74px;
+}
+#pastelabel{
+  margin-right: 8px;
+  display: inline-block;
+  width: 50px;
+  white-space:nowrap;
+  font-size: 1.3em;
+  text-align: right;
+  color: white;
+  padding-left: 8px;
+  font-weight: bold;
+}
+.cloud {
+  color: white;
+  font-size: 4em;
+  padding-top: 17px;
+  position: absolute;
+  margin-left: -40px;
+}
+#stormyweather {
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right:auto;
+  width: 70px;
+  position: absolute;
+  line-height: 6.5;
+  left: 0;
+  right: 0;
+  display: none;
+}
+.spinner {
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right:auto;
+  width: 70px;
+  position: absolute;
+  line-height: 6.5;
+  left: 0;
+  right: 0;
+}
+.spinner > div {
+  width: 18px;
+  height: 18px;
+  background-color: #C6C6C6;
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+  animation: bouncedelay 1.4s infinite ease-in-out;
+  /* Prevent first frame from flickering when animation starts */
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+@-webkit-keyframes bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0.0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+@keyframes bouncedelay {
+  0%, 80%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 40% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
+#arrow{
+  font-weight: bold;
+  font-size: 1.8em;
+  color: #323232;
+  position : relative;
+  top:.2em;
+}
+#dragdiv{
+  font-size: 1em;
+  top:.1em;
+  white-space: nowrap;
+  float: left;
+  margin-top: 10px;
+}
+#piplogo {
+  max-width: 380px;
+  position: relative;
+  top: 40%;
+  transform: translateY(-50%);
+}
+.bookmarklet{padding: 0px;}
+.pressthis{
+  margin:5px 2px 8px 5px;
+  float: left;
+  }
+.pressthis a,.pressthis a:active,.pressthis a:focus,.pressthis a:hover{
+  padding:3px;
+  display:inline-block;
+  position:relative;cursor:
+  move;color:#333;
+  background:#e6e6e6;
+  -webkit-border-radius:5px;
+  border-radius:5px;
+  border:1px solid #b4b4b4;
+  font-family:Paytone One;
+  font-size:16px;
+  text-decoration:none}
+.pressthis a:active{
+  outline:0}
+.pressthis a:hover:after{
+  -webkit-transform:skew(20deg) rotate(9deg);
+  -ms-transform:skew(20deg) rotate(9deg);
+  transform:skew(20deg) rotate(9deg);
+  -webkit-box-shadow:0 10px 8px rgba(0,0,0,.7);
+  box-shadow:0 10px 8px rgba(0,0,0,.7)}
+.pressthis a span{
+  display:inline-block;
+  margin-left:25px;
+  margin-right:26px;
+  }
+.pressthis a span:
+  before{color:#777;
+  font:400 20px/1 ;
+  position:relative;
+  display:inline-block;
+  top:4px;
+  margin-right:4px}
+.pressthis a:after{
+  content:'';
+  width:70%;
+  height:55%;
+  z-index:-1;
+  position:absolute;
+  right:10px;
+  bottom:9px;
+  background:0 0;
+  -webkit-transform:skew(20deg) rotate(6deg);
+  -ms-transform:skew(20deg) rotate(6deg);
+  transform:skew(20deg) rotate(6deg);
+  -webkit-box-shadow:0 10px 8px rgba(0,0,0,.6);
+  box-shadow:0 10px 8px rgba(0,0,0,.6)}
+
+.pip-icon
+{
+  font-family: "mikelevin";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+ 
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: 1em;
+  text-align: center;
+  /* opacity: .8; */
+ 
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+ 
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+ 
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+ 
+  /* You can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+ 
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -webkit-transform-origin: 69% 50%;
+  -moz-osx-font-smoothing: grayscale;
+ 
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+.pipmenu {
+  font-size: 13px;
+  background-color:#DDDDDD;
+  width: 200px;
+  height: auto;
+  margin: .1em 0;
+}
+#piphelp {
+  position:absolute;
+  right: 3em;
+  margin-top:14px;
+  font-size: 1.2em;
+  color: black;
+}
+@media (max-width: 500px) {
+  #dragspan {
+    display: none;
+  }
+  #dragdiv {
+    margin-top: 12px;
+  }
+}
+@media (max-width: 1140px) and (min-width: 960px) {
+  #dragdiv {
+    display: none;
+  }
+}
+@media (min-width: 960px) {
+  #pastelabel{
+    width:4em;
+  }
+  #paste{
+    width: 97%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:50px;
+  }
+  #piphelp{
+    display: none;
+  }
+}

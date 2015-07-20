@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <title>Pipulate Free and Open Source (FOSS) SEO Software</title>
+    <meta name="description" content="Pipulate Collects Data directly into Spreadsheets for SEO and Social Media monitoring.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link href='http://fonts.googleapis.com/css?family=Paytone+One' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Nunito:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/picnicss/4.0.0/picnic.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/picnicss/4.0.0/plugins.min.css">
+    <link rel="stylesheet" href="./static/css/mikelevin.css">
+    <link rel="stylesheet" href="./static/css/animation.css"><!--[if IE 7]><link rel="stylesheet" href="css/mikelevin-ie7.css"><![endif]-->
+    <link rel="stylesheet" href="./static/main.css">
+  </head>
+  <body>
+    <div id="wrapper">
+    <nav>
+    <!-- responsive -->
+    <input id="bmenu" type="checkbox" class="show">
+    <label for="bmenu" class="burger"><i class="pip-icon pip-menu"></i></label>
+    <div class="pressthis" style="text-align: center"><a class="bookmarklet" href="{{ bookmarklet }}" onclick="return false;" oncontextmenu="if(window.navigator.userAgent.indexOf('WebKit')!=-1||window.navigator.userAgent.indexOf('MSIE')!=-1){jQuery('.pressthis-code').show().find('textarea').focus().select();return false;}"><span>{{ blabel }}</span></a></div>
+    <div id="dragdiv"> <img src="./static/foss-seo.png" style="vertical-align: middle;"/><span id="dragspan"> Drag to Boomarks Bar.</span></div>
+    <a id="piphelp" class="pip-help-circled" href="./static/help.html"></a>
+    <div class="menu">
+      <a class="button pseudo pip-picirclelogo2" target="_blank" href="https://docs.google.com/presentation/d/10lr_d1uyLMOnWsMzbenKiPlFE5-BIt9bxVucw7O4GSI/edit?usp=sharing">Intro &amp; Philosophy</a>
+      <a class="button pseudo pip-github-1" target="_blank" href="https://github.com/miklevin/pipulate/blob/master/README.md">Documentation</a>
+      <a class="button pseudo pip-youtube-play" target="_blank" href="https://www.youtube.com/playlist?list=PLy-AlqZFg6G_bo5bH_wLBdxx-TNfB_yXT">Video Tutorials</a>
+      <a class="button pseudo pip-mikelevin-logo" target="_blank" href="http://levinux.com">Levinux</a>
+      {% if session and 'loggedin' in session and session['loggedin'] == '1': %}
+        <a class="button pip-block" href="{{ logoutlink }}">Logout</a>
+      {% else %}
+        <a class="button pip-googleplus" href="{{ loginlink }}">Login</a>
+      {% endif %}
+    </div>
+    </nav>
+    <div id="content">
+      <h1>foo</h1>
+    </div>
+  </body>
+</html>
