@@ -159,7 +159,9 @@ def main():
     elif session and 's' in session:
       form.magicbox.data = session['s']
       stext = session['s']
-    if request.args and "access_token" in request.args:
+    if request.args and "code" in request.args:\
+      gotcha("foo")
+    elif request.args and "access_token" in request.args:
       session['oa2'] = request.args.get("access_token")
       session['loggedin'] = "1"
       session['i'] -= 1 #Don't skip a message, just becuse I redirect.
