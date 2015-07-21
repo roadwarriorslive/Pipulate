@@ -235,6 +235,8 @@
         {% endif %}
         </div>
       </div>
+      {% elif configlink: %}
+        <h1>Gotcha</h1>
       {% else: %}
         <img src="./static/stop-before-you-pipulate.svg" width="300px" height="300px">
         <p class="indoctrinate">Pipulate must always target an existing Google
