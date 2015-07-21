@@ -237,8 +237,12 @@
       </div>
       {% elif configlink: %}
         <h1>Pipulate Server OAuth2 Login Setup</h1>
-        <h2>Step #1: Login to Google with Gmail account to control scheduling.</h2>
-        <a href="{{ configlink }}">Login</a>
+        {% if request.args and 'code' in request.args: %}
+          <h2>Step #2: Enter Client ID and Secret from <a href="https://console.developers.google.com">Google Developers Console</a>.</h2>
+        {% else: %}
+          <h2>Step #1: Login to Google with Gmail account to control scheduling.</h2>
+          <a href="{{ configlink }}">Login</a>
+        {% endif %}
       {% else: %}
         <img src="./static/stop-before-you-pipulate.svg" width="300px" height="300px">
         <p class="indoctrinate">Pipulate must always target an existing Google
