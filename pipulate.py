@@ -73,7 +73,7 @@ class PipForm(Form):
 
 @app.route("/configure", methods=['GET'])
 def configure():
-  filename = "/opt/pipulate.pkl"
+  filename = "/var/opt/pipulate.pkl"
   if os.path.isfile(filename) and os.path.getsize(filename) > 0:
     return render_template('configure.html', configlink=getConfiglink(), configured=True)
   else:
@@ -97,49 +97,46 @@ def main():
               |_|   |_| .__/ \__,_|_|\__,_|\__|_|_| |_|\__, | (_) (_) (_)
                       |_|                              |___/
   ''')
-
   out("ENTERED MAIN FUNCTION", "0")
   STREAMIT = False
   CLICKTEXT = False
   form = PipForm(csrf_enabled=False)
-  #   _            _                 _
-  #  | |_ ___  ___| |_    __ _ _ __ (_)
-  #  | __/ _ \/ __| __|  / _` | '_ \| |
-  #  | ||  __/\__ \ |_  | (_| | |_) | |
-  #   \__\___||___/\__|  \__,_| .__/|_|
-  #                           |_|
-  if session:
-    if 'oa2' in session:
-      creds = Credentials(access_token=session['oa2'])
-      try:
-        gsp = gspread.authorize(creds)
-        gsp.openall()
-        session['loggedin'] = "1"
-      except:
-        session.pop('loggedin', None)
-        if 'u' not in session and globs.PIPURL:
-          session['u'] = globs.PIPURL
+  filename = "/var/opt/pipulate.pkl"
+  if os.path.isfile(filename) and os.path.getsize(filename) > 0:
+    pass
+  else:
+    gotcha("Not yet configured")
 
-      if session and 'loggedin' in session and session['loggedin'] == "1":
-        needsPipulate = True
-        if request.args and 'u' in request.args and 'https://docs.google.com/spreadsheets' in request.args.get('u'):
+  if session and 'oa2' in session:                        # Looks like we're logged in already,
+    creds = Credentials(access_token=session['oa2'])
+    try:
+      gsp = gspread.authorize(creds)
+      gsp.openall()                                       # so, see if we can get a list of docs,
+      session['loggedin'] = "1"
+    except:
+      session.pop('loggedin', None)                       # and if we can't, get rid of login clue.
+      if 'u' not in session and globs.PIPURL:
+        session['u'] = globs.PIPURL
+    if session and 'loggedin' in session and session['loggedin'] == "1":
+      needsPipulate = True
+      if request.args and 'u' in request.args and 'https://docs.google.com/spreadsheets' in request.args.get('u'):
+        needsPipulate = False
+      elif request.method == 'POST':
+        needsPipulate = False
+      else:
+        try:
+          gdoc = gsp.open("Pipulate")
           needsPipulate = False
-        elif request.method == 'POST':
-          needsPipulate = False
-        else:
-          try:
-            gdoc = gsp.open("Pipulate")
-            needsPipulate = False
-          except:
-            pass
-        # Indoctrinate new Pipulate users here
-        if request.args and 'logout' in request.args:
+        except:
           pass
-        elif request.args and 'code' in request.args:
-          pass
-        elif needsPipulate:
-          out("EXITING MAIN FUNCTION RENDER INDOCTRINATE", "0", '-')
-          return render_template('pipulate.html', form=form, select=None)
+      # Indoctrinate new Pipulate users here
+      if request.args and 'logout' in request.args:
+        pass
+      elif request.args and 'code' in request.args:
+        pass
+      elif needsPipulate:
+        out("EXITING MAIN FUNCTION RENDER INDOCTRINATE", "0", '-')
+        return render_template('pipulate.html', form=form, select=None)
   stext = ''
   if request.method == 'POST':
     if form.pipurl.data:
