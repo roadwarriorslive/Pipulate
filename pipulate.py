@@ -96,7 +96,7 @@ def main():
   if os.path.isfile(globs.FILE) and os.path.getsize(globs.FILE) > 0:
     pass
   else:
-    return render_template('configure.html', configlink=getConfiglink(), configured=False)
+    return render_template('pipulate.html', configlink=getConfiglink())
 
   if session and 'oa2' in session:                        # Looks like we're logged in already,
     creds = Credentials(access_token=session['oa2'])
