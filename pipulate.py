@@ -161,7 +161,23 @@ def main():
       stext = session['s']
     if request.args and "code" in request.args:
       output = open(globs.RENEW, 'wb')
-      output.write(request.args['code'])
+      code = request.args['code'] 
+      scope = 'https://spreadsheets.google.com/feeds/'
+      redir = globs.CANONICAL
+      if 'Host' in request.headers:
+        redir = 'http://'+request.headers['Host']
+      endpoint = "https://www.googleapis.com/oauth2/v3/token"
+      postheaders = {
+        'client_id': globs.CLIENTID,
+        'client_secret': 'oh foo',
+        'code': code,
+        'grant_type': 'authorization_code',
+        'redirect_uri': redir
+        }
+      r = requests.post(endpoint, postheaders)
+      out(r.text)
+      gotcha(r.text)
+      output.write(r.text)
       output.close()
       return redirect(url_for('main'))
     elif request.args and "access_token" in request.args:
@@ -217,7 +233,6 @@ def main():
 def LogUser(authkey):
   """Track usage of the Pipulate bookmarklet per user on main domain instance."""
   api = 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='
-  out("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
   api = api + authkey
   ujson = requests.get(api, timeout=5)
   adict = ujson.json()
@@ -1059,13 +1074,13 @@ def getConfiglink():
   scope = 'https://spreadsheets.google.com/feeds/'
   if globs.PCOM:
     scope = 'profile email ' + scope
-  baseurl = "https://accounts.google.com/o/oauth2/auth"
+  baseurl = globs.OAUTHURL
   qsdict = {  'scope': scope,
               'response_type': 'code',
               'access_type': 'offline',
               'redirect_uri': redir,
               'approval_prompt': 'force',
-              'client_id': '394883714902-h3fjk3u6rb4jr4ntpeft41kov6et2nve.apps.googleusercontent.com'
+              'client_id': globs.CLIENTID
             }
   from urllib import urlencode
   return "%s?%s" % (baseurl, urlencode(qsdict))
@@ -1080,11 +1095,11 @@ def getLoginlink():
   scope = 'https://spreadsheets.google.com/feeds/'
   if globs.PCOM:
     scope = 'profile email ' + scope
-  baseurl = "https://accounts.google.com/o/oauth2/auth"
+  baseurl = globs.OAUTHURL
   qsdict = {  'scope': scope,
               'response_type': 'token',
               'redirect_uri': redir,
-              'client_id': '394883714902-h3fjk3u6rb4jr4ntpeft41kov6et2nve.apps.googleusercontent.com'
+              'client_id': globs.CLIENTID
             }
   from urllib import urlencode
   return "%s?%s" % (baseurl, urlencode(qsdict))
