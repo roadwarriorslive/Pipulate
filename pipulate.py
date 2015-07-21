@@ -71,13 +71,6 @@ class PipForm(Form):
   magicbox = TextAreaField("magicbox")
   options = SelectField("options")
 
-@app.route("/configure", methods=['GET'])
-def configure():
-  if os.path.isfile(globs.FILE) and os.path.getsize(globs.FILE) > 0:
-    return render_template('configure.html', configlink=getConfiglink(), configured=True)
-  else:
-    return render_template('configure.html', configlink=getConfiglink(), configured=False)
-
 #  _____ _           _                      _
 # |  ___| | __ _ ___| | __  _ __ ___   __ _(_)_ __
 # | |_  | |/ _` / __| |/ / | '_ ` _ \ / _` | | '_ \
@@ -103,7 +96,7 @@ def main():
   if os.path.isfile(globs.FILE) and os.path.getsize(globs.FILE) > 0:
     pass
   else:
-    gotcha("Not yet configured")
+    return render_template('configure.html', configlink=getConfiglink(), configured=False)
 
   if session and 'oa2' in session:                        # Looks like we're logged in already,
     creds = Credentials(access_token=session['oa2'])
