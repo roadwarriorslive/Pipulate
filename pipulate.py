@@ -73,8 +73,7 @@ class PipForm(Form):
 
 @app.route("/configure", methods=['GET'])
 def configure():
-  filename = "/var/opt/pipulate.pkl"
-  if os.path.isfile(filename) and os.path.getsize(filename) > 0:
+  if os.path.isfile(globs.FILE) and os.path.getsize(globs.FILE) > 0:
     return render_template('configure.html', configlink=getConfiglink(), configured=True)
   else:
     return render_template('configure.html', configlink=getConfiglink(), configured=False)
@@ -101,8 +100,7 @@ def main():
   STREAMIT = False
   CLICKTEXT = False
   form = PipForm(csrf_enabled=False)
-  filename = "/var/opt/pipulate.pkl"
-  if os.path.isfile(filename) and os.path.getsize(filename) > 0:
+  if os.path.isfile(globs.FILE) and os.path.getsize(globs.FILE) > 0:
     pass
   else:
     gotcha("Not yet configured")
@@ -234,51 +232,50 @@ def LogUser(authkey):
   ujson = requests.get(api, timeout=5)
   adict = ujson.json()
   import os.path
-  filename = "/var/opt/pipulate.pkl"
-  if os.path.isfile(filename) and os.path.getsize(filename) > 0:
+  if os.path.isfile(globs.FILE) and os.path.getsize(globs.FILE) > 0:
     import pickle
-    unpickleme = open(filename, "rb")
+    unpickleme = open(globs.FILE, "rb")
     answers = pickle.load(unpickleme)
     unpickleme.close()
     username = answers['username']
     password = answers['password']
-    #try:
-    gc2 = gspread.login(username, password)
-    usersheet = gc2.open("Users").sheet1
-    emails = usersheet.col_values(1)
-    #except:
-    #  return
+    try:
+      gc2 = gspread.login(username, password)
+      usersheet = gc2.open("Users").sheet1
+      emails = usersheet.col_values(1)
+    except:
+      return
     email = ''
     if "email" in adict:
       email = adict["email"].lower()
     if email in emails:
       emaildex = emails.index(email) + 1
       userange = 'H%s:I%s' % (emaildex, emaildex)
-      #try:
-      CellList = usersheet.range(userange)
-      CellList[0].value = timestamp()
-      CellList[1].value = str(int(CellList[1].value) + 1)
-      usersheet.update_cells(CellList)
-      #except:
-      #  return
+      try:
+        CellList = usersheet.range(userange)
+        CellList[0].value = timestamp()
+        CellList[1].value = str(int(CellList[1].value) + 1)
+        usersheet.update_cells(CellList)
+      except:
+        return
     else:
       user = []
       if 'email' in adict:
         user.append(adict["email"].lower())
       for item in ['name', 'link', 'locale', 'gender', 'id']:
-        #try:
-        user.append(adict[item])
-        #except:
-        #  user.append('')
+        try:
+          user.append(adict[item])
+        except:
+          user.append('')
       user.append(timestamp())
       user.append('')
       user.append('1')
-      #try:
-      InsertRows(usersheet, [user], len(emails))
-      #except:
-      #  return
+      try:
+        InsertRows(usersheet, [user], len(emails))
+      except:
+        return
   else:
-    out("/var/opt/pipulate.pkl not found. Run python configure.py")
+    out("%s not found. Run python configure.py" % globs.FILE)
 
 #  ____  _             _       _
 # |  _ \(_)_ __  _   _| | __ _| |_ ___
