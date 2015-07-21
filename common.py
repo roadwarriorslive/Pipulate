@@ -53,7 +53,7 @@ def Stop():
                                           |_|      
   ''')
   if globs.mode == 'web':
-    raise StopIteration
+    raise RuntimeError('Forcing STOP with Stop()')
   else:
     pass
 
@@ -77,7 +77,7 @@ def gotcha(x=''):
   else:
     out("Gotcha!!! </%s>" % globs.nest[-1:])
   globs.nest = globs.nest[:-2]
-  raise SystemExit
+  raise RuntimeError('Forcing STOP with Gotcha')
 
 def InsertRows(onesheet, listoflists, lastrowused=''):
   """Inserts a list-of-lists as rows into spreadsheet from lastrowused."""
