@@ -236,7 +236,9 @@
         </div>
       </div>
       {% elif configlink: %}
-        <h1>Gotcha</h1>
+        <h1>Pipulate Server OAuth2 Login Setup</h1>
+        <h2>Step #1: Login to Google with Gmail account to control scheduling.</h2>
+        <a href="{{ configlink }}">Login</a>
       {% else: %}
         <img src="./static/stop-before-you-pipulate.svg" width="300px" height="300px">
         <p class="indoctrinate">Pipulate must always target an existing Google
