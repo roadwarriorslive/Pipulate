@@ -69,7 +69,7 @@ class ConfigForm(Form):
   """Instantiates flask_wtf form object for use by a jina2 template for Config."""
   clientid = StringField('Client ID:')
   clientsecret = StringField('Client secret:')
-  oauthcode = StringField('The acquired OAuth2 code:')
+  oauthcode = StringField('The acquired OAuth2 code (pre-filled-in):')
 
 class PipForm(Form):
   """Instantiates flask_wtf form object for use by a jina2 template for main UI."""
