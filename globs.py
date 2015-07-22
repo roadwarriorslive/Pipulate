@@ -24,7 +24,6 @@ nest =      ''       # Controls nested indents of debug output.
 sheet =     ''       # Makes sheet1 worksheet object accessible to user functions.
 FILE =      "/var/opt/pipulate.cfg"                           # OAuth2 credentials file
 OAUTHURL =  "https://accounts.google.com/o/oauth2/auth"       # OAuth2 API Endpoint
-RENEW =     "/opt/pipulate.pkl"                               # Location of OAuth2 renew_token
 CANONICAL = "http://pipulate.com"                             # Default for Login Button
 GBAD =      "Timed-out on Google Data API. Sorry, try again." # Default message for GDocs unreachable.
 CLIENTID =  '394883714902-h3fjk3u6rb4jr4ntpeft41kov6et2nve.apps.googleusercontent.com'

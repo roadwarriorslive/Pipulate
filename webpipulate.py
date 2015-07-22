@@ -12,7 +12,7 @@
 
 from pipulate import *
 import os
-import globs
+import globs, common
 
 if __name__ == "__main__":
   globs.mode = "web"
@@ -22,4 +22,6 @@ if __name__ == "__main__":
   else:
     app.run(host='0.0.0.0', port=8888, debug=False)
   if os.path.isfile(globs.FILE) and os.path.getsize(globs.FILE) > 0:
-    app.config.from_pyfile(globs.FILE)
+    app.config.from_pyfile(globs.FILE, silent=False)
+
+

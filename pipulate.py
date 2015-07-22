@@ -86,6 +86,8 @@ class PipForm(Form):
 @app.route("/", methods=['GET', 'POST'])
 def main():
   """Create OAuth2 token saved browser-side for cool work-flow possibilities."""
+  app.config['something'] = "blah"
+  gotcha(app.config)
   stop = False
   print('''
                ____  _             _       _   _
@@ -101,7 +103,11 @@ def main():
   form = PipForm(csrf_enabled=False)
   configform = ConfigForm(csrf_enabled=False)
   if request.method == 'POST' and configform.oauthcode:
-    gotcha("hit")
+    output = open(globs.FILE, 'wb')
+    output.write("CLIENTID = '%s'\n" % configform.clientid.data)
+    output.write("CLIENTSECRET = '%s'\n" % configform.clientsecret.data)
+    output.write("CODE = '%s'\n" % configform.oauthcode.data)
+    output.close()
   if os.path.isfile(globs.FILE) and os.path.getsize(globs.FILE) > 0:
     pass
   else:
@@ -156,25 +162,26 @@ def main():
       form.magicbox.data = session['s']
       stext = session['s']
     if request.args and "code" in request.args:
-      output = open(globs.RENEW, 'wb')
-      code = request.args['code'] 
-      scope = 'https://spreadsheets.google.com/feeds/'
-      redir = globs.CANONICAL
-      if 'Host' in request.headers:
-        redir = 'http://'+request.headers['Host']
-      endpoint = "https://www.googleapis.com/oauth2/v3/token"
-      postheaders = {
-        'client_id': globs.CLIENTID,
-        'client_secret': 'oh foo',
-        'code': code,
-        'grant_type': 'authorization_code',
-        'redirect_uri': redir
-        }
-      r = requests.post(endpoint, postheaders)
-      out(r.text)
-      output.write(r.text)
-      output.close()
-      return redirect(url_for('main'))
+      pass
+      # output = open(globs.FILE, 'wb')
+      # code = request.args['code'] 
+      # scope = 'https://spreadsheets.google.com/feeds/'
+      # redir = globs.CANONICAL
+      # if 'Host' in request.headers:
+      #   redir = 'http://'+request.headers['Host']
+      # endpoint = "https://www.googleapis.com/oauth2/v3/token"
+      # postheaders = {
+      #   'client_id': globs.CLIENTID,
+      #   'client_secret': 'oh foo',
+      #   'code': code,
+      #   'grant_type': 'authorization_code',
+      #   'redirect_uri': redir
+      #   }
+      # r = requests.post(endpoint, postheaders)
+      # out(r.text)
+      # output.write(r.text)
+      # output.close()
+      # return redirect(url_for('main'))
     elif request.args and "access_token" in request.args:
       session['oa2'] = request.args.get("access_token")
       session['loggedin'] = "1"
