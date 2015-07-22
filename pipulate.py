@@ -99,10 +99,12 @@ def main():
   STREAMIT = False
   CLICKTEXT = False
   form = PipForm(csrf_enabled=False)
+  configform = ConfigForm(csrf_enabled=False)
+  if request.method == 'POST' and configform.oauthcode:
+    gotcha("hit")
   if os.path.isfile(globs.FILE) and os.path.getsize(globs.FILE) > 0:
     pass
   else:
-    configform = ConfigForm(csrf_enabled=False)
     return render_template('pipulate.html', configlink=getConfiglink(), form=configform)
   if session and 'oa2' in session:                        # Looks like we're logged in already,
     creds = Credentials(access_token=session['oa2'])
@@ -170,7 +172,6 @@ def main():
         }
       r = requests.post(endpoint, postheaders)
       out(r.text)
-      gotcha(r.text)
       output.write(r.text)
       output.close()
       return redirect(url_for('main'))
