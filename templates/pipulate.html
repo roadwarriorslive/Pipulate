@@ -241,8 +241,7 @@
           <h2>Step #2: Enter Client ID and Secret from <a target="_blank" href="https://console.developers.google.com">Google Developers Console</a> / Project Name / Credentials.</h2>
           <p>Warning: Pipulate is not running in secure https mode. Please only do this step locally.</p>
           <form class="config" id="configform" method="POST" action="/">
-            {{ form.oauthcode(value=request.args['code']) }}
-            {{ form.oauthcode.label }}{{ form.oauthcode }}
+            {{ form.oauthcode.label }}{{ form.oauthcode(value=request.args['code']) }}
             {{ form.clientid.label }}{{ form.clientid }}
             {{ form.clientsecret.label }}{{ form.clientsecret }}
             <input type="submit" value="Submit and Configure"/>
