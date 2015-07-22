@@ -16,11 +16,16 @@ body {
   height: 100%;
   overflow: hidden;
 }
-h1, h2 {
+h1, h2, p, label {
   color: white;
 }
 a {
   color: #76BFFF;
+}
+.config {
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
 }
 .pip {
   font-family: Paytone One;

@@ -65,8 +65,14 @@ def templateglobals():
   cyclemotto=cyclemotto(),
   )
 
+class ConfigForm(Form):
+  """Instantiates flask_wtf form object for use by a jina2 template for Config."""
+  clientid = StringField('Client ID:')
+  clientsecret = StringField('Client secret:')
+  oauthcode = StringField('The acquired OAuth2 code:')
+
 class PipForm(Form):
-  """Instantiates flask_wtf form object for use by a jina2 template."""
+  """Instantiates flask_wtf form object for use by a jina2 template for main UI."""
   pipurl = StringField('Paste a Google Spreadsheet URL:')
   magicbox = TextAreaField("magicbox")
   options = SelectField("options")
@@ -96,8 +102,8 @@ def main():
   if os.path.isfile(globs.FILE) and os.path.getsize(globs.FILE) > 0:
     pass
   else:
-    return render_template('pipulate.html', configlink=getConfiglink())
-
+    configform = ConfigForm(csrf_enabled=False)
+    return render_template('pipulate.html', configlink=getConfiglink(), form=configform)
   if session and 'oa2' in session:                        # Looks like we're logged in already,
     creds = Credentials(access_token=session['oa2'])
     try:

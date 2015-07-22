@@ -238,7 +238,15 @@
       {% elif configlink: %}
         <h1>Pipulate Server OAuth2 Login Setup</h1>
         {% if request.args and 'code' in request.args: %}
-          <h2>Step #2: Enter Client ID and Secret from <a href="https://console.developers.google.com">Google Developers Console</a>.</h2>
+          <h2>Step #2: Enter Client ID and Secret from <a target="_blank" href="https://console.developers.google.com">Google Developers Console</a> / Project Name / Credentials.</h2>
+          <p>Warning: Pipulate is not running in secure https mode. Please only do this step locally.</p>
+          <form class="config" id="configform" method="POST" action="/">
+            {{ form.oauthcode(value=request.args['code']) }}
+            {{ form.oauthcode.label }}{{ form.oauthcode }}
+            {{ form.clientid.label }}{{ form.clientid }}
+            {{ form.clientsecret.label }}{{ form.clientsecret }}
+            <input type="submit" value="Submit and Configure"/>
+          </form>
         {% else: %}
           <h2>Step #1: Login to Google with Gmail account to control scheduling.</h2>
           <a href="{{ configlink }}">Login</a>
