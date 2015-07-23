@@ -112,6 +112,7 @@ def main():
       redir = globs.CANONICAL
       if 'Host' in request.headers:
         redir = 'http://'+request.headers['Host']
+      redir += "?configure"
       if request.args and 'u' in request.args:
         session['u'] = request.args.get('u')
       scope = 'https://spreadsheets.google.com/feeds/'
@@ -123,23 +124,15 @@ def main():
                   'access_type': 'offline',
                   'redirect_uri': redir,
                   'approval_prompt': 'force',
-                  'client_id': app.config['CLIENT_ID']
+                  'client_id': configform.clientid.data
                 }
       from urllib import urlencode
-      linktologin "%s?%s" % (baseurl, urlencode(qsdict))
+      linktologin = "%s?%s" % (baseurl, urlencode(qsdict))
+      gotcha(linktologin)
 
-      # FOLLOW THE ABOVE REDIRECT AND SET A SPECIAL CONDITION TO TRAP IN AN ELIF
-      # FOLLOW THE ABOVE REDIRECT AND SET A SPECIAL CONDITION TO TRAP IN AN ELIF
-      # FOLLOW THE ABOVE REDIRECT AND SET A SPECIAL CONDITION TO TRAP IN AN ELIF
-      # FOLLOW THE ABOVE REDIRECT AND SET A SPECIAL CONDITION TO TRAP IN AN ELIF
-      # FOLLOW THE ABOVE REDIRECT AND SET A SPECIAL CONDITION TO TRAP IN AN ELIF
-      # FOLLOW THE ABOVE REDIRECT AND SET A SPECIAL CONDITION TO TRAP IN AN ELIF
-      # FOLLOW THE ABOVE REDIRECT AND SET A SPECIAL CONDITION TO TRAP IN AN ELIF
-      # FOLLOW THE ABOVE REDIRECT AND SET A SPECIAL CONDITION TO TRAP IN AN ELIF
-      # FOLLOW THE ABOVE REDIRECT AND SET A SPECIAL CONDITION TO TRAP IN AN ELIF
-      # FOLLOW THE ABOVE REDIRECT AND SET A SPECIAL CONDITION TO TRAP IN AN ELIF
-      # FOLLOW THE ABOVE REDIRECT AND SET A SPECIAL CONDITION TO TRAP IN AN ELIF
-      # FOLLOW THE ABOVE REDIRECT AND SET A SPECIAL CONDITION TO TRAP IN AN ELIF
+
+    elif request.args and 'configure' in request.args:
+      # This takes the submit after the initial configuration screen
       code = configform.oauthcode.data
       scope = 'https://spreadsheets.google.com/feeds/'
       redir = globs.CANONICAL
@@ -161,7 +154,10 @@ def main():
       output.write("REFRESH_TOKEN = '%s'\n" % rd['refresh_token'])
       output.write("SECRET_KEY = '%s'\n" % configform.appsecret.data)
       output.close()
+
+
     else:
+      # This constructs the initial configuration screen.
       return render_template('pipulate.html', configform=configform)
   if session and 'oa2' in session:                        # Looks like we're logged in already,
     creds = Credentials(access_token=session['oa2'])
