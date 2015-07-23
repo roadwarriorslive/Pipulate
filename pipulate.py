@@ -107,8 +107,14 @@ def main():
   configform = ConfigForm(csrf_enabled=False)
   if not os.path.isfile(globs.FILE) or os.path.getsize(globs.FILE) == 0:
     if request.method == 'POST':
-
-
+      # Handle config process form submit and pickle values for later.
+      import pickle
+      pickleme = {
+        'CLIENT_ID': configform.clientid.data,
+        'CLIENT_SECRET': configform.clientsecret.data,
+        'APP_SECRET': configform.appsecret.data
+      }
+      pickle.dump(pickleme, open(globs.TOKEN, 'wb'))
       redir = globs.CANONICAL
       if 'Host' in request.headers:
         redir = 'http://'+request.headers['Host']
@@ -128,19 +134,19 @@ def main():
       from urllib import urlencode
       linktologin = "%s?%s" % (baseurl, urlencode(qsdict))
       return redirect(linktologin)
-
-
     elif request.args and 'code' in request.args:
       # This takes the submit after the initial configuration screen
-      code = configform.oauthcode.data
+      import pickle
+      writeus = pickle.load(open(globs.TOKEN, "rb"))
+      code = request.args['code']
       scope = 'https://spreadsheets.google.com/feeds/'
       redir = globs.CANONICAL
       if 'Host' in request.headers:
         redir = 'http://'+request.headers['Host']
       endpoint = "https://www.googleapis.com/oauth2/v3/token"
       postheaders = {
-        'client_id': configform.clientid.data,
-        'client_secret': configform.clientsecret.data,
+        'client_id': writeus['CLIENT_ID'],
+        'client_secret': writeus['CLIENT_SECRET'],
         'code': code,
         'grant_type': 'authorization_code',
         'redirect_uri': redir
@@ -148,13 +154,11 @@ def main():
       r = requests.post(endpoint, postheaders)
       rd = r.json()
       output = open(globs.FILE, 'wb')
-      output.write("CLIENT_ID = '%s'\n" % configform.clientid.data)
-      output.write("CLIENT_SECRET = '%s'\n" % configform.clientsecret.data)
+      output.write("CLIENT_ID = '%s'\n" % writeus['CLIENT_ID'])
+      output.write("CLIENT_SECRET = '%s'\n" % writeus['CLIENT_SECRET'])
+      output.write("SECRET_KEY = '%s'\n" % writeus['APP_SECRET'])
       output.write("REFRESH_TOKEN = '%s'\n" % rd['refresh_token'])
-      output.write("SECRET_KEY = '%s'\n" % configform.appsecret.data)
       output.close()
-
-
     else:
       # This constructs the initial configuration screen.
       return render_template('pipulate.html', configform=configform)
