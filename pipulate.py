@@ -49,7 +49,7 @@ app = Flask(__name__)
 app.secret_key = "m\x00\r\xa5\\\xbeTW\xb3\xdf\x17\xb0!T\x9b6\x88l\xcf\xa1vmD}"
 
 def stream_template(template_name, **context):
-  """Open the most inexpensive Flask-based streaming you ever did see."""
+  """Open inexpensive Flask-based streaming."""
   app.update_template_context(context)
   t = app.jinja_env.get_template(template_name)
   rv = t.stream(context)
@@ -57,7 +57,7 @@ def stream_template(template_name, **context):
 
 @app.context_processor
 def templateglobals():
-  """Make output of certain functions available in jinja2 dynamic templates."""
+  """Make some functions usable in templates."""
   return dict(loginlink=getLoginlink(),
   bookmarklet=getBookmarklet(),
   blabel=getLabel(),
@@ -109,7 +109,6 @@ def main():
     if 'Host' in request.headers:
       redir = 'http://'+request.headers['Host']
     endpoint = "https://www.googleapis.com/oauth2/v3/token"
-
     postheaders = {
       'client_id': configform.clientid.data,
       'client_secret': configform.clientsecret.data,
@@ -119,14 +118,10 @@ def main():
       }
     r = requests.post(endpoint, postheaders)
     rd = r.json()
-    out(rd['access_token'])
-    out(rd['refresh_token'])
-    gotcha(rd)
-
     output = open(globs.FILE, 'wb')
-    output.write("CLIENTID = '%s'\n" % configform.clientid.data)
-    output.write("CLIENTSECRET = '%s'\n" % configform.clientsecret.data)
-    output.write("CODE = '%s'\n" % configform.oauthcode.data)
+    output.write("CLIENT_ID = '%s'\n" % configform.clientid.data)
+    output.write("CLIENT_SECRET = '%s'\n" % configform.clientsecret.data)
+    output.write("REFRESH_TOKEN = '%s'\n" % rd['refresh_token'])
     output.close()
   if os.path.isfile(globs.FILE) and os.path.getsize(globs.FILE) > 0:
     pass
