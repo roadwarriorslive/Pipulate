@@ -103,25 +103,26 @@ def main():
   form = PipForm(csrf_enabled=False)
   configform = ConfigForm(csrf_enabled=False)
   if request.method == 'POST' and configform.oauthcode:
-    # output = open(globs.FILE, 'wb')
-    # code = request.args['code'] 
-    # scope = 'https://spreadsheets.google.com/feeds/'
-    # redir = globs.CANONICAL
-    # if 'Host' in request.headers:
-    #   redir = 'http://'+request.headers['Host']
-    # endpoint = "https://www.googleapis.com/oauth2/v3/token"
-    # postheaders = {
-    #   'client_id': globs.CLIENTID,
-    #   'client_secret': 'oh foo',
-    #   'code': code,
-    #   'grant_type': 'authorization_code',
-    #   'redirect_uri': redir
-    #   }
-    # r = requests.post(endpoint, postheaders)
-    # out(r.text)
-    # output.write(r.text)
-    # output.close()
-    # return redirect(url_for('main'))
+    code = configform.oauthcode.data
+    scope = 'https://spreadsheets.google.com/feeds/'
+    redir = globs.CANONICAL
+    if 'Host' in request.headers:
+      redir = 'http://'+request.headers['Host']
+    endpoint = "https://www.googleapis.com/oauth2/v3/token"
+
+    postheaders = {
+      'client_id': configform.clientid.data,
+      'client_secret': configform.clientsecret.data,
+      'code': code,
+      'grant_type': 'authorization_code',
+      'redirect_uri': redir
+      }
+    r = requests.post(endpoint, postheaders)
+    rd = r.json()
+    out(rd['access_token'])
+    out(rd['refresh_token'])
+    gotcha(rd)
+
     output = open(globs.FILE, 'wb')
     output.write("CLIENTID = '%s'\n" % configform.clientid.data)
     output.write("CLIENTSECRET = '%s'\n" % configform.clientsecret.data)
