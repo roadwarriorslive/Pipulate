@@ -109,7 +109,7 @@
       <a class="button pseudo pip-mikelevin-logo" target="_blank" href="http://levinux.com">Levinux</a>
       {% if session and 'loggedin' in session and session['loggedin'] == '1': %}
         <a class="button pip-block" href="{{ logoutlink }}">Logout</a>
-      {% else %}
+      {% elif session %}
         <a class="button pip-googleplus" href="{{ loginlink }}">Login</a>
       {% endif %}
     </div>
@@ -241,11 +241,10 @@
       {% elif configform: %}
         <h1>Pipulate Server OAuth2 Login Setup</h1>
         <h2>Enter Client ID and Secret from the Google Developers Console.</h2>
-        <p class="config">Warning: Pipulate is not running in secure https mode. Please only do this step locally.</p>
+        <p class="config">Warning: Pipulate does not run in https mode. Please only do this step locally.</p>
         <p class="configinstructions">To complete this step, you must:</p>
         <ol class="configinstructions">
-          <li>Have a <b>registered domain</b> resolving to the server where you plan to host Pipulate -- a necessary step for OAuth2 login.
-          <br />(I'm working on not requiring a registered domain in the future for Zeroconf internal network installs)</li>
+          <li>Have a <b>registered domain</b> resolving to the server where you plan to host Pipulate -- a necessary step for OAuth2 login. (I'm working on not requiring a registered domain in the future for Zeroconf internal network installs)</li>
           <li>Create a New Project from the <a target="_blank" href="https://console.developers.google.com/project">Google Developers Console</a> and give it a name.</li>
           <li>Click APIs &amp; auth (your current project will be pre-selected from the dropdown menu at top of screen).</li>
           <li>Click Create New ID.</li>
@@ -261,6 +260,7 @@
         <form class="config" id="configform" method="POST" action="/">
           {{ configform.clientid.label }}{{ configform.clientid }}
           {{ configform.clientsecret.label }}{{ configform.clientsecret }}
+          {{ configform.appsecret.label }}{{ configform.appsecret }}
           <input type="submit" value="Submit and Configure"/>
         </form>
       {% else: %}

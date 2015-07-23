@@ -45,7 +45,8 @@ from flask import     (Flask,                                       # in Python.
                       flash)                                        # machines, or your desktop.
 
 app = Flask(__name__)                                               # Create that fateful instance of a Flask object.
-app.secret_key = "m\x00\r\xa5\\\xbeTW\xb3\xdf\x17\xb0!T\x9b6\x88l\xcf\xa1vmD}"
+if "SECRET_KEY" in app.config:
+  app.secret_key = app.config['SECRET_KEY']
 
 def stream_template(template_name, **context):                      # Pipulate is a non-traditional streaming app
   """Open inexpensive Flask-based streaming."""                     # utilizing Flask's built-in streaming method.
@@ -66,8 +67,11 @@ def templateglobals():                                              # Every temp
 
 class ConfigForm(Form):                                             # Now, we define the forms we're going ot need.
   """Define form for aquiring configuration values."""
-  clientid = StringField('Client ID:')
-  clientsecret = StringField('Client secret:')
+  import binascii
+  apdef = binascii.hexlify(os.urandom(24))
+  clientid = StringField('Client ID (from Google Dev Console):')
+  clientsecret = StringField('Client secret (from Google Dev Console):')
+  appsecret = StringField('Flask app secret (auto-generated):', default=apdef)
 
 class PipForm(Form):
   """Define form for main Pipulate user interface."""

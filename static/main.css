@@ -23,7 +23,7 @@ a {
   color: #76BFFF;
 }
 .config {
-  width: 85%;
+  width: 500px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -31,7 +31,7 @@ a {
   text-align: left;
   margin-left: auto;
   margin-right: auto;
-  width: 60%;
+  width: 700px;
 }
 .pip {
   font-family: Paytone One;
