@@ -23,6 +23,7 @@ row1 =      []       # Copy of contents of sheet1, row 1 for many uses.
 nest =      ''       # Controls nested indents of debug output.
 sheet =     ''       # Makes sheet1 worksheet object accessible to user functions.
 FILE =      "/var/opt/pipulate.cfg"                           # OAuth2 credentials file
+SHEETS =    'https://docs.google.com/spreadsheets'            # URL to identify being in GSheets"
 OAUTHURL =  "https://accounts.google.com/o/oauth2/auth"       # OAuth2 API Endpoint
 CANONICAL = "http://pipulate.com"                             # Default for Login Button
 GBAD =      "Timed-out on Google Data API. Sorry, try again." # Default message for GDocs unreachable.

@@ -107,6 +107,28 @@ def main():
   configform = ConfigForm(csrf_enabled=False)
   if not os.path.isfile(globs.FILE) or os.path.getsize(globs.FILE) == 0:
     if request.method == 'POST':
+
+
+      redir = globs.CANONICAL
+      if 'Host' in request.headers:
+        redir = 'http://'+request.headers['Host']
+      if request.args and 'u' in request.args:
+        session['u'] = request.args.get('u')
+      scope = 'https://spreadsheets.google.com/feeds/'
+      if globs.PCOM:
+        scope = 'profile email ' + scope
+      baseurl = globs.OAUTHURL
+      qsdict = {  'scope': scope,
+                  'response_type': 'code',
+                  'access_type': 'offline',
+                  'redirect_uri': redir,
+                  'approval_prompt': 'force',
+                  'client_id': app.config['CLIENT_ID']
+                }
+      from urllib import urlencode
+      linktologin "%s?%s" % (baseurl, urlencode(qsdict))
+
+
       code = configform.oauthcode.data
       scope = 'https://spreadsheets.google.com/feeds/'
       redir = globs.CANONICAL
@@ -142,7 +164,7 @@ def main():
         session['u'] = globs.PIPURL
     if session and 'loggedin' in session and session['loggedin'] == "1":
       needsPipulate = True
-      if request.args and 'u' in request.args and 'https://docs.google.com/spreadsheets' in request.args.get('u'):
+      if request.args and 'u' in request.args and globs.SHEETS in request.args.get('u'):
         needsPipulate = False
       elif request.method == 'POST':
         needsPipulate = False
@@ -183,8 +205,6 @@ def main():
       session['oa2'] = request.args.get("access_token")
       session['loggedin'] = "1"
       session['i'] -= 1 #Don't skip a message, just becuse I redirect.
-      # if globs.PCOM:
-      #   LogUser(session['oa2'])
       if 'u' in session and 's' in session:
         out("EXITING MAIN FUNCTION REDIRECT WITH URL AND TEXT", "0", '-')
         return redirect(url_for('main', u=session['u'], s=session['s']))
@@ -203,15 +223,13 @@ def main():
         if 'u' in request.args:
           form.pipurl.data = request.args.get('u')
         session.pop('loggedin', None)
-        #flash('Logged out from Google.')
     elif request.args:
       if 's' in request.args:
         session['s'] = request.args.get('s')
       if 'u' in request.args:
         form.pipurl.data = request.args.get('u')
         session['u'] = request.args.get('u')
-        if 'https://docs.google.com/spreadsheets' in form.pipurl.data:
-          # Consider checking if sheet exists for an "Initialize Sheet" button.
+        if globs.SHEETS in form.pipurl.data:
           CLICKTEXT = "sheets"
         else:
           CLICKTEXT = form.pipurl.data
@@ -1061,27 +1079,6 @@ def url_root(url):
   """Return root domain from url"""
   parsed = urlparse.urlparse(url)
   return "%s://%s%s" % (parsed[0], parsed[1], parsed[2])
-
-def getConfiglink():
-  """Return the HTML code required for an OAuth2 renewal token."""
-  redir = globs.CANONICAL
-  if 'Host' in request.headers:
-    redir = 'http://'+request.headers['Host']
-  if request.args and 'u' in request.args:
-    session['u'] = request.args.get('u')
-  scope = 'https://spreadsheets.google.com/feeds/'
-  if globs.PCOM:
-    scope = 'profile email ' + scope
-  baseurl = globs.OAUTHURL
-  qsdict = {  'scope': scope,
-              'response_type': 'code',
-              'access_type': 'offline',
-              'redirect_uri': redir,
-              'approval_prompt': 'force',
-              'client_id': app.config['CLIENT_ID']
-            }
-  from urllib import urlencode
-  return "%s?%s" % (baseurl, urlencode(qsdict))
 
 def getLoginlink():
   """Return the HTML code required for an OAuth2 login link."""
