@@ -36,43 +36,42 @@ from wtforms import   (StringField,                       # different Python cod
                       SelectField)                        # somewhat controversially directly native
 from flask import     (Flask,                             # in Python. Yes, there's gunicorn, nginx,
                       stream_with_context,                # and all that wonderful webserver extra
-                      render_template,                    # context, but who needs it?
-                      Response,                           # I'll just have to run it because after all
-                      request,                            # A Python's a Python, no matter how small.
-                      session,                            # The enemy's cruft; that's why I declare
-                      redirect,                           # That code over-stuffed is lacking a prayer
-                      url_for,                            # And what I include here is fairly lightweight
-                      flash)                              # Flask SocketIO is too much and too late
-                                                          # Because by the time we're on the next screen
-                                                          # The user's informed about all they have seen.
-app = Flask(__name__)
+                      render_template,                    # context, but who needs it? An entire
+                      Response,                           # instance of Pipulate, including host OS,
+                      request,                            # Python, all 3rd party dependencies and
+                      session,                            # the application itself fit in under 60MB
+                      redirect,                           # of space, making it perfect to run from
+                      url_for,                            # extremely lightweight servers, virtual
+                      flash)                              # machines, or your desktop.
+
+app = Flask(__name__)                                     # Create that fateful instance of a Flask object.
 app.secret_key = "m\x00\r\xa5\\\xbeTW\xb3\xdf\x17\xb0!T\x9b6\x88l\xcf\xa1vmD}"
 
-def stream_template(template_name, **context):
-  """Open inexpensive Flask-based streaming."""
-  app.update_template_context(context)
-  t = app.jinja_env.get_template(template_name)
-  rv = t.stream(context)
-  return rv
+def stream_template(template_name, **context):            # Pipulate is a non-traditional streaming app
+  """Open inexpensive Flask-based streaming."""           # utilizing Flask's built-in streaming method.
+  app.update_template_context(context)                    # Picture building a web user interface that is
+  t = app.jinja_env.get_template(template_name)           # able to update itself immediately following
+  rv = t.stream(context)                                  # the initial request that built the form, so
+  return rv                                               # you can witness response data flowing in.
 
 @app.context_processor
-def templateglobals():
-  """Make some functions usable in templates."""
-  return dict(loginlink=getLoginlink(),
-  bookmarklet=getBookmarklet(),
-  blabel=getLabel(),
-  logoutlink=getLogoutlink(),
-  cyclemotto=cyclemotto(),
+def templateglobals():                                    # Every templating system has some price to it
+  """Make some functions usable in templates."""          # and one of Flask's costs is a disconnect
+  return dict(loginlink=getLoginlink(),                   # between templates and application functions.
+  bookmarklet=getBookmarklet(),                           # No big deal. We just explicitly add those
+  blabel=getLabel(),                                      # that need to be globally available (without
+  logoutlink=getLogoutlink(),                             # explcitly passing as parameters on the
+  cyclemotto=cyclemotto()                                 # template call -- another option) here.
   )
 
-class ConfigForm(Form):
-  """Instantiates flask_wtf form object for use by a jina2 template for Config."""
+class ConfigForm(Form):                                   # Now, we define the forms we're going ot need.
+  """Define form for aquiring configuration values."""
   clientid = StringField('Client ID:')
   clientsecret = StringField('Client secret:')
   oauthcode = StringField('The acquired OAuth2 code (pre-filled-in):')
 
 class PipForm(Form):
-  """Instantiates flask_wtf form object for use by a jina2 template for main UI."""
+  """Define form for main Pipulate user interface."""
   pipurl = StringField('Paste a Google Spreadsheet URL:')
   magicbox = TextAreaField("magicbox")
   options = SelectField("options")
@@ -85,7 +84,7 @@ class PipForm(Form):
 #
 @app.route("/", methods=['GET', 'POST'])
 def main():
-  """Create OAuth2 token saved browser-side for cool work-flow possibilities."""
+  """Ensures all configuration and login requirements are met."""
   if os.path.isfile(globs.FILE) and os.path.getsize(globs.FILE) > 0:
     app.config.from_pyfile(globs.FILE, silent=False)
   stop = False
