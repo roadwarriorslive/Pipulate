@@ -112,7 +112,6 @@ def main():
       redir = globs.CANONICAL
       if 'Host' in request.headers:
         redir = 'http://'+request.headers['Host']
-      redir += "?configure"
       if request.args and 'u' in request.args:
         session['u'] = request.args.get('u')
       scope = 'https://spreadsheets.google.com/feeds/'
@@ -128,10 +127,10 @@ def main():
                 }
       from urllib import urlencode
       linktologin = "%s?%s" % (baseurl, urlencode(qsdict))
-      gotcha(linktologin)
+      return redirect(linktologin)
 
 
-    elif request.args and 'configure' in request.args:
+    elif request.args and 'code' in request.args:
       # This takes the submit after the initial configuration screen
       code = configform.oauthcode.data
       scope = 'https://spreadsheets.google.com/feeds/'
