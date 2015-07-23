@@ -24,55 +24,54 @@
                             Succeed With Pipulate!
 
 """
-import sys, os, socket, urlparse, re, gspread             # Hello World! I'm glad you found your way
-socket.setdefaulttimeout(10.0)                            # to pipulate.py. While this is not the
-import globs                                              # exact file that kicks off Pipulate, it
-from common import *                                      # is the most important to the process.
-import requests, traceback, datetime, time, json          # Those other files, like webpipulate.py
-from flask_wtf import Form                                # and loopipulate.py are merely shims for
-from wtforms import   (StringField,                       # different Python code execution contexts.
-                      HiddenField,                        # Webpipulate creates an instance of the
-                      TextAreaField,                      # Flask webserving app object, perhaps
-                      SelectField)                        # somewhat controversially directly native
-from flask import     (Flask,                             # in Python. Yes, there's gunicorn, nginx,
-                      stream_with_context,                # and all that wonderful webserver extra
-                      render_template,                    # context, but who needs it? An entire
-                      Response,                           # instance of Pipulate, including host OS,
-                      request,                            # Python, all 3rd party dependencies and
-                      session,                            # the application itself fit in under 60MB
-                      redirect,                           # of space, making it perfect to run from
-                      url_for,                            # extremely lightweight servers, virtual
-                      flash)                              # machines, or your desktop.
+import sys, os, socket, urlparse, re, gspread                       # Hello World! I'm glad you found your way
+socket.setdefaulttimeout(10.0)                                      # to pipulate.py. While this is not the
+import globs                                                        # exact file that kicks off Pipulate, it
+from common import *                                                # is the most important to the process.
+import requests, traceback, datetime, time, json                    # Those other files, like webpipulate.py
+from flask_wtf import Form                                          # and loopipulate.py are merely shims for
+from wtforms import   (StringField,                                 # different Python code execution contexts.
+                      HiddenField,                                  # Webpipulate creates an instance of the
+                      TextAreaField,                                # Flask webserving app object, perhaps
+                      SelectField)                                  # somewhat controversially directly native
+from flask import     (Flask,                                       # in Python. Yes, there's gunicorn, nginx,
+                      stream_with_context,                          # and all that wonderful webserver extra
+                      render_template,                              # context, but who needs it? An entire
+                      Response,                                     # instance of Pipulate, including host OS,
+                      request,                                      # Python, all 3rd party dependencies and
+                      session,                                      # the application itself fit in under 60MB
+                      redirect,                                     # of space, making it perfect to run from
+                      url_for,                                      # extremely lightweight servers, virtual
+                      flash)                                        # machines, or your desktop.
 
-app = Flask(__name__)                                     # Create that fateful instance of a Flask object.
+app = Flask(__name__)                                               # Create that fateful instance of a Flask object.
 app.secret_key = "m\x00\r\xa5\\\xbeTW\xb3\xdf\x17\xb0!T\x9b6\x88l\xcf\xa1vmD}"
 
-def stream_template(template_name, **context):            # Pipulate is a non-traditional streaming app
-  """Open inexpensive Flask-based streaming."""           # utilizing Flask's built-in streaming method.
-  app.update_template_context(context)                    # Picture building a web user interface that is
-  t = app.jinja_env.get_template(template_name)           # able to update itself immediately following
-  rv = t.stream(context)                                  # the initial request that built the form, so
-  return rv                                               # you can witness response data flowing in.
+def stream_template(template_name, **context):                      # Pipulate is a non-traditional streaming app
+  """Open inexpensive Flask-based streaming."""                     # utilizing Flask's built-in streaming method.
+  app.update_template_context(context)                              # Picture building a web user interface that is
+  t = app.jinja_env.get_template(template_name)                     # able to update itself immediately following
+  rv = t.stream(context)                                            # the initial request that built the form, so
+  return rv                                                         # you can witness response data flowing in.
 
 @app.context_processor
-def templateglobals():                                    # Every templating system has some price to it
-  """Make some functions usable in templates."""          # and one of Flask's costs is a disconnect
-  return dict(loginlink=getLoginlink(),                   # between templates and application functions.
-  bookmarklet=getBookmarklet(),                           # No big deal. We just explicitly add those
-  blabel=getLabel(),                                      # that need to be globally available (without
-  logoutlink=getLogoutlink(),                             # explcitly passing as parameters on the
-  cyclemotto=cyclemotto()                                 # template call -- another option) here.
+def templateglobals():                                              # Every templating system has some price to it
+  """Make some functions usable in templates."""                    # and one of Flask's costs is a disconnect
+  return dict(loginlink=getLoginlink(),                             # between templates and application functions.
+  bookmarklet=getBookmarklet(),                                     # No big deal. We just explicitly add those
+  blabel=getLabel(),                                                # that need to be globally available (without
+  logoutlink=getLogoutlink(),                                       # explcitly passing as parameters on the
+  cyclemotto=cyclemotto()                                           # template call -- another option) here.
   )
 
-class ConfigForm(Form):                                   # Now, we define the forms we're going ot need.
+class ConfigForm(Form):                                             # Now, we define the forms we're going ot need.
   """Define form for aquiring configuration values."""
   clientid = StringField('Client ID:')
   clientsecret = StringField('Client secret:')
-  oauthcode = StringField('The acquired OAuth2 code (pre-filled-in):')
 
 class PipForm(Form):
   """Define form for main Pipulate user interface."""
-  pipurl = StringField('Paste a Google Spreadsheet URL:')
+  pipurl = StringField('Paste a Google Sheet URL:')
   magicbox = TextAreaField("magicbox")
   options = SelectField("options")
 
@@ -84,8 +83,9 @@ class PipForm(Form):
 #
 @app.route("/", methods=['GET', 'POST'])
 def main():
-  """Ensures all configuration and login requirements are met."""
-  if os.path.isfile(globs.FILE) and os.path.getsize(globs.FILE) > 0:
+  """Ensures config and login requirements met."""
+  if (os.path.isfile(globs.FILE) and 
+      os.path.getsize(globs.FILE) > 0):
     app.config.from_pyfile(globs.FILE, silent=False)
   stop = False
   print('''
@@ -101,9 +101,7 @@ def main():
   CLICKTEXT = False
   form = PipForm(csrf_enabled=False)
   configform = ConfigForm(csrf_enabled=False)
-  if os.path.isfile(globs.FILE) and os.path.getsize(globs.FILE) > 0:
-    pass
-  else:
+  if not os.path.isfile(globs.FILE) or os.path.getsize(globs.FILE) == 0:
     if request.method == 'POST':
       code = configform.oauthcode.data
       scope = 'https://spreadsheets.google.com/feeds/'
