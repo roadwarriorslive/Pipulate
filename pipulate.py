@@ -126,6 +126,7 @@ def main():
       output.write("CLIENT_ID = '%s'\n" % configform.clientid.data)
       output.write("CLIENT_SECRET = '%s'\n" % configform.clientsecret.data)
       output.write("REFRESH_TOKEN = '%s'\n" % rd['refresh_token'])
+      output.write("SECRET_KEY = '%s'\n" % configform.appsecret.data)
       output.close()
     else:
       return render_template('pipulate.html', configform=configform)
