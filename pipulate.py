@@ -103,6 +103,25 @@ def main():
   form = PipForm(csrf_enabled=False)
   configform = ConfigForm(csrf_enabled=False)
   if request.method == 'POST' and configform.oauthcode:
+    # output = open(globs.FILE, 'wb')
+    # code = request.args['code'] 
+    # scope = 'https://spreadsheets.google.com/feeds/'
+    # redir = globs.CANONICAL
+    # if 'Host' in request.headers:
+    #   redir = 'http://'+request.headers['Host']
+    # endpoint = "https://www.googleapis.com/oauth2/v3/token"
+    # postheaders = {
+    #   'client_id': globs.CLIENTID,
+    #   'client_secret': 'oh foo',
+    #   'code': code,
+    #   'grant_type': 'authorization_code',
+    #   'redirect_uri': redir
+    #   }
+    # r = requests.post(endpoint, postheaders)
+    # out(r.text)
+    # output.write(r.text)
+    # output.close()
+    # return redirect(url_for('main'))
     output = open(globs.FILE, 'wb')
     output.write("CLIENTID = '%s'\n" % configform.clientid.data)
     output.write("CLIENTSECRET = '%s'\n" % configform.clientsecret.data)
@@ -161,28 +180,7 @@ def main():
     elif session and 's' in session:
       form.magicbox.data = session['s']
       stext = session['s']
-    if request.args and "code" in request.args:
-      pass
-      # output = open(globs.FILE, 'wb')
-      # code = request.args['code'] 
-      # scope = 'https://spreadsheets.google.com/feeds/'
-      # redir = globs.CANONICAL
-      # if 'Host' in request.headers:
-      #   redir = 'http://'+request.headers['Host']
-      # endpoint = "https://www.googleapis.com/oauth2/v3/token"
-      # postheaders = {
-      #   'client_id': globs.CLIENTID,
-      #   'client_secret': 'oh foo',
-      #   'code': code,
-      #   'grant_type': 'authorization_code',
-      #   'redirect_uri': redir
-      #   }
-      # r = requests.post(endpoint, postheaders)
-      # out(r.text)
-      # output.write(r.text)
-      # output.close()
-      # return redirect(url_for('main'))
-    elif request.args and "access_token" in request.args:
+    if request.args and "access_token" in request.args:
       session['oa2'] = request.args.get("access_token")
       session['loggedin'] = "1"
       session['i'] -= 1 #Don't skip a message, just becuse I redirect.
