@@ -86,8 +86,8 @@ class PipForm(Form):
 @app.route("/", methods=['GET', 'POST'])
 def main():
   """Create OAuth2 token saved browser-side for cool work-flow possibilities."""
-  app.config['something'] = "blah"
-  gotcha(app.config)
+  if os.path.isfile(globs.FILE) and os.path.getsize(globs.FILE) > 0:
+    app.config.from_pyfile(globs.FILE, silent=False)
   stop = False
   print('''
                ____  _             _       _   _
