@@ -238,36 +238,31 @@
         {% endif %}
         </div>
       </div>
-      {% elif configlink: %}
+      {% elif configform: %}
         <h1>Pipulate Server OAuth2 Login Setup</h1>
-        {% if request.args and 'code' in request.args: %}
-          <h2>Step #2: Enter Client ID and Secret from the Google Developers Console.</h2>
-          <p class="config">Warning: Pipulate is not running in secure https mode. Please only do this step locally.</p>
-          <p class="configinstructions">To complete this step, you must:</p>
-          <ol class="configinstructions">
-            <li>Have a <b>registered domain</b> resolving to the server where you plan to host Pipulate (necessary for OAuth2).</li>
-            <li>Create a New Project from the <a target="_blank" href="https://console.developers.google.com/project">Google Developers Console</a> and give it a name.</li>
-            <li>Click APIs &amp; auth (your current project will be pre-selected from the dropdown menu at top of screen).</li>
-            <li>Click Create New ID.</li>
-            <li>Select Web Application</li>
-            <li>Click Configure Consent Screen</li>
-            <li>Click Save</li>
-            <li>Set your Authorized redirect URIs to the fully qualified homepage URL of your domain.</li>
-            <li>Click Create Client ID</li>
-            <li>Paste the Client ID and Client secret into their respective fields here.</li>
-            <li>Press the Submit and Configure button.</li>
-            <li>Have fun Pipulating!</li>
-          </ol>
-          <form class="config" id="configform" method="POST" action="/">
-            {{ form.oauthcode.label }}{{ form.oauthcode(value=request.args['code']) }}
-            {{ form.clientid.label }}{{ form.clientid }}
-            {{ form.clientsecret.label }}{{ form.clientsecret }}
-            <input type="submit" value="Submit and Configure"/>
-          </form>
-        {% else: %}
-          <h2>Step #1: Login to Google with Gmail account to control scheduling.</h2>
-          <a href="{{ configlink }}">Login</a>
-        {% endif %}
+        <h2>Enter Client ID and Secret from the Google Developers Console.</h2>
+        <p class="config">Warning: Pipulate is not running in secure https mode. Please only do this step locally.</p>
+        <p class="configinstructions">To complete this step, you must:</p>
+        <ol class="configinstructions">
+          <li>Have a <b>registered domain</b> resolving to the server where you plan to host Pipulate -- a necessary step for OAuth2 login.
+          <br />(I'm working on not requiring a registered domain in the future for Zeroconf internal network installs)</li>
+          <li>Create a New Project from the <a target="_blank" href="https://console.developers.google.com/project">Google Developers Console</a> and give it a name.</li>
+          <li>Click APIs &amp; auth (your current project will be pre-selected from the dropdown menu at top of screen).</li>
+          <li>Click Create New ID.</li>
+          <li>Select Web Application</li>
+          <li>Click Configure Consent Screen</li>
+          <li>Click Save</li>
+          <li>Set your Authorized redirect URIs to the fully qualified homepage URL of your domain.</li>
+          <li>Click Create Client ID</li>
+          <li>Paste the Client ID and Client secret into their respective fields here.</li>
+          <li>Press the Submit and Configure button.</li>
+          <li>Have fun Pipulating!</li>
+        </ol>
+        <form class="config" id="configform" method="POST" action="/">
+          {{ configform.clientid.label }}{{ configform.clientid }}
+          {{ configform.clientsecret.label }}{{ configform.clientsecret }}
+          <input type="submit" value="Submit and Configure"/>
+        </form>
       {% else: %}
         <img src="./static/stop-before-you-pipulate.svg" width="300px" height="300px">
         <p class="indoctrinate">Pipulate must always target an existing Google

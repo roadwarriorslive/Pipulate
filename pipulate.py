@@ -101,31 +101,32 @@ def main():
   CLICKTEXT = False
   form = PipForm(csrf_enabled=False)
   configform = ConfigForm(csrf_enabled=False)
-  if request.method == 'POST' and configform.oauthcode:
-    code = configform.oauthcode.data
-    scope = 'https://spreadsheets.google.com/feeds/'
-    redir = globs.CANONICAL
-    if 'Host' in request.headers:
-      redir = 'http://'+request.headers['Host']
-    endpoint = "https://www.googleapis.com/oauth2/v3/token"
-    postheaders = {
-      'client_id': configform.clientid.data,
-      'client_secret': configform.clientsecret.data,
-      'code': code,
-      'grant_type': 'authorization_code',
-      'redirect_uri': redir
-      }
-    r = requests.post(endpoint, postheaders)
-    rd = r.json()
-    output = open(globs.FILE, 'wb')
-    output.write("CLIENT_ID = '%s'\n" % configform.clientid.data)
-    output.write("CLIENT_SECRET = '%s'\n" % configform.clientsecret.data)
-    output.write("REFRESH_TOKEN = '%s'\n" % rd['refresh_token'])
-    output.close()
   if os.path.isfile(globs.FILE) and os.path.getsize(globs.FILE) > 0:
     pass
   else:
-    return render_template('pipulate.html', configlink=getConfiglink(), form=configform)
+    if request.method == 'POST':
+      code = configform.oauthcode.data
+      scope = 'https://spreadsheets.google.com/feeds/'
+      redir = globs.CANONICAL
+      if 'Host' in request.headers:
+        redir = 'http://'+request.headers['Host']
+      endpoint = "https://www.googleapis.com/oauth2/v3/token"
+      postheaders = {
+        'client_id': configform.clientid.data,
+        'client_secret': configform.clientsecret.data,
+        'code': code,
+        'grant_type': 'authorization_code',
+        'redirect_uri': redir
+        }
+      r = requests.post(endpoint, postheaders)
+      rd = r.json()
+      output = open(globs.FILE, 'wb')
+      output.write("CLIENT_ID = '%s'\n" % configform.clientid.data)
+      output.write("CLIENT_SECRET = '%s'\n" % configform.clientsecret.data)
+      output.write("REFRESH_TOKEN = '%s'\n" % rd['refresh_token'])
+      output.close()
+    else:
+      return render_template('pipulate.html', configform=configform)
   if session and 'oa2' in session:                        # Looks like we're logged in already,
     creds = Credentials(access_token=session['oa2'])
     try:
@@ -1074,7 +1075,7 @@ def getConfiglink():
               'access_type': 'offline',
               'redirect_uri': redir,
               'approval_prompt': 'force',
-              'client_id': globs.CLIENTID
+              'client_id': app.config['CLIENT_ID']
             }
   from urllib import urlencode
   return "%s?%s" % (baseurl, urlencode(qsdict))
@@ -1090,10 +1091,13 @@ def getLoginlink():
   if globs.PCOM:
     scope = 'profile email ' + scope
   baseurl = globs.OAUTHURL
+  cid = ''
+  if 'CLIENT_ID' in app.config:
+    cid = app.config['CLIENT_ID']
   qsdict = {  'scope': scope,
               'response_type': 'token',
               'redirect_uri': redir,
-              'client_id': globs.CLIENTID
+              'client_id': cid
             }
   from urllib import urlencode
   return "%s?%s" % (baseurl, urlencode(qsdict))
