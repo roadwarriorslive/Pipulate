@@ -38,7 +38,13 @@ def freshtoken(picklefile):
     out(postheaders)
     r = requests.post(endpoint, postheaders)
     rd = r.json()
-    gotcha(rd)
+    xseconds = rd['expires_in']
+    expiresin = datetime.now() + timedelta(seconds=xseconds)
+    pickleme = {
+      'access_token': rd['access_token'],
+      'expires': expiresin
+    }
+    pickle.dump(pickleme, open(globs.TOKEN, 'wb'))
   else:
     return token
 
