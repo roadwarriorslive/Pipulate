@@ -21,8 +21,8 @@ def Scheduler():
     creds = Credentials(access_token=token)
     import gspread
     # Login with your Google account
-    gc = gspread.authorize(creds)
-    doclist = gc.openall()
+    gsp = gspread.authorize(creds)
+    doclist = gsp.openall()
     for x in range(2): #Accomodate for API failures
       for onedoc in doclist:
         dockey = onedoc.get_id_fields()['spreadsheet_id']
