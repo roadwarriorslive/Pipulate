@@ -12,15 +12,18 @@
 from pipulate import *
 import globs
 
+def freshtoken(picklefile):
+  import pickle
+  tdict = pickle.load(open(picklefile, "rb"))
+  token = tdict['access_token']
+  return token
+
 def Scheduler():
   import os.path
   if os.path.isfile(globs.TOKEN) and os.path.getsize(globs.TOKEN) > 0:
-    import pickle
-    tdict = pickle.load(open(globs.TOKEN, "rb"))
-    token = tdict['access_token']
+    token = freshtoken(globs.TOKEN)
     creds = Credentials(access_token=token)
     import gspread
-    # Login with your Google account
     gsp = gspread.authorize(creds)
     doclist = gsp.openall()
     for x in range(2): #Accomodate for API failures
@@ -30,9 +33,9 @@ def Scheduler():
         STREAMIT = Pipulate(dockey, token)
         for thebits in STREAMIT:
           print(thebits)
-      print("*******************************************")
+      print("*"*50)
   else:
-    print("Please run: python configure.py")
+    print("Please configure Pipulate by visiting from a browser.")
 
 if __name__ == '__main__':
   socket.setdefaulttimeout(25)
