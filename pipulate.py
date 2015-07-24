@@ -105,16 +105,21 @@ def main():
   CLICKTEXT = False
   form = PipForm(csrf_enabled=False)
   configform = ConfigForm(csrf_enabled=False)
-  if not os.path.isfile(globs.FILE) or os.path.getsize(globs.FILE) == 0:
-    if request.method == 'POST':
-      # Handle config process form submit and pickle values for later.
+  if not os.path.isfile(globs.FILE) or os.path.getsize(globs.FILE) == 0: # Check if server needs to be configured
+    #                                                   __ _       
+    #   ___  ___ _ ____   _____ _ __    ___ ___  _ __  / _(_) __ _ 
+    #  / __|/ _ \ '__\ \ / / _ \ '__|  / __/ _ \| '_ \| |_| |/ _` |
+    #  \__ \  __/ |   \ V /  __/ |    | (_| (_) | | | |  _| | (_| |
+    #  |___/\___|_|    \_/ \___|_|     \___\___/|_| |_|_| |_|\__, |
+    #                                                        |___/ 
+    if request.method == 'POST': # Form containing id and the 2 secrets has been submitted.
       import pickle
       pickleme = {
         'CLIENT_ID': configform.clientid.data,
         'CLIENT_SECRET': configform.clientsecret.data,
         'APP_SECRET': configform.appsecret.data
       }
-      pickle.dump(pickleme, open(globs.TOKEN, 'wb'))
+      pickle.dump(pickleme, open(globs.TOKEN, 'wb')) # Immediately but temporarily pickle the form's input
       redir = globs.CANONICAL
       if 'Host' in request.headers:
         redir = 'http://'+request.headers['Host']
@@ -130,12 +135,11 @@ def main():
                   'redirect_uri': redir,
                   'approval_prompt': 'force',
                   'client_id': configform.clientid.data
-                }
+                } # Construct URL parameters for an OAuth2 request for initial pre-everything "code"
       from urllib import urlencode
       linktologin = "%s?%s" % (baseurl, urlencode(qsdict))
-      return redirect(linktologin)
-    elif request.args and 'code' in request.args:
-      # This takes the submit after the initial configuration screen
+      return redirect(linktologin) # Redirect to acquire a "code" appended to OAuth2 landing page URL.
+    elif request.args and 'code' in request.args: # Trap condition where "code" is found in querystring
       import pickle
       writeus = pickle.load(open(globs.TOKEN, "rb"))
       code = request.args['code']
@@ -143,26 +147,31 @@ def main():
       redir = globs.CANONICAL
       if 'Host' in request.headers:
         redir = 'http://'+request.headers['Host']
-      endpoint = "https://www.googleapis.com/oauth2/v3/token"
+      endpoint = "https://www.googleapis.com/oauth2/v3/token" # Notice the new endpoint for this exchange.
       postheaders = {
         'client_id': writeus['CLIENT_ID'],
         'client_secret': writeus['CLIENT_SECRET'],
         'code': code,
         'grant_type': 'authorization_code',
         'redirect_uri': redir
-        }
+        } # Construct POST header values for exchanging initial OAuth2 code for refresh and access tokens.
       r = requests.post(endpoint, postheaders)
       rd = r.json()
-      output = open(globs.FILE, 'wb')
+      output = open(globs.FILE, 'wb') # Copy temporarily pickled values to permanent Flask server config file.
       output.write("CLIENT_ID = '%s'\n" % writeus['CLIENT_ID'])
       output.write("CLIENT_SECRET = '%s'\n" % writeus['CLIENT_SECRET'])
       output.write("SECRET_KEY = '%s'\n" % writeus['APP_SECRET'])
       output.write("REFRESH_TOKEN = '%s'\n" % rd['refresh_token'])
       output.close()
-    else:
-      # This constructs the initial configuration screen.
-      return render_template('pipulate.html', configform=configform)
-  if session and 'oa2' in session:                        # Looks like we're logged in already,
+    else: # Config file not found, nor POST method or "code" on querystring.
+      return render_template('pipulate.html', configform=configform) # Start server configuration procedure.
+  if session and 'oa2' in session: # Appears that user is logged in already.
+    #       _               _          _               _    
+    #   ___| |__   ___  ___| |_    ___| |__   ___  ___| | __
+    #  / __| '_ \ / _ \/ _ \ __|  / __| '_ \ / _ \/ __| |/ /
+    #  \__ \ | | |  __/  __/ |_  | (__| | | |  __/ (__|   < 
+    #  |___/_| |_|\___|\___|\__|  \___|_| |_|\___|\___|_|\_\
+    #                                                       
     creds = Credentials(access_token=session['oa2'])
     try:
       gsp = gspread.authorize(creds)
@@ -194,6 +203,12 @@ def main():
         return render_template('pipulate.html', form=form, select=None)
   stext = ''
   if request.method == 'POST':
+    #  ____  _                              _ 
+    # / ___|| |__   __ _ ______ _ _ __ ___ | |
+    # \___ \| '_ \ / _` |_  / _` | '_ ` _ \| |
+    #  ___) | | | | (_| |/ / (_| | | | | | |_|
+    # |____/|_| |_|\__,_/___\__,_|_| |_| |_(_)
+    #                                         
     if form.pipurl.data:
       globs.PIPURL = form.pipurl.data
       if form.options.data:
@@ -205,6 +220,12 @@ def main():
     else:
       flash('Please enter a URL to Pipulate.')
   else:
+    #             _                                             
+    #  _   _ _ __| |  _ __ ___   ___ _ __ ___   ___  _ __ _   _ 
+    # | | | | '__| | | '_ ` _ \ / _ \ '_ ` _ \ / _ \| '__| | | |
+    # | |_| | |  | | | | | | | |  __/ | | | | | (_) | |  | |_| |
+    #  \__,_|_|  |_| |_| |_| |_|\___|_| |_| |_|\___/|_|   \__, |
+    #                                                     |___/ 
     if request.args and 's' in request.args:
       form.magicbox.data = request.args.get('s')
       stext = request.args.get('s')
@@ -246,6 +267,12 @@ def main():
       if session and 'u' in session:
         form.pipurl.data = session['u']
   out("Selecting template method.")
+  #      _                                          _               _   
+  #  ___| |_ _ __ ___  __ _ _ __ ___     ___  _   _| |_ _ __  _   _| |_ 
+  # / __| __| '__/ _ \/ _` | '_ ` _ \   / _ \| | | | __| '_ \| | | | __|
+  # \__ \ |_| | |  __/ (_| | | | | | | | (_) | |_| | |_| |_) | |_| | |_ 
+  # |___/\__|_|  \___|\__,_|_| |_| |_|  \___/ \__,_|\__| .__/ \__,_|\__|
+  #                                                    |_|              
   if STREAMIT:
     #Handle streaming user interface updates resulting from a POST method call.
     options = keymaster('default')
