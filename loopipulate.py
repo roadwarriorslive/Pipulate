@@ -20,7 +20,25 @@ def freshtoken(picklefile):
   expires = tdict['expires']
   thetime = datetime.now()
   if thetime > expires:
-    gotcha("Expired")
+    endpoint = "https://www.googleapis.com/oauth2/v3/token" # Note to self: research the v3 endpoint.
+    configfile = open(globs.FILE, 'rb')
+    lines = configfile.readlines()
+    configfile.close()
+    config = {}
+    for item in lines:
+      parts = item.split()
+      config[parts[0]] = parts[2][1:-1]
+    postheaders = {
+      'client_id': config['CLIENT_ID'],
+      'client_secret': config['CLIENT_SECRET'],
+      'refresh_token': config['REFRESH_TOKEN'],
+      'grant_type': 'refresh_token'
+      }
+    out(endpoint)
+    out(postheaders)
+    r = requests.post(endpoint, postheaders)
+    rd = r.json()
+    gotcha(rd)
   else:
     return token
 
