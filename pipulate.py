@@ -163,6 +163,14 @@ def main():
       output.write("SECRET_KEY = '%s'\n" % writeus['APP_SECRET'])
       output.write("REFRESH_TOKEN = '%s'\n" % rd['refresh_token'])
       output.close()
+      from datetime import datetime, timedelta
+      xminutes = rd['expires_in']
+      expiresin = datetime.now() + timedelta(minutes=xminutes)
+      pickleme = {
+        'access_token': rd['access_token'],
+        'expires': expiresin
+      }
+      pickle.dump(pickleme, open(globs.TOKEN, 'wb')) # Pickle the frequenlty-changed access token
     else: # Config file not found, nor POST method or "code" on querystring.
       return render_template('pipulate.html', configform=configform) # Start server configuration procedure.
   if session and 'oa2' in session: # Appears that user is logged in already.
@@ -220,22 +228,22 @@ def main():
     else:
       flash('Please enter a URL to Pipulate.')
   else:
-    #             _                                             
-    #  _   _ _ __| |  _ __ ___   ___ _ __ ___   ___  _ __ _   _ 
-    # | | | | '__| | | '_ ` _ \ / _ \ '_ ` _ \ / _ \| '__| | | |
-    # | |_| | |  | | | | | | | |  __/ | | | | | (_) | |  | |_| |
-    #  \__,_|_|  |_| |_| |_| |_|\___|_| |_| |_|\___/|_|   \__, |
-    #                                                     |___/ 
-    if request.args and 's' in request.args:
+    #  ___                                _        _             
+    # |__ \__ _ _   _  ___ _ __ _   _ ___| |_ _ __(_)_ __   __ _ 
+    #   / / _` | | | |/ _ \ '__| | | / __| __| '__| | '_ \ / _` |
+    #  |_| (_| | |_| |  __/ |  | |_| \__ \ |_| |  | | | | | (_| |
+    #  (_)\__, |\__,_|\___|_|   \__, |___/\__|_|  |_|_| |_|\__, |
+    #        |_|                |___/                      |___/ 
+    if request.args and 's' in request.args: # User highlighted text on page before clicking bookmarklet
       form.magicbox.data = request.args.get('s')
       stext = request.args.get('s')
-    elif session and 's' in session:
+    elif session and 's' in session: # Selected text made the journey through login
       form.magicbox.data = session['s']
       stext = session['s']
-    if request.args and "access_token" in request.args:
+    if request.args and "access_token" in request.args: # Oops... necessary evil. Redirect quickly.
       session['oa2'] = request.args.get("access_token")
       session['loggedin'] = "1"
-      session['i'] -= 1 #Don't skip a message, just becuse I redirect.
+      session['i'] -= 1 # Don't skip a cute message, just becuse I redirect.
       if 'u' in session and 's' in session:
         out("EXITING MAIN FUNCTION REDIRECT WITH URL AND TEXT", "0", '-')
         return redirect(url_for('main', u=session['u'], s=session['s']))
@@ -246,7 +254,7 @@ def main():
         out("Redirecting, no URL known")
         out("EXITING MAIN FUNCTION REDIRECT", "0", '-')
         return redirect(url_for('main'))
-    elif request.args and 'logout' in request.args:
+    elif request.args and 'logout' in request.args: # Logging out
       if session:
         if 'oa2' in session:
           revokeurl = 'https://accounts.google.com/o/oauth2/revoke?token=' + session['oa2']
@@ -254,7 +262,7 @@ def main():
         if 'u' in request.args:
           form.pipurl.data = request.args.get('u')
         session.pop('loggedin', None)
-    elif request.args:
+    elif request.args: # Move selected text and current url into session object.
       if 's' in request.args:
         session['s'] = request.args.get('s')
       if 'u' in request.args:
@@ -266,13 +274,13 @@ def main():
           CLICKTEXT = form.pipurl.data
       if session and 'u' in session:
         form.pipurl.data = session['u']
-  out("Selecting template method.")
   #      _                                          _               _   
   #  ___| |_ _ __ ___  __ _ _ __ ___     ___  _   _| |_ _ __  _   _| |_ 
   # / __| __| '__/ _ \/ _` | '_ ` _ \   / _ \| | | | __| '_ \| | | | __|
   # \__ \ |_| | |  __/ (_| | | | | | | | (_) | |_| | |_| |_) | |_| | |_ 
   # |___/\__|_|  \___|\__,_|_| |_| |_|  \___/ \__,_|\__| .__/ \__,_|\__|
   #                                                    |_|              
+  out("Selecting template method.")
   if STREAMIT:
     #Handle streaming user interface updates resulting from a POST method call.
     options = keymaster('default')
@@ -343,7 +351,7 @@ def LogUser(authkey):
 # |_|   |_| .__/ \__,_|_|\__,_|\__\___|
 #         |_|
 #
-def Pipulate(username='', password='', dockey=''):
+def Pipulate(dockey='', token=''):
   """I never met a generator I couldn't nest. That doesn't mean you should. A
   few words of explanation are necessary about how these yield statements work,
   and where better than here to explain it? This "funciton" is actually a
@@ -380,11 +388,12 @@ def Pipulate(username='', password='', dockey=''):
     blankrows = 0
     gsp = None
     gdoc = None
-    if session or (username and password and dockey):
+    if session or (dockey and token):
       out("LOGIN ATTEMPT", "2")
       sheet = ''
-      if (username and password and dockey):
-        gsp = gspread.login(username, password)
+      if dockey and token:
+        creds = Credentials(access_token=token)
+        gsp = gspread.authorize(creds)
         gdoc = gsp.open_by_key(dockey)
       else:
         if 'oa2' in session:
