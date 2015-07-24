@@ -14,9 +14,15 @@ import globs
 
 def freshtoken(picklefile):
   import pickle
+  from datetime import datetime, timedelta
   tdict = pickle.load(open(picklefile, "rb"))
   token = tdict['access_token']
-  return token
+  expires = tdict['expires']
+  thetime = datetime.now()
+  if thetime > expires:
+    gotcha("Expired")
+  else:
+    return token
 
 def Scheduler():
   import os.path

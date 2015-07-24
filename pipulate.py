@@ -164,8 +164,8 @@ def main():
       output.write("REFRESH_TOKEN = '%s'\n" % rd['refresh_token'])
       output.close()
       from datetime import datetime, timedelta
-      xminutes = rd['expires_in']
-      expiresin = datetime.now() + timedelta(minutes=xminutes)
+      xseconds = rd['expires_in']
+      expiresin = datetime.now() + timedelta(seconds=xseconds)
       pickleme = {
         'access_token': rd['access_token'],
         'expires': expiresin
