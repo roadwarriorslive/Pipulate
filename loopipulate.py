@@ -17,7 +17,8 @@ def Scheduler():
   if os.path.isfile(globs.TOKEN) and os.path.getsize(globs.TOKEN) > 0:
     import pickle
     tdict = pickle.load(open(globs.TOKEN, "rb"))
-    creds = Credentials(access_token=tdict['access_token'])
+    token = tdict['access_token']
+    creds = Credentials(access_token=token)
     import gspread
     # Login with your Google account
     gc = gspread.authorize(creds)
@@ -26,7 +27,7 @@ def Scheduler():
       for onedoc in doclist:
         dockey = onedoc.get_id_fields()['spreadsheet_id']
         print(dockey)
-        STREAMIT = Pipulate(dockey)
+        STREAMIT = Pipulate(dockey, token)
         for thebits in STREAMIT:
           print(thebits)
       print("*******************************************")
