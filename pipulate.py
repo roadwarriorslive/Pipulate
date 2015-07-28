@@ -380,8 +380,8 @@ def Pipulate(dockey='', token=''):
   unlock = ("", "", "", "-")
   out("PIPULATION BEGINNING", "1")
   try:
-    yield "Beginning to Pipulate...", "", "", ""
-    yield "spinon", "", "", ""
+    if globs.WEB: yield "Beginning to Pipulate...", "", "", ""
+    if globs.WEB: yield "spinon", "", "", ""
     out("Reading in functions.")
     funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
     transfuncs = ziplckey(funcs, funcs) #Keep translation table
@@ -401,23 +401,23 @@ def Pipulate(dockey='', token=''):
           out("Credential object created.")
         else:
           out("Expired login.")
-          yield "Google Login expired. Log back in.", "Login under the \"burger button\" in the upper-right.", "", ""
-          yield "spinoff", "", "", ""
+          if globs.WEB: yield "Google Login expired. Log back in.", "Login under the \"burger button\" in the upper-right.", "", ""
+          if globs.WEB: yield "spinoff", "", "", ""
         try:
           gsp = gspread.authorize(creds)
         except:
           out("Login failed.")
-          yield "Google Login unsuccessful.", "", "", ""
-          yield "spinoff", "", "", ""
+          if globs.WEB: yield "Google Login unsuccessful.", "", "", ""
+          if globs.WEB: yield "spinoff", "", "", ""
           raise StopIteration
         else:
           out("Login successful.")
         out("Opening Spreadsheet...")
-        yield("Opening Spreadsheet...", "", "", "")
+        if globs.WEB: yield("Opening Spreadsheet...", "", "", "")
         stop = True
         sheet = ''
         for x in range(10):
-          yield lock
+          if globs.WEB: yield lock
           try:
             gdoc = gsp.open_by_url(globs.PIPURL)
             stop = False
@@ -425,7 +425,7 @@ def Pipulate(dockey='', token=''):
           except gspread.httpsession.HTTPError, e:
             out("Login appeared successful, but rejected on document open attempt.")
             yme = 'Please <a href="%s">Log In</a> again first.' % getLoginlink()
-            yield yme, "Login under the \"burger button\" in the upper-right.", "", ""
+            if globs.WEB: yield yme, "Login under the \"burger button\" in the upper-right.", "", ""
             if session and 'loggedin' in session:
               session.pop('loggedin', None)
             if 'u' not in session and globs.PIPURL:
@@ -439,22 +439,22 @@ def Pipulate(dockey='', token=''):
             except gspread.httpsession.HTTPError, e:
               pass
             except:
-              yield "I see you're on a URL that is not a Google Spreadsheet. Would you like to grab links?", "", "", ""
-              yield "If so, just <a href='https://docs.google.com/spreadsheets/create' target='_new'>create</a> a new Spreadsheet, name it \"Pipulate\" and click Pipulate again.", "Google Spreadsheet Not Found.", "", ""
-              yield 'New to this odd but awesome approach? Watch the <a target="_blank" href="http://goo.gl/v71kw8">Demo</a> and read the <a target="_blank" href="http://goo.gl/p2zQa4">Docs</a>.', "", "", ""
+              if globs.WEB: yield "I see you're on a URL that is not a Google Spreadsheet. Would you like to grab links?", "", "", ""
+              if globs.WEB: yield "If so, just <a href='https://docs.google.com/spreadsheets/create' target='_new'>create</a> a new Spreadsheet, name it \"Pipulate\" and click Pipulate again.", "Google Spreadsheet Not Found.", "", ""
+              if globs.WEB: yield 'New to this odd but awesome approach? Watch the <a target="_blank" href="http://goo.gl/v71kw8">Demo</a> and read the <a target="_blank" href="http://goo.gl/p2zQa4">Docs</a>.', "", "", ""
               Stop()
           except gspread.exceptions.SpreadsheetNotFound:
-            yield "Please give the document a name to force first save.", "", "", ""
+            if globs.WEB: yield "Please give the document a name to force first save.", "", "", ""
             Stop()
           except Exception as e:
-            yield dontgetfrustrated(x)
+            if globs.WEB: yield dontgetfrustrated(x)
             out("Retry login %s of %s" % (x, 10))
             time.sleep(6)
         if stop:
-          yield "spinoff", "", "", ""
-          yield badtuple
+          if globs.WEB: yield "spinoff", "", "", ""
+          if globs.WEB: yield badtuple
           Stop()
-      yield unlock
+      if globs.WEB: yield unlock
       out("Google Spreadsheet successfully opened.")
 
       if globs.PIPMODE == 'learn':
@@ -462,9 +462,9 @@ def Pipulate(dockey='', token=''):
 
       if globs.KEYWORDS and globs.KEYWORDS[:1] != '[' and globs.KEYWORDS[-1:] != ']':
         # Keywords Tab
-        yield "Keyword Collection Detected", "Making Keywords Tab If Needed", "", ""
+        if globs.WEB: yield "Keyword Collection Detected", "Making Keywords Tab If Needed", "", ""
         headers = ['Keyword', 'Source']
-        yield lock
+        if globs.WEB: yield lock
         offset = 0
         newTab = False
         try:
@@ -473,13 +473,13 @@ def Pipulate(dockey='', token=''):
           pass
         if newTab:
           offset = -1
-        yield unlock
+        if globs.WEB: yield unlock
         ksheet = gdoc.worksheet("Keywords")
         kcount = ksheet.row_count + offset
         kwlist = globs.KEYWORDS.split(',')
         kwrows = []
         yme = "Collecting %s keywords." % len(kwlist)
-        yield yme, "Collecting keywords", "", ""
+        if globs.WEB: yield yme, "Collecting keywords", "", ""
         for kw in kwlist:
           kwrows.append([kw.strip(), globs.PIPURL])
         try:
@@ -509,72 +509,72 @@ def Pipulate(dockey='', token=''):
             bothrows = sheetinitializer(globs.PIPMODE)
             row1 = bothrows[0]
             row2 = [bothrows[1]]
-            yield lock
+            if globs.WEB: yield lock
             try:
               InitTab(gdoc, "sheet1", row1, row2)
             except:
               pass
-            yield unlock
+            if globs.WEB: yield unlock
           except:
             yme = "Action for %s not defined." % globs.PIPMODE
-            yield yme, "Action not defined.", "", ""
+            if globs.WEB: yield yme, "Action not defined.", "", ""
       else:
         anything = re.compile('.+')
         if globs.PIPMODE == 'clear':
           out("Clearing Tab 1...")
-          yield "Clearing Sheet 1. Use revision history if a mistake.", "Clearing Sheet 1", "", ""
+          if globs.WEB: yield "Clearing Sheet 1. Use revision history if a mistake.", "Clearing Sheet 1", "", ""
           try:
             CellList = gdoc.sheet1.findall(anything)
             for cell in CellList:
               cell.value = ''
             result = gdoc.sheet1.update_cells(CellList)
-            yield "Sheet1 Cleared.", "", "", ""
-            yield "spinoffsuccess", "", "", ""
+            if globs.WEB: yield "Sheet1 Cleared.", "", "", ""
+            if globs.WEB: yield "spinoffsuccess", "", "", ""
             Stop()
           except:
             out("Could not clear tap one.")
             Stop()
 
-      yield "Checking Tabs: Sheet 1", "Then we check for tabs...", "", ""
+      if globs.WEB: yield "Checking Tabs: Sheet 1", "Then we check for tabs...", "", ""
       # How To Tab
-      yield ", How To", "", "", ""
+      if globs.WEB: yield ", How To", "", "", ""
       headers = ['Expand column. Hey, you did it! Good job so far.', 'Welcome to Pipulate!']
       InitTab(gdoc, 'How To', headers, documentation())
 
       # Config Tab
-      yield ", Config", "", "", ""
+      if globs.WEB: yield ", Config", "", "", ""
       headers = ['NAME', 'VALUE']
       config = []
       config.append(['RepeatJobEvery','day'])
       config.append(['MaxRowsPerHour','3'])
-      yield lock
+      if globs.WEB: yield lock
       try:
         InitTab(gdoc, 'Config', headers, config)
       except:
         Stop()
-      yield unlock
+      if globs.WEB: yield unlock
 
       # Scrapers Tab
-      yield ", Scrapers", "", "", ""
+      if globs.WEB: yield ", Scrapers", "", "", ""
       headers = ['name', 'type', 'pattern']
       InitTab(gdoc, 'Scrapers', headers, scrapes())
       sst = None
       out("Loading Scrapers.")
       stop = True
       for x in range(5):
-        yield lock
+        if globs.WEB: yield lock
         try:
           sst = gdoc.worksheet("Scrapers")
           stop = False
           break
         except:
-          yield dontgetfrustrated(x)
+          if globs.WEB: yield dontgetfrustrated(x)
           out("Retry get Scraper sheet %s of %s" % (x, 5))
           time.sleep(3)
       if stop:
-        yield badtuple
+        if globs.WEB: yield badtuple
         Stop()
-      yield unlock
+      if globs.WEB: yield unlock
 
       try:
         out("Reading Config tab into globals.")
@@ -587,23 +587,23 @@ def Pipulate(dockey='', token=''):
       out("Counting rows in Pipulate tab.")
       stop = True
       for x in range(5):
-        yield lock
+        if globs.WEB: yield lock
         try:
           globs.sheet = gdoc.sheet1
           stop = False
           break
         except:
-          yield dontgetfrustrated(x)
+          if globs.WEB: yield dontgetfrustrated(x)
           out("Retry get Pipulate sheet %s of %s" % (x, 10))
           time.sleep(5)
       if stop:
-        yield badtuple
+        if globs.WEB: yield badtuple
         Stop()
-      yield unlock
+      if globs.WEB: yield unlock
 
       stop = True
       for x in range(5):
-        yield lock
+        if globs.WEB: yield lock
         try:
           CellList = globs.sheet.findall("?")
           for cell in CellList:
@@ -611,36 +611,36 @@ def Pipulate(dockey='', token=''):
           stop = False
           break
         except:
-          yield dontgetfrustrated(x)
+          if globs.WEB: yield dontgetfrustrated(x)
           out("Retry get rows with question marks %s of %s" % (x, 10))
           time.sleep(5)
       if stop:
-        yield badtuple
+        if globs.WEB: yield badtuple
         Stop()
-      yield unlock
+      if globs.WEB: yield unlock
 
       stop = True
       for x in range(10):
-        yield lock
+        if globs.WEB: yield lock
         try:
           globs.numrows = len(globs.sheet.col_values(1)) #!!!UnboundLocalError HTTPError OPTIMIZE!
           stop = False
           break
         except:
-          yield dontgetfrustrated(x)
+          if globs.WEB: yield dontgetfrustrated(x)
           out("Retry count rows %s of %s" % (x, 10))
           time.sleep(10)
       if stop == True:
-        yield badtuple
+        if globs.WEB: yield badtuple
         Stop()
-      yield unlock
+      if globs.WEB: yield unlock
 
       yme = "%s rows found in Pipulate tab." % globs.numrows
       out(yme)
-      yield yme, "", "", ""
+      if globs.WEB: yield yme, "", "", ""
 
       if globs.numrows == 0:
-        yield "spinoff", "", "", ""
+        if globs.WEB: yield "spinoff", "", "", ""
         Stop()
 
       stop = True
@@ -650,13 +650,13 @@ def Pipulate(dockey='', token=''):
           stop = False
           break
         except:
-          yield dontgetfrustrated(x)
+          if globs.WEB: yield dontgetfrustrated(x)
           out("Retry count rows %s of %s" % (x, 10))
           time.sleep(10)
       if stop == True:
-        yield badtuple
+        if globs.WEB: yield badtuple
         Stop()
-      yield unlock
+      if globs.WEB: yield unlock
       pat = [[d['pattern']][0] for d in lod]
       typ = [[d['type']][0] for d in lod]
       nam = [[d['name']][0] for d in lod]
@@ -665,24 +665,24 @@ def Pipulate(dockey='', token=''):
       transscrape = ziplckey(nam, nam)
       out("Scrapers loaded.")
 
-      yield "Analyzing spreadsheet for request...", "Reading spreadsheet...", "", ""
+      if globs.WEB: yield "Analyzing spreadsheet for request...", "Reading spreadsheet...", "", ""
 
       out("Loading row1 into globals.")
       stop = True
       for x in range(10):
-        yield lock
+        if globs.WEB: yield lock
         try:
           globs.row1 = lowercaselist(globs.sheet.row_values(1))
           stop = False
           break
         except:
-          yield dontgetfrustrated(x)
+          if globs.WEB: yield dontgetfrustrated(x)
           out("Retry load Row1 %s of %s" % (x, 10))
           time.sleep(5)
       if stop:
-        yield badtuple
+        if globs.WEB: yield badtuple
         Stop()
-      yield unlock
+      if globs.WEB: yield unlock
 
       trendlistoflists = []
       out("Scanning row 1 for function and scraper names.")
@@ -730,19 +730,19 @@ def Pipulate(dockey='', token=''):
 
         stop = True
         for x in range(8):
-          yield lock
+          if globs.WEB: yield lock
           try:
             onerow = globs.sheet.row_values(rowdex) #!!! HTTPError OPTIMIZE THIS!
             stop = False
             break
           except:
-            yield dontgetfrustrated(x)
+            if globs.WEB: yield dontgetfrustrated(x)
             out("Retry %s of %s" % (x, 8))
             time.sleep(5)
         if stop:
-          yield badtuple
+          if globs.WEB: yield badtuple
           Stop()
-        yield unlock
+        if globs.WEB: yield unlock
 
         if onerow:
           if rowdex == 2: #Looking for trending requests
@@ -750,7 +750,7 @@ def Pipulate(dockey='', token=''):
               trended = True
               out("Found asterisks on row 2 -- trending activated!")
               trendlistoflists.append(onerow)
-              yield "Found asterisks indicating trending in row 2", "Then we look for trending job requests...", json.dumps(onerow), ""
+              if globs.WEB: yield "Found asterisks indicating trending in row 2", "Then we look for trending job requests...", json.dumps(onerow), ""
             else:
               break
           elif trendlistoflists and rowdex > 2:
@@ -758,7 +758,7 @@ def Pipulate(dockey='', token=''):
               out("Found astrisks on row %s." % rowdex)
               trendlistoflists.append(onerow)
               yme = ", %s" % rowdex
-              yield yme, "", json.dumps(onerow), ""
+              if globs.WEB: yield yme, "", json.dumps(onerow), ""
             else:
               blankrows += 1
               if blankrows > 1:
@@ -770,7 +770,7 @@ def Pipulate(dockey='', token=''):
             out("Found second blank row, so trending scan complete.")
             break
       yme = "%s-Row trending-job found. Analyzing job frequency." % len(trendlistoflists)
-      yield yme, "", "", ""
+      if globs.WEB: yield yme, "", "", ""
       trendingrowsfinished = True
       maxrowsperhour = 0
       out("Done looking for asterisks", "2", "-")
@@ -811,7 +811,7 @@ def Pipulate(dockey='', token=''):
           if trendingrowsfinished:
             maxrowsperhour = len(trendlistoflists)
             if not counts[0]:
-              yield "Last set of trending rows complete.", "", "", ""
+              if globs.WEB: yield "Last set of trending rows complete.", "", "", ""
           if 'maxrowsperhour' in globs.config:
             maxrowsperhour = globs.config['maxrowsperhour']
           try:
@@ -851,19 +851,19 @@ def Pipulate(dockey='', token=''):
         tellrow = maxrowsperhour
         if tellrow == 0:
           tellrow = 'all'
-        yield "Job requested to process %s row(s) every %s %s" % (tellrow, number, name), "", "", ""
+        if globs.WEB: yield "Job requested to process %s row(s) every %s %s" % (tellrow, number, name), "", "", ""
       else:
-        yield "Pipulate running in questionmark replacement mode.", "", "", ""
+        if globs.WEB: yield "Pipulate running in questionmark replacement mode.", "", "", ""
       if left and right and now:
-        yield "%s = Start of last time window" % left, "", "", ""
-        yield "%s = End of last time window" % right, "", "", ""
-        yield "%s = Currrent time" % now, "", "", ""
+        if globs.WEB: yield "%s = Start of last time window" % left, "", "", ""
+        if globs.WEB: yield "%s = End of last time window" % right, "", "", ""
+        if globs.WEB: yield "%s = Currrent time" % now, "", "", ""
       if trendlistoflists and insert: #This line will show in errors for any Config scheduling screw-ups.
         for x in range(4):
           try:
             InsertRows(globs.sheet, trendlistoflists)
           except:
-            yield dontgetfrustrated(x)
+            if globs.WEB: yield dontgetfrustrated(x)
             out("Error on trending, retry %s" % x)
             time.sleep(2)
           else:
@@ -874,8 +874,8 @@ def Pipulate(dockey='', token=''):
         try:
           globs.sheet = gdoc.sheet1
         except:
-          yield "Couldn't reach Google Docs. Try logging in again.", "", "", ""
-          yield "spinoff", "", "", ""
+          if globs.WEB: yield "Couldn't reach Google Docs. Try logging in again.", "", "", ""
+          if globs.WEB: yield "spinoff", "", "", ""
           raise StopIteration
         else:
           pass
@@ -891,9 +891,9 @@ def Pipulate(dockey='', token=''):
       #
       out("Question Mark Replacement.", '2')
       if not qset and not trended:
-        yield "No question marks found.", "Move along. There's nothing to pipulate here.", "", ""
-        yield 'New to Pipulate? Watch <a target="_blank" href="https://docs.google.com/presentation/d/10lr_d1uyLMOnWsMzbenKiPlFE5-BIt9bxVucw7O4GSI/edit?usp=sharing">Demo</a> and read <a target="_blank" href="https://github.com/miklevin/pipulate/blob/master/README.md">Docs</a>.', "", "", ""
-        yield "spinoff", "", "", ""
+        if globs.WEB: yield "No question marks found.", "Move along. There's nothing to pipulate here.", "", ""
+        if globs.WEB: yield 'New to Pipulate? Watch <a target="_blank" href="https://docs.google.com/presentation/d/10lr_d1uyLMOnWsMzbenKiPlFE5-BIt9bxVucw7O4GSI/edit?usp=sharing">Demo</a> and read <a target="_blank" href="https://github.com/miklevin/pipulate/blob/master/README.md">Docs</a>.', "", "", ""
+        if globs.WEB: yield "spinoff", "", "", ""
         Stop()
 
       blankrows = 0 #Lets us skip occasional blank rows
@@ -904,28 +904,28 @@ def Pipulate(dockey='', token=''):
               break
           if index == 0:
             yme = "Pipulating row: %s" % rowdex
-            yield yme, "Next, we replace question marks. This may take awhile...", "", ""
+            if globs.WEB: yield yme, "Next, we replace question marks. This may take awhile...", "", ""
           else:
             yme = ", %s" % rowdex
-            yield yme, "", "", ""
+            if globs.WEB: yield yme, "", "", ""
           globs.hobj = None
           globs.html = '' #Blank the global html object. Recylces fetches.
           rowrange = "A%s:%s%s" % (rowdex, globs.letter[len(globs.row1)], rowdex)
 
           stop = True
           for x in range(5):
-            yield lock
+            if globs.WEB: yield lock
             try:
               CellList = globs.sheet.range(rowrange)
               stop = False
             except:
               out("Retry %s of %s" % (x, 5))
               time.sleep(2)
-              yield dontgetfrustrated(x)
+              if globs.WEB: yield dontgetfrustrated(x)
           if stop:
-            yield "GData Timed Out","Sorry, GDATA Failed. Try again.","",""
+            if globs.WEB: yield "GData Timed Out","Sorry, GDATA Failed. Try again.","",""
             Stop()
-          yield unlock
+          if globs.WEB: yield unlock
 
           onerow = []
           for cell in CellList:
@@ -938,7 +938,7 @@ def Pipulate(dockey='', token=''):
             #
             out("PROCESSING ROW %s." % rowdex, '3')
             blankrows = 0
-            yield "", "", json.dumps(onerow), ""
+            if globs.WEB: yield "", "", json.dumps(onerow), ""
             rowdexstring = str(rowdex)
             newrow = onerow[:]
             if rowdexstring > 1:
@@ -946,12 +946,12 @@ def Pipulate(dockey='', token=''):
               for coldex, acell in enumerate(newrow):
                 if questionmark(onerow, rowdexstring, coldex):
                   if 'url' in globs.row1: #Only fetch html once per row if possible
-                    yield lock
+                    if globs.WEB: yield lock
                     try:
                       globs.html = gethtml(onerow[globs.row1.index('url')])
                     except:
                       pass
-                    yield unlock
+                    if globs.WEB: yield unlock
                   collabel = globs.row1[coldex]
                   if collabel in transfuncs.keys():
                     for x in range(4):
@@ -999,13 +999,13 @@ def Pipulate(dockey='', token=''):
                         spattern = scrapepatterns[sname]
                         if 'url' in globs.row1:
                           url = onerow[globs.row1.index('url')]
-                          yield lock
+                          if globs.WEB: yield lock
                           html = gethtml(url)
                           if not html:
-                            yield "HTML not available. Possible Content-Type error.", "", "", ""
+                            if globs.WEB: yield "HTML not available. Possible Content-Type error.", "", "", ""
                             out("HTML NOT AVAILABLE")
                             Stop()
-                          yield unlock
+                          if globs.WEB: yield unlock
                           #add another elif condition for PyQuery https://pypi.python.org/pypi/pyquery
                           if stype.lower() == 'xpath':
                             import lxml.html
@@ -1015,11 +1015,11 @@ def Pipulate(dockey='', token=''):
                             except lxml.etree.XPathEvalError:
                               out("BAD XPATH PATTERN")
                               yme = "Bad xpath: %s" % spattern
-                              yield yme, "Bad XPATH Pattern!", "", ""
+                              if globs.WEB: yield yme, "Bad XPATH Pattern!", "", ""
                               Stop()
                             except:
                               out("OTHER LXML ERROR")
-                              yield "LXML parser problem. Check URL source", "LXML Problem!", "", ""
+                              if globs.WEB: yield "LXML parser problem. Check URL source", "LXML Problem!", "", ""
                               Stop()
                             if match:
                               if len(match) == 1:
@@ -1052,26 +1052,26 @@ def Pipulate(dockey='', token=''):
                         print traceback.format_exc()
                         out("Scrape problem on row %s. Retrying." % rowdexstring)
                         time.sleep(2)
-                        yield dontgetfrustrated(x)
+                        if globs.WEB: yield dontgetfrustrated(x)
                       out("Scrape End", "4", '-')
             out("DONE PROCESSING ROW %s." % rowdex, '3', '-')
 
             out("Finished processing row. Updating spreadsheet...")
             newrow = ['' if x==None else x for x in newrow]
             if len(str(newrow)) > globs.ROWMAX:
-              yield "", "", "['TOO BIG']", ""
+              if globs.WEB: yield "", "", "['TOO BIG']", ""
             else:
               try:
-                yield "", "", json.dumps(newrow), ""
+                if globs.WEB: yield "", "", json.dumps(newrow), ""
               except:
-                yield "", "", newrow, ""
+                if globs.WEB: yield "", "", newrow, ""
             for index, onecell in enumerate(CellList):
               onecell.value = newrow[index]
             result = None
 
             stop = True
             for x in range(5):
-              yield lock
+              if globs.WEB: yield lock
               try:
                 result = globs.sheet.update_cells(CellList)
                 stop = False
@@ -1079,11 +1079,11 @@ def Pipulate(dockey='', token=''):
               except:
                 out("Writing row to spreadsheet, retry %s of %s" %(x, 5))
                 time.sleep(5)
-                yield dontgetfrustrated(x)
+                if globs.WEB: yield dontgetfrustrated(x)
             if stop:
-              yield badtuple
+              if globs.WEB: yield badtuple
               Stop()
-            yield unlock
+            if globs.WEB: yield unlock
 
           elif onerow.count('') == len(onerow):
             blankrows += 1
@@ -1092,9 +1092,9 @@ def Pipulate(dockey='', token=''):
       out("Question Mark Replacement.", '2', '-')
 
     else: #No session object found
-      yield 'Please Login to Google', "", "", ""
-    yield "Pipulation complete.&nbsp;&nbsp;", "Congratulations, pipulation complete! Now, do a little victory dance.", "", ""
-    yield "spinoffsuccess", "", "", ""
+      if globs.WEB: yield 'Please Login to Google', "", "", ""
+    if globs.WEB: yield "Pipulation complete.&nbsp;&nbsp;", "Congratulations, pipulation complete! Now, do a little victory dance.", "", ""
+    if globs.WEB: yield "spinoffsuccess", "", "", ""
     out("PIPULATION OVER", "1", '-')
   except Exception as e:
     print traceback.format_exc()
@@ -1109,14 +1109,14 @@ def Pipulate(dockey='', token=''):
       loginmsg = ""
       if session and 'loggedin' in session and session['loggedin'] != '1':
         loginmsg = "Login link under the upper-left \"burger button\"."
-      # yield "Session timed out. Try again", "If at first you don't succeed, pipulate again.", "", ""
+      # if globs.WEB: yield "Session timed out. Try again", "If at first you don't succeed, pipulate again.", "", ""
     else:
-      yield fixme, "", "", ""
-      yield "Pipulation prematurely terminated.", "", "", ""
-      yield "Please open an issue at https://github.com/miklevin/pipulate", "", "", ""
-      yield "Or just tap me on the shoulder.", "", "", ""
+      if globs.WEB: yield fixme, "", "", ""
+      if globs.WEB: yield "Pipulation prematurely terminated.", "", "", ""
+      if globs.WEB: yield "Please open an issue at https://github.com/miklevin/pipulate", "", "", ""
+      if globs.WEB: yield "Or just tap me on the shoulder.", "", "", ""
     if globs.PIPMODE != 'clear':
-      yield "spinerr", "", "", ""
+      if globs.WEB: yield "spinerr", "", "", ""
     out("PIPULATION ERROR", "1", '-')
   out("EXITING MAIN", "0", '-') #Special case of function exit reporting
   print("\n")
