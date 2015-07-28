@@ -240,6 +240,10 @@ def main():                                                         # of entry "
       form.magicbox.data = session['s']
       stext = session['s']
     if request.args and "access_token" in request.args: # Oops... necessary evil. Redirect quickly.
+      try:
+        LogUser(request.args['access_token'])
+      except:
+        pass
       session['oa2'] = request.args.get("access_token")
       session['loggedin'] = "1"
       session['i'] -= 1 # Don't skip a cute message, just becuse I redirect.
@@ -299,8 +303,11 @@ def LogUser(authkey):
     creds = Credentials(access_token=token)
     import gspread
     gsp2 = gspread.authorize(creds)
+    api = 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='
+    api = api + authkey
+    ujson = requests.get(api, timeout=5)
+    adict = ujson.json()
     try:
-      gsp2 = gspread.login(username, password)
       usersheet = gsp2.open("Users").sheet1
       emails = usersheet.col_values(1)
     except:
