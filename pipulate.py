@@ -45,8 +45,8 @@ from flask import     (Flask,                                       # in Python.
                       flash)                                        # machines, or your desktop.
 
 app = Flask(__name__)                                               # Create that fateful instance of a Flask object.
-if "SECRET_KEY" in app.config:
-  app.secret_key = app.config['SECRET_KEY']
+if "SECRET_KEY" in app.config:                                      # The app secret value was set during server config
+  app.secret_key = app.config['SECRET_KEY']                         # So, load it from the application config values.
 
 def stream_template(template_name, **context):                      # Pipulate is a non-traditional streaming app
   """Open inexpensive Flask-based streaming."""                     # utilizing Flask's built-in streaming method.
@@ -55,7 +55,7 @@ def stream_template(template_name, **context):                      # Pipulate i
   rv = t.stream(context)                                            # the initial request that built the form, so
   return rv                                                         # you can witness response data flowing in.
 
-@app.context_processor
+@app.context_processor                                              # context_processor called w/access to templateglobals
 def templateglobals():                                              # Every templating system has some price to it
   """Make some functions usable in templates."""                    # and one of Flask's costs is a disconnect
   return dict(loginlink=getLoginlink(),                             # between templates and application functions.
@@ -68,16 +68,16 @@ def templateglobals():                                              # Every temp
 class ConfigForm(Form):                                             # Now, we define the forms we're going ot need.
   """Define form for aquiring configuration values."""
   import binascii
-  apdef = binascii.hexlify(os.urandom(24))
-  clientid = StringField('Client ID (from Google Dev Console):')
-  clientsecret = StringField('Client secret (from Google Dev Console):')
+  apdef = binascii.hexlify(os.urandom(24))                          # Flask needs application secrets for sessions.
   appsecret = StringField('Flask app secret (auto-generated):', default=apdef)
+  clientid = StringField('Client ID (from Google Dev Console):')    # OAuth2 equivalent to username and password.
+  clientsecret = StringField('Client secret (from Google Dev Console):')
 
 class PipForm(Form):
   """Define form for main Pipulate user interface."""
-  pipurl = StringField('Paste a Google Sheet URL:')
-  magicbox = TextAreaField("magicbox")
-  options = SelectField("options")
+  pipurl = StringField('Paste a Google Sheet URL:')                 # Pipulate must know a Google Sheet URL to work.
+  magicbox = TextAreaField("magicbox")                              # This box shows the JSON data being worked upon.
+  options = SelectField("options")                                  # What you're asking Pipulate to do.
 
 #  _____ _           _                      _
 # |  ___| | __ _ ___| | __  _ __ ___   __ _(_)_ __
@@ -85,13 +85,12 @@ class PipForm(Form):
 # |  _| | | (_| \__ \   <  | | | | | | (_| | | | | |
 # |_|   |_|\__,_|___/_|\_\ |_| |_| |_|\__,_|_|_| |_|
 #
-@app.route("/", methods=['GET', 'POST'])
-def main():
-  """Ensures config and login requirements met."""
-  if (os.path.isfile(globs.FILE) and 
-      os.path.getsize(globs.FILE) > 0):
-    app.config.from_pyfile(globs.FILE, silent=False)
-  stop = False
+@app.route("/", methods=['GET', 'POST'])                            # In web-mode, Pipulate only uses this one point
+def main():                                                         # of entry "/", via the Werkzeug routing package.
+  """Ensures config and login requirements met."""                  # We always check first whether the server has
+  if (os.path.isfile(globs.FILE) and                                # been configured or not. Configuration consists
+      os.path.getsize(globs.FILE) > 0):                             # of a file with Google OAuth2 Client ID, Client
+    app.config.from_pyfile(globs.FILE, silent=False)                # secret, and Flask application secret. Load them.
   print('''
                ____  _             _       _   _
               |  _ \(_)_ __  _   _| | __ _| |_(_)_ __   __ _
@@ -100,27 +99,30 @@ def main():
               |_|   |_| .__/ \__,_|_|\__,_|\__|_|_| |_|\__, | (_) (_) (_)
                       |_|                              |___/
   ''')
-  out("ENTERED MAIN FUNCTION", "0")
-  STREAMIT = False
-  CLICKTEXT = False
-  form = PipForm(csrf_enabled=False)
-  configform = ConfigForm(csrf_enabled=False)
-  if not os.path.isfile(globs.FILE) or os.path.getsize(globs.FILE) == 0: # Check if server needs to be configured
+  out("ENTERED MAIN FUNCTION", "0")                                 # Establish hierarchical indenting of debug system.
+  stop = False                                                      # Pipulate "stops" unless permitted to continue.
+  streamit = False                                                  # Controls Flask's stream versus render template.
+  insheet = False                                                   # If bookmarklet is clicked from a Google Sheet.
+  form = PipForm(csrf_enabled=False)                                # All WTForms are instances of classes. Main form.
+  configform = ConfigForm(csrf_enabled=False)                       # The form to let you 1st time configure server.
+
+  if (not os.path.isfile(globs.FILE) or                             # Configure server if no config file is found.
+      os.path.getsize(globs.FILE) == 0):
     #                                                   __ _       
     #   ___  ___ _ ____   _____ _ __    ___ ___  _ __  / _(_) __ _ 
     #  / __|/ _ \ '__\ \ / / _ \ '__|  / __/ _ \| '_ \| |_| |/ _` |
     #  \__ \  __/ |   \ V /  __/ |    | (_| (_) | | | |  _| | (_| |
     #  |___/\___|_|    \_/ \___|_|     \___\___/|_| |_|_| |_|\__, |
     #                                                        |___/ 
-    if request.method == 'POST': # Form containing id and the 2 secrets has been submitted.
-      import pickle
-      pickleme = {
-        'CLIENT_ID': configform.clientid.data,
-        'CLIENT_SECRET': configform.clientsecret.data,
-        'APP_SECRET': configform.appsecret.data
-      }
-      pickle.dump(pickleme, open(globs.TOKEN, 'wb')) # Immediately but temporarily pickle the form's input
-      redir = globs.CANONICAL
+    if request.method == 'POST':                                    # Final configuration has not yet occurred, but a
+      import pickle                                                 # submitted form means that we're sitting on top
+      pickleme = {                                                  # of the values, that we can grab and pickle into
+        'CLIENT_ID': configform.clientid.data,                      # a temporary location. This pickle file is where
+        'CLIENT_SECRET': configform.clientsecret.data,              # the access_token will be stored, but we don't
+        'APP_SECRET': configform.appsecret.data                     # have it yet, and don't want to write into the
+      }                                                             # config file yet, so we enter this server confg
+      pickle.dump(pickleme, open(globs.TOKEN, 'wb'))                # block again for later-stage token exchanges.
+      redir = globs.DOMURL
       if 'Host' in request.headers:
         redir = 'http://'+request.headers['Host']
       if request.args and 'u' in request.args:
@@ -144,7 +146,7 @@ def main():
       writeus = pickle.load(open(globs.TOKEN, "rb"))
       code = request.args['code']
       scope = 'https://spreadsheets.google.com/feeds/'
-      redir = globs.CANONICAL
+      redir = globs.DOMURL
       if 'Host' in request.headers:
         redir = 'http://'+request.headers['Host']
       endpoint = "https://www.googleapis.com/oauth2/v3/token" # Notice the new endpoint for this exchange.
@@ -224,7 +226,7 @@ def main():
       if form.magicbox.data:
         globs.KEYWORDS = form.magicbox.data
         form.magicbox.data = None
-      STREAMIT = stream_with_context(Pipulate())
+      streamit = stream_with_context(Pipulate())
     else:
       flash('Please enter a URL to Pipulate.')
   else:
@@ -269,9 +271,9 @@ def main():
         form.pipurl.data = request.args.get('u')
         session['u'] = request.args.get('u')
         if globs.SHEETS in form.pipurl.data:
-          CLICKTEXT = "sheets"
+          insheet = "sheets"
         else:
-          CLICKTEXT = form.pipurl.data
+          insheet = form.pipurl.data
       if session and 'u' in session:
         form.pipurl.data = session['u']
   #      _                                          _               _   
@@ -281,14 +283,14 @@ def main():
   # |___/\__|_|  \___|\__,_|_| |_| |_|  \___/ \__,_|\__| .__/ \__,_|\__|
   #                                                    |_|              
   out("Selecting template method.")
-  if STREAMIT:
+  if streamit:
     #Handle streaming user interface updates resulting from a POST method call.
     options = keymaster('default')
-    return Response(stream_template('pipulate.html', form=form, select=options, data=STREAMIT))
+    return Response(stream_template('pipulate.html', form=form, select=options, data=streamit))
   else:
     #Handle non-streaming user interface build resulting from a GET method call.
     out("EXITING MAIN FUNCTION RENDER", "0", '-')
-    options = keymaster(CLICKTEXT, stext)
+    options = keymaster(insheet, stext)
     return render_template('pipulate.html', form=form, select=options)
   out("EXITING MAIN", "0", '-')
 
@@ -1128,7 +1130,7 @@ def url_root(url):
 
 def getLoginlink():
   """Return the HTML code required for an OAuth2 login link."""
-  redir = globs.CANONICAL
+  redir = globs.DOMURL
   if 'Host' in request.headers:
     redir = 'http://'+request.headers['Host']
   if request.args and 'u' in request.args:
