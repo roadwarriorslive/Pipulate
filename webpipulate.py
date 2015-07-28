@@ -15,7 +15,7 @@ import os
 import globs, common
 
 if __name__ == "__main__":
-  globs.mode = "web"
+  globs.WEB = True
   if 'pipulate' in socket.gethostname():
     globs.PCOM = True
     app.run(host='0.0.0.0', port=80, debug=True)
