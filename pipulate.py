@@ -293,21 +293,15 @@ def main():                                                         # of entry "
 
 def LogUser(authkey):
   """Track usage of the Pipulate bookmarklet per user on main domain instance."""
-  api = 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='
-  api = api + authkey
-  ujson = requests.get(api, timeout=5)
-  adict = ujson.json()
   import os.path
-  if os.path.isfile(globs.FILE) and os.path.getsize(globs.FILE) > 0:
-    import pickle
-    unpickleme = open(globs.FILE, "rb")
-    answers = pickle.load(unpickleme)
-    unpickleme.close()
-    username = answers['username']
-    password = answers['password']
+  if os.path.isfile(globs.TOKEN) and os.path.getsize(globs.TOKEN) > 0:
+    token = freshtoken(globs.TOKEN)
+    creds = Credentials(access_token=token)
+    import gspread
+    gsp2 = gspread.authorize(creds)
     try:
-      gc2 = gspread.login(username, password)
-      usersheet = gc2.open("Users").sheet1
+      gsp2 = gspread.login(username, password)
+      usersheet = gsp2.open("Users").sheet1
       emails = usersheet.col_values(1)
     except:
       return

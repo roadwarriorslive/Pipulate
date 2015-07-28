@@ -88,8 +88,8 @@ def Stop():
                            |____/ \__\___/| .__/(_)
                                           |_|      
   ''')
-  if globs.mode == 'web':
-    raise RuntimeError('Forcing STOP with Stop()')
+  if globs.WEB:
+    raise StopIteration('Forcing STOP with Stop()')
   else:
     pass
 
