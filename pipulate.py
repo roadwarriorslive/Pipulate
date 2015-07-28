@@ -121,27 +121,24 @@ def main():                                                         # of entry "
         'CLIENT_SECRET': configform.clientsecret.data,              # the access_token will be stored, but we don't
         'APP_SECRET': configform.appsecret.data                     # have it yet, and don't want to write into the
       }                                                             # config file yet, so we enter this server confg
-      pickle.dump(pickleme, open(globs.TOKEN, 'wb'))                # block again for later-stage token exchanges.
-      redir = globs.DOMURL
-      if 'Host' in request.headers:
-        redir = 'http://'+request.headers['Host']
-      if request.args and 'u' in request.args:
-        session['u'] = request.args.get('u')
-      scope = 'https://spreadsheets.google.com/feeds/'
-      if globs.PCOM:
-        scope = 'profile email ' + scope
-      baseurl = globs.OAUTHURL
-      qsdict = {  'scope': scope,
-                  'response_type': 'code',
-                  'access_type': 'offline',
-                  'redirect_uri': redir,
-                  'approval_prompt': 'force',
-                  'client_id': configform.clientid.data
-                } # Construct URL parameters for an OAuth2 request for initial pre-everything "code"
+      pickle.dump(pickleme, open(globs.TOKEN, 'wb'))                # block again for exchanging the initial OAuth2
+      redir = globs.DOMURL                                          # "code" that we're about to get for a permanent
+      if 'Host' in request.headers:                                 # refresh_token and temporary access_token.
+        redir = 'http://'+request.headers['Host']                   # Use a host name if you've got one.
+      scope = 'https://spreadsheets.google.com/feeds/'              # Normal pipulate servers don't need much scope, 
+      if globs.PCOM:                                                # but if it's the main pipulate.com instance, then
+        scope = 'profile email ' + scope                            # I'm going to do a little bit of user tracking.
+      qsdict = {  'scope': scope,                                   # Here, we begin to construct the URL parameters
+                  'response_type': 'code',                          # for a simple GET-method request to the Google
+                  'access_type': 'offline',                         # OAuth2 authentication service. It is going to
+                  'redirect_uri': redir,                            # return to the redirect_uri with a code parameter
+                  'approval_prompt': 'force',                       # appended onto it that we'll use immediately
+                  'client_id': configform.clientid.data             # below when the next elif traps that condition.
+                }
       from urllib import urlencode
-      linktologin = "%s?%s" % (baseurl, urlencode(qsdict))
-      return redirect(linktologin) # Redirect to acquire a "code" appended to OAuth2 landing page URL.
-    elif request.args and 'code' in request.args: # Trap condition where "code" is found in querystring
+      linktologin = "%s?%s" % (globs.OAUTHURL, urlencode(qsdict))
+      return redirect(linktologin) 
+    elif request.args and 'code' in request.args:                   # Trap condition where "code" is found in querystring
       import pickle
       writeus = pickle.load(open(globs.TOKEN, "rb"))
       code = request.args['code']
