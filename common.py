@@ -12,6 +12,42 @@
 
 import globs
 
+def freshtoken(picklefile):
+  import pickle
+  from datetime import datetime, timedelta
+  tdict = pickle.load(open(picklefile, "rb"))
+  token = tdict['access_token']
+  expires = tdict['expires']
+  thetime = datetime.now()
+  if thetime > expires:
+    endpoint = "https://www.googleapis.com/oauth2/v3/token" # Note to self: research the v3 endpoint.
+    configfile = open(globs.FILE, 'rb')
+    lines = configfile.readlines()
+    configfile.close()
+    config = {}
+    for item in lines:
+      parts = item.split()
+      config[parts[0]] = parts[2][1:-1]
+    postheaders = {
+      'client_id': config['CLIENT_ID'],
+      'client_secret': config['CLIENT_SECRET'],
+      'refresh_token': config['REFRESH_TOKEN'],
+      'grant_type': 'refresh_token'
+      }
+    out(endpoint)
+    out(postheaders)
+    r = requests.post(endpoint, postheaders)
+    rd = r.json()
+    xseconds = rd['expires_in']
+    expiresin = datetime.now() + timedelta(seconds=xseconds)
+    pickleme = {
+      'access_token': rd['access_token'],
+      'expires': expiresin
+    }
+    pickle.dump(pickleme, open(globs.TOKEN, 'wb'))
+  else:
+    return token
+
 def out(msg, symbol='', dent=''):
   """Return message as command line debug output when in debug mode."""
   total = 80
