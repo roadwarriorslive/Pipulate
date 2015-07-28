@@ -205,7 +205,7 @@ def main():                                                         # of entry "
         pass
       elif request.args and 'code' in request.args:
         pass
-      elif needsPipulate:
+      elif needsPipulate and 'access_token' not in request.args:
         out("EXITING MAIN FUNCTION RENDER INDOCTRINATE", "0", '-')
         return render_template('pipulate.html', form=form, select=None)
   stext = ''
@@ -240,10 +240,10 @@ def main():                                                         # of entry "
       form.magicbox.data = session['s']
       stext = session['s']
     if request.args and "access_token" in request.args: # Oops... necessary evil. Redirect quickly.
-      #try:
-      LogUser(request.args['access_token'])
-      #except:
-      #  pass
+      try:
+        LogUser(request.args['access_token'])
+      except:
+        pass
       session['oa2'] = request.args.get("access_token")
       session['loggedin'] = "1"
       session['i'] -= 1 # Don't skip a cute message, just becuse I redirect.
@@ -799,7 +799,10 @@ def Pipulate(dockey='', token=''):
           if counts[0] == '*':
             counts[0] = 0
           #Here we need to detect if there's rows left over.
-          timeletter = globs.letter[globs.row1.index('timestamp') + 1]
+          try:
+            timeletter = globs.letter[globs.row1.index('timestamp') + 1]
+          except:
+            Stop()
           mayhaverun = "%s%s:%s%s" % (timeletter, backintime, timeletter, globs.numrows)
           try:
             CellList = globs.sheet.range(mayhaverun)
