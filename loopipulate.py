@@ -60,9 +60,11 @@ def Scheduler():
       for onedoc in doclist:
         dockey = onedoc.get_id_fields()['spreadsheet_id']
         print(dockey)
+        out("ENTERING PIPULATE FUNCTION", "0")
         STREAMIT = Pipulate(dockey, token)
         for thebits in STREAMIT:
           print(thebits)
+        out("EXITING PIPULATE FUNCTION", "0", '-')
       print("*"*50)
   else:
     print("Please configure Pipulate by visiting from a browser.")
