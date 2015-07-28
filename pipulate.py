@@ -240,10 +240,10 @@ def main():                                                         # of entry "
       form.magicbox.data = session['s']
       stext = session['s']
     if request.args and "access_token" in request.args: # Oops... necessary evil. Redirect quickly.
-      try:
-        LogUser(request.args['access_token'])
-      except:
-        pass
+      #try:
+      LogUser(request.args['access_token'])
+      #except:
+      #  pass
       session['oa2'] = request.args.get("access_token")
       session['loggedin'] = "1"
       session['i'] -= 1 # Don't skip a cute message, just becuse I redirect.
@@ -1131,8 +1131,11 @@ def getLoginlink():
   redir = globs.DOMURL
   if 'Host' in request.headers:
     redir = 'http://'+request.headers['Host']
-  if request.args and 'u' in request.args:
-    session['u'] = request.args.get('u')
+  try:
+    if session and request.args and 'u' in request.args:
+      session['u'] = request.args.get('u')
+  except:
+    pass
   scope = 'https://spreadsheets.google.com/feeds/'
   if globs.PCOM:
     scope = 'profile email ' + scope

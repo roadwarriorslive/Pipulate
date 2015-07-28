@@ -36,6 +36,7 @@ def freshtoken(picklefile):
       }
     out(endpoint)
     out(postheaders)
+    import requests
     r = requests.post(endpoint, postheaders)
     rd = r.json()
     xseconds = rd['expires_in']
