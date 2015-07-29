@@ -370,7 +370,6 @@ def Pipulate(dockey='', token=''):
   being zapped around". And finally the fourth channel controls the flashing of
   the little lock icon in the button to give some flashing visual feedback to
   the user tied to actual busy-states."""
-
   stop = False
   qset = set()
   qstart = 1
@@ -496,11 +495,13 @@ def Pipulate(dockey='', token=''):
       anything = re.compile('.+')
       initSheet1 = False
       cell = None
+      out("Begin")
       try:
         cell = gdoc.sheet1.find(anything)
       except gspread.exceptions.CellNotFound:
         # Questionmark replacement tab
         initSheet1 = True
+      out("End")
       if initSheet1:
         if globs.PIPMODE == 'clear':
           pass
@@ -1100,12 +1101,13 @@ def Pipulate(dockey='', token=''):
     if globs.WEB: yield "spinoffsuccess", "", "", ""
     out("PIPULATION OVER", "1", '-')
   except Exception as e:
-    print traceback.format_exc()
-
+    exceptiondata = traceback.format_exc()
+    print(exceptiondata)
+    exceptionlines = exceptiondata.splitlines()
     exc_type, exc_obj, exc_tb = sys.exc_info()
     fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
     ename = type(e).__name__
-    fixme = "%s, %s, %s" % (ename, fname, exc_tb.tb_lineno)
+    fixme = "Error: %s, File: %s, Line: %s" % (ename, fname, exc_tb.tb_lineno)
     out(fixme)
     out("Pipulation Failure")
     if ename == "StopIteration":
@@ -1114,6 +1116,7 @@ def Pipulate(dockey='', token=''):
         loginmsg = "Login link under the upper-left \"burger button\"."
       # if globs.WEB: yield "Session timed out. Try again", "If at first you don't succeed, pipulate again.", "", ""
     else:
+      if globs.WEB: yield exceptionlines[-1], "", "", ""
       if globs.WEB: yield fixme, "", "", ""
       if globs.WEB: yield "Pipulation prematurely terminated.", "", "", ""
       if globs.WEB: yield "Please open an issue at https://github.com/miklevin/pipulate", "", "", ""
