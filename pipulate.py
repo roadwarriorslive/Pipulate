@@ -1116,11 +1116,12 @@ def Pipulate(dockey='', token=''):
         loginmsg = "Login link under the upper-left \"burger button\"."
       # if globs.WEB: yield "Session timed out. Try again", "If at first you don't succeed, pipulate again.", "", ""
     else:
-      if globs.WEB: yield exceptionlines[-1], "", "", ""
-      if globs.WEB: yield fixme, "", "", ""
-      if globs.WEB: yield "Pipulation prematurely terminated.", "", "", ""
-      if globs.WEB: yield "Please open an issue at https://github.com/miklevin/pipulate", "", "", ""
-      if globs.WEB: yield "Or just tap me on the shoulder.", "", "", ""
+      if globs.WEB:
+        yield exceptionlines[-1], "", "", ""
+        yield fixme, "", "", ""
+        yield "Pipulation prematurely terminated.", "", "", ""
+        yield "Please open an issue at https://github.com/miklevin/pipulate", "", "", ""
+        yield "Or just tap me on the shoulder.", "", "", ""
     if globs.PIPMODE != 'clear':
       if globs.WEB: yield "spinerr", "", "", ""
     out("PIPULATION ERROR", "1", '-')
