@@ -34,6 +34,5 @@ def Scheduler():
     print("Please configure Pipulate by visiting from a browser.")
 
 if __name__ == '__main__':
-  socket.setdefaulttimeout(25)
-  globs.mode = "cli"
+  socket.setdefaulttimeout(180)
   Scheduler()

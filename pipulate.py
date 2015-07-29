@@ -25,28 +25,26 @@
 
 """
 import sys, os, socket, urlparse, re, gspread                       # Hello World! I'm glad you found your way
-socket.setdefaulttimeout(10.0)                                      # to pipulate.py. While this is not the
-import globs                                                        # exact file that kicks off Pipulate, it
-from common import *                                                # is the most important to the process.
-import requests, traceback, datetime, time, json                    # Those other files, like webpipulate.py
-from flask_wtf import Form                                          # and loopipulate.py are merely shims for
-from wtforms import   (StringField,                                 # different Python code execution contexts.
-                      HiddenField,                                  # Webpipulate creates an instance of the
-                      TextAreaField,                                # Flask webserving app object, perhaps
-                      SelectField)                                  # somewhat controversially directly native
-from flask import     (Flask,                                       # in Python. Yes, there's gunicorn, nginx,
-                      stream_with_context,                          # and all that wonderful webserver extra
-                      render_template,                              # context, but who needs it? An entire
-                      Response,                                     # instance of Pipulate, including host OS,
-                      request,                                      # Python, all 3rd party dependencies and
-                      session,                                      # the application itself fit in under 60MB
-                      redirect,                                     # of space, making it perfect to run from
-                      url_for,                                      # extremely lightweight servers, virtual
-                      flash)                                        # machines, or your desktop.
+import globs                                                        # to pipulate.py. While this is not the
+from common import *                                                # exact file that kicks off Pipulate, it
+import requests, traceback, datetime, time, json                    # is the most important to the process.
+from flask_wtf import Form                                          # Those other files, like webpipulate.py
+from wtforms import   (StringField,                                 # and loopipulate.py are merely shims for
+                      HiddenField,                                  # different Python code execution contexts.
+                      TextAreaField,                                # Webpipulate creates an instance of the
+                      SelectField)                                  # Flask webserving app object, perhaps
+from flask import     (Flask,                                       # somewhat controversially directly native
+                      stream_with_context,                          # in Python. Yes, there's gunicorn, nginx,
+                      render_template,                              # and all that wonderful webserver extra
+                      Response,                                     # context, but who needs it? An entire
+                      request,                                      # instance of Pipulate, including host OS,
+                      session,                                      # Python, all 3rd party dependencies and
+                      redirect,                                     # the application itself fit in under 60MB
+                      url_for,                                      # of space, making it perfect to run from
+                      flash)                                        # small servers, virtual machines or desktop.
 
+socket.setdefaulttimeout(10.0)                                      
 app = Flask(__name__)                                               # Create that fateful instance of a Flask object.
-if "SECRET_KEY" in app.config:                                      # The app secret value was set during server config
-  app.secret_key = app.config['SECRET_KEY']                         # So, load it from the application config values.
 
 def stream_template(template_name, **context):                      # Pipulate is a non-traditional streaming app
   """Open inexpensive Flask-based streaming."""                     # utilizing Flask's built-in streaming method.
@@ -88,9 +86,6 @@ class PipForm(Form):
 @app.route("/", methods=['GET', 'POST'])                            # In web-mode, Pipulate only uses this one point
 def main():                                                         # of entry "/", via the Werkzeug routing package.
   """Ensures config and login requirements met."""                  # We always check first whether the server has
-  if (os.path.isfile(globs.FILE) and                                # been configured or not. Configuration consists
-      os.path.getsize(globs.FILE) > 0):                             # of a file with Google OAuth2 Client ID, Client
-    app.config.from_pyfile(globs.FILE, silent=False)                # secret, and Flask application secret. Load them.
   print('''
                ____  _             _       _   _
               |  _ \(_)_ __  _   _| | __ _| |_(_)_ __   __ _
@@ -105,9 +100,11 @@ def main():                                                         # of entry "
   insheet = False                                                   # If bookmarklet is clicked from a Google Sheet.
   form = PipForm(csrf_enabled=False)                                # All WTForms are instances of classes. Main form.
   configform = ConfigForm(csrf_enabled=False)                       # The form to let you 1st time configure server.
-
-  if (not os.path.isfile(globs.FILE) or                             # Configure server if no config file is found.
-      os.path.getsize(globs.FILE) == 0):
+  if (os.path.isfile(globs.FILE) and                                # been configured or not. Configuration consists
+      os.path.getsize(globs.FILE) > 0):                             # of a file with Google OAuth2 Client ID, Client
+    app.config.from_pyfile(globs.FILE, silent=False)                # secret, and Flask application secret. Load them.
+    app.config['SESSION_TYPE'] = 'filesystem'
+  else:
     #                                                   __ _       
     #   ___  ___ _ ____   _____ _ __    ___ ___  _ __  / _(_) __ _ 
     #  / __|/ _ \ '__\ \ / / _ \ '__|  / __/ _ \| '_ \| |_| |/ _` |
@@ -494,14 +491,14 @@ def Pipulate(dockey='', token=''):
       # This is where special behavior like crawls get wedged in
       anything = re.compile('.+')
       initSheet1 = False
+      initSheet1 = True
       cell = None
-      out("Begin")
-      try:
-        cell = gdoc.sheet1.find(anything)
-      except gspread.exceptions.CellNotFound:
-        # Questionmark replacement tab
-        initSheet1 = True
-      out("End")
+      out("Hit")
+      #try:
+      #  gdoc.sheet1
+      #except gspread.exceptions.CellNotFound:
+      #  # Questionmark replacement tab
+      #  initSheet1 = True
       if initSheet1:
         if globs.PIPMODE == 'clear':
           pass
