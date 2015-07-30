@@ -720,7 +720,7 @@ def Pipulate(dockey='', token=''):
       #  \__,_|___/\__\___|_|  |_|___/_|\_\___/
       #
       trended = False
-      out("Scan down Pipulate tab looking for asterisks.", "2")
+      out("Scan down Pipulate tab looking for ASTERISKS.", "2")
 
       for rowdex in range(1, globs.numrows+1):
         out("Scanning row %s for asterisks." % rowdex) #This can have a pretty long delay
@@ -777,7 +777,7 @@ def Pipulate(dockey='', token=''):
       # | |_| | | | | | |  __/ | (_>  < | (_| (_) | |_| | | | | |_
       #  \__|_|_| |_| |_|\___|  \___/\/  \___\___/ \__,_|_| |_|\__|
       #
-      out("Count and timestamp columns for trending", '2')
+      out("Count and timestamp columns for TRENDING", '2')
       times = []
       if trended and 'count' in globs.row1:
         backintime = globs.numrows - len(trendlistoflists) + 1
@@ -834,14 +834,14 @@ def Pipulate(dockey='', token=''):
       else:
         qstart = 1
         qend = globs.numrows + 1
-      out("Count and timestamp columns for trending", '2', '-')
+      out("Done count and timestamp columns for trending", '2', '-')
       #  _                     _
       # (_)_ __  ___  ___ _ __| |_   _ __ _____      _____
       # | | '_ \/ __|/ _ \ '__| __| | '__/ _ \ \ /\ / / __|
       # | | | | \__ \  __/ |  | |_  | | | (_) \ V  V /\__ \
       # |_|_| |_|___/\___|_|   \__| |_|  \___/ \_/\_/ |___/
       #
-      out("Insert new rows for new time increment trending", '2')
+      out("INSERT NEW ROWS for new time increment trending", '2')
       #jobstats = timewindow(times[0])
       if times:
         insert, name, number, left, right, now = timewindow(times[0])
@@ -881,7 +881,7 @@ def Pipulate(dockey='', token=''):
           pass
       #globs.numrows = len(globs.sheet.col_values(1))
       globs.numrows = globs.numrows + len(trendlistoflists) #faster
-      out("Insert new rows for new time inrement trending", '2', '-')
+      out("Done insert new rows for new time inrement trending", '2', '-')
       #                        _   _                                    _
       #   __ _ _   _  ___  ___| |_(_) ___  _ __    _ __ ___   __ _ _ __| | _____
       #  / _` | | | |/ _ \/ __| __| |/ _ \| '_ \  | '_ ` _ \ / _` | '__| |/ / __|
@@ -889,7 +889,7 @@ def Pipulate(dockey='', token=''):
       #  \__, |\__,_|\___||___/\__|_|\___/|_| |_| |_| |_| |_|\__,_|_|  |_|\_\___/
       #     |_|
       #
-      out("Question Mark Replacement.", '2')
+      out("QUESTION MARK Replacement.", '2')
       if not qset and not trended:
         if globs.WEB: yield "No question marks found.", "Move along. There's nothing to pipulate here.", "", ""
         if globs.WEB: yield 'New to Pipulate? Watch <a target="_blank" href="https://docs.google.com/presentation/d/10lr_d1uyLMOnWsMzbenKiPlFE5-BIt9bxVucw7O4GSI/edit?usp=sharing">Demo</a> and read <a target="_blank" href="https://github.com/miklevin/pipulate/blob/master/README.md">Docs</a>.', "", "", ""
@@ -1089,7 +1089,7 @@ def Pipulate(dockey='', token=''):
             blankrows += 1
             if blankrows > 1:
               break
-      out("Question Mark Replacement.", '2', '-')
+      out("Done question Mark Replacement.", '2', '-')
 
     else: #No session object found
       if globs.WEB: yield 'Please Login to Google', "", "", ""
