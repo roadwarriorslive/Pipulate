@@ -349,24 +349,7 @@ def LogUser(authkey):
 #         |_|
 #
 def Pipulate(dockey='', token=''):
-  """I never met a generator I couldn't nest. That doesn't mean you should. A
-  few words of explanation are necessary about how these yield statements work,
-  and where better than here to explain it? This "funciton" is actually a
-  Python generator and not a normal function. That means it can return values
-  in small tuple-like packages each having 4 values. The reason for this is to
-  provide constant streaming feedback to the user through the web user
-  interface under the lightweight Python framework, utilizing the very same
-  page-load response that builds the intial user interface itself. In this
-  waprint  we can achieve very slick results that simulate the advantages of more
-  heavyweight approaches, such as websockets. It is beautiful, although it
-  takes a special eye to see it. Each value represents a different "channel"
-  to keep the user informed in the user interface. The first adds to the
-  log-like list at the bottom of the Pipulate interface. The second represents
-  the entertaining messages inserted above the JSON-display area. And the third
-  contains the JSON data that I want the user to be able to visualize as "data
-  being zapped around". And finally the fourth channel controls the flashing of
-  the little lock icon in the button to give some flashing visual feedback to
-  the user tied to actual busy-states."""
+  """Generator that streams output to a web user interface."""
   stop = False
   qset = set()
   qstart = 1
@@ -397,14 +380,16 @@ def Pipulate(dockey='', token=''):
           out("Credential object created.")
         else:
           out("Expired login.")
-          if globs.WEB: yield "Google Login expired. Log back in.", "Login under the \"burger button\" in the upper-right.", "", ""
-          if globs.WEB: yield "spinoff", "", "", ""
+          if globs.WEB: 
+            yield "Google Login expired. Log back in.", "Login under the \"burger button\" in the upper-right.", "", ""
+            yield "spinoff", "", "", ""
         try:
           gsp = gspread.authorize(creds)
         except:
           out("Login failed.")
-          if globs.WEB: yield "Google Login unsuccessful.", "", "", ""
-          if globs.WEB: yield "spinoff", "", "", ""
+          if globs.WEB: 
+            yield "Google Login unsuccessful.", "", "", ""
+            yield "spinoff", "", "", ""
           raise StopIteration
         else:
           out("Login successful.")
@@ -435,9 +420,10 @@ def Pipulate(dockey='', token=''):
             except gspread.httpsession.HTTPError, e:
               pass
             except:
-              if globs.WEB: yield "I see you're on a URL that is not a Google Spreadsheet. Would you like to grab links?", "", "", ""
-              if globs.WEB: yield "If so, just <a href='https://docs.google.com/spreadsheets/create' target='_new'>create</a> a new Spreadsheet, name it \"Pipulate\" and click Pipulate again.", "Google Spreadsheet Not Found.", "", ""
-              if globs.WEB: yield 'New to this odd but awesome approach? Watch the <a target="_blank" href="http://goo.gl/v71kw8">Demo</a> and read the <a target="_blank" href="http://goo.gl/p2zQa4">Docs</a>.', "", "", ""
+              if globs.WEB: 
+                yield "I see you're on a URL that is not a Google Spreadsheet. Would you like to grab links?", "", "", ""
+                yield "If so, just <a href='https://docs.google.com/spreadsheets/create' target='_new'>create</a> a new Spreadsheet, name it \"Pipulate\" and click Pipulate again.", "Google Spreadsheet Not Found.", "", ""
+                yield 'New to this odd but awesome approach? Watch the <a target="_blank" href="http://goo.gl/v71kw8">Demo</a> and read the <a target="_blank" href="http://goo.gl/p2zQa4">Docs</a>.', "", "", ""
               Stop()
           except gspread.exceptions.SpreadsheetNotFound:
             if globs.WEB: yield "Please give the document a name to force first save.", "", "", ""
@@ -447,8 +433,9 @@ def Pipulate(dockey='', token=''):
             out("Retry login %s of %s" % (x, 10))
             time.sleep(6)
         if stop:
-          if globs.WEB: yield "spinoff", "", "", ""
-          if globs.WEB: yield badtuple
+          if globs.WEB: 
+            yield "spinoff", "", "", ""
+            yield badtuple
           Stop()
       if globs.WEB: yield unlock
       out("Google Spreadsheet successfully opened.")
@@ -828,6 +815,7 @@ def Pipulate(dockey='', token=''):
       if trended and trendingrowsfinished == True:
         qstart = globs.numrows + 1
         qend = globs.numrows + 1
+        qset.add(globs.numrows + 1)
       elif qset:
         qstart = min(qset)
         qend = max(qset) + 1
@@ -874,8 +862,9 @@ def Pipulate(dockey='', token=''):
         try:
           globs.sheet = gdoc.sheet1
         except:
-          if globs.WEB: yield "Couldn't reach Google Docs. Try logging in again.", "", "", ""
-          if globs.WEB: yield "spinoff", "", "", ""
+          if globs.WEB:
+            yield "Couldn't reach Google Docs. Try logging in again.", "", "", ""
+            yield "spinoff", "", "", ""
           raise StopIteration
         else:
           pass
@@ -891,13 +880,14 @@ def Pipulate(dockey='', token=''):
       #
       out("QUESTION MARK Replacement.", '2')
       if not qset and not trended:
-        if globs.WEB: yield "No question marks found.", "Move along. There's nothing to pipulate here.", "", ""
-        if globs.WEB: yield 'New to Pipulate? Watch <a target="_blank" href="https://docs.google.com/presentation/d/10lr_d1uyLMOnWsMzbenKiPlFE5-BIt9bxVucw7O4GSI/edit?usp=sharing">Demo</a> and read <a target="_blank" href="https://github.com/miklevin/pipulate/blob/master/README.md">Docs</a>.', "", "", ""
-        if globs.WEB: yield "spinoff", "", "", ""
+        if globs.WEB:
+          yield "No question marks found.", "Move along. There's nothing to pipulate here.", "", ""
+          yield 'New to Pipulate? Watch <a target="_blank" href="https://docs.google.com/presentation/d/10lr_d1uyLMOnWsMzbenKiPlFE5-BIt9bxVucw7O4GSI/edit?usp=sharing">Demo</a> and read <a target="_blank" href="https://github.com/miklevin/pipulate/blob/master/README.md">Docs</a>.', "", "", ""
+          yield "spinoff", "", "", ""
         return
 
       blankrows = 0 #Lets us skip occasional blank rows
-      for index, rowdex in enumerate(range(qstart, qend)): #Start stepping through every row.
+      for index, rowdex in enumerate(range(qstart, qend+1)): #Start stepping through every row.
         if rowdex in qset:
           if maxrowsperhour: # if maxrowsperhour is 0, this won't trap
             if index >= int(maxrowsperhour):
