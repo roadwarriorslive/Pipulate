@@ -9,6 +9,7 @@
   font-style: normal;
 }
 body {
+  background-color: black;
   font-family: Nunito;
   font-size: 14px;
   color: #333;
@@ -48,6 +49,7 @@ a {
   height: 100%;
 }
 #content{
+  width: 100%;
   background-color: #000;
   position: relative;
   margin: 0 auto;
@@ -71,7 +73,7 @@ a {
   text-align: left;
   line-height: 1.4em;
 }
-.pl {
+.pl, .pl > .bullet {
   color: white;
   font-size: .9em;
 }
@@ -334,15 +336,10 @@ nav{
   }
 }
 @media (min-width: 960px) {
-  #pastelabel{
-    width:4em;
-  }
-  #paste{
-    width: 860px;
-    margin-left: auto;
-    margin-right: auto;
-  }
   #piphelp{
     display: none;
+  }
+  #content {
+    width: 960px;
   }
 }
