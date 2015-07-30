@@ -14,9 +14,6 @@
     <link rel="stylesheet" href="./static/main.css">
     <script>
       $(function(){
-        $(window).load(function(){ // On load
-          $('#pipstream').css({'height':(($(window).height())-300)+'px'});
-        });
         $(window).resize(function(){ // On resize
           $('#pipstream').css({'height':(($(window).height())-300)+'px'});
         });
@@ -162,6 +159,9 @@
             </div>
           </form>
           <div id="pipstream">
+            <script>
+              $('#pipstream').css({'height':(($(window).height())-300)+'px'});
+            </script>
           {% with messages = get_flashed_messages() %}
             {% if messages %}
               {% for message in messages %}

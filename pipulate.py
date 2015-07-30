@@ -847,9 +847,10 @@ def Pipulate(dockey='', token=''):
       else:
         if globs.WEB: yield "Pipulate running in questionmark replacement mode.", "", "", ""
       if left and right and now:
-        if globs.WEB: yield "%s = Start of last time window" % left, "", "", ""
-        if globs.WEB: yield "%s = End of last time window" % right, "", "", ""
-        if globs.WEB: yield "%s = Currrent time" % now, "", "", ""
+        if globs.WEB:
+          yield "%s = Start of last time window" % left, "", "", ""
+          yield "%s = End of last time window" % right, "", "", ""
+          yield "%s = Currrent time" % now, "", "", ""
       if trendlistoflists and insert: #This line will show in errors for any Config scheduling screw-ups.
         for x in range(4):
           try:
@@ -872,8 +873,10 @@ def Pipulate(dockey='', token=''):
           raise StopIteration
         else:
           pass
-      #globs.numrows = len(globs.sheet.col_values(1))
-      globs.numrows = globs.numrows + len(trendlistoflists) #faster
+      globs.numrows = len(globs.sheet.col_values(1))
+      if trended:
+        qend = globs.numrows + 1
+      #globs.numrows = globs.numrows + len(trendlistoflists) #faster
       out("Done insert new rows for new time inrement trending", '2', '-')
       #                        _   _                                    _
       #   __ _ _   _  ___  ___| |_(_) ___  _ __    _ __ ___   __ _ _ __| | _____
@@ -891,7 +894,7 @@ def Pipulate(dockey='', token=''):
         return
 
       blankrows = 0 #Lets us skip occasional blank rows
-      for index, rowdex in enumerate(range(qstart, qend+1)): #Start stepping through every row.
+      for index, rowdex in enumerate(range(qstart, qend)): #Start stepping through every row.
         if rowdex in qset:
           if maxrowsperhour: # if maxrowsperhour is 0, this won't trap
             if index >= int(maxrowsperhour):
@@ -1064,14 +1067,14 @@ def Pipulate(dockey='', token=''):
             result = None
 
             stop = True
-            for x in range(5):
+            for x in range(10):
               if globs.WEB: yield lock
               try:
                 result = globs.sheet.update_cells(CellList)
                 stop = False
                 break
               except:
-                out("Writing row to spreadsheet, retry %s of %s" %(x, 5))
+                out("Writing row to spreadsheet, retry %s of %s" %(x, 10))
                 time.sleep(5)
                 if globs.WEB: yield dontgetfrustrated(x)
             if stop:
