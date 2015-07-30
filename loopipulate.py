@@ -11,7 +11,7 @@
 #             tragedy if that moment finds him unprepared or
 #        unqualified for the work which would be his finest hour.
 
-#                        -- Winston Curchill
+#                        -- Winston Churchill
 
 from pipulate import *
 import globs, common
