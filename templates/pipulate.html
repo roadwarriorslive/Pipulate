@@ -171,6 +171,7 @@
               {% endfor %}
             {% endif %}
           {% endwith %}
+          <ul>
           {% for lineitem, learn, magic, glock in data: -%}
             {%- if glock == '+' : -%}
               <script>
@@ -228,20 +229,19 @@
                   // Flash stormy weather (gdata) problem-with-api symbol
                   stormyweather();
                 </script>
-              {%- elif lineitem[:1] == ',' -%}
-                <span class="pl">{{ lineitem }}</span>
               {%- else -%}
                 <script>
                   $("i.bullet").removeClass("pip-circle-notch animate-spin");
                   $("i.bullet").addClass("pip-ok");
                 </script>
-                {%- if loop.index > 1: -%}<br/>{%- endif -%}<span class="pl"><i class="bullet pip-icon pip-circle-notch animate-spin"></i> {{ lineitem|safe }}</span>
+                <li><i class="bullet pip-icon pip-circle-notch animate-spin"></i> {{ lineitem|safe }}</li>
               {%- endif -%}
               <script>
                 $("#pipstream").scrollTop($("#pipstream")[0].scrollHeight);
               </script>
             {%- endif -%}
           {%- endfor -%}
+          </ul>
         {% else: %}
           <a class="button pip" href="{{ loginlink }}">LOGIN... &nbsp;<i id="piplock" class="pip-icon pip-googleplus"></i></a>
           <div style="height: 100%"><img id="piplogo" alt="Pipulate Free and Open Source SEO Software" src="static/pipulate-logo-white-transparent.png" /></div>

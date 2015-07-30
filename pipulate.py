@@ -481,13 +481,12 @@ def Pipulate(dockey='', token=''):
       # This is where special behavior like crawls get wedged in
       anything = re.compile('.+')
       initSheet1 = False
-      initSheet1 = True
       cell = None
-      #try:
-      #  gdoc.sheet1
-      #except gspread.exceptions.CellNotFound:
-      #  # Questionmark replacement tab
-      #  initSheet1 = True
+      try:
+        gdoc.sheet1
+      except gspread.exceptions.CellNotFound:
+        # Questionmark replacement tab
+        initSheet1 = True
       if initSheet1:
         if globs.PIPMODE == 'clear':
           pass
@@ -523,14 +522,12 @@ def Pipulate(dockey='', token=''):
             out("Could not clear tap one.")
             Stop()
 
-      if globs.WEB: yield "Checking Tabs: Sheet 1", "Then we check for tabs...", "", ""
+      if globs.WEB: yield "Checking Tabs.", "Then we check for tabs...", "", ""
       # How To Tab
-      if globs.WEB: yield ", How To", "", "", ""
       headers = ['Expand column. Hey, you did it! Good job so far.', 'Welcome to Pipulate!']
       InitTab(gdoc, 'How To', headers, documentation())
 
       # Config Tab
-      if globs.WEB: yield ", Config", "", "", ""
       headers = ['NAME', 'VALUE']
       config = []
       config.append(['RepeatJobEvery','day'])
@@ -543,7 +540,6 @@ def Pipulate(dockey='', token=''):
       if globs.WEB: yield unlock
 
       # Scrapers Tab
-      if globs.WEB: yield ", Scrapers", "", "", ""
       headers = ['name', 'type', 'pattern']
       InitTab(gdoc, 'Scrapers', headers, scrapes())
       sst = None
@@ -563,8 +559,6 @@ def Pipulate(dockey='', token=''):
         if globs.WEB: yield badtuple
         Stop()
       if globs.WEB: yield unlock
-
-      if globs.WEB: yield ", Done!", "", "", ""
 
       try:
         out("Reading Config tab into globals.")

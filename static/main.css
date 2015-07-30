@@ -73,10 +73,6 @@ a {
   text-align: left;
   line-height: 1.4em;
 }
-.pl, .pl > .bullet {
-  color: white;
-  font-size: .9em;
-}
 nav{
   background-color: #EEEEEE;
 }
@@ -219,7 +215,7 @@ nav{
 #piplogo {
   max-width: 380px;
   position: relative;
-  top: 40%;
+  top: 36%;
   transform: translateY(-50%);
 }
 .bookmarklet{padding: 0px;}
