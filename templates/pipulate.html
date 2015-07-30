@@ -13,6 +13,14 @@
     <link rel="stylesheet" href="./static/css/animation.css"><!--[if IE 7]><link rel="stylesheet" href="css/mikelevin-ie7.css"><![endif]-->
     <link rel="stylesheet" href="./static/main.css">
     <script>
+      $(function(){
+        $(window).load(function(){ // On load
+          $('#pipstream').css({'height':(($(window).height())-330)+'px'});
+        });
+        $(window).resize(function(){ // On resize
+          $('#pipstream').css({'height':(($(window).height())-330)+'px'});
+        });
+      });
       $(document).ready(function(){  
         $(function(){
           $("input").prop('required',true);
