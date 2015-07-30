@@ -564,6 +564,8 @@ def Pipulate(dockey='', token=''):
         Stop()
       if globs.WEB: yield unlock
 
+      if globs.WEB: yield ", Done!", "", "", ""
+
       try:
         out("Reading Config tab into globals.")
         globs.config = RefreshConfig(gdoc, "Config") #HTTPError
@@ -1090,8 +1092,9 @@ def Pipulate(dockey='', token=''):
 
     else: #No session object found
       if globs.WEB: yield 'Please Login to Google', "", "", ""
-    if globs.WEB: yield "Pipulation complete.&nbsp;&nbsp;", "Congratulations, pipulation complete! Now, do a little victory dance.", "", ""
-    if globs.WEB: yield "spinoffsuccess", "", "", ""
+    if globs.WEB:
+      yield "Pipulation complete.&nbsp;&nbsp;", "Congratulations, pipulation complete! Now, do a little victory dance.", "", ""
+      yield "spinoffsuccess", "", "", ""
     out("PIPULATION OVER", "1", '-')
   except Exception as e:
     exceptiondata = traceback.format_exc()

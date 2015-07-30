@@ -50,7 +50,9 @@
         {% endif %}
       });
       function stormyweather() {
+        $('#spinner').css('display', 'none');
         $('#stormyweather').fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100);
+        $('#spinner').css('display', 'block');
       }
       function redlock() {
         $('#piplock').css('color', 'red');

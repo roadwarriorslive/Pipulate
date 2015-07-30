@@ -80,6 +80,9 @@ a {
 nav{
   background-color: #EEEEEE;
 }
+#piplock {
+  color: white;
+}
 #pipurl {
   background-color: bisque;
   font-weight: bold;
@@ -276,7 +279,7 @@ nav{
   font-family: "mikelevin";
   font-style: normal;
   font-weight: normal;
-  color: white;
+  color: black;
   speak: none;
  
   display: inline-block;
