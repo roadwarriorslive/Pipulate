@@ -12,6 +12,10 @@
 
 import globs
 
+class Credentials (object):
+  def __init__ (self, access_token=None):
+    self.access_token = access_token
+
 def freshtoken(picklefile):
   import pickle
   from datetime import datetime, timedelta
@@ -34,8 +38,6 @@ def freshtoken(picklefile):
       'refresh_token': config['REFRESH_TOKEN'],
       'grant_type': 'refresh_token'
       }
-    out(endpoint)
-    out(postheaders)
     import requests
     r = requests.post(endpoint, postheaders)
     rd = r.json()

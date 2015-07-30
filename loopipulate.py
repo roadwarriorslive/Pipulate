@@ -20,7 +20,7 @@ def Scheduler():
     import gspread
     gsp = gspread.authorize(creds)
     doclist = gsp.openall()
-    for x in range(2): #Accomodate for API failures
+    for x in range(1): #Accomodate for API failures
       for onedoc in doclist:
         dockey = onedoc.get_id_fields()['spreadsheet_id']
         print(dockey)

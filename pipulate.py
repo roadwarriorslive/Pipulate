@@ -493,7 +493,6 @@ def Pipulate(dockey='', token=''):
       initSheet1 = False
       initSheet1 = True
       cell = None
-      out("Hit")
       #try:
       #  gdoc.sheet1
       #except gspread.exceptions.CellNotFound:
@@ -1191,10 +1190,6 @@ def getLogoutlink():
   else:
     logout = "http://%s?logout" % host
   return logout
-
-class Credentials (object):
-  def __init__ (self, access_token=None):
-    self.access_token = access_token
 
 def RefreshConfig(gdoc, sheetname):
   #!!! Needs optimization
