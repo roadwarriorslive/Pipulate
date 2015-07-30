@@ -263,17 +263,20 @@ def main():                                                         # of entry "
           form.pipurl.data = request.args.get('u')
         session.pop('loggedin', None)
     elif request.args: # Move selected text and current url into session object.
-      if 's' in request.args:
-        session['s'] = request.args.get('s')
-      if 'u' in request.args:
-        form.pipurl.data = request.args.get('u')
-        session['u'] = request.args.get('u')
-        if globs.SHEETS in form.pipurl.data:
-          insheet = "sheets"
-        else:
-          insheet = form.pipurl.data
-      if session and 'u' in session:
-        form.pipurl.data = session['u']
+      try:
+        if 's' in request.args:
+          session['s'] = request.args.get('s')
+        if 'u' in request.args:
+          form.pipurl.data = request.args.get('u')
+          session['u'] = request.args.get('u')
+          if globs.SHEETS in form.pipurl.data:
+            insheet = "sheets"
+          else:
+            insheet = form.pipurl.data
+        if session and 'u' in session:
+          form.pipurl.data = session['u']
+      except:
+        pass
   #      _                                          _               _   
   #  ___| |_ _ __ ___  __ _ _ __ ___     ___  _   _| |_ _ __  _   _| |_ 
   # / __| __| '__/ _ \/ _` | '_ ` _ \   / _ \| | | | __| '_ \| | | | __|
@@ -500,8 +503,9 @@ def Pipulate(dockey='', token=''):
               pass
             if globs.WEB: yield unlock
           except:
-            yme = "Action for %s not defined." % globs.PIPMODE
-            if globs.WEB: yield yme, "Action not defined.", "", ""
+            # yme = "Action for %s not defined." % globs.PIPMODE
+            # if globs.WEB: yield yme, "Action not defined.", "", ""
+            pass
       else:
         anything = re.compile('.+')
         if globs.PIPMODE == 'clear':
