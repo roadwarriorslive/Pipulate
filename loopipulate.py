@@ -20,16 +20,16 @@ def Scheduler():
     import gspread
     gsp = gspread.authorize(creds)
     doclist = gsp.openall()
-    for x in range(1): #Accomodate for API failures
-      for onedoc in doclist:
-        dockey = onedoc.get_id_fields()['spreadsheet_id']
-        print(dockey)
-        out("ENTERING PIPULATE FUNCTION", "0")
-        STREAMIT = Pipulate(dockey, token)
-        for thebits in STREAMIT:
-          print(thebits)
-        out("EXITING PIPULATE FUNCTION", "0", '-')
-      print("*"*50)
+    #for x in range(2): #Accomodate for API failures
+    for onedoc in doclist:
+      dockey = onedoc.get_id_fields()['spreadsheet_id']
+      print('PROCESSING SHEET: "%s" with key %s' % (onedoc.title, dockey))
+      out("ENTERING PIPULATE FUNCTION", "0")
+      STREAMIT = Pipulate(dockey, token)
+      for thebits in STREAMIT:
+        print(thebits)
+      out("EXITING PIPULATE FUNCTION", "0", '-')
+    print("*"*50)
   else:
     print("Please configure Pipulate by visiting from a browser.")
 

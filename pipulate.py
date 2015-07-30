@@ -356,8 +356,8 @@ def Pipulate(dockey='', token=''):
   in small tuple-like packages each having 4 values. The reason for this is to
   provide constant streaming feedback to the user through the web user
   interface under the lightweight Python framework, utilizing the very same
-  page-load response that builds the intial user interface itself. In this way,
-  we can achieve very slick results that simulate the advantages of more
+  page-load response that builds the intial user interface itself. In this
+  waprint  we can achieve very slick results that simulate the advantages of more
   heavyweight approaches, such as websockets. It is beautiful, although it
   takes a special eye to see it. Each value represents a different "channel"
   to keep the user informed in the user interface. The first adds to the
@@ -894,7 +894,7 @@ def Pipulate(dockey='', token=''):
         if globs.WEB: yield "No question marks found.", "Move along. There's nothing to pipulate here.", "", ""
         if globs.WEB: yield 'New to Pipulate? Watch <a target="_blank" href="https://docs.google.com/presentation/d/10lr_d1uyLMOnWsMzbenKiPlFE5-BIt9bxVucw7O4GSI/edit?usp=sharing">Demo</a> and read <a target="_blank" href="https://github.com/miklevin/pipulate/blob/master/README.md">Docs</a>.', "", "", ""
         if globs.WEB: yield "spinoff", "", "", ""
-        Stop()
+        return
 
       blankrows = 0 #Lets us skip occasional blank rows
       for index, rowdex in enumerate(range(qstart, qend)): #Start stepping through every row.
