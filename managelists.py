@@ -49,7 +49,7 @@ def cyclemotto():
     s.append("Drag the bookmarklet to the Bookmark bar for easier pipulating.")
     s.append("To use Spreadsheets is human; to Pipulate, divine.")
     s.append("Capture Twitter and YouTube counts directly into Spreadsheets.")
-    s.append("Capture FB Likes & Shares, Google Pluses, URL PageRanks and more.")
+    s.append("Capture FB Likes & Shares, Google Pluses, Authority and more.")
     s.append("Make a new Google Spreadsheet, name it, then click the Bookmarklet.")
     s.append("Change the sample data in Pipulate tab to your own profiles.")
     s.append("Schedule jobs to run automatically by sharing in a gmail.")

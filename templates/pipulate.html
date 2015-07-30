@@ -7,18 +7,18 @@
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link href='http://fonts.googleapis.com/css?family=Paytone+One' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Nunito:300' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/picnicss/4.0.0/picnic.min.css">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/picnicss/4.0.0/plugins.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/picnicss/4.1.1/picnic.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/picnicss/4.1.1/plugins.min.css">
     <link rel="stylesheet" href="./static/css/mikelevin.css">
     <link rel="stylesheet" href="./static/css/animation.css"><!--[if IE 7]><link rel="stylesheet" href="css/mikelevin-ie7.css"><![endif]-->
     <link rel="stylesheet" href="./static/main.css">
     <script>
       $(function(){
         $(window).load(function(){ // On load
-          $('#pipstream').css({'height':(($(window).height())-330)+'px'});
+          $('#pipstream').css({'height':(($(window).height())-300)+'px'});
         });
         $(window).resize(function(){ // On resize
-          $('#pipstream').css({'height':(($(window).height())-330)+'px'});
+          $('#pipstream').css({'height':(($(window).height())-300)+'px'});
         });
       });
       $(document).ready(function(){  
@@ -127,7 +127,7 @@
         {% if session and 'loggedin' in session and session['loggedin'] == '1': %}
           <form id="pipform" method="POST" action="/">
             <div id="centerme">
-            <div id="paste" class="row"><span id="pastelabel">URL: </span>{{ form.pipurl(size=80) }}</div>
+            <div id="paste"><span id="pastelabel">URL: </span>{{ form.pipurl(size=80) }}</div>
             </div>
             <div>
             <select class="select pipmenu" id="options" name="options">{{ select|safe }}</select>

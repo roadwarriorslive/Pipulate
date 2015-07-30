@@ -123,6 +123,7 @@ nav{
   margin-left: auto;
   margin-right: auto;
   padding-right: 74px;
+  margin-top: 10px;
 }
 #pastelabel{
   margin-right: 8px;
@@ -273,6 +274,7 @@ nav{
   font-family: "mikelevin";
   font-style: normal;
   font-weight: normal;
+  color: black;
   speak: none;
  
   display: inline-block;
@@ -336,10 +338,9 @@ nav{
     width:4em;
   }
   #paste{
-    width: 97%;
+    width: 860px;
     margin-left: auto;
     margin-right: auto;
-    margin-top:50px;
   }
   #piphelp{
     display: none;
