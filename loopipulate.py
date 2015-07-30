@@ -3,11 +3,15 @@
 # | |   | '__/ _ \| '_ \  \___ \| '_ \| | '_ ` _ \ 
 # | |___| | | (_) | | | |  ___) | | | | | | | | | |
 #  \____|_|  \___/|_| |_| |____/|_| |_|_|_| |_| |_|
-#                                                  
-#   It'd be a cryin' shame to tie timing things
-#                 To schedule-APIs
-#     When a mere cron shim is much more sane
-#            For tasks that death defies!
+                                                  
+#         To every man there comes in his lifetime that special
+#         moment when he is figuratively tapped on the shoulder
+#            and offered a chance to do a very special thing,
+#            unique to him and fitted to his talents. What a
+#             tragedy if that moment finds him unprepared or
+#        unqualified for the work which would be his finest hour.
+
+#                        -- Winston Curchill
 
 from pipulate import *
 import globs, common
