@@ -52,7 +52,6 @@
       function spinoff(successorfailure) {
         $('#spinner').hide();
         $('#spinner').css('display', 'none');
-        // $('<style>li::before{animation: spin 0s; -webkit-animation: spin 0; content: "\\e80a"}</style>').appendTo('head');
         $('li').removeClass("progress");
         $('li').addClass("check");
         unlockbutton();
@@ -235,12 +234,20 @@
               {%- elif lineitem == "spinoff" -%}
                 <script>
                   // Unlock button and remove spinner, failed pipulation
-                  spinoff('success');
+                  $('#spinner').hide();
+                  $('#spinner').css('display', 'none');
+                  $('li').removeClass("progress");
+                  $('li').addClass("check");
+                  unlockbutton();
                 </script>
               {%- elif lineitem == "spinerr" -%}
                 <script>
                   // Unlock button and gracefully show user things are fubar.
-                  spinoff('failure');
+                  $('#spinner').hide();
+                  $('#spinner').css('display', 'none');
+                  $('li').removeClass("progress");
+                  $('li').addClass("warning");
+                  unlockbutton();
                 </script>
               {%- elif lineitem == "stormyweather" -%}
                 <script>
@@ -248,10 +255,15 @@
                   stormyweather();
                 </script>
               {%- else -%}
+                <script>
+                  $('#spinner').hide();
+                  $('#spinner').css('display', 'none');
+                  $('li').removeClass("progress");
+                  $('li').addClass("check");
+                </script>
                 <li class="progress">{{ lineitem|safe }}</li>
               {%- endif -%}
               <script>
-                spinoff('sofarsogood');
                 $("#pipstream").scrollTop($("#pipstream")[0].scrollHeight);
               </script>
             {%- endif -%}

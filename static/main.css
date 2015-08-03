@@ -340,6 +340,12 @@ ul li.check:before {
   animation: spin 0s;
 }
 
+ul li.warning:before {
+  content: "\e80d"; 
+  -webkit-animation: spin 0s;
+  animation: spin 0s;
+}
+
 .pipmenu {
   font-size: 13px;
   background-color:#DDDDDD;
