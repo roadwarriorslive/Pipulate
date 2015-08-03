@@ -49,6 +49,14 @@
           $("#learnsomething").html('Copy and paste a URL into field (even on mobile).');
         {% endif %}
       });
+      function spinoff(successorfailure) {
+        $('#spinner').hide();
+        $('#spinner').css('display', 'none');
+        // $('<style>li::before{animation: spin 0s; -webkit-animation: spin 0; content: "\\e80a"}</style>').appendTo('head');
+        $('li').removeClass("progress");
+        $('li').addClass("check");
+        unlockbutton();
+      }
       function stormyweather() {
         $('#spinner').css('display', 'none');
         $('#stormyweather').fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100);
@@ -184,7 +192,7 @@
           {% with messages = get_flashed_messages() %}
             {% if messages %}
               {% for message in messages %}
-                <li class="circle"> {{ message }}</li>
+                <li style="content: '\e88a';" > {{ message }}</li>
               {% endfor %}
             {% endif %}
           {% endwith %}
@@ -227,18 +235,12 @@
               {%- elif lineitem == "spinoff" -%}
                 <script>
                   // Unlock button and remove spinner, failed pipulation
-                  $('#spinner').hide();
-                  $("i.bullet").removeClass("pip-circle-notch animate-spin");
-                  $("i.bullet").addClass("pip-ok");
-                  unlockbutton();
+                  spinoff('success');
                 </script>
               {%- elif lineitem == "spinerr" -%}
                 <script>
                   // Unlock button and gracefully show user things are fubar.
-                  $('#spinner').hide();
-                  $("i.bullet").removeClass("pip-circle-notch animate-spin");
-                  $("i.bullet").addClass("pip-circle-thin");
-                  unlockbutton();
+                  spinoff('failure');
                 </script>
               {%- elif lineitem == "stormyweather" -%}
                 <script>
@@ -246,13 +248,10 @@
                   stormyweather();
                 </script>
               {%- else -%}
-                <script>
-                  $("i.bullet").removeClass("pip-circle-notch animate-spin");
-                  $("i.bullet").addClass("pip-ok");
-                </script>
-                <li>{{ lineitem|safe }}</li>
+                <li class="progress">{{ lineitem|safe }}</li>
               {%- endif -%}
               <script>
+                spinoff('sofarsogood');
                 $("#pipstream").scrollTop($("#pipstream")[0].scrollHeight);
               </script>
             {%- endif -%}

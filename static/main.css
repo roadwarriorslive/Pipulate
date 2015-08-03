@@ -328,7 +328,17 @@ li:before {
   animation: spin 2s infinite linear;
 }
 
-ul li.star:before { content: "\e88a"; }
+ul li.progress:before {
+  content: "\e820"; 
+  -webkit-animation: spin 2s infinite linear;
+  animation: spin 2s infinite linear;
+}
+
+ul li.check:before {
+  content: "\e80a"; 
+  -webkit-animation: spin 0s;
+  animation: spin 0s;
+}
 
 .pipmenu {
   font-size: 13px;
