@@ -319,7 +319,7 @@ li {
 
 li:before {
   font-family: 'mikelevin';
-  content: '\e804';
+  content: '\e820';
   float: left;
   text-indent: -2em;
   -webkit-transform-origin: -21px 9px;
