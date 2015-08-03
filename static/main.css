@@ -17,7 +17,7 @@ body {
   height: 100%;
   overflow: hidden;
 }
-h1, h2, p, li, label {
+h1, h2, p, label {
   color: white;
 }
 a {
@@ -269,15 +269,12 @@ nav{
   transform:skew(20deg) rotate(6deg);
   -webkit-box-shadow:0 10px 8px rgba(0,0,0,.6);
   box-shadow:0 10px 8px rgba(0,0,0,.6)}
-
-.pip-icon
-{
+.pip-icon {
   font-family: "mikelevin";
   font-style: normal;
   font-weight: normal;
-  color: black;
+  color: white;
   speak: none;
- 
   display: inline-block;
   text-decoration: inherit;
   width: 1em;
@@ -307,6 +304,25 @@ nav{
   /* Uncomment for 3D effect */
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
+
+ul
+{
+  list-style-type: none;
+}
+ 
+li {
+  color: white;
+}
+
+li:before {
+  font-family: 'mikelevin';
+  content: '\e88a';
+  float: left;
+  text-indent: -2em;
+}
+
+ul li.star:before { content: "\e88a"; }
+
 .pipmenu {
   font-size: 13px;
   background-color:#DDDDDD;

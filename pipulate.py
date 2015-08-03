@@ -895,12 +895,8 @@ def Pipulate(dockey='', token=''):
           if maxrowsperhour: # if maxrowsperhour is 0, this won't trap
             if index >= int(maxrowsperhour):
               break
-          if index == 0:
-            yme = "Pipulating row: %s" % rowdex
-            if globs.WEB: yield yme, "Next, we replace question marks. This may take awhile...", "", ""
-          else:
-            yme = ", %s" % rowdex
-            if globs.WEB: yield yme, "", "", ""
+          yme = "Pipulating row: %s" % rowdex
+          if globs.WEB: yield yme, "Next, we replace question marks. This may take awhile...", "", ""
           globs.hobj = None
           globs.html = '' #Blank the global html object. Recylces fetches.
           rowrange = "A%s:%s%s" % (rowdex, globs.letter[len(globs.row1)], rowdex)
@@ -1087,7 +1083,7 @@ def Pipulate(dockey='', token=''):
     else: #No session object found
       if globs.WEB: yield 'Please Login to Google', "", "", ""
     if globs.WEB:
-      yield "Pipulation complete.&nbsp;&nbsp;", "Congratulations, pipulation complete! Now, do a little victory dance.", "", ""
+      yield 'Pipulation complete. Now, do a little victory dance. &nbsp;&nbsp;<img id="pbjt" src="./static/pbjmanwhite.gif" style="vertical-align: top;">', 'Congratulations, pipulation complete!', "", ""
       yield "spinoffsuccess", "", "", ""
     out("PIPULATION OVER", "1", '-')
   except Exception as e:

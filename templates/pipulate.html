@@ -167,7 +167,7 @@
           {% with messages = get_flashed_messages() %}
             {% if messages %}
               {% for message in messages %}
-                {%- if loop.index > 1: -%}<br/>{%- endif -%}<span class="pl"><i class="pip-circle"></i> {{ message }}</span>
+                <li class="circle"> {{ message }}</li>
               {% endfor %}
             {% endif %}
           {% endwith %}
@@ -205,7 +205,6 @@
                   $('#spinner').hide();
                   $("i.bullet").removeClass("pip-circle-notch animate-spin");
                   $("i.bullet").addClass("pip-ok");
-                  document.write('<img id="pbjt" src="./static/pbjmanwhite.gif" style="vertical-align: top;">');
                   unlockbutton();
                 </script>
               {%- elif lineitem == "spinoff" -%}
@@ -234,7 +233,7 @@
                   $("i.bullet").removeClass("pip-circle-notch animate-spin");
                   $("i.bullet").addClass("pip-ok");
                 </script>
-                <li><i class="bullet pip-icon pip-circle-notch animate-spin"></i> {{ lineitem|safe }}</li>
+                <li>{{ lineitem|safe }}</li>
               {%- endif -%}
               <script>
                 $("#pipstream").scrollTop($("#pipstream")[0].scrollHeight);
