@@ -319,9 +319,13 @@ li {
 
 li:before {
   font-family: 'mikelevin';
-  content: '\e88a';
+  content: '\e804';
   float: left;
   text-indent: -2em;
+  -webkit-transform-origin: -21px 9px;
+  -ms-transform-origin: -21px 9px;
+  -webkit-animation: spin 2s infinite linear;
+  animation: spin 2s infinite linear;
 }
 
 ul li.star:before { content: "\e88a"; }
