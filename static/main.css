@@ -20,6 +20,9 @@ body {
 h1, h2, p, label {
   color: white;
 }
+.burger > i {
+  color: black;
+}
 a {
   color: #76BFFF;
 }
