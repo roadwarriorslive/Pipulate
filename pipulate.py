@@ -515,8 +515,9 @@ def Pipulate(dockey='', token=''):
             for cell in CellList:
               cell.value = ''
             result = gdoc.sheet1.update_cells(CellList)
-            if globs.WEB: yield "Sheet1 Cleared.", "", "", ""
-            if globs.WEB: yield "spinoffsuccess", "", "", ""
+            if globs.WEB:
+              yield "Sheet1 Cleared.", "", "", ""
+              yield "spinoff", "", "", ""
             Stop()
           except:
             out("Could not clear tap one.")
@@ -1084,7 +1085,7 @@ def Pipulate(dockey='', token=''):
       if globs.WEB: yield 'Please Login to Google', "", "", ""
     if globs.WEB:
       yield 'Pipulation complete. Now, do a little victory dance. &nbsp;&nbsp;<img id="pbjt" src="./static/pbjmanwhite.gif" style="vertical-align: top;">', 'Congratulations, pipulation complete!', "", ""
-      yield "spinoffsuccess", "", "", ""
+      yield "spinoff", "", "", ""
     out("PIPULATION OVER", "1", '-')
   except Exception as e:
     exceptiondata = traceback.format_exc()

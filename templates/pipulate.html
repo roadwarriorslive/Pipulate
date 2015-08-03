@@ -192,20 +192,20 @@
               {%- if learn: -%}$("#learnsomething").html('{{ learn }}');{%- endif -%}
             </script>
             {%- endif -%}
+            {# 
+              _     _              ___ _                     
+             | |   (_)_ __   ___  |_ _| |_ ___ _ __ ___  ___ 
+             | |   | | '_ \ / _ \  | || __/ _ \ '_ ` _ \/ __|
+             | |___| | | | |  __/  | || ||  __/ | | | | \__ \
+             |_____|_|_| |_|\___| |___|\__\___|_| |_| |_|___/
+
+            #}
             {%- if lineitem -%}
               {%- if lineitem == "spinon" -%}
                 <script>
                   // Lock button and display spinner
                   $('#pipulate').prop("disabled", true);
                   $('#pipulate').fadeTo("fast",.5);
-                </script>
-              {%- elif lineitem == "spinoffsuccess" -%}
-                <script>
-                  // Unlock button and remove spinner, successful pipulation
-                  $('#spinner').hide();
-                  $("i.bullet").removeClass("pip-circle-notch animate-spin");
-                  $("i.bullet").addClass("pip-ok");
-                  unlockbutton();
                 </script>
               {%- elif lineitem == "spinoff" -%}
                 <script>
