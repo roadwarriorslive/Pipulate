@@ -35,6 +35,8 @@ def walkdict(obj, key):
 
 def regex(text, pattern):
   """Take text and a Regular Expression using a group named scrape, and return match."""
+  if text[:4].lower() == 'http':
+    text = requests.get(text).text
   match = re.search(pattern, text, re.S | re.I)
   if match:
     if "scrape" in match.groupdict().keys():
@@ -183,7 +185,14 @@ def twitter_followers(twitter_name):
 def instagram_followers(instagram_name):
   api = 'https://instagram.com/'
   un = instagram_name
-  return instagram_name
+  if un.lower().strip() in ('na', 'n/a'):
+    return un
+  if un[0] == '@':
+    un = un[1:]
+  url = "%s%s" % (api, un)
+  pattern = "(?P<scrape>.*)"
+  sendback = regex(url, pattern)
+  return sendback
 
 def serps(keyword):
   """Return non-customized JSON search results for keyword from Google."""
