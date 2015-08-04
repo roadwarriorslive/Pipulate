@@ -171,7 +171,8 @@ def twitter_followers(twitter_name):
     return un
   if un[0] == '@':
     un = un[1:]
-  return un
+  url = "%s%s" % (api, un)
+  return url
 
 def instagram_followers(instagram_name):
   api = 'https://instagram.com/'
