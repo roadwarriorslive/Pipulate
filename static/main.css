@@ -372,15 +372,17 @@ ul li.warning:before {
   font-size: 1.2em;
   color: black;
 }
+@media (min-width: 360px) and (max-width: 500px) {
+  #mobileinstructions {
+    display: block;
+  }
+}
 @media (max-width: 500px) {
   #dragspan {
     display: none;
   }
   #dragdiv {
     display: none;
-  }
-  #mobileinstructions {
-    display: block;
   }
 }
 @media (max-width: 1140px) and (min-width: 960px) {
