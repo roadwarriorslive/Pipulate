@@ -165,10 +165,10 @@ def pins(url):
 # just works stand-alone elsewhere, simply paste it here to extend Pipulate.
 
 def twitter_followers(twitter_name):
-  return 'foo'
+  return twitter_name
 
 def instagram_followers(instagram_name):
-  return 'bar'
+  return instagram_name
 
 def serps(keyword):
   """Return non-customized JSON search results for keyword from Google."""
