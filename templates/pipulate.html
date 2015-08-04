@@ -49,10 +49,10 @@
           $("#learnsomething").html('Copy and paste a URL into field (even on mobile).');
         {% endif %}
       });
-      function spinoff(successorfailure) {
-        unlockbutton();
-        $('#spinner').hide();
-        $('#spinner').css('display', 'none');
+      function spinoff() {
+        stopsignlock();
+        // $('#spinner').hide();
+        // $('#spinner').css('display', 'none');
         $('li').removeClass("progress");
         $('li').addClass("check");
       }
@@ -68,11 +68,13 @@
         $('#piplock').css('color', 'white');
       }
       function stopsignlock() {
-        $('#piplock').removeClass("pip-angle-circled-right");
-        $('#pipulate').prop("disabled", true);
         $('#pipulate').css('color', 'red');
+        $('#pipulate').prop("disabled", true);
+        $('#piplock').removeClass("pip-angle-circled-right");
+        $('#piplock').removeClass("pip-lock");
         $('#piplock').addClass("pip-stopsign");
         $('#piplock').css('color', 'red');
+        $('#pipulate').fadeTo(0,1);
       }
       function readytogo() {
         if ($( "#options option:selected" ).val() == 'off') {
@@ -238,20 +240,22 @@
               {%- elif lineitem == "spinoff" -%}
                 <script>
                   // Unlock button and remove spinner, failed pipulation
-                  $('#spinner').hide();
-                  $('#spinner').css('display', 'none');
-                  $('li').removeClass("progress");
-                  $('li').addClass("check");
-                  unlockbutton();
+                  spinoff();
+                  // $('#spinner').hide();
+                  // $('#spinner').css('display', 'none');
+                  // $('li').removeClass("progress");
+                  // $('li').addClass("check");
+                  // unlockbutton();
                 </script>
               {%- elif lineitem == "spinerr" -%}
                 <script>
                   // Unlock button and gracefully show user things are fubar.
-                  $('#spinner').hide();
-                  $('#spinner').css('display', 'none');
-                  $('li').removeClass("progress");
-                  $('li').addClass("warning");
-                  unlockbutton();
+                  spinoff();
+                  // $('#spinner').hide();
+                  // $('#spinner').css('display', 'none');
+                  // $('li').removeClass("progress");
+                  // $('li').addClass("warning");
+                  // unlockbutton();
                 </script>
               {%- elif lineitem == "stormyweather" -%}
                 <script>
@@ -260,8 +264,8 @@
                 </script>
               {%- else -%}
                 <script>
-                  $('#spinner').hide();
-                  $('#spinner').css('display', 'none');
+                  // $('#spinner').hide();
+                  // $('#spinner').css('display', 'none');
                   $('li').removeClass("progress");
                   $('li').addClass("check");
                 </script>
@@ -273,6 +277,10 @@
             {%- endif -%}
           {%- endfor -%}
           </ul>
+          <script>
+            $('#spinner').hide();
+            $('#spinner').css('display', 'none');
+          </script>
         {% else: %}
           <a class="button pip" href="{{ loginlink }}">LOGIN... &nbsp;<i id="piplock" class="pip-icon pip-googleplus"></i></a>
           <div style="height: 100%"><img id="piplogo" alt="Pipulate Free and Open Source SEO Software" src="static/pipulate-logo-white-transparent.png" /></div>
