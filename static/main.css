@@ -249,8 +249,8 @@ nav{
   box-shadow:0 10px 8px rgba(0,0,0,.7)}
 .pressthis a span{
   display:inline-block;
-  margin-left:25px;
-  margin-right:26px;
+  margin-left:8px;
+  margin-right:10px;
   }
 .pressthis a span:
   before{color:#777;

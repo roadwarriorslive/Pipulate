@@ -1150,12 +1150,13 @@ def getLabel():
   parsed = urlparse.urlparse(url)
   subdomain = parsed.hostname.split('.')[0]
   blab = "Pipulate"
+  droidcut = "ppp"
   if subdomain == 'localhost':
-    blab = "Pipulate 8888"
+    blab = "%s Pipulate 8888" % droidcut
   elif subdomain == 'pipulate':
-    blab = 'Pipulate'
+    blab = '%s Pipulate' % droidcut
   elif subdomain:
-    blab = "Pipulate %s" % subdomain
+    blab = "%s Pipulate %s" % (droidcut, subdomain)
   return blab
 
 def getBookmarklet():

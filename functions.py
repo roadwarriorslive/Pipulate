@@ -164,6 +164,12 @@ def pins(url):
 # And now what you've all been waiting for! If you write a Python function that
 # just works stand-alone elsewhere, simply paste it here to extend Pipulate.
 
+def twitter_followers(twitter_name):
+  return 'foo'
+
+def instagram_followers(instagram_name):
+  return 'bar'
+
 def serps(keyword):
   """Return non-customized JSON search results for keyword from Google."""
   times = 2
