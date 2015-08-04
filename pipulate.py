@@ -516,7 +516,8 @@ def Pipulate(dockey='', token=''):
               cell.value = ''
             result = gdoc.sheet1.update_cells(CellList)
             if globs.WEB:
-              yield "Sheet1 Cleared.", "", "", ""
+              yme = "Sheet1 Cleared! %s" % globs.PBNJMAN
+              yield yme, "Sheet1 Cleared.", "", ""
               yield "spinoff", "", "", ""
             Stop()
           except:
@@ -1084,7 +1085,8 @@ def Pipulate(dockey='', token=''):
     else: #No session object found
       if globs.WEB: yield 'Please Login to Google', "", "", ""
     if globs.WEB:
-      yield 'Pipulation complete. Now, do a little victory dance. &nbsp;&nbsp;<img id="pbjt" src="./static/pbjmanwhite.gif" style="vertical-align: top;">', 'Congratulations, pipulation complete!', "", ""
+      yme = 'Pipulation complete. Now, do a little victory dance. %s' % globs.PBNJMAN
+      yield yme, 'Congratulations, pipulation complete!', "", ""
       yield "spinoff", "", "", ""
     out("PIPULATION OVER", "1", '-')
   except Exception as e:

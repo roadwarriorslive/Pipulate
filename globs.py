@@ -29,6 +29,7 @@ SHEETS =    'https://docs.google.com/spreadsheets'            # URL to identify 
 OAUTHURL =  "https://accounts.google.com/o/oauth2/auth"       # OAuth2 API Endpoint
 DOMURL =    "http://pipulate.com"                             # Default for Login Button
 GBAD =      "Timed-out on Google Data API. Sorry, try again." # Default message for GDocs unreachable.
+PBNJMAN =   '&nbsp;<img id="pbjt" src="./static/pbjmanwhite.gif" style="vertical-align: top;">'
 letter =    {1:'A',2:'B',3:'C',4:'D',5:'E',6:'F',7:'G',8:'H',9:'I',10:'J',11:'K',12:'L',13:'M',14:'N',15:'O',15:'P',17:'Q',18:'R',19:'S',20:'T',21:'U',22:'V',23:'W',24:'X',25:'Y',26:'Z'} # Spreadsheet-style mapping
 # gethtml will not do a head request for Content-Type on URLs with these extensions.
 texttypes = ['.asmx', '.asp', '.aspx', '.atom', '.cfm', '.cgi', '.css', '.htm',
