@@ -42,10 +42,12 @@ def regex(text, pattern):
   else:
     return None
 
-def scraper(html, anxpath):
+def scraper(text, anxpath):
   """Take html and an XPATH, and return match."""
+  if text[:4].lower() == 'http':
+    text = requests.get(text).text
   import lxml.html
-  searchme = lxml.html.fromstring(html)
+  searchme = lxml.html.fromstring(text)
   match = searchme.xpath(anxpath)
   if match:
     return match[0]
@@ -172,7 +174,11 @@ def twitter_followers(twitter_name):
   if un[0] == '@':
     un = un[1:]
   url = "%s%s" % (api, un)
-  return url
+  xpath = "//span[.='Followers']/following-sibling::span/text()"
+  sendback = scraper(url, xpath)
+  if ',' in sendback:
+    sendback = sendback.replace(',', '')
+  return sendback
 
 def instagram_followers(instagram_name):
   api = 'https://instagram.com/'
