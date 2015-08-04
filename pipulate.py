@@ -624,10 +624,11 @@ def Pipulate(dockey='', token=''):
       yme = "%s rows found in Pipulate tab." % globs.numrows
       out(yme)
       if globs.WEB: yield yme, "", "", ""
-
       if globs.numrows == 0:
-        if globs.WEB: yield "spinoff", "", "", ""
-        Stop()
+        if globs.WEB:
+          yield "Double-check that sheet is set up correctly.", "Pipulate needs question marks to replace.", "", ""
+          yield "spinoff", "", "", ""
+        return
 
       stop = True
       for x in range(5):

@@ -50,11 +50,11 @@
         {% endif %}
       });
       function spinoff(successorfailure) {
+        unlockbutton();
         $('#spinner').hide();
         $('#spinner').css('display', 'none');
         $('li').removeClass("progress");
         $('li').addClass("check");
-        unlockbutton();
       }
       function stormyweather() {
         $('#spinner').css('display', 'none');
@@ -92,11 +92,14 @@
         $('#piplock').addClass("pip-lock");
       }
       function unlockbutton() {
-        whitelock();
-        $('#pipulate').prop("disabled", false);
-        $('#pipulate').fadeTo(0,1);
-        $('#piplock').addClass("pip-angle-circled-right");
-        $('#piplock').removeClass("pip-lock");
+        setTimeout(function(){
+          whitelock();
+          $('#pipulate').prop("disabled", false);
+          $('#pipulate').fadeTo(0,1);
+          $('#piplock').addClass("pip-angle-circled-right");
+          $('#piplock').removeClass("pip-lock");
+          $('#pipulate').css('color', 'white');
+        },2000)
       }
       if (location.hash) {
         var myhash = location.hash
