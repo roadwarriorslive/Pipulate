@@ -191,7 +191,7 @@ def instagram_followers(instagram_name):
     un = un[1:]
   url = "%s%s" % (api, un)
   #pattern = 'followed_by":{"count":(?P<scrape>\d+)}'
-  pattern = '(?P<scrape>followed_by":)'
+  pattern = r'(followed_by":{"count":)(?P<scrape>\d+)}'
   sendback = regex(url, pattern)
   return sendback
 
