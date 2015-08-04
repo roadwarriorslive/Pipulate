@@ -165,9 +165,17 @@ def pins(url):
 # just works stand-alone elsewhere, simply paste it here to extend Pipulate.
 
 def twitter_followers(twitter_name):
-  return twitter_name
+  api = 'https://twitter.com/'
+  un = twitter_name
+  if un.lower().strip() in ('na', 'n/a'):
+    return un
+  if un[0] == '@':
+    un = un[1:]
+  return un
 
 def instagram_followers(instagram_name):
+  api = 'https://instagram.com/'
+  un = instagram_name
   return instagram_name
 
 def serps(keyword):
