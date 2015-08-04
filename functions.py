@@ -190,7 +190,8 @@ def instagram_followers(instagram_name):
   if un[0] == '@':
     un = un[1:]
   url = "%s%s" % (api, un)
-  pattern = "(?P<scrape>.*)"
+  #pattern = 'followed_by":{"count":(?P<scrape>\d+)}'
+  pattern = '(?P<scrape>followed_by":)'
   sendback = regex(url, pattern)
   return sendback
 
