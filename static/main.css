@@ -22,6 +22,7 @@ h1, h2, p, label {
 }
 .burger > i {
   color: black;
+  margin-right: 6px;
 }
 a {
   color: #76BFFF;
@@ -209,6 +210,13 @@ nav{
   position : relative;
   top:.2em;
 }
+#mobileinstructions {
+  display: none;
+  top:.1em;
+  white-space: nowrap;
+  float: left;
+  margin-top: 6px;
+}
 #dragdiv{
   font-size: 1em;
   top:.1em;
@@ -350,7 +358,6 @@ ul li.warning:before {
   -webkit-animation: spin 0s;
   animation: spin 0s;
 }
-
 .pipmenu {
   font-size: 13px;
   background-color:#DDDDDD;
@@ -360,7 +367,7 @@ ul li.warning:before {
 }
 #piphelp {
   position:absolute;
-  right: 3em;
+  right: 34px;
   margin-top:14px;
   font-size: 1.2em;
   color: black;
@@ -370,7 +377,10 @@ ul li.warning:before {
     display: none;
   }
   #dragdiv {
-    margin-top: 12px;
+    display: none;
+  }
+  #mobileinstructions {
+    display: block;
   }
 }
 @media (max-width: 1140px) and (min-width: 960px) {
