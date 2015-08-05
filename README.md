@@ -1,24 +1,28 @@
 # Free And Open Source SEO Software
-## A tool to help automate tedious daily tasks that you never found any better way to peform
+## A tool to help you automate those tedious daily tasks that you never found any better way to peform.
 [Join the Pipulate Team on Slack](http://goo.gl/forms/nh3WM6bPle)
 <img src="http://mikelevinseo.com/images/pipulate-interface.png" alt="FOSS SEO Software"/>
-========
+
 Pipulate uses the highly collaborative and always-improving Google Spreadsheets
-as its database, making the servers it runs on disposable nodes, and a good
-example app for the tiny-server movement. Want more capacity? Just throw more
-of these miniscule servers behind a load-balander. Pipulate requires less than
-100MB for OS, Python, the app and all it's dependencies, and 256MB RAM for
-program run-space. This means you can use bottom-tier nearly-free cloud
-instances to host, or better-yet: practice running your own servers with
-Levinux, Raspberry Pi's, CuBoxes and the like. Use Pipulate's "out of the box"
-capabilities, or expand it by writing stand-alone Python functions, then just
-dropping them into your aresenal of growing SEO and Social Media secret weapons
-that you may or may not share back to the Github/SEO/Social Media communities.
-All your custom functions become instantly accessible to you in Google Docs,
-alleviating the tedium of finding your old scripts or wrangling custom
-home-built script-scheduling systems. It all just natively works in Google
-Sheets -- efectively slapping an Ironman suit onto aspiring SEO or Social Media
-professionals. Watch the videos for inspiration on how you too may use it.
+as its database, making the servers it runs on disposable nodes&#151;and a good
+example app of the tiny-server movement. Want more capacity? Just throw more of
+these miniscule servers behind a load-balander. Pipulate requires less than
+100MB for OS, Python, app and its dependencies, and 256MB RAM&#151;offering the
+perfect route to either scaling or very personal use. This means you can use
+bottom-tier nearly-free cloud instances to host if you want, or better-yet:
+practice running your own servers with Levinux, Raspberry Pi's, CuBoxes and the
+like. 
+
+Use Pipulate's "out of the box" capabilities, or expand it by writing
+stand-alone Python functions, then just dropping them into your aresenal of
+growing SEO and Social Media secret weapons that you may or may not share back
+to the Github/SEO/Social Media communities.  All your custom functions become
+instantly accessible to you in Google Docs, alleviating the tedium of finding
+your old scripts or wrangling custom home-built or expensive data-monitoring
+systems. It all just natively works in Google Sheets&#151;efectively slapping
+an Ironman suit onto aspiring SEO or Social Media professionals. Watch the
+videos for inspiration on how you too may use it.
+
 [Google Slides](http://goo.gl/v71kw8) and visit the sister-project,
 [Levinux](http://levinux.com).
 
