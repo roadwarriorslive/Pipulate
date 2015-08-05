@@ -57,9 +57,11 @@
         $('li').addClass("check");
       }
       function stormyweather() {
-        $('#spinner').css('display', 'none');
+        $('#spinner').hide();
         $('#stormyweather').fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100);
-        $('#spinner').css('display', 'block');
+        setTimeout(function(){
+          $('#spinner').css('display', 'block');
+        },800);
       }
       function redlock() {
         $('#piplock').css('color', 'red');
@@ -101,7 +103,7 @@
           $('#piplock').addClass("pip-angle-circled-right");
           $('#piplock').removeClass("pip-lock");
           $('#pipulate').css('color', 'white');
-        },2000)
+        },2000);
       }
       if (location.hash) {
         var myhash = location.hash
@@ -241,21 +243,11 @@
                 <script>
                   // Unlock button and remove spinner, failed pipulation
                   spinoff();
-                  // $('#spinner').hide();
-                  // $('#spinner').css('display', 'none');
-                  // $('li').removeClass("progress");
-                  // $('li').addClass("check");
-                  // unlockbutton();
                 </script>
               {%- elif lineitem == "spinerr" -%}
                 <script>
                   // Unlock button and gracefully show user things are fubar.
                   spinoff();
-                  // $('#spinner').hide();
-                  // $('#spinner').css('display', 'none');
-                  // $('li').removeClass("progress");
-                  // $('li').addClass("warning");
-                  // unlockbutton();
                 </script>
               {%- elif lineitem == "stormyweather" -%}
                 <script>
@@ -264,8 +256,6 @@
                 </script>
               {%- else -%}
                 <script>
-                  // $('#spinner').hide();
-                  // $('#spinner').css('display', 'none');
                   $('li').removeClass("progress");
                   $('li').addClass("check");
                 </script>

@@ -480,33 +480,16 @@ def Pipulate(dockey='', token=''):
       #                      |_|
       # This is where special behavior like crawls get wedged in
       anything = re.compile('.+')
-      initSheet1 = False
       cell = None
-      try:
-        gdoc.sheet1
-      except gspread.exceptions.CellNotFound:
-        # Questionmark replacement tab
-        initSheet1 = True
-      gotcha(('initSheet: %s' % initSheet1))
-      if initSheet1:
-        if globs.PIPMODE == 'clear':
-          pass
-        else:
-          try:
-            bothrows = sheetinitializer(globs.PIPMODE)
-            row1 = bothrows[0]
-            row2 = [bothrows[1]]
-            if globs.WEB: yield lock
-            try:
-              InitTab(gdoc, "sheet1", row1, row2)
-            except:
-              pass
-            if globs.WEB: yield unlock
-          except:
-            # yme = "Action for %s not defined." % globs.PIPMODE
-            # if globs.WEB: yield yme, "Action not defined.", "", ""
-            pass
-      else:
+      #initSheet1 = False
+      #try:
+      #  gdoc.sheet1
+      #except gspread.exceptions.CellNotFound:
+      #  # Questionmark replacement tab
+      #  initSheet1 = True
+      #gotcha(('initSheet: %s' % initSheet1))
+      #if initSheet1:
+      if globs.PIPMODE == 'clear':
         anything = re.compile('.+')
         if globs.PIPMODE == 'clear':
           out("Clearing Tab 1...")
@@ -524,6 +507,22 @@ def Pipulate(dockey='', token=''):
           except:
             out("Could not clear tap one.")
             Stop()
+      else:
+        try:
+          bothrows = sheetinitializer(globs.PIPMODE)
+          row1 = bothrows[0]
+          row2 = [bothrows[1]]
+          if globs.WEB: yield lock
+          try:
+            InitTab(gdoc, "sheet1", row1, row2)
+          except:
+            pass
+          if globs.WEB: yield unlock
+        except:
+          # yme = "Action for %s not defined." % globs.PIPMODE
+          # if globs.WEB: yield yme, "Action not defined.", "", ""
+          pass
+      #else:
 
       if globs.WEB: yield "Checking Tabs.", "Then we check for tabs...", "", ""
       # How To Tab
@@ -625,7 +624,7 @@ def Pipulate(dockey='', token=''):
       yme = "%s rows found in Pipulate tab." % globs.numrows
       out(yme)
       if globs.WEB: yield yme, "", "", ""
-      if globs.numrows == 0 and not globs.PIPMODE:
+      if globs.numrows == 0 and globs.PIPMODE == 'qm':
         if globs.WEB:
           yield "Double-check that sheet is set up correctly.", "Pipulate needs question marks to replace.", "", ""
           yield "spinoff", "", "", ""
