@@ -3,15 +3,17 @@
 [Join the Pipulate Team on Slack](http://goo.gl/forms/nh3WM6bPle)
 <img src="http://mikelevinseo.com/images/pipulate-interface.png" alt="FOSS SEO Software"/>
 
-Pipulate uses the highly collaborative and always-improving Google Spreadsheets
-as its database, making the servers it runs on disposable nodes&#151;and a good
-example app of the tiny-server movement. Want more capacity? Just throw more of
-these miniscule servers behind a load-balancer. Pipulate requires less than
-100MB for OS, Python, app and its dependencies, and 256MB RAM&#151;offering the
-perfect route to either scaling or very personal use. This means you can use
-bottom-tier nearly-free cloud instances to host if you want, or better-yet:
-practice running your own servers with Levinux, Raspberry Pi's, CuBoxes and the
-like. 
+Pipulate leverages the collaborative and constantly improving Google
+Spreadsheets for its database, making the servers it runs on disposable
+nodes&#151;and a good example app of the tiny-server movement. Want more
+capacity? Just throw more miniscule servers behind a load-balancer. Pipulate
+requires less than 100MB for OS, Python, app and its dependencies, and 256MB
+RAM&#151;offering the perfect route to either scaling or very personal use.
+This means you can use bottom-tier nearly-free cloud instances to host if you
+want, or better-yet: practice running your own servers with Levinux, Raspberry
+Pi's, CuBoxes and the like. It's also a good example of using using Python's
+lightweight Flask web framework with the same code you're ALSO using from the
+command-line and in cron scheduling.
 
 Use Pipulate's "out of the box" capabilities, or expand it by writing
 stand-alone Python functions, then just dropping them into your arsenal of
