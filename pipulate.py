@@ -487,6 +487,7 @@ def Pipulate(dockey='', token=''):
       except gspread.exceptions.CellNotFound:
         # Questionmark replacement tab
         initSheet1 = True
+      gotcha(('initSheet: %s' % initSheet1))
       if initSheet1:
         if globs.PIPMODE == 'clear':
           pass
@@ -624,7 +625,7 @@ def Pipulate(dockey='', token=''):
       yme = "%s rows found in Pipulate tab." % globs.numrows
       out(yme)
       if globs.WEB: yield yme, "", "", ""
-      if globs.numrows == 0:
+      if globs.numrows == 0 and not globs.PIPMODE:
         if globs.WEB:
           yield "Double-check that sheet is set up correctly.", "Pipulate needs question marks to replace.", "", ""
           yield "spinoff", "", "", ""

@@ -155,6 +155,7 @@ def gatekeeper(keymaster):
   mdict['sheets'] =       [
                           menu['qm'],
                           menu['clear'], 
+                          menu['seocrawl'],
                           menu['test'], 
                           menu['learn']
                           ]
