@@ -1,13 +1,24 @@
 # Free And Open Source SEO Software
+## A tool to help automate tedious daily tasks that you never found any better way to peform
 [Join the Pipulate Team on Slack](http://goo.gl/forms/nh3WM6bPle)
 <img src="http://mikelevinseo.com/images/pipulate-interface.png" alt="FOSS SEO Software"/>
 ========
-Pipulate expands your mind... and the way spreadsheets work by using functions
-written and executed in Python entirely outside of the spreadsheet, cleanly
-passing the values back and forth, replacing question marks for output. This
-approach facilitates quick data-investigations from the comfortable of your own
-spreadsheet&#151;effectively slapping an Ironman suit onto aspiring SEO or
-Social Media professionals to give them superpowers. Watch the 
+Pipulate uses the highly collaborative and always-improving Google Spreadsheets
+as its database, making the servers it runs on disposable nodes, and a good
+example app for the tiny-server movement. Want more capacity? Just throw more
+of these miniscule servers behind a load-balander. Pipulate requires less than
+100MB for OS, Python, the app and all it's dependencies, and 256MB RAM for
+program run-space. This means you can use bottom-tier nearly-free cloud
+instances to host, or better-yet: practice running your own servers with
+Levinux, Raspberry Pi's, CuBoxes and the like. Use Pipulate's "out of the box"
+capabilities, or expand it by writing stand-alone Python functions, then just
+dropping them into your aresenal of growing SEO and Social Media secret weapons
+that you may or may not share back to the Github/SEO/Social Media communities.
+All your custom functions become instantly accessible to you in Google Docs,
+alleviating the tedium of finding your old scripts or wrangling custom
+home-built script-scheduling systems. It all just natively works in Google
+Sheets -- efectively slapping an Ironman suit onto aspiring SEO or Social Media
+professionals. Watch the videos for inspiration on how you too may use it.
 [Google Slides](http://goo.gl/v71kw8) and visit the sister-project,
 [Levinux](http://levinux.com).
 
