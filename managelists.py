@@ -125,15 +125,15 @@ def menumaker(url='', keywords=False):
   mdict = {}
   mdict['keywords'] = [menu['keywords']]
   mdict['sheets'] =   [
-                      menu['qm'],
                       menu['clear'], 
                       menu['crawl'],
+                      menu['qm'],
                       menu['keywords']
                       ]
   mdict['seo'] =      [
-                      menu['qm'],
-                      menu['crawl'],
                       menu['clear'], 
+                      menu['crawl'],
+                      menu['qm'],
                       menu['keywords']
                       ]
   optlist = mdict[key]

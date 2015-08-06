@@ -888,7 +888,7 @@ def Pipulate(dockey='', token=''):
           if maxrowsperhour: # if maxrowsperhour is 0, this won't trap
             if index >= int(maxrowsperhour):
               break
-          yme = "Pipulating row: %s" % rowdex
+          yme = "Pipulating row: %s..." % rowdex
           if globs.WEB: yield yme, "Next, we replace question marks. This may take awhile...", "", ""
           globs.hobj = None
           globs.html = '' #Blank the global html object. Recylces fetches.
@@ -963,7 +963,7 @@ def Pipulate(dockey='', token=''):
                         newrow[coldex] = eval(evalme)
                         stop = False
                         out('%s worked' % collabel)
-                        yme = "%s successful." % collabel
+                        yme = "Row %s function %s successful." % (rowdex, collabel)
                         yield yme, yme, "", ""
                         break
                       except Exception as e:
@@ -1041,7 +1041,7 @@ def Pipulate(dockey='', token=''):
                             else:
                               newrow[coldex] = None
                         out('%s worked.' % collabel)
-                        yme = "%s successful." % collabel
+                        yme = "Row %s scraper %s successful." % (rowdex, collabel)
                         yield yme, yme, "", ""
                         stop = False
                         break
