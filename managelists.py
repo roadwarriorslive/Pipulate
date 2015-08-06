@@ -95,22 +95,17 @@ def cyclemotto():
 #  ___) | | | |  __/  __/ |_   | || | | | | |_| | (_| | | |/ /  __/ |
 # |____/|_| |_|\___|\___|\__| |___|_| |_|_|\__|_|\__,_|_|_/___\___|_|
 #                                                                           
-# The keymaster and gatekeeper functions work together to define keys for
-# common contexts, and the menus that should be accordingly presented.
 
-def getmenu():
-  adict = {
+def menumaker(url='', keywords=False):
+  import urlparse
+  """ For any given URL, return a what-to-do-next menu-key."""
+  key = ''
+  menu = {
   'clear':        "Clear sheet1 (initialize)",
   'crawl':        "1-Page Crawl",
   'keywords':     'Collect Keywords',
   'qm':           "Replace Question Marks"
   }
-  return adict
-
-def keymaster(url='', keywords=False):
-  import urlparse
-  """ For any given URL, return a what-to-do-next menu-key."""
-  key = ''
   if url:
     if keywords and keywords.strip() != '':
       key = 'keywords'
@@ -127,28 +122,24 @@ def keymaster(url='', keywords=False):
       key = 'seo'
   else:
     key = 'seo'
-  optlist = gatekeeper(key)
-  menu = '<option value="off">What do you want to do?</option>\n'
-  invmenu = {v: k for k, v in getmenu().items()}
-  for option in optlist:
-    menu += '<option value="%s">%s</options>\n' % (invmenu[option], option)
-  return menu
-
-def gatekeeper(keymaster):
-  """ For any given menu-key, return the actual menu that should appear."""
   mdict = {}
-  menu = getmenu()
   mdict['keywords'] = [menu['keywords']]
   mdict['sheets'] =   [
                       menu['qm'],
                       menu['clear'], 
                       menu['crawl'],
+                      menu['keywords']
                       ]
   mdict['seo'] =      [
+                      menu['qm'],
                       menu['crawl'],
                       menu['clear'], 
+                      menu['keywords']
                       ]
-  try:
-    return mdict[keymaster]
-  except:
-    return mdict['seo']
+  optlist = mdict[key]
+  cgimenu = '<option value="off">What do you want to do?</option>\n'
+  invmenu = {v: k for k, v in menu.items()}
+  for option in optlist:
+    cgimenu += '<option value="%s">%s</options>\n' % (invmenu[option], option)
+  return cgimenu
+

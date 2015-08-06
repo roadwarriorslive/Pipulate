@@ -286,12 +286,12 @@ def main():                                                         # of entry "
   out("Selecting template method.")
   if streamit:
     #Handle streaming user interface updates resulting from a POST method call.
-    options = keymaster()
+    options = menumaker()
     return Response(stream_template('pipulate.html', form=form, select=options, data=streamit))
   else:
     #Handle non-streaming user interface build resulting from a GET method call.
     out("EXITING MAIN FUNCTION RENDER", "0", '-')
-    options = keymaster(insheet, stext)
+    options = menumaker(insheet, stext)
     return render_template('pipulate.html', form=form, select=options)
   out("EXITING MAIN", "0", '-')
 

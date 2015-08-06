@@ -129,7 +129,7 @@ def crawl(url):
   q = ['']*y
   linkslist = zip(links,['1']*y,q,q,q)
   InsertRows(globs.sheet, linkslist, 2)
-  yield "0"
+  return "0"
 
 def crawlinit(gsp):
   """Do the spreadsheet setup requried by crawl function."""
