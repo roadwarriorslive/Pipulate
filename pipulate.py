@@ -992,9 +992,12 @@ def Pipulate(dockey='', token=''):
                           if globs.WEB: yield lock
                           html = gethtml(url)
                           if not html:
-                            if globs.WEB: yield "HTML not available. Possible Content-Type error.", "", "", ""
+                            if globs.WEB:
+                              yield "HTML not available. Possible Content-Type error. Continuing.", "Skipping this row and trying next row.", "", ""
                             out("HTML NOT AVAILABLE")
-                            Stop()
+                            newrow[coldex] = "<Error>HTML Not Available</Error>"
+                            stop = False
+                            break
                           if globs.WEB: yield unlock
                           #add another elif condition for PyQuery https://pypi.python.org/pypi/pyquery
                           if stype.lower() == 'xpath':
@@ -1002,8 +1005,6 @@ def Pipulate(dockey='', token=''):
                             searchme = lxml.html.fromstring(html)
                             try:
                               match = searchme.xpath(spattern)
-                              stop = False
-                              break
                             except lxml.etree.XPathEvalError:
                               out("BAD XPATH PATTERN")
                               yme = "Bad xpath: %s" % spattern
@@ -1012,8 +1013,6 @@ def Pipulate(dockey='', token=''):
                             except:
                               out("OTHER LXML ERROR")
                               if globs.WEB: yield "LXML parser problem. Check URL source", "LXML Problem!", "", ""
-                              Stop()
-                            if stop == True:
                               Stop()
                             if match:
                               if len(match) == 1:
@@ -1044,11 +1043,15 @@ def Pipulate(dockey='', token=''):
                         out('%s worked.' % collabel)
                         yme = "%s successful." % collabel
                         yield yme, yme, "", ""
+                        stop = False
+                        break
                       except Exception as e:
                         print traceback.format_exc()
                         out("Scrape problem on row %s. Retrying." % rowdexstring)
                         time.sleep(2)
                         if globs.WEB: yield dontgetfrustrated(x)
+                      if stop == True:
+                        Stop()
                       out("Scrape End", "4", '-')
             out("DONE PROCESSING ROW %s." % rowdex, '3', '-')
 
