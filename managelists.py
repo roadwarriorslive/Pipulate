@@ -98,7 +98,16 @@ def cyclemotto():
 # The keymaster and gatekeeper functions work together to define keys for
 # common contexts, and the menus that should be accordingly presented.
 
-def keymaster(url, keywords=False):
+def getmenu():
+  adict = {
+  'clear':        "Clear sheet1 (initialize)",
+  'crawl':        "1-Page Crawl",
+  'keywords':     'Collect Keywords',
+  'qm':           "Replace Question Marks"
+  }
+  return adict
+
+def keymaster(url='', keywords=False):
   import urlparse
   """ For any given URL, return a what-to-do-next menu-key."""
   key = ''
@@ -107,120 +116,38 @@ def keymaster(url, keywords=False):
       key = 'keywords'
     elif url == 'sheets':
       key = 'sheets'
-    elif url == 'default':
-      key = 'default'
+    elif url == 'seo':
+      key = 'seo'
     else:
       apexdom = apex(url)
       urlparts = urlparse.urlparse(url)
       netloc = urlparts[1]
       path = urlparts[2]
       query = urlparts[4]
-      if apexdom == 'google.com':
-        if path == '/webhp' or query == 'gws_rd=ssl':
-          key = 'gsearch'
-        elif path == '/search':
-          key = 'googleold'
-        else:
-          key = 'googleother'
-      elif apexdom == 'youtube.com':
-        if path[:6] == '/user/':
-          key = 'ytchannel'
-        elif path[:6] == '/watch':
-          key = 'ytvideo'
-        else:
-          key = 'ytother'
-      elif apexdom == 'twitter.com':
-        if path == '/search':
-          key = 'twsearch'
-        elif path:
-          key = 'twprofile'
-        else:
-          key = 'twother'
-      else:
-        key = 'seo'
+      key = 'seo'
   else:
-    key = 'empty'
+    key = 'seo'
   optlist = gatekeeper(key)
   menu = '<option value="off">What do you want to do?</option>\n'
+  invmenu = {v: k for k, v in getmenu().items()}
   for option in optlist:
-    menu += '<option value="%s">%s</options>\n' % (globs.invmenu[option], option)
+    menu += '<option value="%s">%s</options>\n' % (invmenu[option], option)
   return menu
 
 def gatekeeper(keymaster):
   """ For any given menu-key, return the actual menu that should appear."""
   mdict = {}
-  menu = globs.menu
-
-  # Menu when the bookmarklet is clicked from inside Google Spreadsheets.
-  mdict['sheets'] =       [
-                          menu['qm'],
-                          menu['clear'], 
-                          menu['seocrawl'],
-                          menu['test'], 
-                          ]
-
-  mdict['default'] =      mdict['sheets']
-  
-  mdict['empty'] =        mdict['sheets']
-
-  # Menu when page text is highlighte on bookmarklet click.
-  mdict['keywords'] =     [menu['keywords']]
-
-  # Menu for fall-through menu on bookmarklet when no sites are recognized.
-  mdict['seo'] =          [
-                          menu['seocrawl'],
-                          menu['socialcrawl'], 
-                          menu['ogcrawl'], 
-                          menu['mobilecrawl'],
-                          menu['keywords'],
-                          menu['clear'], 
-                          menu['test'], 
-                          ]
-
-  # Menu when clicked on a Google search result page.
-  mdict['gsearch'] =      [
-                          menu['search'],
-                          menu['keywords'],
-                          menu['clear'], 
-                          menu['test'], 
-                          ]
-
-  mdict['googleold'] =    mdict['gsearch']
-
-  mdict['googleother'] =  mdict['gsearch']
-
-  # Menu for the various things you might want to do in YouTube.
-  mdict['ytchannel'] =    [
-                          menu['ytsubs'],
-                          menu['ytviews'],
-                          menu['ytvids'],
-                          menu['clear'],
-                          menu['test'], 
-                          ]
-
-  mdict['ytvideo'] =      [
-                          menu['ytvids'],
-                          menu['clear'],
-                          menu['test'], 
-                          ]
-
-  mdict['ytother'] =      mdict['ytvideo']
-
-  # Menu for the various things you  might want to do in Twitter.  
-  mdict['twsearch'] =     [
-                          menu['twsearch'],
-                          menu['clear'], 
-                          menu['test'], 
-                          ]
-
-  mdict['twprofile'] =    [
-                          menu['twstats'],
-                          menu['clear'],
-                          menu['test'], 
-                          ]
-
-  mdict['twother'] =      mdict['twprofile'] 
-
+  menu = getmenu()
+  mdict['keywords'] = [menu['keywords']]
+  mdict['sheets'] =   [
+                      menu['qm'],
+                      menu['clear'], 
+                      menu['crawl'],
+                      ]
+  mdict['seo'] =      [
+                      menu['crawl'],
+                      menu['clear'], 
+                      ]
   try:
     return mdict[keymaster]
   except:

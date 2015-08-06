@@ -129,7 +129,7 @@ def crawl(url):
   q = ['']*y
   linkslist = zip(links,['1']*y,q,q,q)
   InsertRows(globs.sheet, linkslist, 2)
-  return "0"
+  yield "0"
 
 def crawlinit(gsp):
   """Do the spreadsheet setup requried by crawl function."""
@@ -411,5 +411,5 @@ def mobilicious(url, mobile, mcanonical):
 def sheetinitializer(sheet1key):
   """ For any given menu-selection, return lists to become row 1 and 2."""
   sinit = {}
-  sinit['seocrawl'] = (['url', 'crawl'], [globs.PIPURL, '?'])
+  sinit['crawl'] = (['url', 'crawl'], [globs.PIPURL, '?'])
   return sinit[sheet1key]
