@@ -157,7 +157,6 @@ def gatekeeper(keymaster):
                           menu['clear'], 
                           menu['seocrawl'],
                           menu['test'], 
-                          menu['learn']
                           ]
 
   mdict['default'] =      mdict['sheets']
@@ -176,7 +175,6 @@ def gatekeeper(keymaster):
                           menu['keywords'],
                           menu['clear'], 
                           menu['test'], 
-                          menu['learn']
                           ]
 
   # Menu when clicked on a Google search result page.
@@ -185,7 +183,6 @@ def gatekeeper(keymaster):
                           menu['keywords'],
                           menu['clear'], 
                           menu['test'], 
-                          menu["learn"]
                           ]
 
   mdict['googleold'] =    mdict['gsearch']
@@ -199,14 +196,12 @@ def gatekeeper(keymaster):
                           menu['ytvids'],
                           menu['clear'],
                           menu['test'], 
-                          menu['learn']
                           ]
 
   mdict['ytvideo'] =      [
                           menu['ytvids'],
                           menu['clear'],
                           menu['test'], 
-                          menu['learn']
                           ]
 
   mdict['ytother'] =      mdict['ytvideo']
@@ -216,14 +211,12 @@ def gatekeeper(keymaster):
                           menu['twsearch'],
                           menu['clear'], 
                           menu['test'], 
-                          menu['learn']
                           ]
 
   mdict['twprofile'] =    [
                           menu['twstats'],
                           menu['clear'],
                           menu['test'], 
-                          menu['learn']
                           ]
 
   mdict['twother'] =      mdict['twprofile'] 
