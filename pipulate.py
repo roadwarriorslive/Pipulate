@@ -439,7 +439,7 @@ def Pipulate(dockey='', token=''):
           if globs.WEB: 
             yield "spinoff", "", "", ""
             yield badtuple
-          Stop()
+          Stop() # Consider adding refresh_token logic for users (versus the scheduler)
       if globs.WEB: yield unlock
       out("Google Spreadsheet successfully opened.")
 
@@ -481,14 +481,6 @@ def Pipulate(dockey='', token=''):
       # This is where special behavior like crawls get wedged in
       anything = re.compile('.+')
       cell = None
-      #initSheet1 = False
-      #try:
-      #  gdoc.sheet1
-      #except gspread.exceptions.CellNotFound:
-      #  # Questionmark replacement tab
-      #  initSheet1 = True
-      #gotcha(('initSheet: %s' % initSheet1))
-      #if initSheet1:
       if globs.PIPMODE == 'clear':
         anything = re.compile('.+')
         if globs.PIPMODE == 'clear':
@@ -509,7 +501,7 @@ def Pipulate(dockey='', token=''):
             Stop()
       else:
         try:
-          bothrows = sheetinitializer(globs.PIPMODE)
+          bothrows = sheetinitializer(globs.PIPMODE) # Beware! There is always an initialization attempt.
           row1 = bothrows[0]
           row2 = [bothrows[1]]
           if globs.WEB: yield lock
@@ -522,8 +514,6 @@ def Pipulate(dockey='', token=''):
           # yme = "Action for %s not defined." % globs.PIPMODE
           # if globs.WEB: yield yme, "Action not defined.", "", ""
           pass
-      #else:
-
       if globs.WEB: yield "Checking Tabs.", "Then we check for tabs...", "", ""
       # How To Tab
       headers = ['Expand column. Hey, you did it! Good job so far.', 'Welcome to Pipulate!']
@@ -946,6 +936,7 @@ def Pipulate(dockey='', token=''):
                     if globs.WEB: yield unlock
                   collabel = globs.row1[coldex]
                   if collabel in transfuncs.keys():
+                    stop = True
                     for x in range(4):
                       #   __                  _   _
                       #  / _|_   _ _ __   ___| |_(_) ___  _ __  ___
@@ -970,12 +961,19 @@ def Pipulate(dockey='', token=''):
                         evalme = evalme + ')'
                       try:
                         newrow[coldex] = eval(evalme)
+                        stop = False
                         out('%s worked' % collabel)
+                        yme = "%s successful." % collabel
+                        yield yme, yme, "", ""
+                        break
                       except Exception as e:
                         print traceback.format_exc()
                         time.sleep(2)
+                      if stop == True:
+                        Stop()
                       out("Function End", "4", '-')
                   elif collabel in transscrape.keys():
+                    stop = True
                     for x in range(4):
                       #  ____
                       # / ___|  ___ _ __ __ _ _ __   ___ _ __
@@ -1004,6 +1002,8 @@ def Pipulate(dockey='', token=''):
                             searchme = lxml.html.fromstring(html)
                             try:
                               match = searchme.xpath(spattern)
+                              stop = False
+                              break
                             except lxml.etree.XPathEvalError:
                               out("BAD XPATH PATTERN")
                               yme = "Bad xpath: %s" % spattern
@@ -1012,6 +1012,8 @@ def Pipulate(dockey='', token=''):
                             except:
                               out("OTHER LXML ERROR")
                               if globs.WEB: yield "LXML parser problem. Check URL source", "LXML Problem!", "", ""
+                              Stop()
+                            if stop == True:
                               Stop()
                             if match:
                               if len(match) == 1:
@@ -1040,6 +1042,8 @@ def Pipulate(dockey='', token=''):
                             else:
                               newrow[coldex] = None
                         out('%s worked.' % collabel)
+                        yme = "%s successful." % collabel
+                        yield yme, yme, "", ""
                       except Exception as e:
                         print traceback.format_exc()
                         out("Scrape problem on row %s. Retrying." % rowdexstring)
