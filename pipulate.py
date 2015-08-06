@@ -970,8 +970,9 @@ def Pipulate(dockey='', token=''):
                         print traceback.format_exc()
                         time.sleep(2)
                       if stop == True:
+                        out("Function End (Failed)", "4", '-')
                         Stop()
-                      out("Function End", "4", '-')
+                    out("Function End", "4", '-')
                   elif collabel in transscrape.keys():
                     stop = True
                     for x in range(4):
@@ -1051,8 +1052,9 @@ def Pipulate(dockey='', token=''):
                         time.sleep(2)
                         if globs.WEB: yield dontgetfrustrated(x)
                       if stop == True:
+                        out("Scrape End (Failed)", "4", '-')
                         Stop()
-                      out("Scrape End", "4", '-')
+                    out("Scrape End", "4", '-')
             out("DONE PROCESSING ROW %s." % rowdex, '3', '-')
 
             out("Finished processing row. Updating spreadsheet...")
