@@ -205,11 +205,11 @@
           {% endwith %}
           <ul>
           {% for lineitem, learn, magic, glock in data: -%}
-            {%- if glock == '+' : -%}
+            {%- if glock == '+' : %}
               <script>
                 redlock();
               </script>
-            {%- elif glock == '-': -%}
+            {% elif glock == '-': -%}
               <script>
                 whitelock();
               </script>
@@ -218,10 +218,9 @@
             <script>
               {%- if magic: -%}
                 var pjson = {{ magic|safe }};
-                //$("#magicbox").val(JSON.stringify(pjson, null, '\t'));
                 $("#magicbox").val(JSON.stringify(pjson));
               {%- endif -%}
-              {%- if learn: -%}$("#learnsomething").html('{{ learn }}');{%- endif -%}
+              {%- if learn: -%}$("#learnsomething").html('{{ learn|safe }}');{%- endif -%}
             </script>
             {%- endif -%}
             {# 

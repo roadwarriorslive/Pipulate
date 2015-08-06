@@ -881,14 +881,14 @@ def Pipulate(dockey='', token=''):
           yield 'New to Pipulate? Watch <a target="_blank" href="https://docs.google.com/presentation/d/10lr_d1uyLMOnWsMzbenKiPlFE5-BIt9bxVucw7O4GSI/edit?usp=sharing">Demo</a> and read <a target="_blank" href="https://github.com/miklevin/pipulate/blob/master/README.md">Docs</a>.', "", "", ""
           yield "spinoff", "", "", ""
         return
-
+      therange = range(qstart, qend)
       blankrows = 0 #Lets us skip occasional blank rows
-      for index, rowdex in enumerate(range(qstart, qend)): #Start stepping through every row.
+      for index, rowdex in enumerate(therange): #Start stepping through every row.
         if rowdex in qset:
           if maxrowsperhour: # if maxrowsperhour is 0, this won't trap
             if index >= int(maxrowsperhour):
               break
-          yme = "Pipulating row: %s..." % rowdex
+          yme = "Pipulating row: %s (%s of %s)..." % (rowdex, index+1, len(therange))
           if globs.WEB: yield yme, "Next, we replace question marks. This may take awhile...", "", ""
           globs.hobj = None
           globs.html = '' #Blank the global html object. Recylces fetches.
@@ -963,7 +963,7 @@ def Pipulate(dockey='', token=''):
                         newrow[coldex] = eval(evalme)
                         stop = False
                         out('%s worked' % collabel)
-                        yme = "Row %s function %s successful." % (rowdex, collabel)
+                        yme = "<li>%s</li>" % (collabel)
                         yield yme, yme, "", ""
                         break
                       except Exception as e:
@@ -1042,8 +1042,8 @@ def Pipulate(dockey='', token=''):
                             else:
                               newrow[coldex] = None
                         out('%s worked.' % collabel)
-                        yme = "Row %s scraper %s successful." % (rowdex, collabel)
-                        yield yme, yme, "", ""
+                        yme = "<li>%s</li>" % (collabel)
+                        if globs.WEB: yield yme, yme, "", ""
                         stop = False
                         break
                       except Exception as e:
