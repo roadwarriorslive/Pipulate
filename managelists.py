@@ -98,16 +98,17 @@ def cyclemotto():
 
 def menumaker():
   ''' Creates the entire cadence of the system.'''
-  menu = ]
-  'setup':    "Set Up New Client",
-  'clear':    "Clear First Worksheet",
-  'crawl':    "Do A Crawl (Depth=2)",
-  'addcols':  "Add Some Columns",
-  'qmarks':   "Replace Question Marks",
-  'keywords': 'Collect Keywords'
-  }
+  menu = [
+  ('setup'   , "Set Up New Client"),
+  ('clear'   , "Clear First Worksheet"),
+  ('crawl'   , "Do A Crawl (Depth=2)"),
+  ('addcols' , "Add Some Columns"),
+  ('qmarks'  , "Replace Question Marks"),
+  ('keywords', "Collect Keywords"),
+  ('docs'    , "Add Docs tab")
+  ]
   strmenu = '<option value="off">What do you want to do?</option>\n'
   for item in menu:
-    strmenu += '<option value="%s">%s</options>\n' % (item, menu[item])
+    strmenu += '<option value="%s">%s</options>\n' % (item[0], item[1])
   return strmenu
 

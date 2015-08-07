@@ -50,11 +50,16 @@
         {% endif %}
       });
       function spinoff() {
+        $('li').last().removeClass("progress");
+        $('li').last().addClass("check");
         stopsignlock();
-        // $('#spinner').hide();
-        // $('#spinner').css('display', 'none');
-        $('li').removeClass("progress");
-        $('li').addClass("check");
+      }
+      function spinerr() {
+        setTimeout(function(){
+          $('li').last().removeClass("progress");
+          $('li').last().addClass("warning");
+        },800);
+        stopsignlock();
       }
       function stormyweather() {
         $('#spinner').hide();
@@ -246,7 +251,7 @@
               {%- elif lineitem == "spinerr" -%}
                 <script>
                   // Unlock button and gracefully show user things are fubar.
-                  spinoff();
+                  spinerr();
                 </script>
               {%- elif lineitem == "stormyweather" -%}
                 <script>

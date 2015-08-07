@@ -431,7 +431,7 @@ def Pipulate(dockey='', token=''):
             time.sleep(6)
         if stop:
           if globs.WEB: 
-            yield "spinoff", "", "", ""
+            yield "spinerr", "", "", ""
             yield badtuple
           Stop() # Consider adding refresh_token logic for users (versus the scheduler)
       if globs.WEB: yield unlock
