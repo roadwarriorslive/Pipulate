@@ -408,23 +408,23 @@ def Pipulate(dockey='', token=''):
               session.pop('loggedin', None)
             if 'u' not in session and globs.PIPURL:
               session['u'] = globs.PIPURL
-            Stop()
           except gspread.exceptions.NoValidUrlKeyFound:
             try:
               gdoc = gsp.open("Pipulate")
               stop = False
               break
             except gspread.httpsession.HTTPError, e:
-              pass
+              out("No token found, session expired. Switch to HTML5 localStorage.")
+              if globs.WEB: 
+                yield "I am sorry, the sesson has expired. Please log back in."
             except:
+              gotcha('c')
               if globs.WEB: 
                 yield "I see you're on a URL that is not a Google Spreadsheet. Would you like to grab links?", "", "", ""
                 yield "If so, just <a href='https://docs.google.com/spreadsheets/create' target='_new'>create</a> a new Spreadsheet, name it \"Pipulate\" and click Pipulate again.", "Google Spreadsheet Not Found.", "", ""
                 yield 'New to this odd but awesome approach? Watch the <a target="_blank" href="http://goo.gl/v71kw8">Demo</a> and read the <a target="_blank" href="http://goo.gl/p2zQa4">Docs</a>.', "", "", ""
-              Stop()
           except gspread.exceptions.SpreadsheetNotFound:
             if globs.WEB: yield "Please give the document a name to force first save.", "", "", ""
-            Stop()
           except Exception as e:
             if globs.WEB: yield dontgetfrustrated(x)
             out("Retry login %s of %s" % (x, 10))
