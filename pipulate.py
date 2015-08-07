@@ -175,6 +175,7 @@ def main():                                                         # of entry "
     #  \__ \ | | |  __/  __/ |_  | (__| | | |  __/ (__|   < 
     #  |___/_| |_|\___|\___|\__|  \___|_| |_|\___|\___|_|\_\
     #                                                       
+    session.permanent = True
     creds = Credentials(access_token=session['oa2'])
     try:
       gsp = gspread.authorize(creds)
