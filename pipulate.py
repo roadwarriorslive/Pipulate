@@ -97,7 +97,6 @@ def main():                                                         # of entry "
   out("ENTERED MAIN FUNCTION", "0")                                 # Establish hierarchical indenting of debug system.
   stop = False                                                      # Pipulate "stops" unless permitted to continue.
   streamit = False                                                  # Controls Flask's stream versus render template.
-  insheet = False                                                   # If bookmarklet is clicked from a Google Sheet.
   form = PipForm(csrf_enabled=False)                                # All WTForms are instances of classes. Main form.
   configform = ConfigForm(csrf_enabled=False)                       # The form to let you 1st time configure server.
   if (os.path.isfile(globs.FILE) and                                # been configured or not. Configuration consists
@@ -269,10 +268,6 @@ def main():                                                         # of entry "
         if 'u' in request.args:
           form.pipurl.data = request.args.get('u')
           session['u'] = request.args.get('u')
-          if globs.SHEETS in form.pipurl.data:
-            insheet = "sheets"
-          else:
-            insheet = form.pipurl.data
         if session and 'u' in session:
           form.pipurl.data = session['u']
       except:
@@ -284,14 +279,13 @@ def main():                                                         # of entry "
   # |___/\__|_|  \___|\__,_|_| |_| |_|  \___/ \__,_|\__| .__/ \__,_|\__|
   #                                                    |_|              
   out("Selecting template method.")
+  options = menumaker()
   if streamit:
     #Handle streaming user interface updates resulting from a POST method call.
-    options = menumaker()
     return Response(stream_template('pipulate.html', form=form, select=options, data=streamit))
   else:
     #Handle non-streaming user interface build resulting from a GET method call.
     out("EXITING MAIN FUNCTION RENDER", "0", '-')
-    options = menumaker(insheet, stext)
     return render_template('pipulate.html', form=form, select=options)
   out("EXITING MAIN", "0", '-')
 
@@ -614,7 +608,7 @@ def Pipulate(dockey='', token=''):
       yme = "%s rows found in Pipulate tab." % globs.numrows
       out(yme)
       if globs.WEB: yield yme, "", "", ""
-      if globs.numrows == 0 and globs.PIPMODE == 'qm':
+      if globs.numrows == 0 and globs.PIPMODE == 'qmarks':
         if globs.WEB:
           yield "Double-check that sheet is set up correctly.", "Pipulate needs question marks to replace.", "", ""
           yield "spinoff", "", "", ""

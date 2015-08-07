@@ -96,50 +96,18 @@ def cyclemotto():
 # |____/|_| |_|\___|\___|\__| |___|_| |_|_|\__|_|\__,_|_|_/___\___|_|
 #                                                                           
 
-def menumaker(url='', keywords=False):
-  import urlparse
-  """ For any given URL, return a what-to-do-next menu-key."""
-  key = ''
-  menu = {
-  'clear':        "Clear sheet1 (initialize)",
-  'crawl':        "1-Page Crawl",
-  'keywords':     'Collect Keywords',
-  'qm':           "Replace Question Marks"
+def menumaker():
+  ''' Creates the entire cadence of the system.'''
+  menu = ]
+  'setup':    "Set Up New Client",
+  'clear':    "Clear First Worksheet",
+  'crawl':    "Do A Crawl (Depth=2)",
+  'addcols':  "Add Some Columns",
+  'qmarks':   "Replace Question Marks",
+  'keywords': 'Collect Keywords'
   }
-  if url:
-    if keywords and keywords.strip() != '':
-      key = 'keywords'
-    elif url == 'sheets':
-      key = 'sheets'
-    elif url == 'seo':
-      key = 'seo'
-    else:
-      apexdom = apex(url)
-      urlparts = urlparse.urlparse(url)
-      netloc = urlparts[1]
-      path = urlparts[2]
-      query = urlparts[4]
-      key = 'seo'
-  else:
-    key = 'seo'
-  mdict = {}
-  mdict['keywords'] = [menu['keywords']]
-  mdict['sheets'] =   [
-                      menu['clear'], 
-                      menu['crawl'],
-                      menu['qm'],
-                      menu['keywords']
-                      ]
-  mdict['seo'] =      [
-                      menu['clear'], 
-                      menu['crawl'],
-                      menu['qm'],
-                      menu['keywords']
-                      ]
-  optlist = mdict[key]
-  cgimenu = '<option value="off">What do you want to do?</option>\n'
-  invmenu = {v: k for k, v in menu.items()}
-  for option in optlist:
-    cgimenu += '<option value="%s">%s</options>\n' % (invmenu[option], option)
-  return cgimenu
+  strmenu = '<option value="off">What do you want to do?</option>\n'
+  for item in menu:
+    strmenu += '<option value="%s">%s</options>\n' % (item, menu[item])
+  return strmenu
 
