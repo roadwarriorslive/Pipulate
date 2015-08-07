@@ -872,8 +872,8 @@ def Pipulate(dockey='', token=''):
       out("QUESTION MARK Replacement.", '2')
       if not qset and not trended:
         if globs.WEB:
-          yield "No question marks found.", "Move along. There's nothing to pipulate here.", "", ""
-          yield 'New to Pipulate? Watch <a target="_blank" href="https://docs.google.com/presentation/d/10lr_d1uyLMOnWsMzbenKiPlFE5-BIt9bxVucw7O4GSI/edit?usp=sharing">Demo</a> and read <a target="_blank" href="https://github.com/miklevin/pipulate/blob/master/README.md">Docs</a>.', "", "", ""
+          yme = 'New to Pipulate? Watch <a target="_blank" href="https://docs.google.com/presentation/d/10lr_d1uyLMOnWsMzbenKiPlFE5-BIt9bxVucw7O4GSI/edit?usp=sharing">Demo</a> and read <a target="_blank" href="https://github.com/miklevin/pipulate/blob/master/README.md">Docs</a>. ' + globs.PBNJMAN
+          yield yme, "The first worksheet in your spreadsheet needs something in it.", "", ""
           yield "spinoff", "", "", ""
         return
       therange = range(qstart, qend)
