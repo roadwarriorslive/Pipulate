@@ -417,7 +417,9 @@ def Pipulate(dockey='', token=''):
             except gspread.httpsession.HTTPError, e:
               out("No token found, session expired. Switch to HTML5 localStorage.")
               if globs.WEB: 
-                yield "I am sorry, the sesson has expired. Please log back in."
+                yield "I am sorry, the sesson has expired. Please log back in.", "Log back in", "", ""
+                yield "spinerr", "", "", ""
+                break
             except:
               gotcha('c')
               if globs.WEB: 
