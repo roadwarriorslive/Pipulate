@@ -100,7 +100,7 @@ def menumaker():
   ''' Creates the entire cadence of the system.'''
   menu = [
   ('clear'   , "Clear First Worksheet"),
-  ('crawl'   , "Do A Crawl (Depth=2)"),
+  ('crawl'   , "Do a 1-Page Crawl"),
   ('addcols' , "Add Some Columns"),
   ('qmarks'  , "Replace Question Marks"),
   ('keywords', "Collect Keywords"),

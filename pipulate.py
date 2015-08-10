@@ -452,13 +452,13 @@ def Pipulate(dockey='', token=''):
         offset = 0
         newTab = False
         try:
-          newTab = InitTab(gdoc, 'Keywords', headers)
+          newTab = InitTab(gdoc, 'Harvest', headers)
         except:
           pass
         if newTab:
           offset = -1
         if globs.WEB: yield unlock
-        ksheet = gdoc.worksheet("Keywords")
+        ksheet = gdoc.worksheet("Harvest")
         kcount = ksheet.row_count + offset
         kwlist = globs.KEYWORDS.split(',')
         kwrows = []
