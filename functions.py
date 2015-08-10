@@ -123,7 +123,8 @@ def crawl2(source):
   links = set()
   for alink in somelinks:
     if urlparse.urlparse(alink)[1][-len(apexdom):] == apexdom:
-      links.add(alink)
+      if alink != source:
+        links.add(alink)
   links = list(links)
   y = len(links)
   linkslist = zip([source]*y, links, ['0']*y, ['?']*y)
