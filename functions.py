@@ -137,6 +137,7 @@ def setolinks(source):
 
 def getlinks(target, depth='0'):
   linkset = setolinks(target)
+  gotcha(linkset)
 
 def crawl2(url):
   """Grab HTML from a URL, parse links and add a row per link to spreadsheet."""

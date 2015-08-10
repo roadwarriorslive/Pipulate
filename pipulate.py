@@ -409,6 +409,7 @@ def Pipulate(dockey='', token=''):
               session.pop('loggedin', None)
             if 'u' not in session and globs.PIPURL:
               session['u'] = globs.PIPURL
+            break
           except gspread.exceptions.NoValidUrlKeyFound:
             try:
               gdoc = gsp.open("Pipulate")
@@ -961,13 +962,16 @@ def Pipulate(dockey='', token=''):
                         stop = False
                         out('%s worked' % collabel)
                         yme = "<li>%s</li>" % (collabel)
-                        yield yme, yme, "", ""
+                        if globs.WEB:
+                          yield yme, yme, "", ""
                         break
                       except Exception as e:
                         print traceback.format_exc()
                         time.sleep(2)
                       if stop == True:
                         out("Function End (Failed)", "4", '-')
+                        if globs.WEB:
+                          yield "spinerr", "", "", ""
                         Stop()
                     out("Function End", "4", '-')
                   elif collabel in transscrape.keys():
