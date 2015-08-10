@@ -3,22 +3,40 @@ from common import *
 
 def documentation():
   s = []
-  s.append(['',''])
-  s.append(['Learn to use Pipulate in 5 easy steps.', ''])
-  s.append(['1: ', ''])
-  s.append(['2: ', ''])
-  s.append(['3: ', ''])
-  s.append(['4: ', ''])
-  s.append(['5: ', ''])
-  s.append(['',''])
-  s.append(["ADDITIONAL RESOURCES:",''])
-  s.append(['Watch A High-level Google Slides Intro -->', 'http://goo.gl/QPQb3t'])
-  s.append(['Read Main Documentation at Github -->', 'http://goo.gl/IOHjTJ'])
-  s.append(['Watch YouTube Video Tutorials -->', 'http://goo.gl/Nh3z7U'])
-  s.append(['',''])
-  s.append(["EASTER EGGS:",''])
-  s.append(['Get List-of-Functions Tab -->',''])
-  s.append(['Get JSON API Tab -->',''])
+  s.append(['Canonical',            'Crawl',     'Url',                       'Return Canonical.', ''])
+  s.append(['Comments',             'Facebook',  'Url',                       'Return Facebook count.', ''])
+  s.append(['Crawl',                'Crawl',     'Source',                    'Get all links on source.', ''])
+  s.append(['Description',          'Crawl',     'Url',                       'Return meta description.', ''])
+  s.append(['Fb',                   'Facebook',  'Url',                       'Return Facebook likes, shares, clicks and comments as JSON.', ''])
+  s.append(['Followers',            'Twitter',   'Url',                       'Return Twitter followers count.', ''])
+  s.append(['Following',            'Twitter',   'Url',                       'Return Twitter following count.', ''])
+  s.append(['Ga',                   'Crawl',     'Url',                       '', ''])
+  s.append(['GetLinks',             'Crawl',     'Url',                       '', ''])
+  s.append(['Instagram_Followers',  'Social',    'Instagram_Name',            '', ''])
+  s.append(['JsonApi',              'Generic',   'Endpoint, Url, Jkey',       '', ''])
+  s.append(['Likes',                'Facebook',  'Url',                       '', ''])
+  s.append(['Mcanonical',           'Mobile',    'Url',                       '', ''])
+  s.append(['Mobile',               'Mobile',    'Url',                       '', ''])
+  s.append(['Mobilicious',          'Mobile',    'Url, Mobile, Mcanonical',   '', ''])
+  s.append(['Pins',                 'Social',    'Url',                       '', ''])
+  s.append(['Plusses',              'Social',    'Url',                       '', ''])
+  s.append(['Position',             'Serps',     'Keyword, (Serps)',          '', ''])
+  s.append(['Positions',            'Serps',     'Keyword, Site, (Positions)','', ''])
+  s.append(['RegEx',                'Crawl',     'Text, Pattern',             '', ''])
+  s.append(['Response',             'Crawl',     'Url',                       '', ''])
+  s.append(['Redirect_Chain',       'Crawl',     'Url',                       '', ''])
+  s.append(['Serps',                'Serps',     'Keyword',                   '', ''])
+  s.append(['Shares',               'Facebook',  'Url',                       '', ''])
+  s.append(['Stumbles',             'Social',    'Url',                       '', ''])
+  s.append(['Subscribers',          'YouTube',   'Url',                       '', ''])
+  s.append(['ThumbsDown',           'YouTube',   'Url',                       '', ''])
+  s.append(['ThumbsUp',             'YouTube',   'Url',                       '', ''])
+  s.append(['Title',                'Crawl',     'Url',                       '', ''])
+  s.append(['TopUrl',               'Serps',     'Site, (Positions)',         '', ''])
+  s.append(['TweetTotal',           'Twitter',   'Url',                       '', ''])
+  s.append(['Tweets',               'Twitter',   'Url',                       '', ''])
+  s.append(['Twitter_Followers',    'Twitter',   'Twitter_Name',              '', ''])
+  s.append(['Views',                'YouTube',   'url',                       '', ''])
   return s
 
 def dontgetfrustrated(x):
@@ -89,12 +107,12 @@ def cyclemotto():
   except:
     return ['Configuring']
 
-#  ____  _               _     ___       _ _   _       _ _                  
-# / ___|| |__   ___  ___| |_  |_ _|_ __ (_) |_(_) __ _| (_)_______ _ __ 
+#  ____  _               _     ___       _ _   _       _ _
+# / ___|| |__   ___  ___| |_  |_ _|_ __ (_) |_(_) __ _| (_)_______ _ __
 # \___ \| '_ \ / _ \/ _ \ __|  | || '_ \| | __| |/ _` | | |_  / _ \ '__/
 #  ___) | | | |  __/  __/ |_   | || | | | | |_| | (_| | | |/ /  __/ |
 # |____/|_| |_|\___|\___|\__| |___|_| |_|_|\__|_|\__,_|_|_/___\___|_|
-#                                                                           
+#
 
 def menumaker():
   ''' Creates the entire cadence of the system.'''

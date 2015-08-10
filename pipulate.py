@@ -514,8 +514,8 @@ def Pipulate(dockey='', token=''):
           pass
       if globs.WEB: yield "Checking Tabs.", "Then we check for tabs...", "", ""
       # How To Tab
-      headers = ['Expand column. Hey, you did it! Good job so far.', 'Welcome to Pipulate!']
-      InitTab(gdoc, 'How To', headers, documentation())
+      headers = ['FunctionName', 'Category', 'RequiredColumns', 'Description', 'MoreInfo']
+      InitTab(gdoc, 'Docs', headers, documentation())
 
       # Config Tab
       headers = ['NAME', 'VALUE']
