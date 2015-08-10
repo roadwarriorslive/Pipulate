@@ -123,7 +123,7 @@ def crawl(source):
 def setolinks(source):
   import lxml.html
   apexdom = apex(source)
-  ro = requests.get(source, timeout=5)
+  ro = requests.get(source, timeout=5, verify=False)
   doc = lxml.html.fromstring(ro.text)
   doc.make_links_absolute(source)
   somelinks = doc.xpath('/html/body//a/@href')
@@ -136,8 +136,14 @@ def setolinks(source):
   return links
 
 def getlinks(target, depth='0'):
-  linkset = setolinks(target)
-  gotcha(linkset)
+  links = setolinks(target)
+  y = len(links)
+  globs.numrows = len(globs.sheet.col_values(1))
+  if depth:
+    depth = int(depth) + 1
+  linkslist = zip([target]*y, links, [depth]*y)
+  InsertRows(globs.sheet, linkslist, globs.numrows)
+  return "done"
 
 def crawl2(url):
   """Grab HTML from a URL, parse links and add a row per link to spreadsheet."""
