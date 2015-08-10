@@ -123,7 +123,7 @@ def menumaker():
   ('qmarks'  , "Replace Question Marks"),
   ('keywords', "Collect Keywords"),
   ('setup'   , "Set Up New Client"),
-  ('docs'    , "Add Docs tab")
+  ('graph'   , "Select Visualization")
   ]
   strmenu = '<option value="off">What do you want to do?</option>\n'
   for item in menu:

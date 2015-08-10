@@ -513,7 +513,7 @@ def Pipulate(dockey='', token=''):
           # if globs.WEB: yield yme, "Action not defined.", "", ""
           pass
       if globs.WEB: yield "Checking Tabs.", "Then we check for tabs...", "", ""
-      # How To Tab
+      # Documentation Tab
       headers = ['FunctionName', 'Category', 'RequiredColumns', 'Description', 'MoreInfo']
       InitTab(gdoc, 'Docs', headers, documentation())
 
