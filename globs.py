@@ -23,6 +23,7 @@ hobj =      ''       # Original Requests object for row's HTML with response hea
 row1 =      []       # Copy of contents of sheet1, row 1 for many uses.
 nest =      ''       # Controls nested indents of debug output.
 sheet =     ''       # Makes sheet1 worksheet object accessible to user functions.
+out =       ''       # Create a communication channel ouside Pipulate() generator.
 FILE =      "/var/opt/pipulate.cfg"                           # Flask server configuration
 TOKEN =     "/var/opt/pipulate.pkl"                           # OAuth2 access token
 SHEETS =    'https://docs.google.com/spreadsheets'            # URL to identify being in GSheets"

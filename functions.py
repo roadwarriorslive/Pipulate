@@ -105,9 +105,34 @@ def scrapes():
 # Not all functions you encounter here will have the ability to add new rows.
 # They require special init functions to set up the column names beforehand.
 
+def crawl2(source):
+  """Grab HTML from a link, parse links and add a row per link to spreadsheet."""
+  fcols = ['target', 'depth', 'getlinks']
+  therange = 'B1:%s2' % globs.letter[len(fcols)+1]
+  CellList = globs.sheet.range(therange)
+  vals = fcols + [] + [] + []
+  for i, val in enumerate(vals): # First, we add the columns we know we're going to need.
+    CellList[i].value = val
+  globs.sheet.update_cells(CellList)
+  apexdom = apex(source)
+  import lxml.html
+  ro = requests.get(source, timeout=5)
+  doc = lxml.html.fromstring(ro.text)
+  doc.make_links_absolute(source)
+  somelinks = doc.xpath('/html/body//a/@href')
+  links = set()
+  for alink in somelinks:
+    if urlparse.urlparse(alink)[1][-len(apexdom):] == apexdom:
+      links.add(alink)
+  links = list(links)
+  y = len(links)
+  linkslist = zip([source]*y, links, ['0']*y, ['?']*y)
+  InsertRows(globs.sheet, linkslist, 2)
+  return ""
+
 def crawl(url):
   """Grab HTML from a URL, parse links and add a row per link to spreadsheet."""
-  fcols = ['Depth', 'Title', 'Description', 'PageRank']
+  fcols = ['Depth', 'Title', 'Description']
   therange = 'B1:%s2' % globs.letter[len(fcols)+1]
   CellList = globs.sheet.range(therange)
   vals = fcols + ['0'] + ['?']*(len(fcols)-1)
