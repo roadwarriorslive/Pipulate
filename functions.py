@@ -105,7 +105,7 @@ def scrapes():
 # Not all functions you encounter here will have the ability to add new rows.
 # They require special init functions to set up the column names beforehand.
 
-def crawl2(source):
+def crawl(source):
   """Grab HTML from a link, parse links and add a row per link to spreadsheet."""
   fcols = ['target', 'depth', 'getlinks']
   therange = 'B1:%s2' % globs.letter[len(fcols)+1]
@@ -114,8 +114,15 @@ def crawl2(source):
   for i, val in enumerate(vals): # First, we add the columns we know we're going to need.
     CellList[i].value = val
   globs.sheet.update_cells(CellList)
-  apexdom = apex(source)
+  links = setolinks(source)
+  y = len(links)
+  linkslist = zip([source]*y, links, ['0']*y, ['?']*y)
+  InsertRows(globs.sheet, linkslist, 2)
+  return ""
+
+def setolinks(source):
   import lxml.html
+  apexdom = apex(source)
   ro = requests.get(source, timeout=5)
   doc = lxml.html.fromstring(ro.text)
   doc.make_links_absolute(source)
@@ -126,12 +133,12 @@ def crawl2(source):
       if alink != source:
         links.add(alink)
   links = list(links)
-  y = len(links)
-  linkslist = zip([source]*y, links, ['0']*y, ['?']*y)
-  InsertRows(globs.sheet, linkslist, 2)
-  return ""
+  return links
 
-def crawl(url):
+def getlinks(target, depth='0'):
+  linkset = setolinks(target)
+
+def crawl2(url):
   """Grab HTML from a URL, parse links and add a row per link to spreadsheet."""
   fcols = ['Depth', 'Title', 'Description']
   therange = 'B1:%s2' % globs.letter[len(fcols)+1]
@@ -437,5 +444,5 @@ def mobilicious(url, mobile, mcanonical):
 def sheetinitializer(sheet1key):
   """ For any given menu-selection, return lists to become row 1 and 2."""
   sinit = {}
-  sinit['crawl'] = (['url', 'crawl'], [globs.PIPURL, '?'])
+  sinit['crawl'] = (['source', 'crawl'], [globs.PIPURL, '?'])
   return sinit[sheet1key]
