@@ -51,7 +51,7 @@ print(r'''********************* Welcome to Pipulate, running on: ***************
   =====       |   displaying.  ||      context  '---|----|--|--|---'
     |         |                ||                   |    |  |  '------------> ?
     5.        '----------------'|     then sends    |    |  '---------------> ?
-  SEE THE--->  |to Google sheet<---------4.---------'    '-----3.-----------> ?
+  SEE THE--->  | to Google Sheet|<-------4.---------'    '-----3.-----------> ?
   RESULTS      '----------------'   a response                ...stuff on net''')
 
 if __name__ == "__main__":
