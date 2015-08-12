@@ -217,6 +217,8 @@ def main():                                                         # of entry "
       globs.PIPURL = form.pipurl.data
       if form.options.data:
         globs.PIPMODE = form.options.data
+        if ':' in globs.PIPMODE:
+          gotcha(globs.PIPMODE)
       if form.magicbox.data:
         globs.KEYWORDS = form.magicbox.data
         form.magicbox.data = None
