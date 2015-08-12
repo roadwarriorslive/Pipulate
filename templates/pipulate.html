@@ -44,7 +44,7 @@
         });
         {% if request.method == 'GET': %}
           $("#spinner").hide();
-        {% elif form.pipurl.data == '': %}
+        {% elif form and 'pipurl' in form and form.pipurl.data == '': %}
           $("#spinner").hide();
           unlockbutton();
           $("#learnsomething").html('Copy and paste a URL into field (even on mobile).');
@@ -282,6 +282,8 @@
         {% endif %}
         </div>
       </div>
+      {% elif form2: %}
+        <h1>This Looks Like A Good Place For an Interstitial Wedge<h1>
       {% elif configform: %}
         <h1>Pipulate Server OAuth2 Login Setup</h1>
         <h2>Enter Client ID and Secret from the Google Developers Console.</h2>
