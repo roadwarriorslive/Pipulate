@@ -41,7 +41,8 @@ print(r'''
 Hello World! I am a native Python webserver: no Apache, nginx or node.js.
 Pipulate is designed for exclusive access to the webserver, giving you the
 chance to watch the webserver's console output like a log file. Here's how the
-process generally looks. Feel free to crack it open and customize.
+process generally looks. Feel free to crack it open and customize. It's a
+syncronous, small-footprint, streaming (but no Ajax) application.
 
   THIS IS     THIS IS YOUR BROWSER                  THIS IS PIPULATE
     YOU            ____ ____                      (disposable servers)
