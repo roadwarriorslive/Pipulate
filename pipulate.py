@@ -236,7 +236,7 @@ def main():                                                         # of entry "
     elif session and 's' in session: # Selected text made the journey through login
       form.magicbox.data = session['s']
       stext = session['s']
-    if request.args and "access_token" in request.args: # Oops... necessary evil. Redirect quickly.
+    if request.args and 'access_token' in request.args: # Oops... necessary evil. Redirect quickly.
       try:
         LogUser(request.args['access_token'])
       except:

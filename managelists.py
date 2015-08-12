@@ -117,13 +117,13 @@ def cyclemotto():
 def menumaker():
   ''' Creates the entire cadence of the system.'''
   menu = [
-  ('clear'   , "Clear First Worksheet"),
-  ('crawl'   , "Do a 1-Page Crawl"),
-  ('addcols' , "Add Some Columns"),
-  ('qmarks'  , "Replace Question Marks"),
-  ('keywords', "Collect Keywords"),
-  ('setup'   , "Set Up New Client"),
-  ('graph'   , "Select Visualization")
+  ('clear'      , "Clear Sheet 1"),
+  ('qmarks'     , "Replace ?'s"),
+  ('menu:crawl' , "Crawl Website"),
+  ('menu:cols'  , "Add Columns"),
+  ('menu:setup' , "Set Up Client"),
+  ('menu:graph' , "See Visualization"),
+  ('keywords'   , "Harvest Keywords")
   ]
   strmenu = '<option value="off">What do you want to do?</option>\n'
   for item in menu:
