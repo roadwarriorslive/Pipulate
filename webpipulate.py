@@ -40,19 +40,19 @@ print(r'''********************* Welcome to Pipulate, running on: ***************
  Hello World! This is a native Python webserver: no Apache, nginx or node.js.
  Pipulate is designed for exclusive access to the webserver, letting you watch
  the this like a web logfile. Feel free to crack it open and customize. It's a
- synchronous, small-footprint, streaming (but no Ajax) application.
+ synchronous, small-footprint, streaming (but no Ajax) app to learn from.
 
-  THIS IS     THIS IS YOUR BROWSER                  THIS IS PIPULATE
-    YOU            ____ ____                      (disposable servers)
-               ,__/site\____\___.  ...which       ,------------------.
-     O         |                ||     SENDS      |   ...to the      |
-    /|\---1.-----> bookmarklet -----------2.-------> Pipulate Server |
-    ( ) CLICK  | with a website ||      URL and   |   | which checks |
-   =====       |   displaying.  ||       context  '---|----|--|--|---'
-     |         |                ||                    |    |  |  '-----> ?
-     5.        '----------------'|      then sends    |    |  '--------> ?
-   SEE THE--->  |to Google sheet<----------4.---------'    '-----3.----> ?
-   RESULTS      '----------------'   a response           ...stuff on net''')
+ THIS IS     THIS IS YOUR BROWSER                 THIS IS PIPULATE     THIS IS
+   YOU            ____ ____                     (disposable servers)    THIS!
+              ,__/site\____\___. ...which       ,------------------.  ,-------.
+    O         |                ||    SENDS      |   ...to the      |  | Debug |
+   /|\---1.-----> bookmarklet ----------2.-------> Pipulate Server--->|Console|
+   ( ) CLICK  | with a website ||     URL and   |   | which checks |  '-------'
+  =====       |   displaying.  ||      context  '---|----|--|--|---'
+    |         |                ||                   |    |  |  '------------> ?
+    5.        '----------------'|     then sends    |    |  '---------------> ?
+  SEE THE--->  |to Google sheet<---------4.---------'    '-----3.-----------> ?
+  RESULTS      '----------------'   a response                ...stuff on net''')
 
 if __name__ == "__main__":
   globs.WEB = True
