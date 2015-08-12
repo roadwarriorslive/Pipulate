@@ -51,14 +51,14 @@
         {% endif %}
       });
       function spinoff() {
-        $('li').last().removeClass("progress");
-        $('li').last().addClass("check");
+        $('#plist > li').last().removeClass("progress");
+        $('#plist > li').last().addClass("check");
         stopsignlock();
       }
       function spinerr() {
         setTimeout(function(){
-          $('li').last().removeClass("progress");
-          $('li').last().addClass("warning");
+          $('#plist > li').last().removeClass("progress");
+          $('#plist > li').last().addClass("warning");
         },800);
         stopsignlock();
       }
@@ -153,8 +153,8 @@
              |_| |_| |_|\___| |_|  \___/|_|  |_| |_| |_|
                                               
           #}
+          <div id="centerme">
           <form id="pipform" method="POST" action="/">
-            <div id="centerme">
             <div id="paste"><span id="pastelabel">URL: </span>{{ form.pipurl(size=80) }}</div>
             </div>
             <div>
@@ -209,7 +209,7 @@
               {% endfor %}
             {% endif %}
           {% endwith %}
-          <ul>
+          <ul id="plist">
           {% for lineitem, learn, magic, glock in data: -%}
             {%- if glock == '+' : %}
               <script>
@@ -287,14 +287,12 @@
           <h1>{{ mode }}</h1>
           <form id="pipform" method="POST" action="/">
             <div id="centerme">
-            {% for subfield in form2.radios %}
-              {{ subfield.label }}
-            {% endfor %}
+              {{ form2.radios }}
             <button id="pipulate" class="button" type="submit">
               Pipulate &nbsp;<i id="piplock" class="pip-angle-circled-right"></i>
             </button>
-            </div>
           </form>
+          </div>
         </div>
       {% elif configform: %}
         <h1>Pipulate Server OAuth2 Login Setup</h1>

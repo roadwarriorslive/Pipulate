@@ -333,7 +333,7 @@ li {
   line-height: 15px;
 }
 
-li:before {
+#plist > li:before {
   font-family: 'mikelevin';
   content: '\e820';
   float: left;
@@ -344,19 +344,19 @@ li:before {
   animation: spin 2s infinite linear;
 }
 
-ul li.progress:before {
+#plist > li.progress:before {
   content: "\e820"; 
   -webkit-animation: spin 2s infinite linear;
   animation: spin 2s infinite linear;
 }
 
-ul li.check:before {
+#plist > li.check:before {
   content: "\e80a"; 
   -webkit-animation: spin 0s;
   animation: spin 0s;
 }
 
-ul li.warning:before {
+#plist > li.warning:before {
   content: "\e80d"; 
   -webkit-animation: spin 0s;
   animation: spin 0s;
