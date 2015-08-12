@@ -285,9 +285,16 @@
       {% elif form2: %}
         <div id="content">
           <h1>{{ mode }}</h1>
+          <div id="centerme">
           <form id="pipform" method="POST" action="/">
-            <div id="centerme">
-              {{ form2.radios }}
+          <ul>
+            {% for item in form2.radios %}
+              <li><label>{{ item }}<span class="checkable">{{ item.label }}</span></label></li>
+            {% endfor %}
+            {% for item in form2.checks %}
+              <li><label>{{ item }}<span class="checkable">{{ item.label }}</span></label></li>
+            {% endfor %}
+          </ul>
             <button id="pipulate" class="button" type="submit">
               Pipulate &nbsp;<i id="piplock" class="pip-angle-circled-right"></i>
             </button>

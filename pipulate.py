@@ -30,9 +30,9 @@ from common import *                                                # exact file
 import requests, traceback, datetime, time, json                    # is the most important to the process.
 from flask_wtf import Form                                          # Those other files, like webpipulate.py
 from wtforms import   (StringField, RadioField,                     # and loopipulate.py are merely shims for
-                      HiddenField,                                  # different Python code execution contexts.
+                      HiddenField, SelectMultipleField,             # different Python code execution contexts.
                       TextAreaField,                                # Webpipulate creates an instance of the
-                      SelectField)                                  # Flask webserving app object, perhaps
+                      SelectField, widgets)                         # Flask webserving app object, perhaps
 from flask import     (Flask,                                       # somewhat controversially directly native
                       stream_with_context,                          # in Python. Yes, there's gunicorn, nginx,
                       render_template,                              # and all that wonderful webserver extra
@@ -83,6 +83,12 @@ class PipForm2(Form):
         'Choice?',
         choices=[('choice1', 'Choice One'), ('choice2', 'Choice Two')], default='choice1'
     )
+  checks = SelectMultipleField(
+        'Pick Things!',
+        choices=[('choice1', 'Choice One'), ('choice2', 'Choice Two')],
+        option_widget=widgets.CheckboxInput(),
+        widget=widgets.ListWidget(prefix_label=False)
+        )
 
 #  _____ _           _                      _
 # |  ___| | __ _ ___| | __  _ __ ___   __ _(_)_ __
