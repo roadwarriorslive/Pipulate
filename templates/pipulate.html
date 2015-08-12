@@ -283,7 +283,16 @@
         </div>
       </div>
       {% elif form2: %}
-        <h1>This Looks Like A Good Place For an Interstitial Wedge<h1>
+        <div id="content">
+          <h1>{{ mode }}</h1>
+          <form id="pipform" method="POST" action="/">
+            <div id="centerme">
+            <button id="pipulate" class="button" type="submit">
+              Pipulate &nbsp;<i id="piplock" class="pip-angle-circled-right"></i>
+            </button>
+            </div>
+          </form>
+        </div>
       {% elif configform: %}
         <h1>Pipulate Server OAuth2 Login Setup</h1>
         <h2>Enter Client ID and Secret from the Google Developers Console.</h2>

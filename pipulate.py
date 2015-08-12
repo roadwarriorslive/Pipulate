@@ -224,8 +224,9 @@ def main():                                                         # of entry "
       if form.options.data:
         globs.PIPMODE = form.options.data
         if ':' in globs.PIPMODE:
+          mode = globs.PIPMODE.split(':')[1]
           form2 = PipForm2(csrf_enabled=False)
-          return render_template('pipulate.html', form2=form2)
+          return render_template('pipulate.html', form2=form2, mode=mode)
       if form.magicbox.data:
         globs.KEYWORDS = form.magicbox.data
         form.magicbox.data = None
