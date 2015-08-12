@@ -4,15 +4,15 @@
 #     \ V  V /  __/ |_) |  ___) | | | | | | | | | |
 #      \_/\_/ \___|_.__/  |____/|_| |_|_|_| |_| |_|
 #
-#    The 80/20 friggn’ rule —
-#    Gotta’ use it. It’s a tool
+#    The 80/20 friggn' rule --
+#    Gotta' use it. It's a tool
 #    Reducing clutter that we pack
 #    Into our lives to hold us back.
 #    
 #    When goals elude and time flies past
-#    And with each step, you’re still in last
+#    And with each step, you're still in last
 #    Consider how you lost your aim
-#    You’ll find recursive tasks to blame.
+#    You'll find recursive tasks to blame.
 #    
 #    With each thing you set to do,
 #    A hundred more come fly at you.
@@ -21,7 +21,7 @@
 #    
 #    The 80/20 Rule just asks
 #    That you should start to plan your tasks
-#    So when you’re only one-fifth done
+#    So when you're only one-fifth done
 #    You could have stopped and still have won.
 #
 #    --December 7, 2002, Mike Levin
