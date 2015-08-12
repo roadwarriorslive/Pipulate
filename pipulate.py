@@ -77,6 +77,12 @@ class PipForm(Form):
   magicbox = TextAreaField("magicbox")                              # This box shows the JSON data being worked upon.
   options = SelectField("options")                                  # What you're asking Pipulate to do.
 
+class PipForm2(Form):
+  """Define form for main Pipulate user interface."""
+  pipurl = StringField('Paste a Google Sheet URL:')                 
+  magicbox = TextAreaField("magicbox")                              
+  options = SelectField("options")                                  
+
 #  _____ _           _                      _
 # |  ___| | __ _ ___| | __  _ __ ___   __ _(_)_ __
 # | |_  | |/ _` / __| |/ / | '_ ` _ \ / _` | | '_ \
@@ -218,7 +224,8 @@ def main():                                                         # of entry "
       if form.options.data:
         globs.PIPMODE = form.options.data
         if ':' in globs.PIPMODE:
-          gotcha(globs.PIPMODE)
+          form2 = PipForm2(csrf_enabled=False)
+          return render_template('pipulate.html', form=form2)
       if form.magicbox.data:
         globs.KEYWORDS = form.magicbox.data
         form.magicbox.data = None
