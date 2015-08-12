@@ -29,7 +29,7 @@
 from pipulate import *
 import os
 import globs, common
-print(r'''********************* Welcome to Pipulate, running on: *************************
+print(r'''********************* Welcome to Pipulate, running on **************************
         ____        _   _                    _______ _           _
        |  _ \ _   _| |_| |__   ___  _ __    / /  ___| | __ _ ___| | __
        | |_) | | | | __| '_ \ / _ \| '_ \  / /| |_  | |/ _` / __| |/ /
@@ -39,8 +39,8 @@ print(r'''********************* Welcome to Pipulate, running on: ***************
 
  Hello World! This is a native Python webserver: no Apache, nginx or node.js.
  Pipulate is designed for exclusive access to the webserver, letting you watch
- the this like a web logfile. Feel free to crack it open and customize. It's a
- synchronous, small-footprint, streaming (but no Ajax) app to learn from.
+ this console like a web logfile. Feel free to crack it open and customize.
+ It's a synchronous, small-footprint, streaming (non-Ajax) app to learn from.
 
  THIS IS     THIS IS YOUR BROWSER                 THIS IS PIPULATE     THIS IS
    YOU            ____ ____                     (disposable servers)    THIS!
