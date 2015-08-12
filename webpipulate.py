@@ -29,19 +29,17 @@
 from pipulate import *
 import os
 import globs, common
-print(r'''
-                      Welcome to Pipulate, running on:
-      ____        _   _                    _______ _           _
-     |  _ \ _   _| |_| |__   ___  _ __    / /  ___| | __ _ ___| | __
-     | |_) | | | | __| '_ \ / _ \| '_ \  / /| |_  | |/ _` / __| |/ /
-     |  __/| |_| | |_| | | | (_) | | | |/ / |  _| | | (_| \__ \   <
-     |_|    \__, |\__|_| |_|\___/|_| |_/_/  |_|   |_|\__,_|___/_|\_\
-            |___/
- 
-Hello World! I am a native Python webserver: no Apache, nginx or node.js.
-Pipulate is designed for exclusive access to the webserver, giving you the
-chance to watch the webserver's console output like a log file. Here's how the
-process generally looks. Feel free to crack it open and customize. It's a
+print(r'''********************* Welcome to Pipulate, running on: *************************
+        ____        _   _                    _______ _           _
+       |  _ \ _   _| |_| |__   ___  _ __    / /  ___| | __ _ ___| | __
+       | |_) | | | | __| '_ \ / _ \| '_ \  / /| |_  | |/ _` / __| |/ /
+       |  __/| |_| | |_| | | | (_) | | | |/ / |  _| | | (_| \__ \   <
+       |_|    \__, |\__|_| |_|\___/|_| |_/_/  |_|   |_|\__,_|___/_|\_\
+              |___/
+
+Hello World! This is a native Python webserver: no Apache, nginx or node.js.
+Pipulate is designed for exclusive access to the webserver, letting you watch
+the this like a web logfile. Feel free to crack it open and customize. It's a
 syncronous, small-footprint, streaming (but no Ajax) application.
 
   THIS IS     THIS IS YOUR BROWSER                  THIS IS PIPULATE
@@ -51,13 +49,10 @@ syncronous, small-footprint, streaming (but no Ajax) application.
     /|\---1.-----> bookmarklet -----------2.-------> Pipulate Server |
     ( ) CLICK  | with a website ||      URL and   |   | which checks |
    =====       |   displaying.  ||       context  '---|----|--|--|---'
-     |         |                ||                    |    |  |  |
-     5.        |                ||                    |    |  |  '-----> ?
-     |         '----------------'|      then sends    |    |  '--------> ?
+     |         |                ||                    |    |  |  '-----> ?
+     5.        '----------------'|      then sends    |    |  '--------> ?
    SEE THE--->  |to Google sheet<----------4.---------'    '-----3.----> ?
-   RESULTS      '----------------'   a response           ...stuff on net
-
-''')
+   RESULTS      '----------------'   a response           ...stuff on net''')
 
 if __name__ == "__main__":
   globs.WEB = True
