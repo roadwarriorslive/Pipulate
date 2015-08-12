@@ -40,7 +40,7 @@ print(r'''********************* Welcome to Pipulate, running on: ***************
  Hello World! This is a native Python webserver: no Apache, nginx or node.js.
  Pipulate is designed for exclusive access to the webserver, letting you watch
  the this like a web logfile. Feel free to crack it open and customize. It's a
- syncronous, small-footprint, streaming (but no Ajax) application.
+ synchronous, small-footprint, streaming (but no Ajax) application.
 
   THIS IS     THIS IS YOUR BROWSER                  THIS IS PIPULATE
     YOU            ____ ____                      (disposable servers)
