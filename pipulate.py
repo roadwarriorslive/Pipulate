@@ -29,7 +29,7 @@ import globs                                                        # to pipulat
 from common import *                                                # exact file that kicks off Pipulate, it
 import requests, traceback, datetime, time, json                    # is the most important to the process.
 from flask_wtf import Form                                          # Those other files, like webpipulate.py
-from wtforms import   (StringField,                                 # and loopipulate.py are merely shims for
+from wtforms import   (StringField, RadioField,                     # and loopipulate.py are merely shims for
                       HiddenField,                                  # different Python code execution contexts.
                       TextAreaField,                                # Webpipulate creates an instance of the
                       SelectField)                                  # Flask webserving app object, perhaps
@@ -78,10 +78,11 @@ class PipForm(Form):
   options = SelectField("options")                                  # What you're asking Pipulate to do.
 
 class PipForm2(Form):
-  """Define form for main Pipulate user interface."""
-  pipurl = StringField('Paste a Google Sheet URL:')                 
-  magicbox = TextAreaField("magicbox")                              
-  options = SelectField("options")                                  
+  """Define form for interstitial options"""
+  radios = RadioField(
+        'Choice?',
+        choices=[('choice1', 'Choice One'), ('choice2', 'Choice Two')], default='choice1'
+    )
 
 #  _____ _           _                      _
 # |  ___| | __ _ ___| | __  _ __ ___   __ _(_)_ __

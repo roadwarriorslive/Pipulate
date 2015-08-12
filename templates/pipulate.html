@@ -287,6 +287,9 @@
           <h1>{{ mode }}</h1>
           <form id="pipform" method="POST" action="/">
             <div id="centerme">
+            {% for subfield in form2.radios %}
+              {{ subfield.label }}
+            {% endfor %}
             <button id="pipulate" class="button" type="submit">
               Pipulate &nbsp;<i id="piplock" class="pip-angle-circled-right"></i>
             </button>
