@@ -82,6 +82,7 @@ class PipForm(Form):
 
 class PipForm2(Form):
   """Define form for interstitial options"""
+  secondary = HiddenField()
   radios = RadioField(
         'Choice?',
         choices=crawlchoices(), default='choice1'
@@ -229,13 +230,15 @@ def main():                                                         # of entry "
     #  ___) | | | | (_| |/ / (_| | | | | | |_|
     # |____/|_| |_|\__,_/___\__,_|_| |_| |_(_)
     #                                         
+    form2 = PipForm2(csrf_enabled=False)
+    if form2.secondary.data == 'on':
+      gotcha("hit")
     if form.pipurl.data:
       globs.PIPURL = form.pipurl.data
       if form.options.data:
         globs.PIPMODE = form.options.data
         if ':' in globs.PIPMODE:
           mode = globs.PIPMODE.split(':')[1]
-          form2 = PipForm2(csrf_enabled=False)
           return render_template('pipulate.html', form2=form2, mode=mode)
       if form.magicbox.data:
         globs.KEYWORDS = form.magicbox.data
