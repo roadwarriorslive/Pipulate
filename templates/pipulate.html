@@ -126,6 +126,13 @@
           window.location = "http://{{ request.headers['Host'] }}?" + myhash;
         }
       }
+      {% if request.args and 'l' in request.args and request.args['l'] == '1' and session and 'oa2' in session: %}
+      if (localStorage) {
+        localStorage.setItem('oa2', '{{ session["oa2"] }}');
+      } 
+      {% elif request.args and 'logout' in request.args: %}
+        localStorage.clear();
+      {% endif %}
     </script>
   </head>
   <body>
@@ -151,9 +158,6 @@
     </div>
     </nav>
     <div id="content">
-      {% if request.args and 'l' in request.args and request.args['l'] == '1' and session and 'oa2' in session: %}
-      <h1>foo</h1>
-      {% endif %}
       {% if select: %}
         {% if session and 'loggedin' in session and session['loggedin'] == '1': %}
           {#
