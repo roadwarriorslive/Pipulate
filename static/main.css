@@ -97,10 +97,14 @@ nav{
   border: 2px solid lightgrey;
   background-color: slategray;
   padding-top: 15px;
+  padding-top: 0px;
   margin-bottom: 15px;
 }
 #pipchoice {
+  width: 600px;
   font-size: 18px;
+  margin-left: auto;
+  margin-right: auto;
 }
 #piplock {
   color: white;
