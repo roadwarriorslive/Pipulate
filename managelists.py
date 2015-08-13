@@ -130,3 +130,10 @@ def menumaker():
     strmenu += '<option value="%s">%s</options>\n' % (item[0], item[1])
   return strmenu
 
+def crawlchoices():
+  return [
+    ('spam', 'Spam'),
+    ('eggs', 'Eggs'),
+    ('foo', 'Foo'),
+    ('bar', 'Bar')
+  ]

@@ -43,6 +43,9 @@ from flask import     (Flask,                                       # somewhat c
                       url_for,                                      # of space, making it perfect to run from
                       flash)                                        # small servers, virtual machines or desktop.
 
+from functions import *
+from managelists import *
+
 socket.setdefaulttimeout(10.0)                                      
 app = Flask(__name__)                                               # Create that fateful instance of a Flask object.
 
@@ -81,7 +84,7 @@ class PipForm2(Form):
   """Define form for interstitial options"""
   radios = RadioField(
         'Choice?',
-        choices=[('choice1', 'Choice One'), ('choice2', 'Choice Two')], default='choice1'
+        choices=crawlchoices(), default='choice1'
     )
   checks = SelectMultipleField(
         'Pick Things!',
@@ -1512,6 +1515,4 @@ def stringify_children(node):
   # filter removes possible Nones in texts and tails
   return ''.join(filter(None, parts))
 
-from functions import *
-from managelists import *
 
