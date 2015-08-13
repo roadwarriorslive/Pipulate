@@ -31,7 +31,7 @@
         $(function(){
           $("input").prop('required',true);
         });
-        {% if form and session and 'loggedin' in session and session['loggedin'] == '1': %}
+        {% if session and 'loggedin' in session and session['loggedin'] == '1': %}
           stopsignlock();
         {% endif %}
         {%- if request.method == 'GET': -%}
@@ -44,8 +44,8 @@
         $( "#options" ).bind( "change", function() {
           readytogo();
         });
-        $("#pipform2").change(function() {
-          if ($("#pipform2 input:checkbox:checked").length > 0 || $("#pipform2 input:radio:checked").length > 0) {
+        $("#pipform").change(function() {
+          if ($("#pipform input:checkbox:checked").length > 0 || $("#pipform input:radio:checked").length > 0) {
             readytogo();
           } else {
             stopsignlock();
@@ -92,13 +92,15 @@
         $('#piplock').css('color', 'white');
       }
       function stopsignlock() {
-        $('#pipulate').css('color', 'red');
-        $('#pipulate').prop("disabled", true);
-        $('#piplock').removeClass("pip-angle-circled-right");
-        $('#piplock').removeClass("pip-lock");
-        $('#piplock').addClass("pip-stopsign");
-        $('#piplock').css('color', 'red');
-        $('#pipulate').fadeTo(0,1);
+        setTimeout(function(){
+          $('#pipulate').css('color', 'red');
+          $('#pipulate').prop("disabled", true);
+          $('#piplock').removeClass("pip-angle-circled-right");
+          $('#piplock').removeClass("pip-lock");
+          $('#piplock').addClass("pip-stopsign");
+          $('#piplock').css('color', 'red');
+          $('#pipulate').fadeTo(0,1);
+        },800);
       }
       function readytogo() {
         if ($( "#options option:selected" ).val() == 'off') {
@@ -311,7 +313,7 @@
       </div>
       {% elif form2: %}
           <div id="mode">{{ mode }} choices</div>
-          <form id="pipform2" method="POST" action="/">
+          <form id="pipform" method="POST" action="/">
           <input type="hidden" name="secondary" value="on">
           <input type="hidden" name="pipurl" value="{{ form.pipurl.data }}">
           <input type="hidden" name="magicbox" value="{{ form.magicbox.data }}">
