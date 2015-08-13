@@ -132,6 +132,10 @@
       } 
       {% elif request.args and 'logout' in request.args: %}
         localStorage.clear();
+      {% elif session and 'oa' not in session and 'loggedin' not in session: %}
+      if (localStorage.getItem("oa2") != null) {
+        window.location = "http://{{ request.headers['Host'] }}?" + localStorage.getItem("oa2");
+      }
       {% endif %}
     </script>
   </head>
