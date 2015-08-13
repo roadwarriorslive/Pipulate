@@ -263,14 +263,14 @@ def main():                                                         # of entry "
       session['i'] -= 1 # Don't skip a cute message, just becuse I redirect.
       if 'u' in session and 's' in session:
         out("EXITING MAIN FUNCTION REDIRECT WITH URL AND TEXT", "0", '-')
-        return redirect(url_for('main', u=session['u'], s=session['s']))
+        return redirect(url_for('main', u=session['u'], s=session['s'], l='1'))
       elif 'u' in session:
         out("EXITING MAIN FUNCTION REDIRECT WITH URL", "0", '-')
-        return redirect(url_for('main', u=session['u']))
+        return redirect(url_for('main', u=session['u'], l='1'))
       else:
         out("Redirecting, no URL known")
         out("EXITING MAIN FUNCTION REDIRECT", "0", '-')
-        return redirect(url_for('main'))
+        return redirect(url_for('main'), l='1')
     elif request.args and 'logout' in request.args: # Logging out
       if session:
         if 'oa2' in session:
