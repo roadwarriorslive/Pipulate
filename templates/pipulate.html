@@ -151,7 +151,7 @@
     </div>
     </nav>
     <div id="content">
-      {% if request.args and 'l' in request.args and request.args['l'] == '1': %}
+      {% if request.args and 'l' in request.args and request.args['l'] == '1' and session and 'oa2' in session: %}
       <h1>foo</h1>
       {% endif %}
       {% if select: %}
