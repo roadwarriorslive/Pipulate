@@ -80,19 +80,13 @@ class PipForm(Form):
   magicbox = TextAreaField("magicbox")                              # This box shows the JSON data being worked upon.
   options = SelectField("options")                                  # What you're asking Pipulate to do.
 
-class PipForm2(Form):
+class PipForm2(PipForm):
   """Define form for interstitial options"""
   secondary = HiddenField()
-  radios = RadioField(
-        'Choice?',
-        choices=crawlchoices(), default='choice1'
-    )
-  checks = SelectMultipleField(
-        'Pick Things!',
-        choices=[('choice1', 'Choice One'), ('choice2', 'Choice Two')],
-        option_widget=widgets.CheckboxInput(),
-        widget=widgets.ListWidget(prefix_label=False)
-        )
+  radios = RadioField(choices=crawlchoices())
+  checks = SelectMultipleField(choices=crawlchoices(), 
+    option_widget=widgets.CheckboxInput(), 
+    widget=widgets.ListWidget(prefix_label=False))
 
 #  _____ _           _                      _
 # |  ___| | __ _ ___| | __  _ __ ___   __ _(_)_ __
@@ -115,6 +109,7 @@ def main():                                                         # of entry "
   stop = False                                                      # Pipulate "stops" unless permitted to continue.
   streamit = False                                                  # Controls Flask's stream versus render template.
   form = PipForm(csrf_enabled=False)                                # All WTForms are instances of classes. Main form.
+  form2 = PipForm2(csrf_enabled=False)
   configform = ConfigForm(csrf_enabled=False)                       # The form to let you 1st time configure server.
   if (os.path.isfile(globs.FILE) and                                # been configured or not. Configuration consists
       os.path.getsize(globs.FILE) > 0):                             # of a file with Google OAuth2 Client ID, Client
@@ -230,7 +225,6 @@ def main():                                                         # of entry "
     #  ___) | | | | (_| |/ / (_| | | | | | |_|
     # |____/|_| |_|\__,_/___\__,_|_| |_| |_(_)
     #                                         
-    form2 = PipForm2(csrf_enabled=False)
     if form2.secondary.data == 'on':
       gotcha("hit")
     if form.pipurl.data:
@@ -239,7 +233,7 @@ def main():                                                         # of entry "
         globs.PIPMODE = form.options.data
         if ':' in globs.PIPMODE:
           mode = globs.PIPMODE.split(':')[1]
-          return render_template('pipulate.html', form2=form2, mode=mode)
+          return render_template('pipulate.html', form=form, form2=form2, mode=mode)
       if form.magicbox.data:
         globs.KEYWORDS = form.magicbox.data
         form.magicbox.data = None
