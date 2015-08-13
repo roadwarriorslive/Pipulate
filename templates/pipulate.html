@@ -30,7 +30,7 @@
         $(function(){
           $("input").prop('required',true);
         });
-        {% if session and 'loggedin' in session and session['loggedin'] == '1': %}
+        {% if form and session and 'loggedin' in session and session['loggedin'] == '1': %}
           stopsignlock();
         {% endif %}
         {%- if request.method == 'GET': -%}
@@ -182,11 +182,11 @@
               Pipulate &nbsp;<i id="piplock" class="pip-angle-circled-right"></i>
             </button>
             </div>
-            {% if request.method == 'POST': %}
+            {% if request.method == 'POST' and form: %}
               <script>
                 lockbutton();
               </script>
-            {% else %}
+            {% elif not form2 %}
               <script>
                 stopsignlock();
               </script>
@@ -302,11 +302,10 @@
         </div>
       </div>
       {% elif form2: %}
-        <div id="content">
-          <h1>{{ mode }}</h1>
-          <div id="pipslate">
+          <div id="mode">{{ mode }} choices</div>
           <form id="pipform" method="POST" action="/">
-          <ul>
+          <div id="pipslate">
+          <ul id="pipchoice">
             {% for item in form2.radios %}
               <li><label>{{ item }}<span class="checkable">{{ item.label }}</span></label></li>
             {% endfor %}
@@ -314,12 +313,11 @@
               <li><label>{{ item }}<span class="checkable">{{ item.label }}</span></label></li>
             {% endfor %}
           </ul>
-            <button id="pipulate" class="button" type="submit">
-              Pipulate &nbsp;<i id="piplock" class="pip-angle-circled-right"></i>
-            </button>
-          </form>
           </div>
-        </div>
+          <button id="pipulate" class="button" type="submit">
+            Pipulate &nbsp;<i id="piplock" class="pip-angle-circled-right"></i>
+          </button>
+          </form>
       {% elif configform: %}
         <h1>Pipulate Server OAuth2 Login Setup</h1>
         <h2>Enter Client ID and Secret from the Google Developers Console.</h2>

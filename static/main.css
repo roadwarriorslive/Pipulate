@@ -81,12 +81,26 @@ a {
   text-align: left;
   line-height: 1.4em;
 }
+[type=checkbox]:checked+.checkable:after, [type=radio]:checked+.checkable:after {
+  color: black;
+}
 nav{
   background-color: #EEEEEE;
+}
+#mode {
+  color: grey;
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 5px;
 }
 #pipslate {
   border: 2px solid lightgrey;
   background-color: slategray;
+  padding-top: 15px;
+  margin-bottom: 15px;
+}
+#pipchoice {
+  font-size: 18px;
 }
 #piplock {
   color: white;
@@ -331,7 +345,7 @@ ul
   margin-top: 2px;
 }
  
-li {
+#plist > li {
   color: white;
   font-size: 13px;
   line-height: 15px;

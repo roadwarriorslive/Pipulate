@@ -50,8 +50,8 @@ print(r'''********************* Welcome to Pipulate, running on ****************
    ( ) CLICK  | with a website ||     URL and   |   | which checks |  '-------'
   =====       |   displaying.  ||      context  '---|----|--|--|---'
     |         |                ||                   |    |  |  '------------> ?
-    5.        '----------------'|     then sends    |    |  '---------------> ?
-  SEE THE--->  | to Google Sheet|<-------4.---------'    '-----3.-----------> ?
+    5.        '----------------'|     then sends    |    |  '--------3.-----> ?
+  SEE THE--->  | to Google Sheet|<-------4.---------'    '------------------> ?
   RESULTS      '----------------'   a response                ...stuff on net''')
 
 if __name__ == "__main__":
