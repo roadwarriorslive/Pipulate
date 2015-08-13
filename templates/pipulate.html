@@ -92,15 +92,13 @@
         $('#piplock').css('color', 'white');
       }
       function stopsignlock() {
-        setTimeout(function(){
-          $('#pipulate').css('color', 'red');
-          $('#pipulate').prop("disabled", true);
-          $('#piplock').removeClass("pip-angle-circled-right");
-          $('#piplock').removeClass("pip-lock");
-          $('#piplock').addClass("pip-stopsign");
-          $('#piplock').css('color', 'red');
-          $('#pipulate').fadeTo(0,1);
-        },800);
+        $('#pipulate').css('color', 'red');
+        $('#pipulate').prop("disabled", true);
+        $('#piplock').removeClass("pip-angle-circled-right");
+        $('#piplock').removeClass("pip-lock");
+        $('#piplock').addClass("pip-stopsign");
+        $('#piplock').css('color', 'red');
+        $('#pipulate').fadeTo(0,1);
       }
       function readytogo() {
         if ($( "#options option:selected" ).val() == 'off') {
