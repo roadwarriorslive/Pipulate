@@ -25,6 +25,7 @@ nest =      ''       # Controls nested indents of debug output.
 sheet =     ''       # Makes sheet1 worksheet object accessible to user functions.
 FILE =      "/var/opt/pipulate.cfg"                           # Flask server configuration
 TOKEN =     "/var/opt/pipulate.pkl"                           # OAuth2 access token
+SHEET =     "Pipulate"                                        # Default GSheet file name.
 SHEETS =    'https://docs.google.com/spreadsheets'            # URL to identify being in GSheets"
 OAUTHURL =  "https://accounts.google.com/o/oauth2/auth"       # OAuth2 API Endpoint
 DOMURL =    "http://pipulate.com"                             # Default for Login Button

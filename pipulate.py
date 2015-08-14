@@ -205,7 +205,7 @@ def main():                                                         # of entry "
         needsPipulate = False
       else:
         try:
-          gdoc = gsp.open("Pipulate")
+          gdoc = gsp.open(globs.SHEET)
           needsPipulate = False
         except:
           pass
@@ -429,7 +429,7 @@ def Pipulate(dockey='', token=''):
             break
           except gspread.exceptions.NoValidUrlKeyFound:
             try:
-              gdoc = gsp.open("Pipulate")
+              gdoc = gsp.open(globs.SHEET)
               stop = False
               break
             except gspread.httpsession.HTTPError, e:
@@ -1179,20 +1179,20 @@ def getLabel():
   url = request.base_url
   parsed = urlparse.urlparse(url)
   subdomain = parsed.hostname.split('.')[0]
-  blab = "Pipulate"
+  blab = globs.SHEET
   droidcut = "ppp"
   if subdomain == 'localhost':
-    blab = "%s Pipulate 8888" % droidcut
+    blab = "%s %s 8888" % (droidcut, globs.SHEET)
   elif subdomain == 'pipulate':
-    blab = '%s Pipulate' % droidcut
+    blab = '%s %s' % (droidcut, globs.SHEET)
   elif subdomain:
-    blab = "%s Pipulate %s" % (droidcut, subdomain)
+    blab = "%s %s %s" % (droidcut, globs.SHEET, subdomain)
   return blab
 
 def getBookmarklet():
   """Return the HTML required to create a draggable Pipulate bookmarklet link."""
   host = request.headers['Host']
-  bname = "Pipulate"
+  bname = globs.SHEET
   #return '''javascript:(function(){window.open('http://%s/?u='+encodeURIComponent(document.location.href)+'&d='+Date.now()+'&s='+encodeURIComponent(window.getSelection?window.getSelection():document.selection.createRange().text)+'&c='+window.btoa(unescape(encodeURIComponent(document.cookie))), '%s', 'toolbar=0,resizable=1,scrollbars=1,status=1,width=630,height=600');})();''' % (host, bname)
   return '''javascript:(function(){open('http://%s/?u='+encodeURIComponent(document.location.href)+'&d='+Date.now()+'&s='+encodeURIComponent(window.getSelection?window.getSelection():document.selection.createRange().text)+'&c='+window.btoa(unescape(encodeURIComponent(document.cookie))));})();''' % (host)
 
