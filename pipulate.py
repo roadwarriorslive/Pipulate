@@ -110,6 +110,7 @@ def main():                                                         # of entry "
   streamit = False                                                  # Controls Flask's stream versus render template.
   form = PipForm(csrf_enabled=False)                                # All WTForms are instances of classes. Main form.
   form2 = PipForm2(csrf_enabled=False)
+  pipstate = None
   configform = ConfigForm(csrf_enabled=False)                       # The form to let you 1st time configure server.
   if (os.path.isfile(globs.FILE) and                                # been configured or not. Configuration consists
       os.path.getsize(globs.FILE) > 0):                             # of a file with Google OAuth2 Client ID, Client
@@ -206,6 +207,7 @@ def main():                                                         # of entry "
       else:
         try:
           gdoc = gsp.open(globs.SHEET)
+          pipstate = {'Row 1': gdoc.sheet1.row_values(1), 'Row 2': gdoc.sheet1.row_values(2)}
           needsPipulate = False
         except:
           pass
@@ -298,6 +300,9 @@ def main():                                                         # of entry "
   #                                                    |_|              
   out("Selecting template method.")
   options = menumaker()
+  if pipstate:
+    form.magicbox.data = pipstate
+    flash("foo")
   if streamit:
     #Handle streaming user interface updates resulting from a POST method call.
     return Response(stream_template('pipulate.html', form=form, select=options, data=streamit))
