@@ -211,6 +211,7 @@ def main():                                                         # of entry "
           needsPipulate = False
         except:
           pass
+      gotcha(gdoc.id)
       # Indoctrinate new Pipulate users here
       if request.args and 'logout' in request.args:
         pass
@@ -302,7 +303,8 @@ def main():                                                         # of entry "
   options = menumaker()
   if pipstate:
     form.magicbox.data = pipstate
-    flash("foo")
+    flash("Welcome to Pipulate!")
+    flash('You are about to perform changes to the Google Sheet named <a href="#">%s</a>.' % globs.SHEET)
   if streamit:
     #Handle streaming user interface updates resulting from a POST method call.
     return Response(stream_template('pipulate.html', form=form, select=options, data=streamit))

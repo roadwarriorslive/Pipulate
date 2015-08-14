@@ -373,6 +373,12 @@ ul
   animation: spin 2s infinite linear;
 }
 
+#plist > li.flash:before {
+  content: "\e88a"; 
+  -webkit-animation: spin 0s;
+  animation: spin 0s;
+}
+
 #plist > li.check:before {
   content: "\e80a"; 
   -webkit-animation: spin 0s;

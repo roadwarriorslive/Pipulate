@@ -231,9 +231,11 @@
             </script>
           {% with messages = get_flashed_messages() %}
             {% if messages %}
+              <ul id="plist">
               {% for message in messages %}
-                <li style="content: '\e88a';" > {{ message }}</li>
+                <li class="flash" style="content: '\e88a';" > {{ message | safe }}</li>
               {% endfor %}
+              </ul>
             {% endif %}
           {% endwith %}
           <ul id="plist">
