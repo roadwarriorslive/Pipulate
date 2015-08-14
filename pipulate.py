@@ -111,6 +111,7 @@ def main():                                                         # of entry "
   form = PipForm(csrf_enabled=False)                                # All WTForms are instances of classes. Main form.
   form2 = PipForm2(csrf_enabled=False)
   pipstate = None
+  docid = None
   configform = ConfigForm(csrf_enabled=False)                       # The form to let you 1st time configure server.
   if (os.path.isfile(globs.FILE) and                                # been configured or not. Configuration consists
       os.path.getsize(globs.FILE) > 0):                             # of a file with Google OAuth2 Client ID, Client
@@ -207,11 +208,11 @@ def main():                                                         # of entry "
       else:
         try:
           gdoc = gsp.open(globs.SHEET)
-          pipstate = {'Row 1': gdoc.sheet1.row_values(1), 'Row 2': gdoc.sheet1.row_values(2)}
+          docid = gdoc.id
+          pipstate = {'ROW1': gdoc.sheet1.row_values(1), 'ROW2': gdoc.sheet1.row_values(2)}
           needsPipulate = False
         except:
           pass
-      gotcha(gdoc.id)
       # Indoctrinate new Pipulate users here
       if request.args and 'logout' in request.args:
         pass
@@ -303,8 +304,11 @@ def main():                                                         # of entry "
   options = menumaker()
   if pipstate:
     form.magicbox.data = pipstate
-    flash("Welcome to Pipulate!")
-    flash('You are about to perform changes to the Google Sheet named <a href="#">%s</a>.' % globs.SHEET)
+    doclink = '%s/d/%s/edit#gid=0' % (globs.SHEETS, docid)
+    flash("Welcome to Pipulate, an SEO tool that outputs jobs into Google Docs.")
+    flash('You are about to perform changes to the Google Sheet named <a target="_new" href="%s">%s</a>.' % (doclink, globs.SHEET))
+    flash("The text in box above represents the data in the first two rows of that sheet.")
+    flash("You should clear Sheet 1 before running new jobs like crawls or client setups.")
   if streamit:
     #Handle streaming user interface updates resulting from a POST method call.
     return Response(stream_template('pipulate.html', form=form, select=options, data=streamit))
@@ -468,7 +472,12 @@ def Pipulate(dockey='', token=''):
       if globs.PIPMODE == 'learn':
         out("<script>alert('hit');</script>")
 
-      if globs.KEYWORDS and globs.KEYWORDS[:1] != '[' and globs.KEYWORDS[-1:] != ']':
+      if (globs.KEYWORDS 
+        and globs.KEYWORDS[:1] != '[' 
+        and globs.KEYWORDS[-1:] != ']'
+        and globs.KEYWORDS[:1] != '{' 
+        and globs.KEYWORDS[-1:] != '}'
+        ):
         # Keywords Tab
         if globs.WEB: yield "Keyword Collection Detected", "Making Keywords Tab If Needed", "", ""
         headers = ['Keyword', 'Source']
