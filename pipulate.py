@@ -313,11 +313,13 @@ def main():                                                         # of entry "
     form.magicbox.data = pipstate
     doclink = '%s/d/%s/edit#gid=0' % (globs.SHEETS, docid)
     flash("Welcome to Pipulate, an SEO tool that outputs jobs into Google Docs.")
-    flash('You are about to perform changes to the Google Sheet named <a target="_new" href="%s">%s</a>.' % (doclink, globs.SHEET))
+    flash('You are about to perform changes to your Google Sheet named %s.' % globs.SHEET)
     flash("The above box represents the data flying around. ['Rows', 'look', 'like', 'this.'].")
-    flash("If the first 2 rows are empty, you're good to perform a site crawl or run a steup.")
+    flash("If the first 2 rows are empty, you're good to perform a site crawl or run a setup.")
     flash('If it\'s not empty, you can choose "Clear Sheet 1" to blank it in preparation.')
     flash('Pipulate lets you see the <a href="https://en.wikipedia.org/wiki/JSON">JSON data</a> flying around behind the scenes.')
+    flash('For advanced options, check out the Docs tab in the <a target="_new" href="%s">%s</a> Sheet.' % (doclink, globs.SHEET))
+
   if streamit:
     #Handle streaming user interface updates resulting from a POST method call.
     return Response(stream_template('pipulate.html', form=form, select=options, data=streamit))
