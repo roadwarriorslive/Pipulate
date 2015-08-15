@@ -504,8 +504,8 @@ def Pipulate(dockey='', token=''):
         kcount = ksheet.row_count + offset
         kwlist = globs.KEYWORDS.split(',')
         kwrows = []
-        yme = "Collecting %s keywords." % len(kwlist)
-        if globs.WEB: yield yme, "Collecting keywords", "", ""
+        yme = "Harvesting %s keywords." % len(kwlist)
+        if globs.WEB: yield yme, "Harvesting keywords", "", ""
         for kw in kwlist:
           kwrows.append([kw.strip(), globs.PIPURL])
         try:
