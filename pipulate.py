@@ -307,6 +307,7 @@ def main():                                                         # of entry "
     flash("Insert commas between keywords, and each one will get its own row.")
     flash("You can also add more keyword variations by just typing them in.")
     flash('Then select "Harvest Keywords" from the dropdown menu.')
+    flash('You can then find your keywords under the Harvest tab.')
   elif pipstate:
     form.magicbox.data = pipstate
     doclink = '%s/d/%s/edit#gid=0' % (globs.SHEETS, docid)
@@ -315,7 +316,7 @@ def main():                                                         # of entry "
     flash("The text in box above represents the data in the first two rows of that sheet.")
     flash("{'ROW1': [], 'ROW2': []} means Sheet1 is empty and ready for a crawl or setup.")
     flash('If it\'s not empty, you can choose "Clear Sheet 1" to blank it in preparation.')
-    flash("Pipulate lets you see the JSON data flying around behind the scenes.")
+    flash('Pipulate lets you see the <a href="https://en.wikipedia.org/wiki/JSON">JSON data</a> flying around behind the scenes.')
   if streamit:
     #Handle streaming user interface updates resulting from a POST method call.
     return Response(stream_template('pipulate.html', form=form, select=options, data=streamit))
@@ -510,6 +511,10 @@ def Pipulate(dockey='', token=''):
           InsertRows(ksheet, kwrows, kcount)
         except:
           pass
+        if globs.WEB:
+          yield "Keywords Harvested!", "Mmmmmm, more keywords.", "", ""
+          yield "spinoff", "", "", ""
+        return
       #           _                       _               _     _
       #  ___  ___| |_   _   _ _ __    ___| |__   ___  ___| |_  / |
       # / __|/ _ \ __| | | | | '_ \  / __| '_ \ / _ \/ _ \ __| | |
