@@ -488,7 +488,7 @@ def Pipulate(dockey='', token=''):
         and globs.KEYWORDS[-1:] != '}'
         ):
         # Keywords Tab
-        if globs.WEB: yield "Keyword Collection Detected", "Making Keywords Tab If Needed", "", ""
+        if globs.WEB: yield "Keyword Harvesting Detected", "Making Harvest Tab If Needed", "", ""
         headers = ['Keyword', 'Source']
         if globs.WEB: yield lock
         offset = 0
@@ -513,7 +513,8 @@ def Pipulate(dockey='', token=''):
         except:
           pass
         if globs.WEB:
-          yield "Keywords Harvested!", "Mmmmmm, more keywords.", "", ""
+          yme = "Keywords Harvested! %s" % globs.PBNJMAN
+          yield yme, "Mmmmmm, more keywords.", json.dumps(kwlist), ""
           yield "spinoff", "", "", ""
         return
       #           _                       _               _     _
