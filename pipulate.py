@@ -208,7 +208,8 @@ def main():                                                         # of entry "
         try:
           gdoc = gsp.open(globs.SHEET)
           docid = gdoc.id
-          pipstate = {'ROW1': gdoc.sheet1.row_values(1), 'ROW2': gdoc.sheet1.row_values(2)}
+          if gdoc.sheet1.row_values(1)==[] and gdoc.sheet1.row_values(2) == []:
+            pipstate = ['Connected to Sheet', 'First 2 rows empty (good).', 'Perform Crawl or Setup.', 'This is JSON data.', 'Watch it flow.', 'Schedule Jobs', 'Read the Docs.', 'Crack it open.']
           needsPipulate = False
         except:
           pass
@@ -313,8 +314,8 @@ def main():                                                         # of entry "
     doclink = '%s/d/%s/edit#gid=0' % (globs.SHEETS, docid)
     flash("Welcome to Pipulate, an SEO tool that outputs jobs into Google Docs.")
     flash('You are about to perform changes to the Google Sheet named <a target="_new" href="%s">%s</a>.' % (doclink, globs.SHEET))
-    flash("The text in box above represents the data in the first two rows of that sheet.")
-    flash("{'ROW1': [], 'ROW2': []} means Sheet1 is empty and ready for a crawl or setup.")
+    flash("The above box represents the data flying around. ['Rows', 'look', 'like', 'this.'].")
+    flash("If the first 2 rows are empty, you're good to perform a site crawl or run a steup.")
     flash('If it\'s not empty, you can choose "Clear Sheet 1" to blank it in preparation.')
     flash('Pipulate lets you see the <a href="https://en.wikipedia.org/wiki/JSON">JSON data</a> flying around behind the scenes.')
   if streamit:
