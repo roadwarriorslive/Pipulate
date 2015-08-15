@@ -21,7 +21,6 @@
                                   my daughter
                                       Adi
 
-                            Succeed With Pipulate!
 
 """
 import sys, os, socket, urlparse, re, gspread                       # Hello World! I'm glad you found your way
@@ -308,7 +307,9 @@ def main():                                                         # of entry "
     flash("Welcome to Pipulate, an SEO tool that outputs jobs into Google Docs.")
     flash('You are about to perform changes to the Google Sheet named <a target="_new" href="%s">%s</a>.' % (doclink, globs.SHEET))
     flash("The text in box above represents the data in the first two rows of that sheet.")
-    flash("You should clear Sheet 1 before running new jobs like crawls or client setups.")
+    flash("{'ROW1': [], 'ROW2': []} means Sheet1 is empty and ready for a crawl or setup.")
+    flash('If it\'s not empty, you can choose "Clear Sheet 1" to blank it in preparation.')
+    flash("Pipulate lets you see the JSON data flying around behind the scenes.")
   if streamit:
     #Handle streaming user interface updates resulting from a POST method call.
     return Response(stream_template('pipulate.html', form=form, select=options, data=streamit))
@@ -323,7 +324,7 @@ def LogUser(authkey):
   import os.path
   if os.path.isfile(globs.TOKEN) and os.path.getsize(globs.TOKEN) > 0:
     token = freshtoken(globs.TOKEN)
-    creds = Credentials(access_token=token)
+    reds = Credentials(access_token=token)
     import gspread
     gsp2 = gspread.authorize(creds)
     api = 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='

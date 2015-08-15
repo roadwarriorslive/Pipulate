@@ -118,9 +118,9 @@ def menumaker():
   ''' Creates the entire cadence of the system.'''
   menu = [
   ('clear'      , "Clear Sheet 1"),
-  ('qmarks'     , "Replace ?'s"),
   ('menu:crawl' , "Crawl Website"),
   ('menu:cols'  , "Add Columns"),
+  ('qmarks'     , "Replace ?'s"),
   ('menu:setup' , "Set Up Client"),
   ('menu:graph' , "See Visualization"),
   ('keywords'   , "Harvest Keywords")
