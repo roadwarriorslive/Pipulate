@@ -480,7 +480,8 @@ def Pipulate(dockey='', token=''):
       if globs.PIPMODE == 'learn':
         out("<script>alert('hit');</script>")
 
-      if (globs.KEYWORDS 
+      if (globs.PIPMODE == 'keywords'
+        and globs.KEYWORDS 
         and globs.KEYWORDS[:1] != '[' 
         and globs.KEYWORDS[-1:] != ']'
         and globs.KEYWORDS[:1] != '{' 
