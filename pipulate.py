@@ -209,7 +209,8 @@ def main():                                                         # of entry "
           gdoc = gsp.open(globs.SHEET)
           docid = gdoc.id
           if gdoc.sheet1.row_values(1)==[] and gdoc.sheet1.row_values(2) == []:
-            pipstate = ['Connected to Sheet', 'First 2 rows empty (good).', 'Perform Crawl or Setup.', 'This is JSON data.', 'Watch it flow.', 'Schedule Jobs', 'Read the Docs.', 'Crack it open.']
+            sname = 'Connected to %s Sheet' % globs.SHEET
+            pipstate = [sname, 'First 2 rows empty (good).', 'Perform Crawl or Setup.', 'This is JSON data.', 'Watch it flow.', 'Schedule Jobs', 'Read the Docs.', 'Crack it open.']
           needsPipulate = False
         except:
           pass
