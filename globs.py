@@ -9,6 +9,7 @@
 #                        But to do so, use a globs prefix
 #                         It's the price you have to pay
 
+DOCID =     None
 WEB =       False    # Controls whether yields show (webpipulate vs. loopipulate)
 PCOM =      True     # Turns True if pipulate in hostname. Tracks usage.
 DBUG =      True     # Turns on and off verbose console output.

@@ -373,6 +373,12 @@ ul
   animation: spin 2s infinite linear;
 }
 
+#plist > li.checkbox:before {
+  content: "\e81e"; 
+  -webkit-animation: spin 0s;
+  animation: spin 0s;
+}
+
 #plist > li.check:before {
   content: "\e80a"; 
   -webkit-animation: spin 0s;

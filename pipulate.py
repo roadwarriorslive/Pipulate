@@ -110,7 +110,6 @@ def main():                                                         # of entry "
   form = PipForm(csrf_enabled=False)                                # All WTForms are instances of classes. Main form.
   form2 = PipForm2(csrf_enabled=False)
   pipstate = None
-  docid = None
   configform = ConfigForm(csrf_enabled=False)                       # The form to let you 1st time configure server.
   if (os.path.isfile(globs.FILE) and                                # been configured or not. Configuration consists
       os.path.getsize(globs.FILE) > 0):                             # of a file with Google OAuth2 Client ID, Client
@@ -207,7 +206,7 @@ def main():                                                         # of entry "
       else:
         try:
           gdoc = gsp.open(globs.SHEET)
-          docid = gdoc.id
+          globs.DOCID = gdoc.id
           if gdoc.sheet1.row_values(1)==[] and gdoc.sheet1.row_values(2) == []:
             sname = 'Connected to %s Sheet' % globs.SHEET
             pipstate = [sname, 'First 2 rows empty (good).', 'Perform Crawl or Setup.', 'This is JSON data.', 'Watch it flow.', 'Schedule Jobs', 'Read the Docs.', 'Crack it open.']
@@ -313,7 +312,7 @@ def main():                                                         # of entry "
     flash('You can then find your keywords under the Harvest tab.')
   elif pipstate:
     form.magicbox.data = pipstate
-    doclink = '%s/d/%s/edit#gid=0' % (globs.SHEETS, docid)
+    doclink = '%s/d/%s/edit#gid=0' % (globs.SHEETS, globs.DOCID)
     session.pop('_flashes', None)
     flash("Welcome to Pipulate, an SEO tool that outputs jobs into Google Docs.")
     flash('You are about to perform changes to your Google Sheet named %s.' % globs.SHEET)
@@ -321,7 +320,7 @@ def main():                                                         # of entry "
     flash("If the first 2 rows are empty, you're good to perform a site crawl or run a setup.")
     flash('If it\'s not empty, you can choose "Clear Sheet 1" to blank it in preparation.')
     flash('Pipulate lets you see the <a href="https://en.wikipedia.org/wiki/JSON">JSON data</a> flying around behind the scenes.')
-    flash('For advanced options, check out the Docs tab in the <a target="_new" href="%s">%s</a> Sheet.' % (doclink, globs.SHEET))
+    flash('For advanced options, check out the Docs tab in the <a target="_blank" href="%s">%s</a> Sheet.' % (doclink, globs.SHEET))
 
   if streamit:
     #Handle streaming user interface updates resulting from a POST method call.
@@ -467,7 +466,7 @@ def Pipulate(dockey='', token=''):
               gotcha('c')
               if globs.WEB: 
                 yield "I see you're on a URL that is not a Google Spreadsheet. Would you like to grab links?", "", "", ""
-                yield "If so, just <a href='https://docs.google.com/spreadsheets/create' target='_new'>create</a> a new Spreadsheet, name it \"Pipulate\" and click Pipulate again.", "Google Spreadsheet Not Found.", "", ""
+                yield "If so, just <a href='https://docs.google.com/spreadsheets/create' target='_blank'>create</a> a new Spreadsheet, name it \"Pipulate\" and click Pipulate again.", "Google Spreadsheet Not Found.", "", ""
                 yield 'New to this odd but awesome approach? Watch the <a target="_blank" href="http://goo.gl/v71kw8">Demo</a> and read the <a target="_blank" href="http://goo.gl/p2zQa4">Docs</a>.', "", "", ""
           except gspread.exceptions.SpreadsheetNotFound:
             if globs.WEB: yield "Please give the document a name to force first save.", "", "", ""
@@ -536,20 +535,24 @@ def Pipulate(dockey='', token=''):
         anything = re.compile('.+')
         if globs.PIPMODE == 'clear':
           out("Clearing Tab 1...")
-          if globs.WEB: yield "Clearing Sheet 1. Use revision history if a mistake.", "Clearing Sheet 1", "", ""
-          try:
-            CellList = gdoc.sheet1.findall(anything)
-            for cell in CellList:
-              cell.value = ''
-            result = gdoc.sheet1.update_cells(CellList)
-            if globs.WEB:
-              yme = "Sheet1 Cleared! %s" % globs.PBNJMAN
-              yield yme, "Sheet1 Cleared.", "", ""
-              yield "spinoff", "", "", ""
-            Stop()
-          except:
-            out("Could not clear tap one.")
-            Stop()
+          if globs.WEB: yield "Clearing Sheet 1. If this was a mistake, use revision history to get back your data.", "Clearing Sheet 1", "", ""
+          #try:
+          CellList = gdoc.sheet1.findall(anything)
+          for cell in CellList:
+            cell.value = ''
+          result = gdoc.sheet1.update_cells(CellList)
+          if globs.WEB:
+            yield "You now are ready to do something requiring Sheet1 empty, like a Crawl or a Setup.", "", "", ""
+            doclink = '%s/d/%s/edit#gid=0' % (globs.SHEETS, globs.DOCID)
+            yme = 'I recommend opening the <a target="_blank" href="%s">%s</a> Sheet in another tab so you can see the magic happen.' % (doclink, globs.SHEET)
+            yield yme, "", "", ""
+            yme = "Sheet1 Cleared! %s" % globs.PBNJMAN
+            yield yme, "Now, go do something awesome!", "", ""
+            yield "spinoff", "", "", ""
+          Stop()
+          # except:
+          #   out("Could not clear tab one.")
+          #   Stop()
       else:
         try:
           bothrows = sheetinitializer(globs.PIPMODE) # Beware! There is always an initialization attempt.
