@@ -7,20 +7,19 @@
            | |   | | |_) | |_| | | (_| | ||  __/ | (_| (_) | | | | | |
            |_|   |_| .__/ \__,_|_|\__,_|\__\___|(_)___\___/|_| |_| |_|
                    | |
-            It does|_| look like much, but looks can be deceiving.
-           I center these lines in the vim editor by hitting Shift-V
-            to highlight the text and then hitting :center[Enter].
-              This is important to remember. I program in Python
-                 primarily so that I can work on this project
-                   and generally think more clearly in life.
-                    I crave super-powers in an age before,
-                        yet obsessed with, super heros.
-                          So, with the clock ticking
-                             I have made this, my
-                               best attempt, for
-                                  my daughter
-                                      Adi
+                   |_|
 
+     THIS IS     THIS IS YOUR BROWSER                 THIS IS PIPULATE   
+       YOU            ____ ____                     (disposable servers) 
+                  ,__/site\____\___. ...which       ,------------------. 
+        O         |                ||    SENDS      |   ...to the      | 
+       /|\---1.-----> bookmarklet ----------2.-------> Pipulate Server | 
+       ( ) CLICK  | with a website ||     URL and   |   | which checks | 
+      =====       |   displaying.  ||      context  '---|----|--|--|---'
+        |         |                ||                   |    |  |  '------> ?
+        5.        '----------------'|     then sends    |    |  '---------> ?
+      SEE THE--->  | to Google Sheet|<-------4.---------'    '------------> ?
+      RESULTS      '----------------'   a response           ...stuff on net
 
 """
 import sys, os, socket, urlparse, re, gspread                       # Hello World! I'm glad you found your way
