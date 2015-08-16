@@ -275,7 +275,7 @@ def main():                                                         # of entry "
       else:
         out("Redirecting, no URL known")
         out("EXITING MAIN FUNCTION REDIRECT", "0", '-')
-        return redirect(url_for('main'), l='1')
+        return redirect(url_for('main', l='1'))
     elif request.args and 'logout' in request.args: # Logging out
       if session:
         if 'oa2' in session:
