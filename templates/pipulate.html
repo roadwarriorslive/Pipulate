@@ -129,6 +129,11 @@
         var myhash = location.hash
         if (myhash.indexOf('access_token') > 0) {
           myhash = myhash.substring(1, myhash.length);
+          if (localStorage) {
+            var regex = /(?:access_token=)(\S+?)(?:&|$)/;
+            var match = regex.exec(myhash);
+            localStorage.setItem('oa2', match[1]);
+          } 
           window.location = "http://{{ request.headers['Host'] }}?" + myhash;
         }
       }

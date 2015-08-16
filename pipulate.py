@@ -303,6 +303,7 @@ def main():                                                         # of entry "
   out("Selecting template method.")
   options = menumaker()
   if form.magicbox.data:
+    session.pop('_flashes', None)
     flash("Congratulations! You have chosen to harvest keywords.") 
     flash("The words filled into the above textarea will be inserted into %s." % globs.SHEET)
     flash("Insert commas between keywords, and each one will get its own row.")
@@ -312,6 +313,7 @@ def main():                                                         # of entry "
   elif pipstate:
     form.magicbox.data = pipstate
     doclink = '%s/d/%s/edit#gid=0' % (globs.SHEETS, docid)
+    session.pop('_flashes', None)
     flash("Welcome to Pipulate, an SEO tool that outputs jobs into Google Docs.")
     flash('You are about to perform changes to your Google Sheet named %s.' % globs.SHEET)
     flash("The above box represents the data flying around. ['Rows', 'look', 'like', 'this.'].")
