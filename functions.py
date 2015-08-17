@@ -363,9 +363,15 @@ def likes(url, fb=''):
     def gfb(url):
       global fb
       return fb(url)
-    fb = json.loads(gfb(url))
+    try:
+      fb = json.loads(gfb(url))
+    except:
+      return "Error"
   else:
-    fb = json.loads(fb)
+    try:
+      fb = json.loads(fb)
+    except:
+      return "Error"
   return walkdict(fb, "like_count")
 
 def comments(url, fb=''):
