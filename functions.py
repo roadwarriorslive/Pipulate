@@ -208,6 +208,16 @@ def pins(url):
 # And now what you've all been waiting for! If you write a Python function that
 # just works stand-alone elsewhere, simply paste it here to extend Pipulate.
 
+def difficulty(keyword):
+  if 'semrush' in globs.config:
+    apikey = globs.config['semrush']
+    call = 'http://api.semrush.com/?type=phrase_kdi&export_columns=Kd&phrase=%s&key=%s&database=us' % (keyword, apikey)
+    respobj = requests.get(call, timeout=5)
+    rtext = respobj.text
+    return rtext.splitlines()[1]
+  else:
+    return "In the Config tab, put semrush under name and the api key under value to proceed."
+
 def twitter_followers(twitter_name):
   api = 'https://twitter.com/'
   un = twitter_name

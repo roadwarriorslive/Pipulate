@@ -301,7 +301,7 @@ def main():                                                         # of entry "
   #                                                    |_|              
   out("Selecting template method.")
   options = menumaker()
-  if form.magicbox.data:
+  if form.magicbox.data and session:
     session.pop('_flashes', None)
     flash("Congratulations! You have chosen to harvest keywords.") 
     flash("The words filled into the above textarea will be inserted into %s." % globs.SHEET)
@@ -309,7 +309,7 @@ def main():                                                         # of entry "
     flash("You can also add more keyword variations by just typing them in.")
     flash('Then select "Harvest Keywords" from the dropdown menu.')
     flash('You can then find your keywords under the Harvest tab.')
-  elif pipstate:
+  elif pipstate and session:
     form.magicbox.data = pipstate
     doclink = '%s/d/%s/edit#gid=0' % (globs.SHEETS, globs.DOCID)
     session.pop('_flashes', None)
