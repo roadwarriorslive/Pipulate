@@ -1,6 +1,5 @@
 # Free And Open Source SEO Software
 ## A tool to help you automate those tedious daily tasks that you never found any better way to perform.
-[Join the Pipulate Team on Slack](http://goo.gl/forms/nh3WM6bPle)
 <img src="http://mikelevinseo.com/images/pipulate-interface.png" alt="FOSS SEO Software"/>
 
 Welcome to Pipulate, a free and open source SEO tool that outputs SEO
@@ -16,7 +15,6 @@ Learn Flask. Learn vim. It works with a bookmarklet from your browser, popping
 up a very minimal user interface when necessary, but generally sends the output
 you want to keep... uh... into a spreadsheet. 
 
-    <pre>
     THIS IS     THIS IS YOUR BROWSER                 THIS IS PIPULATE     THIS IS
       YOU            ____ ____                     (disposable servers)    THIS!
                  ,__/site\____\___. ...which       ,------------------.  ,-------.
@@ -28,7 +26,6 @@ you want to keep... uh... into a spreadsheet.
        5.        '----------------'|     then sends    |    |  '--------3.-----> ?
      SEE THE--->  | to Google Sheet|<-------4.---------'    '------------------> ?
      RESULTS      '----------------'   a response                ...stuff on net''')
-    </pre>
 
 Use Pipulate's "out of the box" capabilities, or expand it by writing
 stand-alone Python functions, then just dropping them into your arsenal of
@@ -357,3 +354,5 @@ instances.
 ## 9\. License
 Pipulate uses the (MIT License as defined by OpenSource.org)[http://opensource.org/licenses/MIT].
 This repository's copy of the license is [here](./LICENSE.md).
+
+[Join the Pipulate Team on Slack](http://goo.gl/forms/nh3WM6bPle)
