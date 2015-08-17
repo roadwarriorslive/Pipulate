@@ -15,17 +15,18 @@ Learn Flask. Learn vim. It works with a bookmarklet from your browser, popping
 up a very minimal user interface when necessary, but generally sends the output
 you want to keep... uh... into a spreadsheet. 
 
-    THIS IS     THIS IS YOUR BROWSER                 THIS IS PIPULATE     THIS IS
-      YOU            ____ ____                     (disposable servers)    THIS!
-                 ,__/site\____\___. ...which       ,------------------.  ,-------.
-       O         |                ||    SENDS      |   ...to the      |  | Debug |
-      /|\---1.-----> bookmarklet ----------2.-------> Pipulate Server--->|Console|
-      ( ) CLICK  | with a website ||     URL and   |   | which checks |  '-------'
-     =====       |   displaying.  ||      context  '---|----|--|--|---'
-       |         |                ||                   |    |  |  '------------> ?
-       5.        '----------------'|     then sends    |    |  '--------3.-----> ?
-     SEE THE--->  | to Google Sheet|<-------4.---------'    '------------------> ?
-     RESULTS      '----------------'   a response                ...stuff on net''')
+    THIS IS       THIS IS YOUR BROWSER                   THIS IS PIPULATE         THIS IS
+      YOU                                              (disposable servers)       AWESOME!
+                       ____ ____                                                           
+                   ,__/site\____\___.  ...which        ,------------------.      ,-------.
+       O           |                ||     SENDS       |   ...to the      |      | Debug |
+      /|\---1.-------> bookmarklet -----------2.--------> Pipulate Server------->|Console|
+      ( ) CLICK    | with a website ||      URL and    |   | which checks |      '-------'
+     =====         |   displaying.  ||       context   '---|----|--|--|---'    
+       |           |                ||                     |    |  |  '----------------> ?
+       5.          '----------------'|      then sends     |    |  '---------3.--------> ?
+     SEE THE------> | to Google Sheet|<--------4.----------'    '----------------------> ?
+     RESULTS        '----------------'    a response                  ...stuff on net''')
 
 Use Pipulate's "out of the box" capabilities, or expand it by writing
 stand-alone Python functions, then just dropping them into your arsenal of
