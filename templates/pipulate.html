@@ -92,7 +92,7 @@
       function stopsignlock() {
         $('#pipulate').css('color', 'red');
         $('#pipulate').prop("disabled", true);
-        $('#piplock').removeClass("pip-angle-circled-right");
+        $('#piplock').removeClass("pip-go");
         $('#piplock').removeClass("pip-lock");
         $('#piplock').addClass("pip-stopsign");
         $('#piplock').css('color', 'red');
@@ -105,14 +105,14 @@
           $('#pipulate').prop("disabled", false);
           $('#pipulate').css('color', 'white');
           $('#piplock').removeClass("pip-attention");
-          $('#piplock').addClass("pip-angle-circled-right");
+          $('#piplock').addClass("pip-go");
           $('#piplock').css('color', 'white');
         }
       }
       function lockbutton() {
         $('#pipulate').css("opacity", .5);
         $('#pipulate').prop("disabled", true);
-        $('#piplock').removeClass("pip-angle-circled-right");
+        $('#piplock').removeClass("pip-go");
         $('#piplock').addClass("pip-lock");
       }
       function unlockbutton() {
@@ -120,7 +120,7 @@
           whitelock();
           $('#pipulate').prop("disabled", false);
           $('#pipulate').fadeTo(0,1);
-          $('#piplock').addClass("pip-angle-circled-right");
+          $('#piplock').addClass("pip-go");
           $('#piplock').removeClass("pip-lock");
           $('#pipulate').css('color', 'white');
         },2000);
@@ -159,13 +159,12 @@
     <div class="pressthis" style="text-align: center"><a class="bookmarklet" href="{{ bookmarklet }}" onclick="return false;" oncontextmenu="if(window.navigator.userAgent.indexOf('WebKit')!=-1||window.navigator.userAgent.indexOf('MSIE')!=-1){jQuery('.pressthis-code').show().find('textarea').focus().select();return false;}"><span>{{ blabel }}</span></a></div>
     <div id="dragdiv"> <img src="./static/foss-seo.png" style="vertical-align: middle;"/><span id="dragspan"> Drag to Boomarks Bar.</span></div>
     <div id="mobileinstructions"><img src="./static/mobile-instructions.png" style="vertical-align: middle;"/></div>
-    <a id="piphelp" class="pip-help-circled" href="./static/help.html"></a>
     <div class="menu">
-      <a class="button pseudo pip-picirclelogo2" target="_blank" href="https://docs.google.com/presentation/d/10lr_d1uyLMOnWsMzbenKiPlFE5-BIt9bxVucw7O4GSI/edit?usp=sharing">Piplosophy</a>
-      <a class="button pseudo pip-github-1" target="_blank" href="https://github.com/miklevin/pipulate/blob/master/README.md">Docs</a>
+      <a class="button pseudo pip-pipulate-icon" target="_blank" href="https://docs.google.com/presentation/d/10lr_d1uyLMOnWsMzbenKiPlFE5-BIt9bxVucw7O4GSI/edit?usp=sharing">Piplosophy</a>
+      <a class="button pseudo pip-github" target="_blank" href="https://github.com/miklevin/pipulate/blob/master/README.md">Docs</a>
       <a class="button pseudo pip-youtube-play" target="_blank" href="https://www.youtube.com/playlist?list=PLy-AlqZFg6G_bo5bH_wLBdxx-TNfB_yXT">Videos</a>
-      <a class="button pseudo pip-mikelevin-logo" target="_blank" href="http://levinux.com">Levinux</a>
-      <a class="button pseudo pip-help-circled-1" href="http://dev.pipulate.com/static/help.html">Help</a>
+      <a class="button pseudo pip-levinux-icon" target="_blank" href="http://levinux.com">Levinux</a>
+      <a class="button pseudo pip-help-circled-2" href="http://dev.pipulate.com/static/help.html">Help</a>
       {% if session and 'loggedin' in session and session['loggedin'] == '1': %}
         <a class="button pip-block" href="{{ logoutlink }}">Logout</a>
       {% elif session %}
@@ -191,7 +190,7 @@
             <div>
             <select class="select pipmenu" id="options" name="options">{{ select|safe }}</select>
             <button id="pipulate" class="button" type="submit">
-              Pipulate &nbsp;<i id="piplock" class="pip-angle-circled-right"></i>
+              Pipulate &nbsp;<i id="piplock" class="pip-go"></i>
             </button>
             </div>
             {% if request.method == 'POST': %}
@@ -338,7 +337,7 @@
           </table>
           </div>
           <button id="pipulate" class="button" type="submit">
-            Pipulate &nbsp;<i id="piplock" class="pip-angle-circled-right"></i>
+            Pipulate &nbsp;<i id="piplock" class="pip-go"></i>
           </button>
           </form>
       {% elif configform: %}

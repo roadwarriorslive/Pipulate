@@ -397,13 +397,6 @@ ul
   height: auto;
   margin: .1em 0;
 }
-#piphelp {
-  position:absolute;
-  right: 31px;
-  margin-top:14px;
-  font-size: 1.2em;
-  color: black;
-}
 @media (min-width: 360px) and (max-width: 500px) {
   #mobileinstructions {
     display: block;
@@ -423,9 +416,6 @@ ul
   }
 }
 @media (min-width: 960px) {
-  #piphelp{
-    display: none;
-  }
   #content {
     width: 960px;
   }
