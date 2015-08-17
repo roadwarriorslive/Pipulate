@@ -3,22 +3,37 @@
 [Join the Pipulate Team on Slack](http://goo.gl/forms/nh3WM6bPle)
 <img src="http://mikelevinseo.com/images/pipulate-interface.png" alt="FOSS SEO Software"/>
 
-Pipulate leverages the collaborative and constantly improving Google
-Spreadsheets for its database, making the servers it runs on disposable
-nodes&#151;and a good example app of the tiny-server movement. Want more
-capacity? Just throw more miniscule servers behind a load-balancer. Pipulate
-requires less than 100MB for OS, Python, app and its dependencies, and 256MB
-RAM&#151;offering the perfect route to either scaling or very personal use.
-This means you can use bottom-tier nearly-free cloud instances to host if you
-want, or better-yet: practice running your own servers with Levinux, Raspberry
-Pi's, CuBoxes and the like. It's also a good example of using using Python's
-lightweight Flask web framework with the same code you're ALSO using from the
-command-line and in cron scheduling.
+Welcome to Pipulate, a free and open source SEO tool that outputs SEO
+investigations like site crawls, position checks, and API-hitting lookup-jobs
+directly into Google Docs. Also supports scheduling. You can try the tool on
+http://pipulate.com, but it's designed to run directly on your own server
+(starting with a 20MB download), but then can be moved off to the cloud,
+Raspberry Pi or whatever.  The servers are tiny and disposable -- easily
+instantiated, coming in at around 100 MB software footprint including OS,
+programming language, webserver, application and all its dependences. This
+little package is also designed to help you learn. Learn Linux. Learn Python.
+Learn Flask. Learn vim. It works with a bookmarklet from your browser, popping
+up a very minimal user interface when necessary, but generally sends the output
+you want to keep... uh... into a spreadsheet. 
+
+    <pre>
+    THIS IS     THIS IS YOUR BROWSER                 THIS IS PIPULATE     THIS IS
+      YOU            ____ ____                     (disposable servers)    THIS!
+                 ,__/site\____\___. ...which       ,------------------.  ,-------.
+       O         |                ||    SENDS      |   ...to the      |  | Debug |
+      /|\---1.-----> bookmarklet ----------2.-------> Pipulate Server--->|Console|
+      ( ) CLICK  | with a website ||     URL and   |   | which checks |  '-------'
+     =====       |   displaying.  ||      context  '---|----|--|--|---'
+       |         |                ||                   |    |  |  '------------> ?
+       5.        '----------------'|     then sends    |    |  '--------3.-----> ?
+     SEE THE--->  | to Google Sheet|<-------4.---------'    '------------------> ?
+     RESULTS      '----------------'   a response                ...stuff on net''')
+    </pre>
 
 Use Pipulate's "out of the box" capabilities, or expand it by writing
 stand-alone Python functions, then just dropping them into your arsenal of
 growing SEO and Social Media secret weapons that you may or may not share back
-to the Github/SEO/Social Media communities.  All your custom functions become
+to the Github/SEO/Social Media communities. All your custom functions become
 instantly accessible to you in Google Docs, alleviating the tedium of finding
 your old scripts or wrangling custom home-built or expensive data-monitoring
 systems. It all just natively works in Google Sheets&#151;effectively slapping
