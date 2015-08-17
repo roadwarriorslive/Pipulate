@@ -211,10 +211,16 @@ def pins(url):
 def difficulty(keyword):
   if 'semrush' in globs.config:
     apikey = globs.config['semrush']
-    call = 'http://api.semrush.com/?type=phrase_kdi&export_columns=Kd&phrase=%s&key=%s&database=us' % (keyword, apikey)
-    respobj = requests.get(call, timeout=5)
-    rtext = respobj.text
-    return rtext.splitlines()[1]
+    try:
+      call = 'http://api.semrush.com/?type=phrase_kdi&export_columns=Kd&phrase=%s&key=%s&database=us' % (keyword, apikey)
+      respobj = requests.get(call, timeout=5)
+      rtext = respobj.text
+    except:
+      return "Double-check your semrush entry in the Config tab."
+    try:
+      return rtext.splitlines()[1]
+    except:
+      return "N/A"
   else:
     return "In the Config tab, put semrush under name and the api key under value to proceed."
 
