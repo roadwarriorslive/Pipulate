@@ -209,13 +209,12 @@ def pins(url):
 # just works stand-alone elsewhere, simply paste it here to extend Pipulate.
 
 def d2(keyword):
-  mycol = globs.row1.index('d2') + 1
-  chunks = [chunk for chunk in range(2, globs.numrows, 50)]
-  return chunks
-
-  return globs.sheet.col_values(mycol)
   if 'keyword' in globs.row1:
-    return globs.row1.index('keyword')
+    letter = globs.letter[globs.row1.index('keyword') + 1]
+    chunks = ['%s%s:%s%s' % (letter, chunk, letter, chunk+49) for chunk in range(2, globs.numrows, 50)]
+    return chunks
+  else:
+    return "You must have a column named keyword."
   # raise StopIteration()
 
 def difficulty(keyword):
