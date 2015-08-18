@@ -214,6 +214,10 @@ def d2(keyword):
     chunks = ['%s%s:%s%s' % (letter, chunk, letter, chunk+49) for chunk in range(2, globs.numrows, 50)]
   else:
     return "You must have a column named keyword."
+  lastchunk = chunks[-1].split(":")
+  lastchunk[1] = "%s%s" % (letter, globs.numrows)
+  chunks[-1] = "%s:%s" % (lastchunk[0], lastchunk[1])
+  return chunks
   for chunk in chunks:
     out(chunk)
     CellList = globs.sheet.range(chunk)
