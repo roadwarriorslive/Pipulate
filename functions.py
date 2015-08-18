@@ -251,7 +251,6 @@ def competition(keyword):
       apair = scorepair.split(';')
       if len(apair) > 1:
         scoredict[str(apair[0])] = str(apair[1])
-    out(scoredict)
     for cindex, acell in enumerate(CellList1):
       out((cindex, acell, acell.value, scoredict[acell.value]))
       if scoredict[acell.value]:

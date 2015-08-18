@@ -573,7 +573,7 @@ def Pipulate(dockey='', token=''):
           pass
       if globs.WEB: yield "Checking Tabs...", "Then we check for tabs...", "", ""
       # Documentation Tab
-      headers = ['FunctionName', 'Category', 'RequiredColumns', 'Description', 'MoreInfo']
+      headers = ['Function', 'Category', 'Requirements', 'Description', 'More']
       InitTab(gdoc, 'Docs', headers, documentation())
 
       # Config Tab
@@ -581,6 +581,8 @@ def Pipulate(dockey='', token=''):
       config = []
       config.append(['RepeatJobEvery','day'])
       config.append(['MaxRowsPerHour','3'])
+      config.append(['SEMRush','Paste SEMRush API key here.'])
+      config.append(['MOZ','Paste Moz API key here.'])
       if globs.WEB: yield lock
       try:
         InitTab(gdoc, 'Config', headers, config)
