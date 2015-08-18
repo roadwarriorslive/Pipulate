@@ -209,6 +209,10 @@ def pins(url):
 # just works stand-alone elsewhere, simply paste it here to extend Pipulate.
 
 def d2(keyword):
+  try:
+    apikey = globs.config['semrush']
+  except:
+    return "In the Config tab, put semrush under name and the api key under value to proceed."
   if 'keyword' in globs.row1:
     kwcol = globs.letter[globs.row1.index('keyword') + 1]
     chunks = ['%s%s:%s%s' % (kwcol, chunk, kwcol, chunk+49) for chunk in range(2, globs.numrows, 50)]
@@ -221,13 +225,26 @@ def d2(keyword):
   for chunk in chunks:
     CellList1 = globs.sheet.range(chunk)
     CellList2 = globs.sheet.range(chunk.replace(kwcol, mycol))
+    kwlist = []
     for cindex, acell in enumerate(CellList1):
       out(cindex)
       asciival = acell.value.encode('ascii', errors='ignore')
-      CellList2[cindex].value = asciival
-      out(asciival)
+      kwlist.append(asciival)
+      #CellList2[cindex].value = asciival
     out(chunk)
-    globs.sheet.update_cells(CellList2)
+    out(kwlist)
+    kwstring = ';'.join(kwlist)
+    endpoint = "http://api.semrush.com/"
+    params = {
+      'type': 'phrase_kdi',
+      'export_columns': 'Ph,Kd',
+      'database': 'us',
+      'key': apikey,
+      'phrase': kwstring
+      } 
+    respobj = requests.get(endpoint, params=params)
+    out(respobj.text)
+    #globs.sheet.update_cells(CellList2)
     time.sleep(5)
   globs.STOP = True
   # call = 'http://api.semrush.com/?type=phrase_kdi&export_columns=Ph,Kd&phrase=%s&key=%s&database=us' % (keyword, apikey)

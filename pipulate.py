@@ -1128,7 +1128,6 @@ def Pipulate(dockey='', token=''):
                       Stop()
                     out("Scrape End", "4", '-')
             out("DONE PROCESSING ROW %s." % rowdex, '3', '-')
-
             out("Finished processing row. Updating spreadsheet...")
             newrow = ['<Error>Nothing returned</Error>' if x==None else x for x in newrow]
             if len(str(newrow)) > globs.ROWMAX:
@@ -1163,13 +1162,11 @@ def Pipulate(dockey='', token=''):
                 if globs.WEB: yield badtuple
                 Stop()
             if globs.WEB: yield unlock
-
           elif onerow.count('') == len(onerow):
             blankrows += 1
             if blankrows > 1:
               break
       out("Done question Mark Replacement.", '2', '-')
-
     else: #No session object found
       if globs.WEB: yield 'Please Login to Google', "", "", ""
     if globs.WEB:
