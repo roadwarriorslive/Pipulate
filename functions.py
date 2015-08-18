@@ -222,7 +222,8 @@ def d2(keyword):
     CellList1 = globs.sheet.range(chunk)
     for cindex, acell in enumerate(CellList1):
       out(cindex)
-      out(acell.value)
+      asciival = acell.value.encode('ascii', errors='ignore')
+      out(asciival)
     CellList2 = globs.sheet.range(chunk.replace(kwcol, mycol))
     out(chunk)
     time.sleep(2)
