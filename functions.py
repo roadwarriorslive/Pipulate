@@ -243,7 +243,14 @@ def d2(keyword):
       'phrase': kwstring
       } 
     respobj = requests.get(endpoint, params=params)
-    out(respobj.text)
+    resplist = respobj.text.splitlines()
+    scoredict = {}
+    apair = []
+    for scorepair in resplist:
+      apair = scorepair.split(';')
+      if len(apair) > 1:
+        scoredict[apair[0]] = apair[1]
+    out(scoredict)
     #globs.sheet.update_cells(CellList2)
     time.sleep(5)
   globs.STOP = True
