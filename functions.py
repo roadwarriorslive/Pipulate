@@ -227,11 +227,8 @@ def d2(keyword):
     CellList2 = globs.sheet.range(chunk.replace(kwcol, mycol))
     kwlist = []
     for cindex, acell in enumerate(CellList1):
-      out(cindex)
       asciival = acell.value.encode('ascii', errors='ignore')
       kwlist.append(asciival)
-    out(chunk)
-    out(kwlist)
     kwstring = ';'.join(kwlist)
     endpoint = "http://api.semrush.com/"
     params = {
@@ -241,8 +238,11 @@ def d2(keyword):
       'key': apikey,
       'phrase': kwstring
       } 
-    out("Hitting API...")
-    respobj = requests.get(endpoint, params=params, timeout=5)
+    out("Hitting SEMRush API...")
+    try:
+      respobj = requests.get(endpoint, params=params, timeout=5)
+    except:
+      Stop()
     resplist = respobj.text.splitlines()
     scoredict = {}
     apair = []
