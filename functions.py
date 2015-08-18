@@ -242,16 +242,21 @@ def d2(keyword):
       'key': apikey,
       'phrase': kwstring
       } 
-    respobj = requests.get(endpoint, params=params)
+    out("Hitting API...")
+    respobj = requests.get(endpoint, params=params, timeout=5)
     resplist = respobj.text.splitlines()
     scoredict = {}
     apair = []
+    out("Before")
     for scorepair in resplist:
       apair = scorepair.split(';')
       if len(apair) > 1:
-        scoredict[apair[0]] = apair[1]
-    out(scoredict)
-    #globs.sheet.update_cells(CellList2)
+        scoredict[str(apair[0])] = str(apair[1])
+    out("After")
+    for cindex, acell in enumerate(CellList1):
+      out(acell.value)
+      CellList2[cindex].value = scoredict[acell.value]
+    globs.sheet.update_cells(CellList2)
     time.sleep(5)
   globs.STOP = True
   # call = 'http://api.semrush.com/?type=phrase_kdi&export_columns=Ph,Kd&phrase=%s&key=%s&database=us' % (keyword, apikey)
