@@ -230,7 +230,6 @@ def d2(keyword):
       out(cindex)
       asciival = acell.value.encode('ascii', errors='ignore')
       kwlist.append(asciival)
-      #CellList2[cindex].value = asciival
     out(chunk)
     out(kwlist)
     kwstring = ';'.join(kwlist)
@@ -254,12 +253,13 @@ def d2(keyword):
         scoredict[str(apair[0])] = str(apair[1])
     out("After")
     for cindex, acell in enumerate(CellList1):
-      out(acell.value)
-      CellList2[cindex].value = scoredict[acell.value]
+      try:
+        CellList2[cindex].value = scoredict[acell.value]
+      except:
+        pass
     globs.sheet.update_cells(CellList2)
     time.sleep(5)
   globs.STOP = True
-  # call = 'http://api.semrush.com/?type=phrase_kdi&export_columns=Ph,Kd&phrase=%s&key=%s&database=us' % (keyword, apikey)
 
 def difficulty(keyword):
   if 'semrush' in globs.config:
