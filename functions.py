@@ -210,15 +210,18 @@ def pins(url):
 
 def d2(keyword):
   if 'keyword' in globs.row1:
-    letter = globs.letter[globs.row1.index('keyword') + 1]
-    chunks = ['%s%s:%s%s' % (letter, chunk, letter, chunk+49) for chunk in range(2, globs.numrows, 50)]
+    kwcol = globs.letter[globs.row1.index('keyword') + 1]
+    chunks = ['%s%s:%s%s' % (kwcol, chunk, kwcol, chunk+49) for chunk in range(2, globs.numrows, 50)]
   else:
     return "You must have a column named keyword."
+  mycol = globs.letter[globs.row1.index('d2') + 1]
   lastchunk = chunks[-1].split(":")
-  lastchunk[1] = "%s%s" % (letter, globs.numrows)
+  lastchunk[1] = "%s%s" % (kwcol, globs.numrows)
   chunks[-1] = "%s:%s" % (lastchunk[0], lastchunk[1])
   for chunk in chunks:
-    CellList = globs.sheet.range(chunk)
+    CellList1 = globs.sheet.range(chunk)
+    CellList2 = globs.sheet.range(chunk.replace(kwcol, mycol))
+    out(chunk)
   return "Did it!"
   # raise StopIteration()
 
