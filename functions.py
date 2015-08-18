@@ -208,6 +208,11 @@ def pins(url):
 # And now what you've all been waiting for! If you write a Python function that
 # just works stand-alone elsewhere, simply paste it here to extend Pipulate.
 
+def d2(keyword):
+  if 'keyword' in globs.row1:
+    return globs.row1.index('keyword')
+  #raise StopIteration()
+
 def difficulty(keyword):
   if 'semrush' in globs.config:
     apikey = globs.config['semrush']
