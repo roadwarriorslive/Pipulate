@@ -210,9 +210,9 @@ def pins(url):
 
 def d2(keyword):
   mycol = globs.row1.index('d2') + 1
-  mycounters = [x for x in range(0, globs.numrows, 50)]
-  return mycounters
-  return (rows, mycol)
+  chunks = [chunk for chunk in range(2, globs.numrows, 50)]
+  return chunks
+
   return globs.sheet.col_values(mycol)
   if 'keyword' in globs.row1:
     return globs.row1.index('keyword')
