@@ -608,11 +608,16 @@ def Pipulate(dockey='', token=''):
         if globs.WEB: yield badtuple
         Stop()
       if globs.WEB: yield unlock
-      
-      for sheet in gdoc.worksheets():
-        out(sheet.title)
 
-      gotcha(gdoc.worksheets())
+      tabs = None
+      try:
+        tabs = [sheet.title for sheet in gdoc.worksheets()]
+      except:
+        pass
+      if tabs:
+        out("These tabs are present: %s" % tabs)
+        if globs.WEB:
+          yield "Tabs successfully found/created!", "Tabs Created", tabs, ""
 
       try:
         out("Reading Config tab into globals.")
