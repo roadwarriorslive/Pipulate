@@ -217,9 +217,7 @@ def d2(keyword):
   lastchunk = chunks[-1].split(":")
   lastchunk[1] = "%s%s" % (letter, globs.numrows)
   chunks[-1] = "%s:%s" % (lastchunk[0], lastchunk[1])
-  return chunks
   for chunk in chunks:
-    out(chunk)
     CellList = globs.sheet.range(chunk)
   return "Did it!"
   # raise StopIteration()
