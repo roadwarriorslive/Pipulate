@@ -251,11 +251,13 @@ def competition(keyword):
       apair = scorepair.split(';')
       if len(apair) > 1:
         scoredict[str(apair[0])] = str(apair[1])
+    out(scoredict)
     for cindex, acell in enumerate(CellList1):
-      try:
+      out((cindex, acell, acell.value, scoredict[acell.value]))
+      if scoredict[acell.value]:
         CellList2[cindex].value = scoredict[acell.value]
-      except:
-        CellList2[cindex].value = 'NA'
+      else:
+        CellList2[cindex].value = 'N/A'
     globs.sheet.update_cells(CellList2)
     time.sleep(5)
   globs.STOP = True
