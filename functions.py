@@ -220,16 +220,17 @@ def d2(keyword):
   chunks[-1] = "%s:%s" % (lastchunk[0], lastchunk[1])
   for chunk in chunks:
     CellList1 = globs.sheet.range(chunk)
+    CellList2 = globs.sheet.range(chunk.replace(kwcol, mycol))
     for cindex, acell in enumerate(CellList1):
       out(cindex)
       asciival = acell.value.encode('ascii', errors='ignore')
+      CellList2[cindex].value = asciival
       out(asciival)
-    CellList2 = globs.sheet.range(chunk.replace(kwcol, mycol))
     out(chunk)
-    time.sleep(2)
+    globs.sheet.update_cells(CellList2)
+    time.sleep(5)
   return "Did it!"
   # raise StopIteration()
-  # s = s.encode('ascii',errors='ignore')
 
 def difficulty(keyword):
   if 'semrush' in globs.config:
