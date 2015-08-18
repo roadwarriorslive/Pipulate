@@ -208,17 +208,18 @@ def pins(url):
 # And now what you've all been waiting for! If you write a Python function that
 # just works stand-alone elsewhere, simply paste it here to extend Pipulate.
 
-def d2(keyword):
+def competition(keyword):
+  pp = 50
   try:
     apikey = globs.config['semrush']
   except:
     return "In the Config tab, put semrush under name and the api key under value to proceed."
   if 'keyword' in globs.row1:
     kwcol = globs.letter[globs.row1.index('keyword') + 1]
-    chunks = ['%s%s:%s%s' % (kwcol, chunk, kwcol, chunk+49) for chunk in range(2, globs.numrows, 50)]
+    chunks = ['%s%s:%s%s' % (kwcol, chunk, kwcol, chunk+pp-1) for chunk in range(2, globs.numrows, pp)]
   else:
     return "You must have a column named keyword."
-  mycol = globs.letter[globs.row1.index('d2') + 1]
+  mycol = globs.letter[globs.row1.index('competition') + 1]
   lastchunk = chunks[-1].split(":")
   lastchunk[1] = "%s%s" % (kwcol, globs.numrows)
   chunks[-1] = "%s:%s" % (lastchunk[0], lastchunk[1])
@@ -246,17 +247,15 @@ def d2(keyword):
     resplist = respobj.text.splitlines()
     scoredict = {}
     apair = []
-    out("Before")
     for scorepair in resplist:
       apair = scorepair.split(';')
       if len(apair) > 1:
         scoredict[str(apair[0])] = str(apair[1])
-    out("After")
     for cindex, acell in enumerate(CellList1):
       try:
         CellList2[cindex].value = scoredict[acell.value]
       except:
-        pass
+        CellList2[cindex].value = 'NA'
     globs.sheet.update_cells(CellList2)
     time.sleep(5)
   globs.STOP = True

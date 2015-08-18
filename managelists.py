@@ -8,6 +8,7 @@ def documentation():
   s.append(['Crawl',                'Crawl',     'Source',                    'Get all links on source.', ''])
   s.append(['Description',          'Crawl',     'Url',                       'Return meta description.', ''])
   s.append(['Difficulty',           'Keyword',   'Keyword',                   'Return SEMRush keyword difficulty.', ''])
+  s.append(['Competition',          'Keyword',   'Keyword',                   'Return SEMRush keyword difficulty, batched.', 'Processes 50 at a time. Only first question mark required.'])
   s.append(['Fb',                   'Facebook',  'Url',                       'Return Facebook likes, shares, clicks and comments as JSON.', ''])
   s.append(['Followers',            'Twitter',   'Url',                       'Return Twitter followers count.', ''])
   s.append(['Following',            'Twitter',   'Url',                       'Return Twitter following count.', ''])
