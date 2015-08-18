@@ -1006,7 +1006,7 @@ def Pipulate(dockey='', token=''):
                   collabel = globs.row1[coldex]
                   if collabel in transfuncs.keys():
                     stop = True
-                    for x in range(4):
+                    for x in range(10):
                       #   __                  _   _
                       #  / _|_   _ _ __   ___| |_(_) ___  _ __  ___
                       # | |_| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
@@ -1038,12 +1038,12 @@ def Pipulate(dockey='', token=''):
                         break
                       except Exception as e:
                         print traceback.format_exc()
-                        time.sleep(2)
-                      if stop == True:
-                        out("Function End (Failed)", "4", '-')
-                        if globs.WEB:
-                          yield "spinerr", "", "", ""
-                        Stop()
+                        time.sleep(10)
+                    if stop == True:
+                      out("Function End (Failed)", "4", '-')
+                      if globs.WEB:
+                        yield "spinerr", "", "", ""
+                      Stop()
                     out("Function End", "4", '-')
                   elif collabel in transscrape.keys():
                     stop = True
@@ -1123,9 +1123,9 @@ def Pipulate(dockey='', token=''):
                         out("Scrape problem on row %s. Retrying." % rowdexstring)
                         time.sleep(2)
                         if globs.WEB: yield dontgetfrustrated(x)
-                      if stop == True:
-                        out("Scrape End (Failed)", "4", '-')
-                        Stop()
+                    if stop == True:
+                      out("Scrape End (Failed)", "4", '-')
+                      Stop()
                     out("Scrape End", "4", '-')
             out("DONE PROCESSING ROW %s." % rowdex, '3', '-')
 
