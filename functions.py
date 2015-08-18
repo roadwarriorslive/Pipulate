@@ -212,9 +212,12 @@ def d2(keyword):
   if 'keyword' in globs.row1:
     letter = globs.letter[globs.row1.index('keyword') + 1]
     chunks = ['%s%s:%s%s' % (letter, chunk, letter, chunk+49) for chunk in range(2, globs.numrows, 50)]
-    return chunks
   else:
     return "You must have a column named keyword."
+  for chunk in chunks:
+    out(chunk)
+    CellList = globs.sheet.range(chunk)
+  return "Did it!"
   # raise StopIteration()
 
 def difficulty(keyword):
