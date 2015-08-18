@@ -9,7 +9,8 @@
 #                        But to do so, use a globs prefix
 #                         It's the price you have to pay
 
-DOCID =     None
+STOP =      False    # The Emergency Break so functions cans top Pipulate.
+DOCID =     None     # The Google Doc key for use anywhere in system
 WEB =       False    # Controls whether yields show (webpipulate vs. loopipulate)
 PCOM =      True     # Turns True if pipulate in hostname. Tracks usage.
 DBUG =      True     # Turns on and off verbose console output.

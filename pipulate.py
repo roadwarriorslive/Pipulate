@@ -1130,7 +1130,7 @@ def Pipulate(dockey='', token=''):
             out("DONE PROCESSING ROW %s." % rowdex, '3', '-')
 
             out("Finished processing row. Updating spreadsheet...")
-            newrow = ['' if x==None else x for x in newrow]
+            newrow = ['<Error>Nothing returned</Error>' if x==None else x for x in newrow]
             if len(str(newrow)) > globs.ROWMAX:
               if globs.WEB: yield "", "", "['TOO BIG']", ""
             else:
@@ -1140,22 +1140,28 @@ def Pipulate(dockey='', token=''):
                 if globs.WEB: yield "", "", newrow, ""
             for index, onecell in enumerate(CellList):
               onecell.value = newrow[index]
-            result = None
-
-            stop = True
-            for x in range(10):
-              if globs.WEB: yield lock
-              try:
-                result = globs.sheet.update_cells(CellList)
-                stop = False
-                break
-              except:
-                out("Writing row to spreadsheet, retry %s of %s" %(x, 10))
-                time.sleep(5)
-                if globs.WEB: yield dontgetfrustrated(x)
-            if stop:
-              if globs.WEB: yield badtuple
+            if globs.STOP:
+              if globs.WEB:
+                yme = "Pipulate deliberately stopped. Feels like a success. %s" % globs.PBNJMAN
+                yield yme, "Pipulation Stopped", "", ""
+                yield "spinoff", "", "", ""
               Stop()
+            else:
+              result = None
+              stop = True
+              for x in range(10):
+                if globs.WEB: yield lock
+                try:
+                  result = globs.sheet.update_cells(CellList)
+                  stop = False
+                  break
+                except:
+                  out("Writing row to spreadsheet, retry %s of %s" %(x, 10))
+                  time.sleep(5)
+                  if globs.WEB: yield dontgetfrustrated(x)
+              if stop:
+                if globs.WEB: yield badtuple
+                Stop()
             if globs.WEB: yield unlock
 
           elif onerow.count('') == len(onerow):

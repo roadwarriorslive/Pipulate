@@ -229,8 +229,8 @@ def d2(keyword):
     out(chunk)
     globs.sheet.update_cells(CellList2)
     time.sleep(5)
-  return "Did it!"
-  # raise StopIteration()
+  globs.STOP = True
+  # call = 'http://api.semrush.com/?type=phrase_kdi&export_columns=Ph,Kd&phrase=%s&key=%s&database=us' % (keyword, apikey)
 
 def difficulty(keyword):
   if 'semrush' in globs.config:
