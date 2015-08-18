@@ -397,8 +397,9 @@ def Pipulate(dockey='', token=''):
   unlock = ("", "", "", "-")
   out("PIPULATION BEGINNING", "1")
   try:
-    if globs.WEB: yield "Beginning to Pipulate...", "", "", ""
-    if globs.WEB: yield "spinon", "", "", ""
+    if globs.WEB:
+      yield "Beginning to Pipulate", "", "", ""
+      yield "spinon", "", "", ""
     out("Reading in functions.")
     funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
     transfuncs = ziplckey(funcs, funcs) #Keep translation table
@@ -439,6 +440,7 @@ def Pipulate(dockey='', token=''):
           if globs.WEB: yield lock
           try:
             gdoc = gsp.open_by_url(globs.PIPURL)
+            globs.SHEET = gdoc.title
             stop = False
             break
           except gspread.httpsession.HTTPError, e:
@@ -479,7 +481,9 @@ def Pipulate(dockey='', token=''):
             yield badtuple
           Stop() # Consider adding refresh_token logic for users (versus the scheduler)
       if globs.WEB: yield unlock
-      out("Google Spreadsheet successfully opened.")
+      out("Google Spreadsheet %s successfully opened." % globs.SHEET)
+      yme = "%s Sheet Opened!" % globs.SHEET
+      yield yme, "Spreadsheet Opened", "", ""
 
       if globs.PIPMODE == 'learn':
         out("<script>alert('hit');</script>")
@@ -567,7 +571,7 @@ def Pipulate(dockey='', token=''):
           # yme = "Action for %s not defined." % globs.PIPMODE
           # if globs.WEB: yield yme, "Action not defined.", "", ""
           pass
-      if globs.WEB: yield "Checking Tabs.", "Then we check for tabs...", "", ""
+      if globs.WEB: yield "Checking Tabs...", "Then we check for tabs...", "", ""
       # Documentation Tab
       headers = ['FunctionName', 'Category', 'RequiredColumns', 'Description', 'MoreInfo']
       InitTab(gdoc, 'Docs', headers, documentation())
@@ -604,6 +608,11 @@ def Pipulate(dockey='', token=''):
         if globs.WEB: yield badtuple
         Stop()
       if globs.WEB: yield unlock
+      
+      for sheet in gdoc.worksheets():
+        out(sheet.title)
+
+      gotcha(gdoc.worksheets())
 
       try:
         out("Reading Config tab into globals.")
@@ -612,7 +621,9 @@ def Pipulate(dockey='', token=''):
         out("Copying Config tag to globals failed.")
       else:
         out("Config tab copied to globals.")
-
+      if globs.WEB:
+        yme = "Counting rows in %s sheet..." % globs.SHEET
+        yield yme, "Counting rows", '', ''
       out("Counting rows in Pipulate tab.")
       stop = True
       for x in range(5):
