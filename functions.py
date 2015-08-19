@@ -458,7 +458,10 @@ def likes(url, fb=''):
       fb = json.loads(fb)
     except:
       return "Error"
-  return walkdict(fb, "like_count")
+  if 'data' in fb:
+    return walkdict(fb['data'][0], "like_count")
+  else:
+    return "Error"
 
 def comments(url, fb=''):
   """Return the number of times a URL was commented on in Facebook."""
