@@ -210,14 +210,16 @@ def pins(url):
 
 def mozsig(expires):
   import hmac, base64
-  import time, urllib
+  from hmac import new
+  from urllib import quote_plus
   from hashlib import sha1
+  from base64 import standard_b64encode
   accessID = globs.config['mozid']
   secretKey = globs.config['mozkey']
   stringToSign = "%s\n%s" % (accessID, expires)
-  binarySignature = hmac.new(secretKey, stringToSign, sha1).digest()
-  textSignature = base64.standard_b64encode(binarySignature)
-  urlSafeSignature = urllib.quote_plus(textSignature)
+  binarySignature = new(secretKey, stringToSign, sha1).digest()
+  textSignature = standard_b64encode(binarySignature)
+  urlSafeSignature = quote_plus(textSignature)
   return urlSafeSignature
 
 def pageauthority(url):
@@ -229,9 +231,9 @@ def pageauthority(url):
   signature = mozsig(expires)
   bitmask = "34359738368" # Page Authority
   # bitmask = "68719476736" # Domain Authority
-  endpoint =  "http://lsapi.seomoz.com/linkscape/url-metrics/"
-  apicall = "%s%s?Cols=%s&AccessID=%s&Expires=%s&Signature=%s" % (endpoint, url, bitmask, accessID, expires, signature)
-  return apicall
+  endpoint =  "http://lsapi.seomoz.com/linkscape/url-metrics/%s?" % (url)
+  parameters = "Cols=%s&AccessID=%s&Expires=%s&Signature=%s" % (bitmask, accessID, expires, signature)
+  return jsonapi(endpoint, parameters, "upa")
 
 def rushdifficulty(keyword):
   pp = 50
