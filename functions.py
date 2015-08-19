@@ -222,18 +222,22 @@ def mozsig(expires):
   urlSafeSignature = quote_plus(textSignature)
   return urlSafeSignature
 
-def pageauthority(url):
+def mozcall(url, bitmask, label):
   from time import time
   from urllib import quote_plus
   url = quote_plus(url)
   accessID = globs.config['mozid']
   expires = int(time()) + 3000
   signature = mozsig(expires)
-  bitmask = "34359738368" # Page Authority
-  # bitmask = "68719476736" # Domain Authority
   endpoint =  "http://lsapi.seomoz.com/linkscape/url-metrics/%s?" % (url)
   parameters = "Cols=%s&AccessID=%s&Expires=%s&Signature=%s" % (bitmask, accessID, expires, signature)
-  return jsonapi(endpoint, parameters, "upa")
+  return jsonapi(endpoint, parameters, label)
+
+def pageauthority(url):
+  return mozcall(url, "34359738368", "upa")
+
+def domainauthority(url):
+  return mozcall(url, "68719476736", "pda")
 
 def rushdifficulty(keyword):
   pp = 50
