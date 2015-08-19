@@ -429,12 +429,8 @@ def plusses(url):
 def fb(url):
   """Return Facebook likes, shares, clicks and comment counts for a given URL."""
   thecall = "https://graph.facebook.com/fql?q=SELECT+like_count,total_count,share_count,click_count,comment_count+FROM+link_stat+WHERE+url=%22"+url+"%22"
-  try:
-    respobj = requests.get(thecall, timeout=5)
-    adict = respobj.json()
-    return json.dumps(adict['data'][0])
-  except:
-    return None
+  jobj = requests.get(thecall).json()
+  return json.dumps(jobj)
 
 def shares(url, fb=''):
   """Return the number of times a given URL was shared in Facebook."""
