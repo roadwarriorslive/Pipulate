@@ -208,6 +208,31 @@ def pins(url):
 # And now what you've all been waiting for! If you write a Python function that
 # just works stand-alone elsewhere, simply paste it here to extend Pipulate.
 
+def mozsig(expires):
+  import hmac, base64
+  import time, urllib
+  from hashlib import sha1
+  accessID = globs.config['mozid']
+  secretKey = globs.config['mozkey']
+  stringToSign = "%s\n%s" % (accessID, expires)
+  binarySignature = hmac.new(secretKey, stringToSign, sha1).digest()
+  textSignature = base64.standard_b64encode(binarySignature)
+  urlSafeSignature = urllib.quote_plus(textSignature)
+  return urlSafeSignature
+
+def pageauthority(url):
+  from time import time
+  from urllib import quote_plus
+  url = quote_plus(url)
+  accessID = globs.config['mozid']
+  expires = int(time()) + 3000
+  signature = mozsig(expires)
+  bitmask = "34359738368" # Page Authority
+  # bitmask = "68719476736" # Domain Authority
+  endpoint =  "http://lsapi.seomoz.com/linkscape/url-metrics/"
+  apicall = "%s%s?Cols=%s&AccessID=%s&Expires=%s&Signature=%s" % (endpoint, url, bitmask, accessID, expires, signature)
+  return apicall
+
 def rushdifficulty(keyword):
   pp = 50
   try:

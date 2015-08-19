@@ -586,7 +586,8 @@ def Pipulate(dockey='', token=''):
       config.append(['RepeatJobEvery','day'])
       config.append(['MaxRowsPerHour','3'])
       config.append(['SEMRush','Paste SEMRush API key here.'])
-      config.append(['MOZ','Paste Moz API key here.'])
+      config.append(['MozID','Paste Moz ID here.'])
+      config.append(['MozKey','Paste Moz Secret Key here.'])
       if globs.WEB: yield lock
       try:
         InitTab(gdoc, 'Config', headers, config)
