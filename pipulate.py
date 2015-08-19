@@ -206,6 +206,7 @@ def main():                                                         # of entry "
         try:
           gdoc = gsp.open(globs.SHEET)
           globs.DOCID = gdoc.id
+          globs.SHEET = gdoc.title
           if gdoc.sheet1.row_values(1)==[] and gdoc.sheet1.row_values(2) == []:
             sname = 'Connected to %s Sheet' % globs.SHEET
             pipstate = [sname, 'First 2 rows empty (good).', 'Perform Crawl or Setup.', 'This is JSON data.', 'Watch it flow.', 'Schedule Jobs', 'Read the Docs.', 'Crack it open.']
@@ -220,6 +221,7 @@ def main():                                                         # of entry "
       elif needsPipulate and 'access_token' not in request.args:
         out("EXITING MAIN FUNCTION RENDER INDOCTRINATE", "0", '-')
         return render_template('pipulate.html', form=form, select=None)
+  globs.DOCLINK = '<a href="%s/d/%s/edit#gid=0" target="_blank">%s</a>' % (globs.SHEETS, globs.DOCID, globs.SHEET)
   stext = ''
   if request.method == 'POST':
     #  ____  _                              _ 
@@ -311,7 +313,6 @@ def main():                                                         # of entry "
     flash('You can then find your keywords under the Harvest tab.')
   elif pipstate and session:
     form.magicbox.data = pipstate
-    doclink = '%s/d/%s/edit#gid=0' % (globs.SHEETS, globs.DOCID)
     session.pop('_flashes', None)
     flash("Welcome to Pipulate, an SEO tool that outputs jobs into Google Docs.")
     flash('You are about to perform changes to your Google Sheet named %s.' % globs.SHEET)
@@ -319,7 +320,7 @@ def main():                                                         # of entry "
     flash("If the first 2 rows are empty, you're good to perform a site crawl or run a setup.")
     flash('If it\'s not empty, you can choose "Clear Sheet 1" to blank it in preparation.')
     flash('Pipulate lets you see the <a href="https://en.wikipedia.org/wiki/JSON">JSON data</a> flying around behind the scenes.')
-    flash('For advanced options, check out the Docs tab in the <a target="_blank" href="%s">%s</a> Sheet.' % (doclink, globs.SHEET))
+    flash('For advanced options, check out the Docs tab in the %s Sheet.' % (globs.DOCLINK))
 
   if streamit:
     #Handle streaming user interface updates resulting from a POST method call.
@@ -440,6 +441,7 @@ def Pipulate(dockey='', token=''):
           if globs.WEB: yield lock
           try:
             gdoc = gsp.open_by_url(globs.PIPURL)
+            globs.DOCID = gdoc.id
             globs.SHEET = gdoc.title
             stop = False
             break
@@ -455,6 +457,7 @@ def Pipulate(dockey='', token=''):
           except gspread.exceptions.NoValidUrlKeyFound:
             try:
               gdoc = gsp.open(globs.SHEET)
+              globs.DOCID = gdoc.id
               stop = False
               break
             except gspread.httpsession.HTTPError, e:
@@ -464,17 +467,18 @@ def Pipulate(dockey='', token=''):
                 yield "spinerr", "", "", ""
                 break
             except:
-              gotcha('c')
               if globs.WEB: 
                 yield "I see you're on a URL that is not a Google Spreadsheet. Would you like to grab links?", "", "", ""
                 yield "If so, just <a href='https://docs.google.com/spreadsheets/create' target='_blank'>create</a> a new Spreadsheet, name it \"Pipulate\" and click Pipulate again.", "Google Spreadsheet Not Found.", "", ""
                 yield 'New to this odd but awesome approach? Watch the <a target="_blank" href="http://goo.gl/v71kw8">Demo</a> and read the <a target="_blank" href="http://goo.gl/p2zQa4">Docs</a>.', "", "", ""
+                break
           except gspread.exceptions.SpreadsheetNotFound:
             if globs.WEB: yield "Please give the document a name to force first save.", "", "", ""
           except Exception as e:
             if globs.WEB: yield dontgetfrustrated(x)
             out("Retry login %s of %s" % (x, 10))
             time.sleep(6)
+        globs.DOCLINK = '<a href="%s/d/%s/edit#gid=0" target="_blank">%s</a>' % (globs.SHEETS, globs.DOCID, globs.SHEET)
         if stop:
           if globs.WEB: 
             yield "spinerr", "", "", ""
@@ -547,8 +551,7 @@ def Pipulate(dockey='', token=''):
           result = gdoc.sheet1.update_cells(CellList)
           if globs.WEB:
             yield "You now are ready to do something requiring Sheet1 empty, like a Crawl or a Setup.", "", "", ""
-            doclink = '%s/d/%s/edit#gid=0' % (globs.SHEETS, globs.DOCID)
-            yme = 'I recommend opening the <a target="_blank" href="%s">%s</a> Sheet in another tab so you can see the magic happen.' % (doclink, globs.SHEET)
+            yme = 'I recommend opening the %s Sheet in another tab so you can see the magic happen.' % (globs.DOCLINK)
             yield yme, "", "", ""
             yme = "Sheet1 Cleared! %s" % globs.PBNJMAN
             yield yme, "Now, go do something awesome!", "", ""
@@ -691,13 +694,13 @@ def Pipulate(dockey='', token=''):
         if globs.WEB: yield badtuple
         Stop()
       if globs.WEB: yield unlock
-
-      yme = "%s rows found in Pipulate tab." % globs.numrows
+      yme = "%s rows found in Sheet." % globs.numrows
       out(yme)
       if globs.WEB: yield yme, "", "", ""
       if globs.numrows == 0 and globs.PIPMODE == 'qmarks':
         if globs.WEB:
-          yield "Double-check that sheet is set up correctly.", "Pipulate needs question marks to replace.", "", ""
+          yme = "Double-check that %s Sheet is set up correctly." % globs.DOCLINK
+          yield yme, "Pipulate needs question marks to replace.", "", ""
           yield "spinoff", "", "", ""
         return
 
@@ -959,7 +962,8 @@ def Pipulate(dockey='', token=''):
       if not qset and not trended:
         out("Done looking for asterisks", "2", "-")
         if globs.WEB:
-          yield "No question marks found in document.", "", "", ""
+          yme = "No question marks found in %s Sheet." % globs.DOCLINK
+          yield yme, "", "", ""
           yme = 'New to Pipulate? Watch <a target="_blank" href="https://docs.google.com/presentation/d/10lr_d1uyLMOnWsMzbenKiPlFE5-BIt9bxVucw7O4GSI/edit?usp=sharing">Demo</a> and read <a target="_blank" href="https://github.com/miklevin/pipulate/blob/master/README.md">Docs</a>. ' + globs.PBNJMAN
           yield yme, "The first worksheet in your spreadsheet needs something in it.", "", ""
           yield "spinoff", "", "", ""

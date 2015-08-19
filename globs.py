@@ -11,6 +11,7 @@
 
 STOP =      False    # The Emergency Break so functions cans top Pipulate.
 DOCID =     None     # The Google Doc key for use anywhere in system
+DOCLINK =   None     # The full a href link for the Google Sheet.
 WEB =       False    # Controls whether yields show (webpipulate vs. loopipulate)
 PCOM =      True     # Turns True if pipulate in hostname. Tracks usage.
 DBUG =      True     # Turns on and off verbose console output.
