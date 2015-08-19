@@ -480,6 +480,7 @@ def Pipulate(dockey='', token=''):
             yield "spinerr", "", "", ""
             yield badtuple
           Stop() # Consider adding refresh_token logic for users (versus the scheduler)
+      out("END LOGIN ATTEMPT", "2", '-')
       if globs.WEB: yield unlock
       out("Google Spreadsheet %s successfully opened." % globs.SHEET)
       yme = "%s Sheet Opened!" % globs.SHEET
@@ -620,14 +621,23 @@ def Pipulate(dockey='', token=''):
         out("These tabs are present: %s" % tabs)
         if globs.WEB:
           yield "Tabs successfully found/created!", "Tabs Created", tabs, ""
-
-      try:
-        out("Reading Config tab into globals.")
-        globs.config = RefreshConfig(gdoc, "Config") #HTTPError
-      except:
-        out("Copying Config tag to globals failed.")
-      else:
-        out("Config tab copied to globals.")
+      stop = True
+      for x in range(5):
+        if globs.WEB: yield lock
+        try:
+          out("Reading Config tab into globals.")
+          globs.config = RefreshConfig(gdoc, "Config") #HTTPError
+          stop = False
+          break
+        except:
+          if globs.WEB: yield dontgetfrustrated(x)
+          out("Retry Reading Config tab into globals %s of %s" % (x, 10))
+          time.sleep(5)
+      if stop:
+        if globs.WEB: yield badtuple
+        Stop()
+      if globs.WEB: yield unlock
+      out("Config tab copied to globals.")
       if globs.WEB:
         yme = "Counting rows in %s sheet..." % globs.SHEET
         yield yme, "Counting rows", '', ''
@@ -947,7 +957,9 @@ def Pipulate(dockey='', token=''):
       #
       out("QUESTION MARK Replacement.", '2')
       if not qset and not trended:
+        out("Done looking for asterisks", "2", "-")
         if globs.WEB:
+          yield "No question marks found in document.", "", "", ""
           yme = 'New to Pipulate? Watch <a target="_blank" href="https://docs.google.com/presentation/d/10lr_d1uyLMOnWsMzbenKiPlFE5-BIt9bxVucw7O4GSI/edit?usp=sharing">Demo</a> and read <a target="_blank" href="https://github.com/miklevin/pipulate/blob/master/README.md">Docs</a>. ' + globs.PBNJMAN
           yield yme, "The first worksheet in your spreadsheet needs something in it.", "", ""
           yield "spinoff", "", "", ""
