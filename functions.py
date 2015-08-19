@@ -208,7 +208,7 @@ def pins(url):
 # And now what you've all been waiting for! If you write a Python function that
 # just works stand-alone elsewhere, simply paste it here to extend Pipulate.
 
-def competition(keyword):
+def rushdifficulty(keyword):
   pp = 50
   try:
     apikey = globs.config['semrush']
@@ -219,7 +219,7 @@ def competition(keyword):
     chunks = ['%s%s:%s%s' % (kwcol, chunk, kwcol, chunk+pp-1) for chunk in range(2, globs.numrows, pp)]
   else:
     return "You must have a column named keyword."
-  mycol = globs.letter[globs.row1.index('competition') + 1]
+  mycol = globs.letter[globs.row1.index('rushdifficulty') + 1]
   lastchunk = chunks[-1].split(":")
   lastchunk[1] = "%s%s" % (kwcol, globs.numrows)
   chunks[-1] = "%s:%s" % (lastchunk[0], lastchunk[1])
@@ -268,6 +268,7 @@ def difficulty(keyword):
       call = 'http://api.semrush.com/?type=phrase_kdi&export_columns=Kd&phrase=%s&key=%s&database=us' % (keyword, apikey)
       respobj = requests.get(call, timeout=5)
       rtext = respobj.text
+      out(rtext)
     except:
       return "Double-check your semrush entry in the Config tab."
     try:
