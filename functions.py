@@ -214,18 +214,23 @@ def rushdifficulty(keyword):
     apikey = globs.config['semrush']
   except:
     return "In the Config tab, put semrush under name and the api key under value to proceed."
+  funcol = globs.row1.index('rushdifficulty') + 1
+  lastq = len(globs.sheet.col_values(funcol))
+  mycol = globs.letter[funcol]
   if 'keyword' in globs.row1:
     kwcol = globs.letter[globs.row1.index('keyword') + 1]
-    chunks = ['%s%s:%s%s' % (kwcol, chunk, kwcol, chunk+pp-1) for chunk in range(2, globs.numrows, pp)]
+    chunks = ['%s%s:%s%s' % (kwcol, chunk, kwcol, chunk+pp-1) for chunk in range(lastq, globs.numrows, pp)]
   else:
     return "You must have a column named keyword."
-  mycol = globs.letter[globs.row1.index('rushdifficulty') + 1]
   lastchunk = chunks[-1].split(":")
   lastchunk[1] = "%s%s" % (kwcol, globs.numrows)
   chunks[-1] = "%s:%s" % (lastchunk[0], lastchunk[1])
   for chunk in chunks:
     CellList1 = globs.sheet.range(chunk)
-    CellList2 = globs.sheet.range(chunk.replace(kwcol, mycol))
+    try:
+      CellList2 = globs.sheet.range(chunk.replace(kwcol, mycol))
+    except:
+      CellList2 = globs.sheet.range(chunk.replace(kwcol, mycol))
     kwlist = []
     for cindex, acell in enumerate(CellList1):
       asciival = acell.value.encode('ascii', errors='ignore')
@@ -252,9 +257,9 @@ def rushdifficulty(keyword):
       if len(apair) > 1:
         scoredict[str(apair[0])] = str(apair[1])
     for cindex, acell in enumerate(CellList1):
-      out((cindex, acell, acell.value, scoredict[acell.value]))
-      if scoredict[acell.value]:
-        CellList2[cindex].value = scoredict[acell.value]
+      acell = acell.value.lower()
+      if acell in scoredict:
+        CellList2[cindex].value = scoredict[acell]
       else:
         CellList2[cindex].value = 'N/A'
     globs.sheet.update_cells(CellList2)
