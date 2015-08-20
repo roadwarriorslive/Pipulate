@@ -247,8 +247,11 @@ def main():                                                         # of entry "
     # |____/|_| |_|\__,_/___\__,_|_| |_| |_(_)
     #                                         
     if form2.secondary.data == 'on':
-      gotcha("hit")
-    if form.pipurl.data:
+      globs.PIPURL = form2.pipurl.data
+      if ':' in globs.PIPMODE:
+        globs.PIPMODE = globs.PIPMODE.split(':')[1]
+      streamit = stream_with_context(Pipulate())
+    elif form.pipurl.data:
       globs.PIPURL = form.pipurl.data
       if form.options.data:
         globs.PIPMODE = form.options.data
