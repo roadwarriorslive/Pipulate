@@ -83,7 +83,9 @@ class PipForm2(PipForm):
   secondary = HiddenField()
 
 class ClearSheet1(PipForm2):
-  radios = RadioField(choices=crawlchoices())
+  radios = RadioField(choices=[
+    ('clear', 'Yes, clear Sheet 1.'), 
+    ('home', 'No, bad idea.')])
 
 class AnotherMenu(PipForm2):
   radios = RadioField(choices=crawlchoices())
