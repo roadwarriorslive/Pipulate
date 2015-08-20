@@ -339,6 +339,7 @@ def main():                                                         # of entry "
       flash('The Tab in position 1 is that will be Pipulated is "%s".' % globs.TAB)
       if menudefault:
         flash("The ?'s in the %s tab indicate that you are ready to Pipulate!" % globs.TAB)
+        flash("So, what are you waiting for? Hit that button!")
       else:
         flash("The lack of ?'s in the %s tab indicates you must choose what you want to do." % globs.TAB)
   except:

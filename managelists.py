@@ -122,7 +122,7 @@ def cyclemotto():
 def menumaker():
   ''' Creates the entire cadence of the system.'''
   menu = [
-  ('clear'      , "Clear Sheet 1"),
+  ('menu:clear' , "Clear Sheet 1"),
   ('menu:crawl' , "Crawl Website"),
   ('menu:cols'  , "Add Columns"),
   ('qmarks'     , "Replace ?'s"),
