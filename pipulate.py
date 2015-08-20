@@ -199,15 +199,21 @@ def main():                                                         # of entry "
         session['u'] = globs.PIPURL
     if session and 'loggedin' in session and session['loggedin'] == "1":
       needsPipulate = True
+      tasteMe = None
       if request.args and 'u' in request.args and globs.SHEETS in request.args.get('u'):
         needsPipulate = False
+        tasteMe = request.args.get('u')
       elif request.method == 'POST':
         needsPipulate = False
       try:
-        gdoc = gsp.open(globs.SHEET)
+        if tasteMe:
+          gdoc = gsp.open_by_url(tasteMe)
+        else:
+          gdoc = gsp.open(globs.SHEET)
         needsPipulate = False
         globs.DOCID = gdoc.id
         globs.SHEET = gdoc.title
+        gotcha(globs.SHEET)
         if gdoc.sheet1.row_values(1)==[] and gdoc.sheet1.row_values(2) == []:
           sname = 'Connected to %s Sheet' % globs.SHEET
           pipstate = [sname, 'First 2 rows empty (good).', 'Perform Crawl or Setup.', 'This is JSON data.', 'Watch it flow.', 'Schedule Jobs', 'Read the Docs.', 'Crack it open.']
@@ -326,6 +332,9 @@ def main():                                                         # of entry "
     flash('If it\'s not empty, you can choose "Clear Sheet 1" to blank it in preparation.')
     flash('Pipulate lets you see the <a href="https://en.wikipedia.org/wiki/JSON">JSON data</a> flying around behind the scenes.')
     flash('For advanced options, check out the Docs tab in the %s Sheet.' % (globs.DOCLINK))
+  else:
+    session.pop('_flashes', None)
+    flash("Targeted Google Spreadsheet is %s." % globs.DOCLINK)
 
   if streamit:
     #Handle streaming user interface updates resulting from a POST method call.
