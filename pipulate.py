@@ -203,20 +203,19 @@ def main():                                                         # of entry "
         needsPipulate = False
       elif request.method == 'POST':
         needsPipulate = False
-      if needsPipulate == False:
-        try:
-          gdoc = gsp.open(globs.SHEET)
-          globs.DOCID = gdoc.id
-          globs.SHEET = gdoc.title
-          r2 = gdoc.sheet1.row_values(2)
-          if gdoc.sheet1.row_values(1)==[] and r2 == []:
-            sname = 'Connected to %s Sheet' % globs.SHEET
-            pipstate = [sname, 'First 2 rows empty (good).', 'Perform Crawl or Setup.', 'This is JSON data.', 'Watch it flow.', 'Schedule Jobs', 'Read the Docs.', 'Crack it open.']
-          elif '?' in r2:
-            menudefault = "qmarks"
-          needsPipulate = False
-        except:
-          pass
+      try:
+        gdoc = gsp.open(globs.SHEET)
+        needsPipulate = False
+        globs.DOCID = gdoc.id
+        globs.SHEET = gdoc.title
+        r2 = gdoc.sheet1.row_values(2)
+        if gdoc.sheet1.row_values(1)==[] and r2 == []:
+          sname = 'Connected to %s Sheet' % globs.SHEET
+          pipstate = [sname, 'First 2 rows empty (good).', 'Perform Crawl or Setup.', 'This is JSON data.', 'Watch it flow.', 'Schedule Jobs', 'Read the Docs.', 'Crack it open.']
+        elif '?' in r2:
+          menudefault = "qmarks"
+      except:
+        pass
       # Indoctrinate new Pipulate users here
       if request.args and 'logout' in request.args:
         pass
@@ -287,6 +286,7 @@ def main():                                                         # of entry "
           requests.get(revokeurl, timeout=5)
         if 'u' in request.args:
           form.pipurl.data = request.args.get('u')
+          globs.PIPURL = request.args.get('u')
         session.pop('loggedin', None)
     elif request.args: # Move selected text and current url into session object.
       try:
@@ -294,9 +294,11 @@ def main():                                                         # of entry "
           session['s'] = request.args.get('s')
         if 'u' in request.args:
           form.pipurl.data = request.args.get('u')
+          globs.PIPURL = request.args.get('u')
           session['u'] = request.args.get('u')
         if session and 'u' in session:
           form.pipurl.data = session['u']
+          globs.PIPURL = session['u']
       except:
         pass
   #      _                                          _               _   
@@ -307,7 +309,7 @@ def main():                                                         # of entry "
   #                                                    |_|              
   out("Selecting template method.")
   options = menumaker()
-  if form.magicbox.data and session:
+  if form.magicbox.data and session and globs.SHEETS not in globs.PIPURL:
     session.pop('_flashes', None)
     flash("Congratulations! You have chosen to harvest keywords.") 
     flash("The words filled into the above textarea will be inserted into %s." % globs.SHEET)
