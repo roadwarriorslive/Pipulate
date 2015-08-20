@@ -272,6 +272,8 @@ def rushdifficulty(keyword):
     chunks = ['%s%s:%s%s' % (kwcol, chunk, kwcol, chunk+pp-1) for chunk in range(lastq, globs.numrows, pp)]
   else:
     return "You must have a column named keyword."
+  if not chunks:
+    return "Please use difficulty function instead."
   lastchunk = chunks[-1].split(":")
   lastchunk[1] = "%s%s" % (kwcol, globs.numrows)
   chunks[-1] = "%s:%s" % (lastchunk[0], lastchunk[1])

@@ -213,6 +213,7 @@ def main():                                                         # of entry "
         needsPipulate = False
         globs.DOCID = gdoc.id
         globs.SHEET = gdoc.title
+        globs.TAB = gdoc.sheet1.title
         if gdoc.sheet1.row_values(1)==[] and gdoc.sheet1.row_values(2) == []:
           sname = 'Connected to %s Sheet' % globs.SHEET
           pipstate = [sname, 'First 2 rows empty (good).', 'Perform Crawl or Setup.', 'This is JSON data.', 'Watch it flow.', 'Schedule Jobs', 'Read the Docs.', 'Crack it open.']
@@ -313,27 +314,35 @@ def main():                                                         # of entry "
   #                                                    |_|              
   out("Selecting template method.")
   options = menumaker()
-  if form.magicbox.data and session and globs.SHEETS not in globs.PIPURL:
-    session.pop('_flashes', None)
-    flash("Congratulations! You have chosen to harvest keywords.") 
-    flash("The words filled into the above textarea will be inserted into %s." % globs.SHEET)
-    flash("Insert commas between keywords, and each one will get its own row.")
-    flash("You can also add more keyword variations by just typing them in.")
-    flash('Then select "Harvest Keywords" from the dropdown menu.')
-    flash('You can then find your keywords under the Harvest tab.')
-  elif pipstate and session:
-    form.magicbox.data = pipstate
-    session.pop('_flashes', None)
-    flash("Welcome to Pipulate, an SEO tool that outputs jobs into Google Docs.")
-    flash('You are about to perform changes to your Google Sheet named %s.' % globs.SHEET)
-    flash("The above box represents the data flying around. ['Rows', 'look', 'like', 'this.'].")
-    flash("If the first 2 rows are empty, you're good to perform a site crawl or run a setup.")
-    flash('If it\'s not empty, you can choose "Clear Sheet 1" to blank it in preparation.')
-    flash('Pipulate lets you see the <a href="https://en.wikipedia.org/wiki/JSON">JSON data</a> flying around behind the scenes.')
-    flash('For advanced options, check out the Docs tab in the %s Sheet.' % (globs.DOCLINK))
-  else:
-    session.pop('_flashes', None)
-    flash("Targeted Google Spreadsheet is %s." % globs.DOCLINK)
+  try:
+    if form.magicbox.data and session and globs.SHEETS not in globs.PIPURL:
+      session.pop('_flashes', None)
+      flash("Congratulations! You have chosen to harvest keywords.") 
+      flash("The words filled into the above textarea will be inserted into %s." % globs.SHEET)
+      flash("Insert commas between keywords, and each one will get its own row.")
+      flash("You can also add more keyword variations by just typing them in.")
+      flash('Then select "Harvest Keywords" from the dropdown menu.')
+      flash('You can then find your keywords under the Harvest tab.')
+    elif pipstate and session:
+      form.magicbox.data = pipstate
+      session.pop('_flashes', None)
+      flash("Welcome to Pipulate, an SEO tool that outputs jobs into Google Docs.")
+      flash('You are about to perform changes to your Google Sheet named %s.' % globs.SHEET)
+      flash("The above box represents the data flying around. ['Rows', 'look', 'like', 'this.'].")
+      flash("If the first 2 rows are empty, you're good to perform a site crawl or run a setup.")
+      flash('If it\'s not empty, you can choose "Clear Sheet 1" to blank it in preparation.')
+      flash('Pipulate lets you see the <a href="https://en.wikipedia.org/wiki/JSON">JSON data</a> flying around behind the scenes.')
+      flash('For advanced options, check out the Docs tab in the %s Sheet.' % (globs.DOCLINK))
+    else:
+      session.pop('_flashes', None)
+      flash("Targeted Google Spreadsheet is %s." % globs.DOCLINK)
+      flash('The Tab in position 1 is that will be Pipulated is "%s".' % globs.TAB)
+      if menudefault:
+        flash("The ?'s in the %s tab indicate that you are ready to Pipulate!" % globs.TAB)
+      else:
+        flash("The lack of ?'s in the %s tab indicates you must choose what you want to do." % globs.TAB)
+  except:
+    pass
 
   if streamit:
     #Handle streaming user interface updates resulting from a POST method call.
@@ -1277,7 +1286,7 @@ def getLabel():
   elif subdomain == 'pipulate':
     blab = '%s %s' % (droidcut, "Pipulate")
   elif subdomain:
-    blab = "%s %s" % (droidcut, subdomain)
+    blab = "%s %s %s" % (droidcut, "Pipulate", subdomain)
   return blab
 
 def getBookmarklet():

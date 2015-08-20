@@ -27,6 +27,7 @@ row1 =      []       # Copy of contents of sheet1, row 1 for many uses.
 nest =      ''       # Controls nested indents of debug output.
 sheet =     ''       # Makes sheet1 worksheet object accessible to user functions.
 EMPTY =     ''                                                # How to populate cell if nothing returned
+TAB =       ''                                                # Name of Sheet1 on Tab
 FILE =      "/var/opt/pipulate.cfg"                           # Flask server configuration
 TOKEN =     "/var/opt/pipulate.pkl"                           # OAuth2 access token
 SHEET =     "Pipulate"                                        # Default GSheet file name.
