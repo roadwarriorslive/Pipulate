@@ -326,7 +326,9 @@ def main():                                                         # of entry "
   out("Selecting template method.")
   options = menumaker()
   try:
-    if form.magicbox.data and session and globs.SHEETS not in globs.PIPURL:
+    if form2:
+      pass
+    elif form.magicbox.data and session and globs.SHEETS not in globs.PIPURL:
       session.pop('_flashes', None)
       flash("Congratulations! You have chosen to harvest keywords.") 
       flash("The words filled into the above textarea will be inserted into %s." % globs.SHEET)
