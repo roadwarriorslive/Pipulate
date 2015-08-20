@@ -213,7 +213,6 @@ def main():                                                         # of entry "
         needsPipulate = False
         globs.DOCID = gdoc.id
         globs.SHEET = gdoc.title
-        gotcha(globs.SHEET)
         if gdoc.sheet1.row_values(1)==[] and gdoc.sheet1.row_values(2) == []:
           sname = 'Connected to %s Sheet' % globs.SHEET
           pipstate = [sname, 'First 2 rows empty (good).', 'Perform Crawl or Setup.', 'This is JSON data.', 'Watch it flow.', 'Schedule Jobs', 'Read the Docs.', 'Crack it open.']
