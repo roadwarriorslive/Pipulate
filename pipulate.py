@@ -1150,7 +1150,7 @@ def Pipulate(dockey='', token=''):
                     out("Scrape End", "4", '-')
             out("DONE PROCESSING ROW %s." % rowdex, '3', '-')
             out("Finished processing row. Updating spreadsheet...")
-            newrow = ['<Error>Nothing returned</Error>' if x==None else x for x in newrow]
+            newrow = [globs.EMPTY if x==None else x for x in newrow]
             if len(str(newrow)) > globs.ROWMAX:
               if globs.WEB: yield "", "", "['TOO BIG']", ""
             else:

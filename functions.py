@@ -239,6 +239,23 @@ def pageauthority(url):
 def domainauthority(url):
   return mozcall(url, "68719476736", "pda")
 
+def difficulty(keyword):
+  if 'semrush' in globs.config:
+    apikey = globs.config['semrush']
+    try:
+      call = 'http://api.semrush.com/?type=phrase_kdi&export_columns=Kd&phrase=%s&key=%s&database=us' % (keyword, apikey)
+      respobj = requests.get(call, timeout=5)
+      rtext = respobj.text
+      out(rtext)
+    except:
+      return "Double-check your semrush entry in the Config tab."
+    try:
+      return rtext.splitlines()[1]
+    except:
+      return "N/A"
+  else:
+    return "In the Config tab, put semrush under name and the api key under value to proceed."
+
 def rushdifficulty(keyword):
   pp = 50
   try:
@@ -297,11 +314,11 @@ def rushdifficulty(keyword):
     time.sleep(5)
   globs.STOP = True
 
-def difficulty(keyword):
+def volume(keyword):
   if 'semrush' in globs.config:
     apikey = globs.config['semrush']
     try:
-      call = 'http://api.semrush.com/?type=phrase_kdi&export_columns=Kd&phrase=%s&key=%s&database=us' % (keyword, apikey)
+      call = 'http://api.semrush.com/?type=phrase_this&export_columns=Ph,Nq&phrase=%s&key=%s&database=us' % (keyword, apikey)
       respobj = requests.get(call, timeout=5)
       rtext = respobj.text
       out(rtext)
