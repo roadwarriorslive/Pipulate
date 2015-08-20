@@ -976,7 +976,7 @@ def Pipulate(dockey='', token=''):
           if maxrowsperhour: # if maxrowsperhour is 0, this won't trap
             if index >= int(maxrowsperhour):
               break
-          yme = "Pipulating row: %s (%s of %s)..." % (rowdex, index+1, len(therange))
+          yme = "Pipulating row: %s (item %s of %s)..." % (rowdex, index+1, len(therange))
           if globs.WEB: yield yme, "Next, we replace question marks. This may take awhile...", "", ""
           globs.hobj = None
           globs.html = '' #Blank the global html object. Recylces fetches.
@@ -993,9 +993,11 @@ def Pipulate(dockey='', token=''):
               time.sleep(2)
               if globs.WEB: yield dontgetfrustrated(x)
           if stop:
-            if globs.WEB: yield "GData Timed Out","Sorry, GDATA Failed. Try again.","",""
+            if globs.WEB:
+              yield "GData Timed Out","Sorry, GDATA Failed. Try again.","",""
+              yield "spinerr", "", "", ""
+              yield unlock
             Stop()
-          if globs.WEB: yield unlock
 
           onerow = []
           for cell in CellList:
