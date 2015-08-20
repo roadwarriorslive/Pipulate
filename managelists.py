@@ -41,6 +41,7 @@ def documentation():
   s.append(['Tweets',               'Twitter',   'Url',                       '', ''])
   s.append(['Twitter_Followers',    'Twitter',   'Twitter_Name',              '', ''])
   s.append(['Views',                'YouTube',   'url',                       '', ''])
+  s.append(['Volume',               'Keyword',   'Keyword',                   'Return SEMRush Keyword Volume.', ''])
   return s
 
 def dontgetfrustrated(x):

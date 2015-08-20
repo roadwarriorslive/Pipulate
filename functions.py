@@ -318,7 +318,7 @@ def volume(keyword):
   if 'semrush' in globs.config:
     apikey = globs.config['semrush']
     try:
-      call = 'http://api.semrush.com/?type=phrase_this&export_columns=Ph,Nq&phrase=%s&key=%s&database=us' % (keyword, apikey)
+      call = 'http://api.semrush.com/?type=phrase_this&export_columns=Nq&phrase=%s&key=%s&database=us' % (keyword, apikey)
       respobj = requests.get(call, timeout=5)
       rtext = respobj.text
       out(rtext)
