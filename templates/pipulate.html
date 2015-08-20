@@ -333,12 +333,16 @@
               $('#pipslate').css({'height':(($(window).height())-160)+'px'});
             </script>
           <table id="pipchoice">
+          {% if 'radios' in form2: %}
             {% for item in form2.radios %}
               <tr><td><label>{{ item }}<span class="checkable">{{ item.label }}</span></label></td></tr>
             {% endfor %}
+          {% endif %}
+          {% if 'checks' in form2: %}
             {% for item in form2.checks %}
               <tr><td><label>{{ item }}<span class="checkable">{{ item.label }}</span></label></td></tr>
             {% endfor %}
+          {% endif %}
           </table>
           </div>
           <button id="pipulate" class="button" type="submit">
