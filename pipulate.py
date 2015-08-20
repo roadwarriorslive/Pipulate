@@ -109,6 +109,7 @@ def main():                                                         # of entry "
   form = PipForm(csrf_enabled=False)                                # All WTForms are instances of classes. Main form.
   form2 = PipForm2(csrf_enabled=False)
   pipstate = None
+  menudefault = None
   configform = ConfigForm(csrf_enabled=False)                       # The form to let you 1st time configure server.
   if (os.path.isfile(globs.FILE) and                                # been configured or not. Configuration consists
       os.path.getsize(globs.FILE) > 0):                             # of a file with Google OAuth2 Client ID, Client
@@ -212,7 +213,7 @@ def main():                                                         # of entry "
             sname = 'Connected to %s Sheet' % globs.SHEET
             pipstate = [sname, 'First 2 rows empty (good).', 'Perform Crawl or Setup.', 'This is JSON data.', 'Watch it flow.', 'Schedule Jobs', 'Read the Docs.', 'Crack it open.']
           elif '?' in r2:
-            gotcha("Pre-select menu")
+            menudefault = "qmarks"
           needsPipulate = False
         except:
           pass
@@ -331,7 +332,7 @@ def main():                                                         # of entry "
   else:
     #Handle non-streaming user interface build resulting from a GET method call.
     out("EXITING MAIN FUNCTION RENDER", "0", '-')
-    return render_template('pipulate.html', form=form, select=options)
+    return render_template('pipulate.html', form=form, select=options, menudefault=menudefault)
   out("EXITING MAIN", "0", '-')
 
 def LogUser(authkey):
