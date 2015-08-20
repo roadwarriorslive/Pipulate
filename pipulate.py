@@ -208,11 +208,10 @@ def main():                                                         # of entry "
         needsPipulate = False
         globs.DOCID = gdoc.id
         globs.SHEET = gdoc.title
-        r2 = gdoc.sheet1.row_values(2)
-        if gdoc.sheet1.row_values(1)==[] and r2 == []:
+        if gdoc.sheet1.row_values(1)==[] and gdoc.sheet1.row_values(2) == []:
           sname = 'Connected to %s Sheet' % globs.SHEET
           pipstate = [sname, 'First 2 rows empty (good).', 'Perform Crawl or Setup.', 'This is JSON data.', 'Watch it flow.', 'Schedule Jobs', 'Read the Docs.', 'Crack it open.']
-        elif '?' in r2:
+        elif gdoc.sheet1.find('?'):
           menudefault = "qmarks"
       except:
         pass
