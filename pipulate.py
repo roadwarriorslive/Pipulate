@@ -78,13 +78,15 @@ class PipForm(Form):
   magicbox = TextAreaField("magicbox")                              # This box shows the JSON data being worked upon.
   options = SelectField("options")                                  # What you're asking Pipulate to do.
 
-class PipForm2(PipForm):
-  """Define form for interstitial options"""
-  secondary = HiddenField()
+class SecondaryMenu(PipForm):
   radios = RadioField(choices=crawlchoices())
   checks = SelectMultipleField(choices=crawlchoices(), 
     option_widget=widgets.CheckboxInput(), 
     widget=widgets.ListWidget(prefix_label=False))
+
+class PipForm2(SecondaryMenu):
+  """Define form for interstitial options"""
+  secondary = HiddenField()
 
 #  _____ _           _                      _
 # |  ___| | __ _ ___| | __  _ __ ___   __ _(_)_ __
