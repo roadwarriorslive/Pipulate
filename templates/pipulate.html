@@ -28,11 +28,11 @@
         });
       });
       $(document).ready(function(){  
-        {%- if menudefault %}
+        {% if menudefault %}
         $(function(){
           $('#options option[value="{{ menudefault }}"]').prop('selected', 'selected').change();
         })
-        {% endif -%}
+        {% endif %}
         $(function(){
           $("input").prop('required',true);
         });

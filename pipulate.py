@@ -203,7 +203,7 @@ def main():                                                         # of entry "
         needsPipulate = False
       elif request.method == 'POST':
         needsPipulate = False
-      else:
+      if needsPipulate == False:
         try:
           gdoc = gsp.open(globs.SHEET)
           globs.DOCID = gdoc.id
