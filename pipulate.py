@@ -1260,11 +1260,11 @@ def getLabel():
   blab = globs.SHEET
   droidcut = "ppp"
   if subdomain == 'localhost':
-    blab = "%s %s 8888" % (droidcut, globs.SHEET)
+    blab = "%s %s 8888" % (droidcut, "Localhost")
   elif subdomain == 'pipulate':
-    blab = '%s %s' % (droidcut, globs.SHEET)
+    blab = '%s %s' % (droidcut, "Pipulate")
   elif subdomain:
-    blab = "%s %s %s" % (droidcut, globs.SHEET, subdomain)
+    blab = "%s %s" % (droidcut, subdomain)
   return blab
 
 def getBookmarklet():
