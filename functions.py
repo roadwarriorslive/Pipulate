@@ -223,7 +223,7 @@ def mozsig(expires):
   return urlSafeSignature
 
 def mozcall(url, bitmask, label):
-  from time import time
+  from time import time, sleep
   from urllib import quote_plus
   url = quote_plus(url)
   accessID = globs.config['mozid']
@@ -231,6 +231,8 @@ def mozcall(url, bitmask, label):
   signature = mozsig(expires)
   endpoint =  "http://lsapi.seomoz.com/linkscape/url-metrics/%s?" % (url)
   parameters = "Cols=%s&AccessID=%s&Expires=%s&Signature=%s" % (bitmask, accessID, expires, signature)
+  out("Sleeping for 5 seconds (for Moz).")
+  sleep(5)
   return jsonapi(endpoint, parameters, label)
 
 def pageauthority(url):
