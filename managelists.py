@@ -177,7 +177,7 @@ def menumaker():
   ('menu:crawl' , "Crawl Website"),
   ('menu:cols'  , "Add Columns"),
   ('qmarks'     , "Replace ?'s"),
-  ('menu:setup' , "Set Up Client"),
+  ('menu:setup' , "Auto Setup"),
   ('menu:graph' , "See Visualization"),
   ('keywords'   , "Harvest Keywords")
   ]

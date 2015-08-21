@@ -87,6 +87,8 @@ def main():                                                         # of entry "
                 }
   if ':' in form.options.data:
     form2 = formSwitch[form.options.data.split(':')[1]]
+  else:
+    form2 = None
   menudefault = None
   stext = None
   configform = ConfigForm(csrf_enabled=False)                       # The form to let you 1st time configure server.
@@ -215,7 +217,7 @@ def main():                                                         # of entry "
     #  ___) | | | | (_| |/ / (_| | | | | | |_|
     # |____/|_| |_|\__,_/___\__,_|_| |_| |_(_)
     #                                         
-    if form2.secondary.data == 'on':
+    if form2 and form2.secondary.data == 'on':
       menutwo = True
       if 'radios' in form2:
         globs.PIPMODE = form2.radios.data
@@ -321,8 +323,8 @@ def main():                                                         # of entry "
         else:
           flash("Because the first two rows of %s are blank, you can do one of the following:" % globs.TAB)
           flash("Visit %s and set up %s with input values, a function and question mark," % (globs.DOCLINK, globs.TAB))
-          flash('Select "Site crawl" from the menu,')
-          flash('Select an "Auto-setup" from menu,')
+          flash('Select "Crawl Website" from the menu,')
+          flash('Select an "Auto Setup" from menu,')
           flash('Harvest keywords,')
           flash('Watch a demo.')
     except:
@@ -404,7 +406,7 @@ def Pipulate(dockey='', token=''):
   out("PIPULATION BEGINNING", "1")
   try:
     if globs.WEB:
-      yield "Beginning to Pipulate", "", "", ""
+      yield "Beginning to Pipulate!", "", "", ""
       yield "spinon", "", "", ""
     out("Reading in functions.")
     funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
@@ -707,7 +709,7 @@ def Pipulate(dockey='', token=''):
         if globs.WEB:
           yme = "Double-check that %s Sheet is set up correctly." % globs.DOCLINK
           yield yme, "Pipulate needs question marks to replace.", "", ""
-          yield "spinoff", "", "", ""
+          yield "spinerr", "", "", ""
         return
 
       stop = True
