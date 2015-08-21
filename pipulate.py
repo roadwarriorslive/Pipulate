@@ -118,6 +118,7 @@ def main():                                                         # of entry "
   form2 = formSwitch['clear']
   pipstate = None
   menudefault = None
+  stext = None
   configform = ConfigForm(csrf_enabled=False)                       # The form to let you 1st time configure server.
   if (os.path.isfile(globs.FILE) and                                # been configured or not. Configuration consists
       os.path.getsize(globs.FILE) > 0):                             # of a file with Google OAuth2 Client ID, Client
@@ -238,7 +239,7 @@ def main():                                                         # of entry "
         out("EXITING MAIN FUNCTION RENDER INDOCTRINATE", "0", '-')
         return render_template('pipulate.html', form=form, select=None)
   globs.DOCLINK = '<a href="%s/d/%s/edit#gid=0" target="_blank">%s</a>' % (globs.SHEETS, globs.DOCID, globs.SHEET)
-  stext = ''
+  interStitial = False
   if request.method == 'POST':
     #  ____  _                              _ 
     # / ___|| |__   __ _ ______ _ _ __ ___ | |
@@ -247,6 +248,7 @@ def main():                                                         # of entry "
     # |____/|_| |_|\__,_/___\__,_|_| |_| |_(_)
     #                                         
     if form2.secondary.data == 'on':
+      interStitial = True
       globs.PIPURL = form2.pipurl.data
       if ':' in globs.PIPMODE:
         globs.PIPMODE = globs.PIPMODE.split(':')[1]
@@ -325,39 +327,30 @@ def main():                                                         # of entry "
   #                                                    |_|              
   out("Selecting template method.")
   options = menumaker()
-  try:
-    if form2:
+  if request.method == 'GET':
+    try:
+      if stext and globs.SHEETS not in globs.PIPURL:
+        gotcha("STEXT: %s" % stext)
+        session.pop('_flashes', None)
+        flash("Congratulations! You have chosen to harvest keywords.") 
+        flash("The words filled into the above textarea will be inserted into %s." % globs.SHEET)
+        flash("Insert commas between keywords, and each one will get its own row.")
+        flash("You can also add more keyword variations by just typing them in.")
+        flash('Then select "Harvest Keywords" from the dropdown menu.')
+        flash('You can then find your keywords under the Harvest tab.')
+      elif not interStitial:
+        session.pop('_flashes', None)
+        flash("Targeted Google Spreadsheet is %s." % globs.DOCLINK)
+        flash('The Tab in position 1 is that will be Pipulated is "%s".' % globs.TAB)
+        if menudefault:
+          flash("The ?'s in the %s tab indicate that you are ready to Pipulate!" % globs.TAB)
+          flash("So, what are you waiting for? Hit that button!")
+        else:
+          flash("The lack of ?'s in the %s tab indicates you must choose what you want to do." % globs.TAB)
+    except:
       pass
-    elif form.magicbox.data and session and globs.SHEETS not in globs.PIPURL:
-      session.pop('_flashes', None)
-      flash("Congratulations! You have chosen to harvest keywords.") 
-      flash("The words filled into the above textarea will be inserted into %s." % globs.SHEET)
-      flash("Insert commas between keywords, and each one will get its own row.")
-      flash("You can also add more keyword variations by just typing them in.")
-      flash('Then select "Harvest Keywords" from the dropdown menu.')
-      flash('You can then find your keywords under the Harvest tab.')
-    elif pipstate and session:
-      form.magicbox.data = pipstate
-      session.pop('_flashes', None)
-      flash("Welcome to Pipulate, an SEO tool that outputs jobs into Google Docs.")
-      flash('You are about to perform changes to your Google Sheet named %s.' % globs.SHEET)
-      flash("The above box represents the data flying around. ['Rows', 'look', 'like', 'this.'].")
-      flash("If the first 2 rows are empty, you're good to perform a site crawl or run a setup.")
-      flash('If it\'s not empty, you can choose "Clear Sheet 1" to blank it in preparation.')
-      flash('Pipulate lets you see the <a href="https://en.wikipedia.org/wiki/JSON">JSON data</a> flying around behind the scenes.')
-      flash('For advanced options, check out the Docs tab in the %s Sheet.' % (globs.DOCLINK))
-    else:
-      session.pop('_flashes', None)
-      flash("Targeted Google Spreadsheet is %s." % globs.DOCLINK)
-      flash('The Tab in position 1 is that will be Pipulated is "%s".' % globs.TAB)
-      if menudefault:
-        flash("The ?'s in the %s tab indicate that you are ready to Pipulate!" % globs.TAB)
-        flash("So, what are you waiting for? Hit that button!")
-      else:
-        flash("The lack of ?'s in the %s tab indicates you must choose what you want to do." % globs.TAB)
-  except:
-    pass
-
+  if pipstate:
+    form.magicbox.data = pipstate
   if streamit:
     #Handle streaming user interface updates resulting from a POST method call.
     return Response(stream_template('pipulate.html', form=form, select=options, data=streamit))
