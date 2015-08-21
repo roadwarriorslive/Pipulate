@@ -26,11 +26,6 @@ import sys, os, socket, urlparse, re, gspread                       # Hello Worl
 import globs                                                        # to pipulate.py. While this is not the
 from common import *                                                # exact file that kicks off Pipulate, it
 import requests, traceback, datetime, time, json                    # is the most important to the process.
-from flask_wtf import Form                                          # Those other files, like webpipulate.py
-from wtforms import   (StringField, RadioField,                     # and loopipulate.py are merely shims for
-                      HiddenField, SelectMultipleField,             # different Python code execution contexts.
-                      TextAreaField,                                # Webpipulate creates an instance of the
-                      SelectField, widgets)                         # Flask webserving app object, perhaps
 from flask import     (Flask,                                       # somewhat controversially directly native
                       stream_with_context,                          # in Python. Yes, there's gunicorn, nginx,
                       render_template,                              # and all that wonderful webserver extra
@@ -42,7 +37,6 @@ from flask import     (Flask,                                       # somewhat c
                       flash)                                        # small servers, virtual machines or desktop.
 
 from functions import *
-from managelists import *
 
 socket.setdefaulttimeout(10.0)                                      
 app = Flask(__name__)                                               # Create that fateful instance of a Flask object.
@@ -64,34 +58,7 @@ def templateglobals():                                              # Every temp
   cyclemotto=cyclemotto()                                           # template call -- another option) here.
   )
 
-class ConfigForm(Form):                                             # Now, we define the forms we're going ot need.
-  """Define form for aquiring configuration values."""
-  import binascii
-  apdef = binascii.hexlify(os.urandom(24))                          # Flask needs application secrets for sessions.
-  appsecret = StringField('Flask app secret (auto-generated):', default=apdef)
-  clientid = StringField('Client ID (from Google Dev Console):')    # OAuth2 equivalent to username and password.
-  clientsecret = StringField('Client secret (from Google Dev Console):')
-
-class PipForm(Form):
-  """Define form for main Pipulate user interface."""
-  pipurl = StringField('Paste a Google Sheet URL:')                 # Pipulate must know a Google Sheet URL to work.
-  magicbox = TextAreaField("magicbox")                              # This box shows the JSON data being worked upon.
-  options = SelectField("options")                                  # What you're asking Pipulate to do.
-
-class PipForm2(PipForm):
-  """Define form for interstitial options"""
-  secondary = HiddenField()
-
-class ClearSheet1(PipForm2):
-  radios = RadioField(choices=[
-    ('clear', 'Yes, clear Sheet 1.'), 
-    ('home', 'No, bad idea.')])
-
-class AnotherMenu(PipForm2):
-  radios = RadioField(choices=crawlchoices())
-  checks = SelectMultipleField(choices=crawlchoices(), 
-    option_widget=widgets.CheckboxInput(), 
-    widget=widgets.ListWidget(prefix_label=False))
+from managelists import *
 
 #  _____ _           _                      _
 # |  ___| | __ _ ___| | __  _ __ ___   __ _(_)_ __
