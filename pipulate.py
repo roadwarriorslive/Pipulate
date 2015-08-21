@@ -84,7 +84,8 @@ def main():                                                         # of entry "
   formSwitch = {'clear': ClearSheet1(csrf_enabled=False),
                 'crawl': CrawlTypes(csrf_enabled=False)
                 }
-  form2 = formSwitch['clear']
+  if ':' in form.options.data:
+    form2 = formSwitch[form.options.data.split(':')[1]]
   pipstate = None
   menudefault = None
   stext = None
