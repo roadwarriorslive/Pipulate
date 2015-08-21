@@ -81,7 +81,9 @@ def main():                                                         # of entry "
   stop = False                                                      # Pipulate "stops" unless permitted to continue.
   streamit = False                                                  # Controls Flask's stream versus render template.
   form = PipForm(csrf_enabled=False)                                # All WTForms are instances of classes. Main form.
-  formSwitch = {'clear': ClearSheet1(csrf_enabled=False)}
+  formSwitch = {'clear': ClearSheet1(csrf_enabled=False),
+                'crawl': CrawlTypes(csrf_enabled=False)
+                }
   form2 = formSwitch['clear']
   pipstate = None
   menudefault = None

@@ -84,6 +84,11 @@ class ClearSheet1(PipForm2):
     ('clear', 'Yes, clear Sheet 1.'),
     ('home', 'No, bad idea.')])
 
+class CrawlTypes(PipForm2):
+  radios = RadioField(choices=[
+    ('crawl1', 'Crawl Depth 1'),
+    ('crawl2', 'Crawl Depth 2')])
+
 class AnotherMenu(PipForm2):
   radios = RadioField(choices=crawlchoices())
   checks = SelectMultipleField(choices=crawlchoices(),
