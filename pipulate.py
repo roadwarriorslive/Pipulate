@@ -313,20 +313,23 @@ def main():                                                         # of entry "
         flash("You can also add more keyword variations by just typing them in.")
         flash('Then select "Harvest Keywords" from the dropdown menu.')
         flash('You can then find your keywords under the Harvest tab.')
-      elif gdoc.sheet1.row_values(1)==[] and gdoc.sheet1.row_values(2) == []:
+      else:
         session.pop('_flashes', None)
         flash('Pipulate will process the "%s" tab in the "%s" Google Spreadsheet.' % (globs.TAB, globs.DOCLINK))
         flash("You can target any Spreadsheet simply by clicking the bookmarklet from there.")
         if readytopip:
           flash('The question marks in %s indicate that you are ready to Pipulate.')
           flash("So, what are you waiting for? Hit that button!")
-        else:
+        elif gdoc.sheet1.row_values(1)==[] and gdoc.sheet1.row_values(2) == []:
           flash("Because the first two rows of %s are blank, you can do one of the following:" % globs.TAB)
           flash("Visit %s and set up %s with input values, a function and question mark," % (globs.DOCLINK, globs.TAB))
           flash('Select "Crawl Website" from the menu,')
           flash('Select an "Auto Setup" from menu,')
           flash('Harvest keywords,')
           flash('Watch a demo.')
+        else:
+          flash("It appears %s has no queston marks." % globs.TAB)
+          flash('Maybe select "Add Columns" from the menu to add some KPIs.')
     except:
       pass
   if streamit:
