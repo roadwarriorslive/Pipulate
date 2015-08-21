@@ -249,7 +249,10 @@ def main():                                                         # of entry "
     #                                         
     if form2.secondary.data == 'on':
       interStitial = True
-      globs.PIPURL = form2.pipurl.data
+      if 'radios' in form2:
+        globs.PIPMODE = form2.radios.data
+      elif 'checkboxes' in form2:
+        globs.PIPMODE = form2.checkbox.data
       if ':' in globs.PIPMODE:
         globs.PIPMODE = globs.PIPMODE.split(':')[1]
       streamit = stream_with_context(Pipulate())
