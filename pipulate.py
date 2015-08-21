@@ -92,8 +92,7 @@ def main():                                                         # of entry "
     form2 = PipForm2(csrf_enabled=False)
   if 'secondary' in form2 and form2.secondary.data == 'on':
     if request.method == 'POST':
-      gotcha(form2.options.data)
-      form2 = formSwitch[form.options.data]
+      form2 = formSwitch[form.options.data.split(':')[1]]
   menudefault = None
   stext = None
   configform = ConfigForm(csrf_enabled=False)                       # The form to let you 1st time configure server.
@@ -224,14 +223,14 @@ def main():                                                         # of entry "
     #                                         
     if form2 and form2.secondary.data == 'on':
       menutwo = True
-      gotcha(dir(form2))
       if 'radios' in form2:
         globs.PIPMODE = form2.radios.data
       elif 'checkboxes' in form2:
         globs.PIPMODE = form2.checkbox.data
       if ':' in globs.PIPMODE:
         globs.PIPMODE = globs.PIPMODE.split(':')[1]
-      gotcha("PIPMODE: %s" % globs.PIPMODE)
+      if globs.PIPMODE == 'cancel':
+        return redirect(url_for('main', u=form2.pipurl.data))
       streamit = stream_with_context(Pipulate())
     elif form.pipurl.data:
       globs.PIPURL = form.pipurl.data
