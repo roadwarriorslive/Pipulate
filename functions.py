@@ -585,3 +585,6 @@ def sheetinitializer(sheet1key):
   sinit = {}
   sinit['crawl'] = (['source', 'crawl'], [globs.PIPURL, '?'])
   return sinit[sheet1key]
+
+def cancel():
+  globs.STOP = True

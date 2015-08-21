@@ -85,10 +85,15 @@ def main():                                                         # of entry "
   formSwitch = {'clear': ClearSheet1(csrf_enabled=False),
                 'crawl': CrawlTypes(csrf_enabled=False)
                 }
+  form2 = None
   if ':' in form.options.data:
     form2 = formSwitch[form.options.data.split(':')[1]]
   else:
-    form2 = None
+    form2 = PipForm2(csrf_enabled=False)
+  if 'secondary' in form2 and form2.secondary.data == 'on':
+    if request.method == 'POST':
+      gotcha(form2.options.data)
+      form2 = formSwitch[form.options.data]
   menudefault = None
   stext = None
   configform = ConfigForm(csrf_enabled=False)                       # The form to let you 1st time configure server.
@@ -219,12 +224,14 @@ def main():                                                         # of entry "
     #                                         
     if form2 and form2.secondary.data == 'on':
       menutwo = True
+      gotcha(dir(form2))
       if 'radios' in form2:
         globs.PIPMODE = form2.radios.data
       elif 'checkboxes' in form2:
         globs.PIPMODE = form2.checkbox.data
       if ':' in globs.PIPMODE:
         globs.PIPMODE = globs.PIPMODE.split(':')[1]
+      gotcha("PIPMODE: %s" % globs.PIPMODE)
       streamit = stream_with_context(Pipulate())
     elif form.pipurl.data:
       globs.PIPURL = form.pipurl.data
@@ -329,6 +336,7 @@ def main():                                                         # of entry "
           flash('Watch a demo.')
         else:
           flash("It appears %s has no queston marks." % globs.TAB)
+          flash('If you would like to perform a crawl or setup, you will need to select "Clear Sheet 1" from the menu first.')
           flash('Maybe select "Add Columns" from the menu to add some KPIs.')
     except:
       pass
@@ -502,9 +510,6 @@ def Pipulate(dockey='', token=''):
       yme = "%s spreadsheet opened!" % globs.DOCLINK
       yield yme, "Spreadsheet Opened", "", ""
 
-      if globs.PIPMODE == 'learn':
-        out("<script>alert('hit');</script>")
-
       if (globs.PIPMODE == 'keywords'
         and globs.KEYWORDS 
         and globs.KEYWORDS[:1] != '[' 
@@ -634,7 +639,7 @@ def Pipulate(dockey='', token=''):
       except:
         pass
       if tabs:
-        out("These tabs are present: %s" % tabs)
+        out("Tabs Read!")
         if globs.WEB:
           yield "Tabs successfully found/created!", "Tabs Created", tabs, ""
       stop = True
