@@ -53,10 +53,13 @@ def crawlchoices():
   ]
 
 from flask_wtf import Form
-from wtforms import   (StringField, RadioField,
-                      HiddenField, SelectMultipleField,
-                      TextAreaField,
-                      SelectField, widgets)
+from wtforms import (StringField,
+                    RadioField,
+                    HiddenField, 
+                    SelectMultipleField,
+                    TextAreaField,
+                    SelectField, 
+                    widgets)
 
 class ConfigForm(Form):
   """Define form for aquiring configuration values."""
