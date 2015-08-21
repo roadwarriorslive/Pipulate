@@ -105,6 +105,25 @@ def scrapes():
 # Not all functions you encounter here will have the ability to add new rows.
 # They require special init functions to set up the column names beforehand.
 
+def setolinks(url):
+  '''Return a list of links from a given url'''
+  import lxml.html
+  apexdom = apex(url)
+  ro = requests.get(url, timeout=5, verify=False)
+  if ro.status_code == 200:
+    doc = lxml.html.fromstring(ro.text)
+    doc.make_links_absolute(url)
+    somelinks = doc.xpath('/html/body//a/@href')
+    links = set()
+    for alink in somelinks:
+      if urlparse.urlparse(alink)[1][-len(apexdom):] == apexdom:
+        if alink != url:
+          links.add(alink)
+    links = list(links)
+    return links
+  else:
+    return None
+
 def crawl(url):
   """Grab HTML from a link, parse links and add a row per link to spreadsheet."""
   fcols = ['target', 'depth', 'crawl2']
@@ -120,25 +139,9 @@ def crawl(url):
   InsertRows(globs.sheet, linkslist, 2)
   return ""
 
-def setolinks(url):
-  import lxml.html
-  apexdom = apex(url)
-  ro = requests.get(url, timeout=5, verify=False)
-  if ro.status_code == '200':
-    doc = lxml.html.fromstring(ro.text)
-    doc.make_links_absolute(url)
-    somelinks = doc.xpath('/html/body//a/@href')
-    links = set()
-    for alink in somelinks:
-      if urlparse.urlparse(alink)[1][-len(apexdom):] == apexdom:
-        if alink != url:
-          links.add(alink)
-    links = list(links)
-    return links
-  else:
-    return None
-
 def crawl2(target, depth='0'):
+  '''Performs second degree crawling from the 1st crawl function. No recursion
+  necessary for a shalow crawl.'''
   links = setolinks(target)
   if links:
     y = len(links)

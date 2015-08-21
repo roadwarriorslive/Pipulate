@@ -5,7 +5,8 @@ def documentation():
   s = []
   s.append(['Canonical',            'Crawl',     'Url',                       'Return Canonical.', ''])
   s.append(['Comments',             'Facebook',  'Url',                       'Return Facebook count.', ''])
-  s.append(['Crawl',                'Crawl',     'Source',                    'Get all links on source.', ''])
+  s.append(['Crawl',                'Crawl',     'Url',                       'Make one row per link found on url, setting stage for Crawl2', ''])
+  s.append(['Crawl2',               'Crawl',     'Target',                    'Make one row per link found on target, as set up by Crawl', ''])
   s.append(['Description',          'Crawl',     'Url',                       'Return meta description.', ''])
   s.append(['Difficulty',           'Keyword',   'Keyword',                   'Return SEMRush Keyword Difficulty.', ''])
   s.append(['DomainAuthority',      'MOZ',       'Url',                       'Return Moz Domain Authority score for a URL.', ''])
