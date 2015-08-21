@@ -80,13 +80,13 @@ def main():                                                         # of entry "
   out("ENTERED MAIN FUNCTION", "0")                                 # Establish hierarchical indenting of debug system.
   stop = False                                                      # Pipulate "stops" unless permitted to continue.
   streamit = False                                                  # Controls Flask's stream versus render template.
+  readytopip = False
   form = PipForm(csrf_enabled=False)                                # All WTForms are instances of classes. Main form.
   formSwitch = {'clear': ClearSheet1(csrf_enabled=False),
                 'crawl': CrawlTypes(csrf_enabled=False)
                 }
   if ':' in form.options.data:
     form2 = formSwitch[form.options.data.split(':')[1]]
-  pipstate = None
   menudefault = None
   stext = None
   configform = ConfigForm(csrf_enabled=False)                       # The form to let you 1st time configure server.
@@ -193,9 +193,8 @@ def main():                                                         # of entry "
         globs.DOCID = gdoc.id
         globs.SHEET = gdoc.title
         globs.TAB = gdoc.sheet1.title
-        if gdoc.sheet1.row_values(1)==[] and gdoc.sheet1.row_values(2) == []:
-          pipstate = ['Learning', 'to', 'read', 'JSON', 'data', "isn't", 'hard.']
-        elif gdoc.sheet1.find('?'):
+        if gdoc.sheet1.find('?'):
+          readytopip = True
           menudefault = "qmarks"
       except:
         pass
@@ -208,7 +207,7 @@ def main():                                                         # of entry "
         out("EXITING MAIN FUNCTION RENDER INDOCTRINATE", "0", '-')
         return render_template('pipulate.html', form=form, select=None)
   globs.DOCLINK = '<a href="%s/d/%s/edit#gid=0" target="_blank">%s</a>' % (globs.SHEETS, globs.DOCID, globs.SHEET)
-  interStitial = False
+  menutwo = False
   if request.method == 'POST':
     #  ____  _                              _ 
     # / ___|| |__   __ _ ______ _ _ __ ___ | |
@@ -217,7 +216,7 @@ def main():                                                         # of entry "
     # |____/|_| |_|\__,_/___\__,_|_| |_| |_(_)
     #                                         
     if form2.secondary.data == 'on':
-      interStitial = True
+      menutwo = True
       if 'radios' in form2:
         globs.PIPMODE = form2.radios.data
       elif 'checkboxes' in form2:
@@ -301,8 +300,9 @@ def main():                                                         # of entry "
   options = menumaker()
   if request.method == 'GET':
     try:
-      if stext and globs.SHEETS not in globs.PIPURL:
-        gotcha("STEXT: %s" % stext)
+      if menutwo:
+        pass
+      elif stext and globs.SHEETS not in globs.PIPURL:
         session.pop('_flashes', None)
         flash("Congratulations! You have chosen to harvest keywords.") 
         flash("The words filled into the above textarea will be inserted into %s." % globs.SHEET)
@@ -310,19 +310,22 @@ def main():                                                         # of entry "
         flash("You can also add more keyword variations by just typing them in.")
         flash('Then select "Harvest Keywords" from the dropdown menu.')
         flash('You can then find your keywords under the Harvest tab.')
-      elif not interStitial:
+      elif gdoc.sheet1.row_values(1)==[] and gdoc.sheet1.row_values(2) == []:
         session.pop('_flashes', None)
-        flash("Targeted Google Spreadsheet is %s." % globs.DOCLINK)
-        flash('The Tab in position 1 is that will be Pipulated is "%s".' % globs.TAB)
-        if menudefault:
-          flash("The ?'s in the %s tab indicate that you are ready to Pipulate!" % globs.TAB)
+        flash('Pipulate will process the "%s" tab in the "%s" Google Spreadsheet.' % (globs.TAB, globs.DOCLINK))
+        flash("You can target any Spreadsheet simply by clicking the bookmarklet from there.")
+        if readytopip:
+          flash('The question marks in %s indicate that you are ready to Pipulate.')
           flash("So, what are you waiting for? Hit that button!")
         else:
-          flash("The lack of ?'s in the %s tab indicates you must choose what you want to do." % globs.TAB)
+          flash("Because the first two rows of %s are blank, you can do one of the following:" % globs.TAB)
+          flash("Visit %s and set up %s with input values, a function and question mark," % (globs.DOCLINK, globs.TAB))
+          flash('Select "Site crawl" from the menu,')
+          flash('Select an "Auto-setup" from menu,')
+          flash('Harvest keywords,')
+          flash('Watch a demo.')
     except:
       pass
-  if pipstate:
-    form.magicbox.data = pipstate
   if streamit:
     #Handle streaming user interface updates resulting from a POST method call.
     return Response(stream_template('pipulate.html', form=form, select=options, data=streamit))
