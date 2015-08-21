@@ -52,25 +52,25 @@ def crawlchoices():
     ('bar', 'Bar')
   ]
 
-from flask_wtf import Form                                          # Those other files, like webpipulate.py
-from wtforms import   (StringField, RadioField,                     # and loopipulate.py are merely shims for
-                      HiddenField, SelectMultipleField,             # different Python code execution contexts.
-                      TextAreaField,                                # Webpipulate creates an instance of the
-                      SelectField, widgets)                         # Flask webserving app object, perhaps
+from flask_wtf import Form
+from wtforms import   (StringField, RadioField,
+                      HiddenField, SelectMultipleField,
+                      TextAreaField,
+                      SelectField, widgets)
 
-class ConfigForm(Form):                                             # Now, we define the forms we're going ot need.
+class ConfigForm(Form):
   """Define form for aquiring configuration values."""
   import binascii, os
-  apdef = binascii.hexlify(os.urandom(24))                          # Flask needs application secrets for sessions.
+  apdef = binascii.hexlify(os.urandom(24))
   appsecret = StringField('Flask app secret (auto-generated):', default=apdef)
-  clientid = StringField('Client ID (from Google Dev Console):')    # OAuth2 equivalent to username and password.
+  clientid = StringField('Client ID (from Google Dev Console):')
   clientsecret = StringField('Client secret (from Google Dev Console):')
 
 class PipForm(Form):
   """Define form for main Pipulate user interface."""
-  pipurl = StringField('Paste a Google Sheet URL:')                 # Pipulate must know a Google Sheet URL to work.
-  magicbox = TextAreaField("magicbox")                              # This box shows the JSON data being worked upon.
-  options = SelectField("options")                                  # What you're asking Pipulate to do.
+  pipurl = StringField('Paste a Google Sheet URL:')
+  magicbox = TextAreaField("magicbox")
+  options = SelectField("options")
 
 class PipForm2(PipForm):
   """Define form for interstitial options"""
@@ -78,13 +78,13 @@ class PipForm2(PipForm):
 
 class ClearSheet1(PipForm2):
   radios = RadioField(choices=[
-    ('clear', 'Yes, clear Sheet 1.'), 
+    ('clear', 'Yes, clear Sheet 1.'),
     ('home', 'No, bad idea.')])
 
 class AnotherMenu(PipForm2):
   radios = RadioField(choices=crawlchoices())
-  checks = SelectMultipleField(choices=crawlchoices(), 
-    option_widget=widgets.CheckboxInput(), 
+  checks = SelectMultipleField(choices=crawlchoices(),
+    option_widget=widgets.CheckboxInput(),
     widget=widgets.ListWidget(prefix_label=False))
 
 def dontgetfrustrated(x):

@@ -191,7 +191,7 @@ def main():                                                         # of entry "
         globs.SHEET = gdoc.title
         globs.TAB = gdoc.sheet1.title
         if gdoc.sheet1.row_values(1)==[] and gdoc.sheet1.row_values(2) == []:
-          pipstate = ['Learning', 'to', 'read', 'JSON', 'data', "isn't", "hard."]
+          pipstate = ['Learning', 'to', 'read', 'JSON', 'data', "isn't", 'hard.']
         elif gdoc.sheet1.find('?'):
           menudefault = "qmarks"
       except:
