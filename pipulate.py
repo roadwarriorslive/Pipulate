@@ -303,6 +303,7 @@ def main():                                                         # of entry "
       if menutwo:
         pass
       elif stext and globs.SHEETS not in globs.PIPURL:
+        menudefault = "keywords"
         session.pop('_flashes', None)
         flash("Congratulations! You have chosen to harvest keywords.") 
         flash("The words filled into the above textarea will be inserted into %s." % globs.SHEET)
