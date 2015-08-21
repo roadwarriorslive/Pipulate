@@ -450,6 +450,7 @@ def Pipulate(dockey='', token=''):
             gdoc = gsp.open_by_url(globs.PIPURL)
             globs.DOCID = gdoc.id
             globs.SHEET = gdoc.title
+            globs.TAB = gdoc.sheet1.title
             stop = False
             break
           except gspread.httpsession.HTTPError, e:
@@ -465,6 +466,7 @@ def Pipulate(dockey='', token=''):
             try:
               gdoc = gsp.open(globs.SHEET)
               globs.DOCID = gdoc.id
+              globs.TAB = gdoc.sheet1.title
               stop = False
               break
             except gspread.httpsession.HTTPError, e:
@@ -493,8 +495,8 @@ def Pipulate(dockey='', token=''):
           Stop() # Consider adding refresh_token logic for users (versus the scheduler)
       out("END LOGIN ATTEMPT", "2", '-')
       if globs.WEB: yield unlock
-      out("Google Spreadsheet %s successfully opened." % globs.SHEET)
-      yme = "%s Sheet Opened!" % globs.SHEET
+      out("%s successfully opened." % globs.SHEET)
+      yme = "%s spreadsheet opened!" % globs.DOCLINK
       yield yme, "Spreadsheet Opened", "", ""
 
       if globs.PIPMODE == 'learn':
@@ -650,7 +652,7 @@ def Pipulate(dockey='', token=''):
       if globs.WEB: yield unlock
       out("Config tab copied to globals.")
       if globs.WEB:
-        yme = "Counting rows in %s sheet..." % globs.SHEET
+        yme = "Counting rows in %s tab..." % globs.TAB
         yield yme, "Counting rows", '', ''
       out("Counting rows in Pipulate tab.")
       stop = True
@@ -702,12 +704,12 @@ def Pipulate(dockey='', token=''):
         if globs.WEB: yield badtuple
         Stop()
       if globs.WEB: yield unlock
-      yme = "%s rows found in Sheet." % globs.numrows
+      yme = "%s rows with question marks found in %s tab." % (globs.numrows, globs.TAB)
       out(yme)
       if globs.WEB: yield yme, "", "", ""
       if globs.numrows == 0 and globs.PIPMODE == 'qmarks':
         if globs.WEB:
-          yme = "Double-check that %s Sheet is set up correctly." % globs.DOCLINK
+          yme = "Double-check that the %s sheet in %s is set up correctly." % (globs.TAB, globs.DOCLINK)
           yield yme, "Pipulate needs question marks to replace.", "", ""
           yield "spinerr", "", "", ""
         return
