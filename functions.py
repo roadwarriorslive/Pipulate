@@ -105,47 +105,53 @@ def scrapes():
 # Not all functions you encounter here will have the ability to add new rows.
 # They require special init functions to set up the column names beforehand.
 
-def crawl(source):
+def crawl(url):
   """Grab HTML from a link, parse links and add a row per link to spreadsheet."""
-  fcols = ['target', 'depth', 'getlinks']
+  fcols = ['target', 'depth', 'crawl2']
   therange = 'B1:%s2' % globs.letter[len(fcols)+1]
   CellList = globs.sheet.range(therange)
   vals = fcols + [] + [] + []
   for i, val in enumerate(vals): # First, we add the columns we know we're going to need.
     CellList[i].value = val
   globs.sheet.update_cells(CellList)
-  links = setolinks(source)
+  links = setolinks(url)
   y = len(links)
-  linkslist = zip([source]*y, links, ['0']*y, ['?']*y)
+  linkslist = zip([url]*y, links, ['0']*y, ['?']*y)
   InsertRows(globs.sheet, linkslist, 2)
   return ""
 
-def setolinks(source):
+def setolinks(url):
   import lxml.html
-  apexdom = apex(source)
-  ro = requests.get(source, timeout=5, verify=False)
-  doc = lxml.html.fromstring(ro.text)
-  doc.make_links_absolute(source)
-  somelinks = doc.xpath('/html/body//a/@href')
-  links = set()
-  for alink in somelinks:
-    if urlparse.urlparse(alink)[1][-len(apexdom):] == apexdom:
-      if alink != source:
-        links.add(alink)
-  links = list(links)
-  return links
+  apexdom = apex(url)
+  ro = requests.get(url, timeout=5, verify=False)
+  if ro.status_code == '200':
+    doc = lxml.html.fromstring(ro.text)
+    doc.make_links_absolute(url)
+    somelinks = doc.xpath('/html/body//a/@href')
+    links = set()
+    for alink in somelinks:
+      if urlparse.urlparse(alink)[1][-len(apexdom):] == apexdom:
+        if alink != url:
+          links.add(alink)
+    links = list(links)
+    return links
+  else:
+    return None
 
-def getlinks(target, depth='0'):
+def crawl2(target, depth='0'):
   links = setolinks(target)
-  y = len(links)
-  globs.numrows = len(globs.sheet.col_values(1))
-  if depth:
-    depth = int(depth) + 1
-  linkslist = zip([target]*y, links, [depth]*y)
-  InsertRows(globs.sheet, linkslist, globs.numrows)
-  return "done"
+  if links:
+    y = len(links)
+    globs.numrows = len(globs.sheet.col_values(1))
+    if depth:
+      depth = int(depth) + 1
+    linkslist = zip([target]*y, links, [depth]*y)
+    InsertRows(globs.sheet, linkslist, globs.numrows)
+    return "done"
+  else:
+    return "Can not get"
 
-def crawl2(url):
+def getlinks(url):
   """Grab HTML from a URL, parse links and add a row per link to spreadsheet."""
   fcols = ['Depth', 'Title', 'Description']
   therange = 'B1:%s2' % globs.letter[len(fcols)+1]

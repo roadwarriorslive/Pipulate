@@ -82,12 +82,15 @@ class PipForm2(PipForm):
 class ClearSheet1(PipForm2):
   radios = RadioField(choices=[
     ('clear', 'Yes, clear Sheet 1.'),
-    ('cancel', 'No, bad idea.')])
+    ('cancel', 'Cancel')
+    ])
 
 class CrawlTypes(PipForm2):
   radios = RadioField(choices=[
     ('crawl1', 'Crawl Depth 1'),
-    ('crawl2', 'Crawl Depth 2')])
+    ('crawl2', 'Crawl Depth 2'),
+    ('cancel', 'Cancel')
+    ])
 
 class AnotherMenu(PipForm2):
   radios = RadioField(choices=crawlchoices())
