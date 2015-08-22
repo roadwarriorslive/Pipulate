@@ -113,6 +113,34 @@ def formSwitch():
     'crawl': CrawlTypes(csrf_enabled=False)
   }
 
+def pipSwitch():
+  return {
+    'clear': ClearSheet1B(),
+    'cancel': Cancel(),
+    'crawl1': SetupCrawl1(),
+    'crawl2': SetupCrawl2(),
+    'crawl3': SetupCrawl3(),
+    'getlinks': SetupGetLinks()
+  }
+
+def ClearSheet1B():
+  pass
+
+def Canel():
+  pass
+
+def SetupCrawl1():
+  pass
+
+def SetupCrawl2():
+  pass
+
+def SetupCrawl3():
+  pass
+
+def SetupGetLinks():
+  pass
+
 def dontgetfrustrated(x):
   s = []
   s.append("Heavy traffic on the Inter-Webs tonight.")

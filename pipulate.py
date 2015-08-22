@@ -262,7 +262,8 @@ def main():                                                         # of entry "
         # Arbitrary code before and after "emptying out" a pip-cycle can do housekeeping and such.
         # We will basically be activating THIS switch:
 
-        # pipSwitch[globs.MODE]
+        
+        pipSwitch[globs.MODE]
 
       streamit = stream_with_context(Pipulate())
     elif form.pipurl.data:
