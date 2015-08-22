@@ -191,10 +191,10 @@ def main():                                                         # of entry "
         if tasteMe:
           gdoc = gsp.open_by_url(tasteMe)
         else:
-          gdoc = gsp.open(globs.SHEET)
+          gdoc = gsp.open(globs.NAME)
         needsPipulate = False
         globs.DOCID = gdoc.id
-        globs.SHEET = gdoc.title
+        globs.NAME = gdoc.title
         globs.TAB = gdoc.sheet1.title
         if gdoc.sheet1.find('?'):
           readytopip = True
@@ -209,7 +209,7 @@ def main():                                                         # of entry "
       elif needsPipulate and 'access_token' not in request.args:
         out("EXITING MAIN FUNCTION RENDER INDOCTRINATE", "0", '-')
         return render_template('pipulate.html', form=form, select=None)
-  globs.DOCLINK = '<a href="%s/d/%s/edit#gid=0" target="_blank">%s</a>' % (globs.SHEETS, globs.DOCID, globs.SHEET)
+  globs.DOCLINK = '<a href="%s/d/%s/edit#gid=0" target="_blank">%s</a>' % (globs.SHEETS, globs.DOCID, globs.NAME)
   menutwo = False
   if request.method == 'POST':
     #  ____  _                              _ 
@@ -311,7 +311,7 @@ def main():                                                         # of entry "
         menudefault = "keywords"
         session.pop('_flashes', None)
         flash("Congratulations! You have chosen to harvest keywords.") 
-        flash("The words filled into the above textarea will be inserted into %s." % globs.SHEET)
+        flash("The words filled into the above textarea will be inserted into %s." % globs.NAME)
         flash("Insert commas between keywords, and each one will get its own row.")
         flash("You can also add more keyword variations by just typing them in.")
         flash('Then select "Harvest Keywords" from the dropdown menu.')
@@ -455,7 +455,7 @@ def Pipulate(dockey='', token=''):
           try:
             gdoc = gsp.open_by_url(globs.PIPURL)
             globs.DOCID = gdoc.id
-            globs.SHEET = gdoc.title
+            globs.NAME = gdoc.title
             globs.TAB = gdoc.sheet1.title
             stop = False
             break
@@ -470,7 +470,7 @@ def Pipulate(dockey='', token=''):
             break
           except gspread.exceptions.NoValidUrlKeyFound:
             try:
-              gdoc = gsp.open(globs.SHEET)
+              gdoc = gsp.open(globs.NAME)
               globs.DOCID = gdoc.id
               globs.TAB = gdoc.sheet1.title
               stop = False
@@ -493,7 +493,7 @@ def Pipulate(dockey='', token=''):
             if globs.WEB: yield dontgetfrustrated(x)
             out("Retry login %s of %s" % (x, 10))
             time.sleep(6)
-        globs.DOCLINK = '<a href="%s/d/%s/edit#gid=0" target="_blank">%s</a>' % (globs.SHEETS, globs.DOCID, globs.SHEET)
+        globs.DOCLINK = '<a href="%s/d/%s/edit#gid=0" target="_blank">%s</a>' % (globs.SHEETS, globs.DOCID, globs.NAME)
         if stop:
           if globs.WEB: 
             yield "spinerr", "", "", ""
@@ -501,7 +501,7 @@ def Pipulate(dockey='', token=''):
           Stop() # Consider adding refresh_token logic for users (versus the scheduler)
       out("END LOGIN ATTEMPT", "2", '-')
       if globs.WEB: yield unlock
-      out("%s successfully opened." % globs.SHEET)
+      out("%s successfully opened." % globs.NAME)
       yme = "%s spreadsheet opened!" % globs.DOCLINK
       yield yme, "Spreadsheet Opened", "", ""
 
@@ -1271,7 +1271,7 @@ def getLabel():
   url = request.base_url
   parsed = urlparse.urlparse(url)
   subdomain = parsed.hostname.split('.')[0]
-  blab = globs.SHEET
+  blab = globs.NAME
   droidcut = "ppp"
   if subdomain == 'localhost':
     blab = "%s %s 8888" % (droidcut, "Localhost")
@@ -1284,7 +1284,7 @@ def getLabel():
 def getBookmarklet():
   """Return the HTML required to create a draggable Pipulate bookmarklet link."""
   host = request.headers['Host']
-  bname = globs.SHEET
+  bname = globs.NAME
   #return '''javascript:(function(){window.open('http://%s/?u='+encodeURIComponent(document.location.href)+'&d='+Date.now()+'&s='+encodeURIComponent(window.getSelection?window.getSelection():document.selection.createRange().text)+'&c='+window.btoa(unescape(encodeURIComponent(document.cookie))), '%s', 'toolbar=0,resizable=1,scrollbars=1,status=1,width=630,height=600');})();''' % (host, bname)
   return '''javascript:(function(){open('http://%s/?u='+encodeURIComponent(document.location.href)+'&d='+Date.now()+'&s='+encodeURIComponent(window.getSelection?window.getSelection():document.selection.createRange().text)+'&c='+window.btoa(unescape(encodeURIComponent(document.cookie))));})();''' % (host)
 
