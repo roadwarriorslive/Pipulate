@@ -549,6 +549,12 @@ def Pipulate(preproc='', dockey='', token=''):
       # |___/\___|\__|  \__,_| .__/  |___/_| |_|\___|\___|\__| |_|
       #                      |_|
       # This is where special behavior like crawls get wedged in
+
+      if preproc:
+        for instruction in preproc:
+          yme = "%s : %s" % (instruction[0], instruction[1])
+          yield yme, "", "", ""
+
       anything = re.compile('.+')
       cell = None
       if globs.MODE == 'clear':
@@ -1569,8 +1575,11 @@ def pipSwitch():
   }
 
 def ClearSheet1B():
-  out("ClearSheet!")
-  return stream_with_context(Pipulate())
+  do =  [
+          ('clear', 'sheet1'),
+          ('clear', 'sheet1')
+        ]
+  return stream_with_context(Pipulate(do))
 
 def Cancel():
   out("Cancel")
