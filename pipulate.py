@@ -264,16 +264,16 @@ def main():                                                         # of entry "
     else:
       flash('Please enter a URL to Pipulate.')
   else:
-    #  ___                                _        _             
-    # |__ \__ _ _   _  ___ _ __ _   _ ___| |_ _ __(_)_ __   __ _ 
-    #   / / _` | | | |/ _ \ '__| | | / __| __| '__| | '_ \ / _` |
-    #  |_| (_| | |_| |  __/ |  | |_| \__ \ |_| |  | | | | | (_| |
-    #  (_)\__, |\__,_|\___|_|   \__, |___/\__|_|  |_|_| |_|\__, |
-    #        |_|                |___/                      |___/ 
-    if request.args and 's' in request.args: # User highlighted text on page before clicking bookmarklet
-      form.magicbox.data = request.args.get('s')
-      selectedtext = request.args.get('s')
-    elif session and 's' in session: # Selected text made the journey through login
+    #  ___                                _        _              You're here because method doesn't equal POST.
+    # |__ \__ _ _   _  ___ _ __ _   _ ___| |_ _ __(_)_ __   __ _  It's a very important place to be, because
+    #   / / _` | | | |/ _ \ '__| | | / __| __| '__| | '_ \ / _` | data passed on the URL is a super-reliable way
+    #  |_| (_| | |_| |  __/ |  | |_| \__ \ |_| |  | | | | | (_| | to pass data between systems, sessions, or
+    #  (_)\__, |\__,_|\___|_|   \__, |___/\__|_|  |_|_| |_|\__, | what have you. That's why you'll see logout
+    #        |_|                |___/                      |___/  handling and client-to-server data handoffs.
+    if request.args and 's' in request.args:     # User highlighted text 
+      form.magicbox.data = request.args.get('s') # on page before 
+      selectedtext = request.args.get('s')       # clicking bookmarklet
+    elif session and 's' in session:             # Selected text made the journey through login
       form.magicbox.data = session['s']
       selectedtext = session['s']
     if request.args and 'access_token' in request.args: # Oops... necessary evil. Redirect quickly.
