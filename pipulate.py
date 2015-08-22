@@ -322,7 +322,7 @@ def main():                                                         # of entry "
       else:
         session.pop('_flashes', None)
         flash('Pipulate will process the "%s" tab in the "%s" Google Spreadsheet.' % (globs.TAB, globs.DOCLINK))
-        flash("You can target any Spreadsheet simply by clicking the bookmarklet from there.")
+        flash("You can target any sheet simply by clicking the bookmarklet on that Google Spreadsheet.")
         if readytopip:
           flash('The question marks in %s indicate that you are ready to Pipulate.')
           flash("So, what are you waiting for? Hit that button!")

@@ -20,6 +20,9 @@ body {
 h1, h2, p, label {
   color: white;
 }
+td, th {
+  padding: .5em 2.4em .5em .6em;
+}
 .burger > i {
   color: black;
   margin-right: 6px;
@@ -91,8 +94,13 @@ a {
   max-width: 100%;
   max-height: 100%;
 }
-[type=checkbox]:checked+.checkable:after, [type=radio]:checked+.checkable:after {
+[type=checkbox]+.checkable:after, [type=checkbox]+.checkable:before,
+[type=radio]+.checkable:after, [type=radio]+.checkable:before {
   color: black;
+  top: 12px;
+}
+[type=checkbox]+.checkable:before, [type=radio]+.checkable:before {
+  border: 3px solid #fff;
 }
 nav{
   background-color: #EEEEEE;
@@ -104,6 +112,7 @@ nav{
   margin-bottom: 5px;
 }
 #pipslate {
+  position: relative;
   border: 2px solid lightgrey;
   background-color: slategray;
   padding-top: 15px;
@@ -112,7 +121,7 @@ nav{
 }
 #pipchoice {
   width: 100%;
-  font-size: 24px;
+  font-size: 22px;
   margin-left: auto;
   margin-right: auto;
 }
