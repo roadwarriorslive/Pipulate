@@ -124,6 +124,7 @@ nav{
   font-weight: bold;
 }
 #magicdiv{
+  position: relative;
   margin-top: 12px;
   margin-bottom: 6px;
   margin-left: 15px;
