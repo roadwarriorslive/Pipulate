@@ -228,43 +228,8 @@ def main():                                                         # of entry "
         globs.MODE = globs.MODE.split(':')[1]
       if globs.MODE == 'cancel':
         return redirect(url_for('main', u=form2.pipurl.data))
-      #                            _ _           
-      #   _ __   ___  ___  ___  __| (_)_   _____    While it is true the Pipulate() generator  
-      #  | '_ \ / _ \/ __|/ _ \/ _` | \ \ / / _ \   could easily support infinite recursion,
-      #  | | | | (_) \__ \  __/ (_| | |\ V /  __/   doesn't mean it's a good idea. And it's not.
-      #  |_| |_|\___/|___/\___|\__,_|_| \_/ \___|   Pipulate() gets to Pipulate(). But that's all.
-      # >>> FirstGen()
-      # Going nose-first into oblivion: False
-      # >>> nosedive = False
-      # >>> def FirstGen():
-      # ...   global nosedive
-      # ...   if nosedive:
-      # ...     print("Pshwew, that was a close one!")
-      # ...   else:
-      # ...     print("Going nose-first into oblivion: %s") % nosedive
-      # ...     nosedive = True
-      # ...     FirstGen()
-      # ... 
-      # >>> FirstGen()
-      # Going nose-first into oblivion: False
-      # Pshwew, that was a close one!
-      # >>> 
-      if globs.nosedive:
-        out("You may not pipulate again.")
-      else:
-        globs.nosedive = True
+      streamit = pipSwitch()[globs.MODE]
 
-        # You are free to call Pipulate... I think.
-        # Or, maybe I just create a series of Pipulate() instances in a list
-        # then step through them with a Response(stream_template('stream.html', data=streamit)) 
-        # ListOStreams? Each entry is the definition for one question-mark replacement cycle.
-        # Any tab can be targeted--not just Sheet1.
-        # Arbitrary code before and after "emptying out" a pip-cycle can do housekeeping and such.
-        # We will basically be activating THIS switch:
-        
-        pipSwitch()[globs.MODE]
-
-      streamit = stream_with_context(Pipulate())
     elif form.pipurl.data:
       globs.PIPURL = form.pipurl.data
       if form.options.data:
@@ -1587,4 +1552,43 @@ def stringify_children(node):
   # filter removes possible Nones in texts and tails
   return ''.join(filter(None, parts))
 
+def formSwitch():
+  return {
+    'clear': ClearSheet1(csrf_enabled=False),
+    'crawl': CrawlTypes(csrf_enabled=False)
+  }
+
+def pipSwitch():
+  return {
+    'clear': ClearSheet1B(),
+    'cancel': Cancel(),
+    'crawl1': SetupCrawl1(),
+    'crawl2': SetupCrawl2(),
+    'crawl3': SetupCrawl3(),
+    'getlinks': SetupGetLinks()
+  }
+
+def ClearSheet1B():
+  out("ClearSheet")
+  return stream_with_context(Pipulate())
+
+def Cancel():
+  out("Cancel")
+  return stream_with_context(Pipulate())
+
+def SetupCrawl1():
+  out("Crawl1")
+  return stream_with_context(Pipulate())
+
+def SetupCrawl2():
+  out("Crawl2")
+  return stream_with_context(Pipulate())
+
+def SetupCrawl3():
+  out("Crawl3")
+  return stream_with_context(Pipulate())
+
+def SetupGetLinks():
+  out("SetupGetLinks")
+  return stream_with_context(Pipulate())
 
