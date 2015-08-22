@@ -103,6 +103,12 @@ class AnotherMenu(PipForm2):
     option_widget=widgets.CheckboxInput(),
     widget=widgets.ListWidget(prefix_label=False))
 
+def formSwitch():
+  return {
+    'clear': ClearSheet1(csrf_enabled=False),
+    'crawl': CrawlTypes(csrf_enabled=False)
+  }
+
 def dontgetfrustrated(x):
   s = []
   s.append("Heavy traffic on the Inter-Webs tonight.")

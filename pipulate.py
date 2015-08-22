@@ -82,17 +82,15 @@ def main():                                                         # of entry "
   streamit = False                                                  # Controls Flask's stream versus render template.
   readytopip = False
   form = PipForm(csrf_enabled=False)                                # All WTForms are instances of classes. Main form.
-  formSwitch = {'clear': ClearSheet1(csrf_enabled=False),
-                'crawl': CrawlTypes(csrf_enabled=False)
-                }
+  formDict = formSwitch()
   form2 = None
   if ':' in form.options.data:
-    form2 = formSwitch[form.options.data.split(':')[1]]
+    form2 = formDict[form.options.data.split(':')[1]]
   else:
     form2 = PipForm2(csrf_enabled=False)
   if 'secondary' in form2 and form2.secondary.data == 'on':
     if request.method == 'POST':
-      form2 = formSwitch[form.options.data.split(':')[1]]
+      form2 = formDict[form.options.data.split(':')[1]]
   menudefault = None
   stext = None
   configform = ConfigForm(csrf_enabled=False)                       # The form to let you 1st time configure server.
