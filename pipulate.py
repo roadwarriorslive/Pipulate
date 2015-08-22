@@ -1528,56 +1528,9 @@ def questionmark(oldrow, rowdex, coldex):
       return True
   return False
 
-def gethtml(url):
-  if globs.html:
-    out("Recycling HTML.")
-    return globs.html
-  else:
-    out("Doing first HTML fetch for row.")
-    path = urlparse.urlparse(url).path
-    ext = os.path.splitext(path)[1]
-    if ext not in globs.texttypes:
-      try:
-        defend = requests.head(url)
-      except:
-        return None
-      if 'Content-Type' in defend.headers:
-        ct = defend.headers['Content-Type']
-      else:
-        return None
-      if ct != '' and 'text' not in ct:
-        return None
-    try:
-      globs.hobj = requests.get(url, timeout=(5, 10))
-    except:
-      return None
-    globs.html = globs.hobj.text
-  return globs.html
-
-def html(url):
-  return gethtml(url)
-
 def convertisotime(timestamp):
   i = datetime.datetime(*map(int, re.split('[^\d]', timestamp)[:-1]))
   return i.strftime("%m/%d/%Y %H:%M:%S")
-
-def timestamp():
-  i = datetime.datetime.now()
-  return i.strftime("%m/%d/%Y %H:%M:%S")
-
-def datestamp():
-  now = datetime.datetime.now()
-  now = now.strftime("%B %d, %Y")
-  return now
-
-def extension(url):
-  """Return the file extension, given (typically) a URL."""
-  if url:
-    path = urlparse.urlparse(url).path
-    ext = os.path.splitext(path)[1]
-    return ext
-  else:
-    return None
 
 def getargval(anarg, defargval, onerow):
   for coldex, acol in enumerate(globs.row1):

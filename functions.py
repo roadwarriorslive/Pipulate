@@ -21,6 +21,38 @@ from common import *                                      #For if user function 
 # Take a look at some support-functions you can call from your own functions.
 # The jobs done by these are so common, they get used almost everywhere.
 
+def gethtml(url):
+  '''Return HTML text from given URL. Makes attempt to recycle pre-fetched
+  HTML from current if any of them used the same URL input parameter.'''
+  if globs.html:
+    out("Recycling HTML.")
+    return globs.html
+  else:
+    out("Doing first HTML fetch for row.")
+    path = urlparse.urlparse(url).path
+    ext = os.path.splitext(path)[1]
+    if ext not in globs.texttypes:
+      try:
+        defend = requests.head(url)
+      except:
+        return None
+      if 'Content-Type' in defend.headers:
+        ct = defend.headers['Content-Type']
+      else:
+        return None
+      if ct != '' and 'text' not in ct:
+        return None
+    try:
+      globs.hobj = requests.get(url, timeout=(5, 10))
+    except:
+      return None
+    globs.html = globs.hobj.text
+  return globs.html
+
+def html(url):
+  '''Return HTML text for given URL. Simple wrapper for gethtml function.'''
+  return gethtml(url)
+
 def walkdict(obj, key):
   """Take a JSON object and key and return the first matched value from the object."""
   stack = obj.items()
@@ -32,6 +64,26 @@ def walkdict(obj, key):
       if k == key:
         return v
   return None
+
+def timestamp():
+  '''Return current date in simple format.'''
+  i = datetime.datetime.now()
+  return i.strftime("%m/%d/%Y %H:%M:%S")
+
+def datestamp():
+  'Return current time and date in time-trending-friendly format.'
+  now = datetime.datetime.now()
+  now = now.strftime("%B %d, %Y")
+  return now
+
+def extension(url):
+  """Return the file extension, given (typically) a URL."""
+  if url:
+    path = urlparse.urlparse(url).path
+    ext = os.path.splitext(path)[1]
+    return ext
+  else:
+    return None
 
 def regex(text, pattern):
   """Take text and a Regular Expression using a group named scrape, and return match."""
