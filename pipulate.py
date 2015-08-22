@@ -212,11 +212,11 @@ def main():                                                         # of entry "
   globs.DOCLINK = '<a href="%s/d/%s/edit#gid=0" target="_blank">%s</a>' % (globs.SHEETS, globs.DOCID, globs.NAME)
   menutwo = False
   if request.method == 'POST':
-    #  ____  _                              _ 
-    # / ___|| |__   __ _ ______ _ _ __ ___ | |
-    # \___ \| '_ \ / _` |_  / _` | '_ ` _ \| |
-    #  ___) | | | | (_| |/ / (_| | | | | | |_|
-    # |____/|_| |_|\__,_/___\__,_|_| |_| |_(_)
+    #  ____  _                              _   Shazam! is the block in which we create the
+    # / ___|| |__   __ _ ______ _ _ __ ___ | |  first instance of the Pipulate() generator
+    # \___ \| '_ \ / _` |_  / _` | '_ ` _ \| |  object that gets called again later as the
+    #  ___) | | | | (_| |/ / (_| | | | | | |_|  data paramater of a stream_template() call 
+    # |____/|_| |_|\__,_/___\__,_|_| |_| |_(_)  enabling our magic streaming output. Shazam!
     #                                         
     if form2 and form2.secondary.data == 'on':
       menutwo = True
@@ -228,6 +228,27 @@ def main():                                                         # of entry "
         globs.MODE = globs.MODE.split(':')[1]
       if globs.MODE == 'cancel':
         return redirect(url_for('main', u=form2.pipurl.data))
+      #                            _ _           
+      #   _ __   ___  ___  ___  __| (_)_   _____    While it is true the Pipulate() generator  
+      #  | '_ \ / _ \/ __|/ _ \/ _` | \ \ / / _ \   could easily support infinite recursion,
+      #  | | | | (_) \__ \  __/ (_| | |\ V /  __/   doesn't mean it's a good idea. And it's not.
+      #  |_| |_|\___/|___/\___|\__,_|_| \_/ \___|   Pipulate() gets to Pipulate(). But that's all.
+      # >>> FirstGen()
+      # Going nose-first into oblivion: False
+      # >>> nosedive = False
+      # >>> def FirstGen():
+      # ...   global nosedive
+      # ...   if nosedive:
+      # ...     print("Pshwew, that was a close one!")
+      # ...   else:
+      # ...     print("Going nose-first into oblivion: %s") % nosedive
+      # ...     nosedive = True
+      # ...     FirstGen()
+      # ... 
+      # >>> FirstGen()
+      # Going nose-first into oblivion: False
+      # Pshwew, that was a close one!
+      # >>> 
       streamit = stream_with_context(Pipulate())
     elif form.pipurl.data:
       globs.PIPURL = form.pipurl.data
