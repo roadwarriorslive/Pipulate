@@ -295,12 +295,12 @@ def main():                                                         # of entry "
           globs.PIPURL = session['u']
       except:
         pass
-  #      _                                          _               _   
-  #  ___| |_ _ __ ___  __ _ _ __ ___     ___  _   _| |_ _ __  _   _| |_ 
-  # / __| __| '__/ _ \/ _` | '_ ` _ \   / _ \| | | | __| '_ \| | | | __|
-  # \__ \ |_| | |  __/ (_| | | | | | | | (_) | |_| | |_| |_) | |_| | |_ 
-  # |___/\__|_|  \___|\__,_|_| |_| |_|  \___/ \__,_|\__| .__/ \__,_|\__|
-  #                                                    |_|              
+  #  ____                _                          ____  _                            
+  # |  _ \ ___ _ __   __| | ___ _ __    ___  _ __  / ___|| |_ _ __ ___  __ _ _ __ ___  
+  # | |_) / _ \ '_ \ / _` |/ _ \ '__|  / _ \| '__| \___ \| __| '__/ _ \/ _` | '_ ` _ \ 
+  # |  _ <  __/ | | | (_| |  __/ |    | (_) | |     ___) | |_| | |  __/ (_| | | | | | |
+  # |_| \_\___|_| |_|\__,_|\___|_|     \___/|_|    |____/ \__|_|  \___|\__,_|_| |_| |_|
+  #                                                                                    
   out("Selecting template method.")
   options = menumaker()
   if request.method == 'GET':
@@ -338,7 +338,7 @@ def main():                                                         # of entry "
       pass
   if streamit:
     #Handle streaming user interface updates resulting from a POST method call.
-    return Response(stream_template('pipulate.html', form=form, select=options, data=streamit))
+    return Response(stream_template('pipulate.html', form=form, select=options, data=streamit)) # <-- Look Closely!!!
   else:
     #Handle non-streaming user interface build resulting from a GET method call.
     out("EXITING MAIN FUNCTION RENDER", "0", '-')
@@ -393,14 +393,12 @@ def LogUser(authkey):
         return
   else:
     out("%s not found. Run python configure.py" % globs.FILE)
-
-#  ____  _             _       _
-# |  _ \(_)_ __  _   _| | __ _| |_ ___
-# | |_) | | '_ \| | | | |/ _` | __/ _ \
-# |  __/| | |_) | |_| | | (_| | ||  __/
-# |_|   |_| .__/ \__,_|_|\__,_|\__\___|
-#         |_|
-#
+#   ____                           _             
+#  / ___| ___ _ __   ___ _ __ __ _| |_ ___  _ __ 
+# | |  _ / _ \ '_ \ / _ \ '__/ _` | __/ _ \| '__|
+# | |_| |  __/ | | |  __/ | | (_| | || (_) | |   
+#  \____|\___|_| |_|\___|_|  \__,_|\__\___/|_|   
+#                                                
 def Pipulate(dockey='', token=''):
   """Generator that streams output to a web user interface."""
   stop = False
@@ -410,6 +408,7 @@ def Pipulate(dockey='', token=''):
   badtuple = (globs.GBAD, globs.GBAD, "", "")
   lock = ("", "", "", "+")
   unlock = ("", "", "", "-")
+  spinerr = "spinerr", "", "", ""
   out("PIPULATION BEGINNING", "1")
   try:
     if globs.WEB:
@@ -479,7 +478,7 @@ def Pipulate(dockey='', token=''):
               out("No token found, session expired. Switch to HTML5 localStorage.")
               if globs.WEB: 
                 yield "I am sorry, the sesson has expired. Please log back in.", "Log back in", "", ""
-                yield "spinerr", "", "", ""
+                yield spinerr
                 break
             except:
               if globs.WEB: 
@@ -496,7 +495,7 @@ def Pipulate(dockey='', token=''):
         globs.DOCLINK = '<a href="%s/d/%s/edit#gid=0" target="_blank">%s</a>' % (globs.SHEETS, globs.DOCID, globs.NAME)
         if stop:
           if globs.WEB: 
-            yield "spinerr", "", "", ""
+            yield spinerr
             yield badtuple
           Stop() # Consider adding refresh_token logic for users (versus the scheduler)
       out("END LOGIN ATTEMPT", "2", '-')
@@ -714,7 +713,7 @@ def Pipulate(dockey='', token=''):
         if globs.WEB:
           yme = "Double-check that the %s sheet in %s is set up correctly." % (globs.TAB, globs.DOCLINK)
           yield yme, "Pipulate needs question marks to replace.", "", ""
-          yield "spinerr", "", "", ""
+          yield spinerr
         return
 
       stop = True
@@ -1008,8 +1007,8 @@ def Pipulate(dockey='', token=''):
               if globs.WEB: yield dontgetfrustrated(x)
           if stop:
             if globs.WEB:
-              yield "GData Timed Out","Sorry, GDATA Failed. Try again.","",""
-              yield "spinerr", "", "", ""
+              yield "GData Timed Out","Sorry, GDATA Failed. Try again.", "", ""
+              yield spinerr
               yield unlock
             Stop()
 
@@ -1077,7 +1076,7 @@ def Pipulate(dockey='', token=''):
                     if stop == True:
                       out("Function End (Failed)", "4", '-')
                       if globs.WEB:
-                        yield "spinerr", "", "", ""
+                        yield spinerr
                       Stop()
                     out("Function End", "4", '-')
                   elif collabel in transscrape.keys():
@@ -1232,7 +1231,7 @@ def Pipulate(dockey='', token=''):
         yield "Please open an issue at https://github.com/miklevin/pipulate", "", "", ""
         yield "Or just tap me on the shoulder.", "", "", ""
         if globs.MODE != 'clear':
-          yield "spinerr", "", "", ""
+          yield spinerr
     out("PIPULATION ERROR", "1", '-')
   out("EXITING MAIN", "0", '-') #Special case of function exit reporting
   print("\n")
