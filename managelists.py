@@ -124,7 +124,7 @@ def pipSwitch():
   }
 
 def ClearSheet1B():
-  pass
+  gotcha("Hit")
 
 def Canel():
   pass
