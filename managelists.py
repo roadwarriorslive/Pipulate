@@ -77,23 +77,25 @@ class PipForm(Form):
   options = SelectField("options")
 
 class PipForm2(PipForm):
-  """Define form for interstitial options"""
+  """Adds a hidden field to tell the secondary menu from a dropdown menu selection."""
   secondary = HiddenField()
 
 class ClearSheet1(PipForm2):
+  """Create the menu for when Clear Sheet 1 is selected."""
   radios = RadioField(choices=[
     ('clear', 'Yes, clear Sheet 1.'),
     ('cancel', 'Cancel')
-    ])
+  ])
 
 class CrawlTypes(PipForm2):
+  """Present user with different types of crawls they can perform."""
   radios = RadioField(choices=[
     ('getlinks', 'SHY: Only get links from this URL.'),
     ('crawl1', 'MODEST: Visit each link from this URL.'),
     ('crawl2', 'ASSERTIVE: Visit each link from each link from this URL (2 clicks deep).'),
     ('crawl3', 'ASSERTIVE PLUS: take me to the visualization, baby!'),
     ('cancel', 'Cancel')
-    ])
+  ])
 
 class AnotherMenu(PipForm2):
   radios = RadioField(choices=crawlchoices())
