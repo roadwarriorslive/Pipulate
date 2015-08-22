@@ -335,6 +335,7 @@
               $('#pipslate').css({'height':(($(window).height())-160)+'px'});
             </script>
           <table id="pipchoice">
+            <tr><th><label>{{ form2.pipurl.data }}</label></tj></tr>
           {% if 'radios' in form2: %}
             {% for item in form2.radios %}
               <tr><td><label>{{ item }}<span class="checkable">{{ item.label }}</span></label></td></tr>

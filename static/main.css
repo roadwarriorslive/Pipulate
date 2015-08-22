@@ -23,6 +23,9 @@ h1, h2, p, label {
 td, th {
   padding: .5em 2.4em .5em .6em;
 }
+th {
+  text-align: center;
+}
 .burger > i {
   color: black;
   margin-right: 6px;
@@ -97,10 +100,10 @@ a {
 [type=checkbox]+.checkable:after, [type=checkbox]+.checkable:before,
 [type=radio]+.checkable:after, [type=radio]+.checkable:before {
   color: black;
-  top: 12px;
+  top: 10px;
 }
 [type=checkbox]+.checkable:before, [type=radio]+.checkable:before {
-  border: 3px solid #fff;
+  border: 2px solid #fff;
 }
 nav{
   background-color: #EEEEEE;
@@ -121,7 +124,7 @@ nav{
 }
 #pipchoice {
   width: 100%;
-  font-size: 22px;
+  font-size: 15px;
   margin-left: auto;
   margin-right: auto;
 }
