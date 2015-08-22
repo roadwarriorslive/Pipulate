@@ -45,7 +45,7 @@ def Scheduler():
         dockey = onedoc.get_id_fields()['spreadsheet_id']
         print('PROCESSING SHEET: "%s" with key %s' % (onedoc.title, dockey))
         out("ENTERING PIPULATE FUNCTION", "0")
-        STREAMIT = Pipulate(dockey, token)
+        STREAMIT = Pipulate(dockey=dockey, token=token)
         for thebits in STREAMIT:
           print(thebits)
         out("EXITING PIPULATE FUNCTION", "0", '-')

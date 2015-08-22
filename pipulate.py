@@ -400,7 +400,7 @@ def LogUser(authkey):
 # | |_| |  __/ | | |  __/ | | (_| | || (_) | |      the generator is invoked, it goes to the next yield,
 #  \____|\___|_| |_|\___|_|  \__,_|\__\___/|_|      freezes generator state, until called again. Streaming!
 #                                                
-def Pipulate(dockey='', token=''):
+def Pipulate(preproc='', dockey='', token=''):
   """Generator that streams output to a web user interface."""
   stop = False
   qset = set()
