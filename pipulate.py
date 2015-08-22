@@ -228,7 +228,7 @@ def main():                                                         # of entry "
         globs.MODE = globs.MODE.split(':')[1]
       if globs.MODE == 'cancel':
         return redirect(url_for('main', u=form2.pipurl.data))
-      streamit = pipSwitch()[globs.MODE]
+      streamit = pipSwitch()[globs.MODE]()
 
     elif form.pipurl.data:
       globs.PIPURL = form.pipurl.data
@@ -1560,16 +1560,16 @@ def formSwitch():
 
 def pipSwitch():
   return {
-    'clear': ClearSheet1B(),
-    'cancel': Cancel(),
-    'crawl1': SetupCrawl1(),
-    'crawl2': SetupCrawl2(),
-    'crawl3': SetupCrawl3(),
-    'getlinks': SetupGetLinks()
+    'clear': ClearSheet1B,
+    'cancel': Cancel,
+    'crawl1': SetupCrawl1,
+    'crawl2': SetupCrawl2,
+    'crawl3': SetupCrawl3,
+    'getlinks': SetupGetLinks
   }
 
 def ClearSheet1B():
-  out("ClearSheet")
+  out("ClearSheet!")
   return stream_with_context(Pipulate())
 
 def Cancel():
