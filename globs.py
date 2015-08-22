@@ -11,6 +11,7 @@
 
 config =    {}     # In-memory copy of everything from Config tab
 row1 =      []     # Copy of contents of sheet1, row 1 for many uses.
+nosedive =  False  # Allow to recur but once.
 STOP =      False  # The Emergency Break so functions cans top Pipulate.
 DOCID =     None   # The Google Doc key for use anywhere in system
 DOCLINK =   None   # The full a href link for the Google Sheet.

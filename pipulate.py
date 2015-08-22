@@ -249,6 +249,21 @@ def main():                                                         # of entry "
       # Going nose-first into oblivion: False
       # Pshwew, that was a close one!
       # >>> 
+      if globs.nosedive:
+        out("You may not pipulate again.")
+      else:
+        globs.nosedive = True
+
+        # You are free to call Pipulate... I think.
+        # Or, maybe I just create a series of Pipulate() instances in a list
+        # then step through them with a Response(stream_template('stream.html', data=streamit)) 
+        # ListOStreams? Each entry is the definition for one question-mark replacement cycle.
+        # Any tab can be targeted--not just Sheet1.
+        # Arbitrary code before and after "emptying out" a pip-cycle can do housekeeping and such.
+        # We will basically be activating THIS switch:
+
+        # pipSwitch[globs.MODE]
+
       streamit = stream_with_context(Pipulate())
     elif form.pipurl.data:
       globs.PIPURL = form.pipurl.data
