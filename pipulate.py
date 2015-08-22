@@ -221,20 +221,20 @@ def main():                                                         # of entry "
     if form2 and form2.secondary.data == 'on':
       menutwo = True
       if 'radios' in form2:
-        globs.PIPMODE = form2.radios.data
+        globs.MODE = form2.radios.data
       elif 'checkboxes' in form2:
-        globs.PIPMODE = form2.checkbox.data
-      if ':' in globs.PIPMODE:
-        globs.PIPMODE = globs.PIPMODE.split(':')[1]
-      if globs.PIPMODE == 'cancel':
+        globs.MODE = form2.checkbox.data
+      if ':' in globs.MODE:
+        globs.MODE = globs.MODE.split(':')[1]
+      if globs.MODE == 'cancel':
         return redirect(url_for('main', u=form2.pipurl.data))
       streamit = stream_with_context(Pipulate())
     elif form.pipurl.data:
       globs.PIPURL = form.pipurl.data
       if form.options.data:
-        globs.PIPMODE = form.options.data
-        if ':' in globs.PIPMODE:
-          mode = globs.PIPMODE.split(':')[1]
+        globs.MODE = form.options.data
+        if ':' in globs.MODE:
+          mode = globs.MODE.split(':')[1]
           return render_template('pipulate.html', form=form, form2=form2, mode=mode)
       if form.magicbox.data:
         globs.KEYWORDS = form.magicbox.data
@@ -505,7 +505,7 @@ def Pipulate(dockey='', token=''):
       yme = "%s spreadsheet opened!" % globs.DOCLINK
       yield yme, "Spreadsheet Opened", "", ""
 
-      if (globs.PIPMODE == 'keywords'
+      if (globs.MODE == 'keywords'
         and globs.KEYWORDS 
         and globs.KEYWORDS[:1] != '[' 
         and globs.KEYWORDS[-1:] != ']'
@@ -551,9 +551,9 @@ def Pipulate(dockey='', token=''):
       # This is where special behavior like crawls get wedged in
       anything = re.compile('.+')
       cell = None
-      if globs.PIPMODE == 'clear':
+      if globs.MODE == 'clear':
         anything = re.compile('.+')
-        if globs.PIPMODE == 'clear':
+        if globs.MODE == 'clear':
           out("Clearing Tab 1...")
           if globs.WEB: yield "Clearing Sheet 1. If this was a mistake, use revision history to get back your data.", "Clearing Sheet 1", "", ""
           #try:
@@ -574,7 +574,7 @@ def Pipulate(dockey='', token=''):
           #   Stop()
       else:
         try:
-          bothrows = sheetinitializer(globs.PIPMODE) # Beware! There is always an initialization attempt.
+          bothrows = sheetinitializer(globs.MODE) # Beware! There is always an initialization attempt.
           row1 = bothrows[0]
           row2 = [bothrows[1]]
           if globs.WEB: yield lock
@@ -584,7 +584,7 @@ def Pipulate(dockey='', token=''):
             pass
           if globs.WEB: yield unlock
         except:
-          # yme = "Action for %s not defined." % globs.PIPMODE
+          # yme = "Action for %s not defined." % globs.MODE
           # if globs.WEB: yield yme, "Action not defined.", "", ""
           pass
       if globs.WEB: yield "Checking Tabs...", "Then we check for tabs...", "", ""
@@ -710,7 +710,7 @@ def Pipulate(dockey='', token=''):
       yme = "%s rows with question marks found in %s." % (globs.numrows, globs.TAB)
       out(yme)
       if globs.WEB: yield yme, "", "", ""
-      if globs.numrows == 0 and globs.PIPMODE == 'qmarks':
+      if globs.numrows == 0 and globs.MODE == 'qmarks':
         if globs.WEB:
           yme = "Double-check that the %s sheet in %s is set up correctly." % (globs.TAB, globs.DOCLINK)
           yield yme, "Pipulate needs question marks to replace.", "", ""
@@ -1231,7 +1231,7 @@ def Pipulate(dockey='', token=''):
         yield "Pipulation prematurely terminated.", "", "", ""
         yield "Please open an issue at https://github.com/miklevin/pipulate", "", "", ""
         yield "Or just tap me on the shoulder.", "", "", ""
-        if globs.PIPMODE != 'clear':
+        if globs.MODE != 'clear':
           yield "spinerr", "", "", ""
     out("PIPULATION ERROR", "1", '-')
   out("EXITING MAIN", "0", '-') #Special case of function exit reporting
