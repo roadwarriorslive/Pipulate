@@ -88,11 +88,10 @@ def main():                                                         # of entry "
     form2 = formDict[form.options.data.split(':')[1]]
   else:
     form2 = PipForm2(csrf_enabled=False)
-  if 'secondary' in form2 and form2.secondary.data == 'on':
-    if request.method == 'POST':
-      form2 = formDict[form.options.data.split(':')[1]]
+  if request.method == 'POST' and 'secondary' in form2 and form2.secondary.data == 'on':
+    form2 = formDict[form.options.data.split(':')[1]]
   menudefault = None
-  stext = None
+  selectedtext = None
   configform = ConfigForm(csrf_enabled=False)                       # The form to let you 1st time configure server.
   if (os.path.isfile(globs.FILE) and                                # been configured or not. Configuration consists
       os.path.getsize(globs.FILE) > 0):                             # of a file with Google OAuth2 Client ID, Client
@@ -252,10 +251,10 @@ def main():                                                         # of entry "
     #        |_|                |___/                      |___/ 
     if request.args and 's' in request.args: # User highlighted text on page before clicking bookmarklet
       form.magicbox.data = request.args.get('s')
-      stext = request.args.get('s')
+      selectedtext = request.args.get('s')
     elif session and 's' in session: # Selected text made the journey through login
       form.magicbox.data = session['s']
-      stext = session['s']
+      selectedtext = session['s']
     if request.args and 'access_token' in request.args: # Oops... necessary evil. Redirect quickly.
       try:
         LogUser(request.args['access_token'])
@@ -308,7 +307,7 @@ def main():                                                         # of entry "
     try:
       if menutwo:
         pass
-      elif stext and globs.SHEETS not in globs.PIPURL:
+      elif selectedtext and globs.SHEETS not in globs.PIPURL:
         menudefault = "keywords"
         session.pop('_flashes', None)
         flash("Congratulations! You have chosen to harvest keywords.") 
