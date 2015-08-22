@@ -26,6 +26,13 @@ td, th {
 th {
   text-align: center;
 }
+#showurl {
+  width: 100%;
+  background-color: white;
+  color: black;
+  font-size: 11px;
+  opacity: 0.3;
+}
 .burger > i {
   color: black;
   margin-right: 6px;

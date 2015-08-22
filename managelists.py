@@ -88,7 +88,7 @@ class ClearSheet1(PipForm2):
 
 class CrawlTypes(PipForm2):
   radios = RadioField(choices=[
-    ('getlinks', 'SHY: Only GetLinks only from this URL.'),
+    ('getlinks', 'SHY: Only get links from this URL.'),
     ('crawl1', 'MODEST: Visit each link from this URL'),
     ('crawl2', 'ASSERTIVE: Visit each link from each link from this URL'),
     ('crawl3', 'ASSERTIVE PLUS: take me to the visualization, baby!'),
