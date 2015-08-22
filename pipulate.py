@@ -711,7 +711,7 @@ def Pipulate(dockey='', token=''):
         if globs.WEB: yield badtuple
         Stop()
       if globs.WEB: yield unlock
-      yme = "%s rows with question marks found in %s tab." % (globs.numrows, globs.TAB)
+      yme = "%s rows with question marks found in %s." % (globs.numrows, globs.TAB)
       out(yme)
       if globs.WEB: yield yme, "", "", ""
       if globs.numrows == 0 and globs.PIPMODE == 'qmarks':
@@ -847,7 +847,7 @@ def Pipulate(dockey='', token=''):
           if blankrows > 1:
             out("Found second blank row, so trending scan complete.")
             break
-      yme = "%s-Row trending-job found. Analyzing job frequency." % len(trendlistoflists)
+      yme = "%s trending jobs found. Analyzing frequency." % len(trendlistoflists)
       if globs.WEB: yield yme, "", "", ""
       trendingrowsfinished = True
       maxrowsperhour = 0
@@ -935,7 +935,7 @@ def Pipulate(dockey='', token=''):
           tellrow = 'all'
         if globs.WEB: yield "Job requested to process %s row(s) every %s %s" % (tellrow, number, name), "", "", ""
       else:
-        if globs.WEB: yield "Pipulate running in questionmark replacement mode.", "", "", ""
+        if globs.WEB: yield "Pipulate running in ?-replacement mode.", "", "", ""
       if left and right and now:
         if globs.WEB:
           yield "%s = Start of last time window" % left, "", "", ""
@@ -979,9 +979,9 @@ def Pipulate(dockey='', token=''):
       if not qset and not trended:
         out("Done looking for asterisks", "2", "-")
         if globs.WEB:
-          yme = "No question marks found in %s Sheet." % globs.DOCLINK
+          yme = "No ?'s found in %s Sheet." % globs.DOCLINK
           yield yme, "", "", ""
-          yme = 'New to Pipulate? Watch <a target="_blank" href="https://docs.google.com/presentation/d/10lr_d1uyLMOnWsMzbenKiPlFE5-BIt9bxVucw7O4GSI/edit?usp=sharing">Demo</a> and read <a target="_blank" href="https://github.com/miklevin/pipulate/blob/master/README.md">Docs</a>. ' + globs.PBNJMAN
+          yme = 'New to this? Watch <a target="_blank" href="https://docs.google.com/presentation/d/10lr_d1uyLMOnWsMzbenKiPlFE5-BIt9bxVucw7O4GSI/edit?usp=sharing">Demo</a> &amp; read <a target="_blank" href="https://github.com/miklevin/pipulate/blob/master/README.md">Docs</a>. ' + globs.PBNJMAN
           yield yme, "The first worksheet in your spreadsheet needs something in it.", "", ""
           yield "spinoff", "", "", ""
         return
