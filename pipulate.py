@@ -431,10 +431,10 @@ def LogUser(authkey):
   else:
     out("%s not found. Run python configure.py" % globs.FILE)
 #   ____                           _             
-#  / ___| ___ _ __   ___ _ __ __ _| |_ ___  _ __ 
-# | |  _ / _ \ '_ \ / _ \ '__/ _` | __/ _ \| '__|
-# | |_| |  __/ | | |  __/ | | (_| | || (_) | |   
-#  \____|\___|_| |_|\___|_|  \__,_|\__\___/|_|   
+#  / ___| ___ _ __   ___ _ __ __ _| |_ ___  _ __    Generators are just Python functions that yield values
+# | |  _ / _ \ '_ \ / _ \ '__/ _` | __/ _ \| '__|   instead of return. Simple enough, right? Well, each time
+# | |_| |  __/ | | |  __/ | | (_| | || (_) | |      the generator is invoked, it goes to the next yield,
+#  \____|\___|_| |_|\___|_|  \__,_|\__\___/|_|      freezes generator state, until called again. Streaming!
 #                                                
 def Pipulate(dockey='', token=''):
   """Generator that streams output to a web user interface."""
@@ -605,9 +605,6 @@ def Pipulate(dockey='', token=''):
             yield yme, "Now, go do something awesome!", "", ""
             yield "spinoff", "", "", ""
           Stop()
-          # except:
-          #   out("Could not clear tab one.")
-          #   Stop()
       else:
         try:
           bothrows = sheetinitializer(globs.MODE) # Beware! There is always an initialization attempt.
@@ -620,8 +617,6 @@ def Pipulate(dockey='', token=''):
             pass
           if globs.WEB: yield unlock
         except:
-          # yme = "Action for %s not defined." % globs.MODE
-          # if globs.WEB: yield yme, "Action not defined.", "", ""
           pass
       if globs.WEB: yield "Checking Tabs...", "Then we check for tabs...", "", ""
       # Documentation Tab
