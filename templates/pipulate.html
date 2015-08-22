@@ -74,6 +74,13 @@
         $('#plist > li').last().addClass("check");
         stopsignlock();
       }
+      function heart() {
+        setTimeout(function(){
+          $('#plist > li').last().removeClass("progress");
+          $('#plist > li').last().addClass("heart");
+        },800);
+        stopsignlock();
+      }
       function spinerr() {
         setTimeout(function(){
           $('#plist > li').last().removeClass("progress");
@@ -166,9 +173,9 @@
     <div id="mobileinstructions"><img src="./static/png/mobile-instructions.png" style="vertical-align: middle;"/></div>
     <div class="menu">
       <a class="button pseudo pip-pipulate-icon" target="_blank" href="https://docs.google.com/presentation/d/10lr_d1uyLMOnWsMzbenKiPlFE5-BIt9bxVucw7O4GSI/edit?usp=sharing">Piplosophy</a>
+      <a class="button pseudo pip-levinux-icon" target="_blank" href="http://levinux.com">Levinux</a>
       <a class="button pseudo pip-github" target="_blank" href="https://github.com/miklevin/pipulate/blob/master/README.md">Docs</a>
       <a class="button pseudo pip-youtube-play" target="_blank" href="https://www.youtube.com/playlist?list=PLy-AlqZFg6G_bo5bH_wLBdxx-TNfB_yXT">Videos</a>
-      <a class="button pseudo pip-levinux-icon" target="_blank" href="http://levinux.com">Levinux</a>
       <a class="button pseudo pip-help-circled-2" href="http://dev.pipulate.com/static/help.html">Help</a>
       {% if session and 'loggedin' in session and session['loggedin'] == '1': %}
         <a class="button pip-block" href="{{ logoutlink }}">Logout</a>
@@ -287,6 +294,11 @@
                 <script>
                   // Unlock button and remove spinner, failed pipulation
                   spinoff();
+                </script>
+              {%- elif lineitem == "heart" -%}
+                <script>
+                  // Hypnotize 'em
+                  heart();
                 </script>
               {%- elif lineitem == "spinerr" -%}
                 <script>

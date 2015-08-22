@@ -414,6 +414,12 @@ ul
   animation: spin 0s;
 }
 
+#plist > li.heart:before {
+  content: "\e85a"; 
+  -webkit-animation: spin 0s;
+  animation: spin 0s;
+}
+
 #plist > li.warning:before {
   content: "\e80d"; 
   -webkit-animation: spin 0s;

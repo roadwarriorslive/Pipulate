@@ -981,7 +981,7 @@ def Pipulate(dockey='', token=''):
           yield yme, "The first worksheet in your spreadsheet needs something in it.", "", ""
           yme = "But congratulations; you found Pipulate. " + globs.PBNJMAN
           yield yme, "", "", ""
-          yield "spinerr", "", "", ""
+          yield "heart", "", "", ""
         return
       therange = range(qstart, qend)
       blankrows = 0 #Lets us skip occasional blank rows
