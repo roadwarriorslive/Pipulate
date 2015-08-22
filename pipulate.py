@@ -416,7 +416,7 @@ def Pipulate(dockey='', token=''):
   out("PIPULATION BEGINNING", "1")
   try:
     if globs.WEB:
-      yield "Beginning to Pipulate!", "", "", ""
+      yield "Beginning to Pipulate! Opening sheet...", "", "", ""
       yield "spinon", "", "", ""
     out("Reading in functions.")
     funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
@@ -451,7 +451,6 @@ def Pipulate(dockey='', token=''):
         else:
           out("Login successful.")
         out("Opening Spreadsheet...")
-        if globs.WEB: yield("Opening Spreadsheet...", "", "", "")
         stop = True
         sheet = ''
         for x in range(10):
@@ -981,9 +980,11 @@ def Pipulate(dockey='', token=''):
         if globs.WEB:
           yme = "No ?'s found in %s Sheet." % globs.DOCLINK
           yield yme, "", "", ""
-          yme = 'New to this? Watch <a target="_blank" href="https://docs.google.com/presentation/d/10lr_d1uyLMOnWsMzbenKiPlFE5-BIt9bxVucw7O4GSI/edit?usp=sharing">Demo</a> &amp; read <a target="_blank" href="https://github.com/miklevin/pipulate/blob/master/README.md">Docs</a>. ' + globs.PBNJMAN
+          yme = 'New to this? Watch <a target="_blank" href="https://docs.google.com/presentation/d/10lr_d1uyLMOnWsMzbenKiPlFE5-BIt9bxVucw7O4GSI/edit?usp=sharing">Demo</a> &amp; read <a target="_blank" href="https://github.com/miklevin/pipulate/blob/master/README.md">Docs</a>. '
           yield yme, "The first worksheet in your spreadsheet needs something in it.", "", ""
-          yield "spinoff", "", "", ""
+          yme = "But congratulations; you found Pipulate. " + globs.PBNJMAN
+          yield yme, "", "", ""
+          yield "spinerr", "", "", ""
         return
       therange = range(qstart, qend)
       blankrows = 0 #Lets us skip occasional blank rows
