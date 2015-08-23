@@ -464,7 +464,7 @@ def Pipulate(preproc='', dockey='', token=''):
           if globs.WEB: 
             yield "Google Login unsuccessful.", "", "", ""
             yield spinoff
-          raise StopIteration
+          Stop()
         else:
           out("Login successful.")
         out("Opening Spreadsheet...")
@@ -883,7 +883,7 @@ def Pipulate(preproc='', dockey='', token=''):
           CellList = globs.sheet.range(mayhaverun)
         except:
           out("Failed to load the trending Count range.")
-          raise StopIteration
+          Stop()
         counts = []
         for onecell in CellList:
           counts.append(onecell.value)
@@ -975,7 +975,7 @@ def Pipulate(preproc='', dockey='', token=''):
           if globs.WEB:
             yield "Couldn't reach Google Docs. Try logging in again.", "", "", ""
             yield spinoff
-          raise StopIteration
+          Stop()
         else:
           pass
       globs.numrows = len(globs.sheet.col_values(1))
