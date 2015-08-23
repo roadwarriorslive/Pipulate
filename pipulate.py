@@ -1589,6 +1589,43 @@ def stringify_children(node):
   # filter removes possible Nones in texts and tails
   return ''.join(filter(None, parts))
 
+# __        _______ _____ ___   _____                        _ 
+# \ \      / /_   _|  ___|__ \ |  ___|__  _ __ _ __ ___  ___| |
+#  \ \ /\ / /  | | | |_    / / | |_ / _ \| '__| '_ ` _ \/ __| |
+#   \ V  V /   | | |  _|  |_|  |  _| (_) | |  | | | | | \__ \_|
+#    \_/\_/    |_| |_|    (_)  |_|  \___/|_|  |_| |_| |_|___(_)
+from flask_wtf import Form
+from wtforms import (StringField,
+                    RadioField,
+                    HiddenField, 
+                    SelectMultipleField,
+                    TextAreaField,
+                    SelectField, 
+                    widgets)
+
+class ConfigForm(Form):
+  """Define form for aquiring configuration values."""
+  import binascii, os
+  apdef = binascii.hexlify(os.urandom(24))
+  appsecret = StringField('Flask app secret (auto-generated):', default=apdef)
+  clientid = StringField('Client ID (from Google Dev Console):')
+  clientsecret = StringField('Client secret (from Google Dev Console):')
+
+class PipForm(Form):
+  """Define form for main Pipulate user interface."""
+  pipurl = StringField('Paste a Google Sheet URL:')
+  magicbox = TextAreaField("magicbox")
+  options = SelectField("options")
+
+class PipForm2(PipForm):
+  """Adds a hidden field to tell the secondary menu from a dropdown menu selection."""
+  secondary = HiddenField()
+
+#class AnotherMenu(PipForm2):
+#  radios = RadioField(choices=crawlchoices())
+#  checks = SelectMultipleField(choices=crawlchoices(),
+#    option_widget=widgets.CheckboxInput(),
+#    widget=widgets.ListWidget(prefix_label=False))
 #  _       _                _   _ _   _       _    __                           This should set forth a familiar pattern where 
 # (_)_ __ | |_ ___ _ __ ___| |_(_) |_(_) __ _| |  / _| ___  _ __ _ __ ___  ___  we open with a dict router and follow with the
 # | | '_ \| __/ _ \ '__/ __| __| | __| |/ _` | | | |_ / _ \| '__| '_ ` _ \/ __| things that router can invoke. In this case,

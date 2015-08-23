@@ -49,39 +49,6 @@ def documentation():
   s.append(['Volume',               'Keyword',   'Keyword',                   'Return SEMRush Keyword Volume.', ''])
   return s
 
-from flask_wtf import Form
-from wtforms import (StringField,
-                    RadioField,
-                    HiddenField, 
-                    SelectMultipleField,
-                    TextAreaField,
-                    SelectField, 
-                    widgets)
-
-class ConfigForm(Form):
-  """Define form for aquiring configuration values."""
-  import binascii, os
-  apdef = binascii.hexlify(os.urandom(24))
-  appsecret = StringField('Flask app secret (auto-generated):', default=apdef)
-  clientid = StringField('Client ID (from Google Dev Console):')
-  clientsecret = StringField('Client secret (from Google Dev Console):')
-
-class PipForm(Form):
-  """Define form for main Pipulate user interface."""
-  pipurl = StringField('Paste a Google Sheet URL:')
-  magicbox = TextAreaField("magicbox")
-  options = SelectField("options")
-
-class PipForm2(PipForm):
-  """Adds a hidden field to tell the secondary menu from a dropdown menu selection."""
-  secondary = HiddenField()
-
-#class AnotherMenu(PipForm2):
-#  radios = RadioField(choices=crawlchoices())
-#  checks = SelectMultipleField(choices=crawlchoices(),
-#    option_widget=widgets.CheckboxInput(),
-#    widget=widgets.ListWidget(prefix_label=False))
-
 def dontgetfrustrated(x):
   s = []
   s.append("Heavy traffic on the Inter-Webs tonight.")
