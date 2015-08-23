@@ -150,26 +150,3 @@ def cyclemotto():
   except:
     return ['Configuring']
 
-#  ____  _               _     ___       _ _   _       _ _
-# / ___|| |__   ___  ___| |_  |_ _|_ __ (_) |_(_) __ _| (_)_______ _ __
-# \___ \| '_ \ / _ \/ _ \ __|  | || '_ \| | __| |/ _` | | |_  / _ \ '__/
-#  ___) | | | |  __/  __/ |_   | || | | | | |_| | (_| | | |/ /  __/ |
-# |____/|_| |_|\___|\___|\__| |___|_| |_|_|\__|_|\__,_|_|_/___\___|_|
-#
-
-def menumaker():
-  ''' Creates the entire cadence of the system.'''
-  menu = [
-  ('menu:crawl' , "Crawl Website"),
-  ('menu:cols'  , "Add Columns"),
-  ('qmarks'     , "Replace ?'s"),
-  ('menu:setup' , "Auto Setup"),
-  ('menu:graph' , "See Visualization"),
-  ('keywords'   , "Harvest Keywords"),
-  ('menu:clear' , "Clear Sheet 1")
-  ]
-  strmenu = '<option value="off">What do you want to do?</option>\n'
-  for item in menu:
-    strmenu += '<option value="%s">%s</options>\n' % (item[0], item[1])
-  return strmenu
-

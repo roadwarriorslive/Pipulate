@@ -597,21 +597,9 @@ def Pipulate(preproc='', dockey='', token=''):
             row1 = aobj[0]
             row2 = aobj[1:]
             InitTab(gdoc, "sheet1", row1, row2)
-
-      #if globs.MODE != 'clear':
-      #  try:
-      #    bothrows = sheetinitializer(globs.MODE) # Beware! There is always an initialization attempt.
-      #    row1 = bothrows[0]
-      #    row2 = [bothrows[1]]
-      #    if globs.WEB: yield lock
-      #    try:
-      #      InitTab(gdoc, "sheet1", row1, row2)
-      #    except:
-      #      pass
-      #    if globs.WEB: yield unlock
-      #  except:
-      #    pass
-
+          elif inst == '?':
+            for yieldme in Pipulate():
+              yield yieldme
       #                        _       _               _  ___   At some point in the future, there wil be
       #   __ _  ___   ___   __| |  ___| |__   ___  ___| ||__ \  something better than Google Spreadsheets.
       #  / _` |/ _ \ / _ \ / _` | / __| '_ \ / _ \/ _ \ __|/ /  Until that day, let us use it excessively
@@ -1656,37 +1644,63 @@ def ShyCrawl():
   ]))
 
 def ModestCrawl():
-  '''Collect links from displaying page'''
+  '''Collect links from displaying page and get titles and metas'''
   out("Modest Crawl")
-  return stream_with_context(Pipulate([
-    ('clear', ''),
-    ('table', (
-      ['url','GetLinks'],
-      ['http://mikelev.in', '?']
-    ))
-  ]))
-
-def AssertiveCrawl():
-  out("Assertive Crawl")
   return stream_with_context(Pipulate([
     ('clear', ''),
     ('table', [
       ('url','GetLinks'),
+      (globs.PIPURL, '?')
+    ]),
+    ('?', '')
+  ]))
+
+def AssertiveCrawl():
+  '''Collect links from displaying page'''
+  out("Modest Crawl")
+  return stream_with_context(Pipulate([
+    ('clear', ''),
+    ('table', [
+      ('url','Crawl'),
       (globs.PIPURL, '?')
     ])
   ]))
 
 def AssertivePlusCrawl():
-  out("Assertive Plus Crawl")
+  '''Collect links from displaying page'''
+  out("Modest Crawl")
   return stream_with_context(Pipulate([
     ('clear', ''),
     ('table', [
-      ('url','GetLinks'),
+      ('url','Crawl'),
       (globs.PIPURL, '?')
-    ])
+    ]),
+    ('?', '')
   ]))
 
 def Cancel():
   out("Cancel")
   return stream_with_context(Pipulate())
+
+#      _                     _                     
+#   __| |_ __ ___  _ __   __| | _____      ___ __  
+#  / _` | '__/ _ \| '_ \ / _` |/ _ \ \ /\ / / '_ \ 
+# | (_| | | | (_) | |_) | (_| | (_) \ V  V /| | | |
+#  \__,_|_|  \___/| .__/ \__,_|\___/ \_/\_/ |_| |_|
+#                 |_|                              
+def menumaker():
+  ''' Creates the entire cadence of the system.'''
+  menu = [
+  ('menu:crawl' , "Crawl Website"),
+  ('menu:cols'  , "Add Columns"),
+  ('qmarks'     , "Replace ?'s"),
+  ('menu:setup' , "Auto Setup"),
+  ('menu:graph' , "See Visualization"),
+  ('keywords'   , "Harvest Keywords"),
+  ('menu:clear' , "Clear Sheet 1")
+  ]
+  strmenu = '<option value="off">What do you want to do?</option>\n'
+  for item in menu:
+    strmenu += '<option value="%s">%s</options>\n' % (item[0], item[1])
+  return strmenu
 
