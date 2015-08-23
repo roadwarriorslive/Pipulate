@@ -436,7 +436,7 @@ ul
 .pipmenu {
   font-size: 13px;
   background-color: #DDDDDD;
-  width: 200px;
+  width: 205px;
   height: 29px
 }
 @media (min-width: 360px) and (max-width: 500px) {

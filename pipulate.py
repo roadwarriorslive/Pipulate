@@ -570,6 +570,7 @@ def Pipulate(preproc='', dockey='', token=''):
       if preproc:
         for instruction in preproc:
           inst = instruction[0]
+          aobj = instruction[1]
           if inst == 'clear':
             out('Clearing Sheet 1')
             if globs.WEB: yield "Clearing Sheet 1...", "Clearing Sheet 1", "", ""
@@ -592,6 +593,11 @@ def Pipulate(preproc='', dockey='', token=''):
               Stop()
           elif inst == 'stop':
             Stop()
+          elif inst == 'table':
+            row1 = aobj[0]
+            row2 = aobj[1:]
+            InitTab(gdoc, "sheet1", row1, row2)
+
       #if globs.MODE != 'clear':
       #  try:
       #    bothrows = sheetinitializer(globs.MODE) # Beware! There is always an initialization attempt.
@@ -1526,7 +1532,7 @@ def InitTab(gdoc2, tabname, headerlist, listoflists=[]):
     for onelist in listoflists:
       for onecell in onelist:
         initlist.append(onecell)
-    wholelist = headerlist + initlist
+    wholelist = list(headerlist) + list(initlist)
     for index, onecell in enumerate(CellList):
       try:
         onecell.value = wholelist[index]
@@ -1607,10 +1613,10 @@ class ClearSheet1Form(PipForm2):
 class CrawlTypesForm(PipForm2):
   """Present user with different types of crawls they can perform."""
   radios = RadioField(choices=[
-    ('getlinks', 'SHY: Only get links from this URL.'),
-    ('crawl1', 'MODEST: Visit each link from this URL.'),
-    ('crawl2', 'ASSERTIVE: Visit each link from each link from this URL (2 clicks deep).'),
-    ('crawl3', 'ASSERTIVE PLUS: take me to the visualization, baby!'),
+    ('shycrawl', 'SHY: Only get links from this URL.'),
+    ('modestcrawl', 'MODEST: Visit each link from this URL.'),
+    ('assertivecrawl', 'ASSERTIVE: Visit each link from each link from this URL (2 clicks deep).'),
+    ('assertivepluscrawl', 'ASSERTIVE PLUS: take me to the visualization, baby!'),
     ('cancel', 'Cancel')
   ])
 
@@ -1625,10 +1631,10 @@ def pipSwitch():
   return {
     'clear': ClearSheet1,
     'cancel': Cancel,
-    'crawl1': SetupCrawl1,
-    'crawl2': SetupCrawl2,
-    'crawl3': SetupCrawl3,
-    'getlinks': SetupGetLinks
+    'shycrawl': ShyCrawl,
+    'modestcrawl': ModestCrawl,
+    'assertivecrawl': AssertiveCrawl,
+    'assertivepluscrawl': AssertivePlusCrawl
   }
 
 def ClearSheet1():
@@ -1638,8 +1644,40 @@ def ClearSheet1():
     ('stop', '')
   ]))
 
-def SetupCrawl1():
+def ShyCrawl():
   '''Collect links from displaying page'''
+  out("Shy Crawl")
+  return stream_with_context(Pipulate([
+    ('clear', ''),
+    ('table', [
+      ('url','GetLinks'),
+      (globs.PIPURL, '?')
+    ])
+  ]))
+
+def ModestCrawl():
+  '''Collect links from displaying page'''
+  out("Modest Crawl")
+  return stream_with_context(Pipulate([
+    ('clear', ''),
+    ('table', [
+      ['url','GetLinks'],
+      ['http://mikelev.in', '?']
+    ])
+  ]))
+
+def AssertiveCrawl():
+  out("Assertive Crawl")
+  return stream_with_context(Pipulate([
+    ('clear', ''),
+    ('table', [
+      ('url','GetLinks'),
+      (globs.PIPURL, '?')
+    ])
+  ]))
+
+def AssertivePlusCrawl():
+  out("Assertive Plus Crawl")
   return stream_with_context(Pipulate([
     ('clear', ''),
     ('table', [
@@ -1650,17 +1688,5 @@ def SetupCrawl1():
 
 def Cancel():
   out("Cancel")
-  return stream_with_context(Pipulate())
-
-def SetupCrawl2():
-  out("Crawl2")
-  return stream_with_context(Pipulate())
-
-def SetupCrawl3():
-  out("Crawl3")
-  return stream_with_context(Pipulate())
-
-def SetupGetLinks():
-  out("SetupGetLinks")
   return stream_with_context(Pipulate())
 

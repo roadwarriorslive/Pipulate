@@ -227,8 +227,8 @@ def getlinks(url):
       links.add(alink)
   links = list(links)
   y = len(links)
-  q = ['']*y
-  linkslist = zip(links,['1']*y,q,q,q)
+  q = ['?']*y
+  linkslist = zip(links,['1']*y,q,q)
   InsertRows(globs.sheet, linkslist, 2)
   return "0"
 
