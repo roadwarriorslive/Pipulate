@@ -568,7 +568,7 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
           yield yme, "Mmmmmm, more keywords.", json.dumps(kwlist), ""
           yield spinoff
         return #permissible here?
-      #        _             _       _         ___ ____  __  __   The Pipulate Instruction Processor Machine
+      #        _             _       _         ___ ____  __  __   The Pipulate Instruction Processor Machine (IPM)
       #  _ __ (_)_ __  _   _| | __ _| |_ ___  |_ _|  _ \|  \/  |  takes a list of tuples and interprets each
       # | '_ \| | '_ \| | | | |/ _` | __/ _ \  | || |_) | |\/| |  and interprets it as an action to take and
       # | |_) | | |_) | |_| | | (_| | ||  __/  | ||  __/| |  | |  a target aginst which to, and becomes a sort
@@ -577,7 +577,6 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
       if preproc:
         for instruction in preproc:
           inst = instruction[0]
-          aobj = instruction[1]
           if inst == 'clear':
             out('Clearing Sheet 1')
             if globs.WEB: yield "Clearing Sheet 1...", "Clearing Sheet 1", "", ""
@@ -601,9 +600,16 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
           elif inst == 'stop':
             Stop()
           elif inst == 'table':
+            aobj = instruction[1]
             row1 = aobj[0]
-            row2 = aobj[1:]
-            InitTab(gdoc, "sheet1", row1, row2)
+            lol = aobj[1:]
+            InitTab(gdoc, "sheet1", row1, lol)
+          elif inst == 'sheet':
+            tabname = instruction[1]
+            aobj = instruction[2]
+            row1 = aobj[0]
+            lol = aobj[1:]
+            InitTab(gdoc, tabname, row1, lol)
           elif inst == '?':
             for yieldme in Pipulate():
               yield yieldme
@@ -1724,7 +1730,7 @@ def RunTests():
   out("Running tests... Just doin' a whole bunch of stuff.")
   return Pipulate([
     ('clear', ''),
-    ('table', [
+    ('sheet', 'tests', [
       ('url','GetLinks'),
       (globs.PIPURL, '?')
     ])
