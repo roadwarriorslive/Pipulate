@@ -49,14 +49,6 @@ def documentation():
   s.append(['Volume',               'Keyword',   'Keyword',                   'Return SEMRush Keyword Volume.', ''])
   return s
 
-def crawlchoices():
-  return [
-    ('spam', 'Spam'),
-    ('eggs', 'Eggs'),
-    ('foo', 'Foo'),
-    ('bar', 'Bar')
-  ]
-
 from flask_wtf import Form
 from wtforms import (StringField,
                     RadioField,
@@ -84,11 +76,11 @@ class PipForm2(PipForm):
   """Adds a hidden field to tell the secondary menu from a dropdown menu selection."""
   secondary = HiddenField()
 
-class AnotherMenu(PipForm2):
-  radios = RadioField(choices=crawlchoices())
-  checks = SelectMultipleField(choices=crawlchoices(),
-    option_widget=widgets.CheckboxInput(),
-    widget=widgets.ListWidget(prefix_label=False))
+#class AnotherMenu(PipForm2):
+#  radios = RadioField(choices=crawlchoices())
+#  checks = SelectMultipleField(choices=crawlchoices(),
+#    option_widget=widgets.CheckboxInput(),
+#    widget=widgets.ListWidget(prefix_label=False))
 
 def dontgetfrustrated(x):
   s = []
@@ -168,13 +160,13 @@ def cyclemotto():
 def menumaker():
   ''' Creates the entire cadence of the system.'''
   menu = [
-  ('menu:clear' , "Clear Sheet 1"),
   ('menu:crawl' , "Crawl Website"),
   ('menu:cols'  , "Add Columns"),
   ('qmarks'     , "Replace ?'s"),
   ('menu:setup' , "Auto Setup"),
   ('menu:graph' , "See Visualization"),
-  ('keywords'   , "Harvest Keywords")
+  ('keywords'   , "Harvest Keywords"),
+  ('menu:clear' , "Clear Sheet 1")
   ]
   strmenu = '<option value="off">What do you want to do?</option>\n'
   for item in menu:

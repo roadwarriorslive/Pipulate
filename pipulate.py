@@ -1660,10 +1660,10 @@ def ModestCrawl():
   out("Modest Crawl")
   return stream_with_context(Pipulate([
     ('clear', ''),
-    ('table', [
+    ('table', (
       ['url','GetLinks'],
       ['http://mikelev.in', '?']
-    ])
+    ))
   ]))
 
 def AssertiveCrawl():
