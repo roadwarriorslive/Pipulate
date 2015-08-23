@@ -421,6 +421,7 @@ def Pipulate(preproc='', dockey='', token=''):
   lock = ("", "", "", "+")
   unlock = ("", "", "", "-")
   spinerr = "spinerr", "", "", ""
+  spinoff = "spinoff", "", "", ""
   out("PIPULATION BEGINNING", "1")
   #                                            _     _         _                Try to keep your try blocks small to isolate where the
   #   ___  _ __   ___  __   _____ _ __ _   _  | |__ (_) __ _  | |_ _ __ _   _   errors are coming from. Or do this. Python is a very
@@ -454,14 +455,14 @@ def Pipulate(preproc='', dockey='', token=''):
           out("Expired login.")
           if globs.WEB: 
             yield "Google Login expired. Log back in.", "Login under the \"burger button\" in the upper-right.", "", ""
-            yield "spinoff", "", "", ""
+            yield spinoff
         try:
           gsp = gspread.authorize(creds)
         except:
           out("Login failed.")
           if globs.WEB: 
             yield "Google Login unsuccessful.", "", "", ""
-            yield "spinoff", "", "", ""
+            yield spinoff
           raise StopIteration
         else:
           out("Login successful.")
@@ -558,7 +559,7 @@ def Pipulate(preproc='', dockey='', token=''):
         if globs.WEB:
           yme = "Keywords Harvested! %s" % globs.PBNJMAN
           yield yme, "Mmmmmm, more keywords.", json.dumps(kwlist), ""
-          yield "spinoff", "", "", ""
+          yield spinoff
         return
       #        _             _       _         ___ ____  __  __   The Pipulate Instruction Processor Machine
       #  _ __ (_)_ __  _   _| | __ _| |_ ___  |_ _|  _ \|  \/  |  takes a list of tuples and interprets each
@@ -568,22 +569,29 @@ def Pipulate(preproc='', dockey='', token=''):
       # |_|     |_|                                               make table, fill in defaults, and pipulate.
       if preproc:
         for instruction in preproc:
-          yme = "%s : %s" % (instruction[0], instruction[1])
-          yield yme, "", "", ""
-          if instruction[0] == 'clear':
+          inst = instruction[0]
+          if inst == 'clear':
             out('Clearing Sheet 1')
-            anything = re.compile('.+')
-            CellList = gdoc.sheet1.findall(anything)
-            for cell in CellList:
-              cell.value = ''
-            result = gdoc.sheet1.update_cells(CellList)
-            if globs.WEB:
-              yield "You now are ready to do something requiring Sheet1 empty, like a Crawl or a Setup.", "", "", ""
-              yme = 'I recommend opening the %s Sheet in another tab so you can see the magic happen.' % (globs.DOCLINK)
-              yield yme, "", "", ""
-              yme = "Sheet1 Cleared! %s" % globs.PBNJMAN
-              yield yme, "Now, go do something awesome!", "", ""
-              yield "spinoff", "", "", ""
+            if globs.WEB: yield "Clearing Sheet 1...", "Clearing Sheet 1", "", ""
+            try:
+              anything = re.compile('.+')
+              CellList = gdoc.sheet1.findall(anything)
+              for cell in CellList:
+                cell.value = ''
+              result = gdoc.sheet1.update_cells(CellList)
+              if globs.WEB:
+                yield "You now are ready to do something requiring Sheet1 empty, like a Crawl or a Setup.", "", "", ""
+                yme = 'I recommend opening the %s Sheet in another tab so you can see the magic happen.' % (globs.DOCLINK)
+                yield yme, "", "", ""
+                yme = "Sheet1 Cleared! %s" % globs.PBNJMAN
+                yield yme, "Now, go do something awesome!", "", ""
+                yield spinoff
+            except:
+              yield "Failed to clear Sheet 1", "", "", ""
+              yield spinerr
+              Stop()
+          elif inst == 'stop':
+            Stop()
       #if globs.MODE != 'clear':
       #  try:
       #    bothrows = sheetinitializer(globs.MODE) # Beware! There is always an initialization attempt.
@@ -973,7 +981,7 @@ def Pipulate(preproc='', dockey='', token=''):
         except:
           if globs.WEB:
             yield "Couldn't reach Google Docs. Try logging in again.", "", "", ""
-            yield "spinoff", "", "", ""
+            yield spinoff
           raise StopIteration
         else:
           pass
@@ -1195,7 +1203,7 @@ def Pipulate(preproc='', dockey='', token=''):
               if globs.WEB:
                 yme = "Pipulate deliberately stopped. Feels like a success. %s" % globs.PBNJMAN
                 yield yme, "Pipulation Stopped", "", ""
-                yield "spinoff", "", "", ""
+                yield spinoff
               Stop()
             else:
               result = None
@@ -1224,7 +1232,7 @@ def Pipulate(preproc='', dockey='', token=''):
     if globs.WEB:
       yme = 'Pipulation complete. Now, do a little victory dance. %s' % globs.PBNJMAN
       yield yme, 'Congratulations, pipulation complete!', "", ""
-      yield "spinoff", "", "", ""
+      yield spinoff
     out("PIPULATION OVER", "1", '-')
   except Exception as e:
     exceptiondata = traceback.format_exc()
@@ -1592,8 +1600,8 @@ def pipSwitch():
 
 def ClearSheet1B():
   do =  [
-          ('clear', 'sheet1'),
-          ('clear', 'sheet1')
+          ('clear', ''),
+          ('stop', '')
         ]
   return stream_with_context(Pipulate(do))
 
