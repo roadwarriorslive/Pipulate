@@ -441,6 +441,7 @@ def Pipulate(preproc='', dockey='', token=''):
     if session or (dockey and token):
       out("LOGIN ATTEMPT", "2")
       sheet = ''
+      cell = None
       if dockey and token:
         creds = Credentials(access_token=token)
         gsp = gspread.authorize(creds)
@@ -569,46 +570,42 @@ def Pipulate(preproc='', dockey='', token=''):
         for instruction in preproc:
           yme = "%s : %s" % (instruction[0], instruction[1])
           yield yme, "", "", ""
+          if instruction[0] == 'clear':
+            out('Clearing Sheet 1')
+            anything = re.compile('.+')
+            CellList = gdoc.sheet1.findall(anything)
+            for cell in CellList:
+              cell.value = ''
+            result = gdoc.sheet1.update_cells(CellList)
+            if globs.WEB:
+              yield "You now are ready to do something requiring Sheet1 empty, like a Crawl or a Setup.", "", "", ""
+              yme = 'I recommend opening the %s Sheet in another tab so you can see the magic happen.' % (globs.DOCLINK)
+              yield yme, "", "", ""
+              yme = "Sheet1 Cleared! %s" % globs.PBNJMAN
+              yield yme, "Now, go do something awesome!", "", ""
+              yield "spinoff", "", "", ""
+      #if globs.MODE != 'clear':
+      #  try:
+      #    bothrows = sheetinitializer(globs.MODE) # Beware! There is always an initialization attempt.
+      #    row1 = bothrows[0]
+      #    row2 = [bothrows[1]]
+      #    if globs.WEB: yield lock
+      #    try:
+      #      InitTab(gdoc, "sheet1", row1, row2)
+      #    except:
+      #      pass
+      #    if globs.WEB: yield unlock
+      #  except:
+      #    pass
+
       #                        _       _               _  ___   At some point in the future, there wil be
       #   __ _  ___   ___   __| |  ___| |__   ___  ___| ||__ \  something better than Google Spreadsheets.
       #  / _` |/ _ \ / _ \ / _` | / __| '_ \ / _ \/ _ \ __|/ /  Until that day, let us use it excessively
       # | (_| | (_) | (_) | (_| | \__ \ | | |  __/  __/ |_|_|   for precisely the things it's good at. But
       #  \__, |\___/ \___/ \__,_| |___/_| |_|\___|\___|\__(_)   it must be there, you must have access, any
       #  |___/                                                  servers in the picture must have access too.
-      anything = re.compile('.+')
-      cell = None
-      if globs.MODE == 'clear':
-        anything = re.compile('.+')
-        if globs.MODE == 'clear':
-          out("Clearing Tab 1...")
-          if globs.WEB: yield "Clearing Sheet 1. If this was a mistake, use revision history to get back your data.", "Clearing Sheet 1", "", ""
-          #try:
-          CellList = gdoc.sheet1.findall(anything)
-          for cell in CellList:
-            cell.value = ''
-          result = gdoc.sheet1.update_cells(CellList)
-          if globs.WEB:
-            yield "You now are ready to do something requiring Sheet1 empty, like a Crawl or a Setup.", "", "", ""
-            yme = 'I recommend opening the %s Sheet in another tab so you can see the magic happen.' % (globs.DOCLINK)
-            yield yme, "", "", ""
-            yme = "Sheet1 Cleared! %s" % globs.PBNJMAN
-            yield yme, "Now, go do something awesome!", "", ""
-            yield "spinoff", "", "", ""
-          Stop()
-      else:
-        try:
-          bothrows = sheetinitializer(globs.MODE) # Beware! There is always an initialization attempt.
-          row1 = bothrows[0]
-          row2 = [bothrows[1]]
-          if globs.WEB: yield lock
-          try:
-            InitTab(gdoc, "sheet1", row1, row2)
-          except:
-            pass
-          if globs.WEB: yield unlock
-        except:
-          pass
       if globs.WEB: yield "Checking Tabs...", "Then we check for tabs...", "", ""
+
       # Documentation Tab
       headers = ['Function', 'Category', 'Requirements', 'Description', 'More']
       InitTab(gdoc, 'Docs', headers, documentation())
