@@ -1645,11 +1645,16 @@ def formSwitch():
 
 class AddColumnsForm(PipForm2):
   """Create the menu for when Clear Sheet 1 is selected."""
-  radios = RadioField(choices=[
+  choices = [
     ('social', 'Common Social Media Counters'),
     ('seo', 'Common SEO counters'),
     ('cancel', 'Cancel')
-  ])
+  ]
+  checks = SelectMultipleField(
+    choices=choices, 
+    option_widget=widgets.CheckboxInput(),
+    widget=widgets.ListWidget(prefix_label=False)
+  )
 
 class SetupForm(PipForm2):
   """Create the menu for when Clear Sheet 1 is selected."""

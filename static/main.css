@@ -112,7 +112,6 @@ a {
 }
 [type=checkbox]+.checkable:after, [type=checkbox]+.checkable:before,
 [type=radio]+.checkable:after, [type=radio]+.checkable:before {
-  color: black;
   top: 10px;
 }
 [type=checkbox]+.checkable:before, [type=radio]+.checkable:before {
