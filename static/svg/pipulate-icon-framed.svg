@@ -63,7 +63,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -79,14 +79,14 @@
        style="font-size:228.02098083px;font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial Black;-inkscape-font-specification:'Arial Black, Heavy'"
        id="text3681">
       <circle
-         style="fill:#ffffff;fill-opacity:0.69540232;fill-rule:evenodd;stroke:#000080;stroke-width:37.9;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         style="fill:#ffffff;fill-opacity:0.69540232;fill-rule:evenodd;stroke:#000080;stroke-width:38.99450302;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          id="path3503"
          cx="565.85193"
          cy="475.46039"
-         r="470.75888" />
+         r="484.35376" />
       <g
          id="g3545"
-         transform="matrix(0.83887555,0,0,0.83887555,133.11637,34.664512)"
+         transform="matrix(0.86310115,0,0,0.86310115,120.61955,21.934918)"
          style="fill:#000080">
         <path
            inkscape:connector-curvature="0"
