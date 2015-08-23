@@ -1639,10 +1639,12 @@ def formSwitch():
     'graph': VisualizationForm(csrf_enabled=False)
   }
 
-class VisualizationForm(PipForm2):
-  """Offer up a few common visualizations of the type of data we're handling"""
+class CrawlTypesForm(PipForm2):
+  """Present user with different types of crawls they can perform."""
   radios = RadioField(choices=[
-    ('sitemap', 'Generate interactive hierarchal sitemap from a 2-DEEP crawl.'),
+    ('linksonpage', '1. LINKS ON PAGE: Just get the de-duplicated links from page, one line per link.'),
+    ('oneclickcrawl', '2. QUICK CRAWL: Same as above, but visits each page to get their on-page data.'),
+    ('linkgraph', '3. CRAWL, 2 DEEP: Creates data for 3-Level Site Hierarchy Visualization. Requires separate ?-replacement for sanity.'),
     ('cancel', 'Cancel')
   ])
 
@@ -1666,19 +1668,17 @@ class SetupForm(PipForm2):
     ('cancel', 'Cancel')
   ])
 
+class VisualizationForm(PipForm2):
+  """Offer up a few common visualizations of the type of data we're handling"""
+  radios = RadioField(choices=[
+    ('sitemap', 'Generate interactive hierarchal sitemap from a 2-DEEP crawl.'),
+    ('cancel', 'Cancel')
+  ])
+
 class ClearSheet1Form(PipForm2):
   """Create the menu for when Clear Sheet 1 is selected."""
   radios = RadioField(choices=[
     ('clear', 'Yes, clear Sheet 1.'),
-    ('cancel', 'Cancel')
-  ])
-
-class CrawlTypesForm(PipForm2):
-  """Present user with different types of crawls they can perform."""
-  radios = RadioField(choices=[
-    ('linksonpage', '1. LINKS ON PAGE: Just get the de-duplicated links from page, one line per link.'),
-    ('oneclickcrawl', '2. QUICK CRAWL: Same as above, but visits each page to get their on-page data.'),
-    ('linkgraph', '3. CRAWL, 2 DEEP: Creates data for 3-Level Site Hierarchy Visualization. Requires separate ?-replacement for sanity.'),
     ('cancel', 'Cancel')
   ])
 
@@ -1697,8 +1697,21 @@ def pipSwitch():
     'quickcrawl': QuickCrawl,
     'linkgraph': LinkGraph,
     'tests': RunTests,
-    'column': AddColumns
+    'column': AddColumns,
+    'sitemap': MakeSitemap
   }
+
+def MakeSitemap():
+  '''Offer user some visualizations to choose from.'''
+  return Pipulate([
+    ('sitemap', '')
+  ])
+
+def ClearSheet1():
+  '''Offer user some visualizations to choose from.'''
+  return Pipulate([
+    ('graph', '')
+  ])
 
 def AddColumns():
   '''Ad columns to sheet from checkboxes on submitted form.'''
