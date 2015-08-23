@@ -163,12 +163,12 @@ def main():                                                         # of entry "
     else: # Config file not found, nor POST method or "code" on querystring.
       return render_template('pipulate.html', configform=configform) # Start server configuration procedure.
   if session and 'oa2' in session: # Appears that user is logged in already.
-    #       _               _          _               _    
-    #   ___| |__   ___  ___| |_    ___| |__   ___  ___| | __
-    #  / __| '_ \ / _ \/ _ \ __|  / __| '_ \ / _ \/ __| |/ /
-    #  \__ \ | | |  __/  __/ |_  | (__| | | |  __/ (__|   < 
-    #  |___/_| |_|\___|\___|\__|  \___|_| |_|\___|\___|_|\_\
-    #                                                       
+    #                    _            _   _       _     
+    #   ___ _ __ ___  __| | ___ _ __ | |_(_) __ _| |___ 
+    #  / __| '__/ _ \/ _` |/ _ \ '_ \| __| |/ _` | / __|
+    # | (__| | |  __/ (_| |  __/ | | | |_| | (_| | \__ \
+    #  \___|_|  \___|\__,_|\___|_| |_|\__|_|\__,_|_|___/
+    #                                                   
     session.permanent = True
     creds = Credentials(access_token=session['oa2'])
     try:
@@ -179,6 +179,12 @@ def main():                                                         # of entry "
       session.pop('loggedin', None)                       # and if we can't, get rid of login clue.
       if 'u' not in session and globs.PIPURL:
         session['u'] = globs.PIPURL
+    #      _                  _             _   Yes, Pipulate needs to know what spreadsheet to target, 
+    #  ___| |_ ___  _ __  ___(_) __ _ _ __ | |  and making a new one every time is a terrible mess.
+    # / __| __/ _ \| '_ \/ __| |/ _` | '_ \| |  Been there, done that. And so, it ALWAYS targets a sheet
+    # \__ \ || (_) | |_) \__ \ | (_| | | | |_|  named Pipulate unless you click the bookmarklet FROM a
+    # |___/\__\___/| .__/|___/_|\__, |_| |_(_)  Google Sheet. Then, it targets that. In any case, this
+    #              |_|          |___/           version is great at recycling and reducing file cruft.
     if session and 'loggedin' in session and session['loggedin'] == "1":
       needsPipulate = True
       tasteMe = None
@@ -212,12 +218,12 @@ def main():                                                         # of entry "
   globs.DOCLINK = '<a href="%s/d/%s/edit#gid=0" target="_blank">%s</a>' % (globs.SHEETS, globs.DOCID, globs.NAME)
   menutwo = False
   if request.method == 'POST':
-    #  ____  _                              _   Shazam! is the block in which we create the
-    # / ___|| |__   __ _ ______ _ _ __ ___ | |  first instance of the Pipulate() generator
-    # \___ \| '_ \ / _` |_  / _` | '_ ` _ \| |  object that gets called again later as the
-    #  ___) | | | | (_| |/ / (_| | | | | | |_|  data paramater of a stream_template() call 
-    # |____/|_| |_|\__,_/___\__,_|_| |_| |_(_)  enabling our magic streaming output. Shazam!
-    #                                         
+    #  ____   ___  ____ _____   ____  _                              _   Shazam! is the block in which we create the
+    # |  _ \ / _ \/ ___|_   _| / ___|| |__   __ _ ______ _ _ __ ___ | |  first instance of the Pipulate() generator
+    # | |_) | | | \___ \ | |   \___ \| '_ \ / _` |_  / _` | '_ ` _ \| |  object that gets called again later as the
+    # |  __/| |_| |___) || |    ___) | | | | (_| |/ / (_| | | | | | |_|  data paramater of a stream_template() call 
+    # |_|    \___/|____/ |_|   |____/|_| |_|\__,_/___\__,_|_| |_| |_(_)  enabling our magic streaming output. Shazam!
+    #                                                                  
     if form2 and form2.secondary.data == 'on':
       menutwo = True
       if 'radios' in form2:
@@ -229,7 +235,6 @@ def main():                                                         # of entry "
       if globs.MODE == 'cancel':
         return redirect(url_for('main', u=form2.pipurl.data))
       streamit = pipSwitch()[globs.MODE]()
-
     elif form.pipurl.data:
       globs.PIPURL = form.pipurl.data
       if form.options.data:
@@ -296,13 +301,12 @@ def main():                                                         # of entry "
           globs.PIPURL = session['u']
       except:
         pass
-  #  ____                _                          ____  _                            
-  # |  _ \ ___ _ __   __| | ___ _ __    ___  _ __  / ___|| |_ _ __ ___  __ _ _ __ ___  
-  # | |_) / _ \ '_ \ / _` |/ _ \ '__|  / _ \| '__| \___ \| __| '__/ _ \/ _` | '_ ` _ \ 
-  # |  _ <  __/ | | | (_| |  __/ |    | (_) | |     ___) | |_| | |  __/ (_| | | | | | |
-  # |_| \_\___|_| |_|\__,_|\___|_|     \___/|_|    |____/ \__|_|  \___|\__,_|_| |_| |_|
-  #                                                                                    
-  out("Selecting template method.")
+  #    ____ _____ _____                                                   What better place to "GET" messages than
+  #   / ___| ____|_   _|  _ __ ___   ___  ___ ___  __ _  __ _  ___  ___   where the GET method is being used to build
+  #  | |  _|  _|   | |   | '_ ` _ \ / _ \/ __/ __|/ _` |/ _` |/ _ \/ __|  the normally much more stream-y UI. But it's
+  #  | |_| | |___  | |   | | | | | |  __/\__ \__ \ (_| | (_| |  __/\__ \  not needed, and Flask provides yet another
+  #   \____|_____| |_|   |_| |_| |_|\___||___/___/\__,_|\__, |\___||___/  thing for the world flash to mean. Nice little
+  #                                                     |___/             higher abstraction doohickey in Flask framework.
   options = menumaker()
   if request.method == 'GET':
     try:
@@ -337,6 +341,13 @@ def main():                                                         # of entry "
           flash('Maybe select "Add Columns" from the menu to add some KPIs.')
     except:
       pass
+  out("Selecting template method.")
+  #  _                       _       _              To Stream or to Render, that is the question. 'Tis it not nobler 
+  # | |_ ___ _ __ ___  _ __ | | __ _| |_ ___  ___   to embrace the streamy render_temblate alternative in Flask and
+  # | __/ _ \ '_ ` _ \| '_ \| |/ _` | __/ _ \/ __|  do all the ajaxy-communication tight on the same response that
+  # | ||  __/ | | | | | |_) | | (_| | ||  __/\__ \  built the form in the first place? How little overhead. How few
+  #  \__\___|_| |_| |_| .__/|_|\__,_|\__\___||___/  parts. How adaptable to unimaginably diverse situations in the
+  #                   |_|                           future! Flask-SocketIO is not ruled it. It is just not necessary.
   if streamit:
     #Handle streaming user interface updates resulting from a POST method call.
     return Response(stream_template('pipulate.html', form=form, select=options, data=streamit)) # <-- Look Closely!!!
@@ -399,7 +410,7 @@ def LogUser(authkey):
 # | |  _ / _ \ '_ \ / _ \ '__/ _` | __/ _ \| '__|   instead of return. Simple enough, right? Well, each time
 # | |_| |  __/ | | |  __/ | | (_| | || (_) | |      the generator is invoked, it goes to the next yield,
 #  \____|\___|_| |_|\___|_|  \__,_|\__\___/|_|      freezes generator state, until called again. Streaming!
-#                                                
+#                                                   There may be other approaches, but this is a good one. 
 def Pipulate(preproc='', dockey='', token=''):
   """Generator that streams output to a web user interface."""
   stop = False
@@ -542,19 +553,22 @@ def Pipulate(preproc='', dockey='', token=''):
           yield yme, "Mmmmmm, more keywords.", json.dumps(kwlist), ""
           yield "spinoff", "", "", ""
         return
-      #           _                       _               _     _
-      #  ___  ___| |_   _   _ _ __    ___| |__   ___  ___| |_  / |
-      # / __|/ _ \ __| | | | | '_ \  / __| '_ \ / _ \/ _ \ __| | |
-      # \__ \  __/ |_  | |_| | |_) | \__ \ | | |  __/  __/ |_  | |
-      # |___/\___|\__|  \__,_| .__/  |___/_| |_|\___|\___|\__| |_|
-      #                      |_|
-      # This is where special behavior like crawls get wedged in
-
+      #        _             _       _         ___ ____  __  __   The Pipulate Instruction Processor Machine
+      #  _ __ (_)_ __  _   _| | __ _| |_ ___  |_ _|  _ \|  \/  |  takes a list of tuples and interprets each
+      # | '_ \| | '_ \| | | | |/ _` | __/ _ \  | || |_) | |\/| |  and interprets it as an action to take and
+      # | |_) | | |_) | |_| | | (_| | ||  __/  | ||  __/| |  | |  a target aginst which to, and becomes a sort
+      # | .__/|_| .__/ \__,_|_|\__,_|\__\___| |___|_|   |_|  |_|  of sequentially carried out jobs, such as
+      # |_|     |_|                                               make table, fill in defaults, and pipulate.
       if preproc:
         for instruction in preproc:
           yme = "%s : %s" % (instruction[0], instruction[1])
           yield yme, "", "", ""
-
+      #                        _       _               _  ___   At some point in the future, there wil be
+      #   __ _  ___   ___   __| |  ___| |__   ___  ___| ||__ \  something better than Google Spreadsheets.
+      #  / _` |/ _ \ / _ \ / _` | / __| '_ \ / _ \/ _ \ __|/ /  Until that day, let us use it excessively
+      # | (_| | (_) | (_) | (_| | \__ \ | | |  __/  __/ |_|_|   for precisely the things it's good at. But
+      #  \__, |\___/ \___/ \__,_| |___/_| |_|\___|\___|\__(_)   it must be there, you must have access, any
+      #  |___/                                                  servers in the picture must have access too.
       anything = re.compile('.+')
       cell = None
       if globs.MODE == 'clear':
