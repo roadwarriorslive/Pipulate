@@ -5,8 +5,7 @@ def documentation():
   s = []
   s.append(['Canonical',            'Crawl',     'Url',                       'Return Canonical.', ''])
   s.append(['Comments',             'Facebook',  'Url',                       'Return Facebook count.', ''])
-  s.append(['Crawl',                'Crawl',     'Url',                       'Make one row per link found on url, setting stage for Crawl2.', ''])
-  s.append(['Crawl2',               'Crawl',     'Target',                    'Make one row per link found on target, as set up by Crawl.', ''])
+  s.append(['Crawl',                'Crawl',     'LinksTo',                   'Make one row per link found on target, as set up by PreCrawl.', ''])
   s.append(['DateStamp',            'Time',      '',                          'Return current date only in easy to read format. Good for oncce/day tasks.', ''])
   s.append(['Description',          'Crawl',     'Url',                       'Return meta description.', ''])
   s.append(['Difficulty',           'Keyword',   'Keyword',                   'Return SEMRush Keyword Difficulty.', ''])
@@ -28,6 +27,7 @@ def documentation():
   s.append(['Plusses',              'Social',    'Url',                       'Return Google Plus count on a URL.', ''])
   s.append(['Position',             'Serps',     'Keyword, Site, (Serps)',    'Return the actual position for a given site for a given keyword.', ''])
   s.append(['Positions',            'Serps',     'Keyword, (Positions)',      'Return all the SERP positions as easily readable JSON for a given keyword.', ''])
+  s.append(['PreCrawl',             'Crawl',     'Url',                       'Make one row per link found on url, setting stage for Crawl.', ''])
   s.append(['Redirect_Chain',       'Crawl',     'Url',                       'Not yet implemented', ''])
   s.append(['RegEx',                'Crawl',     'Text, Pattern',             'Return matched group named (?P<scrape>blah) given text and pattern.', ''])
   s.append(['Response',             'Crawl',     'Url',                       'Return http response code from fetching given URL.', ''])

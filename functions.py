@@ -176,9 +176,9 @@ def setolinks(url):
   else:
     return None
 
-def crawl(url):
+def precrawl(url):
   """Grab HTML from a link, parse links and add a row per link to spreadsheet."""
-  fcols = ['target', 'depth', 'crawl2']
+  fcols = ['linksto', 'depth', 'crawl']
   therange = 'B1:%s2' % globs.letter[len(fcols)+1]
   CellList = globs.sheet.range(therange)
   vals = fcols + [] + [] + []
@@ -191,20 +191,20 @@ def crawl(url):
   InsertRows(globs.sheet, linkslist, 2)
   return ""
 
-def crawl2(target, depth='0'):
+def crawl(linksto, depth='0'):
   '''Performs second degree crawling from the 1st crawl function. No recursion
   necessary for a shalow crawl.'''
-  links = setolinks(target)
+  links = setolinks(linksto)
   if links:
     y = len(links)
     globs.numrows = len(globs.sheet.col_values(1))
     if depth:
       depth = int(depth) + 1
-    linkslist = zip([target]*y, links, [depth]*y)
+    linkslist = zip([linksto]*y, links, [depth]*y)
     InsertRows(globs.sheet, linkslist, globs.numrows)
-    return "done"
+    return "visited"
   else:
-    return "Can not get"
+    return "can't reach"
 
 def getlinks(url):
   """Grab HTML from a URL, parse links and add a row per link to spreadsheet."""
@@ -231,10 +231,6 @@ def getlinks(url):
   linkslist = zip(links,['1']*y,q,q)
   InsertRows(globs.sheet, linkslist, 2)
   return "0"
-
-def crawlinit(gsp):
-  """Do the spreadsheet setup requried by crawl function."""
-  pass
 
 #   ___                         _ ____   ___  _   _      _    ____ ___     
 #  / _ \ _ __   ___ _ __       | / ___| / _ \| \ | |    / \  |  _ \_ _|___ 

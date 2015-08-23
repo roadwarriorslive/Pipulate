@@ -1601,10 +1601,9 @@ class ClearSheet1Form(PipForm2):
 class CrawlTypesForm(PipForm2):
   """Present user with different types of crawls they can perform."""
   radios = RadioField(choices=[
-    ('shycrawl', 'SHY: Only get links from this URL.'),
-    ('modestcrawl', 'MODEST: Visit each link from this URL.'),
-    ('assertivecrawl', 'ASSERTIVE: Visit each link from each link from this URL (2 clicks deep).'),
-    ('assertivepluscrawl', 'ASSERTIVE PLUS: take me to the visualization, baby!'),
+    ('linksonpage', '1. LINKS ON PAGE: Just get the de-duplicated links from page, one line per link.'),
+    ('oneclickcrawl', '2. QUICK CRAWL: Same as above, but visits each page to get their on-page data.'),
+    ('linkgraph', '3. CRAWL 2 DEEP: Creates data for 3-Level Site Hierarchy Visualization.'),
     ('cancel', 'Cancel')
   ])
 
@@ -1619,10 +1618,9 @@ def pipSwitch():
   return {
     'clear': ClearSheet1,
     'cancel': Cancel,
-    'shycrawl': ShyCrawl,
-    'modestcrawl': ModestCrawl,
-    'assertivecrawl': AssertiveCrawl,
-    'assertivepluscrawl': AssertivePlusCrawl
+    'linksonpage': LinksOnPage,
+    'quickcrawl': QuickCrawl,
+    'linkgraph': LinkGraph
   }
 
 def ClearSheet1():
@@ -1632,7 +1630,7 @@ def ClearSheet1():
     ('stop', '')
   ]))
 
-def ShyCrawl():
+def LinksOnPage():
   '''Collect links from displaying page'''
   out("Shy Crawl")
   return stream_with_context(Pipulate([
@@ -1643,7 +1641,7 @@ def ShyCrawl():
     ])
   ]))
 
-def ModestCrawl():
+def QuickCrawl():
   '''Collect links from displaying page and get titles and metas'''
   out("Modest Crawl")
   return stream_with_context(Pipulate([
@@ -1655,39 +1653,26 @@ def ModestCrawl():
     ('?', '')
   ]))
 
-def AssertiveCrawl():
+def LinkGraph():
   '''Collect links from displaying page'''
   out("Modest Crawl")
   return stream_with_context(Pipulate([
     ('clear', ''),
     ('table', [
-      ('url','Crawl'),
+      ('url','PreCrawl'),
       (globs.PIPURL, '?')
     ])
-  ]))
-
-def AssertivePlusCrawl():
-  '''Collect links from displaying page'''
-  out("Modest Crawl")
-  return stream_with_context(Pipulate([
-    ('clear', ''),
-    ('table', [
-      ('url','Crawl'),
-      (globs.PIPURL, '?')
-    ]),
-    ('?', '')
   ]))
 
 def Cancel():
   out("Cancel")
   return stream_with_context(Pipulate())
-
-#      _                     _                     
-#   __| |_ __ ___  _ __   __| | _____      ___ __  
-#  / _` | '__/ _ \| '_ \ / _` |/ _ \ \ /\ / / '_ \ 
-# | (_| | | | (_) | |_) | (_| | (_) \ V  V /| | | |
-#  \__,_|_|  \___/| .__/ \__,_|\___/ \_/\_/ |_| |_|
-#                 |_|                              
+#                   _                                    
+#   _ __ ___   __ _(_)_ __    _ __ ___   ___ _ __  _   _ 
+#  | '_ ` _ \ / _` | | '_ \  | '_ ` _ \ / _ \ '_ \| | | |
+#  | | | | | | (_| | | | | | | | | | | |  __/ | | | |_| |
+#  |_| |_| |_|\__,_|_|_| |_| |_| |_| |_|\___|_| |_|\__,_|
+#                                                        
 def menumaker():
   ''' Creates the entire cadence of the system.'''
   menu = [
