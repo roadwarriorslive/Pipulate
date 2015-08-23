@@ -422,6 +422,12 @@ def Pipulate(preproc='', dockey='', token=''):
   unlock = ("", "", "", "-")
   spinerr = "spinerr", "", "", ""
   out("PIPULATION BEGINNING", "1")
+  #                                            _     _         _                Try to keep your try blocks small to isolate where the
+  #   ___  _ __   ___  __   _____ _ __ _   _  | |__ (_) __ _  | |_ _ __ _   _   errors are coming from. Or do this. Python is a very
+  #  / _ \| '_ \ / _ \ \ \ / / _ \ '__| | | | | '_ \| |/ _` | | __| '__| | | |  pragmatic language, and sometimes you have to take
+  # | (_) | | | |  __/  \ V /  __/ |  | |_| | | |_) | | (_| | | |_| |  | |_| |  advantage of how try/exept can work in a big generotor
+  #  \___/|_| |_|\___|   \_/ \___|_|   \__, | |_.__/|_|\__, |  \__|_|   \__, |  yielding instructions to a Web browser UI, which must
+  #                                    |___/           |___/            |___/   be told in its final dying breath to stop spinning.
   try:
     if globs.WEB:
       yield "Beginning to Pipulate! Opening sheet...", "", "", ""
@@ -985,7 +991,6 @@ def Pipulate(preproc='', dockey='', token=''):
       # | (_| | |_| |  __/\__ \ |_| | (_) | | | | | | | | | | (_| | |  |   <\__ \
       #  \__, |\__,_|\___||___/\__|_|\___/|_| |_| |_| |_| |_|\__,_|_|  |_|\_\___/
       #     |_|
-      #
       out("QUESTION MARK Replacement.", '2')
       if not qset and not trended:
         out("Done looking for asterisks", "2", "-")
