@@ -1589,11 +1589,11 @@ def stringify_children(node):
   # filter removes possible Nones in texts and tails
   return ''.join(filter(None, parts))
 
-# __        _______ _____ ___   _____                        _ 
-# \ \      / /_   _|  ___|__ \ |  ___|__  _ __ _ __ ___  ___| |
-#  \ \ /\ / /  | | | |_    / / | |_ / _ \| '__| '_ ` _ \/ __| |
-#   \ V  V /   | | |  _|  |_|  |  _| (_) | |  | | | | | \__ \_|
-#    \_/\_/    |_| |_|    (_)  |_|  \___/|_|  |_| |_| |_|___(_)
+# __        _______ _____ ___   _____                        _  I should probably externalize these.
+# \ \      / /_   _|  ___|__ \ |  ___|__  _ __ _ __ ___  ___| | Tried moving them into managelists.py
+#  \ \ /\ / /  | | | |_    / / | |_ / _ \| '__| '_ ` _ \/ __| | but had to bring SOME parts back in
+#   \ V  V /   | | |  _|  |_|  |  _| (_) | |  | | | | | \__ \_| here, so I ended up bringing all parts
+#    \_/\_/    |_| |_|    (_)  |_|  \___/|_|  |_| |_| |_|___(_) back in here. Bottom of pipulate.py = forms
 from flask_wtf import Form
 from wtforms import (StringField,
                     RadioField,
@@ -1621,11 +1621,6 @@ class PipForm2(PipForm):
   """Adds a hidden field to tell the secondary menu from a dropdown menu selection."""
   secondary = HiddenField()
 
-#class AnotherMenu(PipForm2):
-#  radios = RadioField(choices=crawlchoices())
-#  checks = SelectMultipleField(choices=crawlchoices(),
-#    option_widget=widgets.CheckboxInput(),
-#    widget=widgets.ListWidget(prefix_label=False))
 #  _       _                _   _ _   _       _    __                           This should set forth a familiar pattern where 
 # (_)_ __ | |_ ___ _ __ ___| |_(_) |_(_) __ _| |  / _| ___  _ __ _ __ ___  ___  we open with a dict router and follow with the
 # | | '_ \| __/ _ \ '__/ __| __| | __| |/ _` | | | |_ / _ \| '__| '_ ` _ \/ __| things that router can invoke. In this case,
@@ -1634,14 +1629,22 @@ class PipForm2(PipForm):
 #                                                                               interstitial screen to follow, choices listed.
 
 def formSwitch():
-  """Create dict that ties screen 1 select options with what menu to show on interstital page.
-  Everything in the interstital forms section needs an entry in this dict to activate."""
+  """Create dict that ties screen 1 select options with what menu to show on interstitial page.
+  Everything in the interstitial forms section needs an entry in this dict to activate."""
   return {
     'clear': ClearSheet1Form(csrf_enabled=False),
     'crawl': CrawlTypesForm(csrf_enabled=False),
     'setup': SetupForm(csrf_enabled=False),
-    'column': AddColumnsForm(csrf_enabled=False)
+    'column': AddColumnsForm(csrf_enabled=False),
+    'graph': VisualizationForm(csrf_enabled=False)
   }
+
+class VisualizationForm(PipForm2):
+  """Offer up a few common visualizations of the type of data we're handling"""
+  radios = RadioField(choices=[
+    ('sitemap', 'Generate interactive hierarchal sitemap from a 2-DEEP crawl.'),
+    ('cancel', 'Cancel')
+  ])
 
 class AddColumnsForm(PipForm2):
   """Create the menu for when Clear Sheet 1 is selected."""
