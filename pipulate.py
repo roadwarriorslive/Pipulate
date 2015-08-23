@@ -1582,15 +1582,48 @@ def stringify_children(node):
   # filter removes possible Nones in texts and tails
   return ''.join(filter(None, parts))
 
+#  _       _                _   _ _   _       _    __                           This should set forth a familiar pattern where 
+# (_)_ __ | |_ ___ _ __ ___| |_(_) |_(_) __ _| |  / _| ___  _ __ _ __ ___  ___  we open with a dict router and follow with the
+# | | '_ \| __/ _ \ '__/ __| __| | __| |/ _` | | | |_ / _ \| '__| '_ ` _ \/ __| things that router can invoke. In this case,
+# | | | | | ||  __/ |  \__ \ |_| | |_| | (_| | | |  _| (_) | |  | | | | | \__ \ it's the mapping between the main Pipulate drop-
+# |_|_| |_|\__\___|_|  |___/\__|_|\__|_|\__,_|_| |_|  \___/|_|  |_| |_| |_|___/ down menu and what form gets shown on the
+#                                                                               interstitial screen to follow, choices listed.
+
 def formSwitch():
+  """Create dict that ties screen 1 select options with what menu to show on interstital page.
+  Everything in the interstital forms section needs an entry in this dict to activate."""
   return {
-    'clear': ClearSheet1(csrf_enabled=False),
-    'crawl': CrawlTypes(csrf_enabled=False)
+    'clear': ClearSheet1Form(csrf_enabled=False),
+    'crawl': CrawlTypesForm(csrf_enabled=False)
   }
+
+class ClearSheet1Form(PipForm2):
+  """Create the menu for when Clear Sheet 1 is selected."""
+  radios = RadioField(choices=[
+    ('clear', 'Yes, clear Sheet 1.'),
+    ('cancel', 'Cancel')
+  ])
+
+class CrawlTypesForm(PipForm2):
+  """Present user with different types of crawls they can perform."""
+  radios = RadioField(choices=[
+    ('getlinks', 'SHY: Only get links from this URL.'),
+    ('crawl1', 'MODEST: Visit each link from this URL.'),
+    ('crawl2', 'ASSERTIVE: Visit each link from each link from this URL (2 clicks deep).'),
+    ('crawl3', 'ASSERTIVE PLUS: take me to the visualization, baby!'),
+    ('cancel', 'Cancel')
+  ])
+
+#  ____       _                      ___      ____                    _       Again, we open with a dict that lays forth the options.
+# / ___|  ___| |_ _   _ _ __  ___   ( _ )    / ___|_ __ __ ___      _| |___   In this case, it's a mapping to a list of tuples, each
+# \___ \ / _ \ __| | | | '_ \/ __|  / _ \/\ | |   | '__/ _` \ \ /\ / / / __|  representing a name/value pair, but preserving the order.
+#  ___) |  __/ |_| |_| | |_) \__ \ | (_>  < | |___| | | (_| |\ V  V /| \__ \  Some think of it as an ordered dict. I think of it as
+# |____/ \___|\__|\__,_| .__/|___/  \___/\/  \____|_|  \__,_| \_/\_/ |_|___/  the job instructions, where the value in the pair can
+#                      |_|                                                    be ANYTHING including a function. Remember this flexibilty!
 
 def pipSwitch():
   return {
-    'clear': ClearSheet1B,
+    'clear': ClearSheet1,
     'cancel': Cancel,
     'crawl1': SetupCrawl1,
     'crawl2': SetupCrawl2,
@@ -1598,7 +1631,7 @@ def pipSwitch():
     'getlinks': SetupGetLinks
   }
 
-def ClearSheet1B():
+def ClearSheet1():
   do =  [
           ('clear', ''),
           ('stop', '')
