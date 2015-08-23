@@ -611,8 +611,12 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
             lol = aobj[1:]
             InitTab(gdoc, tabname, row1, lol)
           elif inst == '?':
-            for yieldme in Pipulate():
-              yield yieldme
+            if instruction[1]:
+              for yieldme in Pipulate(targettab=instruction[1]):
+                yield yieldme
+            else:
+              for yieldme in Pipulate():
+                yield yieldme
       #                        _       _               _  ___   At some point in the future, there wil be
       #   __ _  ___   ___   __| |  ___| |__   ___  ___| ||__ \  something better than Google Spreadsheets.
       #  / _` |/ _ \ / _ \ / _` | / __| '_ \ / _ \/ _ \ __|/ /  Until that day, let us use it excessively
@@ -1731,9 +1735,11 @@ def RunTests():
   return Pipulate([
     ('clear', ''),
     ('sheet', 'tests', [
-      ('url','GetLinks'),
+      ('url','Title'),
       (globs.PIPURL, '?')
-    ])
+    ]),
+    ('?', 'tests'),
+    ('stop', '')
   ])
 
 def ClearSheet1():
