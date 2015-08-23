@@ -439,6 +439,7 @@ def Pipulate(preproc='', dockey='', token=''):
     blankrows = 0
     gsp = None
     gdoc = None
+    stop = True
     if session or (dockey and token):
       out("LOGIN ATTEMPT", "2")
       sheet = ''
@@ -467,8 +468,6 @@ def Pipulate(preproc='', dockey='', token=''):
         else:
           out("Login successful.")
         out("Opening Spreadsheet...")
-        stop = True
-        sheet = ''
         for x in range(10):
           if globs.WEB: yield lock
           try:
