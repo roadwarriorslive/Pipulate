@@ -234,7 +234,7 @@ def main():                                                         # of entry "
         globs.MODE = globs.MODE.split(':')[1]
       if globs.MODE == 'cancel':
         return redirect(url_for('main', u=form2.pipurl.data))
-      streamit = pipSwitch()[globs.MODE]()
+      streamit = stream_with_context(pipSwitch()[globs.MODE]())
     elif form.pipurl.data:
       globs.PIPURL = form.pipurl.data
       if form.options.data:
@@ -468,13 +468,14 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
         else:
           out("Login successful.")
         out("Opening Spreadsheet...")
+        stop = True
         for x in range(10):
           if globs.WEB: yield lock
           try:
             gdoc = gsp.open_by_url(globs.PIPURL)
             globs.DOCID = gdoc.id
             globs.NAME = gdoc.title
-            if targetttab:
+            if targettab:
               globs.TAB = gdoc.worksheet(targettab).title
             else:
               globs.TAB = gdoc.sheet1.title
@@ -493,7 +494,7 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
             try:
               gdoc = gsp.open(globs.NAME)
               globs.DOCID = gdoc.id
-              if targetttab:
+              if targettab:
                 globs.TAB = gdoc.worksheet(targettab).title
               else:
                 globs.TAB = gdoc.sheet1.title
@@ -517,12 +518,12 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
             if globs.WEB: yield dontgetfrustrated(x)
             out("Retry login %s of %s" % (x, 10))
             time.sleep(6)
-        globs.DOCLINK = '<a href="%s/d/%s/edit#gid=0" target="_blank">%s</a>' % (globs.SHEETS, globs.DOCID, globs.NAME)
         if stop:
           if globs.WEB: 
             yield spinerr
             yield badtuple
           Stop() # Consider adding refresh_token logic for users (versus the scheduler)
+        globs.DOCLINK = '<a href="%s/d/%s/edit#gid=0" target="_blank">%s</a>' % (globs.SHEETS, globs.DOCID, globs.NAME)
       out("END LOGIN ATTEMPT", "2", '-')
 
       if globs.WEB: yield unlock
@@ -688,7 +689,10 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
       for x in range(5):
         if globs.WEB: yield lock
         try:
-          globs.sheet = gdoc.sheet1
+          if targettab:
+            globs.sheet = gdoc.worksheet(targettab)
+          else:
+            globs.sheet = gdoc.sheet1
           stop = False
           break
         except:
@@ -977,7 +981,10 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
       #We need to get it again if trending rows were added. !!! Optimize
       if trended:
         try:
-          globs.sheet = gdoc.sheet1
+          if targettab:
+            globs.sheet = gdoc.worksheet(targettab)
+          else:
+            globs.sheet = gdoc.sheet1
         except:
           if globs.WEB:
             yield "Couldn't reach Google Docs. Try logging in again.", "", "", ""
@@ -1609,7 +1616,7 @@ class CrawlTypesForm(PipForm2):
   radios = RadioField(choices=[
     ('linksonpage', '1. LINKS ON PAGE: Just get the de-duplicated links from page, one line per link.'),
     ('oneclickcrawl', '2. QUICK CRAWL: Same as above, but visits each page to get their on-page data.'),
-    ('linkgraph', '3. CRAWL 2 DEEP: Creates data for 3-Level Site Hierarchy Visualization.'),
+    ('linkgraph', '3. CRAWL, 2 DEEP: Creates data for 3-Level Site Hierarchy Visualization. Requires separate ?-replacement for sanity.'),
     ('cancel', 'Cancel')
   ])
 
@@ -1631,48 +1638,50 @@ def pipSwitch():
 
 def ClearSheet1():
   '''Clear Sheet 1'''
-  return stream_with_context(Pipulate([
+  return Pipulate([
     ('clear', ''),
     ('stop', '')
-  ]))
+  ])
 
 def LinksOnPage():
-  '''Collect links from displaying page'''
-  out("Shy Crawl")
-  return stream_with_context(Pipulate([
+  '''Collect links from displaying page.'''
+  out("Getting links on page.")
+  return Pipulate([
     ('clear', ''),
     ('table', [
       ('url','GetLinks'),
       (globs.PIPURL, '?')
     ])
-  ]))
+  ])
 
 def QuickCrawl():
-  '''Collect links from displaying page and get titles and metas'''
-  out("Modest Crawl")
-  return stream_with_context(Pipulate([
+  '''Collect links from displaying page and then visit each for more data..'''
+  out("Getting links on page, then will visit.")
+  return Pipulate([
     ('clear', ''),
     ('table', [
       ('url','GetLinks'),
       (globs.PIPURL, '?')
     ]),
     ('?', '')
-  ]))
+  ])
 
 def LinkGraph():
-  '''Collect links from displaying page'''
-  out("Modest Crawl")
-  return stream_with_context(Pipulate([
+  '''Collect links from displaying page and prepare to visit each for more links..'''
+  out("Getting links on page to get links on other pages.")
+  return Pipulate([
     ('clear', ''),
     ('table', [
       ('url','PreCrawl'),
       (globs.PIPURL, '?')
     ])
-  ]))
+  ])
 
 def Cancel():
+  '''Go back to default main menu.'''
   out("Cancel")
-  return stream_with_context(Pipulate())
+  return Pipulate()
+
 #                   _                                    
 #   _ __ ___   __ _(_)_ __    _ __ ___   ___ _ __  _   _ 
 #  | '_ ` _ \ / _` | | '_ \  | '_ ` _ \ / _ \ '_ \| | | |
