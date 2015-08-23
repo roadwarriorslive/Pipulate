@@ -411,7 +411,7 @@ def LogUser(authkey):
 # | |_| |  __/ | | |  __/ | | (_| | || (_) | |      the generator is invoked, it goes to the next yield,
 #  \____|\___|_| |_|\___|_|  \__,_|\__\___/|_|      freezes generator state, until called again. Streaming!
 #                                                   There may be other approaches, but this is a good one. 
-def Pipulate(preproc='', dockey='', token=''):
+def Pipulate(preproc='', dockey='', targettab="", token=''):
   """Generator that streams output to a web user interface."""
   stop = False
   qset = set()
@@ -474,7 +474,10 @@ def Pipulate(preproc='', dockey='', token=''):
             gdoc = gsp.open_by_url(globs.PIPURL)
             globs.DOCID = gdoc.id
             globs.NAME = gdoc.title
-            globs.TAB = gdoc.sheet1.title
+            if targetttab:
+              globs.TAB = gdoc.worksheet(targettab).title
+            else:
+              globs.TAB = gdoc.sheet1.title
             stop = False
             break
           except gspread.httpsession.HTTPError, e:
@@ -490,7 +493,10 @@ def Pipulate(preproc='', dockey='', token=''):
             try:
               gdoc = gsp.open(globs.NAME)
               globs.DOCID = gdoc.id
-              globs.TAB = gdoc.sheet1.title
+              if targetttab:
+                globs.TAB = gdoc.worksheet(targettab).title
+              else:
+                globs.TAB = gdoc.sheet1.title
               stop = False
               break
             except gspread.httpsession.HTTPError, e:
@@ -518,6 +524,7 @@ def Pipulate(preproc='', dockey='', token=''):
             yield badtuple
           Stop() # Consider adding refresh_token logic for users (versus the scheduler)
       out("END LOGIN ATTEMPT", "2", '-')
+
       if globs.WEB: yield unlock
       out("%s successfully opened." % globs.NAME)
       yme = "%s spreadsheet opened!" % globs.DOCLINK
@@ -559,7 +566,7 @@ def Pipulate(preproc='', dockey='', token=''):
           yme = "Keywords Harvested! %s" % globs.PBNJMAN
           yield yme, "Mmmmmm, more keywords.", json.dumps(kwlist), ""
           yield spinoff
-        return
+        return #permissible here?
       #        _             _       _         ___ ____  __  __   The Pipulate Instruction Processor Machine
       #  _ __ (_)_ __  _   _| | __ _| |_ ___  |_ _|  _ \|  \/  |  takes a list of tuples and interprets each
       # | '_ \| | '_ \| | | | |/ _` | __/ _ \  | || |_) | |\/| |  and interprets it as an action to take and
@@ -734,7 +741,7 @@ def Pipulate(preproc='', dockey='', token=''):
           yme = "Double-check that the %s sheet in %s is set up correctly." % (globs.TAB, globs.DOCLINK)
           yield yme, "Pipulate needs question marks to replace.", "", ""
           yield spinerr
-        return
+        return #permissible here?
 
       stop = True
       for x in range(5):
@@ -1000,7 +1007,7 @@ def Pipulate(preproc='', dockey='', token=''):
           yme = "But congratulations; you found Pipulate. " + globs.PBNJMAN
           yield yme, "", "", ""
           yield "heart", "", "", ""
-        return
+        return # permissible here?
       therange = range(qstart, qend)
       blankrows = 0 #Lets us skip occasional blank rows
       for index, rowdex in enumerate(therange): #Start stepping through every row.
