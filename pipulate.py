@@ -1632,18 +1632,24 @@ def pipSwitch():
   }
 
 def ClearSheet1():
-  do =  [
-          ('clear', ''),
-          ('stop', '')
-        ]
-  return stream_with_context(Pipulate(do))
+  '''Clear Sheet 1'''
+  return stream_with_context(Pipulate([
+    ('clear', ''),
+    ('stop', '')
+  ]))
+
+def SetupCrawl1():
+  '''Collect links from displaying page'''
+  return stream_with_context(Pipulate([
+    ('clear', ''),
+    ('table', [
+      ('url','GetLinks'),
+      (globs.PIPURL, '?')
+    ])
+  ]))
 
 def Cancel():
   out("Cancel")
-  return stream_with_context(Pipulate())
-
-def SetupCrawl1():
-  out("Crawl1")
   return stream_with_context(Pipulate())
 
 def SetupCrawl2():
