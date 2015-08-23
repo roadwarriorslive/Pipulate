@@ -35,6 +35,10 @@ th {
   font-size: 11px;
   opacity: 0.3;
 }
+.pip-stopsign:before {
+  font-size: 17px;
+  line-height: 0;
+}
 .burger > i {
   color: black;
   margin-right: 6px;
@@ -178,7 +182,9 @@ nav{
   box-sizing: border-box;         /* Opera/IE 8+ */
 }
 #pipulate{
-  font-family:Paytone One
+  font-family: Paytone One;
+  width: 116px;
+  height: 29px;
 }
 #paste{
   margin-bottom: 3px;
@@ -429,10 +435,9 @@ ul
 }
 .pipmenu {
   font-size: 13px;
-  background-color:#DDDDDD;
+  background-color: #DDDDDD;
   width: 200px;
-  height: auto;
-  margin: .1em 0;
+  height: 29px
 }
 @media (min-width: 360px) and (max-width: 500px) {
   #mobileinstructions {
