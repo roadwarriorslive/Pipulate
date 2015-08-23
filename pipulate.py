@@ -1602,8 +1602,17 @@ def formSwitch():
   return {
     'clear': ClearSheet1Form(csrf_enabled=False),
     'crawl': CrawlTypesForm(csrf_enabled=False),
-    'setup': SetupForm(csrf_enabled=False)
+    'setup': SetupForm(csrf_enabled=False),
+    'column': AddColumnsForm(csrf_enabled=False)
   }
+
+class AddColumnsForm(PipForm2):
+  """Create the menu for when Clear Sheet 1 is selected."""
+  radios = RadioField(choices=[
+    ('social', 'Common Social Media Counters'),
+    ('seo', 'Common SEO counters'),
+    ('cancel', 'Cancel')
+  ])
 
 class SetupForm(PipForm2):
   """Create the menu for when Clear Sheet 1 is selected."""
@@ -1642,8 +1651,15 @@ def pipSwitch():
     'linksonpage': LinksOnPage,
     'quickcrawl': QuickCrawl,
     'linkgraph': LinkGraph,
-    'tests': RunTests
+    'tests': RunTests,
+    'column': AddColumns
   }
+
+def AddColumns():
+  '''Ad columns to sheet from checkboxes on submitted form.'''
+  out("Hey, I'm adding some columns!.")
+  colList = ['some', 'fnames', 'here']
+  return Pipulate([('column', colList)])
 
 def RunTests():
   '''Where you're going to develop everyhing these jobs can do!.'''
@@ -1711,13 +1727,13 @@ def Cancel():
 def menumaker():
   ''' Creates the entire cadence of the system.'''
   menu = [
-  ('menu:crawl' , "Crawl Website"),
-  ('menu:cols'  , "Add Columns"),
-  ('qmarks'     , "Replace ?'s"),
-  ('menu:setup' , "Do an Auto Setup"),
-  ('menu:graph' , "See Visualization"),
-  ('keywords'   , "Harvest Keywords"),
-  ('menu:clear' , "Clear Sheet 1")
+  ('menu:crawl'  , "Crawl Website"),
+  ('menu:column' , "Add Columns"),
+  ('qmarks'      , "Replace ?'s"),
+  ('menu:setup'  , "Do an Auto Setup"),
+  ('menu:graph'  , "See Visualization"),
+  ('keywords'    , "Harvest Keywords"),
+  ('menu:clear'  , "Clear Sheet 1")
   ]
   strmenu = '<option value="off">What do you want to do?</option>\n'
   for item in menu:
