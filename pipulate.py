@@ -1601,8 +1601,16 @@ def formSwitch():
   Everything in the interstital forms section needs an entry in this dict to activate."""
   return {
     'clear': ClearSheet1Form(csrf_enabled=False),
-    'crawl': CrawlTypesForm(csrf_enabled=False)
+    'crawl': CrawlTypesForm(csrf_enabled=False),
+    'setup': SetupForm(csrf_enabled=False)
   }
+
+class SetupForm(PipForm2):
+  """Create the menu for when Clear Sheet 1 is selected."""
+  radios = RadioField(choices=[
+    ('tests', 'Run Tests'),
+    ('cancel', 'Cancel')
+  ])
 
 class ClearSheet1Form(PipForm2):
   """Create the menu for when Clear Sheet 1 is selected."""
@@ -1633,8 +1641,20 @@ def pipSwitch():
     'cancel': Cancel,
     'linksonpage': LinksOnPage,
     'quickcrawl': QuickCrawl,
-    'linkgraph': LinkGraph
+    'linkgraph': LinkGraph,
+    'tests': RunTests
   }
+
+def RunTests():
+  '''Where you're going to develop everyhing these jobs can do!.'''
+  out("Running tests... Just doin' a whole bunch of stuff.")
+  return Pipulate([
+    ('clear', ''),
+    ('table', [
+      ('url','GetLinks'),
+      (globs.PIPURL, '?')
+    ])
+  ])
 
 def ClearSheet1():
   '''Clear Sheet 1'''
@@ -1694,7 +1714,7 @@ def menumaker():
   ('menu:crawl' , "Crawl Website"),
   ('menu:cols'  , "Add Columns"),
   ('qmarks'     , "Replace ?'s"),
-  ('menu:setup' , "Auto Setup"),
+  ('menu:setup' , "Do an Auto Setup"),
   ('menu:graph' , "See Visualization"),
   ('keywords'   , "Harvest Keywords"),
   ('menu:clear' , "Clear Sheet 1")
