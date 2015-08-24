@@ -28,6 +28,11 @@
         });
       });
       $(document).ready(function(){  
+        {% if form2: %}
+        $("#pipform").find("input[value='cancel']").on("click", function(){
+          window.history.back();
+        });
+        {% endif %}
         {% if menudefault %}
         $(function(){
           $('#options option[value="{{ menudefault }}"]').prop('selected', 'selected').change();
