@@ -86,7 +86,8 @@ th {
   line-height: 0;
 }
 .burger > i {
-  color: black;
+  color: cornflowerblue;
+  font-size: 24px;
   margin-right: 6px;
 }
 a {
