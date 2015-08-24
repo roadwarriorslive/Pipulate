@@ -1681,7 +1681,7 @@ class AddColumnsForm(PipForm2):
     ('keyword', 'Keyword'),
     ('social',  'Social Media counters'),
     ('seo',     'SEO counters'),
-    ('fq',      "Full-in all possible ?'s"),
+    ('fq',      "Fill-in all possible ?'s (pre-replacement)"),
     ('cancel',  'Cancel')
   ]
   checks = SelectMultipleField(

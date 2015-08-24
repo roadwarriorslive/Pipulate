@@ -24,7 +24,7 @@
       $(function(){
         $(window).resize(function(){ // On resize
           $('#pipstream').css({'height':(($(window).height())-265)+'px'});
-          $('#pipslate').css({'height':(($(window).height())-160)+'px'});
+          $('#pipslate').css({'height':(($(window).height())-140)+'px'});
         });
       });
       $(document).ready(function(){  
@@ -346,7 +346,7 @@
             <img id="hypnotizethem" src="./static/svg/pipulate-logo.svg" alt="Witness the Pipstream" />
             <script>
               // Adjust vertical size the instant it's built to reduce flash
-              $('#pipslate').css({'height':(($(window).height())-160)+'px'});
+              $('#pipslate').css({'height':(($(window).height())-140)+'px'});
             </script>
           <table id="pipchoice">
             <tr><th><input type="text" id="showurl" value="{{ form2.pipurl.data }}" readonly></th></tr>
