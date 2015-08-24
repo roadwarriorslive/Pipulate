@@ -1,20 +1,20 @@
 """        Because life's too short to not collect  ABOUT THE AUTHOR:
            data in the same place you work with it  http://mikelev.in
             _____ _             _       _           http://levinux.com
-           |  __ (_)           | |     | |          http://pipulate.com
-           | |__) | _ __  _   _| | __ _| |_ ___    ___ ___  _ __ ___
-           |  ___/ | '_ \| | | | |/ _` | __/ _ \  / __/ _ \| '_ ` _ \
-           | |   | | |_) | |_| | | (_| | ||  __/ | (_| (_) | | | | | |
-           |_|   |_| .__/ \__,_|_|\__,_|\__\___|(_)___\___/|_| |_| |_|
-                   | |
-                   |_|
-
-     THIS IS     THIS IS YOUR BROWSER                 THIS IS PIPULATE   
-       YOU            ____ ____                     (disposable servers) 
-                  ,__/site\____\___. ...which       ,------------------. 
-        O         |                ||    SENDS      |   ...to the      | 
-       /|\---1.-----> bookmarklet ----------2.-------> Pipulate Server | 
-       ( ) CLICK  | with a website ||     URL and   |   | which checks | 
+           |  __ (_)           | |     | |          http://pipulate.com       - What is Pipulate and why? It's...
+           | |__) | _ __  _   _| | __ _| |_ ___    ___ ___  _ __ ___          - An attempt to scratch my own itch
+           |  ___/ | '_ \| | | | |/ _` | __/ _ \  / __/ _ \| '_ ` _ \         - So that I can structure my mind better
+           | |   | | |_) | |_| | | (_| | ||  __/ | (_| (_) | | | | | |        - So that I can structure my behavior better
+           |_|   |_| .__/ \__,_|_|\__,_|\__\___|(_)___\___/|_| |_| |_|        - So that I can remember more and forget less
+                   | |                                                        - So that I can achieve more while straining less
+                   |_|                                                        - So that I can improve my life and impact the world
+                                                                              - So that I can help teach others to do the same
+     THIS IS     THIS IS YOUR BROWSER                 THIS IS PIPULATE        - So that I can turn a life's work into legacy
+       YOU            ____ ____                     (disposable servers)      - So that I can get the kick of a performer
+                  ,__/site\____\___. ...which       ,------------------.      - So that the rewards become compounding
+        O         |                ||    SENDS      |   ...to the      |      - Attracting a nice growing community
+       /|\---1.-----> bookmarklet ----------2.-------> Pipulate Server |      - To chat with a bit as I get old
+       ( ) CLICK  | with a website ||     URL and   |   | which checks |      - Because, we make our own why.
       =====       |   displaying.  ||      context  '---|----|--|--|---'
         |         |                ||                   |    |  |  '------> ?
         5.        '----------------'|     then sends    |    |  '----3.---> ?
@@ -38,7 +38,7 @@ from flask import     (Flask,                                       # somewhat c
 
 from functions import *
 
-socket.setdefaulttimeout(10.0)                                      
+socket.setdefaulttimeout(10.0)
 app = Flask(__name__)                                               # Create that fateful instance of a Flask object.
 
 def stream_template(template_name, **context):                      # Pipulate is a non-traditional streaming app
@@ -98,12 +98,12 @@ def main():                                                         # of entry "
     app.config.from_pyfile(globs.FILE, silent=False)                # secret, and Flask application secret. Load them.
     app.config['SESSION_TYPE'] = 'filesystem'
   else:
-    #                                                   __ _       
-    #   ___  ___ _ ____   _____ _ __    ___ ___  _ __  / _(_) __ _ 
+    #                                                   __ _
+    #   ___  ___ _ ____   _____ _ __    ___ ___  _ __  / _(_) __ _
     #  / __|/ _ \ '__\ \ / / _ \ '__|  / __/ _ \| '_ \| |_| |/ _` |
     #  \__ \  __/ |   \ V /  __/ |    | (_| (_) | | | |  _| | (_| |
     #  |___/\___|_|    \_/ \___|_|     \___\___/|_| |_|_| |_|\__, |
-    #                                                        |___/ 
+    #                                                        |___/
     if request.method == 'POST':                                    # Final configuration has not yet occurred, but a
       import pickle                                                 # submitted form means that we're sitting on top
       pickleme = {                                                  # of the values, that we can grab and pickle into
@@ -115,7 +115,7 @@ def main():                                                         # of entry "
       redir = globs.DOMURL                                          # "code" that we're about to get for a permanent
       if 'Host' in request.headers:                                 # refresh_token and temporary access_token.
         redir = 'http://'+request.headers['Host']                   # Use a host name if you've got one.
-      scope = 'https://spreadsheets.google.com/feeds/'              # Normal pipulate servers don't need much scope, 
+      scope = 'https://spreadsheets.google.com/feeds/'              # Normal pipulate servers don't need much scope,
       if globs.PCOM:                                                # but if it's the main pipulate.com instance, then
         scope = 'profile email ' + scope                            # I'm going to do a little bit of user tracking.
       qsdict = {  'scope': scope,                                   # Here, we begin to construct the URL parameters
@@ -127,7 +127,7 @@ def main():                                                         # of entry "
                 }
       from urllib import urlencode
       linktologin = "%s?%s" % (globs.OAUTHURL, urlencode(qsdict))
-      return redirect(linktologin) 
+      return redirect(linktologin)
     elif request.args and 'code' in request.args:                   # Trap condition where "code" is found in querystring
       import pickle
       writeus = pickle.load(open(globs.TOKEN, "rb"))
@@ -163,12 +163,12 @@ def main():                                                         # of entry "
     else: # Config file not found, nor POST method or "code" on querystring.
       return render_template('pipulate.html', configform=configform) # Start server configuration procedure.
   if session and 'oa2' in session: # Appears that user is logged in already.
-    #                    _            _   _       _     
-    #   ___ _ __ ___  __| | ___ _ __ | |_(_) __ _| |___ 
+    #                    _            _   _       _
+    #   ___ _ __ ___  __| | ___ _ __ | |_(_) __ _| |___
     #  / __| '__/ _ \/ _` |/ _ \ '_ \| __| |/ _` | / __|
     # | (__| | |  __/ (_| |  __/ | | | |_| | (_| | \__ \
     #  \___|_|  \___|\__,_|\___|_| |_|\__|_|\__,_|_|___/
-    #                                                   
+    #
     session.permanent = True
     creds = Credentials(access_token=session['oa2'])
     try:
@@ -179,7 +179,7 @@ def main():                                                         # of entry "
       session.pop('loggedin', None)                       # and if we can't, get rid of login clue.
       if 'u' not in session and globs.PIPURL:
         session['u'] = globs.PIPURL
-    #      _                  _             _   Yes, Pipulate needs to know what spreadsheet to target, 
+    #      _                  _             _   Yes, Pipulate needs to know what spreadsheet to target,
     #  ___| |_ ___  _ __  ___(_) __ _ _ __ | |  and making a new one every time is a terrible mess.
     # / __| __/ _ \| '_ \/ __| |/ _` | '_ \| |  Been there, done that. And so, it ALWAYS targets a sheet
     # \__ \ || (_) | |_) \__ \ | (_| | | | |_|  named Pipulate unless you click the bookmarklet FROM a
@@ -221,9 +221,9 @@ def main():                                                         # of entry "
     #  ____   ___  ____ _____   ____  _                              _   Shazam! is the block in which we create the
     # |  _ \ / _ \/ ___|_   _| / ___|| |__   __ _ ______ _ _ __ ___ | |  first instance of the Pipulate() generator
     # | |_) | | | \___ \ | |   \___ \| '_ \ / _` |_  / _` | '_ ` _ \| |  object that gets called again later as the
-    # |  __/| |_| |___) || |    ___) | | | | (_| |/ / (_| | | | | | |_|  data paramater of a stream_template() call 
+    # |  __/| |_| |___) || |    ___) | | | | (_| |/ / (_| | | | | | |_|  data paramater of a stream_template() call
     # |_|    \___/|____/ |_|   |____/|_| |_|\__,_/___\__,_|_| |_| |_(_)  enabling our magic streaming output. Shazam!
-    #                                                                  
+    #
     if form2 and form2.secondary.data == 'on':
       menutwo = True
       if 'radios' in form2:
@@ -255,8 +255,8 @@ def main():                                                         # of entry "
     #  |_| (_| | |_| |  __/ |  | |_| \__ \ |_| |  | | | | | (_| | to pass data between systems, sessions, or
     #  (_)\__, |\__,_|\___|_|   \__, |___/\__|_|  |_|_| |_|\__, | what have you. That's why you'll see logout
     #        |_|                |___/                      |___/  handling and client-to-server data handoffs.
-    if request.args and 's' in request.args:     # User highlighted text 
-      form.magicbox.data = request.args.get('s') # on page before 
+    if request.args and 's' in request.args:     # User highlighted text
+      form.magicbox.data = request.args.get('s') # on page before
       selectedtext = request.args.get('s')       # clicking bookmarklet
     elif session and 's' in session:             # Selected text made the journey through login
       form.magicbox.data = session['s']
@@ -315,7 +315,7 @@ def main():                                                         # of entry "
       elif selectedtext and globs.SHEETS not in globs.PIPURL:
         menudefault = "keywords"
         session.pop('_flashes', None)
-        flash("Congratulations! You have chosen to harvest keywords.") 
+        flash("Congratulations! You have chosen to harvest keywords.")
         flash("The words filled into the above textarea will be inserted into %s." % globs.NAME)
         flash("Insert commas between keywords, and each one will get its own row.")
         flash("You can also add more keyword variations by just typing them in.")
@@ -342,7 +342,7 @@ def main():                                                         # of entry "
     except:
       pass
   out("Selecting template method.")
-  #  _                       _       _              To Stream or to Render, that is the question. 'Tis it not nobler 
+  #  _                       _       _              To Stream or to Render, that is the question. 'Tis it not nobler
   # | |_ ___ _ __ ___  _ __ | | __ _| |_ ___  ___   to embrace the streamy render_temblate alternative in Flask and
   # | __/ _ \ '_ ` _ \| '_ \| |/ _` | __/ _ \/ __|  do all the ajaxy-communication tight on the same response that
   # | ||  __/ | | | | | |_) | | (_| | ||  __/\__ \  built the form in the first place? How little overhead. How few
@@ -405,12 +405,12 @@ def LogUser(authkey):
         return
   else:
     out("%s not found. Run python configure.py" % globs.FILE)
-#   ____                           _             
+#   ____                           _
 #  / ___| ___ _ __   ___ _ __ __ _| |_ ___  _ __    Generators are just Python functions that yield values
 # | |  _ / _ \ '_ \ / _ \ '__/ _` | __/ _ \| '__|   instead of return. Simple enough, right? Well, each time
 # | |_| |  __/ | | |  __/ | | (_| | || (_) | |      the generator is invoked, it goes to the next yield,
 #  \____|\___|_| |_|\___|_|  \__,_|\__\___/|_|      freezes generator state, until called again. Streaming!
-#                                                   There may be other approaches, but this is a good one. 
+#                                                   There may be other approaches, but this is a good one.
 def Pipulate(preproc='', dockey='', targettab="", token=''):
   """Generator that streams output to a web user interface."""
   stop = False
@@ -454,14 +454,14 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
           out("Credential object created.")
         else:
           out("Expired login.")
-          if globs.WEB: 
+          if globs.WEB:
             yield "Google Login expired. Log back in.", "Login under the \"burger button\" in the upper-right.", "", ""
             yield spinoff
         try:
           gsp = gspread.authorize(creds)
         except:
           out("Login failed.")
-          if globs.WEB: 
+          if globs.WEB:
             yield "Google Login unsuccessful.", "", "", ""
             yield spinoff
           Stop()
@@ -502,12 +502,12 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
               break
             except gspread.httpsession.HTTPError, e:
               out("No token found, session expired. Switch to HTML5 localStorage.")
-              if globs.WEB: 
+              if globs.WEB:
                 yield "I am sorry, the sesson has expired. Please log back in.", "Log back in", "", ""
                 yield spinerr
                 break
             except:
-              if globs.WEB: 
+              if globs.WEB:
                 yield "I see you're on a URL that is not a Google Spreadsheet. Would you like to grab links?", "", "", ""
                 yield "If so, just <a href='https://docs.google.com/spreadsheets/create' target='_blank'>create</a> a new Spreadsheet, name it \"Pipulate\" and click Pipulate again.", "Google Spreadsheet Not Found.", "", ""
                 yield 'New to this odd but awesome approach? Watch the <a target="_blank" href="http://goo.gl/v71kw8">Demo</a> and read the <a target="_blank" href="http://goo.gl/p2zQa4">Docs</a>.', "", "", ""
@@ -519,7 +519,7 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
             out("Retry login %s of %s" % (x, 10))
             time.sleep(6)
         if stop:
-          if globs.WEB: 
+          if globs.WEB:
             yield spinerr
             yield badtuple
           Stop() # Consider adding refresh_token logic for users (versus the scheduler)
@@ -532,10 +532,10 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
       yield yme, "Spreadsheet Opened", "", ""
 
       if (globs.MODE == 'keywords'
-        and globs.KEYWORDS 
-        and globs.KEYWORDS[:1] != '[' 
+        and globs.KEYWORDS
+        and globs.KEYWORDS[:1] != '['
         and globs.KEYWORDS[-1:] != ']'
-        and globs.KEYWORDS[:1] != '{' 
+        and globs.KEYWORDS[:1] != '{'
         and globs.KEYWORDS[-1:] != '}'
         ):
         # Keywords Tab
@@ -1607,10 +1607,10 @@ def stringify_children(node):
 from flask_wtf import Form
 from wtforms import (StringField,
                     RadioField,
-                    HiddenField, 
+                    HiddenField,
                     SelectMultipleField,
                     TextAreaField,
-                    SelectField, 
+                    SelectField,
                     widgets)
 
 class ConfigForm(Form):
@@ -1631,7 +1631,7 @@ class PipForm2(PipForm):
   """Adds a hidden field to tell the secondary menu from a dropdown menu selection."""
   secondary = HiddenField()
 
-#  _       _                _   _ _   _       _    __                           This should set forth a familiar pattern where 
+#  _       _                _   _ _   _       _    __                           This should set forth a familiar pattern where
 # (_)_ __ | |_ ___ _ __ ___| |_(_) |_(_) __ _| |  / _| ___  _ __ _ __ ___  ___  we open with a dict router and follow with the
 # | | '_ \| __/ _ \ '__/ __| __| | __| |/ _` | | | |_ / _ \| '__| '_ ` _ \/ __| things that router can invoke. In this case,
 # | | | | | ||  __/ |  \__ \ |_| | |_| | (_| | | |  _| (_) | |  | | | | | \__ \ it's the mapping between the main Pipulate drop-
@@ -1666,7 +1666,7 @@ class AddColumnsForm(PipForm2):
     ('cancel', 'Cancel')
   ]
   checks = SelectMultipleField(
-    choices=choices, 
+    choices=choices,
     option_widget=widgets.CheckboxInput(),
     widget=widgets.ListWidget(prefix_label=False)
   )
@@ -1788,12 +1788,12 @@ def Cancel():
   out("Cancel")
   return Pipulate()
 
-#                   _                                    
-#   _ __ ___   __ _(_)_ __    _ __ ___   ___ _ __  _   _ 
+#                   _
+#   _ __ ___   __ _(_)_ __    _ __ ___   ___ _ __  _   _
 #  | '_ ` _ \ / _` | | '_ \  | '_ ` _ \ / _ \ '_ \| | | |
 #  | | | | | | (_| | | | | | | | | | | |  __/ | | | |_| |
 #  |_| |_| |_|\__,_|_|_| |_| |_| |_| |_|\___|_| |_|\__,_|
-#                                                        
+#
 def menumaker():
   ''' Creates the entire cadence of the system.'''
   menu = [
