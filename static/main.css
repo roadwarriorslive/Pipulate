@@ -26,14 +26,15 @@ td, th {
 th {
   text-align: center;
   width: 100%;
-  padding: 3px;
+  padding: 2px;
 }
 #showurl {
   width: 100%;
-  background-color: white;
-  color: black;
-  font-size: 11px;
-  opacity: 0.3;
+  background-color: black;
+  text-color: white;
+  font-size: 12px;
+  text-align: center;
+  opacity: 0.2;
 }
 .pip-stopsign:before {
   font-size: 17px;
