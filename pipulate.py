@@ -1646,41 +1646,39 @@ class PipForm(Form):
 class PipForm2(PipForm):
   """Adds a hidden field to tell the secondary menu from a dropdown menu selection."""
   secondary = HiddenField()
-
-#  _       _                _   _ _   _       _    __                           This should set forth a familiar pattern where
-# (_)_ __ | |_ ___ _ __ ___| |_(_) |_(_) __ _| |  / _| ___  _ __ _ __ ___  ___  we open with a dict router and follow with the
-# | | '_ \| __/ _ \ '__/ __| __| | __| |/ _` | | | |_ / _ \| '__| '_ ` _ \/ __| things that router can invoke. In this case,
-# | | | | | ||  __/ |  \__ \ |_| | |_| | (_| | | |  _| (_) | |  | | | | | \__ \ it's the mapping between the main Pipulate drop-
-# |_|_| |_|\__\___|_|  |___/\__|_|\__|_|\__,_|_| |_|  \___/|_|  |_| |_| |_|___/ down menu and what form gets shown on the
-#                                                                               interstitial screen to follow, choices listed.
-
+#  _       _                _   _ _   _       _       This should set forth a familiar pattern where
+# (_)_ __ | |_ ___ _ __ ___| |_(_) |_(_) __ _| |___   we open with a dict router and follow with the
+# | | '_ \| __/ _ \ '__/ __| __| | __| |/ _` | / __|  things that router can invoke. In this case,
+# | | | | | ||  __/ |  \__ \ |_| | |_| | (_| | \__ \  it's the mapping between the main Pipulate drop-
+# |_|_| |_|\__\___|_|  |___/\__|_|\__|_|\__,_|_|___/  down menu and what form gets shown on the
+#                                                     interstitial screen to follow, choices listed.
 def formSwitch():
   """Create dict that ties screen 1 select options with what menu to show on interstitial page.
   Everything in the interstitial forms section needs an entry in this dict to activate."""
   return {
-    'clear': ClearSheet1Form(csrf_enabled=False),
-    'crawl': CrawlTypesForm(csrf_enabled=False),
-    'setup': SetupForm(csrf_enabled=False),
+    'clear':  ClearSheet1Form(csrf_enabled=False),
+    'crawl':  CrawlTypesForm(csrf_enabled=False),
+    'setup':  SetupForm(csrf_enabled=False),
     'column': AddColumnsForm(csrf_enabled=False),
-    'graph': VisualizationForm(csrf_enabled=False)
+    'graph':  VisualizationForm(csrf_enabled=False)
   }
 
 class CrawlTypesForm(PipForm2):
   """Present user with different types of crawls they can perform."""
   radios = RadioField(choices=[
-    ('linksonpage', '1. LINKS ON PAGE: Just get the de-duplicated links from page, one line per link.'),
+    ('linksonpage',   '1. LINKS ON PAGE: Just get the de-duplicated links from page, one line per link.'),
     ('oneclickcrawl', '2. QUICK CRAWL: Same as above, but visits each page to get their on-page data.'),
-    ('linkgraph', '3. CRAWL, 2 DEEP: Creates data for 3-Level Site Hierarchy Visualization. Requires separate ?-replacement for sanity.'),
-    ('cancel', 'Cancel')
+    ('linkgraph',     '3. CRAWL, 2 DEEP: Creates data for 3-Level Site Hierarchy Visualization. Requires separate ?-replacement for sanity.'),
+    ('cancel',        'Cancel')
   ])
 
 class AddColumnsForm(PipForm2):
   """Create the menu for when Clear Sheet 1 is selected."""
   choices = [
-    ('social', 'Common Social Media Counters'),
-    ('seo', 'Common SEO counters'),
-    ('fq', "Also, slap down some ?'s"),
-    ('cancel', 'Cancel')
+    ('social',  'Social Media Counters'),
+    ('seo',     'SEO counters'),
+    ('fq',      "Also, slap down some ?'s"),
+    ('cancel',  'Cancel')
   ]
   checks = SelectMultipleField(
     choices=choices,
@@ -1691,31 +1689,30 @@ class AddColumnsForm(PipForm2):
 class SetupForm(PipForm2):
   """Create the menu for when Clear Sheet 1 is selected."""
   radios = RadioField(choices=[
-    ('tests', 'Run Tests'),
-    ('cancel', 'Cancel')
+    ('tests',   'Run Tests'),
+    ('cancel',  'Cancel')
   ])
 
 class VisualizationForm(PipForm2):
   """Offer up a few common visualizations of the type of data we're handling"""
   radios = RadioField(choices=[
     ('sitemap', 'Generate interactive hierarchal sitemap from a 2-DEEP crawl.'),
-    ('cancel', 'Cancel')
+    ('cancel',  'Cancel')
   ])
 
 class ClearSheet1Form(PipForm2):
   """Create the menu for when Clear Sheet 1 is selected."""
   radios = RadioField(choices=[
-    ('clear', 'Yes, clear Sheet 1.'),
-    ('cancel', 'Cancel')
+    ('clear',   'Yes, clear Sheet 1.'),
+    ('cancel',  'Cancel')
   ])
 
-#  ____       _                      ___      ____                    _       Again, we open with a dict that lays forth the options.
-# / ___|  ___| |_ _   _ _ __  ___   ( _ )    / ___|_ __ __ ___      _| |___   In this case, it's a mapping to a list of tuples, each
-# \___ \ / _ \ __| | | | '_ \/ __|  / _ \/\ | |   | '__/ _` \ \ /\ / / / __|  representing a name/value pair, but preserving the order.
-#  ___) |  __/ |_| |_| | |_) \__ \ | (_>  < | |___| | | (_| |\ V  V /| \__ \  Some think of it as an ordered dict. I think of it as
-# |____/ \___|\__|\__,_| .__/|___/  \___/\/  \____|_|  \__,_| \_/\_/ |_|___/  the job instructions, where the value in the pair can
-#                      |_|                                                    be ANYTHING including a function. Remember this flexibilty!
-
+#        _                               _                    Here's a bunch of key/value pairs for ya. We open with a
+#  _ __ | | __ _ _   _  ___ _ __   _ __ (_) __ _ _ __   ___   very Pythonic switch that comprise the possible instructions  
+# | '_ \| |/ _` | | | |/ _ \ '__| | '_ \| |/ _` | '_ \ / _ \  for our Instruction Processor Machine... or "player piano"    
+# | |_) | | (_| | |_| |  __/ |    | |_) | | (_| | | | | (_) | such as it were. Or Loom, if you prefer. Or Turing machine.   
+# | .__/|_|\__,_|\__, |\___|_|    | .__/|_|\__,_|_| |_|\___/  In any case, we just feed these instructions into the part    
+# |_|            |___/            |_|                         of Pipulate there waiting to execute final menu choices. 
 def pipSwitch():
   return {
     'clear': ClearSheet1,
@@ -1815,12 +1812,12 @@ def menumaker():
   ''' Creates the entire cadence of the system.'''
   menu = [
   ('menu:crawl'  , "Crawl Website"),
-  ('menu:column' , "Add Columns"),
   ('qmarks'      , "Replace ?'s"),
   ('menu:setup'  , "Do an Auto Setup"),
-  ('menu:graph'  , "See Visualization"),
+  ('menu:column' , "Add Some Columns"),
+  ('menu:graph'  , "See a Visualization"),
   ('keywords'    , "Harvest Keywords"),
-  ('menu:clear'  , "Clear Sheet 1")
+  ('menu:clear'  , "Clear Sheet1")
   ]
   strmenu = '<option value="off">What do you want to do?</option>\n'
   for item in menu:
