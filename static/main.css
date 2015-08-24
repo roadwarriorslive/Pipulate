@@ -28,6 +28,16 @@ th {
   width: 100%;
   padding: 2px;
 }
+#content{
+  width: 100%;
+  position: relative;
+  margin: 0px auto;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 50px;
+  text-align: center;
+  min-height: 100%
+}
 #showurl {
   width: 100%;
   background-color: black;
@@ -75,16 +85,6 @@ a {
 #wrapper {
   position: relative;
   height: 100%;
-}
-#content{
-  width: 100%;
-  position: relative;
-  margin: 0 auto;
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-top: 50px;
-  text-align: center;
-  min-height: 100%
 }
 #pipstream{
   position: relative;
@@ -436,7 +436,7 @@ ul
 .pipmenu {
   font-size: 13px;
   background-color: #DDDDDD;
-  width: 205px;
+  width: 210px;
   height: 29px
 }
 @media (min-width: 360px) and (max-width: 500px) {
