@@ -419,12 +419,12 @@ def LogUser(authkey):
         return
   else:
     out("%s not found. Run python configure.py" % globs.FILE)
-#   ____                           _
-#  / ___| ___ _ __   ___ _ __ __ _| |_ ___  _ __    Generators are just Python functions that yield values
-# | |  _ / _ \ '_ \ / _ \ '__/ _` | __/ _ \| '__|   instead of return. Simple enough, right? Well, each time
-# | |_| |  __/ | | |  __/ | | (_| | || (_) | |      the generator is invoked, it goes to the next yield,
-#  \____|\___|_| |_|\___|_|  \__,_|\__\___/|_|      freezes generator state, until called again. Streaming!
-#                                                   There may be other approaches, but this is a good one.
+#  __  __                   _ _ _   _     _         ____                           _              I am a monolith until I
+# |  \/  | ___  _ __   ___ | (_) |_| |__ (_) ___   / ___| ___ _ __   ___ _ __ __ _| |_ ___  _ __  fuse my defensive api
+# | |\/| |/ _ \| '_ \ / _ \| | | __| '_ \| |/ __| | |  _ / _ \ '_ \ / _ \ '__/ _` | __/ _ \| '__| coding trick with my
+# | |  | | (_) | | | | (_) | | | |_| | | | | (__  | |_| |  __/ | | |  __/ | | (_| | || (_) | |    streaming user output
+# |_|  |_|\___/|_| |_|\___/|_|_|\__|_| |_|_|\___|  \____|\___|_| |_|\___|_|  \__,_|\__\___/|_|    trick. You may not get
+#                                                                                                 it, but you will yield.
 def Pipulate(preproc='', dockey='', targettab="", token=''):
   """Generator that streams output to a web user interface."""
   stop = False
