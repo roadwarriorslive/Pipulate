@@ -1,61 +1,61 @@
-"""        Because life's too short to not collect  ABOUT THE AUTHOR:
-           data in the same place you work with it  http://mikelev.in                   import this...
-            _____ _             _       _           http://levinux.com
-           |  __ (_)           | |     | |          http://pipulate.com       - What is Pipulate and why? It's...
-           | |__) | _ __  _   _| | __ _| |_ ___    ___ ___  _ __ ___          - An attempt to scratch my own itch
-           |  ___/ | '_ \| | | | |/ _` | __/ _ \  / __/ _ \| '_ ` _ \         - So that I can structure my mind better
-           | |   | | |_) | |_| | | (_| | ||  __/ | (_| (_) | | | | | |        - So that I can structure my behavior better
-           |_|   |_| .__/ \__,_|_|\__,_|\__\___|(_)___\___/|_| |_| |_|        - So that I can remember more and forget less
-                   | |                                                        - So that I can achieve more while straining less
-                   |_|                                                        - So that I can improve my life and impact the world
-                                                                              - So that I can help teach others to do the same
-     THIS IS     THIS IS YOUR BROWSER                 THIS IS PIPULATE        - So that I can turn a life's work into legacy
-       YOU            ____ ____                     (disposable servers)      - So that I can get the kick of a performer
-                  ,__/site\____\___. ...which       ,------------------.      - So that the rewards become compounding
-        O         |                ||    SENDS      |   ...to the      |      - Attracting a nice growing community
-       /|\---1.-----> bookmarklet ----------2.-------> Pipulate Server |      - To chat with a bit as I get old
-       ( ) CLICK  | with a website ||     URL and   |   | which checks |      - Because, we make our own why.
-      =====       |   displaying.  ||      context  '---|----|--|--|---'
-        |         |                ||                   |    |  |  '------> ?
-        5.        '----------------'|     then sends    |    |  '----3.---> ?
-      SEE THE--->  | to Google Sheet|<-------4.---------'    '------------> ?
-      RESULTS      '----------------'   a response           ...stuff on net
+"""     Because life's too short to not collect  ABOUT THE AUTHOR:               import this...
+        data in the same place you work with it  http://mikelev.in
+         _____ _             _       _           http://levinux.com    - What is Pipulate and why? It's...
+        |  __ (_)           | |     | |          http://pipulate.com   - An attempt to scratch my own itch
+        | |__) | _ __  _   _| | __ _| |_ ___    ___ ___  _ __ ___      - So that I can structure my mind better
+        |  ___/ | '_ \| | | | |/ _` | __/ _ \  / __/ _ \| '_ ` _ \     - So that I can structure my behavior better
+        | |   | | |_) | |_| | | (_| | ||  __/ | (_| (_) | | | | | |    - So that I can remember more and forget less
+        |_|   |_| .__/ \__,_|_|\__,_|\__\___|(_)___\___/|_| |_| |_|    - So that I can achieve more while straining less
+                | |                                                    - So that I can improve my life and impact the world
+                |_|                                                    - So that I can help teach others to do the same
+                                                                       - So that I can turn a life's work into legacy
+  THIS IS     THIS IS YOUR BROWSER                 THIS IS PIPULATE    - So that I can get the kick of a performer
+    YOU            ____ ____                     (disposable servers)  - So that the rewards become compounding
+               ,__/site\____\___. ...which       ,------------------.  - Attracting a nice growing community
+     O         |                ||    SENDS      |   ...to the      |  - To chat with a bit as I get old
+    /|\---1.-----> bookmarklet ----------2.-------> Pipulate Server |  - Because, we make our own why.
+    ( ) CLICK  | with a website ||     URL and   |   | which checks |
+   =====       |   displaying.  ||      context  '---|----|--|--|---'
+     |         |                ||                   |    |  |  '------> ?
+     5.        '----------------'|     then sends    |    |  '----3.---> ?
+   SEE THE--->  | to Google Sheet|<-------4.---------'    '------------> ?
+   RESULTS      '----------------'   a response           ...stuff on net
 
 """
-import sys, os, socket, urlparse, re, gspread                       # Hello World! I'm glad you found your way
-import globs                                                        # to pipulate.py. While this is not the
-from common import *                                                # exact file that kicks off Pipulate, it
-import requests, traceback, datetime, time, json                    # is the most important to the process.
-from flask import     (Flask,                                       # somewhat controversially directly native
-                      stream_with_context,                          # in Python. Yes, there's gunicorn, nginx,
-                      render_template,                              # and all that wonderful webserver extra
-                      Response,                                     # context, but who needs it? An entire
-                      request,                                      # instance of Pipulate, including host OS,
-                      session,                                      # Python, all 3rd party dependencies and
-                      redirect,                                     # the application itself fit in under 60MB
-                      url_for,                                      # of space, making it perfect to run from
-                      flash)                                        # small servers, virtual machines or desktop.
+import sys, os, socket, urlparse, re, gspread
+import globs
+from common import *
+import requests, traceback, datetime, time, json
+from flask import     (Flask,
+                      stream_with_context,
+                      render_template,
+                      Response,
+                      request,
+                      session,
+                      redirect,
+                      url_for,
+                      flash)
 
 from functions import *
 
 socket.setdefaulttimeout(10.0)
-app = Flask(__name__)                                               # Create that fateful instance of a Flask object.
+app = Flask(__name__)
 
-def stream_template(template_name, **context):                      # Pipulate is a non-traditional streaming app
-  """Open inexpensive Flask-based streaming."""                     # utilizing Flask's built-in streaming method.
-  app.update_template_context(context)                              # Picture building a web user interface that is
-  t = app.jinja_env.get_template(template_name)                     # able to update itself immediately following
-  rv = t.stream(context)                                            # the initial request that built the form, so
-  return rv                                                         # you can witness response data flowing in.
+def stream_template(template_name, **context):
+  """Open inexpensive Flask-based streaming."""
+  app.update_template_context(context)
+  t = app.jinja_env.get_template(template_name)
+  rv = t.stream(context)
+  return rv
 
-@app.context_processor                                              # context_processor called w/access to templateglobals
-def templateglobals():                                              # Every templating system has some price to it
-  """Make some functions usable in templates."""                    # and one of Flask's costs is a disconnect
-  return dict(loginlink=getLoginlink(),                             # between templates and application functions.
-  bookmarklet=getBookmarklet(),                                     # No big deal. We just explicitly add those
-  blabel=getLabel(),                                                # that need to be globally available (without
-  logoutlink=getLogoutlink(),                                       # explcitly passing as parameters on the
-  cyclemotto=cyclemotto()                                           # template call -- another option) here.
+@app.context_processor
+def templateglobals():
+  """Make some functions usable in templates."""
+  return dict(loginlink=getLoginlink(),
+  bookmarklet=getBookmarklet(),
+  blabel=getLabel(),
+  logoutlink=getLogoutlink(),
+  cyclemotto=cyclemotto()
   )
 
 from managelists import *
@@ -66,9 +66,9 @@ from managelists import *
 # |  _| | | (_| \__ \   <  | | | | | | (_| | | | | |
 # |_|   |_|\__,_|___/_|\_\ |_| |_| |_|\__,_|_|_| |_|
 #
-@app.route("/", methods=['GET', 'POST'])                            # In web-mode, Pipulate only uses this one point
-def main():                                                         # of entry "/", via the Werkzeug routing package.
-  """Ensures config and login requirements met."""                  # We always check first whether the server has
+@app.route("/", methods=['GET', 'POST'])
+def main():
+  """Ensures config and login requirements met."""
   print('''
                ____  _             _       _   _
               |  _ \(_)_ __  _   _| | __ _| |_(_)_ __   __ _
@@ -77,11 +77,11 @@ def main():                                                         # of entry "
               |_|   |_| .__/ \__,_|_|\__,_|\__|_|_| |_|\__, | (_) (_) (_)
                       |_|                              |___/
   ''')
-  out("ENTERED MAIN FUNCTION", "0")                                 # Establish hierarchical indenting of debug system.
-  stop = False                                                      # Pipulate "stops" unless permitted to continue.
-  streamit = False                                                  # Controls Flask's stream versus render template.
+  out("ENTERED MAIN FUNCTION", "0")
+  stop = False
+  streamit = False
   readytopip = False
-  form = PipForm(csrf_enabled=False)                                # All WTForms are instances of classes. Main form.
+  form = PipForm(csrf_enabled=False)
   formDict = formSwitch()
   form2 = None
   if ':' in form.options.data:
@@ -92,10 +92,10 @@ def main():                                                         # of entry "
     form2 = formDict[form.options.data.split(':')[1]]
   menudefault = None
   selectedtext = None
-  configform = ConfigForm(csrf_enabled=False)                       # The form to let you 1st time configure server.
-  if (os.path.isfile(globs.FILE) and                                # been configured or not. Configuration consists
-      os.path.getsize(globs.FILE) > 0):                             # of a file with Google OAuth2 Client ID, Client
-    app.config.from_pyfile(globs.FILE, silent=False)                # secret, and Flask application secret. Load them.
+  configform = ConfigForm(csrf_enabled=False)
+  if (os.path.isfile(globs.FILE) and
+      os.path.getsize(globs.FILE) > 0):
+    app.config.from_pyfile(globs.FILE, silent=False)
     app.config['SESSION_TYPE'] = 'filesystem'
   else:
     #                                                   __ _
