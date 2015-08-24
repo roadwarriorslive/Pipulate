@@ -1,5 +1,5 @@
 """        Because life's too short to not collect  ABOUT THE AUTHOR:
-           data in the same place you work with it  http://mikelev.in
+           data in the same place you work with it  http://mikelev.in                   import this...
             _____ _             _       _           http://levinux.com
            |  __ (_)           | |     | |          http://pipulate.com       - What is Pipulate and why? It's...
            | |__) | _ __  _   _| | __ _| |_ ___    ___ ___  _ __ ___          - An attempt to scratch my own itch
