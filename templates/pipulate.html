@@ -52,6 +52,7 @@
         $( "#options" ).bind( "change", function() {
           readytogo();
         });
+        {% if form2: %}
         $("#pipform").change(function() {
           if ($("#pipform input:checkbox:checked").length > 0 || $("#pipform input:radio:checked").length > 0) {
             readytogo();
@@ -59,6 +60,7 @@
             stopsignlock();
           }
         });
+        {% endif %}
         $("#pipulate").click(function() {
           lockbutton();
           $('#pipstream').html('');
@@ -200,16 +202,12 @@
              |_| |_| |_|\___| |_|  \___/|_|  |_| |_| |_|
                                               
           #}
-          <div id="centerme">
           <form id="pipform" method="POST" action="/">
             <div id="paste"><span id="pastelabel">URL: </span>{{ form.pipurl(size=80) }}</div>
-            </div>
-            <div>
-            <select class="select pipmenu" id="options" name="options">{{ select|safe }}</select>
-            <button id="pipulate" class="button" type="submit">
-              Pipulate &nbsp;<i id="piplock" class="pip-go"></i>
-            </button>
-            </div>
+            <span>
+              <select class="select pipmenu" id="options" name="options">{{ select|safe }}</select>
+              <button id="pipulate" class="button" type="submit">Pipulate<i id="piplock" class="pip-go"></i></button>
+            </span>
             {% if request.method == 'POST': %}
               <script>
                 lockbutton();
@@ -234,7 +232,6 @@
                 <div id="learnsomething">{{ cyclemotto }}</div>
               {% endif %}
               {{ form.magicbox(cols="60", rows="4", placeholder="Don't forget you can also highlight words before clicking boomarklet to harvest keywords into the sheet. Separate them with commas. Example: keyword 1, keyword 2, keyword 3") }}
-
             </div>
           </form>
           {#
