@@ -1677,9 +1677,11 @@ class CrawlTypesForm(PipForm2):
 class AddColumnsForm(PipForm2):
   """Create the menu for when Clear Sheet 1 is selected."""
   choices = [
-    ('social',  'Social Media Counters'),
+    ('url',     'URL'),
+    ('keyword', 'Keyword'),
+    ('social',  'Social Media counters'),
     ('seo',     'SEO counters'),
-    ('fq',      "Also, slap down some ?'s"),
+    ('fq',      "Full-in all possible ?'s"),
     ('cancel',  'Cancel')
   ]
   checks = SelectMultipleField(
