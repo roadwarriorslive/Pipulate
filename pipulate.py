@@ -1,4 +1,4 @@
-"""     Because life's too short to not collect  ABOUT THE AUTHOR:               import this...
+"""     Because life's too short to not collect  ABOUT THE AUTHOR:       From Pipulate, Import *
         data in the same place you work with it  http://mikelev.in
          _____ _             _       _           http://levinux.com    - What is Pipulate and why? It's...
         |  __ (_)           | |     | |          http://pipulate.com   - An attempt to scratch my own itch
@@ -22,22 +22,35 @@
    RESULTS      '----------------'   a response           ...stuff on net
 
 """
+
+#  _                            _     _   _     _       While it may look it, this is not the entry-point for Pipulate.
+# (_)_ __ ___  _ __   ___  _ __| |_  | |_| |__ (_)___   Both webpipulate.py (the Flask context) and loopipulate.py (the
+# | | '_ ` _ \| '_ \ / _ \| '__| __| | __| '_ \| / __|  command-line context for cron) import this file as one of their
+# | | | | | | | |_) | (_) | |  | |_  | |_| | | | \__ \  first steps. It does it with "from pipulate import *" so that
+# |_|_| |_| |_| .__/ \___/|_|   \__|  \__|_| |_|_|___/  everything here is running in top-level scope. The next few lines
+#             |_|                                       are most of the early-load ubiquitous libraries used throughout.
+
 import sys, os, socket, urlparse, re, gspread
 import globs
 from common import *
 import requests, traceback, datetime, time, json
-from flask import     (Flask,
-                      stream_with_context,
-                      render_template,
-                      Response,
-                      request,
-                      session,
-                      redirect,
-                      url_for,
-                      flash)
-
+from flask import (Flask,
+                  stream_with_context,
+                  render_template,
+                  Response,
+                  request,
+                  session,
+                  redirect,
+                  url_for,
+                  flash)
 from functions import *
-
+#                          _          __  __   This ain't PHP. It's kinda like a .NET codebehind, but way more awesome
+#   __ _ _ __  _ __    ___| |_ _   _ / _|/ _|  because it's Python. But Python resisting doing things like plugging whole
+#  / _` | '_ \| '_ \  / __| __| | | | |_| |_   high-level web frameworks in the core product relies on 3rd party developers
+# | (_| | |_) | |_) | \__ \ |_| |_| |  _|  _|  to fill the void--and in this case, it happens to be Flask. And Flask
+#  \__,_| .__/| .__/  |___/\__|\__,_|_| |_|    happens to be Werkzeug to handle "web routing" and Jinja2 to handle
+#       |_|   |_|                              PHP-style web templates. It takes time to grok, but is worth it.
+#
 socket.setdefaulttimeout(10.0)
 app = Flask(__name__)
 
@@ -60,12 +73,12 @@ def templateglobals():
 
 from managelists import *
 
-#  _____ _           _                      _
-# |  ___| | __ _ ___| | __  _ __ ___   __ _(_)_ __
-# | |_  | |/ _` / __| |/ / | '_ ` _ \ / _` | | '_ \
-# |  _| | | (_| \__ \   <  | | | | | | (_| | | | | |
-# |_|   |_|\__,_|___/_|\_\ |_| |_| |_|\__,_|_|_| |_|
-#
+#  _   _                                             
+# | | | | ___  _ __ ___   ___ _ __   __ _  __ _  ___ 
+# | |_| |/ _ \| '_ ` _ \ / _ \ '_ \ / _` |/ _` |/ _ \
+# |  _  | (_) | | | | | |  __/ |_) | (_| | (_| |  __/
+# |_| |_|\___/|_| |_| |_|\___| .__/ \__,_|\__, |\___|
+#                            |_|          |___/      
 @app.route("/", methods=['GET', 'POST'])
 def main():
   """Ensures config and login requirements met."""
