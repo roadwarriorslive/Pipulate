@@ -342,7 +342,7 @@ def main():
         if readytopip:
           flash('The question marks in %s indicate that you are ready to Pipulate.')
           flash("So, what are you waiting for? Hit that button!")
-        elif gdoc.sheet1.row_values(1)==[] and gdoc.sheet1.row_values(2) == []:
+        elif globs.sheet.row_values(1)==[] and globs.sheet.row_values(2) == []:
           flash("Because the first two rows of %s are blank, you can do one of the following:" % globs.TAB)
           flash("Visit %s and set up %s with input values, a function and question mark," % (globs.DOCLINK, globs.TAB))
           flash('Select "Crawl Website" from the menu,')
@@ -631,6 +631,8 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
             else:
               for yieldme in Pipulate():
                 yield yieldme
+          elif inst == 'fq': #Fill in question marks
+            pass
           elif inst == 'columns':
             pass
       #                        _       _               _  ___   At some point in the future, there wil be
