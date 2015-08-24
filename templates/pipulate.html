@@ -23,7 +23,7 @@
     <script>
       $(function(){
         $(window).resize(function(){ // On resize
-          $('#pipstream').css({'height':(($(window).height())-300)+'px'});
+          $('#pipstream').css({'height':(($(window).height())-265)+'px'});
           $('#pipslate').css({'height':(($(window).height())-160)+'px'});
         });
       });
@@ -246,7 +246,7 @@
             <img id="hypnotizethem" src="./static/svg/pipulate-logo.svg" alt="Witness the Pipstream" />
             <script>
               // Adjust vertical size the instant it's built to reduce flash
-              $('#pipstream').css({'height':(($(window).height())-300)+'px'});
+              $('#pipstream').css({'height':(($(window).height())-265)+'px'});
             </script>
           {% with messages = get_flashed_messages() %}
             {% if messages %}

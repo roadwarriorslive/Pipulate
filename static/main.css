@@ -20,6 +20,16 @@ body {
 h1, h2, p, label {
   color: white;
 }
+#content{
+  margin: 0px auto;
+  min-height: 100%;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 45px;
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
 /*
 td, th {
   padding: .5em 2.4em .5em .6em; 
@@ -30,6 +40,9 @@ th {
   width: 100%;
 }
 */
+#pipform {
+  margin-bottom: 5px;
+}
 .pipmenu {
   font-size: 13px;
   background-color: #DDDDDD;
@@ -38,22 +51,11 @@ th {
   width: calc(100% - 134px);
   height: 29px
 }
-#content{
-  margin: 0px auto;
-  min-height: 100%;
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-top: 50px;
-  position: relative;
-  text-align: center;
-  width: 100%;
-}
 #pipstream{
   background-color: slategrey;
   border: 2px solid lightgrey;
   height: 250px;
   line-height: 1.4em;
-  margin-bottom: 15px;
   margin-left: 0px;
   margin-right: 0px;
   overflow: auto;
@@ -65,11 +67,11 @@ th {
   text-align: left;
 }
 #magicdiv{
-  position: relative;
-  margin-top: 12px;
-  margin-bottom: 6px;
+  margin-bottom: 0px;
   margin-left: 0px;
   margin-right: 0px;
+  margin-top: 8px;
+  position: relative;
   text-align:center;
 }
 
@@ -166,6 +168,7 @@ nav{
 #pipurl {
   background-color: bisque;
   font-weight: bold;
+  font-size: 15px;
   width: -moz-calc(100% - 53px);
   width: -webkit-calc(100% - 53px);
   width: calc(100% - 53px);
