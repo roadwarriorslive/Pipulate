@@ -186,12 +186,13 @@ def main():
     creds = Credentials(access_token=session['oa2'])
     try:
       gsp = gspread.authorize(creds)
-      gsp.openall()                                       # so, see if we can get a list of docs,
+      gsp.openall()
       session['loggedin'] = "1"
     except:
-      session.pop('loggedin', None)                       # and if we can't, get rid of login clue.
-      if 'u' not in session and globs.PIPURL:
-        session['u'] = globs.PIPURL
+      session.pop('loggedin', None)
+      # COMMENT: I think this is the source of URL misfires! Remove and observe.
+      #if 'u' not in session and globs.PIPURL:
+      #  session['u'] = globs.PIPURL
     #      _                  _             _   Yes, Pipulate needs to know what spreadsheet to target,
     #  ___| |_ ___  _ __  ___(_) __ _ _ __ | |  and making a new one every time is a terrible mess.
     # / __| __/ _ \| '_ \/ __| |/ _` | '_ \| |  Been there, done that. And so, it ALWAYS targets a sheet
