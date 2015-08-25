@@ -645,7 +645,8 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
             out(unified)
             for acol in globs.row1:
               if acol in unified:
-                out('Gotcha: %s' % acol)
+                qmycol = globs.letter[globs.row1.index(acol) + 1]
+                out(qmycol)
             gotcha("done")
             Stop()
           elif inst == 'columns':
