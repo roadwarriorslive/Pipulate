@@ -638,9 +638,12 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
                 yield yieldme
           elif inst == 'fillmarks': #Fill in question marks
             if globs.row1 and globs.numrows:
-              out('row1 %s' % globs.row1)
-              out('numros %s' % globs.numrows)
-              out('globals %s' % [x for x in globals().keys() if x[:2] != '__'])
+              gfuncs = [x for x in globals().keys() if x[:2] != '__']
+              scrapers = [x for x in scrapes()[0]]
+              unified = gfuncs + scrapers
+              for acol in globs.row1:
+                if acol in unified:
+                  out(acol)
               gotcha("done")
               Stop()
           elif inst == 'columns':
