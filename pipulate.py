@@ -498,6 +498,7 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
               globs.TAB = gdoc.worksheet(targettab).title
             else:
               globs.TAB = gdoc.sheet1.title
+            globs.sheet = gdoc.worksheet(globs.TAB)
             stop = False
             break
           except gspread.httpsession.HTTPError, e:
@@ -637,22 +638,31 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
               for yieldme in Pipulate():
                 yield yieldme
           elif inst == 'fillmarks': #Fill in question marks
+            if globs.WEB:
+              yield "Looking for where question marks should go...", "Looking for functions and scraper names", "", ""
             if not globs.row1:
               globs.row1 = lowercaselist(gdoc.worksheet(globs.TAB).row_values(1))
             if not globs.numrows:
               globs.numrows = len(globs.sheet.col_values(1))
-            out(globs.row1)
             gfuncs = [x for x in globals().keys() if x[:2] != '__']
             scrapers = [x[0] for x in scrapes()]
             unified = set(gfuncs + scrapers)
             colrange = None
             for acol in globs.row1:
               if acol in unified:
+                yme = "?'s for %s" % acol
+                if globs.WEB: yield yme, "", "", ""
                 qcol = globs.letter[globs.row1.index(acol) + 1]
                 nr = globs.numrows
                 colrange = '%s%s:%s%s' % (qcol, 2, qcol, nr)
-                out(colrange)
-            gotcha("done")
+                CellList = globs.sheet.range(colrange)
+                for cell in CellList:
+                  cell.value = '?'
+                result = globs.sheet.update_cells(CellList)
+            yield "Question marks filled in!", "Ready for some serious pipulating", "", ""
+            yme = "You're now ready for some serious pipulating!" + globs.PBNJMAN
+            yield yme, "", "", ""
+            yield spinoff
             Stop()
           elif inst == 'columns':
             pass
@@ -735,19 +745,20 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
         yield yme, "Counting rows", '', ''
       out("Counting rows in Pipulate tab.")
       stop = True
-      for x in range(5):
-        if globs.WEB: yield lock
-        try:
-          if targettab:
-            globs.sheet = gdoc.worksheet(targettab)
-          else:
-            globs.sheet = gdoc.sheet1
-          stop = False
-          break
-        except:
-          if globs.WEB: yield dontgetfrustrated(x)
-          out("Retry get Pipulate sheet %s of %s" % (x, 10))
-          time.sleep(5)
+      if not globs.sheet:
+        for x in range(5):
+          if globs.WEB: yield lock
+          try:
+            if targettab:
+              globs.sheet = gdoc.worksheet(targettab)
+            else:
+              globs.sheet = gdoc.sheet1
+            stop = False
+            break
+          except:
+            if globs.WEB: yield dontgetfrustrated(x)
+            out("Retry get Pipulate sheet %s of %s" % (x, 10))
+            time.sleep(5)
       if stop:
         if globs.WEB: yield badtuple
         Stop()
@@ -1713,7 +1724,7 @@ class AddColumnsForm(PipForm2):
 class SetupForm(PipForm2):
   """Create the menu for when Clear Sheet 1 is selected."""
   radios = RadioField(choices=[
-    ('fillmarks', "Insert ?'s into all valid locations."),
+    ('fillmarks', "Insert ?'s into all valid locations (this will clear existing ?-replacement data)."),
     ('tests',   'Run Tests'),
     ('cancel',  'Cancel')
   ])
