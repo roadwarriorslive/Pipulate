@@ -242,8 +242,13 @@ def main():
       menutwo = True
       if 'radios' in form2:
         globs.MODE = form2.radios.data
-      elif 'checkboxes' in form2:
-        globs.MODE = form2.checkbox.data
+      elif 'checks' in form2:
+        checklist = form2.checks.data
+        globs.MODE = checklist[0]
+        for item in checklist:
+          if ':' in item:
+            globs.MODE = item.split(':')[0]
+            break
       if ':' in globs.MODE:
         globs.MODE = globs.MODE.split(':')[1]
       if globs.MODE == 'cancel':
@@ -631,8 +636,13 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
             else:
               for yieldme in Pipulate():
                 yield yieldme
-          elif inst == 'fq': #Fill in question marks
-            pass
+          elif inst == 'fillmarks': #Fill in question marks
+            if globs.row1 and globs.numrows:
+              out('row1 %s' % globs.row1)
+              out('numros %s' % globs.numrows)
+              out('globals %s' % [x for x in globals().keys() if x[:2] != '__'])
+              gotcha("done")
+              Stop()
           elif inst == 'columns':
             pass
       #                        _       _               _  ___   At some point in the future, there wil be
@@ -1677,12 +1687,11 @@ class CrawlTypesForm(PipForm2):
 class AddColumnsForm(PipForm2):
   """Create the menu for when Clear Sheet 1 is selected."""
   choices = [
-    ('url',     'URL'),
-    ('keyword', 'Keyword'),
-    ('social',  'Social Media counters'),
-    ('seo',     'SEO counters'),
-    ('fq',      "Fill-in all possible ?'s (pre-replacement)"),
-    ('cancel',  'Cancel')
+    ('url',       'URL'),
+    ('keyword',   'Keyword'),
+    ('social',    'Social Media counters'),
+    ('seo',       'SEO counters'),
+    ('cancel',    'Cancel')
   ]
   checks = SelectMultipleField(
     choices=choices,
@@ -1693,6 +1702,7 @@ class AddColumnsForm(PipForm2):
 class SetupForm(PipForm2):
   """Create the menu for when Clear Sheet 1 is selected."""
   radios = RadioField(choices=[
+    ('fillmarks', "Insert ?'s into all valid locations."),
     ('tests',   'Run Tests'),
     ('cancel',  'Cancel')
   ])
@@ -1719,15 +1729,22 @@ class ClearSheet1Form(PipForm2):
 # |_|            |___/            |_|                         of Pipulate there waiting to execute final menu choices. 
 def pipSwitch():
   return {
-    'clear': ClearSheet1,
-    'cancel': Cancel,
-    'linksonpage': LinksOnPage,
-    'quickcrawl': QuickCrawl,
-    'linkgraph': LinkGraph,
-    'tests': RunTests,
-    'column': AddColumns,
-    'sitemap': MakeSitemap
+    'clear':        ClearSheet1,
+    'cancel':       Cancel,
+    'linksonpage':  LinksOnPage,
+    'quickcrawl':   QuickCrawl,
+    'linkgraph':    LinkGraph,
+    'tests':        RunTests,
+    'column':       AddColumns,
+    'sitemap':      MakeSitemap,
+    'fillmarks':    FillQMarks
   }
+
+def FillQMarks():
+  '''Interrogates worksheet and inserts question marks wherever they can go'''
+  return Pipulate([
+    ('fillmarks', '')
+  ])
 
 def MakeSitemap():
   '''Offer user some visualizations to choose from.'''
