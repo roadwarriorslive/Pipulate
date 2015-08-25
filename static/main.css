@@ -49,7 +49,7 @@ th {
 }
 .pipmenu {
   background-color: #ddd;
-  background-color: powderblue;
+  background-color: lightsteelblue;
   font-size: 13px;
   height: 29px;
   padding-right: 32px;
@@ -95,7 +95,7 @@ th {
   line-height: 0;
 }
 .burger > i {
-  color: lightsteelblue;
+  color: black;
   font-size: 22px;
   margin-right: 6px;
 }
@@ -113,6 +113,9 @@ a {
   margin-left: auto;
   margin-right: auto;
   width: 700px;
+}
+#login {
+  margin-top: 18px;
 }
 .pip {
   font-family: Paytone One;
@@ -184,9 +187,9 @@ nav{
 }
 #learnsomething{
   background-color: lightgrey;
-  font-size: 10px;
+  font-size: 11px;
   height: 24px;
-  line-height: 2.7;
+  line-height: 2.4;
   margin-bottom: 0px;
   margin-bottom: 0px;
   margin-left: auto;
@@ -306,11 +309,14 @@ nav{
   margin-top: 6px;
 }
 #dragdiv{
-  font-size: 1em;
-  top:.1em;
-  white-space: nowrap;
   float: left;
   margin-top: 10px;
+  position: relative;
+  white-space: nowrap;
+}
+#dragspan {
+  position: absolute;
+  top: 2px;
 }
 #piplogo {
   max-width: 380px;
@@ -328,7 +334,8 @@ nav{
   display:inline-block;
   position:relative;cursor:
   move;color:#333;
-  background:#e6e6e6;
+  /* background:#e6e6e6; */
+  background:#ddd;
   -webkit-border-radius:5px;
   border-radius:5px;
   border:1px solid #b4b4b4;
