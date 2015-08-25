@@ -1265,7 +1265,7 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
     else: #No session object found
       if globs.WEB: yield 'Please Login to Google', "", "", ""
     if globs.WEB:
-      yme = 'Pipulation complete. Now, do a little victory dance. %s' % globs.PBNJMAN
+      yme = 'Pipulation complete. Do a little victory dance. %s' % globs.PBNJMAN
       yield yme, 'Congratulations, pipulation complete!', "", ""
       yield spinoff
     out("PIPULATION OVER", "1", '-')
