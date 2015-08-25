@@ -1045,13 +1045,13 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
         return # permissible here?
       therange = range(qstart, qend)
       blankrows = 0 #Lets us skip occasional blank rows
+      if globs.WEB: yield yme, "Next, we replace question marks. This may take awhile...", "", ""
       for index, rowdex in enumerate(therange): #Start stepping through every row.
         if rowdex in qset:
           if maxrowsperhour: # if maxrowsperhour is 0, this won't trap
             if index >= int(maxrowsperhour):
               break
           yme = "Pipulating row: %s (item %s of %s)..." % (rowdex, index+1, len(therange))
-          if globs.WEB: yield yme, "Next, we replace question marks. This may take awhile...", "", ""
           globs.hobj = None
           globs.html = '' #Blank the global html object. Recylces fetches.
           rowrange = "A%s:%s%s" % (rowdex, globs.letter[len(globs.row1)], rowdex)
@@ -1129,7 +1129,7 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
                         out('%s worked' % collabel)
                         yme = "<li>%s</li>" % (collabel)
                         if globs.WEB:
-                          yield yme, yme, "", ""
+                          yield yme, collabel, "", ""
                         break
                       except Exception as e:
                         print traceback.format_exc()
@@ -1668,7 +1668,7 @@ def formSwitch():
 class CrawlTypesForm(PipForm2):
   """Present user with different types of crawls they can perform."""
   radios = RadioField(choices=[
-    ('linksonpage',   '1. LINKS ON PAGE: Just get the de-duplicated links from page, one line per link.'),
+    ('linksonpage',   '1. LINKS ON PAGE: Just get the links from page, one line per link.'),
     ('oneclickcrawl', '2. QUICK CRAWL: Same as above, but visits each page to get their on-page data.'),
     ('linkgraph',     '3. CRAWL, 2 DEEP: Creates data for 3-Level Site Hierarchy Visualization. Requires separate ?-replacement for sanity.'),
     ('cancel',        'Cancel')
