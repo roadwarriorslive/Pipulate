@@ -54,6 +54,7 @@ th {
   background-color: #9ED1F3;
   left: 0px;
   padding-right: 32px;
+  padding-top: 3px;
   position: absolute;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
   top: 0px;
@@ -159,13 +160,12 @@ nav{
   color: grey;
   font-size: 16px;
   font-weight: bold;
-  margin-bottom: 2px;
-  margin-top: 2px;
+  margin-top: 6px;
 }
 #pipslate {
   background-color: slategray;
   border: 2px solid lightgrey;
-  margin-bottom: 15px;
+  margin-bottom: 7px;
   overflow-y: auto;
   padding-top: 0px;
   padding-top: 15px;
