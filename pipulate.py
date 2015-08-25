@@ -1662,11 +1662,12 @@ def stringify_children(node):
   # filter removes possible Nones in texts and tails
   return ''.join(filter(None, parts))
 
-# __        _______ _____ ___   _____                        _  I should probably externalize these.
-# \ \      / /_   _|  ___|__ \ |  ___|__  _ __ _ __ ___  ___| | Tried moving them into managelists.py
-#  \ \ /\ / /  | | | |_    / / | |_ / _ \| '__| '_ ` _ \/ __| | but had to bring SOME parts back in
-#   \ V  V /   | | |  _|  |_|  |  _| (_) | |  | | | | | \__ \_| here, so I ended up bringing all parts
-#    \_/\_/    |_| |_|    (_)  |_|  \___/|_|  |_| |_| |_|___(_) back in here. Bottom of pipulate.py = forms
+#                   _
+#   _ __ ___   __ _(_)_ __    _ __ ___   ___ _ __  _   _
+#  | '_ ` _ \ / _` | | '_ \  | '_ ` _ \ / _ \ '_ \| | | |
+#  | | | | | | (_| | | | | | | | | | | |  __/ | | | |_| |
+#  |_| |_| |_|\__,_|_|_| |_| |_| |_| |_|\___|_| |_|\__,_|
+#
 from flask_wtf import Form
 from wtforms import (StringField,
                     RadioField,
@@ -1676,13 +1677,45 @@ from wtforms import (StringField,
                     SelectField,
                     widgets)
 
-class ConfigForm(Form):
-  """Define form for aquiring configuration values."""
-  import binascii, os
-  apdef = binascii.hexlify(os.urandom(24))
-  appsecret = StringField('Flask app secret (auto-generated):', default=apdef)
-  clientid = StringField('Client ID (from Google Dev Console):')
-  clientsecret = StringField('Client secret (from Google Dev Console):')
+def menumaker():
+  ''' Creates the entire cadence of the system.'''
+  menu = [
+    ('menu:crawl'  , "Crawl Website"),
+    ('qmarks'      , "Replace ?'s"),
+    ('menu:setup'  , "Do an Auto Setup"),
+    ('menu:column' , "Add Some Columns"),
+    ('menu:graph'  , "See a Visualization"),
+    ('keywords'    , "Harvest Keywords"),
+    ('menu:clear'  , "Clear Sheet1")
+  ]
+  strmenu = '<option value="off">What do you want to do?</option>\n'
+  for item in menu:
+    strmenu += '<option value="%s">%s</options>\n' % (item[0], item[1])
+  return strmenu
+
+def formSwitch():
+  """Create dict that ties screen 1 select options with what menu to show on interstitial page.
+  Everything in the interstitial forms section needs an entry in this dict to activate."""
+  return {
+    'clear':        ClearSheet1Form(csrf_enabled=False),
+    'crawl':        CrawlTypesForm(csrf_enabled=False),
+    'setup':        SetupForm(csrf_enabled=False),
+    'column':       AddColumnsForm(csrf_enabled=False),
+    'graph':        VisualizationForm(csrf_enabled=False)
+  }
+
+def pipSwitch():
+  return {
+    'clear':        ClearSheet1,
+    'cancel':       Cancel,
+    'linksonpage':  LinksOnPage,
+    'quickcrawl':   QuickCrawl,
+    'linkgraph':    LinkGraph,
+    'tests':        RunTests,
+    'column':       AddColumns,
+    'sitemap':      MakeSitemap,
+    'fillmarks':    FillQMarks
+  }
 
 class PipForm(Form):
   """Define form for main Pipulate user interface."""
@@ -1693,31 +1726,22 @@ class PipForm(Form):
 class PipForm2(PipForm):
   """Adds a hidden field to tell the secondary menu from a dropdown menu selection."""
   secondary = HiddenField()
+
+class ConfigForm(Form):
+  """Define form for aquiring configuration values."""
+  import binascii, os
+  apdef = binascii.hexlify(os.urandom(24))
+  appsecret = StringField('Flask app secret (auto-generated):', default=apdef)
+  clientid = StringField('Client ID (from Google Dev Console):')
+  clientsecret = StringField('Client secret (from Google Dev Console):')
+
+
 #  _       _                _   _ _   _       _       This should set forth a familiar pattern where
 # (_)_ __ | |_ ___ _ __ ___| |_(_) |_(_) __ _| |___   we open with a dict router and follow with the
 # | | '_ \| __/ _ \ '__/ __| __| | __| |/ _` | / __|  things that router can invoke. In this case,
 # | | | | | ||  __/ |  \__ \ |_| | |_| | (_| | \__ \  it's the mapping between the main Pipulate drop-
 # |_|_| |_|\__\___|_|  |___/\__|_|\__|_|\__,_|_|___/  down menu and what form gets shown on the
 #                                                     interstitial screen to follow, choices listed.
-def formSwitch():
-  """Create dict that ties screen 1 select options with what menu to show on interstitial page.
-  Everything in the interstitial forms section needs an entry in this dict to activate."""
-  return {
-    'clear':  ClearSheet1Form(csrf_enabled=False),
-    'crawl':  CrawlTypesForm(csrf_enabled=False),
-    'setup':  SetupForm(csrf_enabled=False),
-    'column': AddColumnsForm(csrf_enabled=False),
-    'graph':  VisualizationForm(csrf_enabled=False)
-  }
-
-class CrawlTypesForm(PipForm2):
-  """Present user with different types of crawls they can perform."""
-  radios = RadioField(choices=[
-    ('linksonpage',   '1. LINKS ON PAGE: Just get the links from page, one line per link.'),
-    ('quickcrawl',    '2. QUICK CRAWL: Same as above, but visits each page to get their on-page data.'),
-    ('linkgraph',     '3. CRAWL, 2 DEEP: Acquires link-data for 3-Level Site Hierarchy Visualization. It requires you to do another "Replace ?\'s" afterwards.'),
-    ('cancel',        'Cancel')
-  ])
 
 class AddColumnsForm(PipForm2):
   """Create the menu for when Clear Sheet 1 is selected."""
@@ -1739,6 +1763,15 @@ class AddColumnsForm(PipForm2):
     option_widget=widgets.CheckboxInput(),
     widget=widgets.ListWidget(prefix_label=False)
   )
+
+class CrawlTypesForm(PipForm2):
+  """Present user with different types of crawls they can perform."""
+  radios = RadioField(choices=[
+    ('linksonpage',   '1. LINKS ON PAGE: Just get the links from page, one line per link.'),
+    ('quickcrawl',    '2. QUICK CRAWL: Same as above, but visits each page to get their on-page data.'),
+    ('linkgraph',     '3. CRAWL, 2 DEEP: Acquires link-data for 3-Level Site Hierarchy Visualization. It requires you to do another "Replace ?\'s" afterwards.'),
+    ('cancel',        'Cancel')
+  ])
 
 class SetupForm(PipForm2):
   """Create the menu for when Clear Sheet 1 is selected."""
@@ -1768,18 +1801,6 @@ class ClearSheet1Form(PipForm2):
 # | |_) | | (_| | |_| |  __/ |    | |_) | | (_| | | | | (_) | such as it were. Or Loom, if you prefer. Or Turing machine.   
 # | .__/|_|\__,_|\__, |\___|_|    | .__/|_|\__,_|_| |_|\___/  In any case, we just feed these instructions into the part    
 # |_|            |___/            |_|                         of Pipulate there waiting to execute final menu choices. 
-def pipSwitch():
-  return {
-    'clear':        ClearSheet1,
-    'cancel':       Cancel,
-    'linksonpage':  LinksOnPage,
-    'quickcrawl':   QuickCrawl,
-    'linkgraph':    LinkGraph,
-    'tests':        RunTests,
-    'column':       AddColumns,
-    'sitemap':      MakeSitemap,
-    'fillmarks':    FillQMarks
-  }
 
 def FillQMarks():
   '''Interrogates worksheet and inserts question marks wherever they can go'''
@@ -1863,26 +1884,4 @@ def Cancel():
   '''Go back to default main menu.'''
   out("Cancel")
   return Pipulate()
-
-#                   _
-#   _ __ ___   __ _(_)_ __    _ __ ___   ___ _ __  _   _
-#  | '_ ` _ \ / _` | | '_ \  | '_ ` _ \ / _ \ '_ \| | | |
-#  | | | | | | (_| | | | | | | | | | | |  __/ | | | |_| |
-#  |_| |_| |_|\__,_|_|_| |_| |_| |_| |_|\___|_| |_|\__,_|
-#
-def menumaker():
-  ''' Creates the entire cadence of the system.'''
-  menu = [
-  ('menu:crawl'  , "Crawl Website"),
-  ('qmarks'      , "Replace ?'s"),
-  ('menu:setup'  , "Do an Auto Setup"),
-  ('menu:column' , "Add Some Columns"),
-  ('menu:graph'  , "See a Visualization"),
-  ('keywords'    , "Harvest Keywords"),
-  ('menu:clear'  , "Clear Sheet1")
-  ]
-  strmenu = '<option value="off">What do you want to do?</option>\n'
-  for item in menu:
-    strmenu += '<option value="%s">%s</options>\n' % (item[0], item[1])
-  return strmenu
 

@@ -257,6 +257,7 @@
               </ul>
             {% endif %}
           {% endwith %}
+          {% if data %}
           <ul id="plist">
           {% for lineitem, learn, magic, glock in data: -%}
             {%- if glock == '+' : %}
@@ -325,6 +326,7 @@
             {%- endif -%}
           {%- endfor -%}
           </ul>
+          {%- endif -%}
           <script>
             $('#spinner').hide();
             $('#spinner').css('display', 'none');
