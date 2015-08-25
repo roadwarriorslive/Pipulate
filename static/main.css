@@ -387,6 +387,9 @@ nav{
   #dragdiv {
     display: none;
   }
+  #hypnotizethem {
+    top: 72%;
+  }
 }
 @media (max-width: 1140px) and (min-width: 960px) {
   #dragdiv {
