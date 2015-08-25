@@ -204,10 +204,10 @@
           #}
           <form id="pipform" method="POST" action="/">
             <div id="paste"><span id="pastelabel">Url: </span>{{ form.pipurl(size=80) }}</div>
-            <span>
+            <div id="pipselector">
               <select class="select pipmenu" id="options" name="options">{{ select|safe }}</select>
               <button id="pipulate" class="button" type="submit">Pipulate<i id="piplock" class="pip-go"></i></button>
-            </span>
+            </div>
             {% if request.method == 'POST': %}
               <script>
                 lockbutton();
