@@ -5,7 +5,7 @@
 Welcome to Pipulate, a free and open source SEO tool that crawls sites directly
 into Google Docs, producing pretty, interactive sitemap visualizations--sort of
 an elusive Holy Grails of the SEO industry. But Pipulate is also an all-purpose
-Swiss Army Knife for all sorts of data-mashups. Key capabilities include:
+Swiss Army Knife for all sorts of data-mashups, including...
 
 ## Key Capabilties of The System
 - Let you perform tightly controlled site-crawls directly into spreadsheet.
