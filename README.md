@@ -2,18 +2,20 @@
 ## A tool to help you automate those tedious daily tasks that you never found any better way to perform.
 <img src="http://mikelevinseo.com/images/pipulate-interface.png" alt="FOSS SEO Software"/>
 
-Welcome to Pipulate, a free and open source SEO tool that outputs SEO
-investigations like site crawls, position checks, and API-hitting lookup-jobs
-directly into Google Docs. Also supports scheduling. You can try the tool on
-http://pipulate.com, but it's designed to run directly on your own server
-(starting with a 20MB download), but then can be moved off to the cloud,
-Raspberry Pi or whatever.  The servers are tiny and disposable -- easily
-instantiated, coming in at around 100 MB software footprint including OS,
-programming language, webserver, application and all its dependences. This
-little package is also designed to help you learn. Learn Linux. Learn Python.
-Learn Flask. Learn vim. It works with a bookmarklet from your browser, popping
-up a very minimal user interface when necessary, but generally sends the output
-you want to keep... uh... into a spreadsheet. 
+Welcome to Pipulate, a free and open source SEO tool that crawls sites directly
+into Google Docs, producing pretty, interactive sitemap visualizations--sort of
+an elusive Holy Grails of the SEO industry. But Pipulate is also an all-purpose
+Swiss Army Knife for both SEO and Social Media, offering these key capabilities:
+
+## Key Capabilties of The System
+- Let you perform tightly controlled site-crawls directly into spreadsheet.
+- Give you the ability to harvest keywords without leaving the web browser.
+- Be able to run modest, automated search engine position rank monitoring.
+- Automate the many tedious little chores that we know should be possible.
+- Instantly become a valuable part of your daily-flow with low investment.
+- Let you visualize data in insightful, actionable and exciting new ways.
+
+## Here's How It Works
 
     THIS IS       THIS IS YOUR BROWSER                   THIS IS PIPULATE         THIS IS
       YOU                                              (disposable servers)       AWESOME!
@@ -28,15 +30,16 @@ you want to keep... uh... into a spreadsheet.
      SEE THE------> | to Google Sheet|<--------4.----------'    '----------------------> ?
      RESULTS        '----------------'    a response                  ...stuff on net''')
 
-Use Pipulate's "out of the box" capabilities, or expand it by writing
-stand-alone Python functions, then just dropping them into your arsenal of
-growing SEO and Social Media secret weapons that you may or may not share back
-to the Github/SEO/Social Media communities. All your custom functions become
-instantly accessible to you in Google Docs, alleviating the tedium of finding
-your old scripts or wrangling custom home-built or expensive data-monitoring
-systems. It all just natively works in Google Sheets&#151;effectively slapping
-an Ironman suit onto aspiring SEO or Social Media professionals. Watch the
-videos for inspiration on how you too may use it.
+## Using it
+You can try it out on pipulate.com, but as it picks up in popularity, I'll be
+throttling use of that site--deliberately, to prod you to run your own server!
+That's the only true path to to a vendor-independent, low-cost solution to all
+the expensive services offered in this industry for >= ~$100/mo. Free's better.
+
+Use Pipulate "out of the box", or expand it by writing your own secret-weapons
+as stand-alone Python functions (one input / one output), then just magically
+drop it into Pipulate and see it become instantly invokable from Google Sheets.
+You may or may not share back your creations to the Github/Pipulate community.
 
 [Google Slides](http://goo.gl/v71kw8) and visit the sister-project,
 [Levinux](http://levinux.com).

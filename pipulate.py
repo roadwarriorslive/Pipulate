@@ -15,11 +15,11 @@
      O         |                ||    SENDS      |   ...to the      |  - To chat with a bit as I get old
     /|\---1.-----> bookmarklet ----------2.-------> Pipulate Server |  - Because, we make our own why.
     ( ) CLICK  | with a website ||     URL and   |   | which checks |
-   =====       |   displaying.  ||      context  '---|----|--|--|---'
-     |         |                ||                   |    |  |  '------> ?
-     5.        '----------------'|     then sends    |    |  '----3.---> ?
-   SEE THE--->  | to Google Sheet|<-------4.---------'    '------------> ?
-   RESULTS      '----------------'   a response           ...stuff on net
+   =====       |   displaying.  ||      context  '---|----|--|--|---'         # The Pipulate To-Do List Hit Parade:
+     |         |                ||                   |    |  |  '------> ?    - Auto Setup Departmential Processes
+     5.        '----------------'|     then sends    |    |  '----3.---> ?    - Cytoscape visualization of crawl data
+   SEE THE--->  | to Google Sheet|<-------4.---------'    '------------> ?    - Video-per-feature links from Docs tab
+   RESULTS      '----------------'   a response           ...stuff on net     - Email support
 
 """
 
