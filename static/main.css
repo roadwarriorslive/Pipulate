@@ -85,7 +85,6 @@ th {
   position: relative;
   text-align:center;
 }
-
 #showurl {
   width: 100%;
   background-color: black;
@@ -100,7 +99,7 @@ th {
 }
 .burger > i {
   color: black;
-  font-size: 22px;
+  font-size: 19px;
   margin-right: 6px;
 }
 a {
@@ -307,10 +306,13 @@ nav{
 }
 #mobileinstructions {
   display: none;
-  top:.1em;
-  white-space: nowrap;
   float: left;
+  font-size: 9px;
+  letter-spacing: -0.2px;
+  line-height: 9px;
   margin-top: 6px;
+  padding-left: 19px;
+  text-indent: -2px;
 }
 #dragdiv{
   float: left;
@@ -334,11 +336,11 @@ nav{
 }
 .bookmarklet{padding: 0px;}
 .pressthis{
-  margin:5px 2px 8px 5px;
+  margin:5px 0px 8px 5px;
   float: left;
   }
 .pressthis a,.pressthis a:active,.pressthis a:focus,.pressthis a:hover{
-  padding:3px;
+  padding: 2px;
   display:inline-block;
   position:relative;cursor:
   move;color:#333;
