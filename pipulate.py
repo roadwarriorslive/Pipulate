@@ -1670,7 +1670,7 @@ class CrawlTypesForm(PipForm2):
   radios = RadioField(choices=[
     ('linksonpage',   '1. LINKS ON PAGE: Just get the links from page, one line per link.'),
     ('oneclickcrawl', '2. QUICK CRAWL: Same as above, but visits each page to get their on-page data.'),
-    ('linkgraph',     '3. CRAWL, 2 DEEP: Creates data for 3-Level Site Hierarchy Visualization. Requires separate ?-replacement for sanity.'),
+    ('linkgraph',     '3. CRAWL, 2 DEEP: Acquires link-data for 3-Level Site Hierarchy Visualization. It requires you to do another "Replace ?\'s" afterwards.'),
     ('cancel',        'Cancel')
   ])
 
