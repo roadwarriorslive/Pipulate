@@ -540,8 +540,9 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
             time.sleep(6)
         if stop:
           if globs.WEB:
-            yield spinerr
             yield badtuple
+            yield spinerr
+            yield unlock
           Stop() # Consider adding refresh_token logic for users (versus the scheduler)
         globs.DOCLINK = '<a href="%s/d/%s/edit#gid=0" target="_blank">%s</a>' % (globs.SHEETS, globs.DOCID, globs.NAME)
       out("END LOGIN ATTEMPT", "2", '-')
@@ -710,10 +711,11 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
           out("Retry get Scraper sheet %s of %s" % (x, 5))
           time.sleep(3)
       if stop:
-        if globs.WEB: yield badtuple
+        if globs.WEB: 
+          yield badtuple
+          yield spinerr
+          yield unlock
         Stop()
-      if globs.WEB: yield unlock
-
       tabs = None
       try:
         tabs = [sheet.title for sheet in gdoc.worksheets()]
@@ -736,34 +738,36 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
           out("Retry Reading Config tab into globals %s of %s" % (x, 10))
           time.sleep(5)
       if stop:
-        if globs.WEB: yield badtuple
+        if globs.WEB:
+          yield badtuple
+          yield spinerr
+          yield unlock
         Stop()
-      if globs.WEB: yield unlock
       out("Config tab copied to globals.")
       if globs.WEB:
         yme = "Counting rows in %s tab..." % globs.TAB
         yield yme, "Counting rows", '', ''
       out("Counting rows in Pipulate tab.")
       stop = True
-      if not globs.sheet:
-        for x in range(5):
-          if globs.WEB: yield lock
-          try:
-            if targettab:
-              globs.sheet = gdoc.worksheet(targettab)
-            else:
-              globs.sheet = gdoc.sheet1
-            stop = False
-            break
-          except:
-            if globs.WEB: yield dontgetfrustrated(x)
-            out("Retry get Pipulate sheet %s of %s" % (x, 10))
-            time.sleep(5)
+      for x in range(5):
+        if globs.WEB: yield lock
+        try:
+          if targettab:
+            globs.sheet = gdoc.worksheet(targettab)
+          else:
+            globs.sheet = gdoc.sheet1
+          stop = False
+          break
+        except:
+          if globs.WEB: yield dontgetfrustrated(x)
+          out("Retry get Pipulate sheet %s of %s" % (x, 10))
+          time.sleep(5)
       if stop:
-        if globs.WEB: yield badtuple
+        if globs.WEB:
+          yield badtuple
+          yield spinerr
+          yield unlock
         Stop()
-      if globs.WEB: yield unlock
-
       stop = True
       for x in range(5):
         if globs.WEB: yield lock
@@ -778,10 +782,11 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
           out("Retry get rows with question marks %s of %s" % (x, 10))
           time.sleep(5)
       if stop:
-        if globs.WEB: yield badtuple
+        if globs.WEB:
+          yield badtuple
+          yield spinerr
+          yield unlock
         Stop()
-      if globs.WEB: yield unlock
-
       stop = True
       for x in range(10):
         if globs.WEB: yield lock
@@ -794,9 +799,11 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
           out("Retry count rows %s of %s" % (x, 10))
           time.sleep(10)
       if stop == True:
-        if globs.WEB: yield badtuple
+        if globs.WEB:
+          yield badtuple
+          yield spinerr
+          yield unlock
         Stop()
-      if globs.WEB: yield unlock
       yme = "%s rows with question marks found in %s." % (globs.numrows, globs.TAB)
       out(yme)
       if globs.WEB: yield yme, "", "", ""
@@ -818,9 +825,11 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
           out("Retry count rows %s of %s" % (x, 10))
           time.sleep(10)
       if stop == True:
-        if globs.WEB: yield badtuple
+        if globs.WEB:
+          yield badtuple
+          yield spinerr
+          yield unlock
         Stop()
-      if globs.WEB: yield unlock
       pat = [[d['pattern']][0] for d in lod]
       typ = [[d['type']][0] for d in lod]
       nam = [[d['name']][0] for d in lod]
@@ -844,10 +853,11 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
           out("Retry load Row1 %s of %s" % (x, 10))
           time.sleep(5)
       if stop:
-        if globs.WEB: yield badtuple
+        if globs.WEB:
+          yield badtuple
+          yield spinerr
+          yield unlock
         Stop()
-      if globs.WEB: yield unlock
-
       trendlistoflists = []
       out("Scanning row 1 for function and scraper names.")
       fargs = {}
@@ -904,10 +914,11 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
             out("Retry %s of %s" % (x, 8))
             time.sleep(5)
         if stop:
-          if globs.WEB: yield badtuple
+          if globs.WEB:
+            yield badtuple
+            yield spinerr
+            yield unlock
           Stop()
-        if globs.WEB: yield unlock
-
         if onerow:
           if rowdex == 2: #Looking for trending requests
             if '*' in onerow:
@@ -1286,9 +1297,11 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
                   time.sleep(5)
                   if globs.WEB: yield dontgetfrustrated(x)
               if stop:
-                if globs.WEB: yield badtuple
+                if globs.WEB:
+                  yield badtuple
+                  yield spinerr
+                  yield unlock
                 Stop()
-            if globs.WEB: yield unlock
           elif onerow.count('') == len(onerow):
             blankrows += 1
             if blankrows > 1:
@@ -1701,7 +1714,7 @@ class CrawlTypesForm(PipForm2):
   """Present user with different types of crawls they can perform."""
   radios = RadioField(choices=[
     ('linksonpage',   '1. LINKS ON PAGE: Just get the links from page, one line per link.'),
-    ('oneclickcrawl', '2. QUICK CRAWL: Same as above, but visits each page to get their on-page data.'),
+    ('quickcrawl',    '2. QUICK CRAWL: Same as above, but visits each page to get their on-page data.'),
     ('linkgraph',     '3. CRAWL, 2 DEEP: Acquires link-data for 3-Level Site Hierarchy Visualization. It requires you to do another "Replace ?\'s" afterwards.'),
     ('cancel',        'Cancel')
   ])
