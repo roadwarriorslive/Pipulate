@@ -8,7 +8,7 @@
   font-weight: normal;
   font-style: normal;
 }
-.pseudo.button {
+pseudo.button {
   font-size: 16px;
   color: black;
 }
@@ -86,12 +86,12 @@ th {
   text-align:center;
 }
 #showurl {
-  width: 100%;
   background-color: black;
-  text-color: white;
   font-size: 12px;
-  text-align: center;
   opacity: 0.2;
+  text-align: center;
+  text-color: white;
+  width: 100%;
 }
 .pip-stopsign:before {
   font-size: 17px;
@@ -106,15 +106,15 @@ a {
   color: #76BFFF;
 }
 .config {
-  width: 580px;
   margin-left: auto;
   margin-right: auto;
+  width: 580px;
 }
 .configinstructions {
   color: lightgrey;
-  text-align: left;
   margin-left: auto;
   margin-right: auto;
+  text-align: left;
   width: 700px;
 }
 #login {
@@ -124,27 +124,27 @@ a {
   font-family: Paytone One;
 }
 .indoctrinate {
-  text-align: left;
+  color: white;
   margin-left: auto;
   margin-right: auto;
-  color: white;
+  text-align: left;
   width: 360px;
 }
 .indoctrinate > li:before{
   display: none;
 }
 #wrapper {
-  position: relative;
   height: 100%;
+  position: relative;
 }
 #hypnotizethem {
+  display: block;
+  max-height: 100%;
+  max-width: 100%;
   opacity: 0.05;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  display: block;
-  max-width: 100%;
-  max-height: 100%;
 }
 [type=checkbox]+.checkable:after, [type=checkbox]+.checkable:before,
 [type=radio]+.checkable:after, [type=radio]+.checkable:before {
@@ -158,32 +158,33 @@ nav{
 }
 #mode {
   color: grey;
-  font-weight: bold;
   font-size: 16px;
+  font-weight: bold;
   margin-bottom: 2px;
   margin-top: 2px;
 }
 #pipslate {
-  position: relative;
-  border: 2px solid lightgrey;
   background-color: slategray;
-  padding-top: 15px;
-  padding-top: 0px;
+  border: 2px solid lightgrey;
   margin-bottom: 15px;
+  overflow-y: scroll;
+  padding-top: 0px;
+  padding-top: 15px;
+  position: relative;
 }
 #pipchoice {
-  width: 100%;
   font-size: 15px;
   margin-left: auto;
   margin-right: auto;
+  width: 100%;
 }
 #piplock {
   color: white;
 }
 #pipurl {
   background-color: bisque;
-  font-weight: bold;
   font-size: 15px;
+  font-weight: bold;
   width: -moz-calc(100% - 53px);
   width: -webkit-calc(100% - 53px);
   width: calc(100% - 53px);
@@ -200,24 +201,24 @@ nav{
   width: 100%;
 }
 #magicbox{
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  -webkit-border-radius:0px;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
   background-color: darkslategray;
   border-radius:0px;
   border: 2px solid lightgrey;
+  box-sizing: border-box;         /* Opera/IE 8+ */
   color: white;
   margin-left: auto;
   margin-right:auto;
   margin-top: 0px;
   position: relative;
   width: 100%;
-  -webkit-border-radius:0px;
-  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-  box-sizing: border-box;         /* Opera/IE 8+ */
 }
 #pipulate{
   font-family: Paytone One;
-  width: 128px !important;
   height: 29px;
+  width: 128px !important;
 }
 #pastelabel{
   color: white;
@@ -231,76 +232,33 @@ nav{
 }
 #paste{
   margin-bottom: 3px;
-  white-space:nowrap;
   margin-left: auto;
   margin-right: auto;
   margin-top: 10px;
+  white-space:nowrap;
 }
 .cloud {
   color: white;
   font-size: 4em;
+  margin-left: -40px;
   padding-top: 17px;
   position: absolute;
-  margin-left: -40px;
 }
 #stormyweather {
-  margin-top: 30px;
-  margin-left: auto;
-  margin-right:auto;
-  width: 70px;
-  position: absolute;
-  line-height: 6.5;
-  left: 0;
-  right: 0;
   display: none;
-}
-.spinner {
-  margin-top: 30px;
+  left: 0;
+  line-height: 6.5;
   margin-left: auto;
   margin-right:auto;
-  width: 70px;
+  margin-top: 30px;
   position: absolute;
-  line-height: 6.5;
-  left: 0;
   right: 0;
-}
-.spinner > div {
-  width: 18px;
-  height: 18px;
-  background-color: #C6C6C6;
-  border-radius: 100%;
-  display: inline-block;
-  -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
-  animation: bouncedelay 1.4s infinite ease-in-out;
-  /* Prevent first frame from flickering when animation starts */
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
-.spinner .bounce1 {
-  -webkit-animation-delay: -0.32s;
-  animation-delay: -0.32s;
-}
-.spinner .bounce2 {
-  -webkit-animation-delay: -0.16s;
-  animation-delay: -0.16s;
-}
-@-webkit-keyframes bouncedelay {
-  0%, 80%, 100% { -webkit-transform: scale(0.0) }
-  40% { -webkit-transform: scale(1.0) }
-}
-@keyframes bouncedelay {
-  0%, 80%, 100% { 
-    transform: scale(0.0);
-    -webkit-transform: scale(0.0);
-  } 40% { 
-    transform: scale(1.0);
-    -webkit-transform: scale(1.0);
-  }
+  width: 70px;
 }
 #arrow{
-  font-weight: bold;
-  font-size: 1.8em;
   color: #323232;
+  font-size: 1.8em;
+  font-weight: bold;
   position : relative;
   top:.2em;
 }
@@ -335,59 +293,85 @@ nav{
   top: 36%;
   transform: translateY(-50%);
 }
-.bookmarklet{padding: 0px;}
-.pressthis{
-  margin:5px 0px 8px 5px;
+.bookmarklet{
+  padding: 0px;
   float: left;
+  list-style-type: none;
+  margin-top: 2px;
+  margin:5px 0px 8px 5px;
+  padding-left: 26px;
+} 
+#plist > li {
+  color: white;
+  font-size: 13px;
+  line-height: 15px;
+  list-style-type: none;
+}
+
+#plist > li:before {
+  -ms-transform-origin: -1.5em 7.5px;
+  -webkit-animation: spin 2s infinite linear;
+  -webkit-transform-origin: -1.5em 7.5px;
+  animation: spin 2s infinite linear;
+  content: '\e820';
+  float: left;
+  font-family: 'mikelevin';
+  text-indent: -2em;
+}
+
+#plist > li.progress:before {
+  -webkit-animation: spin 2s infinite linear;
+  animation: spin 2s infinite linear;
+  content: "\e820"; 
+}
+
+#plist > li.checkbox:before {
+  -webkit-animation: spin 0s;
+  animation: spin 0s;
+  content: "\e81e"; 
+}
+
+#plist > li.check:before {
+  -webkit-animation: spin 0s;
+  animation: spin 0s;
+  content: "\e80a"; 
+}
+
+#plist > li.heart:before {
+  -webkit-animation: spin 0s;
+  animation: spin 0s;
+  content: "\e85a"; 
+}
+
+#plist > li.warning:before {
+  -webkit-animation: spin 0s;
+  animation: spin 0s;
+  content: "\e80d"; 
+}
+@media (min-width: 360px) and (max-width: 500px) {
+  #mobileinstructions {
+    display: block;
   }
-.pressthis a,.pressthis a:active,.pressthis a:focus,.pressthis a:hover{
-  padding: 2px;
-  letter-spacing: -1.5px;
-  display:inline-block;
-  position:relative;cursor:
-  move;color:#333;
-  /* background:#e6e6e6; */
-  background:#ddd;
-  -webkit-border-radius:5px;
-  border-radius:5px;
-  border:1px solid #b4b4b4;
-  font-family:Paytone One;
-  font-size:15px;
-  text-decoration:none}
-.pressthis a:active{
-  outline:0}
-.pressthis a:hover:after{
-  -webkit-transform:skew(20deg) rotate(9deg);
-  -ms-transform:skew(20deg) rotate(9deg);
-  transform:skew(20deg) rotate(9deg);
-  -webkit-box-shadow:0 10px 8px rgba(0,0,0,.7);
-  box-shadow:0 10px 8px rgba(0,0,0,.7)}
-.pressthis a span{
-  display:inline-block;
-  margin-left:8px;
-  margin-right:10px;
+}
+@media (max-width: 500px) {
+  #dragspan {
+    display: none;
   }
-.pressthis a span:
-  before{color:#777;
-  font:400 20px/1 ;
-  position:relative;
-  display:inline-block;
-  top:4px;
-  margin-right:4px}
-.pressthis a:after{
-  content:'';
-  width:70%;
-  height:55%;
-  z-index:-1;
-  position:absolute;
-  right:10px;
-  bottom:9px;
-  background:0 0;
-  -webkit-transform:skew(20deg) rotate(6deg);
-  -ms-transform:skew(20deg) rotate(6deg);
-  transform:skew(20deg) rotate(6deg);
-  -webkit-box-shadow:0 10px 8px rgba(0,0,0,.6);
-  box-shadow:0 10px 8px rgba(0,0,0,.6)}
+  #dragdiv {
+    display: none;
+  }
+}
+@media (max-width: 1140px) and (min-width: 960px) {
+  #dragdiv {
+    display: none;
+  }
+}
+@media (min-width: 960px) {
+  #content {
+    width: 960px;
+  }
+}
+
 .pip-icon {
   font-family: "mikelevin";
   font-style: normal;
@@ -424,79 +408,95 @@ nav{
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
 
-ul
-{
-  list-style-type: none;
-  padding-left: 26px;
-  margin-top: 2px;
+.spinner {
+  left: 0;
+  line-height: 6.5;
+  margin-left: auto;
+  margin-right:auto;
+  margin-top: 30px;
+  position: absolute;
+  right: 0;
+  width: 70px;
 }
- 
-#plist > li {
-  color: white;
-  font-size: 13px;
-  line-height: 15px;
+.spinner > div {
+  -webkit-animation-fill-mode: both;
+  -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+  animation-fill-mode: both;
+  animation: bouncedelay 1.4s infinite ease-in-out;
+  background-color: #C6C6C6;
+  border-radius: 100%;
+  display: inline-block;
+  height: 18px;
+  width: 18px;
 }
-
-#plist > li:before {
-  font-family: 'mikelevin';
-  content: '\e820';
-  float: left;
-  text-indent: -2em;
-  -webkit-transform-origin: -1.5em 7.5px;
-  -ms-transform-origin: -1.5em 7.5px;
-  -webkit-animation: spin 2s infinite linear;
-  animation: spin 2s infinite linear;
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
 }
-
-#plist > li.progress:before {
-  content: "\e820"; 
-  -webkit-animation: spin 2s infinite linear;
-  animation: spin 2s infinite linear;
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
 }
-
-#plist > li.checkbox:before {
-  content: "\e81e"; 
-  -webkit-animation: spin 0s;
-  animation: spin 0s;
+@-webkit-keyframes bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0.0) }
+  40% { -webkit-transform: scale(1.0) }
 }
-
-#plist > li.check:before {
-  content: "\e80a"; 
-  -webkit-animation: spin 0s;
-  animation: spin 0s;
-}
-
-#plist > li.heart:before {
-  content: "\e85a"; 
-  -webkit-animation: spin 0s;
-  animation: spin 0s;
-}
-
-#plist > li.warning:before {
-  content: "\e80d"; 
-  -webkit-animation: spin 0s;
-  animation: spin 0s;
-}
-@media (min-width: 360px) and (max-width: 500px) {
-  #mobileinstructions {
-    display: block;
+@keyframes bouncedelay {
+  0%, 80%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 40% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
   }
 }
-@media (max-width: 500px) {
-  #dragspan {
-    display: none;
+
+.pressthis{
   }
-  #dragdiv {
-    display: none;
+.pressthis a,.pressthis a:active,.pressthis a:focus,.pressthis a:hover{
+  -webkit-border-radius:5px;
+  background:#ddd;
+  border-radius:5px;
+  border:1px solid #b4b4b4;
+  display:inline-block;
+  font-family:Paytone One;
+  font-size:15px;
+  letter-spacing: -1.5px;
+  move;color:#333;
+  padding: 2px;
+  position:relative;cursor:
+  text-decoration:none}
+.pressthis a:active{
+  outline:0}
+.pressthis a:hover:after{
+  -webkit-transform:skew(20deg) rotate(9deg);
+  -ms-transform:skew(20deg) rotate(9deg);
+  transform:skew(20deg) rotate(9deg);
+  -webkit-box-shadow:0 10px 8px rgba(0,0,0,.7);
+  box-shadow:0 10px 8px rgba(0,0,0,.7)}
+.pressthis a span{
+  display:inline-block;
+  margin-left:8px;
+  margin-right:10px;
   }
-}
-@media (max-width: 1140px) and (min-width: 960px) {
-  #dragdiv {
-    display: none;
-  }
-}
-@media (min-width: 960px) {
-  #content {
-    width: 960px;
-  }
-}
+.pressthis a span:
+  before{color:#777;
+  font:400 20px/1 ;
+  position:relative;
+  display:inline-block;
+  top:4px;
+  margin-right:4px}
+.pressthis a:after{
+  content:'';
+  width:70%;
+  height:55%;
+  z-index:-1;
+  position:absolute;
+  right:10px;
+  bottom:9px;
+  background:0 0;
+  -webkit-transform:skew(20deg) rotate(6deg);
+  -ms-transform:skew(20deg) rotate(6deg);
+  transform:skew(20deg) rotate(6deg);
+  -webkit-box-shadow:0 10px 8px rgba(0,0,0,.6);
+  box-shadow:0 10px 8px rgba(0,0,0,.6)}
