@@ -1,4 +1,4 @@
-# Free And Open Source SEO Software
+# Free &amp; Open Source SEO Software
 Welcome to Pipulate, a free and open source SEO tool that crawls sites directly
 into Google Docs, producing pretty, interactive sitemap visualizations--sort of
 an elusive Holy Grails of the SEO industry. But Pipulate is also an all-purpose
@@ -7,12 +7,12 @@ Swiss Army Knife for all sorts of data-mashups, including...
 <img src="http://mikelevinseo.com/images/pipulate-interface.png" alt="FOSS SEO Software"/>
 
 ## Key Capabilties of The System
-- Let you perform tightly controlled site-crawls directly into spreadsheet.
-- Give you the ability to harvest keywords without leaving the web browser.
-- Be able to run modest, automated search engine position rank monitoring.
-- Automate the many tedious little chores that we know should be possible.
-- Instantly become a valuable part of your daily-flow with low investment.
-- Let you visualize data in insightful, actionable and exciting new ways.
+- Lets you perform tightly controlled site-crawls directly into spreadsheet.
+- Gives you the ability to harvest keywords without leaving the web browser.
+- Is able to run modest, automated search engine position rank monitoring.
+- Automates the many tedious little chores that we know should be possible.
+- Instantly becomes a valuable part of your daily-flow with low investment.
+- Provides wicked-cool insights on your data through new visualizations.
 
 ## Here's How It Works
 
