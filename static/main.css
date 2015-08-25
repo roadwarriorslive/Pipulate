@@ -30,6 +30,12 @@ h1, h2, p, label {
   text-align: center;
   width: 100%;
 }
+select {
+  direction: rtl;
+}
+option {
+  direction: ltr;
+}
 td, th {
   padding: .5em 2.4em .5em .6em; 
 }
@@ -42,12 +48,14 @@ th {
   margin-bottom: 5px;
 }
 .pipmenu {
-  font-size: 13px;
   background-color: #DDDDDD;
+  background-color: lightsteelblue;
+  font-size: 13px;
+  height: 29px;
+  padding-right: 32px;
   width: -moz-calc(100% - 134px);
   width: -webkit-calc(100% - 134px);
   width: calc(100% - 134px);
-  height: 29px
 }
 #pipstream{
   background-color: slategrey;
@@ -86,8 +94,8 @@ th {
   line-height: 0;
 }
 .burger > i {
-  color: cornflowerblue;
-  font-size: 24px;
+  color: powderblue;
+  font-size: 22px;
   margin-right: 6px;
 }
 a {
