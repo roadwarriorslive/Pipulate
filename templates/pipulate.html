@@ -23,7 +23,7 @@
     <script>
       $(function(){
         $(window).resize(function(){ // On resize
-          $('#pipstream').css({'height':(($(window).height())-265)+'px'});
+          $('#pipstream').css({'height':(($(window).height())-234)+'px'});
           $('#pipslate').css({'height':(($(window).height())-140)+'px'});
         });
       });
@@ -206,7 +206,7 @@
             <div id="paste"><span id="pastelabel">Url: </span>{{ form.pipurl(size=80) }}</div>
             <div id="pipselector">
               <select class="select pipmenu" id="options" name="options">{{ select|safe }}</select>
-              <button id="pipulate" class="button" type="submit">Pipulate<i id="piplock" class="pip-go"></i></button>
+              <button id="pipulate" class="button primary" type="submit">Pipulate<i id="piplock" class="pip-go"></i></button>
             </div>
             {% if request.method == 'POST': %}
               <script>
@@ -246,7 +246,7 @@
             <img id="hypnotizethem" src="./static/svg/pipulate-logo.svg" alt="Witness the Pipstream" />
             <script>
               // Adjust vertical size the instant it's built to reduce flash
-              $('#pipstream').css({'height':(($(window).height())-265)+'px'});
+              $('#pipstream').css({'height':(($(window).height())-234)+'px'});
             </script>
           {% with messages = get_flashed_messages() %}
             {% if messages %}
@@ -364,7 +364,7 @@
           {% endif %}
           </table>
           </div>
-          <button id="pipulate" class="button" type="submit">
+          <button id="pipulate" class="button secondary" type="submit">
             Pipulate &nbsp;<i id="piplock" class="pip-go"></i>
           </button>
           </form>

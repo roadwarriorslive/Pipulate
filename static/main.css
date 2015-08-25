@@ -25,14 +25,11 @@ h1, h2, p, label {
   color: white;
 }
 #content{
-  margin: 0px auto;
+  margin-left: 2px;
+  margin-right: 2px;
   min-height: 100%;
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-top: 43px;
   position: relative;
   text-align: center;
-  width: 100%;
 }
 select {
   direction: rtl;
@@ -49,19 +46,20 @@ th {
   width: 100%;
 }
 #pipform {
-  margin-bottom: 5px;
+  position: absolute;
+  top: 36px;
+  width: 100%;
 }
 .pipmenu {
   background-color: #9ED1F3;
-  height: 29px;
   left: 0px;
   padding-right: 32px;
   position: absolute;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-  top: 5px;
-  width: -moz-calc(100% - 134px);
-  width: -webkit-calc(100% - 134px);
-  width: calc(100% - 134px);
+  top: 0px;
+  width: -moz-calc(100% - 131px);
+  width: -webkit-calc(100% - 131px);
+  width: calc(100% - 131px);
 }
 #pipselector {
   position: relative;
@@ -76,19 +74,16 @@ th {
   overflow: auto;
   position: absolute;
   text-align: left;
-  top: 254px;
-  width: 99%;
+  top: 231px;
+  width: 100%;
 }
 #magicdiv{
   margin-bottom: 0px;
   margin-left: 0px;
   margin-right: 0px;
-  margin-top: 7px;
   position: absolute;
-  text-align: center;
-  text-align:center;
-  top: 122px;
-  width: 99%;
+  top: 73px;
+  width: 100%;
 }
 #showurl {
   background-color: black;
@@ -123,7 +118,7 @@ a {
   width: 700px;
 }
 #login {
-  margin-top: 18px;
+  margin-top: 60px;
 }
 .pip {
   font-family: Paytone One;
@@ -139,7 +134,6 @@ a {
   display: none;
 }
 #wrapper {
-  height: 100%;
   position: relative;
 }
 #hypnotizethem {
@@ -202,7 +196,6 @@ nav{
   height: 24px;
   line-height: 2.4;
   margin-bottom: 0px;
-  margin-bottom: 0px;
   margin-left: auto;
   margin-right: auto;
   width: 100%;
@@ -224,11 +217,33 @@ nav{
 }
 #pipulate{
   font-family: Paytone One;
-  height: 29px;
-  position: absolute;
   right: 0px;
+  top: 0px;
   width: 128px !important;
 }
+.primary {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 1px;
+  position: absolute;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.secondary {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 1px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
 #pastelabel{
   color: white;
   display: inline-block;
@@ -243,7 +258,7 @@ nav{
   margin-bottom: 3px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 10px;
+  margin-top: 8px;
   white-space:nowrap;
 }
 .cloud {
