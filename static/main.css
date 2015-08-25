@@ -143,8 +143,9 @@ a {
   max-width: 100%;
   opacity: 0.05;
   position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 66%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 [type=checkbox]+.checkable:after, [type=checkbox]+.checkable:before,
 [type=radio]+.checkable:after, [type=radio]+.checkable:before {
