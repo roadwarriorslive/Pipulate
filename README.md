@@ -6,7 +6,7 @@ Swiss Army Knife for all sorts of data-mashups, including...
 
 <img src="http://mikelevinseo.com/images/pipulate-interface.png" alt="FOSS SEO Software"/>
 
-## Key Capabilties of The System
+## Key Capabilities of The System
 - Lets you perform tightly controlled site-crawls directly into spreadsheet.
 - Gives you the ability to harvest keywords without leaving the web browser.
 - Is able to run modest, automated search engine position rank monitoring.

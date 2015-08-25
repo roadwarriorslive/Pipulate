@@ -313,6 +313,7 @@ nav{
   margin-top: 6px;
   padding-left: 18px;
   text-indent: -2px;
+  white-space: nowrap;
 }
 #dragdiv{
   float: left;
