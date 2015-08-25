@@ -637,16 +637,21 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
               for yieldme in Pipulate():
                 yield yieldme
           elif inst == 'fillmarks': #Fill in question marks
-            globs.row1 = lowercaselist(gdoc.worksheet(globs.TAB).row_values(1))
+            if not globs.row1:
+              globs.row1 = lowercaselist(gdoc.worksheet(globs.TAB).row_values(1))
+            if not globs.numrows:
+              globs.numrows = len(globs.sheet.col_values(1))
             out(globs.row1)
             gfuncs = [x for x in globals().keys() if x[:2] != '__']
             scrapers = [x[0] for x in scrapes()]
             unified = set(gfuncs + scrapers)
-            out(unified)
+            colrange = None
             for acol in globs.row1:
               if acol in unified:
-                qmycol = globs.letter[globs.row1.index(acol) + 1]
-                out(qmycol)
+                qcol = globs.letter[globs.row1.index(acol) + 1]
+                nr = globs.numrows
+                colrange = '%s%s:%s%s' % (qcol, 2, qcol, nr)
+                out(colrange)
             gotcha("done")
             Stop()
           elif inst == 'columns':
