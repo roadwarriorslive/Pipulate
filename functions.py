@@ -51,7 +51,7 @@ def gethtml(url):
 
 def html(url):
   '''Return HTML text for given URL. Simple wrapper for gethtml function.'''
-  import bas64
+  import base64
   somehtml = gethtml(url)
   cellfriendly = base64.b64encode(somehtml)
   labeleledtoo = {'base64html': cellfriendly}

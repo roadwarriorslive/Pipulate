@@ -1143,7 +1143,7 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
                   collabel = globs.row1[coldex]
                   if collabel in transfuncs.keys():
                     stop = True
-                    for x in range(5):
+                    for x in range(3):
                       #   __                  _   _
                       #  / _|_   _ _ __   ___| |_(_) ___  _ __  ___
                       # | |_| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
@@ -1179,13 +1179,15 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
                     if stop == True:
                       out("Function End (Failed)", "4", '-')
                       if globs.WEB:
+                        yme = "Something went wrong in the %s function. Stopping." % collabel
+                        yield yme, "", "", ""
                         yield spinerr
                         yield unlock
                       Stop() #                                            <-- This is where you could keep things running
                     out("Function End", "4", '-')
                   elif collabel in transscrape.keys():
                     stop = True
-                    for x in range(4):
+                    for x in range(3):
                       #  ____
                       # / ___|  ___ _ __ __ _ _ __   ___ _ __
                       # \___ \ / __| '__/ _` | '_ \ / _ \ '__|
@@ -1264,6 +1266,8 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
                     if stop == True:
                       out("Scrape End (Failed)", "4", '-')
                       if globs.WEB:
+                        yme = "Something went wrong in the %s scraper. Stopping." % collabel
+                        yield yme, "", "", ""
                         yield spinerr
                         yield unlock
                       Stop() #                                            <-- This is where you could keep things running
