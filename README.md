@@ -29,6 +29,14 @@ Swiss Army Knife for all sorts of data-mashups, including...
      SEE THE------> | to Google Sheet|<--------4.----------'    '----------------------> ?
      RESULTS        '----------------'    a response                  ...stuff on net''')
 
+## Recent Changes
+- Archive function added to save page's HTML into Google Sheets, compressed.
+- Scrapers all work if Archive column is there (pull titles, metas, from archive).
+- Documentation tab gets automatically regenerated if new functions are added.
+- SEMRush and Moz KPI functions like Difficulty and DomainAuthority added.
+- Modest amounts of website crawling is now possible (maximum depth of 2).
+- Tons of cosmetic stuff to make it prettier.
+
 ## Using it
 You can try it out on pipulate.com, but as it picks up in popularity, I'll be
 throttling use of that site--deliberately, to prod you to run your own server!
