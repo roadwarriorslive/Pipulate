@@ -1087,7 +1087,8 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
         return # permissible here?
       therange = range(qstart, qend)
       blankrows = 0 #Lets us skip occasional blank rows
-      if globs.WEB: yield yme, "Next, we replace question marks. This may take awhile...", "", ""
+      if globs.WEB:
+        yield "Beginning to process rows with question marks...", "", "", ""
       for index, rowdex in enumerate(therange): #Start stepping through every row.
         if rowdex in qset:
           if maxrowsperhour: # if maxrowsperhour is 0, this won't trap
@@ -1175,6 +1176,9 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
                         break
                       except Exception as e:
                         print traceback.format_exc()
+                        if globs.WEB:
+                          yme = "We have a problem in %s." % collabel
+                          yield yme, "", "", ""
                         time.sleep(10)
                     if stop == True:
                       out("Function End (Failed)", "4", '-')
