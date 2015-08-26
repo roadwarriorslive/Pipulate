@@ -1143,7 +1143,7 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
                   collabel = globs.row1[coldex]
                   if collabel in transfuncs.keys():
                     stop = True
-                    for x in range(10):
+                    for x in range(5):
                       #   __                  _   _
                       #  / _|_   _ _ __   ___| |_(_) ___  _ __  ___
                       # | |_| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
@@ -1180,6 +1180,7 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
                       out("Function End (Failed)", "4", '-')
                       if globs.WEB:
                         yield spinerr
+                        yield unlock
                       Stop()
                     out("Function End", "4", '-')
                   elif collabel in transscrape.keys():

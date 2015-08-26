@@ -51,7 +51,11 @@ def gethtml(url):
 
 def html(url):
   '''Return HTML text for given URL. Simple wrapper for gethtml function.'''
-  return gethtml(url)
+  import bas64
+  somehtml = gethtml(url)
+  cellfriendly = base64.b64encode(somehtml)
+  labeleledtoo = {'base64html': cellfriendly}
+  return json.dumps(labeledtoo)
 
 def walkdict(obj, key):
   """Take a JSON object and key and return the first matched value from the object."""
