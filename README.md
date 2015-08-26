@@ -30,6 +30,7 @@ Swiss Army Knife for all sorts of data-mashups, including...
      RESULTS        '----------------'    a response                  ...stuff on net''')
 
 ## Recent Changes
+### Wed Aug 26 21:00:08 UTC 2015
 - Archive function added to save page's HTML into Google Sheets, compressed.
 - Scrapers all work if Archive column is there (pull titles, metas, from archive).
 - Documentation tab gets automatically regenerated if new functions are added.
