@@ -72,8 +72,8 @@ def templateglobals():
 
 from managelists import *
 
-#  _   _                                              Flask uses a routing system from another package called Werkzeug.                                   
-# | | | | ___  _ __ ___   ___ _ __   __ _  __ _  ___  Werkzeug uses decorators to "route" requests. You can read the main 
+#  _   _                                              Flask uses a routing system from another package called Werkzeug.
+# | | | | ___  _ __ ___   ___ _ __   __ _  __ _  ___  Werkzeug uses decorators to "route" requests. You can read the main
 # | |_| |/ _ \| '_ ` _ \ / _ \ '_ \ / _` |/ _` |/ _ \ function as: Feed the entire main() function as a parameter to the
 # |  _  | (_) | | | | | |  __/ |_) | (_| | (_| |  __/ route method of the Flask app object, keeping all of Flask's "outer"
 # |_| |_|\___/|_| |_| |_|\___| .__/ \__,_|\__, |\___| conext, which happens to be everying you need for a standard Python
@@ -110,32 +110,32 @@ def main():
     app.config.from_pyfile(globs.FILE, silent=False)
     app.config['SESSION_TYPE'] = 'filesystem'
   else:
-    #                                                   __ _
-    #   ___  ___ _ ____   _____ _ __    ___ ___  _ __  / _(_) __ _
-    #  / __|/ _ \ '__\ \ / / _ \ '__|  / __/ _ \| '_ \| |_| |/ _` |
-    #  \__ \  __/ |   \ V /  __/ |    | (_| (_) | | | |  _| | (_| |
-    #  |___/\___|_|    \_/ \___|_|     \___\___/|_| |_|_| |_|\__, |
-    #                                                        |___/
-    if request.method == 'POST':                                    # Final configuration has not yet occurred, but a
-      import pickle                                                 # submitted form means that we're sitting on top
-      pickleme = {                                                  # of the values, that we can grab and pickle into
-        'CLIENT_ID': configform.clientid.data,                      # a temporary location. This pickle file is where
-        'CLIENT_SECRET': configform.clientsecret.data,              # the access_token will be stored, but we don't
-        'APP_SECRET': configform.appsecret.data                     # have it yet, and don't want to write into the
-      }                                                             # config file yet, so we enter this server confg
-      pickle.dump(pickleme, open(globs.TOKEN, 'wb'))                # block again for exchanging the initial OAuth2
-      redir = globs.DOMURL                                          # "code" that we're about to get for a permanent
-      if 'Host' in request.headers:                                 # refresh_token and temporary access_token.
-        redir = 'http://'+request.headers['Host']                   # Use a host name if you've got one.
-      scope = 'https://spreadsheets.google.com/feeds/'              # Normal pipulate servers don't need much scope,
-      if globs.PCOM:                                                # but if it's the main pipulate.com instance, then
-        scope = 'profile email ' + scope                            # I'm going to do a little bit of user tracking.
-      qsdict = {  'scope': scope,                                   # Here, we begin to construct the URL parameters
-                  'response_type': 'code',                          # for a simple GET-method request to the Google
-                  'access_type': 'offline',                         # OAuth2 authentication service. It is going to
-                  'redirect_uri': redir,                            # return to the redirect_uri with a code parameter
-                  'approval_prompt': 'force',                       # appended onto it that we'll use immediately
-                  'client_id': configform.clientid.data             # below when the next elif traps that condition.
+    #                                                   ____        # This traps the first time Pipulate is run on a new
+    #   ___  ___ _ ____   _____ _ __    ___ ___  _ __  / _(_) __ _  # server and prompts you to enter your Google Developer
+    #  / __|/ _ \ '__\ \ / / _ \ '__|  / __/ _ \| '_ \| |_| |/ _` | # Web app OAuth2 Client ID and Secret that you get from
+    #  \__ \  __/ |   \ V /  __/ |    | (_| (_) | | | |  _| | (_| | # https://console.developers.google.com/project so that
+    #  |___/\___|_|    \_/ \___|_|     \___\___/|_| |_|_| |_|\__, | # You never need to keep your username and password on
+    #                                                        |___/  # the hard drive. In fact now, you can't anymore.
+    if request.method == 'POST':
+      import pickle
+      pickleme = {
+        'CLIENT_ID': configform.clientid.data,
+        'CLIENT_SECRET': configform.clientsecret.data,
+        'APP_SECRET': configform.appsecret.data
+      }
+      pickle.dump(pickleme, open(globs.TOKEN, 'wb'))
+      redir = globs.DOMURL
+      if 'Host' in request.headers:
+        redir = 'http://'+request.headers['Host']
+      scope = 'https://spreadsheets.google.com/feeds/'
+      if globs.PCOM:
+        scope = 'profile email ' + scope
+      qsdict = {  'scope': scope,
+                  'response_type': 'code',
+                  'access_type': 'offline',
+                  'redirect_uri': redir,
+                  'approval_prompt': 'force',
+                  'client_id': configform.clientid.data
                 }
       from urllib import urlencode
       linktologin = "%s?%s" % (globs.OAUTHURL, urlencode(qsdict))
@@ -710,7 +710,7 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
           out("Retry get Scraper sheet %s of %s" % (x, 5))
           time.sleep(3)
       if stop:
-        if globs.WEB: 
+        if globs.WEB:
           yield badtuple
           yield spinerr
           yield unlock
@@ -1795,11 +1795,11 @@ class ClearSheet1Form(PipForm2):
   ])
 
 #        _                               _                    Here's a bunch of key/value pairs for ya. We open with a
-#  _ __ | | __ _ _   _  ___ _ __   _ __ (_) __ _ _ __   ___   very Pythonic switch that comprise the possible instructions  
-# | '_ \| |/ _` | | | |/ _ \ '__| | '_ \| |/ _` | '_ \ / _ \  for our Instruction Processor Machine... or "player piano"    
-# | |_) | | (_| | |_| |  __/ |    | |_) | | (_| | | | | (_) | such as it were. Or Loom, if you prefer. Or Turing machine.   
-# | .__/|_|\__,_|\__, |\___|_|    | .__/|_|\__,_|_| |_|\___/  In any case, we just feed these instructions into the part    
-# |_|            |___/            |_|                         of Pipulate there waiting to execute final menu choices. 
+#  _ __ | | __ _ _   _  ___ _ __   _ __ (_) __ _ _ __   ___   very Pythonic switch that comprise the possible instructions
+# | '_ \| |/ _` | | | |/ _ \ '__| | '_ \| |/ _` | '_ \ / _ \  for our Instruction Processor Machine... or "player piano"
+# | |_) | | (_| | |_| |  __/ |    | |_) | | (_| | | | | (_) | such as it were. Or Loom, if you prefer. Or Turing machine.
+# | .__/|_|\__,_|\__, |\___|_|    | .__/|_|\__,_|_| |_|\___/  In any case, we just feed these instructions into the part
+# |_|            |___/            |_|                         of Pipulate there waiting to execute final menu choices.
 
 def FillQMarks():
   '''Interrogates worksheet and inserts question marks wherever they can go'''
