@@ -56,8 +56,10 @@ def archive(url):
   utf8html = somehtml.encode('utf-8-sig')
   compressed = zlib.compress(utf8html)
   cellfriendly = base64.b64encode(compressed)
-  if len(cellfriendly) > 50000:
-    return "[HTML too big to archive]"
+  maxl = 900000
+  alen = len(cellfriendly)
+  if alen > maxl:
+    return "[HTML too big to archivei (%s > %s)]" % (alen, maxl)
   whatisthatmess = {
     'url' : url,
     'base64.decode(zlib.dcompress(this))': cellfriendly
