@@ -1262,7 +1262,7 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
                         if globs.WEB: yield dontgetfrustrated(x)
                     if stop == True:
                       out("Scrape End (Failed)", "4", '-')
-                      Stop()
+                      # Stop()                                       <------------- Decide
                     out("Scrape End", "4", '-')
             out("DONE PROCESSING ROW %s." % rowdex, '3', '-')
             out("Finished processing row. Updating spreadsheet...")
@@ -1748,7 +1748,7 @@ class AddColumnsForm(PipForm2):
     ('add:url',       'URL'),
     ('add:keyword',   'Keyword'),
     ('add:seo',       'Crawl stuff like Title, Metas, H1s, etc.'),
-    ('add:httpcodes', 'Response Codes, Headders, Redirect Chain, etc.'),
+    ('add:httpcodes', 'Response Codes, Headers, Redirect Chain, etc.'),
     ('add:opengraph', 'Facebook Open Graph tags'),
     ('add:mobile',    'Mobile-friendly Check'),
     ('add:twitter',   'Twitter (multiple)'),
