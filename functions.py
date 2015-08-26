@@ -49,10 +49,20 @@ def gethtml(url):
     globs.html = globs.hobj.text
   return globs.html
 
+def replacepat(pat, replacement, string):
+  import re
+  cpat = re.compile(pat, re.S | re.I)
+  return cpat.sub(replacement, string) 
+
+
 def archive(url):
   '''Return HTML text for given URL. Simple wrapper for gethtml function.'''
   import base64, zlib
   somehtml = requests.get(url).text
+  import re
+  badpats = ['id="__EVENTVALIDATION" value=".*?"', 'id="__VIEWSTATE" value=".*?"']
+  for pat in badpats:
+    somehtml = replacepat(pat, '', somehtml)
   utf8html = somehtml.encode('utf-8-sig')
   compressed = zlib.compress(utf8html)
   cellfriendly = base64.b64encode(compressed)
