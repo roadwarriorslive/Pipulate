@@ -1181,7 +1181,7 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
                       if globs.WEB:
                         yield spinerr
                         yield unlock
-                      Stop()
+                      Stop() #                                            <-- This is where you could keep things running
                     out("Function End", "4", '-')
                   elif collabel in transscrape.keys():
                     stop = True
@@ -1263,7 +1263,10 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
                         if globs.WEB: yield dontgetfrustrated(x)
                     if stop == True:
                       out("Scrape End (Failed)", "4", '-')
-                      # Stop()                                       <------------- Decide
+                      if globs.WEB:
+                        yield spinerr
+                        yield unlock
+                      Stop() #                                            <-- This is where you could keep things running
                     out("Scrape End", "4", '-')
             out("DONE PROCESSING ROW %s." % rowdex, '3', '-')
             out("Finished processing row. Updating spreadsheet...")
