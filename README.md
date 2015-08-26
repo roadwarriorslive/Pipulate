@@ -34,6 +34,7 @@ Swiss Army Knife for all sorts of data-mashups, including...
 - Archive function added to save page's HTML into Google Sheets, compressed.
 - Scrapers all work if Archive column is there (pull titles, metas, from archive).
 - Documentation tab gets automatically regenerated if new functions are added.
+- Choice was added to fill question marks into all locations that will pipulate.
 - SEMRush and Moz KPI functions like Difficulty and DomainAuthority added.
 - Modest amounts of website crawling is now possible (maximum depth of 2).
 - Tons of cosmetic stuff to make it prettier.

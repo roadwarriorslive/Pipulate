@@ -1105,6 +1105,7 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
             if index >= int(maxrowsperhour):
               break
           yme = "Pipulating row: %s (item %s of %s)..." % (rowdex, index+1, len(therange))
+          yield yme, yme, "", ""
           globs.hobj = None
           globs.html = '' #Blank the global html object. Recylces fetches.
           rowrange = "A%s:%s%s" % (rowdex, globs.letter[len(globs.row1)], rowdex)
@@ -1130,14 +1131,15 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
           for cell in CellList:
             onerow.append(cell.value)
           if '?' in onerow:
-            #   _ __ _____      __
-            #  | '__/ _ \ \ /\ / /
-            #  | | | (_) \ V  V /
-            #  |_|  \___/ \_/\_/
+            #   _ __ _____      __  Inside the Monolithic Generator, there resides a very special location where you are
+            #  | '__/ _ \ \ /\ / /  about to step through rows and actually replace any that contain a question mark.
+            #  | | | (_) \ V  V /   What's so special about this place? Well, user feedback, of course! Anything you want
+            #  |_|  \___/ \_/\_/    to show to the user once-per-row must yield it's output from the generator here.
             #
             out("PROCESSING ROW %s." % rowdex, '3')
             blankrows = 0
-            if globs.WEB: yield "", "", json.dumps(onerow), ""
+            if globs.WEB: 
+              yield "", "", json.dumps(onerow), ""
             rowdexstring = str(rowdex)
             newrow = onerow[:]
             if rowdexstring > 1:
@@ -1186,7 +1188,7 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
                         out('%s worked' % collabel)
                         yme = "<li>%s</li>" % (collabel)
                         if globs.WEB:
-                          yield yme, collabel, "", ""
+                          yield yme, "", "", ""
                         break
                       except Exception as e:
                         print traceback.format_exc()
@@ -1711,8 +1713,8 @@ def menumaker():
   ''' Creates the entire cadence of the system.'''
   menu = [
     ('qmarks'      , "Replace ?'s"),
-    ('menu:crawl'  , "Crawl Website"),
     ('menu:setup'  , "Do an Auto Setup"),
+    ('menu:crawl'  , "Crawl a Website"),
     ('menu:column' , "Add Some Columns"),
     ('menu:graph'  , "See a Visualization"),
     ('keywords'    , "Harvest Keywords"),
