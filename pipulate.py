@@ -1240,7 +1240,7 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
                                   frag += '\r\n'
                                 newrow[coldex] = frag
                             else:
-                              newrow[coldex] = "<Error>no match</Error>"
+                              newrow[coldex] = globs.NONE
                           elif stype.lower() == 'regex':
                             match = re.search(spattern, html, re.S | re.I)
                             if match:
@@ -1268,7 +1268,8 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
             out("Finished processing row. Updating spreadsheet...")
             newrow = [globs.EMPTY if x==None else x for x in newrow]
             if len(str(newrow)) > globs.ROWMAX:
-              if globs.WEB: yield "", "", "['TOO BIG']", ""
+              yme = "['JSON data for %s too big to display here.']" % collabel
+              if globs.WEB: yield "", "", yme, ""
             else:
               try:
                 if globs.WEB: yield "", "", json.dumps(newrow), ""
