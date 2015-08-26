@@ -49,15 +49,19 @@ def gethtml(url):
     globs.html = globs.hobj.text
   return globs.html
 
-def html(url):
+def archive(url):
   '''Return HTML text for given URL. Simple wrapper for gethtml function.'''
   import base64, zlib
-  somehtml = gethtml(url)
+  somehtml = requests.get(url).text
   utf8html = somehtml.encode('utf-8-sig')
   compressed = zlib.compress(utf8html)
   cellfriendly = base64.b64encode(compressed)
-  whatisthatmess = {'base64.decode(zlib.dcompress(html))': cellfriendly}
-  out(whatisthatmess)
+  if len(cellfriendly) > 50000:
+    return "[HTML too big to archive]"
+  whatisthatmess = {
+    'url' : url,
+    'base64.decode(zlib.dcompress(this))': cellfriendly
+    }
   return json.dumps(whatisthatmess)
 
 def walkdict(obj, key):

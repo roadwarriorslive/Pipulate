@@ -15,7 +15,7 @@ def documentation():
   s.append(['Following',            'Twitter',   'Url',                       'Return Twitter following count.', ''])
   s.append(['Ga',                   'Crawl',     'Url',                       'Return Google Analytics ID to check if GA installed on page.', ''])
   s.append(['GetLinks',             'Crawl',     'Url',                       'Return list of links found on page. Adds rows.', ''])
-  s.append(['Html',                 'Crawl',     'Url',                       'Return full HTML text for a given URL.', ''])
+  s.append(['Archive',              'Crawl',     'Url',                       'Return full html of page, zlib compressand and base64 encoded for spreadsheet cell-friendliness.', ''])
   s.append(['Instagram_Followers',  'Social',    'Instagram_Name',            'Return Instagram Followers count.', ''])
   s.append(['JsonApi',              'Generic',   'Endpoint, Url, Jkey',       "Return response code from any JSON API that doesn't require login.", ''])
   s.append(['Likes',                'Facebook',  'Url',                       'Return Facebook likes for given URL.', ''])
