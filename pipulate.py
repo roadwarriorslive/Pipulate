@@ -355,7 +355,6 @@ def main():
           flash('Watch a demo.')
         else:
           flash("It appears %s has no queston marks." % globs.TAB)
-          flash('If you would like to perform a crawl or setup, you will need to select "Clear Sheet 1" from the menu first.')
           flash('Maybe select "Add Columns" from the menu to add some KPIs.')
     except:
       pass
@@ -1279,7 +1278,7 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
                               newrow[coldex] = None
                         out('%s worked.' % collabel)
                         yme = "<li>%s</li>" % (collabel)
-                        if globs.WEB: yield yme, yme, "", ""
+                        if globs.WEB: yield yme, "", "", ""
                         stop = False
                         break
                       except Exception as e:

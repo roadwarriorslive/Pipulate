@@ -45,6 +45,9 @@ th {
   text-align: center;
   width: 100%;
 }
+.menu {
+  background: #E6CFBB;
+}
 #pipform {
   position: absolute;
   top: 36px;
@@ -99,9 +102,10 @@ th {
   line-height: 0;
 }
 .burger > i {
-  color: black;
-  font-size: 16px;
-  margin-right: 6px;
+  color: #2F4F4F;
+  font-size: 22px;
+  margin-right: 12px;
+  margin-top: 2px;
 }
 a {
   color: #76BFFF;
