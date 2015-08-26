@@ -49,30 +49,35 @@ def gethtml(url):
     globs.html = globs.hobj.text
   return globs.html
 
-def replacepat(pat, replacement, string):
-  import re
-  cpat = re.compile(pat, re.S | re.I)
-  return cpat.sub(replacement, string) 
-
+def unarchive(archive):
+  import base64, bz2
+  binary = base64.b64decode(archive)
+  newhtml = bz2.decompress(binary)
+  return newhtml
 
 def archive(url):
   '''Return HTML text for given URL. Simple wrapper for gethtml function.'''
-  import base64, zlib
+  def replacepat(pat, replacement, string):
+    import re
+    cpat = re.compile(pat, re.S | re.I)
+    return cpat.sub(replacement, string) 
+  import base64, bz2
   somehtml = requests.get(url).text
   import re
   badpats = ['id="__EVENTVALIDATION" value=".*?"', 'id="__VIEWSTATE" value=".*?"']
   for pat in badpats:
     somehtml = replacepat(pat, '', somehtml)
   utf8html = somehtml.encode('utf-8-sig')
-  compressed = zlib.compress(utf8html)
+  compressed = bz2.compress(utf8html)
   cellfriendly = base64.b64encode(compressed)
   maxl = 900000
   alen = len(cellfriendly)
   if alen > maxl:
     return "[HTML too big to archivei (%s > %s)]" % (alen, maxl)
+  return cellfriendly
   whatisthatmess = {
     'url' : url,
-    'base64.decode(zlib.dcompress(this))': cellfriendly
+    'base64.decode(bz2.decompress(this))': cellfriendly
     }
   return json.dumps(whatisthatmess)
 
@@ -668,3 +673,6 @@ def sheetinitializer(sheet1key):
 
 def cancel():
   globs.STOP = True
+
+def length(archive):
+  return len(archive)

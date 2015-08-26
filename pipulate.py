@@ -30,9 +30,9 @@
 #             |_|                                       are most of the early-load ubiquitous libraries used throughout.
 
 import sys, os, socket, urlparse, re, gspread
+import requests, traceback, datetime, time, json
 import globs
 from common import *
-import requests, traceback, datetime, time, json
 from flask import (Flask,
                   stream_with_context,
                   render_template,
@@ -1137,7 +1137,11 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
                   if 'url' in globs.row1: #Only fetch html once per row if possible
                     if globs.WEB: yield lock
                     try:
-                      globs.html = gethtml(onerow[globs.row1.index('url')])
+                      if 'archive' in globs.row1:
+                        prehtml = onerow[globs.row1.index('archive')]
+                        globs.html = unarchive(prehtml)
+                      else:
+                        globs.html = gethtml(onerow[globs.row1.index('url')])
                     except:
                       pass
                     if globs.WEB: yield unlock
@@ -1204,10 +1208,14 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
                         sname = transscrape[globs.row1[coldex]]
                         stype = scrapetypes[sname]
                         spattern = scrapepatterns[sname]
-                        if 'url' in globs.row1:
-                          url = onerow[globs.row1.index('url')]
+                        if 'url' in globs.row1 or 'archive' in globs.row1:
                           if globs.WEB: yield lock
-                          html = gethtml(url)
+                          if 'archive' in globs.row1:
+                            prehtml = onerow[globs.row1.index('archive')]
+                            html = unarchive(prehtml)
+                          else:
+                            url = onerow[globs.row1.index('url')]
+                            html = gethtml(url)
                           if not html:
                             if globs.WEB:
                               yield "HTML not available. Possible Content-Type error. Continuing.", "Skipping this row and trying next row.", "", ""

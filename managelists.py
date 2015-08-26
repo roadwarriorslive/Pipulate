@@ -3,6 +3,7 @@ from common import *
 
 def documentation():
   s = []
+  s.append(['Archive'  ,            'Crawl',     'Url',                       "Return an archived version of the page's URL. Scrapers can work against archive column.", ''])
   s.append(['Canonical',            'Crawl',     'Url',                       'Return Canonical.', ''])
   s.append(['Comments',             'Facebook',  'Url',                       'Return Facebook count.', ''])
   s.append(['Crawl',                'Crawl',     'LinksTo',                   'Make one row per link found on target, as set up by PreCrawl.', ''])
