@@ -677,6 +677,9 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
       # Documentation Tab
       if 'docs' in globs.SHEETS:
         if len(documentation()) > gdoc.worksheet("Docs").row_count:
+          if globs.WEB:
+            yield "Re-creating the Docs tab (new functions added).", "New Function Added", "", ""
+          out("Re-creating Docs Tab")
           try:
             gdoc.del_worksheet(gdoc.worksheet("Docs"))
           except:
