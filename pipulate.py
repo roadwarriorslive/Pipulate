@@ -675,8 +675,15 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
       if globs.WEB: yield "Checking Tabs...", "Then we check for tabs...", "", ""
 
       # Documentation Tab
+      if 'docs' in globs.SHEETS:
+        if len(documentation()) > gdoc.worksheet("Docs").row_count:
+          try:
+            gdoc.del_worksheet(gdoc.worksheet("Docs"))
+          except:
+            pass
+        #gotcha((gdoc.worksheet("Docs").row_count, len(documentation())))
       headers = ['Function', 'Category', 'Requirements', 'Description', 'More']
-      InitTab(gdoc, 'Docs', headers, documentation())
+      InitTab(gdoc, 'Docs', headers, documentation()) #!!!
 
       # Config Tab
       headers = ['NAME', 'VALUE']
@@ -1700,8 +1707,8 @@ from wtforms import (StringField,
 def menumaker():
   ''' Creates the entire cadence of the system.'''
   menu = [
-    ('menu:crawl'  , "Crawl Website"),
     ('qmarks'      , "Replace ?'s"),
+    ('menu:crawl'  , "Crawl Website"),
     ('menu:setup'  , "Do an Auto Setup"),
     ('menu:column' , "Add Some Columns"),
     ('menu:graph'  , "See a Visualization"),
