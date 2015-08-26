@@ -22,7 +22,6 @@
    RESULTS      '----------------'   a response           ...stuff on net     - Email support
 
 """
-
 #  _                            _     _   _     _       While it may look it, this is not the entry-point for Pipulate.
 # (_)_ __ ___  _ __   ___  _ __| |_  | |_| |__ (_)___   Both webpipulate.py (the Flask context) and loopipulate.py (the
 # | | '_ ` _ \| '_ \ / _ \| '__| __| | __| '_ \| / __|  command-line context for cron) import this file as one of their
@@ -73,12 +72,12 @@ def templateglobals():
 
 from managelists import *
 
-#  _   _                                             
-# | | | | ___  _ __ ___   ___ _ __   __ _  __ _  ___ 
-# | |_| |/ _ \| '_ ` _ \ / _ \ '_ \ / _` |/ _` |/ _ \
-# |  _  | (_) | | | | | |  __/ |_) | (_| | (_| |  __/
-# |_| |_|\___/|_| |_| |_|\___| .__/ \__,_|\__, |\___|
-#                            |_|          |___/      
+#  _   _                                              Flask uses a routing system from another package called Werkzeug.                                   
+# | | | | ___  _ __ ___   ___ _ __   __ _  __ _  ___  Werkzeug uses decorators to "route" requests. You can read the main 
+# | |_| |/ _ \| '_ ` _ \ / _ \ '_ \ / _` |/ _` |/ _ \ function as: Feed the entire main() function as a parameter to the
+# |  _  | (_) | | | | | |  __/ |_) | (_| | (_| |  __/ route method of the Flask app object, keeping all of Flask's "outer"
+# |_| |_|\___/|_| |_| |_|\___| .__/ \__,_|\__, |\___| conext, which happens to be everying you need for a standard Python
+#                            |_|          |___/       WSGI webserver. There's no Apache, nginx or even gunicorn here.
 @app.route("/", methods=['GET', 'POST'])
 def main():
   """Ensures config and login requirements met."""
