@@ -683,10 +683,10 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
             Stop()
           elif inst == 'add':
             if not globs.row1:
-              globs.row1 = gdoc.worksheet(globs.TAB).row_values(1)
+              globs.row1 = lowercaselist(gdoc.worksheet(globs.TAB).row_values(1))
             colname = instruction[1]
             if colname not in globs.row1:
-              clet = globs.letter[len(globs.row1) + 1]
+              clet = globs.letter[len(gdoc.worksheet(globs.TAB).row_values(1)) + 1]
               acell = "%s1" % clet
               globs.sheet.update_acell(acell, instruction[1])
               out(instruction)
@@ -1907,6 +1907,7 @@ def AddColumns(checks):
   # We return an instance of the Pipulate geneorator, fed the list-of-tuples. Nice! <-- leave this comment for awhile.
   # Pipulate is the player piano. It normally tries to replace question marks.
   # So when fed a list of tuples, it will interpret them as it's music instructions.
+  lot.append(('fillmarks', ''))
   return Pipulate(lot)
 
 def RunTests():
