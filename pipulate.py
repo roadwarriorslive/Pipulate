@@ -686,6 +686,9 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
               globs.row1 = gdoc.worksheet(globs.TAB).row_values(1)
             colname = instruction[1]
             if colname not in globs.row1:
+              clet = globs.letter[len(globs.row1) + 1]
+              acell = "%s1" % clet
+              globs.sheet.update_acell(acell, instruction[1])
               out(instruction)
       #                        _       _               _  ___   At some point in the future, there wil be
       #   __ _  ___   ___   __| |  ___| |__   ___  ___| ||__ \  something better than Google Spreadsheets.
