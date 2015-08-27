@@ -264,7 +264,7 @@ def main():
         except:
           pass
         if checks:
-          streamit = stream_with_context(pipSwitch()[psKey]("foo"))
+          streamit = stream_with_context(pipSwitch()[psKey](checks))
         else:
           streamit = stream_with_context(pipSwitch()[psKey]())
       else:
@@ -1810,7 +1810,7 @@ class AddColumnsForm(PipForm2):
   choices = [
     ('add:url',       'URL'),
     ('add:keyword',   'Keyword'),
-    ('add:[url,title,description,h1,h2,canonical]',       'Crawl stuff like Title, Metas, H1s, etc.'),
+    ('add:url,title,description,h1,h2,canonical',       'Crawl stuff like Title, Metas, H1s, etc.'),
     ('add:httpcodes', 'Response Codes, Headers, Redirect Chain, etc.'),
     ('add:opengraph', 'Facebook Open Graph tags'),
     ('add:mobile',    'Mobile-friendly Check'),
@@ -1882,12 +1882,22 @@ def ClearSheet1():
     ('graph', '')
   ])
 
-def AddColumns(aparam):
+def AddColumns(checks):
   '''Ad columns to sheet from checkboxes on submitted form.'''
   out("Hey, I'm adding some columns!.")
-  out("Something?: %s" % aparam)
-  colList = ['some', 'fnames', 'here']
-  gotcha("Pass the correction thing to the IPM. then teach it what to do with it.")
+  lot = []
+  for acolumn in checks:
+    out('type: %s' % type(acolumn))
+    if ',' in acolumn:
+      subcols = [x.strip() for x in acolumn.split(',')]
+      for subcol in subcols:
+        lot.append(('add', subcol))
+    else:
+      lot.append(('add', acolumn[4:]))
+  gotcha(lot)
+  # We return an instance of the Pipulate geneorator, fed the list-of-tuples. Nice!
+  # Pipulate is the player piano. It normally tries to replace question marks.
+  # So when fed a list of tuples, it will interpret them as it's music instructions.
   return Pipulate([('column', colList)])
 
 def RunTests():
