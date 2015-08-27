@@ -894,6 +894,12 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
           out("Found function %s in row 1." % fname)
           fargs[coldex2] = {}
           from inspect import getargspec
+          #  _____       _ _   _____            _     _  _   _  Evil Eval #1
+          # | ____|_   _(_) | | ____|_   ____ _| |  _| || |_/ | 
+          # |  _| \ \ / / | | |  _| \ \ / / _` | | |_  ..  _| | Turns string-name of a function into an actual
+          # | |___ \ V /| | | | |___ \ V / (_| | | |_      _| | instance of that function. Can only do this if
+          # |_____| \_/ |_|_| |_____| \_/ \__,_|_|   |_||_| |_| it was already found to exist in globals.
+          #                                                              
           argspec = getargspec(eval(fname))
           if argspec:
             out("%s has arguments." % (fname))
@@ -1198,6 +1204,12 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
                         #No arguments required, so just immediately close the parenthesis.
                         evalme = evalme + ')'
                       try:
+                        #  _____       _ _   _____            _     _  _  ____    Evil Eval #2
+                        # | ____|_   _(_) | | ____|_   ____ _| |  _| || ||___ \   
+                        # |  _| \ \ / / | | |  _| \ \ / / _` | | |_  ..  _|__) |  Turns a function-call string signature
+                        # | |___ \ V /| | | | |___ \ V / (_| | | |_      _/ __/   into an actual instance of that function
+                        # |_____| \_/ |_|_| |_____| \_/ \__,_|_|   |_||_||_____|  called with those parameters. Grok it.
+                        #                                                       
                         newrow[coldex] = eval(evalme)
                         stop = False
                         out('%s worked' % collabel)
