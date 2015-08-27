@@ -684,8 +684,9 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
           elif inst == 'add':
             if not globs.row1:
               globs.row1 = gdoc.worksheet(globs.TAB).row_values(1)
-            out(globs.row1)
-            out(instruction)
+            colname = instruction[1]
+            if colname not in globs.row1:
+              out(instruction)
       #                        _       _               _  ___   At some point in the future, there wil be
       #   __ _  ___   ___   __| |  ___| |__   ___  ___| ||__ \  something better than Google Spreadsheets.
       #  / _` |/ _ \ / _ \ / _` | / __| '_ \ / _ \/ _ \ __|/ /  Until that day, let us use it excessively
@@ -1894,11 +1895,11 @@ def AddColumns(checks):
       subcols = [x.strip() for x in acolumn[4:].split(',')]
       for subcol in subcols:
         if subcol not in used:
-          lot.append(('add', subcol))
+          lot.append(('add', str(subcol)))
           used.add(subcol)
     else:
       if acolumn not in used:
-        lot.append(('add', acolumn[4:]))
+        lot.append(('add', str(acolumn[4:])))
         used.add(acolumn[4:])
   # We return an instance of the Pipulate geneorator, fed the list-of-tuples. Nice! <-- leave this comment for awhile.
   # Pipulate is the player piano. It normally tries to replace question marks.
