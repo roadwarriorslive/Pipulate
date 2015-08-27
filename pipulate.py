@@ -1,25 +1,32 @@
-"""     Because life's too short to not collect  ABOUT THE AUTHOR:       From Pipulate, Import *
-        data in the same place you work with it  http://mikelev.in
-         _____ _             _       _           http://levinux.com    - What is Pipulate and why? It's...
-        |  __ (_)           | |     | |          http://pipulate.com   - An attempt to scratch my own itch
-        | |__) | _ __  _   _| | __ _| |_ ___    ___ ___  _ __ ___      - So that I can structure my mind better
-        |  ___/ | '_ \| | | | |/ _` | __/ _ \  / __/ _ \| '_ ` _ \     - So that I can structure my behavior better
-        | |   | | |_) | |_| | | (_| | ||  __/ | (_| (_) | | | | | |    - So that I can remember more and forget less
-        |_|   |_| .__/ \__,_|_|\__,_|\__\___|(_)___\___/|_| |_| |_|    - So that I can achieve more while straining less
-                | |                                                    - So that I can improve my life and impact the world
-                |_|                                                    - So that I can help teach others to do the same
-                                                                       - So that I can turn a life's work into legacy
-  THIS IS     THIS IS YOUR BROWSER                 THIS IS PIPULATE    - So that I can get the kick of a performer
-    YOU            ____ ____                     (disposable servers)  - So that the rewards become compounding
-               ,__/site\____\___. ...which       ,------------------.  - Attracting a nice growing community
-     O         |                ||    SENDS      |   ...to the      |  - To chat with a bit as I get old
-    /|\---1.-----> bookmarklet ----------2.-------> Pipulate Server |  - Because, we make our own why.
-    ( ) CLICK  | with a website ||     URL and   |   | which checks |
-   =====       |   displaying.  ||      context  '---|----|--|--|---'         # The Pipulate To-Do List Hit Parade:
-     |         |                ||                   |    |  |  '------> ?    - Auto Setup Departmential Processes
-     5.        '----------------'|     then sends    |    |  '----3.---> ?    - Cytoscape visualization of crawl data
-   SEE THE--->  | to Google Sheet|<-------4.---------'    '------------> ?    - Video-per-feature links from Docs tab
-   RESULTS      '----------------'   a response           ...stuff on net     - Email support
+"""    Because life's too short to not collect  ABOUT THE AUTHOR:      # From Pipulate, Import *
+       data in the same place you work with it  http://mikelev.in
+        _____ _             _       _           http://levinux.com     - What is Pipulate and why? It's...
+       |  __ (_)           | |     | |          http://pipulate.com    - An attempt to scratch my own itch
+       | |__) | _ __  _   _| | __ _| |_ ___    ___ ___  _ __ ___       - So that I can structure my mind better
+       |  ___/ | '_ \| | | | |/ _` | __/ _ \  / __/ _ \| '_ ` _ \      - So that I can structure my behavior better
+       | |   | | |_) | |_| | | (_| | ||  __/ | (_| (_) | | | | | |     - So that I can remember more and forget less
+       |_|   |_| .__/ \__,_|_|\__,_|\__\___|(_)___\___/|_| |_| |_|     - So that I can achieve more while straining less
+               | |                                                     - So that I can improve my life and impact the world
+THIS IS     THIS |IS YOUR BROWSER                                      - So that I can help teach others to do the same
+              \   /                               THIS IS PIPULATE     - So that I can turn a life's work into legacy
+   YOU         \ / ___ ____                     (disposable servers)   -So that I can get the kick of a performer
+              ,_V_/site\___\___. ...which       ,------------------.   -So that the rewards become compounding
+    O         |                ||    SENDS      |   ...to the      |   -Attracting a nice growing community
+   /|\---1.-----> bookmarklet ----------2.-------> Pipulate Server |   -To chat with a bit as I get old
+   ( ) CLICK  | with a website ||     URL and   |   | which checks |   -Because, we make our own why.
+  =====       |   displaying.  ||      context  '---|---|--|--|----'
+    |         |                ||                   |   |  |  |              # The Pipulate To-Do List Hit Parade:
+    5.        '----------------'|     then sends    |   |  |  '-------> ?    - Auto Setup Departmential Processes
+  SEE THE--->  | to Google Sheet|<-------4.---------'   |  '----3.----> ?    - Cytoscape visualization of crawl data
+  RESULTS      '----------------'   a response          '-------------> ?    - Video-per-feature links from Docs tab                                                                        - Email support
+                                                          ...stuff on net
+
+If you like what you see expressed here in this project, there is countless more where that came from. Though I hate the
+notion of yet another platform or framework or architecture, that is indeed exactly what I've built here, but lightweight
+and pragmatic and in a "ready-position" for change. I love the never-ending fight against obsolessence, marginalzing and
+disnintermediation. A good fight with naysayers also intensifies the heat in which this product is forged, and makes it
+better overall. Follow my antics, from a Catskills Geek-Dad to seasoned SEO-pro in highly competitive NYC. Join me here.
+{'more' : ['https://twitter.com/miklevin', 'https://www.linkedin.com/in/miklevin', 'https://instagram.com/miklevin/']}
 
 """
 #  _                            _     _   _     _       While it may look it, this is not the entry-point for Pipulate.
@@ -1145,7 +1152,7 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
             #
             out("PROCESSING ROW %s." % rowdex, '3')
             blankrows = 0
-            if globs.WEB: 
+            if globs.WEB:
               yield "", "", json.dumps(onerow), ""
             rowdexstring = str(rowdex)
             newrow = onerow[:]
