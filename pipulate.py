@@ -258,10 +258,17 @@ def main():
       if psKey == 'cancel':
         return redirect(url_for('main', u=form2.pipurl.data))
       if psKey == 'add':
-        out(form2.checks.data)
-        gotcha("Reminder")
-        #if form2 and 'checks' in form2 and 'data' in form2.checks:
-      streamit = stream_with_context(pipSwitch()[psKey]())
+        checks = None
+        try:
+          checks = form2.checks.data
+        except:
+          pass
+        if checks:
+          streamit = stream_with_context(pipSwitch()[psKey]("foo"))
+        else:
+          streamit = stream_with_context(pipSwitch()[psKey]())
+      else:
+        streamit = stream_with_context(pipSwitch()[psKey]())
     elif form.pipurl.data:
       globs.PIPURL = form.pipurl.data
       if form.options.data:
@@ -1875,9 +1882,10 @@ def ClearSheet1():
     ('graph', '')
   ])
 
-def AddColumns():
+def AddColumns(aparam):
   '''Ad columns to sheet from checkboxes on submitted form.'''
   out("Hey, I'm adding some columns!.")
+  out("Something?: %s" % aparam)
   colList = ['some', 'fnames', 'here']
   gotcha("Pass the correction thing to the IPM. then teach it what to do with it.")
   return Pipulate([('column', colList)])
