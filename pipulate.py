@@ -196,9 +196,6 @@ def main():
       session['loggedin'] = "1"
     except:
       session.pop('loggedin', None)
-      # COMMENT: I think this is the source of URL misfires! Remove and observe.
-      #if 'u' not in session and globs.PIPURL:
-      #  session['u'] = globs.PIPURL
     #      _                  _             _   Yes, Pipulate needs to know what spreadsheet to target,
     #  ___| |_ ___  _ __  ___(_) __ _ _ __ | |  and making a new one every time is a terrible mess.
     # / __| __/ _ \| '_ \/ __| |/ _` | '_ \| |  Been there, done that. And so, it ALWAYS targets a sheet
@@ -259,6 +256,16 @@ def main():
         globs.MODE = globs.MODE.split(':')[1]
       if globs.MODE == 'cancel':
         return redirect(url_for('main', u=form2.pipurl.data))
+      if globs.MODE == 'add':
+        try:
+          out(form.checks.data)
+        except:
+          pass
+        try:
+          out(form2.checks.data)
+        except:
+          pass
+      gotcha(globs.MODE)
       streamit = stream_with_context(pipSwitch()[globs.MODE]())
     elif form.pipurl.data:
       globs.PIPURL = form.pipurl.data
@@ -674,12 +681,7 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
             Stop()
           else:
           #elif len(inst) > 4 and inst[:4] == 'add:':
-            columns = instruction[1]
-            if ',' in columns:
-              collist = columns.split(',')
-            else:
-              collist = list(columns)
-            gotcha(collist)
+            gotcha(instruction)
       #                        _       _               _  ___   At some point in the future, there wil be
       #   __ _  ___   ___   __| |  ___| |__   ___  ___| ||__ \  something better than Google Spreadsheets.
       #  / _` |/ _ \ / _ \ / _` | / __| '_ \ / _ \/ _ \ __|/ /  Until that day, let us use it excessively
@@ -1882,6 +1884,8 @@ def AddColumns():
   '''Ad columns to sheet from checkboxes on submitted form.'''
   out("Hey, I'm adding some columns!.")
   colList = ['some', 'fnames', 'here']
+  out(form2)
+  gotcha("Pass the correction thing to the IPM. then teach it what to do with it.")
   return Pipulate([('column', colList)])
 
 def RunTests():
