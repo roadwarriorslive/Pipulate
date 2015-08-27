@@ -1842,12 +1842,12 @@ class ClearSheet1Form(PipForm2):
     ('cancel',  'Cancel')
   ])
 
-#        _                               _                    Here's a bunch of key/value pairs for ya. We open with a
-#  _ __ | | __ _ _   _  ___ _ __   _ __ (_) __ _ _ __   ___   very Pythonic switch that comprise the possible instructions
-# | '_ \| |/ _` | | | |/ _ \ '__| | '_ \| |/ _` | '_ \ / _ \  for our Instruction Processor Machine... or "player piano"
-# | |_) | | (_| | |_| |  __/ |    | |_) | | (_| | | | | (_) | such as it were. Or Loom, if you prefer. Or Turing machine.
-# | .__/|_|\__,_|\__, |\___|_|    | .__/|_|\__,_|_| |_|\___/  In any case, we just feed these instructions into the part
-# |_|            |___/            |_|                         of Pipulate there waiting to execute final menu choices.
+#       _               _                         _         Here's a bunch of key/value pairs for ya. We open with a
+#   ___| |__   ___  ___| |_   _ __ ___  _   _ ___(_) ___    very Pythonic switch that comprise the possible instructions
+#  / __| '_ \ / _ \/ _ \ __| | '_ ` _ \| | | / __| |/ __|   for our Instruction Processor Machine... or "player piano"
+#  \__ \ | | |  __/  __/ |_  | | | | | | |_| \__ \ | (__    such as it were. Or Loom, if you prefer. Or Turing machine.
+#  |___/_| |_|\___|\___|\__| |_| |_| |_|\__,_|___/_|\___|   In any case, we just feed these instructions into the part
+#                                                           of Pipulate there waiting to execute final menu choices.
 
 def FillQMarks():
   '''Interrogates worksheet and inserts question marks wherever they can go'''
