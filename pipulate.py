@@ -1086,6 +1086,7 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
       #     |_|
       out("QUESTION MARK Replacement.", '2')
       if not qset and not trended:
+        # Yield values that will un-nest console output
         if globs.WEB:
           yme = "No ?'s found in %s Sheet." % globs.DOCLINK
           yield yme, "", "", ""
