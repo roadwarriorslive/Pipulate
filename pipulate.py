@@ -7,19 +7,20 @@
        | |   | | |_) | |_| | | (_| | ||  __/ | (_| (_) | | | | | |     - So that I can remember more and forget less
        |_|   |_| .__/ \__,_|_|\__,_|\__\___|(_)___\___/|_| |_| |_|     - So that I can achieve more while straining less
                | |                                                     - So that I can improve my life and impact the world
-THIS IS     THIS |IS YOUR BROWSER                                      - So that I can help teach others to do the same
-              \   /                               THIS IS PIPULATE     - So that I can turn a life's work into legacy
-   YOU         \ / ___ ____                     (disposable servers)   -So that I can get the kick of a performer
-              ,_V_/site\___\___. ...which       ,------------------.   -So that the rewards become compounding
-    O         |                ||    SENDS      |   ...to the      |   -Attracting a nice growing community
-   /|\---1.-----> bookmarklet ----------2.-------> Pipulate Server |   -To chat with a bit as I get old
-   ( ) CLICK  | with a website ||     URL and   |   | which checks |   -Because, we make our own why.
+          THIS |IS YOUR BROWSER  i                                     - So that I can help teach others to do the same
+ THIS IS      \   /                               THIS IS PIPULATE     - So that I can turn a life's work into legacy
+   YOU         \ / ___ ____                     (disposable servers)   - So that I can get the kick of a performer
+              ,_V_/site\___\___. ...which       ,------------------.   - So that the rewards become compounding
+    O         |                ||    SENDS      |   ...to the      |   - Attracting a nice growing community
+   /|\---1.-----> bookmarklet ----------2.-------> Pipulate Server |   - To chat with a bit as I get old
+   ( ) CLICK  | with a website ||     URL and   |   | which checks |   - Because, we make our own why.
   =====       |   displaying.  ||      context  '---|---|--|--|----'
-    |         |                ||                   |   |  |  |              # The Pipulate To-Do List Hit Parade:
+    |         |                ||                   |   |  |  |              # THE PIPULATE TO-DO LIST HIT PARADE:
     5.        '----------------'|     then sends    |   |  |  '-------> ?    - Auto Setup Departmential Processes
   SEE THE--->  | to Google Sheet|<-------4.---------'   |  '----3.----> ?    - Cytoscape visualization of crawl data
-  RESULTS      '----------------'   a response          '-------------> ?    - Video-per-feature links from Docs tab                                                                        - Email support
-                                                          ...stuff on net
+  RESULTS      '----------------'   a response          '-------------> ?    - Video-per-feature links from Docs tab
+                                                          ...stuff on net    - Email support
+
 
 If you like what you see expressed here in this project, there is countless more where that came from. Though I hate the
 notion of yet another platform or framework or architecture, that is indeed exactly what I've built here, but lightweight
