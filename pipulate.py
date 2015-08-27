@@ -682,7 +682,10 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
             yield spinoff
             Stop()
           elif inst == 'add':
+            out('foo')
+            out(gdoc.worksheet(globs.TAB).row_values(1))
             out(instruction)
+            out('bar')
       #                        _       _               _  ___   At some point in the future, there wil be
       #   __ _  ___   ___   __| |  ___| |__   ___  ___| ||__ \  something better than Google Spreadsheets.
       #  / _` |/ _ \ / _ \ / _` | / __| '_ \ / _ \/ _ \ __|/ /  Until that day, let us use it excessively
