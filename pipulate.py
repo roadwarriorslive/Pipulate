@@ -665,8 +665,14 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
             yield yme, "", "", ""
             yield spinoff
             Stop()
-          elif inst == 'add':
-            gotcha("gonna add columns")
+          else:
+          #elif len(inst) > 4 and inst[:4] == 'add:':
+            columns = instruction[1]
+            if ',' in columns:
+              collist = columns.split(',')
+            else:
+              collist = list(columns)
+            gotcha(collist)
       #                        _       _               _  ___   At some point in the future, there wil be
       #   __ _  ___   ___   __| |  ___| |__   ___  ___| ||__ \  something better than Google Spreadsheets.
       #  / _` |/ _ \ / _ \ / _` | / __| '_ \ / _ \/ _ \ __|/ /  Until that day, let us use it excessively
