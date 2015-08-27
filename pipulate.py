@@ -513,8 +513,10 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
               gdoc = gsp.open(globs.NAME)
               globs.DOCID = gdoc.id
               if targettab:
+                globs.sheet = gdoc.worksheet(targettab)
                 globs.TAB = gdoc.worksheet(targettab).title
               else:
+                globs.sheet = gdoc.sheet1
                 globs.TAB = gdoc.sheet1.title
               stop = False
               break
@@ -1807,7 +1809,7 @@ class CrawlTypesForm(PipForm2):
 class SetupForm(PipForm2):
   """Create the menu for when Clear Sheet 1 is selected."""
   radios = RadioField(choices=[
-    ('fillmarks', "Insert ?'s into all valid locations (this will clear existing ?-replacement data)."),
+    ('fillmarks', "Flood-fill ?'s (It will wipe out existing data)."),
     ('tests',   'Run Tests'),
     ('cancel',  'Cancel')
   ])
