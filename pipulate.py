@@ -281,10 +281,10 @@ def main():
     #  |_| (_| | |_| |  __/ |  | |_| \__ \ |_| |  | | | | | (_| | to pass data between systems, sessions, or
     #  (_)\__, |\__,_|\___|_|   \__, |___/\__|_|  |_|_| |_|\__, | what have you. That's why you'll see logout
     #        |_|                |___/                      |___/  handling and client-to-server data handoffs.
-    if request.args and 's' in request.args:     # User highlighted text
-      form.magicbox.data = request.args.get('s') # on page before
-      selectedtext = request.args.get('s')       # clicking bookmarklet
-    elif session and 's' in session:             # Selected text made the journey through login
+    if request.args and 's' in request.args:
+      form.magicbox.data = request.args.get('s')
+      selectedtext = request.args.get('s')
+    elif session and 's' in session:
       form.magicbox.data = session['s']
       selectedtext = session['s']
     if request.args and 'access_token' in request.args: # Oops... necessary evil. Redirect quickly.
@@ -895,11 +895,11 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
           fargs[coldex2] = {}
           from inspect import getargspec
           #  _____       _ _   _____            _     _  _   _  Evil Eval #1
-          # | ____|_   _(_) | | ____|_   ____ _| |  _| || |_/ | 
+          # | ____|_   _(_) | | ____|_   ____ _| |  _| || |_/ |
           # |  _| \ \ / / | | |  _| \ \ / / _` | | |_  ..  _| | Turns string-name of a function into an actual
           # | |___ \ V /| | | | |___ \ V / (_| | | |_      _| | instance of that function. Can only do this if
           # |_____| \_/ |_|_| |_____| \_/ \__,_|_|   |_||_| |_| it was already found to exist in globals.
-          #                                                              
+          #
           argspec = getargspec(eval(fname))
           if argspec:
             out("%s has arguments." % (fname))
@@ -1205,11 +1205,11 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
                         evalme = evalme + ')'
                       try:
                         #  _____       _ _   _____            _     _  _  ____    Evil Eval #2
-                        # | ____|_   _(_) | | ____|_   ____ _| |  _| || ||___ \   
+                        # | ____|_   _(_) | | ____|_   ____ _| |  _| || ||___ \
                         # |  _| \ \ / / | | |  _| \ \ / / _` | | |_  ..  _|__) |  Turns a function-call string signature
                         # | |___ \ V /| | | | |___ \ V / (_| | | |_      _/ __/   into an actual instance of that function
                         # |_____| \_/ |_|_| |_____| \_/ \__,_|_|   |_||_||_____|  called with those parameters. Grok it.
-                        #                                                       
+                        #
                         newrow[coldex] = eval(evalme)
                         stop = False
                         out('%s worked' % collabel)
