@@ -1886,14 +1886,20 @@ def AddColumns(checks):
   '''Ad columns to sheet from checkboxes on submitted form.'''
   out("Hey, I'm adding some columns!.")
   lot = []
+  used = set()
   for acolumn in checks:
     out('type: %s' % type(acolumn))
     if ',' in acolumn:
-      subcols = [x.strip() for x in acolumn.split(',')]
+      subcols = [x.strip() for x in acolumn[4:].split(',')]
       for subcol in subcols:
-        lot.append(('add', subcol))
+        if subcol not in used:
+          lot.append(('add', subcol))
+          used.add(subcol)
     else:
-      lot.append(('add', acolumn[4:]))
+      if acolumn not in used:
+        lot.append(('add', acolumn[4:]))
+        used.add(acolumn[4:])
+  out(used)
   gotcha(lot)
   # We return an instance of the Pipulate geneorator, fed the list-of-tuples. Nice!
   # Pipulate is the player piano. It normally tries to replace question marks.
