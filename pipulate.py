@@ -681,9 +681,8 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
             yield yme, "", "", ""
             yield spinoff
             Stop()
-          else:
-          #elif len(inst) > 4 and inst[:4] == 'add:':
-            gotcha(instruction)
+          elif inst == 'add':
+            out(instruction)
       #                        _       _               _  ___   At some point in the future, there wil be
       #   __ _  ___   ___   __| |  ___| |__   ___  ___| ||__ \  something better than Google Spreadsheets.
       #  / _` |/ _ \ / _ \ / _` | / __| '_ \ / _ \/ _ \ __|/ /  Until that day, let us use it excessively
@@ -1888,7 +1887,6 @@ def AddColumns(checks):
   lot = []
   used = set()
   for acolumn in checks:
-    out('type: %s' % type(acolumn))
     if ',' in acolumn:
       subcols = [x.strip() for x in acolumn[4:].split(',')]
       for subcol in subcols:
@@ -1899,12 +1897,10 @@ def AddColumns(checks):
       if acolumn not in used:
         lot.append(('add', acolumn[4:]))
         used.add(acolumn[4:])
-  out(used)
-  gotcha(lot)
-  # We return an instance of the Pipulate geneorator, fed the list-of-tuples. Nice!
+  # We return an instance of the Pipulate geneorator, fed the list-of-tuples. Nice! <-- leave this comment for awhile.
   # Pipulate is the player piano. It normally tries to replace question marks.
   # So when fed a list of tuples, it will interpret them as it's music instructions.
-  return Pipulate([('column', colList)])
+  return Pipulate(lot)
 
 def RunTests():
   '''Where you're going to develop everyhing these jobs can do!.'''
