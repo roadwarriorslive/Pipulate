@@ -243,30 +243,25 @@ def main():
     #
     if form2 and form2.secondary.data == 'on':
       menutwo = True
+      psKey = globs.MODE
       if 'radios' in form2:
-        globs.MODE = form2.radios.data
+        psKey = form2.radios.data
       elif 'checks' in form2:
         checklist = form2.checks.data
-        globs.MODE = checklist[0]
+        psKey = checklist[0]
         for item in checklist:
           if ':' in item:
-            globs.MODE = item.split(':')[0]
+            psKey = item.split(':')[0]
             break
-      if ':' in globs.MODE:
-        globs.MODE = globs.MODE.split(':')[1]
-      if globs.MODE == 'cancel':
+      if ':' in psKey:
+        psKey = globs.MODE.split(':')[1]
+      if psKey == 'cancel':
         return redirect(url_for('main', u=form2.pipurl.data))
-      if globs.MODE == 'add':
-        try:
-          out(form.checks.data)
-        except:
-          pass
-        try:
-          out(form2.checks.data)
-        except:
-          pass
-      gotcha(globs.MODE)
-      streamit = stream_with_context(pipSwitch()[globs.MODE]())
+      if psKey == 'add':
+        out(form2.checks.data)
+        gotcha("Reminder")
+        #if form2 and 'checks' in form2 and 'data' in form2.checks:
+      streamit = stream_with_context(pipSwitch()[psKey]())
     elif form.pipurl.data:
       globs.PIPURL = form.pipurl.data
       if form.options.data:
@@ -1884,7 +1879,6 @@ def AddColumns():
   '''Ad columns to sheet from checkboxes on submitted form.'''
   out("Hey, I'm adding some columns!.")
   colList = ['some', 'fnames', 'here']
-  out(form2)
   gotcha("Pass the correction thing to the IPM. then teach it what to do with it.")
   return Pipulate([('column', colList)])
 
