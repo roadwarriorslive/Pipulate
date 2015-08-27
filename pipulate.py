@@ -665,8 +665,8 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
             yield yme, "", "", ""
             yield spinoff
             Stop()
-          elif inst == 'columns':
-            pass
+          elif inst == 'add':
+            gotcha("gonna add columns")
       #                        _       _               _  ___   At some point in the future, there wil be
       #   __ _  ___   ___   __| |  ___| |__   ___  ___| ||__ \  something better than Google Spreadsheets.
       #  / _` |/ _ \ / _ \ / _` | / __| '_ \ / _ \/ _ \ __|/ /  Until that day, let us use it excessively
@@ -1086,7 +1086,6 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
       #     |_|
       out("QUESTION MARK Replacement.", '2')
       if not qset and not trended:
-        out("Done looking for asterisks", "2", "-")
         if globs.WEB:
           yme = "No ?'s found in %s Sheet." % globs.DOCLINK
           yield yme, "", "", ""
@@ -1745,7 +1744,7 @@ def pipSwitch():
     'quickcrawl':   QuickCrawl,
     'linkgraph':    LinkGraph,
     'tests':        RunTests,
-    'column':       AddColumns,
+    'add':          AddColumns,
     'sitemap':      MakeSitemap,
     'fillmarks':    FillQMarks
   }
@@ -1781,7 +1780,7 @@ class AddColumnsForm(PipForm2):
   choices = [
     ('add:url',       'URL'),
     ('add:keyword',   'Keyword'),
-    ('add:seo',       'Crawl stuff like Title, Metas, H1s, etc.'),
+    ('add:[url,title,description,h1,h2,canonical]',       'Crawl stuff like Title, Metas, H1s, etc.'),
     ('add:httpcodes', 'Response Codes, Headers, Redirect Chain, etc.'),
     ('add:opengraph', 'Facebook Open Graph tags'),
     ('add:mobile',    'Mobile-friendly Check'),
