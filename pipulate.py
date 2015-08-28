@@ -39,13 +39,13 @@
 import sys, os, socket, urlparse, re, gspread
 import requests, traceback, datetime, time, json
 import globs
-from common import *
-from flask import (Flask,
+from common import *                                    # This is not DRY      Although you fret,    It's best to stamp
+from flask import (Flask,                               # I'll tell you why    I like it WET         Out code most DAMP
                   stream_with_context,
                   render_template,
                   Response,
-                  request,
-                  session,
+                  request,                              # If truth be told     To advocate           With exercise,
+                  session,                              # I'd be so bold       that vim is great     You win a prize.
                   redirect,
                   url_for,
                   flash)
