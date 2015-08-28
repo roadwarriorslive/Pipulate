@@ -50,22 +50,22 @@ from flask import (Flask,                               # I'll tell you why    I
                   url_for,
                   flash)
 from functions import *
-#                          _          __  __   This ain't PHP. It's kinda like a .NET codebehind, but way more awesome
-#   __ _ _ __  _ __    ___| |_ _   _ / _|/ _|  because it's Python. But Python resisting doing things like plugging whole
-#  / _` | '_ \| '_ \  / __| __| | | | |_| |_   high-level web frameworks in the core product relies on 3rd party developers
-# | (_| | |_) | |_) | \__ \ |_| |_| |  _|  _|  to fill the void--and in this case, it happens to be Flask. And Flask
-#  \__,_| .__/| .__/  |___/\__|\__,_|_| |_|    happens to be Werkzeug to handle "web routing" and Jinja2 to handle
-#       |_|   |_|                              PHP-style web templates. It takes time to grok, but is worth it.
+#                          _          __  __    This ain't PHP. It's kinda like a .NET codebehind, but way more awesome
+#   __ _ _ __  _ __    ___| |_ _   _ / _|/ _|   because it's Python. But Python resisting doing things like plugging whole
+#  / _` | '_ \| '_ \  / __| __| | | | |_| |_    high-level web frameworks in the core product relies on 3rd party developers
+# | (_| | |_) | |_) | \__ \ |_| |_| |  _|  _|   to fill the void--and in this case, it happens to be Flask. And Flask
+#  \__,_| .__/| .__/  |___/\__|\__,_|_| |_|     happens to be Werkzeug to handle "web routing" and Jinja2 to handle
+#       |_|   |_|                               PHP-style web templates. It takes time to grok, but is worth it.
 #
 socket.setdefaulttimeout(10.0)
-app = Flask(__name__)
+app = Flask(__name__) #                         <-- This is a rather big moment in this application's lifecycle.
 
-def stream_template(template_name, **context):
-  """Open inexpensive Flask-based streaming."""
-  app.update_template_context(context)
-  t = app.jinja_env.get_template(template_name)
-  rv = t.stream(context)
-  return rv
+def stream_template(template_name, **context):  # There's a rather awesome bit of Python magic going on here. This is
+  """Open inexpensive Flask-based streaming.""" # essentially a replacement for render_template() but which repeatedly
+  app.update_template_context(context)          # "flushes" streaming output to the user. Part of the context expected
+  t = app.jinja_env.get_template(template_name) # is data=somegeneratorinstance. Something inside a Flask object are
+  rv = t.stream(context)                        # instructions what to do if it gets a generator object on a parameter
+  return rv                                     # named data. And THIS is how the entire app is kept so lightweight.
 
 @app.context_processor
 def templateglobals():
