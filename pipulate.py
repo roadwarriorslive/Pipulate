@@ -82,6 +82,7 @@ from managelists import *
 
 @app.route("/v")
 def visualize():
+  out(request.args["k"])
   out("woot!")
   return render_template('visualize.html')
 
