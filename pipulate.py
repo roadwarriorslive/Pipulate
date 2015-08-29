@@ -37,17 +37,17 @@
 #             |_|                                       are most of the early-load ubiquitous libraries used throughout.
 
 import sys, os, socket, urlparse, re, gspread
-import requests, traceback, datetime, time, json                          
+import requests, traceback, datetime, time, json
 import globs                                                                # An Ode To Style
-from common import *                                                                                        
-from flask import (Flask,                                                   # This is not DRY              
+from common import *
+from flask import (Flask,                                                   # This is not DRY.
                   stream_with_context,                                      # I'll tell you why
-                  render_template,                                                                          
-                  Response,                                                 # Though you may fret          
-                  request,                                                  # I like it WET
-                  session,                                                                                  
-                  redirect,                                                 # Like a true champ            
-                  url_for,                                                  # I make it DAMP
+                  render_template,
+                  Response,                                                 # Though you may fret,
+                  request,                                                  # I like it WET.
+                  session,
+                  redirect,                                                 # But like a champ,
+                  url_for,                                                  # I make it DAMP!
                   flash)
 from functions import *
 
