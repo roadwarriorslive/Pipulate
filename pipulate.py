@@ -82,8 +82,16 @@ from managelists import *
 
 @app.route("/v")
 def visualize():
-  out(request.args["k"])
-  out("woot!")
+  if session and 'oa2' in session:
+    out("Session")
+    creds = Credentials(access_token=session['oa2'])
+    gsp = gspread.authorize(creds)
+    gdoc = gsp.open_by_key(request.args['k'])
+    try:
+      sheet = gdoc.worksheet("Visualizations")
+      out("We're in business!")
+    except:
+      out("Visualizatons not found")
   return render_template('visualize.html')
 
 #  _   _                                              Flask uses a routing system from another package called Werkzeug.
