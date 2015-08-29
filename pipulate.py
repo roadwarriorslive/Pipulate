@@ -37,19 +37,20 @@
 #             |_|                                       are most of the early-load ubiquitous libraries used throughout.
 
 import sys, os, socket, urlparse, re, gspread
-import requests, traceback, datetime, time, json
-import globs
-from common import *                                    # This is not DRY      Although you fret,    It's best to stamp
-from flask import (Flask,                               # I'll tell you why    I like it WET         Out code most DAMP
-                  stream_with_context,
-                  render_template,
-                  Response,
-                  request,                              # If truth be told     To advocate           With exercise,
-                  session,                              # I'd be so bold       that vim is great     You win a prize.
-                  redirect,
-                  url_for,
+import requests, traceback, datetime, time, json                          
+import globs                                                                # An Ode To Style
+from common import *                                                                                        
+from flask import (Flask,                                                   # This is not DRY              
+                  stream_with_context,                                      # I'll tell you why
+                  render_template,                                                                          
+                  Response,                                                 # Though you may fret          
+                  request,                                                  # I like it WET
+                  session,                                                                                  
+                  redirect,                                                 # Like a true champ            
+                  url_for,                                                  # I make it DAMP
                   flash)
 from functions import *
+
 #                          _          __  __    This ain't PHP. It's kinda like a .NET codebehind, but way more awesome
 #   __ _ _ __  _ __    ___| |_ _   _ / _|/ _|   because it's Python. But Python resisting doing things like plugging whole
 #  / _` | '_ \| '_ \  / __| __| | | | |_| |_    high-level web frameworks in the core product relies on 3rd party developers
@@ -1134,7 +1135,7 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
           if maxrowsperhour: # if maxrowsperhour is 0, this won't trap
             if index >= int(maxrowsperhour):
               break
-          yme = "Pipulating row: %s (item %s of %s)..." % (rowdex, index+1, len(therange))
+          yme = "Pipulating row: %s (item %s of %s)..." % (rowdex-1, index+1, len(therange))
           yield yme, yme, "", ""
           globs.hobj = None
           globs.html = '' #Blank the global html object. Recylces fetches.
