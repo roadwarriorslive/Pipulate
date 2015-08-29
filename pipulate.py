@@ -70,7 +70,7 @@ def stream_template(template_name, **context):  # There's a rather awesome bit o
 
 @app.context_processor
 def templateglobals():
-  """Make some functions usable in templates."""
+  """Make functions usable in templates."""
   return dict(loginlink=getLoginlink(),
   bookmarklet=getBookmarklet(),
   blabel=getLabel(),
@@ -79,6 +79,11 @@ def templateglobals():
   )
 
 from managelists import *
+
+@app.route("/v")
+def visualize():
+  out("woot!")
+  return render_template('visualize.html')
 
 #  _   _                                              Flask uses a routing system from another package called Werkzeug.
 # | | | | ___  _ __ ___   ___ _ __   __ _  __ _  ___  Werkzeug uses decorators to "route" requests. You can read the main
@@ -108,7 +113,9 @@ def main():
     form2 = formDict[form.options.data.split(':')[1]]
   else:
     form2 = PipForm2(csrf_enabled=False)
-  if request.method == 'POST' and 'secondary' in form2 and form2.secondary.data == 'on':
+  if (request.method == 'POST' 
+      and 'secondary' in form2 
+      and form2.secondary.data == 'on'):
     form2 = formDict[form.options.data.split(':')[1]]
   menudefault = None
   selectedtext = None
