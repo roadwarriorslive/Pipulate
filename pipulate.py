@@ -1897,9 +1897,11 @@ def MakeSitemap():
   '''Offer user some visualizations to choose from.'''
   return Pipulate([
     ('sheet', 'visualizations', [
-      ('name', 'datestamp', 'guid', 'includecode', 'compresseddata'),
-      (globs.PIPURL, '?')
+      ('viewname', 'makeview', 'datestamp', 'guid', 'includecode', 'compresseddata'),
+      ('sitemap', '?', '', '', '')
     ]),
+    ('?', 'visualizations'),
+    ('stop', '')
   ])
 
 def ClearSheet1():

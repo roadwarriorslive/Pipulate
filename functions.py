@@ -182,8 +182,7 @@ def scrapes():
 # |  _ < (_) \ V  V /   | || | | \__ \  __/ |  | ||  __/ |  \__ \
 # |_| \_\___/ \_/\_/   |___|_| |_|___/\___|_|   \__\___|_|  |___/
 #                                                                
-# Not all functions you encounter here will have the ability to add new rows.
-# They require special init functions to set up the column names beforehand.
+# These are the functions that can add new rows, usually using globs.sheet.
 
 def setolinks(url):
   '''Return a list of links from a given url'''
@@ -676,3 +675,6 @@ def cancel():
 
 def length(archive):
   return len(archive)
+
+def makeview(viewname):
+  return "I see %s" % viewname
