@@ -1766,7 +1766,7 @@ def menumaker():
   ''' Creates the entire cadence of the system.'''
   menu = [
     ('qmarks'      , "Replace ?'s"),
-    ('menu:setup'  , "Do an Auto Setup"),
+    ('menu:setup'  , "Auto Templates"),
     ('menu:crawl'  , "Crawl a Website"),
     ('menu:column' , "Add Some Columns"),
     ('menu:graph'  , "See a Visualization"),
@@ -1896,7 +1896,10 @@ def FillQMarks():
 def MakeSitemap():
   '''Offer user some visualizations to choose from.'''
   return Pipulate([
-    ('sitemap', '')
+    ('sheet', 'visualizations', [
+      ('name', 'datestamp', 'guid', 'includecode', 'compresseddata'),
+      (globs.PIPURL, '?')
+    ]),
   ])
 
 def ClearSheet1():
