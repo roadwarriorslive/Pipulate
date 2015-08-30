@@ -1238,7 +1238,7 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
                         #
                         tastereturn = eval(evalme)
                         if type(tastereturn) == tuple:
-                          gotcha("I can handle this")
+                          gotcha(tastereturn[1])
                         else:
                           newrow[coldex] = tastereturn
                         stop = False

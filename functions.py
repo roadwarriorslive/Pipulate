@@ -680,4 +680,4 @@ def makeview(viewname):
   return "I see %s" % viewname
 
 def foo():
-  return 'bar', 'bell'
+  return 'bar', {'first':'one', 'second':'two', 'third': 'three'}
