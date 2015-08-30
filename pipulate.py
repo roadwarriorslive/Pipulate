@@ -1236,7 +1236,11 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
                         # | |___ \ V /| | | | |___ \ V / (_| | | |_      _/ __/   into an actual instance of that function
                         # |_____| \_/ |_|_| |_____| \_/ \__,_|_|   |_||_||_____|  called with those parameters. Grok it.
                         #
-                        newrow[coldex] = eval(evalme)
+                        tastereturn = eval(evalme)
+                        if type(tastereturn) == tuple:
+                          gotcha("I can handle this")
+                        else:
+                          newrow[coldex] = tastereturn
                         stop = False
                         out('%s worked' % collabel)
                         yme = "<li>%s</li>" % (collabel)

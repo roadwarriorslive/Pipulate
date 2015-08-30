@@ -678,3 +678,6 @@ def length(archive):
 
 def makeview(viewname):
   return "I see %s" % viewname
+
+def foo():
+  return 'bar', 'bell'
