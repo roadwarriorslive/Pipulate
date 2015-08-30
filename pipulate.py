@@ -1897,8 +1897,8 @@ def MakeSitemap():
   '''Offer user some visualizations to choose from.'''
   return Pipulate([
     ('sheet', 'visualizations', [
-      ('viewname', 'makeview', 'datestamp', 'guid', 'includecode', 'compresseddata'),
-      ('sitemap', '?', '', '', '')
+      ('viewname', 'makeview', 'sharelink', 'datestamp', 'guid', 'includecode', 'compresseddata'),
+      ('sitemap', '?', '', '', '', '')
     ]),
     ('?', 'visualizations'),
     ('stop', '')
