@@ -677,15 +677,15 @@ def length(archive):
   return len(archive)
 
 def makeview(viewname):
+  from uuid import uuid4
   rowdict = {
-    'sharelink':'one', 
-    'datestamp': datestamp, 
-    'guid': 'three', 
-    'includecode': 'four', 
-    'compresseddata': 'five'
+    'sharelink': 'http://%s?k=%s' % (globs.HOST, globs.DOCID),
+    'datestamp': datestamp(), 
+    'guid': uuid4(), 
+    'includecode': '<link rel="1"/>\n<link rel="2"/>', 
+    'compresseddata': 'spamandeggs'
     }
-  return 'done', rowdict
-
+  return "%s done" % viewname, rowdict
 
 def foo():
   return 'bar', {'first':'one', 'second':'two', 'third': 'three'}
