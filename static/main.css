@@ -12,6 +12,9 @@ pseudo.button {
   font-size: 16px;
   color: black;
 }
+#stopsign {
+  margin-top: 60px;
+}
 body {
   background-color: #000000;
   color: #333;
