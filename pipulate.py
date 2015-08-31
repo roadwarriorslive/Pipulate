@@ -86,7 +86,10 @@ def visualize():
     out("Session")
     creds = Credentials(access_token=session['oa2'])
     gsp = gspread.authorize(creds)
-    gdoc = gsp.open_by_key(request.args['k'])
+    try:
+      gdoc = gsp.open_by_key(request.args['k'])
+    except:
+      return redirect(url_for('main'))
     vsheet = gdoc.worksheet("visualizations")
     vkey = request.args['v']
     vrow = vsheet.find(vkey).row
@@ -96,7 +99,7 @@ def visualize():
     cdex = vcols.index('compresseddata')
     return render_template('visualize.html', injectjson=unarchive(darow[cdex]), injectincludes=darow[idex])
   else:
-    return render_template('visualize.html')
+    return redirect(url_for('main'))
 
 #  _   _                                              Flask uses a routing system from another package called Werkzeug.
 # | | | | ___  _ __ ___   ___ _ __   __ _  __ _  ___  Werkzeug uses decorators to "route" requests. You can read the main
@@ -1472,9 +1475,11 @@ def url_root(url):
   parsed = urlparse.urlparse(url)
   return "%s://%s%s" % (parsed[0], parsed[1], parsed[2])
 
-def getLoginlink():
+def getLoginlink(gobackurl=''):
   """Return the HTML code required for an OAuth2 login link."""
   redir = globs.DOMURL
+  if gobackurl:
+    redir = gobackurl
   if 'Host' in request.headers:
     redir = 'http://'+request.headers['Host']
   try:
@@ -1487,8 +1492,7 @@ def getLoginlink():
     scope = 'profile email ' + scope
   baseurl = globs.OAUTHURL
   cid = ''
-  if 'CLIENT_ID' in app.config:
-    cid = app.config['CLIENT_ID']
+  cid = app.config['CLIENT_ID']
   qsdict = {  'scope': scope,
               'response_type': 'token',
               'redirect_uri': redir,
