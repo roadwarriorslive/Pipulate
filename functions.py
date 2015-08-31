@@ -679,7 +679,42 @@ def length(archive):
 def makeview(viewname):
   import base64, bz2
   from uuid import uuid4
-  prefix = '''$(function(){ // on dom ready
+  compressed = bz2.compress(sampleData())
+  cellfriendly = base64.b64encode(compressed)
+  mygid = uuid4()
+  rowdict = {
+    'sharelink': 'http://%s/v?k=%s&v=%s' % (globs.HOST, globs.DOCID, mygid),
+    'datestamp': datestamp(), 
+    'guid': mygid, 
+    'includecode': '<script src="http://js.cytoscape.org/js/cytoscape.min.js"></script>',
+    'compresseddata': cellfriendly
+    }
+  return 'made', rowdict
+
+def foo():
+  return 'bar', {'first':'one', 'second':'two', 'third': 'three'}
+
+def sampleData():
+
+  out(globs.sheet.title)
+
+  nodes = '''{ data: { id: 'j', name: 'Frank' } },
+        { data: { id: 'e', name: 'Debbie' } },
+        { data: { id: 'k', name: 'Eugine' } },
+        { data: { id: 'g', name: 'Stan' } }'''
+
+  edges = '''{ data: { source: 'j', target: 'e' } },
+        { data: { source: 'j', target: 'k' } },
+        { data: { source: 'j', target: 'g' } },
+        { data: { source: 'e', target: 'j' } },
+        { data: { source: 'e', target: 'k' } },
+        { data: { source: 'k', target: 'j' } },
+        { data: { source: 'k', target: 'e' } },
+        { data: { source: 'k', target: 'g' } },
+        { data: { source: 'g', target: 'j' } }'''
+
+  return '''$(function(){ // on dom ready
+
   $('#cy').cytoscape({
     style: cytoscape.stylesheet()
       .selector('node')
@@ -706,24 +741,37 @@ def makeview(viewname):
           'opacity': 0.25,
           'text-opacity': 0
         }),
-    elements: {'''
-
-  suffix = '''},
+    
+    elements: {
+      nodes: [
+        %s
+      ],
+      edges: [
+        %s 
+      ]
+    },
+    
     layout: {
       name: 'grid',
       padding: 10
     },
+    
     // on graph initial layout done (could be async depending on layout...)
     ready: function(){
       window.cy = this;
+      
       // giddy up...
+      
       cy.elements().unselectify();
+      
       cy.on('tap', 'node', function(e){
         var node = e.cyTarget; 
         var neighborhood = node.neighborhood().add(node);
+        
         cy.elements().addClass('faded');
         neighborhood.removeClass('faded');
       });
+      
       cy.on('tap', function(e){
         if( e.cyTarget === cy ){
           cy.elements().removeClass('faded');
@@ -731,37 +779,5 @@ def makeview(viewname):
       });
     }
   });
-  }); // on dom ready'''
 
-  nodes = '''nodes: [
-      { data: { id: 'j', name: 'Jerry' } },
-      { data: { id: 'e', name: 'Elaine' } },
-      { data: { id: 'k', name: 'Kramer' } },
-      { data: { id: 'g', name: 'George' } }
-    ],'''
-  edges= ''' edges: [
-      { data: { source: 'j', target: 'e' } },
-      { data: { source: 'j', target: 'k' } },
-      { data: { source: 'j', target: 'g' } },
-      { data: { source: 'e', target: 'j' } },
-      { data: { source: 'e', target: 'k' } },
-      { data: { source: 'k', target: 'j' } },
-      { data: { source: 'k', target: 'e' } },
-      { data: { source: 'k', target: 'g' } },
-      { data: { source: 'g', target: 'j' } }
-    ]'''
-
-  thedata = "%s%s%s%s" % (prefix, nodes, edges, suffix)
-
-  compressed = bz2.compress(thedata)
-  cellfriendly = base64.b64encode(compressed)
-  mygid = uuid4()
-  rowdict = {
-    'sharelink': 'http://%s/v?k=%s&v=%s' % (globs.HOST, globs.DOCID, mygid),
-    'datestamp': datestamp(), 
-    'guid': mygid, 
-    'includecode': '<script src="http://js.cytoscape.org/js/cytoscape.min.js"></script>',
-    'compresseddata': cellfriendly
-    }
-  return 'made', rowdict
-
+  }); // on dom ready''' % (nodes, edges)
