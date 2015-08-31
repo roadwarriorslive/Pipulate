@@ -1787,7 +1787,7 @@ def menumaker():
     ('menu:setup'  , "Auto Templates"),
     ('menu:crawl'  , "Crawl a Website"),
     ('menu:column' , "Add Some Columns"),
-    ('menu:graph'  , "See a Visualization"),
+    ('menu:graph'  , "Make Visualization"),
     ('keywords'    , "Harvest Keywords"),
     ('menu:clear'  , "Clear Sheet1")
   ]
