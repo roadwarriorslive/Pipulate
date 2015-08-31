@@ -23,6 +23,7 @@ KEYWORDS =  ''     # Constant containing selected text when bookmarklet clicked.
 html =      ''     # Avoids re-fetching HTML multiple times for same row.
 hobj =      ''     # Original Requests object for row's HTML with response headers.
 nest =      ''     # Controls nested indents of debug output.
+gdoc =      None
 sheet =     ''     # Makes sheet1 worksheet object accessible to user functions.
 TAB =       ''     # Name of Sheet1 on Tab
 numrows =   0      # Tracks latest number of rows in sheet1 (for InsertRows)

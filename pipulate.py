@@ -580,6 +580,7 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
             yield unlock
           Stop() # Consider adding refresh_token logic for users (versus the scheduler)
         globs.DOCLINK = '<a href="%s/d/%s/edit#gid=0" target="_blank">%s</a>' % (globs.SHEETS, globs.DOCID, globs.NAME)
+        globs.gdoc = gdoc
       out("END LOGIN ATTEMPT", "2", '-')
 
       if globs.WEB: yield unlock

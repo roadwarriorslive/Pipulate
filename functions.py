@@ -696,7 +696,7 @@ def foo():
 
 def sampleData():
 
-  out(globs.sheet.title)
+  out("SHEET TITLEEEEEEEEEEEEEEEEEEEEEE: %s" % globs.sheet.title)
 
   nodes = '''{ data: { id: 'j', name: 'Frank' } },
         { data: { id: 'e', name: 'Debbie' } },
