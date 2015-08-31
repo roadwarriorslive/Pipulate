@@ -654,18 +654,26 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
               yield spinerr
               Stop()
           elif inst == 'stop':
+            out("This is a forced-stop from the IPM")
             Stop()
           elif inst == 'table':
+            out("IPM Make table on sheet1")
             aobj = instruction[1]
             row1 = aobj[0]
             lol = aobj[1:]
             InitTab(gdoc, "sheet1", row1, lol)
           elif inst == 'sheet':
+            out("IPM Make table on any sheet")
             tabname = instruction[1]
             aobj = instruction[2]
             row1 = aobj[0]
             lol = aobj[1:]
-            InitTab(gdoc, tabname, row1, lol)
+            tabs = [sheet.title for sheet in gdoc.worksheets()]
+            if tabname.lower() in lowercaselist(tabs):
+              insertat = len(gdoc.worksheet(tabname).col_values(1))
+              InsertRows(gdoc.worksheet(tabname), lol, insertat)
+            else:
+              InitTab(gdoc, tabname, row1, lol)
           elif inst == '?':
             if instruction[1]:
               for yieldme in Pipulate(targettab=instruction[1]):
@@ -1887,7 +1895,7 @@ class SetupForm(PipForm2):
 class VisualizationForm(PipForm2):
   """Offer up a few common visualizations of the type of data we're handling"""
   radios = RadioField(choices=[
-    ('sitemap', 'Generate interactive hierarchal sitemap from a 2-DEEP crawl.'),
+    ('sitemap', 'Sitemap with 2-DEEP crawl data'),
     ('cancel',  'Cancel')
   ])
 
