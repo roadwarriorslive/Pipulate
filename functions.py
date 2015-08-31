@@ -751,8 +751,8 @@ def sampleData():
         })
       .selector('.faded')
         .css({
-          'opacity': 0.25,
-          'text-opacity': 0
+          'opacity': 0,
+          'text-opacity': 0.25
         }),
     
     elements: {
@@ -765,7 +765,7 @@ def sampleData():
     },
     
     layout: {
-      name: 'grid',
+      name: 'circle',
       padding: 10
     },
     
