@@ -91,12 +91,10 @@ def visualize():
     vkey = request.args['v']
     vrow = vsheet.find(vkey).row
     vcols = vsheet.row_values(1)
-    out(vcols)
     darow = vsheet.row_values(vrow)
     idex = vcols.index('includecode')
     cdex = vcols.index('compresseddata')
-    usethis = darow[idex]
-    return render_template('visualize.html', injectjson=sampleData(), injectincludes=usethis)
+    return render_template('visualize.html', injectjson=unarchive(darow[cdex]), injectincludes=darow[idex])
   else:
     return render_template('visualize.html')
 
