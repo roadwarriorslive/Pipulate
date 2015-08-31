@@ -118,6 +118,8 @@ def main():
   form = PipForm(csrf_enabled=False)
   formDict = formSwitch()
   form2 = None
+  if 'Host' in request.headers:
+    globs.HOST = request.headers['Host']
   if ':' in form.options.data:
     form2 = formDict[form.options.data.split(':')[1]]
   else:
@@ -148,9 +150,7 @@ def main():
         'APP_SECRET': configform.appsecret.data
       }
       pickle.dump(pickleme, open(globs.TOKEN, 'wb'))
-      redir = globs.DOMURL
-      if 'Host' in request.headers:
-        redir = 'http://'+request.headers['Host']
+      redir = 'http://'+globs.HOST
       scope = 'https://spreadsheets.google.com/feeds/'
       if globs.PCOM:
         scope = 'profile email ' + scope
@@ -169,9 +169,7 @@ def main():
       writeus = pickle.load(open(globs.TOKEN, "rb"))
       code = request.args['code']
       scope = 'https://spreadsheets.google.com/feeds/'
-      redir = globs.DOMURL
-      if 'Host' in request.headers:
-        redir = 'http://'+request.headers['Host']
+      redir = 'http://'+globs.HOST
       endpoint = "https://www.googleapis.com/oauth2/v3/token" # Notice the new endpoint for this exchange.
       postheaders = {
         'client_id': writeus['CLIENT_ID'],

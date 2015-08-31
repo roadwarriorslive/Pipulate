@@ -677,7 +677,15 @@ def length(archive):
   return len(archive)
 
 def makeview(viewname):
-  return 'done', {'sharelink':'one', 'datestamp': 'two', 'guid': 'three', 'includecode': 'four', 'compresseddata': 'five'}
+  rowdict = {
+    'sharelink':'one', 
+    'datestamp': datestamp, 
+    'guid': 'three', 
+    'includecode': 'four', 
+    'compresseddata': 'five'
+    }
+  return 'done', rowdict
+
 
 def foo():
   return 'bar', {'first':'one', 'second':'two', 'third': 'three'}

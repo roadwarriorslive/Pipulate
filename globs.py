@@ -31,6 +31,7 @@ ROWMAX =    10000  # The size over which a row will not attempt to insert into s
 EMPTY =     '[]'   # How to populate cell if nothing returned
 NONE =      '[None]'                                        # Alternative to Empty 
 NAME =      "Pipulate"                                      # Default GSheet file name.
+HOST =      "pipulate.com"                                  # Gets overwritten if 'Host' in request.headers
 DOMURL =    "http://pipulate.com"                           # Default for Login Button
 FILE =      "/var/opt/pipulate.cfg"                         # Flask server configuration
 TOKEN =     "/var/opt/pipulate.pkl"                         # OAuth2 access token
