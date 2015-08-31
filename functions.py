@@ -677,14 +677,17 @@ def length(archive):
   return len(archive)
 
 def makeview(viewname):
+  import base64, bz2
   from uuid import uuid4
+  compressed = bz2.compress(sampleData())
+  cellfriendly = base64.b64encode(compressed)
   mygid = uuid4()
   rowdict = {
     'sharelink': 'http://%s/v?k=%s&v=%s' % (globs.HOST, globs.DOCID, mygid),
     'datestamp': datestamp(), 
     'guid': mygid, 
     'includecode': '<script src="http://js.cytoscape.org/js/cytoscape.min.js"></script>',
-    'compresseddata': sampleData()
+    'compresseddata': cellfriendly
     }
   return "%s done" % viewname, rowdict
 
