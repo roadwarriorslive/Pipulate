@@ -120,7 +120,7 @@ def main():
   streamit = False
   readytopip = False
   form = PipForm(csrf_enabled=False)
-  formDict = formSwitch()
+  formDict = secondaryMenu()
   form2 = None
   if 'Host' in request.headers:
     globs.HOST = request.headers['Host']
@@ -283,11 +283,11 @@ def main():
         except:
           pass
         if checks:
-          streamit = stream_with_context(pipSwitch()[psKey](checks))
+          streamit = stream_with_context(prePipulators()[psKey](checks))
         else:
-          streamit = stream_with_context(pipSwitch()[psKey]())
+          streamit = stream_with_context(prePipulators()[psKey]())
       else:
-        streamit = stream_with_context(pipSwitch()[psKey]())
+        streamit = stream_with_context(prePipulators()[psKey]())
     elif form.pipurl.data:
       globs.PIPURL = form.pipurl.data
       if form.options.data:
@@ -360,7 +360,7 @@ def main():
   #  | |_| | |___  | |   | | | | | |  __/\__ \__ \ (_| | (_| |  __/\__ \  not needed, and Flask provides yet another
   #   \____|_____| |_|   |_| |_| |_|\___||___/___/\__,_|\__, |\___||___/  thing for the world flash to mean. Nice little
   #                                                     |___/             higher abstraction doohickey in Flask framework.
-  options = menumaker()
+  options = mainMenu()
   if request.method == 'GET':
     try:
       if menutwo:
@@ -625,12 +625,19 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
           yield yme, "Mmmmmm, more keywords.", json.dumps(kwlist), ""
           yield spinoff
         return #permissible here?
-      #        _             _       _         ___ ____  __  __   The Pipulate Instruction Processor Machine (IPM)
-      #  _ __ (_)_ __  _   _| | __ _| |_ ___  |_ _|  _ \|  \/  |  takes a list of tuples and interprets each
-      # | '_ \| | '_ \| | | | |/ _` | __/ _ \  | || |_) | |\/| |  and interprets it as an action to take and
-      # | |_) | | |_) | |_| | | (_| | ||  __/  | ||  __/| |  | |  a target aginst which to, and becomes a sort
-      # | .__/|_| .__/ \__,_|_|\__,_|\__\___| |___|_|   |_|  |_|  of sequentially carried out jobs, such as
-      # |_|     |_|                                               make table, fill in defaults, and pipulate.
+      #  _____           _             _           _       _        _                 A.K.A. the Instruction Processor
+      # |_   _|   _ _ __(_)_ __   __ _( )___      | |_   _| | _____| |__   _____  __  Machine, or IPM. Pipulate() may
+      #   | || | | | '__| | '_ \ / _` |// __|  _  | | | | | |/ / _ \ '_ \ / _ \ \/ /  get a pre-processing instruction
+      #   | || |_| | |  | | | | | (_| | \__ \ | |_| | |_| |   <  __/ |_) | (_) >  <   which causes Pipulate to call
+      #   |_| \__,_|_|  |_|_| |_|\__, | |___/  \___/ \__,_|_|\_\___|_.__/ \___/_/\_\  itself, interpret commands in tuples,
+      #                          |___/                                                then come back and continue normally.
+
+      # There's a very important point to get here, so I'll write even more. Pipulate works just fine without Turing's 
+      # Jukebox, but what this does is gives a chance to do other things to the spreadsheet, like add tables, setup initial
+      # values, and even simulate "replace ?'s" clicks in targeted tabs BEFORE other Good Sheet starts to happen, according
+      # to the conventional lawnmower-sweeping ?-replacement behavior--which you can choose to block here, or allow as the
+      # final phase if you like. This is your "sheet music" reader or Turing Machine read/write head scanner.
+
       if preproc:
         for instruction in preproc:
           inst = instruction[0]
@@ -1765,13 +1772,12 @@ def stringify_children(node):
   parts = ([node.text] + list(chain(*([c.text, tostring(c, with_tail=False), c.tail] for c in node.getchildren()))) + [node.tail])
   # filter removes possible Nones in texts and tails
   return ''.join(filter(None, parts))
-
-#                   _
-#   _ __ ___   __ _(_)_ __    _ __ ___   ___ _ __  _   _
-#  | '_ ` _ \ / _` | | '_ \  | '_ ` _ \ / _ \ '_ \| | | |
-#  | | | | | | (_| | | | | | | | | | | |  __/ | | | |_| |
-#  |_| |_| |_|\__,_|_|_| |_| |_| |_| |_|\___|_| |_|\__,_|
-#
+#            _    __                              _  _     _ 
+#  __      _| |_ / _| ___  _ __ _ __ ___  ___   _| || |_  / |
+#  \ \ /\ / / __| |_ / _ \| '__| '_ ` _ \/ __| |_  ..  _| | |
+#   \ V  V /| |_|  _| (_) | |  | | | | | \__ \ |_      _| | |
+#    \_/\_/  \__|_|  \___/|_|  |_| |_| |_|___/   |_||_|   |_|
+#                                                            
 from flask_wtf import Form
 from wtforms import (StringField,
                     RadioField,
@@ -1780,46 +1786,6 @@ from wtforms import (StringField,
                     TextAreaField,
                     SelectField,
                     widgets)
-
-def menumaker():
-  ''' Creates the entire cadence of the system.'''
-  menu = [
-    ('qmarks'      , "Replace ?'s"),
-    ('menu:setup'  , "Auto Templates"),
-    ('menu:crawl'  , "Crawl a Website"),
-    ('menu:column' , "Add Some Columns"),
-    ('menu:graph'  , "Make Visualization"),
-    ('keywords'    , "Harvest Keywords"),
-    ('menu:clear'  , "Clear Sheet1")
-  ]
-  strmenu = '<option value="off">What do you want to do?</option>\n'
-  for item in menu:
-    strmenu += '<option value="%s">%s</options>\n' % (item[0], item[1])
-  return strmenu
-
-def formSwitch():
-  """Create dict that ties screen 1 select options with what menu to show on interstitial page.
-  Everything in the interstitial forms section needs an entry in this dict to activate."""
-  return {
-    'clear':        ClearSheet1Form(csrf_enabled=False),
-    'crawl':        CrawlTypesForm(csrf_enabled=False),
-    'setup':        SetupForm(csrf_enabled=False),
-    'column':       AddColumnsForm(csrf_enabled=False),
-    'graph':        VisualizationForm(csrf_enabled=False)
-  }
-
-def pipSwitch():
-  return {
-    'clear':        ClearSheet1,
-    'cancel':       Cancel,
-    'linksonpage':  LinksOnPage,
-    'quickcrawl':   QuickCrawl,
-    'linkgraph':    LinkGraph,
-    'tests':        RunTests,
-    'add':          AddColumns,
-    'sitemap':      MakeSitemap,
-    'fillmarks':    FillQMarks
-  }
 
 class PipForm(Form):
   """Define form for main Pipulate user interface."""
@@ -1840,13 +1806,67 @@ class ConfigForm(Form):
   clientsecret = StringField('Client secret (from Google Dev Console):')
 
 
-#  _       _                _   _ _   _       _       This should set forth a familiar pattern where
-# (_)_ __ | |_ ___ _ __ ___| |_(_) |_(_) __ _| |___   we open with a dict router and follow with the
-# | | '_ \| __/ _ \ '__/ __| __| | __| |/ _` | / __|  things that router can invoke. In this case,
-# | | | | | ||  __/ |  \__ \ |_| | |_| | (_| | \__ \  it's the mapping between the main Pipulate drop-
-# |_|_| |_|\__\___|_|  |___/\__|_|\__|_|\__,_|_|___/  down menu and what form gets shown on the
-#                                                     interstitial screen to follow, choices listed.
-
+#                   _
+#   _ __ ___   __ _(_)_ __    _ __ ___   ___ _ __  _   _    The main menu is the dropdown menu that comes up on the main
+#  | '_ ` _ \ / _` | | '_ \  | '_ ` _ \ / _ \ '_ \| | | |   Pipulate interface. It's merely a list of tuples that become
+#  | | | | | | (_| | | | | | | | | | | |  __/ | | | |_| |   the select element options, and VERY MUCH setting the overall
+#  |_| |_| |_|\__,_|_|_| |_| |_| |_| |_|\___|_| |_|\__,_|   tone of what it is to Pipulate. Tehnically, it is the least
+#                                                           complicated of all the non-main menu stuff that follows.
+def mainMenu():
+  ''' Creates the entire cadence of the system.'''
+  menu = [
+    ('qmarks'      , "Replace ?'s"),
+    ('menu:setup'  , "Auto Templates"),
+    ('menu:crawl'  , "Crawl a Website"),
+    ('menu:column' , "Add Some Columns"),
+    ('menu:graph'  , "Make Visualization"),
+    ('keywords'    , "Harvest Keywords"),
+    ('menu:clear'  , "Clear Sheet1")
+  ]
+  strmenu = '<option value="off">What do you want to do?</option>\n'
+  for item in menu:
+    strmenu += '<option value="%s">%s</options>\n' % (item[0], item[1])
+  return strmenu
+#   ____  _           _                                                 _                    Every entry from main menu
+#  |___ \( )_ __   __| | __ _ _ __ _   _   _ __ ___   ___ _ __  _   _  | | _____ _   _ ___   whose value is prefixed by
+#    __) |/| '_ \ / _` |/ _` | '__| | | | | '_ ` _ \ / _ \ '_ \| | | | | |/ / _ \ | | / __|  "menu" goes as a key to pull
+#   / __/  | | | | (_| | (_| | |  | |_| | | | | | | |  __/ | | | |_| | |   <  __/ |_| \__ \  up a form from the wtforms #2
+#  |_____| |_| |_|\__,_|\__,_|_|   \__, | |_| |_| |_|\___|_| |_|\__,_| |_|\_\___|\__, |___/  section. The values of the
+#                                  |___/                                         |___/       dict override default forms.
+def secondaryMenu():
+  '''Everything prefixed with "menu" in the mainMenu function becomes input
+  here. '''
+  return {
+    'clear':        ClearSheet1Form(csrf_enabled=False),
+    'crawl':        CrawlTypesForm(csrf_enabled=False),
+    'setup':        SetupForm(csrf_enabled=False),
+    'column':       AddColumnsForm(csrf_enabled=False),
+    'graph':        VisualizationForm(csrf_enabled=False)
+  }
+#                            _             _       _                   Pre-Pipulators may be chosen directly from the
+#  _ __  _ __ ___      _ __ (_)_ __  _   _| | __ _| |_ ___  _ __ ___   main menu or secondary. They point to object that
+# | '_ \| '__/ _ \____| '_ \| | '_ \| | | | |/ _` | __/ _ \| '__/ __|  are called as functions when the menu option is
+# | |_) | | |  __/____| |_) | | |_) | |_| | | (_| | || (_) | |  \__ \  POST'ed. Think of it as the function-hook location
+# | .__/|_|  \___|    | .__/|_| .__/ \__,_|_|\__,_|\__\___/|_|  |___/  to do stuff before the normal ?-replacement phase
+# |_|                 |_|     |_|                                      begins. They can do anything to the spreadsheet.
+def prePipulators():
+  return {
+    'clear':        ClearSheet1,
+    'cancel':       Cancel,
+    'linksonpage':  LinksOnPage,
+    'quickcrawl':   QuickCrawl,
+    'linkgraph':    LinkGraph,
+    'tests':        RunTests,
+    'add':          AddColumns,
+    'sitemap':      MakeSitemap,
+    'fillmarks':    FillQMarks
+  }
+#           _    __                              _  _     ____    These forms control what is in many cases, activation 
+# __      _| |_ / _| ___  _ __ _ __ ___  ___   _| || |_  |___ \   of tertiary actions (main menu / 2ndary menu / this).
+# \ \ /\ / / __| |_ / _ \| '__| '_ ` _ \/ __| |_  ..  _|   __) |  These selections almost always result in "doing a thing" 
+#  \ V  V /| |_|  _| (_) | |  | | | | | \__ \ |_      _|  / __/   by pressing a jukebox "music selection" on the "IPM".
+#   \_/\_/  \__|_|  \___/|_|  |_| |_| |_|___/   |_||_|   |_____|  Secondary menus tend to trigger of a SERIES of things
+#                                                                 happening. The IPM (~line 630) handles these commands.
 class AddColumnsForm(PipForm2):
   """Create the menu for when Clear Sheet 1 is selected."""
   choices = [
@@ -1860,7 +1880,7 @@ class AddColumnsForm(PipForm2):
     ('add:facebook',  'Facebook (multiple)'),
     ('add:youtube',   'YouTube (multiple)'),
     ('add:instagram', 'Instagram'),
-    ('cancel',    'Cancel')
+    ('cancel',        'Cancel')
   ]
   checks = SelectMultipleField(
     choices=choices,
@@ -1880,9 +1900,10 @@ class CrawlTypesForm(PipForm2):
 class SetupForm(PipForm2):
   """Create the menu for when Clear Sheet 1 is selected."""
   radios = RadioField(choices=[
-    ('fillmarks', "Flood-fill ?'s (It will wipe out existing data)."),
-    ('tests',   'Run Tests'),
-    ('cancel',  'Cancel')
+    ('client',    'Set up New SEO Client'),
+    ('fillmarks', "Flood-fill ?'s (wipes out existing data)."),
+    ('tests',     'Run System Tests'),
+    ('cancel',    'Cancel')
   ])
 
 class VisualizationForm(PipForm2):
