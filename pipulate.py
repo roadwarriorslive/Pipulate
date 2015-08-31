@@ -87,12 +87,15 @@ def visualize():
     creds = Credentials(access_token=session['oa2'])
     gsp = gspread.authorize(creds)
     gdoc = gsp.open_by_key(request.args['k'])
+    usethis = '<script src="http://js.cytoscape.org/js/cytoscape.min.js"></script>'
     try:
       sheet = gdoc.worksheet("Visualizations")
       out("We're in business!")
     except:
       out("Visualizatons not found")
-  return render_template('visualize.html', injectjson=sampleData())
+    return render_template('visualize.html', injectjson=sampleData(), injectincludes=usethis)
+  else:
+    return render_template('visualize.html')
 
 #  _   _                                              Flask uses a routing system from another package called Werkzeug.
 # | | | | ___  _ __ ___   ___ _ __   __ _  __ _  ___  Werkzeug uses decorators to "route" requests. You can read the main
