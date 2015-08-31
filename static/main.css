@@ -145,6 +145,7 @@ a {
 }
 #hypnotizethem {
   display: block;
+  pointer-events: none;
   max-height: 100%;
   max-width: 100%;
   opacity: 0.05;
