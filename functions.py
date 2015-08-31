@@ -707,7 +707,7 @@ def sampleData():
   edges = ''
   for atuple in edgetuples:
     edges = edges + "{ data: { source: '%s', target: '%s' } },\n" % (atuple[0], atuple[1])
-  edges = edges[:-1]
+  edges = edges[:-2]
 
   xnodes = '''{ data: { id: 'j', name: 'j'} },
              { data: { id: 'e', name: 'e'} },
@@ -763,7 +763,7 @@ def sampleData():
     },
     
     layout: {
-      name: 'radial',
+      name: 'grid',
       padding: 10
     },
     

@@ -678,8 +678,11 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
             lol = aobj[1:]
             tabs = [sheet.title for sheet in gdoc.worksheets()]
             if tabname.lower() in lowercaselist(tabs):
-              insertat = len(gdoc.worksheet(tabname).col_values(1))
-              InsertRows(gdoc.worksheet(tabname), lol, insertat)
+              try:
+                insertat = len(gdoc.worksheet(tabname).col_values(1))
+                InsertRows(gdoc.worksheet(tabname), lol, insertat)
+              except:
+                pass
             else:
               InitTab(gdoc, tabname, row1, lol)
           elif inst == '?':
@@ -689,7 +692,7 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
             else:
               for yieldme in Pipulate():
                 yield yieldme
-          elif inst == 'fillmarks': #Fill in question marks
+          elif inst == 'fillmarks' or inst == 'resetmarks': #Fill in question marks
             if globs.WEB:
               yield "Looking for where question marks should go...", "Looking for functions and scraper names", "", ""
             if not globs.row1:
@@ -709,7 +712,10 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
                 colrange = '%s%s:%s%s' % (qcol, 2, qcol, nr)
                 CellList = globs.sheet.range(colrange)
                 for cell in CellList:
-                  cell.value = '?'
+                  if inst == 'resetmarks':
+                    cell.value = '?'
+                  elif not cell.value:
+                    cell.value = '?'
                 result = globs.sheet.update_cells(CellList)
             yield "Question marks filled in!", "Ready for some serious pipulating", "", ""
             yme = "You're now ready for some serious pipulating!" + globs.PBNJMAN
@@ -734,7 +740,7 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
       if globs.WEB: yield "Checking Tabs...", "Then we check for tabs...", "", ""
 
       # Documentation Tab
-      if 'docs' in globs.SHEETS:
+      if 'docs' in gdoc.worksheets():
         if len(documentation()) > gdoc.worksheet("Docs").row_count:
           if globs.WEB:
             yield "Re-creating the Docs tab (new functions added).", "New Function Added", "", ""
@@ -1804,8 +1810,6 @@ class ConfigForm(Form):
   appsecret = StringField('Flask app secret (auto-generated):', default=apdef)
   clientid = StringField('Client ID (from Google Dev Console):')
   clientsecret = StringField('Client secret (from Google Dev Console):')
-
-
 #                   _
 #   _ __ ___   __ _(_)_ __    _ __ ___   ___ _ __  _   _    The main menu is the dropdown menu that comes up on the main
 #  | '_ ` _ \ / _` | | '_ \  | '_ ` _ \ / _ \ '_ \| | | |   Pipulate interface. It's merely a list of tuples that become
@@ -1816,7 +1820,7 @@ def mainMenu():
   ''' Creates the entire cadence of the system.'''
   menu = [
     ('qmarks'      , "Replace ?'s"),
-    ('menu:setup'  , "Auto Templates"),
+    ('menu:setup'  , "Do Auto Setup"),
     ('menu:crawl'  , "Crawl a Website"),
     ('menu:column' , "Add Some Columns"),
     ('menu:graph'  , "Make Visualization"),
@@ -1859,7 +1863,8 @@ def prePipulators():
     'tests':        RunTests,
     'add':          AddColumns,
     'sitemap':      MakeSitemap,
-    'fillmarks':    FillQMarks
+    'fillmarks':    FillQMarks,
+    'resetmarks':   ResetQMarks
   }
 #           _    __                              _  _     ____    These forms control what is in many cases, activation 
 # __      _| |_ / _| ___  _ __ _ __ ___  ___   _| || |_  |___ \   of tertiary actions (main menu / 2ndary menu / this).
@@ -1891,19 +1896,20 @@ class AddColumnsForm(PipForm2):
 class CrawlTypesForm(PipForm2):
   """Present user with different types of crawls they can perform."""
   radios = RadioField(choices=[
-    ('linksonpage',   '1. LINKS ON PAGE: Just get the links from page, one line per link.'),
-    ('quickcrawl',    '2. QUICK CRAWL: Same as above, but visits each page to get their on-page data.'),
-    ('linkgraph',     '3. CRAWL, 2 DEEP: Acquires link-data for 3-Level Site Hierarchy Visualization. It requires you to do another "Replace ?\'s" afterwards.'),
+    ('linksonpage',   '1. LINKS ON PAGE (quickest): Just get the links from page, one line per link.'),
+    ('quickcrawl',    '2. LINKS OFF PAGE (quick): Same as above, but visits each page to get their on-page data.'),
+    ('linkgraph',     '3. CRAWL, 2-DEEP (longer): Gathers link data required for sitemap visualization.'),
     ('cancel',        'Cancel')
   ])
 
 class SetupForm(PipForm2):
   """Create the menu for when Clear Sheet 1 is selected."""
   radios = RadioField(choices=[
-    ('client',    'Set up New SEO Client'),
-    ('fillmarks', "Flood-fill ?'s (wipes out existing data)."),
-    ('tests',     'Run System Tests'),
-    ('cancel',    'Cancel')
+    ('client',      'Set up New SEO Client'),
+    ('fillmarks',   "Flood-fill ?'s (keeps existing data)."),
+    ('resetmarks',  "Reset ?'s (WIPES existing data)."),
+    ('tests',       'Run System Tests'),
+    ('cancel',      'Cancel')
   ])
 
 class VisualizationForm(PipForm2):
@@ -1926,6 +1932,12 @@ class ClearSheet1Form(PipForm2):
 #  \__ \ | | |  __/  __/ |_  | | | | | | |_| \__ \ | (__    such as it were. Or Loom, if you prefer. Or Turing machine.
 #  |___/_| |_|\___|\___|\__| |_| |_| |_|\__,_|___/_|\___|   In any case, we just feed these instructions into the part
 #                                                           of Pipulate there waiting to execute final menu choices.
+
+def ResetQMarks():
+  '''Interrogates worksheet and inserts question marks wherever they can go'''
+  return Pipulate([
+    ('resetmarks', '')
+  ])
 
 def FillQMarks():
   '''Interrogates worksheet and inserts question marks wherever they can go'''
@@ -2023,7 +2035,15 @@ def LinkGraph():
     ('table', [
       ('url','PreCrawl'),
       (globs.PIPURL, '?')
-    ])
+    ]),
+    ('?', ''),
+    ('?', ''),
+    ('sheet', 'visualizations', [
+      ('viewname', 'makeview', 'sharelink', 'datestamp', 'guid', 'includecode', 'compresseddata'),
+      ('sitemap', '?', '', '', '', '')
+    ]),
+    ('?', 'visualizations'),
+    ('stop', '')
   ])
 
 def Cancel():

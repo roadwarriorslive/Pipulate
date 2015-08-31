@@ -29,17 +29,6 @@ Swiss Army Knife for all sorts of data-mashups, including...
      SEE THE------> | to Google Sheet|<--------4.----------'    '----------------------> ?
      RESULTS        '----------------'    a response                  ...stuff on net''')
 
-## Recent Changes
-### Mon Aug 31 03:22:47 UTC 2015
-- Function returning dict as the second element of tuple can update entire row.
-### Wed Aug 26 21:00:08 UTC 2015
-- Archive function added to save page's HTML into Google Sheets, compressed.
-- Scrapers all work if Archive column is there (pull titles, metas, from archive).
-- Documentation tab gets automatically regenerated if new functions are added.
-- Choice was added to fill question marks into all locations that will pipulate.
-- SEMRush and Moz KPI functions like Difficulty and DomainAuthority added.
-- Modest amounts of website crawling is now possible (maximum depth of 2).
-- Tons of cosmetic stuff to make it prettier.
 
 ## Using it
 You can try it out on pipulate.com, but as it picks up in popularity, I'll be
@@ -89,6 +78,7 @@ You may or may not share back your creations to the Github/Pipulate community.
 7. [FAQ](#7-faq)
 8. [Roadmap](#8-roadmap)
 9. [License](#9-license)
+10. [License](#10-changes)
 
 ## 1\. Introduction
 ### Overview
@@ -370,4 +360,16 @@ instances.
 Pipulate uses the (MIT License as defined by OpenSource.org)[http://opensource.org/licenses/MIT].
 This repository's copy of the license is [here](./LICENSE.md).
 
-[Join the Pipulate Team on Slack](http://goo.gl/forms/nh3WM6bPle)
+## 10\. Recent Changes
+### Mon Aug 31 15:09:26 UTC 2015
+- Distinct separate Flood ?'s and Reset ?'s behavior.
+### Mon Aug 31 03:22:47 UTC 2015
+- Function returning dict as the second element of tuple can update entire row.
+### Wed Aug 26 21:00:08 UTC 2015
+- Archive function added to save page's HTML into Google Sheets, compressed.
+- Scrapers all work if Archive column is there (pull titles, metas, from archive).
+- Documentation tab gets automatically regenerated if new functions are added.
+- Choice was added to fill question marks into all locations that will pipulate.
+- SEMRush and Moz KPI functions like Difficulty and DomainAuthority added.
+- Modest amounts of website crawling is now possible (maximum depth of 2).
+- Tons of cosmetic stuff to make it prettier.

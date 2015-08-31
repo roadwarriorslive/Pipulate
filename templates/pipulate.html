@@ -135,14 +135,12 @@
         $('#piplock').addClass("pip-lock");
       }
       function unlockbutton() {
-        setTimeout(function(){
-          whitelock();
-          $('#pipulate').prop("disabled", false);
-          $('#pipulate').fadeTo(0,1);
-          $('#piplock').addClass("pip-go");
-          $('#piplock').removeClass("pip-lock");
-          $('#pipulate').css('color', 'white');
-        },2000);
+        whitelock();
+        $('#pipulate').prop("disabled", false);
+        $('#pipulate').fadeTo(0,1);
+        $('#piplock').addClass("pip-go");
+        $('#piplock').removeClass("pip-lock");
+        $('#pipulate').css('color', 'white');
       }
       if (location.hash) {
         var myhash = location.hash
