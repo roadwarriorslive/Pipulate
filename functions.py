@@ -702,11 +702,13 @@ def sampleData():
   edgetuples = zip(fromurl, linksto)
   nodes = ''
   for aurl in set(fromurl):
-    nodes = nodes + "{ data: { id: '%s', name: '%s'} },\n" % (aurl, aurl)
+    if aurl != 'url':
+      nodes = nodes + "{ data: { id: '%s', name: '%s'} },\n" % (aurl, aurl)
   nodes = nodes[:-2]
   edges = ''
   for atuple in edgetuples:
-    edges = edges + "{ data: { source: '%s', target: '%s' } },\n" % (atuple[0], atuple[1])
+    if atuple[0] != 'url':
+      edges = edges + "{ data: { source: '%s', target: '%s' } },\n" % (atuple[0], atuple[1])
   edges = edges[:-2]
 
   xnodes = '''{ data: { id: 'j', name: 'j'} },
