@@ -678,10 +678,11 @@ def length(archive):
 
 def makeview(viewname):
   from uuid import uuid4
+  mygid = uuid4()
   rowdict = {
-    'sharelink': 'http://%s?k=%s' % (globs.HOST, globs.DOCID),
+    'sharelink': 'http://%s/v?k=%s&v=%s' % (globs.HOST, globs.DOCID, mygid),
     'datestamp': datestamp(), 
-    'guid': uuid4(), 
+    'guid': mygid, 
     'includecode': '<link rel="1"/>\n<link rel="2"/>', 
     'compresseddata': 'spamandeggs'
     }
