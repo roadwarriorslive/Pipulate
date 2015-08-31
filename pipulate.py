@@ -466,7 +466,7 @@ def LogUser(authkey):
 # | |  | | (_) | | | | (_) | | | |_| | | | | (__  | |_| |  __/ | | |  __/ | | (_| | || (_) | |    streaming user output
 # |_|  |_|\___/|_| |_|\___/|_|_|\__|_| |_|_|\___|  \____|\___|_| |_|\___|_|  \__,_|\__\___/|_|    trick. You may not get
 #                                                                                                 it, but you will yield.
-def Pipulate(preproc='', dockey='', targettab="", token=''):
+def Pipulate(preproc='', dockey='', targettab="", token='', label=''):
   """Generator that streams output to a web user interface."""
   stop = False
   qset = set()
@@ -478,6 +478,8 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
   spinerr = "spinerr", "", "", ""
   spinoff = "spinoff", "", "", ""
   out("PIPULATION BEGINNING", "1")
+  if label:
+    yield label, label, "", ""
   #                                            _     _         _                Try to keep your try blocks small to isolate where the
   #   ___  _ __   ___  __   _____ _ __ _   _  | |__ (_) __ _  | |_ _ __ _   _   errors are coming from. Or do this. Python is a very
   #  / _ \| '_ \ / _ \ \ \ / / _ \ '__| | | | | '_ \| |/ _` | | __| '__| | | |  pragmatic language, and sometimes you have to take
@@ -1940,13 +1942,13 @@ def ResetQMarks():
   '''Interrogates worksheet and inserts question marks wherever they can go'''
   return Pipulate([
     ('resetmarks', '')
-  ])
+  ], label="Resetting ?'s")
 
 def FillQMarks():
   '''Interrogates worksheet and inserts question marks wherever they can go'''
   return Pipulate([
     ('fillmarks', '')
-  ])
+  ], label="Flooding ?'s")
 
 def MakeSitemap():
   '''Offer user some visualizations to choose from.'''
@@ -1957,13 +1959,7 @@ def MakeSitemap():
     ]),
     ('?', 'visualizations'),
     ('stop', '')
-  ])
-
-def ClearSheet1():
-  '''Offer user some visualizations to choose from.'''
-  return Pipulate([
-    ('graph', '')
-  ])
+  ], label="Making Sitemap")
 
 def AddColumns(checks):
   '''Ad columns to sheet from checkboxes on submitted form.'''
@@ -1985,7 +1981,7 @@ def AddColumns(checks):
   # Pipulate is the player piano. It normally tries to replace question marks.
   # So when fed a list of tuples, it will interpret them as it's music instructions.
   lot.append(('fillmarks', ''))
-  return Pipulate(lot)
+  return Pipulate(lot, label="Adding Columns")
 
 def RunTests():
   '''Where you're going to develop everyhing these jobs can do!.'''
@@ -1998,14 +1994,14 @@ def RunTests():
     ]),
     ('?', 'tests'),
     ('stop', '')
-  ])
+  ], label='Run Tests')
 
 def ClearSheet1():
   '''Clear Sheet 1'''
   return Pipulate([
     ('clear', ''),
     ('stop', '')
-  ])
+  ], label='Clear Sheet')
 
 def LinksOnPage():
   '''Collect links from displaying page.'''
@@ -2016,7 +2012,7 @@ def LinksOnPage():
       ('url','GetLinks'),
       (globs.PIPURL, '?')
     ])
-  ])
+  ], label='Links On Page')
 
 def QuickCrawl():
   '''Collect links from displaying page and then visit each for more data..'''
@@ -2028,7 +2024,7 @@ def QuickCrawl():
       (globs.PIPURL, '?')
     ]),
     ('?', '')
-  ])
+  ], label='Links Off Page')
 
 def LinkGraph():
   '''Collect links from displaying page and prepare to visit each for more links..'''
@@ -2047,7 +2043,7 @@ def LinkGraph():
     ]),
     ('?', 'visualizations'),
     ('stop', '')
-  ])
+  ], label='Crawl, 2-Deep')
 
 def Cancel():
   '''Go back to default main menu.'''
