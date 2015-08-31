@@ -1238,6 +1238,8 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
                         #
                         tastereturn = eval(evalme)
                         if type(tastereturn) == tuple:
+                          for index2, anothercell in enumerate(CellList):
+                            out("'%s': '%s'" % (globs.row1[index2], anothercell.value))
                           gotcha(tastereturn[1])
                         else:
                           newrow[coldex] = tastereturn
