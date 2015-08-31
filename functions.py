@@ -213,25 +213,31 @@ def precrawl(url):
     CellList[i].value = val
   globs.sheet.update_cells(CellList)
   links = setolinks(url)
-  y = len(links)
-  linkslist = zip([url]*y, links, ['0']*y, ['?']*y)
-  InsertRows(globs.sheet, linkslist, 2)
-  return ""
+  if links:
+    y = len(links)
+    linkslist = zip([url]*y, links, ['0']*y, ['?']*y)
+    InsertRows(globs.sheet, linkslist, 2)
+    return ""
+  else:
+    return "can't reach"
 
 def crawl(linksto, depth='0'):
   '''Performs second degree crawling from the 1st crawl function. No recursion
   necessary for a shalow crawl.'''
-  links = setolinks(linksto)
-  if links:
-    y = len(links)
-    globs.numrows = len(globs.sheet.col_values(1))
-    if depth:
-      depth = int(depth) + 1
-    linkslist = zip([linksto]*y, links, [depth]*y)
-    InsertRows(globs.sheet, linkslist, globs.numrows)
-    return "visited"
+  if linksto and len(linksto) > 3 and linksto[:4] != 'http':
+    Stop()
   else:
-    return "can't reach"
+    links = setolinks(linksto)
+    if links:
+      y = len(links)
+      globs.numrows = len(globs.sheet.col_values(1))
+      if depth:
+        depth = int(depth) + 1
+      linkslist = zip([linksto]*y, links, [depth]*y)
+      InsertRows(globs.sheet, linkslist, globs.numrows)
+      return "visited"
+    else:
+      return "can't reach"
 
 def getlinks(url):
   """Grab HTML from a URL, parse links and add a row per link to spreadsheet."""
@@ -765,8 +771,10 @@ def sampleData():
     },
     
     layout: {
-      name: 'circle',
-      padding: 10
+      name: 'breadthfirst',
+      padding: 10,
+      strictHierarchy: true,
+      avoidOverlap: true
     },
     
     // on graph initial layout done (could be async depending on layout...)

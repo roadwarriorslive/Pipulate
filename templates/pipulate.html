@@ -79,21 +79,21 @@
       function spinoff() {
         $('#plist > li').last().removeClass("progress");
         $('#plist > li').last().addClass("check");
-        stopsignlock();
+        // stopsignlock();
       }
       function heart() {
         setTimeout(function(){
           $('#plist > li').last().removeClass("progress");
           $('#plist > li').last().addClass("heart");
         },800);
-        stopsignlock();
+        // stopsignlock();
       }
       function spinerr() {
         setTimeout(function(){
           $('#plist > li').last().removeClass("progress");
           $('#plist > li').last().addClass("warning");
         },800);
-        stopsignlock();
+        // stopsignlock();
       }
       function stormyweather() {
         $('#spinner').hide();
@@ -132,6 +132,7 @@
         $('#pipulate').css("opacity", .5);
         $('#pipulate').prop("disabled", true);
         $('#piplock').removeClass("pip-go");
+        $('#piplock').removeClass("pip-stopsign");
         $('#piplock').addClass("pip-lock");
       }
       function unlockbutton() {

@@ -485,9 +485,9 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
   #  \___/|_| |_|\___|   \_/ \___|_|   \__, | |_.__/|_|\__, |  \__|_|   \__, |  yielding instructions to a Web browser UI, which must
   #                                    |___/           |___/            |___/   be told in its final dying breath to stop spinning.
   try:
-    if globs.WEB:
-      yield "Beginning to Pipulate! Opening sheet...", "", "", ""
-      yield "spinon", "", "", ""
+    #if globs.WEB:
+    #  yield "Beginning to Pipulate! Opening sheet...", "", "", ""
+    #  yield "spinon", "", "", ""
     out("Reading in functions.")
     funcs = [x for x in globals().keys() if x[:2] != '__'] #List all functions
     transfuncs = ziplckey(funcs, funcs) #Keep translation table
@@ -588,7 +588,7 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
 
       if globs.WEB: yield unlock
       out("%s successfully opened." % globs.NAME)
-      yme = "%s spreadsheet opened!" % globs.DOCLINK
+      yme = "%s Sheet Opened" % globs.DOCLINK
       yield yme, "Spreadsheet Opened", "", ""
 
       if (globs.MODE == 'keywords'
@@ -657,16 +657,12 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
                 yield "You now are ready to do something requiring Sheet1 empty, like a Crawl or a Setup.", "", "", ""
                 yme = 'I recommend opening the %s Sheet in another tab so you can see the magic happen.' % (globs.DOCLINK)
                 yield yme, "", "", ""
-                yme = "Sheet1 Cleared! %s" % globs.PBNJMAN
-                yield yme, "Now, go do something awesome!", "", ""
+                yield "Sheet1 Cleared!", "Now, go do something awesome!", "", ""
                 yield spinoff
             except:
               yield "Failed to clear Sheet 1", "", "", ""
               yield spinerr
               Stop()
-          elif inst == 'stop':
-            out("This is a forced-stop from the IPM")
-            Stop()
           elif inst == 'table':
             out("IPM Make table on sheet1")
             aobj = instruction[1]
@@ -721,8 +717,7 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
                     cell.value = '?'
                 result = globs.sheet.update_cells(CellList)
             yield "Question marks filled in!", "Ready for some serious pipulating", "", ""
-            yme = "You're now ready for some serious pipulating!" + globs.PBNJMAN
-            yield yme, "", "", ""
+            yield "You're now ready for some serious pipulating!", "", "", ""
             yield spinoff
             Stop()
           elif inst == 'add':
@@ -734,6 +729,13 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
               acell = "%s1" % clet
               globs.sheet.update_acell(acell, instruction[1])
               out(instruction)
+          elif inst == 'stop':
+            out("This is a forced-stop from the IPM")
+            yme = "Pipulation Complete! Do a little victory dance!" + globs.PBNJMAN
+            yield yme, "", "", ""
+            yield spinoff
+            yield "", "", "", ""
+            Stop()
       #                        _       _               _  ___   At some point in the future, there wil be
       #   __ _  ___   ___   __| |  ___| |__   ___  ___| ||__ \  something better than Google Spreadsheets.
       #  / _` |/ _ \ / _ \ / _` | / __| '_ \ / _ \/ _ \ __|/ /  Until that day, let us use it excessively
@@ -877,7 +879,6 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
           time.sleep(10)
       if stop == True:
         if globs.WEB:
-          yield badtuple
           yield spinerr
           yield unlock
         Stop()
@@ -1165,8 +1166,7 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
           yield yme, "", "", ""
           yme = 'New to this? Watch <a target="_blank" href="https://docs.google.com/presentation/d/10lr_d1uyLMOnWsMzbenKiPlFE5-BIt9bxVucw7O4GSI/edit?usp=sharing">Demo</a> &amp; read <a target="_blank" href="https://github.com/miklevin/pipulate/blob/master/README.md">Docs</a>. '
           yield yme, "The first worksheet in your spreadsheet needs something in it.", "", ""
-          yme = "But congratulations; you found Pipulate. " + globs.PBNJMAN
-          yield yme, "", "", ""
+          yield "But congratulations; you found Pipulate.", "", "", ""
           yield "heart", "", "", ""
         return # permissible here?
       therange = range(qstart, qend)
@@ -1407,8 +1407,7 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
               onecell.value = newrow[index]
             if globs.STOP:
               if globs.WEB:
-                yme = "Pipulate deliberately stopped. Feels like a success. %s" % globs.PBNJMAN
-                yield yme, "Pipulation Stopped", "", ""
+                yield "Pipulate deliberately stopped. Feels like a success.", "Pipulation Stopped", "", ""
                 yield spinoff
               Stop()
             else:
@@ -1438,8 +1437,8 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
     else: #No session object found
       if globs.WEB: yield 'Please Login to Google', "", "", ""
     if globs.WEB:
-      yme = 'Pipulation complete. Do a little victory dance. %s' % globs.PBNJMAN
-      yield yme, 'Congratulations, pipulation complete!', "", ""
+      #yme = 'Pipulation complete. Do a little victory dance. %s' % globs.PBNJMAN
+      #yield yme, 'Congratulations, pipulation complete!', "", ""
       yield spinoff
     out("PIPULATION OVER", "1", '-')
   except Exception as e:
