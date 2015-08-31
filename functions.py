@@ -689,7 +689,7 @@ def makeview(viewname):
     'includecode': '<script src="http://js.cytoscape.org/js/cytoscape.min.js"></script>',
     'compresseddata': cellfriendly
     }
-  return "%s done" % viewname, rowdict
+  return 'made', rowdict
 
 def foo():
   return 'bar', {'first':'one', 'second':'two', 'third': 'three'}
