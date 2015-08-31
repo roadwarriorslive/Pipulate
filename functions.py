@@ -733,13 +733,13 @@ def makeview(viewname):
   });
   }); // on dom ready'''
 
-  nodesandedges = '''nodes: [
+  nodes = '''nodes: [
       { data: { id: 'j', name: 'Jerry' } },
       { data: { id: 'e', name: 'Elaine' } },
       { data: { id: 'k', name: 'Kramer' } },
       { data: { id: 'g', name: 'George' } }
-    ],
-    edges: [
+    ],'''
+  edges= ''' edges: [
       { data: { source: 'j', target: 'e' } },
       { data: { source: 'j', target: 'k' } },
       { data: { source: 'j', target: 'g' } },
@@ -751,7 +751,7 @@ def makeview(viewname):
       { data: { source: 'g', target: 'j' } }
     ]'''
 
-  thedata = "%s%s%s" % (prefix, nodesandedges, suffix)
+  thedata = "%s%s%s%s" % (prefix, nodes, edges, suffix)
 
   compressed = bz2.compress(thedata)
   cellfriendly = base64.b64encode(compressed)
