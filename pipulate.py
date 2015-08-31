@@ -1238,9 +1238,19 @@ def Pipulate(preproc='', dockey='', targettab="", token=''):
                         #
                         tastereturn = eval(evalme)
                         if type(tastereturn) == tuple:
-                          for index2, anothercell in enumerate(CellList):
-                            out("'%s': '%s'" % (globs.row1[index2], anothercell.value))
-                          gotcha(tastereturn[1])
+                          newrow[coldex] = tastereturn[0]
+                          if len(tastereturn) > 1:
+                            checkdict = tastereturn[1]
+                            if type(checkdict) == dict:
+                              for index2, anothercell in enumerate(CellList):
+                                #out("'%s': '%s'" % (globs.row1[index2], anothercell.value))
+                                for akey in checkdict:
+                                  #out("'%s': '%s'" % (akey, checkdict[akey]))
+                                  if globs.row1[index2] == akey:
+                                    anothercell.value = checkdict[akey] 
+                                    newrow[index2] = checkdict[akey]
+                              #result = globs.sheet.update_cells(CellList)
+                              #break
                         else:
                           newrow[coldex] = tastereturn
                         stop = False
