@@ -87,12 +87,15 @@ def visualize():
     creds = Credentials(access_token=session['oa2'])
     gsp = gspread.authorize(creds)
     gdoc = gsp.open_by_key(request.args['k'])
-    usethis = '<script src="http://js.cytoscape.org/js/cytoscape.min.js"></script>'
-    try:
-      sheet = gdoc.worksheet("Visualizations")
-      out("We're in business!")
-    except:
-      out("Visualizatons not found")
+    vsheet = gdoc.worksheet("visualizations")
+    vkey = request.args['v']
+    vrow = vsheet.find(vkey).row
+    vcols = vsheet.row_values(1)
+    out(vcols)
+    darow = vsheet.row_values(vrow)
+    idex = vcols.index('includecode')
+    cdex = vcols.index('compresseddata')
+    usethis = darow[idex]
     return render_template('visualize.html', injectjson=sampleData(), injectincludes=usethis)
   else:
     return render_template('visualize.html')
