@@ -695,8 +695,7 @@ def foo():
   return 'bar', {'first':'one', 'second':'two', 'third': 'three'}
 
 def sampleData():
-  return '''<script>
-$(function(){ // on dom ready
+  return '''$(function(){ // on dom ready
 
 $('#cy').cytoscape({
   style: cytoscape.stylesheet()
@@ -774,5 +773,4 @@ $('#cy').cytoscape({
   }
 });
 
-}); // on dom ready
-</script>'''
+}); // on dom ready'''
