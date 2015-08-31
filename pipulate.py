@@ -1567,14 +1567,6 @@ def ziplckey(keys, values):
   keys = lowercaselist(keys)
   return dict(zip(keys, values))
 
-def lowercaselist(onelist):
-  for index, item in enumerate(onelist):
-    try:
-      onelist[index] = item.lower().strip()
-    except:
-      pass
-  return onelist
-
 def timewindow(amiinnewtimewindow):
   if amiinnewtimewindow == "*":
     return (True,'','','','','')

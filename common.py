@@ -193,3 +193,12 @@ def checkurl(url):
     r'(?::\d+)?'  # optional port
     r'(?:/?|[/?]\S+)$', re.IGNORECASE)
   return url is not None and regex.search(url)
+
+def lowercaselist(onelist):
+  for index, item in enumerate(onelist):
+    try:
+      onelist[index] = item.lower().strip()
+    except:
+      pass
+  return onelist
+

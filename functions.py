@@ -691,19 +691,30 @@ def makeview(viewname):
     }
   return 'made', rowdict
 
-def foo():
-  return 'bar', {'first':'one', 'second':'two', 'third': 'three'}
-
 def sampleData():
 
-  out("SHEET TITLEEEEEEEEEEEEEEEEEEEEEE: %s" % globs.sheet.title)
+  sheet1 = globs.gdoc.sheet1
+  row1 = lowercaselist(sheet1.row_values(1))
+  fromurldex = row1.index('url') + 1
+  linkstodex = row1.index('linksto') + 1
+  fromurl = sheet1.col_values(fromurldex)
+  linksto = sheet1.col_values(linkstodex)
+  edgetuples = zip(fromurl, linksto)
+  nodes = ''
+  for aurl in set(fromurl):
+    nodes = nodes + "{ data: { id: '%s', name: '%s'} },\n" % (aurl, aurl)
+  nodes = nodes[:-2]
+  edges = ''
+  for atuple in edgetuples:
+    edges = edges + "{ data: { source: '%s', target: '%s' } },\n" % (atuple[0], atuple[1])
+  edges = edges[:-1]
 
-  nodes = '''{ data: { id: 'j', name: 'Frank' } },
-        { data: { id: 'e', name: 'Debbie' } },
-        { data: { id: 'k', name: 'Eugine' } },
-        { data: { id: 'g', name: 'Stan' } }'''
+  xnodes = '''{ data: { id: 'j', name: 'j'} },
+             { data: { id: 'e', name: 'e'} },
+             { data: { id: 'k', name: 'k'} },
+             { data: { id: 'g', name: 'g'} }'''
 
-  edges = '''{ data: { source: 'j', target: 'e' } },
+  xedges = '''{ data: { source: 'j', target: 'e' } },
         { data: { source: 'j', target: 'k' } },
         { data: { source: 'j', target: 'g' } },
         { data: { source: 'e', target: 'j' } },
@@ -752,7 +763,7 @@ def sampleData():
     },
     
     layout: {
-      name: 'grid',
+      name: 'radial',
       padding: 10
     },
     
