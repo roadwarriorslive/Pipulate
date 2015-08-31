@@ -679,53 +679,61 @@ def length(archive):
 def makeview(viewname):
   import base64, bz2
   from uuid import uuid4
-  compressed = bz2.compress(sampleData())
-  cellfriendly = base64.b64encode(compressed)
-  mygid = uuid4()
-  rowdict = {
-    'sharelink': 'http://%s/v?k=%s&v=%s' % (globs.HOST, globs.DOCID, mygid),
-    'datestamp': datestamp(), 
-    'guid': mygid, 
-    'includecode': '<script src="http://js.cytoscape.org/js/cytoscape.min.js"></script>',
-    'compresseddata': cellfriendly
+  prefix = '''$(function(){ // on dom ready
+  $('#cy').cytoscape({
+    style: cytoscape.stylesheet()
+      .selector('node')
+        .css({
+          'content': 'data(name)',
+          'text-valign': 'center',
+          'color': 'white',
+          'text-outline-width': 2,
+          'text-outline-color': '#888'
+        })
+      .selector('edge')
+        .css({
+          'target-arrow-shape': 'triangle'
+        })
+      .selector(':selected')
+        .css({
+          'background-color': 'black',
+          'line-color': 'black',
+          'target-arrow-color': 'black',
+          'source-arrow-color': 'black'
+        })
+      .selector('.faded')
+        .css({
+          'opacity': 0.25,
+          'text-opacity': 0
+        }),
+    elements: {'''
+
+  suffix = '''},
+    layout: {
+      name: 'grid',
+      padding: 10
+    },
+    // on graph initial layout done (could be async depending on layout...)
+    ready: function(){
+      window.cy = this;
+      // giddy up...
+      cy.elements().unselectify();
+      cy.on('tap', 'node', function(e){
+        var node = e.cyTarget; 
+        var neighborhood = node.neighborhood().add(node);
+        cy.elements().addClass('faded');
+        neighborhood.removeClass('faded');
+      });
+      cy.on('tap', function(e){
+        if( e.cyTarget === cy ){
+          cy.elements().removeClass('faded');
+        }
+      });
     }
-  return 'made', rowdict
+  });
+  }); // on dom ready'''
 
-def foo():
-  return 'bar', {'first':'one', 'second':'two', 'third': 'three'}
-
-def sampleData():
-  return '''$(function(){ // on dom ready
-
-$('#cy').cytoscape({
-  style: cytoscape.stylesheet()
-    .selector('node')
-      .css({
-        'content': 'data(name)',
-        'text-valign': 'center',
-        'color': 'white',
-        'text-outline-width': 2,
-        'text-outline-color': '#888'
-      })
-    .selector('edge')
-      .css({
-        'target-arrow-shape': 'triangle'
-      })
-    .selector(':selected')
-      .css({
-        'background-color': 'black',
-        'line-color': 'black',
-        'target-arrow-color': 'black',
-        'source-arrow-color': 'black'
-      })
-    .selector('.faded')
-      .css({
-        'opacity': 0.25,
-        'text-opacity': 0
-      }),
-  
-  elements: {
-    nodes: [
+  nodesandedges = '''nodes: [
       { data: { id: 'j', name: 'Jerry' } },
       { data: { id: 'e', name: 'Elaine' } },
       { data: { id: 'k', name: 'Kramer' } },
@@ -741,36 +749,19 @@ $('#cy').cytoscape({
       { data: { source: 'k', target: 'e' } },
       { data: { source: 'k', target: 'g' } },
       { data: { source: 'g', target: 'j' } }
-    ]
-  },
-  
-  layout: {
-    name: 'grid',
-    padding: 10
-  },
-  
-  // on graph initial layout done (could be async depending on layout...)
-  ready: function(){
-    window.cy = this;
-    
-    // giddy up...
-    
-    cy.elements().unselectify();
-    
-    cy.on('tap', 'node', function(e){
-      var node = e.cyTarget; 
-      var neighborhood = node.neighborhood().add(node);
-      
-      cy.elements().addClass('faded');
-      neighborhood.removeClass('faded');
-    });
-    
-    cy.on('tap', function(e){
-      if( e.cyTarget === cy ){
-        cy.elements().removeClass('faded');
-      }
-    });
-  }
-});
+    ]'''
 
-}); // on dom ready'''
+  thedata = "%s%s%s" % (prefix, nodesandedges, suffix)
+
+  compressed = bz2.compress(thedata)
+  cellfriendly = base64.b64encode(compressed)
+  mygid = uuid4()
+  rowdict = {
+    'sharelink': 'http://%s/v?k=%s&v=%s' % (globs.HOST, globs.DOCID, mygid),
+    'datestamp': datestamp(), 
+    'guid': mygid, 
+    'includecode': '<script src="http://js.cytoscape.org/js/cytoscape.min.js"></script>',
+    'compresseddata': cellfriendly
+    }
+  return 'made', rowdict
+
