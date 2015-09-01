@@ -63,6 +63,7 @@ def archive(url):
     return cpat.sub(replacement, string) 
   import base64, bz2
   somehtml = requests.get(url).text
+  globs.html = somehtml
   import re
   badpats = ['id="__EVENTVALIDATION" value=".*?"', 'id="__VIEWSTATE" value=".*?"']
   for pat in badpats:
@@ -241,7 +242,7 @@ def crawl(linksto, depth='0'):
 
 def getlinks(url):
   """Grab HTML from a URL, parse links and add a row per link to spreadsheet."""
-  fcols = ['Depth', 'Title', 'Description']
+  fcols = ['Depth', 'Archive', 'Title', 'Description']
   therange = 'B1:%s2' % globs.letter[len(fcols)+1]
   CellList = globs.sheet.range(therange)
   vals = fcols + ['0'] + ['?']*(len(fcols)-1)
@@ -261,7 +262,7 @@ def getlinks(url):
   links = list(links)
   y = len(links)
   q = ['?']*y
-  linkslist = zip(links,['1']*y,q,q)
+  linkslist = zip(links,['1']*y,q,q,q)
   InsertRows(globs.sheet, linkslist, 2)
   return "0"
 

@@ -1323,6 +1323,9 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label=''):
                           if 'archive' in globs.row1:
                             prehtml = onerow[globs.row1.index('archive')]
                             html = unarchive(prehtml)
+                            if not html:
+                              url = onerow[globs.row1.index('url')]
+                              html = gethtml(url)
                           else:
                             url = onerow[globs.row1.index('url')]
                             html = gethtml(url)
@@ -1440,7 +1443,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label=''):
       if globs.WEB: yield 'Please Login to Google', "", "", ""
     if globs.WEB:
       #yme = 'Pipulation complete. Do a little victory dance. %s' % globs.PBNJMAN
-      #yield yme, 'Congratulations, pipulation complete!', "", ""
+      yield "Pipulate cycle complete.", 'Pipulate Cycle Complete', "", ""
       yield spinoff
     out("PIPULATION OVER", "1", '-')
   except Exception as e:
@@ -1911,7 +1914,9 @@ class SetupForm(PipForm2):
   """Create the menu for when Clear Sheet 1 is selected."""
   radios = RadioField(choices=[
     ('cancel',      'Cancel'),
-    ('client',      'Set up New SEO Client'),
+    ('process',     'Create Roadmap'),
+    ('serps',       'Monitor Rankings'),
+    ('seocop',      'Implementation Monitor'),
     ('fillmarks',   "Flood-fill ?'s (keeps existing data)."),
     ('resetmarks',  "Reset ?'s (WIPES existing data)."),
     ('tests',       'Run System Tests')
