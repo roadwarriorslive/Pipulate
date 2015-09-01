@@ -71,7 +71,10 @@ def stream_template(template_name, **context):  # There's a rather awesome bit o
 @app.context_processor
 def templateglobals():
   """Make functions usable in templates."""
-  return dict(loginlink=getLoginlink(),
+  alink = ''
+  if session:
+    alink = getLoginlink()
+  return dict(loginlink=alink,
   bookmarklet=getBookmarklet(),
   blabel=getLabel(),
   logoutlink=getLogoutlink(),
