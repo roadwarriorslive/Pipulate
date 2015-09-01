@@ -190,17 +190,33 @@ of nuanced issues (like lxml on Windows under CygWin!):
 
 ### Debian/Ubuntu
 From a Terminal:
-- sudo apt-get install python-pip python-dev python-lxml git
-- sudo pip install requests
-- sudo pip install flask_wtf
-- sudo pip install gspread
-- sudo pip install lxml
-- pip install requests -U
+- Create server. I chose Debian 8 (Jessie) (PVHVM) 512MB
+- Create DNS entry pointing IP to your server.
+- ssh in by root@yourdomain.com
+- Type passwd and change password
+- apt-get update
+- apt-get upgrade (and Y confirm)
+- easy_install pip
+- apt-get install python-dev python-lxml git
+- pip2 install requests flask_wtf lxml gspread
 - cd /var
 - git clone https://github.com/miklevin/pipulate.git
 - cd pipulate
-- python webpipulate.py
-- Visit http://localhost:8888
+- hostname devpipulate
+  (make sure pipulate is in the name or it serves on port 8888)
+- sh install.sh
+- git config --global user.email "your@gmail.com"
+- git config --global user.name "Your Name"
+- devpipulate
+- Visit site in browser at yourdomain.com
+- Go to https://console.developers.google.com/
+- Set up a Web App project and Credentials (process documented elsewhere)
+- Paste your Google app Client ID and Client Secret into Pipulate config form.
+- Click Submit and Configure
+- Approve OAuth login
+- Drag bookmarklet to Bookmark bar and close tab.
+- Get pipulating! Remember, visit it through bookmarklet now.
+
 
 ### Mac OS X
 From a Terminal:
