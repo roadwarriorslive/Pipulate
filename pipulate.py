@@ -1,8 +1,8 @@
-"""    Because life's too short to not collect  ABOUT THE AUTHOR:      # From Pipulate, Import *
-       data in the same place you work with it  http://mikelev.in
-        _____ _             _       _           http://levinux.com     - What is Pipulate and why? It's...
-       |  __ (_)           | |     | |          http://pipulate.com    - An attempt to scratch my own itch
-       | |__) | _ __  _   _| | __ _| |_ ___    ___ ___  _ __ ___       - So that I can structure my mind better
+"""    Because life's too short to not collect  ABOUT THE AUTHOR:           # From Pipulate, Import *              column 1
+       data in the same place you work with it  http://mikelev.in                                                         2
+        _____ _             _       _           http://levinux.com     - What is Pipulate and why? It's...                3
+       |  __ (_)           | |     | |          http://pipulate.com    - An attempt to scratch my own itch                |
+       | |__) | _ __  _   _| | __ _| |_ ___    ___ ___  _ __ ___       - So that I can structure my mind better           V
        |  ___/ | '_ \| | | | |/ _` | __/ _ \  / __/ _ \| '_ ` _ \      - So that I can structure my behavior better
        | |   | | |_) | |_| | | (_| | ||  __/ | (_| (_) | | | | | |     - So that I can remember more and forget less
        |_|   |_| .__/ \__,_|_|\__,_|\__\___|(_)___\___/|_| |_| |_|     - So that I can achieve more while straining less
@@ -15,11 +15,11 @@
    /|\---1.-----> bookmarklet ----------2.-------> Pipulate Server |   - To chat with a bit as I get old
    ( ) CLICK  | with a website ||      URL and  |   | which checks |   - Because, we make our own why.
   =====       |   displaying.  ||       context '---|---|--|--|----'
-    |         |                ||                   |   |  |  |              # THE PIPULATE TO-DO LIST HIT PARADE:
-    5.        '----------------'|      then sends   |   |  |  '-------> ?    - Auto Setup Departmential Processes
-  SEE THE--->  | to Google Sheet|<-------4.---------'   |  '----3.----> ?    - Cytoscape visualization of crawl data
-  RESULTS      '----------------'  a response           '-------------> ?    - Video-per-feature links from Docs tab
-                                                          ...stuff on net    - Email support
+    |         |                ||                   |   |  |  |             # THE PIPULATE TO-DO LIST HIT PARADE:
+    5.        '----------------'|      then sends   |   |  |  '-------> ?   - Auto Setup Departmential Processes
+  SEE THE--->  | to Google Sheet|<-------4.---------'   |  '----3.----> ?   - Cytoscape visualization of crawl data
+  RESULTS      '----------------'  a response           '-------------> ?   - Video-per-feature links from Docs tab
+                                                          ...stuff on net   - Email support
 
  If you like what you see expressed here in this project, there is countless more where that came from. Though I hate the
  notion of yet another platform or framework or architecture, that is indeed exactly what I've built here, but lightweight
@@ -27,8 +27,8 @@
  disnintermediation. A good fight with naysayers also intensifies the heat in which this product is forged, and makes it
  better overall. Follow my antics, from a Catskills Geek-Dad to seasoned SEO-pro in highly competitive NYC. Join me here.
  {'more' : ['https://twitter.com/miklevin', 'https://www.linkedin.com/in/miklevin', 'https://instagram.com/miklevin/']}
-
 """
+
 #  _                            _     _   _     _       While it may look it, this is not the entry-point for Pipulate.
 # (_)_ __ ___  _ __   ___  _ __| |_  | |_| |__ (_)___   Both webpipulate.py (the Flask context) and loopipulate.py (the
 # | | '_ ` _ \| '_ \ / _ \| '__| __| | __| '_ \| / __|  command-line context for cron) import this file as one of their
@@ -38,22 +38,22 @@
 
 import sys, os, socket, urlparse, re, gspread
 import requests, traceback, datetime, time, json
-import globs                                                                # An Ode To Style
-from common import *
-from flask import (Flask,                                                   # This is not DRY.
-                  stream_with_context,                                      # I'll tell you why
-                  render_template,
+import globs
+from common import *                                                        # AN ODE TO STYLE
+from flask import (Flask,
+                  stream_with_context,                                      # This is not DRY.
+                  render_template,                                          # I'll tell you why.
                   Response,                                                 # Though you may fret,
                   request,                                                  # I like it WET.
-                  session,
-                  redirect,                                                 # But like a champ,
-                  url_for,                                                  # I make it DAMP!
+                  session,                                                  # But like a champ,
+                  redirect,                                                 # I make it DAMP!
+                  url_for,
                   flash)
 from functions import *
 
 #                          _          __  __    This ain't PHP. It's kinda like a .NET codebehind, but way more awesome
 #   __ _ _ __  _ __    ___| |_ _   _ / _|/ _|   because it's Python. But Python resisting doing things like plugging whole
-#  / _` | '_ \| '_ \  / __| __| | | | |_| |_    high-level web frameworks in the core product relies on 3rd party developers
+#  / _` | '_ \| '_ \  / __| __| | | | |_| |_    high-level frameworks in the core product relies on 3rd party developers
 # | (_| | |_) | |_) | \__ \ |_| |_| |  _|  _|   to fill the void--and in this case, it happens to be Flask. And Flask
 #  \__,_| .__/| .__/  |___/\__|\__,_|_| |_|     happens to be Werkzeug to handle "web routing" and Jinja2 to handle
 #       |_|   |_|                               PHP-style web templates. It takes time to grok, but is worth it.
@@ -131,8 +131,8 @@ def main():
     form2 = formDict[form.options.data.split(':')[1]]
   else:
     form2 = PipForm2(csrf_enabled=False)
-  if (request.method == 'POST' 
-      and 'secondary' in form2 
+  if (request.method == 'POST'
+      and 'secondary' in form2
       and form2.secondary.data == 'on'):
     form2 = formDict[form.options.data.split(':')[1]]
   menudefault = None
@@ -638,7 +638,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label=''):
       #   |_| \__,_|_|  |_|_| |_|\__, | |___/  \___/ \__,_|_|\_\___|_.__/ \___/_/\_\  itself, interpret commands in tuples,
       #                          |___/                                                then come back and continue normally.
 
-      # There's a very important point to get here, so I'll write even more. Pipulate works just fine without Turing's 
+      # There's a very important point to get here, so I'll write even more. Pipulate works just fine without Turing's
       # Jukebox, but what this does is gives a chance to do other things to the spreadsheet, like add tables, setup initial
       # values, and even simulate "replace ?'s" clicks in targeted tabs BEFORE other Good Sheet starts to happen, according
       # to the conventional lawnmower-sweeping ?-replacement behavior--which you can choose to block here, or allow as the
@@ -1275,7 +1275,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label=''):
                                 for akey in checkdict:
                                   #out("'%s': '%s'" % (akey, checkdict[akey]))
                                   if globs.row1[index2] == akey:
-                                    anothercell.value = checkdict[akey] 
+                                    anothercell.value = checkdict[akey]
                                     newrow[index2] = checkdict[akey]
                               #result = globs.sheet.update_cells(CellList)
                               #break
@@ -1785,12 +1785,12 @@ def stringify_children(node):
   parts = ([node.text] + list(chain(*([c.text, tostring(c, with_tail=False), c.tail] for c in node.getchildren()))) + [node.tail])
   # filter removes possible Nones in texts and tails
   return ''.join(filter(None, parts))
-#            _    __                              _  _     _ 
+#            _    __                              _  _     _
 #  __      _| |_ / _| ___  _ __ _ __ ___  ___   _| || |_  / |
 #  \ \ /\ / / __| |_ / _ \| '__| '_ ` _ \/ __| |_  ..  _| | |
 #   \ V  V /| |_|  _| (_) | |  | | | | | \__ \ |_      _| | |
 #    \_/\_/  \__|_|  \___/|_|  |_| |_| |_|___/   |_||_|   |_|
-#                                                            
+#
 from flask_wtf import Form
 from wtforms import (StringField,
                     RadioField,
@@ -1873,26 +1873,39 @@ def prePipulators():
     'fillmarks':    FillQMarks,
     'resetmarks':   ResetQMarks
   }
-#           _    __                              _  _     ____    These forms control what is in many cases, activation 
+#           _    __                              _  _     ____    These forms control what is in many cases, activation
 # __      _| |_ / _| ___  _ __ _ __ ___  ___   _| || |_  |___ \   of tertiary actions (main menu / 2ndary menu / this).
-# \ \ /\ / / __| |_ / _ \| '__| '_ ` _ \/ __| |_  ..  _|   __) |  These selections almost always result in "doing a thing" 
+# \ \ /\ / / __| |_ / _ \| '__| '_ ` _ \/ __| |_  ..  _|   __) |  These selections almost always result in "doing a thing"
 #  \ V  V /| |_|  _| (_) | |  | | | | | \__ \ |_      _|  / __/   by pressing a jukebox "music selection" on the "IPM".
 #   \_/\_/  \__|_|  \___/|_|  |_| |_| |_|___/   |_||_|   |_____|  Secondary menus tend to trigger of a SERIES of things
 #                                                                 happening. The IPM (~line 630) handles these commands.
+
+class SetupForm(PipForm2):
+  """Create the menu for when Clear Sheet 1 is selected."""
+  radios = RadioField(choices=[
+    ('cancel',      'Cancel'),
+    ('checklist',   'SEO Checklist & Roadmap'),
+    ('serps',       'Monitor Rankings'),
+    ('seocop',      'Implementation Monitor'),
+    ('fillmarks',   "Flood-fill ?'s (keeps existing data)."),
+    ('resetmarks',  "Reset ?'s (WIPES existing data)."),
+    ('tests',       'Run System Tests')
+  ])
+
 class AddColumnsForm(PipForm2):
   """Create the menu for when Clear Sheet 1 is selected."""
   choices = [
-    ('add:url',       'URL'),
-    ('add:keyword',   'Keyword'),
-    ('add:url,title,description,h1,h2,canonical',       'Crawl stuff like Title, Metas, H1s, etc.'),
-    ('add:httpcodes', 'Response Codes, Headers, Redirect Chain, etc.'),
-    ('add:opengraph', 'Facebook Open Graph tags'),
-    ('add:mobile',    'Mobile-friendly Check'),
-    ('add:twitter',   'Twitter (multiple)'),
-    ('add:facebook',  'Facebook (multiple)'),
-    ('add:youtube',   'YouTube (multiple)'),
-    ('add:instagram', 'Instagram'),
-    ('cancel',        'Cancel')
+    ('add:url',                                   'URL'),
+    ('add:keyword',                               'Keyword'),
+    ('add:url,title,description,canonical',       'Crawl stuff like Title, Metas, H1s, etc.'),
+    ('add:httpcodes',                             'Response Codes, Headers, Redirect Chain, etc.'),
+    ('add:opengraph',                             'Facebook Open Graph tags'),
+    ('add:mobile',                                'Mobile-friendly Check'),
+    ('add:twitter',                               'Twitter (multiple)'),
+    ('add:facebook',                              'Facebook (multiple)'),
+    ('add:youtube',                               'YouTube (multiple)'),
+    ('add:instagram',                             'Instagram'),
+    ('cancel',                                    'Cancel')
   ]
   checks = SelectMultipleField(
     choices=choices,
@@ -1907,18 +1920,6 @@ class CrawlTypesForm(PipForm2):
     ('linksonpage',   '1. LINKS ON PAGE (quickest): Just get the links from page, one line per link.'),
     ('quickcrawl',    '2. LINKS OFF PAGE (quick): Same as above, but visits each page to get their on-page data.'),
     ('linkgraph',     '3. CRAWL, 2-DEEP (longer): Gathers link data required for sitemap visualization.')
-  ])
-
-class SetupForm(PipForm2):
-  """Create the menu for when Clear Sheet 1 is selected."""
-  radios = RadioField(choices=[
-    ('cancel',      'Cancel'),
-    ('process',     'Create Roadmap'),
-    ('serps',       'Monitor Rankings'),
-    ('seocop',      'Implementation Monitor'),
-    ('fillmarks',   "Flood-fill ?'s (keeps existing data)."),
-    ('resetmarks',  "Reset ?'s (WIPES existing data)."),
-    ('tests',       'Run System Tests')
   ])
 
 class VisualizationForm(PipForm2):
