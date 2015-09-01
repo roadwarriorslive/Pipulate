@@ -301,7 +301,7 @@ def main():
       if form.magicbox.data:
         globs.KEYWORDS = form.magicbox.data
         form.magicbox.data = None
-      streamit = stream_with_context(Pipulate())
+      streamit = stream_with_context(Pipulate(label="Main Pipulation Sequence"))
     else:
       flash('Please enter a URL to Pipulate.')
   else:
@@ -479,7 +479,8 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label=''):
   spinoff = "spinoff", "", "", ""
   out("PIPULATION BEGINNING", "1")
   if label:
-    yield label, label, "", ""
+    yme = '<span class="labelhead">%s</span>' % label
+    yield yme, label, "", ""
   #                                            _     _         _                Try to keep your try blocks small to isolate where the
   #   ___  _ __   ___  __   _____ _ __ _   _  | |__ (_) __ _  | |_ _ __ _   _   errors are coming from. Or do this. Python is a very
   #  / _ \| '_ \ / _ \ \ \ / / _ \ '__| | | | | '_ \| |/ _` | | __| '__| | | |  pragmatic language, and sometimes you have to take
@@ -656,9 +657,6 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label=''):
                 cell.value = ''
               result = gdoc.sheet1.update_cells(CellList)
               if globs.WEB:
-                yield "You now are ready to do something requiring Sheet1 empty, like a Crawl or a Setup.", "", "", ""
-                yme = 'I recommend opening the %s Sheet in another tab so you can see the magic happen.' % (globs.DOCLINK)
-                yield yme, "", "", ""
                 yield "Sheet1 Cleared!", "Now, go do something awesome!", "", ""
                 yield spinoff
             except:
@@ -730,6 +728,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label=''):
               clet = globs.letter[len(gdoc.worksheet(globs.TAB).row_values(1)) + 1]
               acell = "%s1" % clet
               globs.sheet.update_acell(acell, instruction[1])
+              globs.row1 = lowercaselist(globs.sheet.row_values(1))
               out(instruction)
           elif inst == 'stop':
             out("This is a forced-stop from the IPM")
