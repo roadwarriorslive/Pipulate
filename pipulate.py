@@ -575,6 +575,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label=''):
                 break
           except gspread.exceptions.SpreadsheetNotFound:
             if globs.WEB: yield "Please give the document a name to force first save.", "", "", ""
+            break
           except Exception as e:
             if globs.WEB: yield dontgetfrustrated(x)
             out("Retry login %s of %s" % (x, 10))
@@ -1871,25 +1872,26 @@ def prePipulators():
     'add':          AddColumns,
     'sitemap':      MakeSitemap,
     'fillmarks':    FillQMarks,
-    'resetmarks':   ResetQMarks
+    'resetmarks':   ResetQMarks,
+    'checklist':    SEOChecklist
   }
 #           _    __                              _  _     ____    These forms control what is in many cases, activation
 # __      _| |_ / _| ___  _ __ _ __ ___  ___   _| || |_  |___ \   of tertiary actions (main menu / 2ndary menu / this).
 # \ \ /\ / / __| |_ / _ \| '__| '_ ` _ \/ __| |_  ..  _|   __) |  These selections almost always result in "doing a thing"
 #  \ V  V /| |_|  _| (_) | |  | | | | | \__ \ |_      _|  / __/   by pressing a jukebox "music selection" on the "IPM".
-#   \_/\_/  \__|_|  \___/|_|  |_| |_| |_|___/   |_||_|   |_____|  Secondary menus tend to trigger of a SERIES of things
-#                                                                 happening. The IPM (~line 630) handles these commands.
+#   \_/\_/  \__|_|  \___/|_|  |_| |_| |_|___/   |_||_|   |_____|  These forms need corresponding entries in prePipulators()
+#                                                                 in order to trigger the cascading player piano effect.
 
 class SetupForm(PipForm2):
   """Create the menu for when Clear Sheet 1 is selected."""
   radios = RadioField(choices=[
-    ('cancel',      'Cancel'),
-    ('checklist',   'SEO Checklist & Roadmap'),
-    ('serps',       'Monitor Rankings'),
-    ('seocop',      'Implementation Monitor'),
-    ('fillmarks',   "Flood-fill ?'s (keeps existing data)."),
-    ('resetmarks',  "Reset ?'s (WIPES existing data)."),
-    ('tests',       'Run System Tests')
+    ('checklist',   'SEO Checklist'),
+    ('serps',       'Ranking Monitor'),
+    ('seocop',      'Code Cop (not ready)'),
+    ('fillmarks',   "Flood-?'s (KEEPS data)."),
+    ('resetmarks',  "Reset-?'s (WIPES data)."),
+    ('tests',       'Run System Tests'),
+    ('cancel',      'Cancel')
   ])
 
 class AddColumnsForm(PipForm2):
@@ -1897,14 +1899,16 @@ class AddColumnsForm(PipForm2):
   choices = [
     ('add:url',                                   'URL'),
     ('add:keyword',                               'Keyword'),
-    ('add:url,title,description,canonical',       'Crawl stuff like Title, Metas, H1s, etc.'),
-    ('add:httpcodes',                             'Response Codes, Headers, Redirect Chain, etc.'),
-    ('add:opengraph',                             'Facebook Open Graph tags'),
-    ('add:mobile',                                'Mobile-friendly Check'),
-    ('add:twitter',                               'Twitter (multiple)'),
-    ('add:facebook',                              'Facebook (multiple)'),
-    ('add:youtube',                               'YouTube (multiple)'),
-    ('add:instagram',                             'Instagram'),
+    ('add:archive',                               'Archive (save page in spreadsheet)'),
+    ('add:difficulty',                            'SEMRush Difficulty (process singles)'),
+    ('add:rushdifficulty',                        'SEMRush Difficulty (batches 50/time)'),
+    ('add:domainauthority,pageauthority',         'Moz Domain and Page Authority'),
+    ('add:url,title,description,canonical,h1,h2', 'Enhanced SEO Crawl fields'),
+    ('add:header,response,redirect_chain',        'HTTP Header, Response Code and Redirect Chain'),
+    ('add:fb,likes,shares,comments',              'Facebook Likes, Shares & Comments'),
+    ('add:url,tweettotal,following,followers',    'Twitter Profile (tweet total, following & followers)'),
+    ('add:url,subscribers,views',                 'YouTube Profile (subscribers & views)'),
+    ('add:url,views,thumbsup,thumbsdown',         'YouTube Video (views & thumbs)'),
     ('cancel',                                    'Cancel')
   ]
   checks = SelectMultipleField(
@@ -1916,17 +1920,17 @@ class AddColumnsForm(PipForm2):
 class CrawlTypesForm(PipForm2):
   """Present user with different types of crawls they can perform."""
   radios = RadioField(choices=[
-    ('cancel',        'Cancel'),
     ('linksonpage',   '1. LINKS ON PAGE (quickest): Just get the links from page, one line per link.'),
     ('quickcrawl',    '2. LINKS OFF PAGE (quick): Same as above, but visits each page to get their on-page data.'),
-    ('linkgraph',     '3. CRAWL, 2-DEEP (longer): Gathers link data required for sitemap visualization.')
+    ('linkgraph',     '3. CRAWL, 2-DEEP (longer): Gathers link data required for sitemap visualization.'),
+    ('cancel',        'Cancel')
   ])
 
 class VisualizationForm(PipForm2):
   """Offer up a few common visualizations of the type of data we're handling"""
   radios = RadioField(choices=[
-    ('cancel',  'Cancel'),
-    ('sitemap', 'Sitemap with 2-DEEP crawl data')
+    ('sitemap', 'Sitemap with 2-DEEP crawl data'),
+    ('cancel',  'Cancel')
   ])
 
 class ClearSheet1Form(PipForm2):
@@ -1942,6 +1946,46 @@ class ClearSheet1Form(PipForm2):
 #  \__ \ | | |  __/  __/ |_  | | | | | | |_| \__ \ | (__    such as it were. Or Loom, if you prefer. Or Turing machine.
 #  |___/_| |_|\___|\___|\__| |_| |_| |_|\__,_|___/_|\___|   In any case, we just feed these instructions into the part
 #                                                           of Pipulate there waiting to execute final menu choices.
+
+def SEOChecklist():
+  '''Sets up a new worksheet for tracking SEO Client setup and deliverables.'''
+  out("Setting up New SEO Client.")
+  return Pipulate([
+    ('clear', ''),
+    ('sheet', 'SEOChecklist', [
+      ('DateStamp', 'Category',     'Task',                     'Phase', 'Recurrence',  'WhetherDue', 'Status', 'Notes'),
+      (datestamp(), 'Reports',      'Monthly',                  '2',     'True',        'True',       '?',      ''),
+      (datestamp(), 'Reports',      'UXReport',                 '2',     'True',        'True',       '?',      ''),
+      (datestamp(), 'Onboarding',   'Discovery',                '1',     'False',       'True',       '?',      ''),
+      (datestamp(), 'Onboarding',   'Analytics Logins',         '1',     'False',       'True',       '?',      ''),
+      (datestamp(), 'Onboarding',   'Keyword Research',         '1',     'False',       'True',       '?',      ''),
+      (datestamp(), 'Onboarding',   'BrightEdge Integration',   '1',     'False',       'True',       '?',      ''),
+      (datestamp(), 'SiteAudit',    'Architecture & URL',       '2',     'False',       'False',      '?',      ''),
+      (datestamp(), 'SiteAudit',    'Product & Categories',     '2',     'False',       'False',      '?',      ''),
+      (datestamp(), 'SiteAudit',    'Titles, Descriptions',     '2',     'False',       'False',      '?',      ''),
+      (datestamp(), 'SiteAudit',    'Body Copy',                '2',     'False',       'False',      '?',      ''),
+      (datestamp(), 'SiteAudit',    'Schema',                   '2',     'False',       'False',      '?',      ''),
+      (datestamp(), 'SiteAudit',    'Local Pages',              '2',     'False',       'False',      '?',      ''),
+      (datestamp(), 'SiteAudit',    'Site Speed',               '2',     'False',       'False',      '?',      ''),
+      (datestamp(), 'SiteAudit',    'Duplicate Content',        '2',     'False',       'False',      '?',      ''),
+      (datestamp(), 'SiteAudit',    'Minimizing Code',          '2',     'False',       'False',      '?',      ''),
+      (datestamp(), 'SiteAudit',    'Crawl & robots.txt',       '2',     'False',       'False',      '?',      ''),
+      (datestamp(), 'SiteAudit',    'HTML & XML Sitemap',       '2',     'False',       'False',      '?',      ''),
+      (datestamp(), 'SiteAudit',    'Server Response Codes',    '2',     'False',       'False',      '?',      ''),
+      (datestamp(), 'SiteAudit',    'Reducing Dynamic URLs',    '2',     'False',       'False',      '?',      ''),
+      (datestamp(), 'Competition',  'Anlayze & Monitor',        '2',     'True',        'False',      '?',      ''),
+      (datestamp(), 'Competition',  'Report on',                '2',     'True',        'False',      '?',      ''),
+      (datestamp(), 'Offsite',      'Develop Content Strategy', '2',     'True',        'False',      '?',      ''),
+      (datestamp(), 'Offsite',      'Content Recos',            '2',     'True',        'False',      '?',      ''),
+      (datestamp(), 'Offsite',      'Email Outreach',           '2',     'True',        'False',      '?',      ''),
+      (datestamp(), 'Offsite',      'PR & Partnering',          '2',     'True',        'False',      '?',      ''),
+      (datestamp(), 'Offsite',      'Social Media Signals',     '2',     'True',        'False',      '?',      ''),
+      (datestamp(), 'Offsite',      'Open Graph',               '2',     'True',        'False',      '?',      ''),
+      (datestamp(), 'UXTesting',    'Conversion',               '2',     'True',        'False',      '?',      ''),
+      (datestamp(), 'UXTesting',    'Usability',                '2',     'True',        'False',      '?',      ''),
+      (datestamp(), 'UXTesting',    'Multivariate',             '2',     'True',        'False',      '?',      '')
+    ])
+  ], label='Making SEO Checklist')
 
 def ResetQMarks():
   '''Interrogates worksheet and inserts question marks wherever they can go'''

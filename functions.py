@@ -698,6 +698,12 @@ def makeview(viewname):
     }
   return 'made', rowdict
 
+def status(recurrence, whetherdue):
+  if whetherdue == 'FALSE':
+    return '[N/A]'
+  elif whetherdue == 'TRUE':
+    return "[Is it done?]"
+
 def sampleData():
 
   sheet1 = globs.gdoc.sheet1
