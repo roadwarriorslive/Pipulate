@@ -204,6 +204,7 @@ def main():
         'expires': expiresin
       }
       pickle.dump(pickleme, open(globs.TOKEN, 'wb')) # Pickle the frequenlty-changed access token
+      return render_template('pipulate.html') # Get "code" out of the URL.
     else: # Config file not found, nor POST method or "code" on querystring.
       return render_template('pipulate.html', configform=configform) # Start server configuration procedure.
   if session and 'oa2' in session: # Appears that user is logged in already.
