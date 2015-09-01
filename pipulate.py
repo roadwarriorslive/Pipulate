@@ -324,7 +324,10 @@ def main():
         pass
       session['oa2'] = request.args.get("access_token")
       session['loggedin'] = "1"
-      session['i'] -= 1 # Don't skip a cute message, just becuse I redirect.
+      try:
+        session['i'] -= 1 # Don't skip a cute message, just becuse I redirect.
+      except:
+        pass
       if 'u' in session and 's' in session:
         out("EXITING MAIN FUNCTION REDIRECT WITH URL AND TEXT", "0", '-')
         return redirect(url_for('main', u=session['u'], s=session['s'], l='1'))
