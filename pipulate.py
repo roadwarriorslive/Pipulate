@@ -1901,34 +1901,34 @@ class AddColumnsForm(PipForm2):
 class CrawlTypesForm(PipForm2):
   """Present user with different types of crawls they can perform."""
   radios = RadioField(choices=[
+    ('cancel',        'Cancel'),
     ('linksonpage',   '1. LINKS ON PAGE (quickest): Just get the links from page, one line per link.'),
     ('quickcrawl',    '2. LINKS OFF PAGE (quick): Same as above, but visits each page to get their on-page data.'),
-    ('linkgraph',     '3. CRAWL, 2-DEEP (longer): Gathers link data required for sitemap visualization.'),
-    ('cancel',        'Cancel')
+    ('linkgraph',     '3. CRAWL, 2-DEEP (longer): Gathers link data required for sitemap visualization.')
   ])
 
 class SetupForm(PipForm2):
   """Create the menu for when Clear Sheet 1 is selected."""
   radios = RadioField(choices=[
+    ('cancel',      'Cancel'),
     ('client',      'Set up New SEO Client'),
     ('fillmarks',   "Flood-fill ?'s (keeps existing data)."),
     ('resetmarks',  "Reset ?'s (WIPES existing data)."),
-    ('tests',       'Run System Tests'),
-    ('cancel',      'Cancel')
+    ('tests',       'Run System Tests')
   ])
 
 class VisualizationForm(PipForm2):
   """Offer up a few common visualizations of the type of data we're handling"""
   radios = RadioField(choices=[
-    ('sitemap', 'Sitemap with 2-DEEP crawl data'),
-    ('cancel',  'Cancel')
+    ('cancel',  'Cancel'),
+    ('sitemap', 'Sitemap with 2-DEEP crawl data')
   ])
 
 class ClearSheet1Form(PipForm2):
   """Create the menu for when Clear Sheet 1 is selected."""
   radios = RadioField(choices=[
-    ('clear',   'Yes, clear Sheet 1.'),
-    ('cancel',  'Cancel')
+    ('cancel',  'Cancel'),
+    ('clear',   'Yes, clear Sheet 1.')
   ])
 
 #       _               _                         _         Here's a bunch of key/value pairs for ya. We open with a
