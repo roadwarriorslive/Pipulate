@@ -175,12 +175,12 @@ def main():
       linktologin = "%s?%s" % (globs.OAUTHURL, urlencode(qsdict))
       return redirect(linktologin)
     elif request.args and 'code' in request.args:                   # Trap condition where "code" is found in querystring
-      import pickle
-      writeus = pickle.load(open(globs.TOKEN, "rb"))
       code = request.args['code']
       scope = 'https://spreadsheets.google.com/feeds/'
       redir = 'http://'+globs.HOST
       endpoint = "https://www.googleapis.com/oauth2/v3/token" # Notice the new endpoint for this exchange.
+      import pickle
+      writeus = pickle.load(open(globs.TOKEN, "rb"))
       postheaders = {
         'client_id': writeus['CLIENT_ID'],
         'client_secret': writeus['CLIENT_SECRET'],

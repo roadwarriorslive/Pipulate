@@ -162,9 +162,9 @@
       {% elif request.args and 'logout' in request.args: %}
         localStorage.clear();
       {% elif not session: %}
-      if (localStorage.getItem("oa2") != null) {
-        window.location = "http://{{ request.headers['Host'] }}?access_token=" + localStorage.getItem("oa2");
-      }
+      // if (localStorage.getItem("oa2") != null) {
+      //   window.location = "http://{{ request.headers['Host'] }}?access_token=" + localStorage.getItem("oa2");
+      // }
       {% endif %}
     </script>
   </head>
