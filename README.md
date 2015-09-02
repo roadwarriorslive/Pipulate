@@ -22,7 +22,7 @@ Swiss Army Knife for all sorts of data-mashups, including...
 That being said, I'm pretty certain Pipulate will become a preferred method of
 accessing these very same services through their APIs, because who doesn't want
 to conduct this kind of investigation directly from a spreadsheet if they can?
-This unification-under-spreadsheet approach "feels right" because it is right.
+This unification-under-spreadsheet approach "feels right" [because it is right.](https://docs.google.com/presentation/d/10lr_d1uyLMOnWsMzbenKiPlFE5-BIt9bxVucw7O4GSI/edit?usp=sharing)
 
 ## Here's How It Works
 
