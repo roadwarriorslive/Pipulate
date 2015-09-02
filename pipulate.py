@@ -305,7 +305,7 @@ def main():
       if form.magicbox.data:
         globs.KEYWORDS = form.magicbox.data
         form.magicbox.data = None
-      streamit = stream_with_context(Pipulate(label="Main Pipulation Sequence"))
+      streamit = stream_with_context(Pipulate(label="Main Pipulation Sequence (?-Replacement)..."))
     else:
       flash('Please enter a URL to Pipulate.')
   else:
@@ -832,6 +832,10 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label=''):
           yield unlock
         Stop()
       out("Config tab copied to globals.")
+      maxrowsperhour = 0
+      if 'maxrowsperhour' in globs.config:
+        maxrowsperhour = globs.config['maxrowsperhour']
+      out("maxrowsperhour: %s" % maxrowsperhour)
       if globs.WEB:
         yme = "Counting rows in %s tab..." % globs.TAB
         yield yme, "Counting rows", '', ''
@@ -1040,7 +1044,6 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label=''):
       yme = "%s trending jobs found. Analyzing frequency." % len(trendlistoflists)
       if globs.WEB: yield yme, "", "", ""
       trendingrowsfinished = True
-      maxrowsperhour = 0
       out("Done looking for asterisks", "2", "-")
       #  _   _                   ___                           _
       # | |_(_)_ __ ___   ___   ( _ )     ___ ___  _   _ _ __ | |_
@@ -1083,8 +1086,6 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label=''):
             maxrowsperhour = len(trendlistoflists)
             if not counts[0]:
               if globs.WEB: yield "Last set of trending rows complete.", "", "", ""
-          if 'maxrowsperhour' in globs.config:
-            maxrowsperhour = globs.config['maxrowsperhour']
           try:
             int(maxrowsperhour)
           except:
@@ -1184,8 +1185,11 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label=''):
         yield "Beginning to process rows with question marks...", "", "", ""
       for index, rowdex in enumerate(therange): #Start stepping through every row.
         if rowdex in qset:
+          out("maxrowsperhour: %s" % maxrowsperhour)
+          out("index: %s" % index)
           if maxrowsperhour: # if maxrowsperhour is 0, this won't trap
             if index >= int(maxrowsperhour):
+              #raise SystemExit("MaxRowsPerHour")
               break
           yme = "Pipulating row: %s (item %s of %s)..." % (rowdex-1, index+1, len(therange))
           yield yme, yme, "", ""
@@ -1904,19 +1908,21 @@ class SetupForm(PipForm2):
 class AddColumnsForm(PipForm2):
   """Create the menu for when Clear Sheet 1 is selected."""
   choices = [
-    ('add:url',                                   'URL'),
-    ('add:keyword',                               'Keyword'),
-    ('add:archive',                               'Archive (save page in spreadsheet)'),
-    ('add:difficulty',                            'SEMRush Difficulty (process singles)'),
-    ('add:rushdifficulty',                        'SEMRush Difficulty (batches 50/time)'),
-    ('add:domainauthority,pageauthority',         'Moz Domain and Page Authority'),
-    ('add:url,title,description,canonical,h1,h2', 'Enhanced SEO Crawl fields'),
-    ('add:header,response,redirect_chain',        'HTTP Header, Response Code and Redirect Chain'),
-    ('add:fb,likes,shares,comments',              'Facebook Likes, Shares & Comments'),
-    ('add:url,tweettotal,following,followers',    'Twitter Profile (tweet total, following & followers)'),
-    ('add:url,subscribers,views',                 'YouTube Profile (subscribers & views)'),
-    ('add:url,views,thumbsup,thumbsdown',         'YouTube Video (views & thumbs)'),
-    ('cancel',                                    'Cancel')
+    ('add:url',                                    'URL'),
+    ('add:keyword',                                'Keyword'),
+    ('add:TimeStamp,Count',                        'TimeStamp & Count (scheduling requirements)'),
+    ('add:site,keyword,positions,position,topurl', 'SERPS (search engine results pages)'),
+    ('add:archive',                                'Archive (save page in spreadsheet)'),
+    ('add:difficulty',                             'SEMRush Difficulty (process singles)'),
+    ('add:rushdifficulty',                         'SEMRush Difficulty (batches 50/time)'),
+    ('add:domainauthority,pageauthority',          'Moz Domain and Page Authority'),
+    ('add:url,title,description,canonical,h1,h2',  'Enhanced SEO Crawl fields'),
+    ('add:header,response,redirect_chain',         'HTTP Header, Response Code and Redirect Chain'),
+    ('add:fb,likes,shares,comments',               'Facebook Likes, Shares & Comments'),
+    ('add:url,tweettotal,following,followers',     'Twitter Profile (tweet total, following & followers)'),
+    ('add:url,subscribers,views',                  'YouTube Profile (subscribers & views)'),
+    ('add:url,views,thumbsup,thumbsdown',          'YouTube Video (views & thumbs)'),
+    ('cancel',                                     'Cancel')
   ]
   checks = SelectMultipleField(
     choices=choices,
