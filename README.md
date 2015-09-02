@@ -14,6 +14,11 @@ Swiss Army Knife for all sorts of data-mashups, including...
 - Instantly becomes a valuable part of your daily-flow with low investment.
 - Provides wicked-cool insights on your data through new visualizations.
 
+## What Pipulate is not
+- An industrial-strength webcrawler. Go use Screamingfrog or ScraPY for that.
+- A large-scale position-tracker. Use ((Brightedge | Conductor) & Authority Labs).
+- Anything that has a clue about the Google-scale link-graph (MajesticSEO | MozScape).
+
 ## Here's How It Works
 
     THIS IS       THIS IS YOUR BROWSER                   THIS IS PIPULATE         THIS IS
