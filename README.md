@@ -14,10 +14,15 @@ Swiss Army Knife for all sorts of data-mashups, including...
 - Instantly becomes a valuable part of your daily-flow with low investment.
 - Provides wicked-cool insights on your data through new visualizations.
 
-## What Pipulate is not
+## What Pipulate is Not
 - An industrial-strength webcrawler. Go use Screamingfrog or ScraPY for that.
 - A large-scale position-tracker. Use ((Brightedge | Conductor) & Authority Labs).
 - Anything that has a clue about the Google-scale link-graph (MajesticSEO | MozScape).
+
+That being said, I'm pretty certain Pipulate will become a preferred method of
+accessing these very same services through their APIs, because who doesn't want
+to conduct this kind of investigation directly from a spreadsheet if they can?
+This unification-under-spreadsheet approach "feels right" because it is right.
 
 ## Here's How It Works
 
