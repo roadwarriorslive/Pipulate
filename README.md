@@ -38,7 +38,7 @@ This unification-under-spreadsheet approach "feels right"
        |           |                ||                     |    |  |  '----------------> ?
        5.          '----------------'|      then sends     |    |  '---------3.--------> ?
      SEE THE------> | to Google Sheet|<--------4.----------'    '----------------------> ?
-     RESULTS        '----------------'    a response                  ...stuff on net''')
+     RESULTS        '----------------'    a response                 ...stuff on net
 
 
 ## Using it
