@@ -334,14 +334,17 @@ def main():
         pass
       if 'u' in session and 's' in session:
         out("EXITING MAIN FUNCTION REDIRECT WITH URL AND TEXT", "0", '-')
-        return redirect(url_for('main', u=session['u'], s=session['s'], l='1'))
+        #return redirect(url_for('main', u=session['u'], s=session['s'], l='1'))
+        return redirect(url_for('main', u=session['u'], s=session['s']))
       elif 'u' in session:
         out("EXITING MAIN FUNCTION REDIRECT WITH URL", "0", '-')
-        return redirect(url_for('main', u=session['u'], l='1'))
+        #return redirect(url_for('main', u=session['u'], l='1'))
+        return redirect(url_for('main', u=session['u']))
       else:
         out("Redirecting, no URL known")
         out("EXITING MAIN FUNCTION REDIRECT", "0", '-')
-        return redirect(url_for('main', l='1'))
+        #return redirect(url_for('main', l='1'))
+        return redirect(url_for('main'))
     elif request.args and 'logout' in request.args: # Logging out
       if session:
         if 'oa2' in session:
