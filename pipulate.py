@@ -836,6 +836,10 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label=''):
       if 'maxrowsperhour' in globs.config:
         maxrowsperhour = globs.config['maxrowsperhour']
       out("maxrowsperhour: %s" % maxrowsperhour)
+      secondsbetweenrows = 0
+      if 'secondsbetweenrows' in globs.config and globs.config['secondsbetweenrows']:
+        secondsbetweenrows = int(globs.config['secondsbetweenrows'])
+      out("secondsbetweenrows : %s" % secondsbetweenrows)
       if globs.WEB:
         yme = "Counting rows in %s tab..." % globs.TAB
         yield yme, "Counting rows", '', ''
@@ -1187,10 +1191,19 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label=''):
         if rowdex in qset:
           out("maxrowsperhour: %s" % maxrowsperhour)
           out("index: %s" % index)
-          if maxrowsperhour: # if maxrowsperhour is 0, this won't trap
+          if maxrowsperhour:
+            if globs.WEB:
+              yme = "Maximum number of rows (%s) reached on this run."
+              yield yme, "Maximum rows-per-click processed", "", ""
             if index >= int(maxrowsperhour):
               #raise SystemExit("MaxRowsPerHour")
               break
+          if secondsbetweenrows: 
+            out("Waiting %s seconds between rows..." % secondsbetweenrows)
+            if globs.WEB:
+              yme = "Waiting %s seconds between processing each row." % secondsbetweenrows
+              yield yme, "", "", ""
+            time.sleep(secondsbetweenrows)
           yme = "Pipulating row: %s (item %s of %s)..." % (rowdex-1, index+1, len(therange))
           yield yme, yme, "", ""
           globs.hobj = None
