@@ -11,12 +11,12 @@
    viewBox="-921600 0 0 720"
    stroke-miterlimit="10"
    id="svg5367"
-   inkscape:version="0.91 r13725"
+   inkscape:version="0.48.5 r10040"
    width="960"
    height="960"
    sodipodi:docname="pipulate-logo-square.svg"
    style="fill:none;stroke:none;stroke-linecap:square;stroke-miterlimit:10"
-   inkscape:export-filename="/Users/miklevin/Desktop/pipulate-logo-square.png"
+   inkscape:export-filename="C:\cygwin64\home\mlevine\Dropbox\pipulate-logo-square.png"
    inkscape:export-xdpi="112.5"
    inkscape:export-ydpi="112.5">
   <metadata
@@ -47,10 +47,10 @@
      id="namedview5393"
      showgrid="false"
      inkscape:zoom="0.46354778"
-     inkscape:cx="-339.6818"
+     inkscape:cx="417.45802"
      inkscape:cy="402.33201"
-     inkscape:window-x="177"
-     inkscape:window-y="23"
+     inkscape:window-x="171"
+     inkscape:window-y="43"
      inkscape:window-maximized="0"
      inkscape:current-layer="g3037"
      inkscape:snap-nodes="false"
@@ -99,7 +99,10 @@
        id="g5497" />
     <g
        id="g4952"
-       transform="translate(0,-49.101993)">
+       transform="translate(0,-53.718128)"
+       inkscape:export-filename="C:\cygwin64\home\mlevine\Dropbox\g4952.png"
+       inkscape:export-xdpi="112.5"
+       inkscape:export-ydpi="112.5">
       <path
          style="fill:#ffffff;fill-rule:nonzero"
          inkscape:connector-curvature="0"
