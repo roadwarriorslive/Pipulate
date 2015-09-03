@@ -228,6 +228,23 @@ From a Terminal:
 - Drag bookmarklet to Bookmark bar and close tab.
 - Get pipulating! Remember, visit it through bookmarklet now.
 
+#### Extra nicities for developement machines
+- Eliminate challenge on ssh login: ad local public key -- usually found in
+  ~/.ssh/id_rsa.pub on local machine as a single line entry in
+  ~/.ssh/authorized_keys on remote machine.
+- Eliminate challenge on git push to github: Generate the not-yet-there ssh
+  keys by cd'ing to ~/.ssh/ on remote server. Then type:
+  - ssh-keygen -C "your@email.com"
+  - Copy-and-paste contents of id_rsa.pub into Github / Settings / SSH keys.
+- If vim's not installed: apt-get install vim-nox
+- Get .vimrc: git clone https://github.com/miklevin/vimrc
+- cp ./vimrc/.vimrc ~/
+- rm -rf ./vimrc
+- cd ~/
+- echo "cd /var/pipulate" >> .bashrc
+
+And that's pretty much all I do to turn a production machine into a development
+machine.
 
 ### Mac OS X
 From a Terminal:
