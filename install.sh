@@ -4,6 +4,10 @@
 chmod 755 webpipulate.py
 chmod 755 loopipulate.py
 
+if [ ! -d "/etc/cron.hourly" ]; then
+  mkdir /etc/cron.hourly
+fi
+
 # webserver daemon
 echo "Copying webserver damemon to /etc/init.d/ and activating..."
 cp systuff/daemons/webpipulate /etc/init.d/webpipulate

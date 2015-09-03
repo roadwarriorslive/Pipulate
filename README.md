@@ -212,13 +212,13 @@ From a Terminal:
   - Look to see if it's version 2.7.x
   - Type exit() to get out of Python
 - apt-get install python-dev python-lxml git
-- Follow the instructions here to install pip
-  - https://pip.pypa.io/en/latest/installing.html#install-pip
+- Follow the instructions here to install pip: https://pip.pypa.io/en/latest/installing.html#install-pip
   - wget https://bootstrap.pypa.io/get-pip.py
   - python get-pip.py
+  - rm get-pip.py
 - pip install requests flask_wtf lxml gspread
 - cd /var
-- git clone https://github.com/miklevin/pipulate.git
+- git clone https://github.com/miklevin/pipulate
 - hostname devpipulate
   (make sure pipulate is in the name or it serves on port 8888)
 - cd pipulate
@@ -236,6 +236,7 @@ From a Terminal:
 - Get pipulating! Remember, visit it through bookmarklet now.
 
 #### Extra nicities for developement machines
+- If you don't have a ~/.ssh folder, make one.
 - Eliminate challenge on ssh login: ad local public key -- usually found in
   ~/.ssh/id_rsa.pub on local machine as a single line entry in
   ~/.ssh/authorized_keys on remote machine.
