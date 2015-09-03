@@ -43,12 +43,12 @@ from common import *                                                        # AN
 from flask import (Flask,
                   stream_with_context,                                      # This is not DRY.
                   render_template,                                          # I'll tell you why.
-                  Response,                                                 # Though you may fret,
-                  request,                                                  # I like it WET.
-                  session,                                                  # But like a champ,
-                  redirect,                                                 # I make it DAMP!
+                  Response,                                                 # Though you may gripe,
+                  request,                                                  # I like to type
+                  session,                                                  # In vim and stamp
+                  redirect,                                                 # Out code most DAMP.
                   url_for,
-                  flash)
+                  flash)                                            # (Descriptive And Meaningful Phrases)
 from functions import *
 
 #                          _          __  __    This ain't PHP. It's kinda like a .NET codebehind, but way more awesome
