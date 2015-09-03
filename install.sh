@@ -18,8 +18,8 @@ chmod 755 /etc/init.d/loopipulate
 
 # cron jobs
 echo "Copying cron scripts to /etc/cron.hourly..."
-cp systuff/crons/webpipulate /etc/cron.hourly
-cp systuff/crons/loopipulate /etc/cron.hourly
+cp systuff/crons/webpipulate /etc/cron.hourly/webpipulate
+cp systuff/crons/loopipulate /etc/cron.hourly/webpipulate
 chmod 755 /etc/cron.hourly/webpipulate
 chmod 755 /etc/cron.hourly/loopipulate
 

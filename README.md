@@ -207,14 +207,21 @@ From a Terminal:
 - Type passwd and change password
 - apt-get update
 - apt-get upgrade (and Y confirm)
-- easy_install pip
+- Ensure that Python is installed.
+  - Type: python
+  - Look to see if it's version 2.7.x
+  - Type exit() to get out of Python
 - apt-get install python-dev python-lxml git
-- pip2 install requests flask_wtf lxml gspread
+- Follow the instructions here to install pip
+  - https://pip.pypa.io/en/latest/installing.html#install-pip
+  - wget https://bootstrap.pypa.io/get-pip.py
+  - python get-pip.py
+- pip install requests flask_wtf lxml gspread
 - cd /var
 - git clone https://github.com/miklevin/pipulate.git
-- cd pipulate
 - hostname devpipulate
   (make sure pipulate is in the name or it serves on port 8888)
+- cd pipulate
 - sh install.sh
 - git config --global user.email "your@gmail.com"
 - git config --global user.name "Your Name"
