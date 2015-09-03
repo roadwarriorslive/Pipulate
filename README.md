@@ -236,6 +236,9 @@ From a Terminal:
   keys by cd'ing to ~/.ssh/ on remote server. Then type:
   - ssh-keygen -C "your@email.com"
   - Copy-and-paste contents of id_rsa.pub into Github / Settings / SSH keys.
+- Change default git protocol on the repository from https to SSH:
+  - git remote set-url origin git@github.com:miklevin/pipulate
+  - Now, you should be able to push to git without a username/password challenge.
 - If vim's not installed: apt-get install vim-nox
 - Get .vimrc: git clone https://github.com/miklevin/vimrc
 - cp ./vimrc/.vimrc ~/
