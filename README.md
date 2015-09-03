@@ -248,7 +248,9 @@ From a Terminal:
 - echo "cd /var/pipulate" >> .bashrc
 
 And that's pretty much all I do to turn a production machine into a development
-machine.
+machine. Every time you log into the remote machine, you will get right in with
+no username/password challenge, and every time you do a git commit/push, it
+will go right up to github without a username/password challenge. Smoooth.
 
 ### Mac OS X
 From a Terminal:
