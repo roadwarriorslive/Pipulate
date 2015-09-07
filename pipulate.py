@@ -1543,7 +1543,7 @@ def getLabel():
   elif subdomain == 'pipulate':
     blab = '%s %s' % (droidcut, "Pipulate")
   elif subdomain:
-    blab = "%s %s %s" % (droidcut, "Pipulate", subdomain)
+    blab = "%s %s (%s)" % (droidcut, "Pipulate", subdomain)
   return blab
 
 def getBookmarklet():
