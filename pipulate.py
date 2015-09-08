@@ -89,7 +89,9 @@ from managelists import *
 
 @app.route("/update")
 def update():
-  return render_template('update.html')
+  import subprocess
+  output = subprocess.check_output(["git", "pull"])
+  return render_template('update.html', output=output)
 
 @app.route("/v")
 def visualize():
@@ -1204,7 +1206,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label=''):
           out("index: %s" % index)
           if maxrowsperhour:
             if globs.WEB:
-              yme = "Maximum number of rows (%s) reached on this run."
+              yme = "Maximum number of rows (%s) reached on this run." % maxrowsperhour
               yield yme, "Maximum rows-per-click processed", "", ""
             if index >= int(maxrowsperhour):
               #raise SystemExit("MaxRowsPerHour")
