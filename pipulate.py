@@ -90,9 +90,17 @@ from managelists import *
 @app.route("/update")
 def update():
   import subprocess
-  process = subprocess.Popen("/usr/bin/git pull", cwd="/var/pipulate/", shell=True, stdout=subprocess.PIPE)
-  output = process.communicate()[0]
-  return render_template('update.html', output=output)
+  if request.args and 'all' in request.args:
+    msg = ''
+    for ahost in ['prod', 'newyork', 'dallas', 'seattle']:
+      aurl = 'http://%s.pipulate.com/update'
+      rtext = requests.get(aurl, timeout=5).text
+      msg = msg + rtext
+    return render_template('update.html', output=msg)
+  else:
+    process = subprocess.Popen("/usr/bin/git pull", cwd="/var/pipulate/", shell=True, stdout=subprocess.PIPE)
+    output = process.communicate()[0]
+    return render_template('update.html', output=output)
 
 @app.route("/v")
 def visualize():
