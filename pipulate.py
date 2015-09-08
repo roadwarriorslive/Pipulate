@@ -79,7 +79,7 @@ def templateglobals():
   blabel=getLabel(),
   logoutlink=getLogoutlink(),
   cyclemotto=cyclemotto(),
-  hostname=socket.hostname()
+  hostname=socket.gethostname()
   )
 
 from managelists import *
