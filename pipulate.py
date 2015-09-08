@@ -90,6 +90,7 @@ from managelists import *
 @app.route("/update")
 def update():
   import subprocess
+  output = ''
   try:
     output = subprocess.check_output(["git", "pull"])
   except subprocess.CalledProcessError:
