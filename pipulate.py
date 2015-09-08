@@ -87,6 +87,10 @@ def templateglobals():
 
 from managelists import *
 
+@app.route("/update")
+def update():
+  return render_template('update.html')
+
 @app.route("/v")
 def visualize():
   if session and 'oa2' in session:
