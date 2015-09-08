@@ -436,7 +436,7 @@ This repository's copy of the license is [here](./LICENSE.md).
 
 ## 10\. Recent Changes
 ### Tue Sep  8 14:27:48 EDT 2015
-- Making every node able to git pull from main branch
+- Making every node able to git pull from main branch (test)
 ### Mon Aug 31 15:09:26 UTC 2015
 - Distinct separate Flood ?'s and Reset ?'s behavior.
 ### Mon Aug 31 03:22:47 UTC 2015
