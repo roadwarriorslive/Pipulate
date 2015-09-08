@@ -93,10 +93,19 @@ def update():
   if request.args and 'all' in request.args:
     msg = ''
     for ahost in ['prod', 'newyork', 'dallas', 'seattle']:
-      aurl = 'http://%s.pipulate.com/update'
+      aurl = 'http://%s.pipulate.com/update' % ahost
       rtext = requests.get(aurl, timeout=5).text
-      msg = msg + rtext
-    return render_template('update.html', output=msg)
+      msg = msg + "%s: %s\r" % (ahost, rtext)
+      msg2 = '''<html>
+        <head>
+          <title>Updating all servers</title>
+        </head>
+        <body>
+          <h1>Updating all servers</h1>
+          %s
+        </body>
+      </html>''' % msg
+    return render_template('update.html', output=msg2)
   else:
     process = subprocess.Popen("/usr/bin/git pull", cwd="/var/pipulate/", shell=True, stdout=subprocess.PIPE)
     output = process.communicate()[0]
