@@ -74,12 +74,15 @@ def templateglobals():
   alink = ''
   if session:
     alink = getLoginlink()
+  hostname = socket.gethostname()
+  if hostname[-8:] == 'pipulate':
+    hostname = hostname[:-8]
   return dict(loginlink=alink,
   bookmarklet=getBookmarklet(),
   blabel=getLabel(),
   logoutlink=getLogoutlink(),
   cyclemotto=cyclemotto(),
-  hostname=socket.gethostname()
+  hostname=hostname
   )
 
 from managelists import *
