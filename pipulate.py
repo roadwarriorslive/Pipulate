@@ -90,7 +90,7 @@ from managelists import *
 @app.route("/update")
 def update():
   import subprocess
-  process = subprocess.Popen("git pull", stdout=subprocess.PIPE)
+  process = subprocess.Popen("git pull", cwd="/var/pipulate", stdout=subprocess.PIPE)
   output = process.communicate()[0]
   return render_template('update.html', output=output)
 
