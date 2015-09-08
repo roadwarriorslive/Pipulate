@@ -165,7 +165,7 @@ will be able to convey the awesomeness of these particular dots being
 connected.
 
 ### Great for newbs!
-Pipulate is an extendable system, plug-in compatible with Pipulate-unaware
+Pipulate is an extendible system, plug-in compatible with Pipulate-unaware
 standalone Python functions, making it wonderful for amateur coders looking to
 extend a system. That's a long way of saying: just write a Python function
 anywhere, anyhow you like (on your Mac or Windows desktop, for example), and
@@ -198,6 +198,22 @@ twinkling in as new rows. You can get a taste of this from pipulate.com, where
 you can use my demo instance to kick the tires. Here are the preferred
 platforms for Pipulate in descending order of ease-of-installation and avoidance
 of nuanced issues (like lxml on Windows under CygWin!):
+
+### Radical Single Tenant Webserver Design
+Although it has a webserver built-in, Pipulate is not intended to serve the
+masses. It is generally a single-tenant application EVEN THOUGH IT USES A
+WEBSERVER--due to the way I make users wait while the server goes out and does
+some fancy footwork on their behalf. Although you might not notice at first
+pass, this is really very different from how other "web" applications work. I
+am unapologetic about this, even though it make some folks ornery.  Think how
+you embed sqlite into apps.  That doesn't mean you're turning it into a
+database server up to the c10k problem, necessitating non-blocking I/O,
+concurrency, parallelism and all that happy bullshit. Instead, just think
+Pipulate as YOUR app running on some very modest hardware that will be lucky to
+have multiple cores. Scaling is achieved with Pipulate through lots of little
+single-tenant servers behind a load balancer. And here's how you set up one
+instance, suitable for replicating, once your Google App Client ID and Secret
+are written onto the drive. A prompt shows on first page-load request of app.
 
 ### Debian/Ubuntu
 From a Terminal:
