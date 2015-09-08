@@ -92,7 +92,7 @@ def update():
   import subprocess
   try:
     output = subprocess.check_output(["git", "pull"])
-  except CalledProcessError:
+  except subprocess.CalledProcessError:
     out("CalledProcessError")
   except:
     pass
