@@ -90,7 +90,12 @@ from managelists import *
 @app.route("/update")
 def update():
   import subprocess
-  output = subprocess.check_output(["git", "pull"])
+  try:
+    output = subprocess.check_output(["git", "pull"])
+  except CalledProcessError:
+    out("CalledProcessError")
+  except:
+    pass
   return render_template('update.html', output=output)
 
 @app.route("/v")
