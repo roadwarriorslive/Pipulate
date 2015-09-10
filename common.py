@@ -41,7 +41,6 @@ def freshtoken(picklefile):
     import requests
     r = requests.post(endpoint, postheaders)
     rd = r.json()
-    gotcha(rd)
     xseconds = rd['expires_in']
     expiresin = datetime.now() + timedelta(seconds=xseconds)
     pickleme = {
