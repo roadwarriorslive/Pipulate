@@ -1223,12 +1223,10 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label=''):
         if rowdex in qset:
           out("maxrowsperhour: %s" % maxrowsperhour)
           out("index: %s" % index)
-          if maxrowsperhour:
+          if maxrowsperhour and index >= int(maxrowsperhour):
             if globs.WEB:
               yme = "Maximum number of rows (%s) reached on this run." % maxrowsperhour
               yield yme, "Maximum rows-per-click processed", "", ""
-            if index >= int(maxrowsperhour):
-              #raise SystemExit("MaxRowsPerHour")
               break
           if secondsbetweenrows: 
             out("Waiting %s seconds between rows..." % secondsbetweenrows)

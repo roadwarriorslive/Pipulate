@@ -469,10 +469,13 @@ def positions(keyword, serps=''):
     if rd == None:
       return "API quota likely exceeded"
     for serpage in serps:
-      serpage = serpage["responseData"]["results"]
-      for result in serpage:
-        easydict[serpos] = result['url']
-        serpos += 1
+      try:
+        serpage = serpage["responseData"]["results"]
+        for result in serpage:
+          easydict[serpos] = result['url']
+          serpos += 1
+      except:
+        pass
     return json.dumps(easydict)
   else:
     return "Error"
