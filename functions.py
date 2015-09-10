@@ -465,6 +465,9 @@ def positions(keyword, serps=''):
     serps = json.loads(serps)
     easydict = {}
     serpos = 1
+    rd = serps[0]["responseData"]
+    if rd == None:
+      return "API quota likely exceeded"
     for serpage in serps:
       serpage = serpage["responseData"]["results"]
       for result in serpage:
@@ -473,6 +476,22 @@ def positions(keyword, serps=''):
     return json.dumps(easydict)
   else:
     return "Error"
+
+def topurl(site, positions=''):
+  """Return the top performing URL for a site given a positions object."""
+  if positions:
+    urldict = json.loads(positions)
+    for thepos, aurl in urldict.iteritems():
+      if site in aurl:
+        return aurl
+
+def foundurl(lookforurl, positions=''):
+  """Return a looked-for URL, given a positions object."""
+  if positions:
+    urldict = json.loads(positions)
+    for thepos, aurl in urldict.iteritems():
+      if lookforurl.lower() == aurl.lower():
+        return aurl
 
 def position(keyword, site, positions=''):
   """Return the position a provided site is in for a given keyword."""
@@ -486,23 +505,19 @@ def position(keyword, site, positions=''):
     for thepos, aurl in urldict.iteritems():
       if site in aurl:
         return thepos
-    #return "> " % len(positions)
 
-def foundurl(lookforurl, positions=''):
-  """Return a looked-for URL, given a positions object."""
-  if positions:
+def inposition(keyword, lookforurl, positions=''):
+  """Return the position a provided lookforurl is in for a given keyword."""
+  if not positions:
+    def gpositions(keyword):
+      global positions
+      return positions(keyword)
+    positions = gpositions(keyword)
+  elif positions:
     urldict = json.loads(positions)
     for thepos, aurl in urldict.iteritems():
       if lookforurl.lower() == aurl.lower():
-        return aurl
-
-def topurl(site, positions=''):
-  """Return the top performing URL for a site given a positions object."""
-  if positions:
-    urldict = json.loads(positions)
-    for thepos, aurl in urldict.iteritems():
-      if site in aurl:
-        return aurl
+        return thepos
 
 def response(url):
   """Return a numeric http response code for given URL."""
