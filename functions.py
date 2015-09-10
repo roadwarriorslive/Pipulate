@@ -94,17 +94,6 @@ def walkdict(obj, key):
         return v
   return None
 
-def timestamp():
-  '''Return current date in simple format.'''
-  i = datetime.datetime.now()
-  return i.strftime("%m/%d/%Y %H:%M:%S")
-
-def datestamp():
-  'Return current time and date in time-trending-friendly format.'
-  now = datetime.datetime.now()
-  now = now.strftime("%B %d, %Y")
-  return now
-
 def extension(url):
   """Return the file extension, given (typically) a URL."""
   if url:

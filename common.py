@@ -203,3 +203,16 @@ def lowercaselist(onelist):
       pass
   return onelist
 
+def timestamp():
+  '''Return current date in simple format.'''
+  import datetime
+  i = datetime.datetime.now()
+  return i.strftime("%m/%d/%Y %H:%M:%S")
+
+def datestamp():
+  'Return current time and date in time-trending-friendly format.'
+  import datetime
+  now = datetime.datetime.now()
+  now = now.strftime("%B %d, %Y")
+  return now
+
