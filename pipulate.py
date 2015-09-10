@@ -1227,7 +1227,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label=''):
             if globs.WEB:
               yme = "Maximum number of rows (%s) reached on this run." % maxrowsperhour
               yield yme, "Maximum rows-per-click processed", "", ""
-              break
+            break
           if secondsbetweenrows: 
             out("Waiting %s seconds between rows..." % secondsbetweenrows)
             if globs.WEB:
