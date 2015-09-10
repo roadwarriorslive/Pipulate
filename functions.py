@@ -444,7 +444,7 @@ def instagram_followers(instagram_name):
 
 def serps(keyword):
   """Return non-customized JSON search results for keyword from Google."""
-  times = 2
+  times = 6
   api = "http://ajax.googleapis.com/ajax/services/search/web"
   returnme = []
   for start in [8*n for n in range(0,times)]:
@@ -487,6 +487,14 @@ def position(keyword, site, positions=''):
       if site in aurl:
         return thepos
     #return "> " % len(positions)
+
+def foundurl(lookforurl, positions=''):
+  """Return a looked-for URL, given a positions object."""
+  if positions:
+    urldict = json.loads(positions)
+    for thepos, aurl in urldict.iteritems():
+      if lookforurl.lower() == aurl.lower():
+        return aurl
 
 def topurl(site, positions=''):
   """Return the top performing URL for a site given a positions object."""

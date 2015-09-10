@@ -1346,9 +1346,9 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label=''):
                       except Exception as e:
                         print traceback.format_exc()
                         if globs.WEB:
-                          yme = "We have a problem in %s." % collabel
+                          yme = "We have a problem in %s. Retrying in %s seconds." % (collabel, globs.LONGRETRY)
                           yield yme, "", "", ""
-                        time.sleep(10)
+                        time.sleep(globs.LONGRETRY)
                     if stop == True:
                       out("Function End (Failed)", "4", '-')
                       if globs.WEB:
@@ -1952,20 +1952,21 @@ class SetupForm(PipForm2):
 class AddColumnsForm(PipForm2):
   """Create the menu for when Clear Sheet 1 is selected."""
   choices = [
-    ('add:url',                                    'URL'),
-    ('add:keyword',                                'Keyword'),
+    ('add:URL',                                    'URL'),
+    ('add:Keyword',                                'Keyword'),
     ('add:TimeStamp,Count',                        'TimeStamp & Count (scheduling requirements)'),
-    ('add:site,keyword,positions,position,topurl', 'SERPS (search engine results pages)'),
-    ('add:archive',                                'Archive (save page in spreadsheet)'),
-    ('add:difficulty',                             'SEMRush Difficulty (process singles)'),
-    ('add:rushdifficulty',                         'SEMRush Difficulty (batches 50/time)'),
-    ('add:domainauthority,pageauthority',          'Moz Domain and Page Authority'),
-    ('add:url,title,description,canonical,h1,h2',  'Enhanced SEO Crawl fields'),
-    ('add:header,response,redirect_chain',         'HTTP Header, Response Code and Redirect Chain'),
-    ('add:fb,likes,shares,comments',               'Facebook Likes, Shares & Comments'),
-    ('add:url,tweettotal,following,followers',     'Twitter Profile (tweet total, following & followers)'),
-    ('add:url,subscribers,views',                  'YouTube Profile (subscribers & views)'),
-    ('add:url,views,thumbsup,thumbsdown',          'YouTube Video (views & thumbs)'),
+    ('add:Site,Keyword,Positions,Position,TopUrl', 'SERPs (search engine results pages)'),
+    ('add:Site,Keyword,LookForUrl,SERPs,Positions,TopUrl,Position,FoundUrl,InPosition', 'SERPs 2 (find particular page)'),
+    ('add:Archive',                                'Archive (save page in spreadsheet)'),
+    ('add:Difficulty',                             'SEMRush Difficulty (process singles)'),
+    ('add:RushDifficulty',                         'SEMRush Difficulty (batches 50/time)'),
+    ('add:DomainAuthority,PageAuthority',          'Moz Domain and Page Authority'),
+    ('add:URL,Title,Description,Canonical,H1,H2',  'Enhanced SEO Crawl fields'),
+    ('add:Header,Response,Redirects',              'HTTP Header, Response Code and Redirect Chain'),
+    ('add:FB,Likes,Shares,Comments',               'Facebook Likes, Shares & Comments'),
+    ('add:URL,TweetTotal,Following,Followers',     'Twitter Profile (tweet total, following & followers)'),
+    ('add:URL,Subscribers,Views',                  'YouTube Profile (subscribers & views)'),
+    ('add:URL,Views,ThumbsUp,ThumbsDown',          'YouTube Video (views & thumbs)'),
     ('cancel',                                     'Cancel')
   ]
   checks = SelectMultipleField(

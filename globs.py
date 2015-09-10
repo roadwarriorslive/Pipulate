@@ -29,6 +29,7 @@ TAB =       ''     # Name of Sheet1 on Tab
 numrows =   0      # Tracks latest number of rows in sheet1 (for InsertRows)
 ROWMAX =    2000   # The size over which a row will not attempt to insert into sheet.
 EMPTY =     '[]'   # How to populate cell if nothing returned
+LONGRETRY = 10     # Number of seconds between retries that you really want to succeed.
 NONE =      '[None]'                                        # Alternative to Empty 
 NAME =      "Pipulate"                                      # Default GSheet file name.
 HOST =      "pipulate.com"                                  # Gets overwritten if 'Host' in request.headers
