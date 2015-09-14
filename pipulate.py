@@ -95,6 +95,7 @@ def update():
     for ahost in ['prod', 'newyork', 'dallas', 'seattle']:
       aurl = 'http://%s.pipulate.com/update' % ahost
       rtext = requests.get(aurl, timeout=10).text
+      rtext = rtext.replace('\n', '<br/>\n')
       msg = msg + "<li>%s: %s</li>\n" % (ahost, rtext)
     msg = msg + "</ol>\n"
     msg2 = '''<html>

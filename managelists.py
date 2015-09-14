@@ -52,8 +52,8 @@ def documentation():
 
 def seedkeywordlist():
   return [
-    ('Keyword', 'Source', 'Volume', 'Difficulty', 'SERPs')
-  ] + [''*5]*30
+    ('Keyword', 'Source', 'Volume', 'Difficulty', 'Priority', 'SERPs')
+  ] + [''*6]*30
 
 def expansionkeywordlist():
   return [
