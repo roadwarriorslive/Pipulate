@@ -1469,7 +1469,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label=''):
               if globs.WEB:
                 yield "Pipulate deliberately stopped. Feels like a success.", "Pipulation Stopped", "", ""
                 yield spinoff
-              Stop()
+              #Stop() !!!
             else:
               result = None
               stop = True
