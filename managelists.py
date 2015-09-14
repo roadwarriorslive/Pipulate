@@ -50,6 +50,46 @@ def documentation():
   s.append(['Volume',               'Keyword',   'Keyword',                   'Return SEMRush Keyword Volume.', ''])
   return s
 
+def seedkeywordlist():
+  return [
+    ('Keyword', 'Source', 'Volume', 'Difficulty', 'SERPs')
+  ] + [''*5]*30
+
+def expansionkeywordlist():
+  return [
+    ('Keyword', 'Source', 'Volume', 'Difficulty', 'Priority', 'Categories')
+  ]
+
+def keywordbuildchecklist():
+  return [
+    ('Phase',       'Task',                             'Status', 'Notes'),
+    ('Discovery',   'Interview Client',                 '',       ''),
+    ('Discovery',   "Crawl Client's Site",              '',       ''),
+    ('Discovery',   "Get Analytics Logins",             '',       ''),
+    ('Discovery',   "Competitors Identified by Client", '',       ''),
+    ('Discovery',   "Client Identified Competitors",    '',       ''),
+    ('Seeding',     "SERP-identified Competitors",      '',       ''),
+    ('Seeding',     "Crawl Competitor Sites",           '',       ''),
+    ('Seeding',     "Harvest Wikipedia Pages",          '',       ''),
+    ('Seeding',     "Harvest PDFs and Other",           '',       ''),
+    ('Expansion',   "Identify Best Seed Keywords",      '',       ''),
+    ('Expansion',   "Google Keyword Planner",           '',       ''),
+    ('Expansion',   "Google Suggest API",               '',       ''),
+    ('Expansion',   "Proprietary Tool 1 (BrightEdge)",  '',       ''),
+    ('Expansion',   "Proprietary Tool 2 (SEMRush)",     '',       ''),
+    ('Quantify',    "Combine and Preserve Datapoints",  '',       ''),
+    ('Quantify',    "Fill-in Missing Search Volumes",   '',       ''),
+    ('Quantify',    "Fill-in Difficulty Scores",        '',       ''),
+    ('Quantify',    "Stem Term Analysis",               '',       ''),
+    ('Portfolio',   "Bucket by Category",               '',       ''),
+    ('Portfolio',   "Frame Discussion in Spreadsheet",  '',       ''),
+    ('Portfolio',   "Prioritize With Client",           '',       ''),
+    ('Portfolio',   "Complete Prioritization",          '',       ''),
+    ('Portfolio',   "Recommend Portfolio",              '',       ''),
+    ('Portfolio',   "Refine With Client",               '',       ''),
+    ('Portfolio',   "Setup Tracking",                   '',       '')
+  ]
+
 def seochecklistlist():
   return [
     ('DateStamp', 'Category',    'Task',                     'Phase', 'StartDate', 'Recurrence', 'WhetherDue', 'Status', 'Notes'),

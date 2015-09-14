@@ -715,8 +715,8 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label=''):
             aobj = instruction[2]
             row1 = aobj[0]
             lol = aobj[1:]
-            tabs = [sheet.title for sheet in gdoc.worksheets()]
-            if tabname.lower() in lowercaselist(tabs):
+            tabs = [sheet.title.lower() for sheet in gdoc.worksheets()]
+            if tabname in tabs:
               try:
                 insertat = len(gdoc.worksheet(tabname).col_values(1))
                 InsertRows(gdoc.worksheet(tabname), lol, insertat)
@@ -1927,7 +1927,8 @@ def prePipulators():
     'sitemap':      MakeSitemap,
     'fillmarks':    FillQMarks,
     'resetmarks':   ResetQMarks,
-    'checklist':    SEOChecklist
+    'checklist':    SEOChecklist,
+    'keywordlist':  KeywordChecklist
   }
 #           _    __                              _  _     ____    These forms control what is in many cases, activation
 # __      _| |_ / _| ___  _ __ _ __ ___  ___   _| || |_  |___ \   of tertiary actions (main menu / 2ndary menu / this).
@@ -1940,6 +1941,7 @@ class SetupForm(PipForm2):
   """Create the menu for when Clear Sheet 1 is selected."""
   radios = RadioField(choices=[
     ('checklist',   'SEO Checklist'),
+    ('keywordlist', 'Keyword Build'),
     ('serps',       'Ranking Monitor'),
     ('seocop',      'Code Cop (not ready)'),
     ('fillmarks',   "Flood-?'s (KEEPS data)."),
@@ -2004,11 +2006,19 @@ class ClearSheet1Form(PipForm2):
 #  |___/_| |_|\___|\___|\__| |_| |_| |_|\__,_|___/_|\___|   In any case, we just feed these instructions into the part
 #                                                           of Pipulate there waiting to execute final menu choices.
 
+def KeywordChecklist():
+  '''Sets up a new worksheet for the keyword build phase.'''
+  out("Setting up New Keyword process.")
+  return Pipulate([
+    ('sheet', 'Keyword Build', keywordbuildchecklist()),
+    ('sheet', 'Seeds', seedkeywordlist()),
+    ('sheet', 'Expansion', expansionkeywordlist())
+  ], label="Making Keyword Build tab")
+
 def SEOChecklist():
   '''Sets up a new worksheet for tracking SEO Client setup and deliverables.'''
   out("Setting up New SEO Client.")
   return Pipulate([
-    ('clear', ''),
     ('sheet', 'SEOChecklist', seochecklistlist())
   ], label='Making SEO Checklist')
 
