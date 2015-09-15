@@ -16,9 +16,9 @@
    ( ) CLICK  | with a website ||      URL and  |   | which checks |   - Because, we make our own why.
   =====       |   displaying.  ||       context '---|---|--|--|----'
     |         |                ||                   |   |  |  |             # THE PIPULATE TO-DO LIST HIT PARADE:
-    5.        '----------------'|      then sends   |   |  |  '-------> ?   - Auto Setup Departmential Processes
-  SEE THE--->  | to Google Sheet|<-------4.---------'   |  '----3.----> ?   - Cytoscape visualization of crawl data
-  RESULTS      '----------------'  a response           '-------------> ?   - Video-per-feature links from Docs tab
+    5.        '----------------'|      then sends   |   |  |  '-------> ?   - More Departmential Auto Setups
+  SEE THE--->  | to Google Sheet|<-------4.---------'   |  '----3.----> ?   - Better Cytoscape visualization
+  RESULTS      '----------------'  a response           '-------------> ?   - Site crawl keyword extraction
                                                           ...stuff on net   - Email support
 
  If you like what you see expressed here in this project, there is countless more where that came from. Though I hate the
