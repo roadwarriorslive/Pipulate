@@ -57,7 +57,7 @@ def seedkeywordlist():
 
 def expansionkeywordlist():
   return [
-    ('Keyword', 'Source', 'Volume', 'Difficulty', 'Priority', 'Categories')
+    ('Keyword', 'Volume', 'Difficulty', 'Source', 'Categories', 'Priority')
   ]
 
 def keywordbuildchecklist():
