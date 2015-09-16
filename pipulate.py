@@ -270,7 +270,9 @@ def main():
         if tasteMe:
           gdoc = gsp.open_by_url(tasteMe)
         else:
+          out("Attempting to load %s sheet." % globs.NAME)
           gdoc = gsp.open(globs.NAME)
+          out("Loaded %s sheet." % gdoc.title)
         needsPipulate = False
         globs.DOCID = gdoc.id
         globs.NAME = gdoc.title
@@ -804,7 +806,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label=''):
       headers = ['NAME', 'VALUE']
       config = []
       config.append(['RepeatJobEvery','day'])
-      config.append(['MaxRowsPerHour','3'])
+      config.append(['MaxRowsPerHour',''])
       config.append(['SEMRush','Paste SEMRush API key here.'])
       config.append(['MozID','Paste Moz ID here.'])
       config.append(['MozKey','Paste Moz Secret Key here.'])
@@ -1910,27 +1912,6 @@ def secondaryMenu():
     'column':       AddColumnsForm(csrf_enabled=False),
     'graph':        VisualizationForm(csrf_enabled=False)
   }
-#                            _             _       _                   Pre-Pipulators may be chosen directly from the
-#  _ __  _ __ ___      _ __ (_)_ __  _   _| | __ _| |_ ___  _ __ ___   main menu or secondary. They point to object that
-# | '_ \| '__/ _ \____| '_ \| | '_ \| | | | |/ _` | __/ _ \| '__/ __|  are called as functions when the menu option is
-# | |_) | | |  __/____| |_) | | |_) | |_| | | (_| | || (_) | |  \__ \  POST'ed. Think of it as the function-hook location
-# | .__/|_|  \___|    | .__/|_| .__/ \__,_|_|\__,_|\__\___/|_|  |___/  to do stuff before the normal ?-replacement phase
-# |_|                 |_|     |_|                                      begins. They can do anything to the spreadsheet.
-def prePipulators():
-  return {
-    'clear':        ClearSheet1,
-    'cancel':       Cancel,
-    'linksonpage':  LinksOnPage,
-    'quickcrawl':   QuickCrawl,
-    'linkgraph':    LinkGraph,
-    'tests':        RunTests,
-    'add':          AddColumns,
-    'sitemap':      MakeSitemap,
-    'fillmarks':    FillQMarks,
-    'resetmarks':   ResetQMarks,
-    'checklist':    SEOChecklist,
-    'keywordlist':  KeywordChecklist
-  }
 #           _    __                              _  _     ____    These forms control what is in many cases, activation
 # __      _| |_ / _| ___  _ __ _ __ ___  ___   _| || |_  |___ \   of tertiary actions (main menu / 2ndary menu / this).
 # \ \ /\ / / __| |_ / _ \| '__| '_ ` _ \/ __| |_  ..  _|   __) |  These selections almost always result in "doing a thing"
@@ -2121,6 +2102,19 @@ def LinkGraph():
       (globs.PIPURL, '?')
     ]),
     ('?', ''),
+    ('stop', '')
+  ], label='Crawl, 2-Deep')
+
+def LinkGraphDeluxe():
+  '''Collect links from displaying page and prepare to visit each for more links..'''
+  out("Getting links on page to get links on other pages.")
+  return Pipulate([
+    ('clear', ''),
+    ('table', [
+      ('url','PreCrawl'),
+      (globs.PIPURL, '?')
+    ]),
+    ('?', ''),
     ('?', ''),
     ('sheet', 'visualizations', [
       ('viewname', 'makeview', 'sharelink', 'datestamp', 'guid', 'includecode', 'compresseddata'),
@@ -2135,3 +2129,24 @@ def Cancel():
   out("Cancel")
   return Pipulate()
 
+#                            _             _       _                   Pre-Pipulators may be chosen directly from the
+#  _ __  _ __ ___      _ __ (_)_ __  _   _| | __ _| |_ ___  _ __ ___   main menu or secondary. They point to object that
+# | '_ \| '__/ _ \____| '_ \| | '_ \| | | | |/ _` | __/ _ \| '__/ __|  are called as functions when the menu option is
+# | |_) | | |  __/____| |_) | | |_) | |_| | | (_| | || (_) | |  \__ \  POST'ed. Think of it as the function-hook location
+# | .__/|_|  \___|    | .__/|_| .__/ \__,_|_|\__,_|\__\___/|_|  |___/  to do stuff before the normal ?-replacement phase
+# |_|                 |_|     |_|                                      begins. They can do anything to the spreadsheet.
+def prePipulators():
+  return {
+    'clear':        ClearSheet1,
+    'cancel':       Cancel,
+    'linksonpage':  LinksOnPage,
+    'quickcrawl':   QuickCrawl,
+    'linkgraph':    LinkGraph,
+    'tests':        RunTests,
+    'add':          AddColumns,
+    'sitemap':      MakeSitemap,
+    'fillmarks':    FillQMarks,
+    'resetmarks':   ResetQMarks,
+    'checklist':    SEOChecklist,
+    'keywordlist':  KeywordChecklist
+  }
