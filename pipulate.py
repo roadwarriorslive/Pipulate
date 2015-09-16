@@ -277,6 +277,7 @@ def main():
         globs.DOCID = gdoc.id
         globs.NAME = gdoc.title
         globs.TAB = gdoc.sheet1.title
+        globs.sheet = gdoc.sheet1
         if gdoc.sheet1.find('?'):
           readytopip = True
           menudefault = "qmarks"
@@ -1964,6 +1965,7 @@ class CrawlTypesForm(PipForm2):
     ('linksonpage',   '1. LINKS ON PAGE (quickest): Just get the links from page, one line per link.'),
     ('quickcrawl',    '2. LINKS OFF PAGE (quick): Same as above, but visits each page to get their on-page data.'),
     ('linkgraph',     '3. CRAWL, 2-DEEP (longer): Gathers link data required for sitemap visualization.'),
+    ('pagestab',      'De-duplicate 2-DEEP crawl into new Pages tab.'),
     ('cancel',        'Cancel')
   ])
 
@@ -2124,6 +2126,18 @@ def LinkGraphDeluxe():
     ('stop', '')
   ], label='Crawl, 2-Deep')
 
+def PagesTab():
+  '''Collect links now residing in Sheet 1 from 2-DEEP crawl and de-dupe URLs into new tab.'''
+  out("Collecting links from Sheet 1 and de-duplicating Pages into new tab.")
+
+  pages = set(globs.sheet.col_values(1))
+
+  gotcha(pages)
+
+  return Pipulate([
+    ('sheet', 'Pages', seochecklistlist())
+  ], label='De-duplicating Links')
+
 def Cancel():
   '''Go back to default main menu.'''
   out("Cancel")
@@ -2142,6 +2156,7 @@ def prePipulators():
     'linksonpage':  LinksOnPage,
     'quickcrawl':   QuickCrawl,
     'linkgraph':    LinkGraph,
+    'pagestab':     PagesTab,
     'tests':        RunTests,
     'add':          AddColumns,
     'sitemap':      MakeSitemap,
