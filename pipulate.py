@@ -1938,6 +1938,7 @@ class AddColumnsForm(PipForm2):
   choices = [
     ('add:URL',                                    'URL'),
     ('add:Keyword',                                'Keyword'),
+    ('add:URL,Archive,Title,Description,Canonical,H1,H2', 'Manual Crawl (title, description, canonical, h1, etc.'),
     ('add:TimeStamp,Count',                        'TimeStamp & Count (scheduling requirements)'),
     ('add:Site,Keyword,Positions,Position,TopUrl', 'SERPs (search engine results pages)'),
     ('add:Site,Keyword,LookForUrl,SERPs,Positions,TopUrl,Position,FoundUrl,InPosition', 'SERPs 2 (find particular page)'),
@@ -2129,14 +2130,17 @@ def LinkGraphDeluxe():
 def PagesTab():
   '''Collect links now residing in Sheet 1 from 2-DEEP crawl and de-dupe URLs into new tab.'''
   out("Collecting links from Sheet 1 and de-duplicating Pages into new tab.")
-
   pages = set(globs.sheet.col_values(1))
-
-  gotcha(pages)
-
+  siteurls = []
+  siteurls.append(('URL', 'Archive', 'Title', 'Description', 'MetaKeywords'))
+  for apage in pages:
+    if apage.lower() != 'url':
+      siteurls.append((apage, '?', '?', '?', '?'))
   return Pipulate([
-    ('sheet', 'Pages', seochecklistlist())
+    ('sheet', 'Pages', siteurls)
   ], label='De-duplicating Links')
+  #  ('?', 'Pages'),
+  #  ('stop', '')
 
 def Cancel():
   '''Go back to default main menu.'''
