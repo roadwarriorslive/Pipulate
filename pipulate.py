@@ -266,21 +266,21 @@ def main():
         tasteMe = request.args.get('u')
       elif request.method == 'POST':
         needsPipulate = False
+      if tasteMe:
+        gdoc = gsp.open_by_url(tasteMe)
+      else:
+        out("Attempting to load %s sheet." % globs.NAME)
+        gdoc = gsp.open(globs.NAME)
+        out("Loaded %s sheet." % gdoc.title)
+      needsPipulate = False
+      globs.DOCID = gdoc.id
+      globs.NAME = gdoc.title
+      globs.TAB = gdoc.sheet1.title
+      globs.sheet = gdoc.sheet1
       try:
-        if tasteMe:
-          gdoc = gsp.open_by_url(tasteMe)
-        else:
-          out("Attempting to load %s sheet." % globs.NAME)
-          gdoc = gsp.open(globs.NAME)
-          out("Loaded %s sheet." % gdoc.title)
-        needsPipulate = False
-        globs.DOCID = gdoc.id
-        globs.NAME = gdoc.title
-        globs.TAB = gdoc.sheet1.title
-        globs.sheet = gdoc.sheet1
-        if gdoc.sheet1.find('?'):
-          readytopip = True
-          menudefault = "qmarks"
+        gdoc.sheet1.find('?')
+        readytopip = True
+        menudefault = "qmarks"
       except:
         pass
       # Indoctrinate new Pipulate users here
@@ -351,16 +351,16 @@ def main():
     if request.args and 's' in request.args:
       form.magicbox.data = request.args.get('s')
       selectedtext = request.args.get('s')
-    elif session and 's' in session:
-      form.magicbox.data = session['s']
-      selectedtext = session['s']
     if request.args and 'access_token' in request.args: # Oops... necessary evil. Redirect quickly.
       try:
         LogUser(request.args['access_token'])
       except:
         pass
-      session['oa2'] = request.args.get("access_token")
-      session['loggedin'] = "1"
+      try:
+        session['oa2'] = request.args.get("access_token")
+        session['loggedin'] = "1"
+      except:
+        pass
       try:
         session['i'] -= 1 # Don't skip a cute message, just becuse I redirect.
       except:
@@ -425,7 +425,7 @@ def main():
         flash('Pipulate will process the "%s" tab in the "%s" Google Spreadsheet.' % (globs.TAB, globs.DOCLINK))
         flash("You can target any sheet simply by clicking the bookmarklet on that Google Spreadsheet.")
         if readytopip:
-          flash('The question marks in %s indicate that you are ready to Pipulate.')
+          flash('The question marks in %s indicate that you are ready to Pipulate.' % globs.NAME)
           flash("So, what are you waiting for? Hit that button!")
         elif globs.sheet.row_values(1)==[] and globs.sheet.row_values(2) == []:
           flash("Because the first two rows of %s are blank, you can do one of the following:" % globs.TAB)
