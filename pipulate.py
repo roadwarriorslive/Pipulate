@@ -951,7 +951,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
       if globs.WEB: yield yme, "", "", ""
       if globs.numrows == 0 and globs.MODE == 'qmarks':
         if globs.WEB:
-          yme = "Double-check that the %s sheet in %s is set up correctly." % (globs.TAB, globs.DOCLINK)
+          yme = "Ready to go, but no question marks found."
           yield yme, "Pipulate needs question marks to replace.", "", ""
           yield spinerr
         return #permissible here?
