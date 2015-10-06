@@ -275,11 +275,12 @@ def main():
         except:
           pass
       try:
-        out("Loaded %s sheet." % gdoc.title)
         globs.DOCID = gdoc.id
         globs.NAME = gdoc.title
         globs.TAB = gdoc.sheet1.title
         globs.sheet = gdoc.sheet1
+        needsPipulate = False
+        out("Loaded %s sheet." % gdoc.title)
       except:
         pass
       try:
@@ -456,6 +457,12 @@ def main():
 
 def LogUser(authkey):
   """Track usage of the Pipulate bookmarklet per user on main domain instance."""
+  #  _                _   _               
+  # | |    ___   __ _| | | |___  ___ _ __ 
+  # | |   / _ \ / _` | | | / __|/ _ \ '__|
+  # | |__| (_) | (_| | |_| \__ \  __/ |   
+  # |_____\___/ \__, |\___/|___/\___|_|   
+  #             |___/                     
   import os.path
   if os.path.isfile(globs.TOKEN) and os.path.getsize(globs.TOKEN) > 0:
     token = freshtoken(globs.TOKEN)
