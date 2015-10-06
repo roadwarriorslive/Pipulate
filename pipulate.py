@@ -412,7 +412,8 @@ def main():
   #  | |_| | |___  | |   | | | | | |  __/\__ \__ \ (_| | (_| |  __/\__ \  not needed, and Flask provides yet another
   #   \____|_____| |_|   |_| |_| |_|\___||___/___/\__,_|\__, |\___||___/  thing for the world flash to mean. Nice little
   #                                                     |___/             higher abstraction doohickey in Flask framework.
-  options = mainMenu()
+  menuTupleList = mainMenu()
+
   if request.method == 'GET':
     try:
       if menutwo:
@@ -428,17 +429,22 @@ def main():
         flash('You can then find your keywords under the Harvest tab.')
       else:
         session.pop('_flashes', None)
-        flash('This will apply to %s in "%s".' % (globs.TAB, globs.DOCLINK))
+        flash('This will apply to %s in <b>%s</b>.' % (globs.TAB, globs.DOCLINK))
         if readytopip:
           flash('The question marks in %s indicate that you are ready to Pipulate.' % globs.NAME)
           flash("So, what are you waiting for? Hit that button!")
-        elif globs.sheet.row_values(1)==[] and globs.sheet.row_values(2) == []:
-          flash('If you are new to Pipulate, watch the demo.')
+        #elif globs.sheet.row_values(1)==[] and globs.sheet.row_values(2) == []:
+        #  flash('If you are new to Pipulate, watch the demo.')
         else:
           flash("It appears %s has no queston marks." % globs.TAB)
-          flash('Maybe select "Add Columns" from the menu to add some KPIs.')
+          menuTupleList = [('initialize'      , "Initialize Sheet")] + menuTupleList
+          gotcha(menuTupleList)
     except:
       pass
+  options = '<option value="off">What do you want to do?</option>\n'
+  for item in menuTupleList:
+    options += '<option value="%s">%s</options>\n' % (item[0], item[1])
+
   out("Selecting template method.")
   #  _                       _       _              To Stream or to Render, that is the question. 'Tis it not nobler
   # | |_ ___ _ __ ___  _ __ | | __ _| |_ ___  ___   to embrace the streamy render_temblate alternative in Flask and
@@ -1892,7 +1898,7 @@ class ConfigForm(Form):
 #                                                           complicated of all the non-main menu stuff that follows.
 def mainMenu():
   ''' Creates the entire cadence of the system.'''
-  menu = [
+  return [
     ('qmarks'      , "Replace ?'s"),
     ('menu:setup'  , "Do Auto Setup"),
     ('menu:crawl'  , "Crawl a Website"),
@@ -1901,10 +1907,6 @@ def mainMenu():
     ('keywords'    , "Harvest Keywords"),
     ('menu:clear'  , "Clear Sheet1")
   ]
-  strmenu = '<option value="off">What do you want to do?</option>\n'
-  for item in menu:
-    strmenu += '<option value="%s">%s</options>\n' % (item[0], item[1])
-  return strmenu
 #   ____  _           _                                                 _                    Every entry from main menu
 #  |___ \( )_ __   __| | __ _ _ __ _   _   _ __ ___   ___ _ __  _   _  | | _____ _   _ ___   whose value is prefixed by
 #    __) |/| '_ \ / _` |/ _` | '__| | | | | '_ ` _ \ / _ \ '_ \| | | | | |/ / _ \ | | / __|  "menu" goes as a key to pull
