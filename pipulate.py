@@ -280,6 +280,7 @@ def main():
         globs.TAB = gdoc.sheet1.title
         globs.sheet = gdoc.sheet1
         globs.worksheets = gdoc.worksheets()
+        globs.tabnames = [sheet.title for sheet in globs.worksheets]
         needsPipulate = False
         out("Loaded %s sheet." % gdoc.title)
       except:
@@ -437,7 +438,7 @@ def main():
       #  flash('If you are new to Pipulate, watch the demo.')
       else:
         flash("It appears %s has no queston marks." % globs.TAB)
-        if 'Config' not in globs.worksheets:
+        if 'Config' not in globs.tabnames:
           menuTupleList = [('qmarks'      , "Initialize Sheet")] + menuTupleList
   options = '<option value="off">What do you want to do?</option>\n'
   for item in menuTupleList:
