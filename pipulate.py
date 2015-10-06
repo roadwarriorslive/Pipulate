@@ -270,13 +270,18 @@ def main():
         gdoc = gsp.open_by_url(tasteMe)
       else:
         out("Attempting to load %s sheet." % globs.NAME)
-        gdoc = gsp.open(globs.NAME)
+        try:
+          gdoc = gsp.open(globs.NAME)
+        except:
+          pass
+      try:
         out("Loaded %s sheet." % gdoc.title)
-      needsPipulate = False
-      globs.DOCID = gdoc.id
-      globs.NAME = gdoc.title
-      globs.TAB = gdoc.sheet1.title
-      globs.sheet = gdoc.sheet1
+        globs.DOCID = gdoc.id
+        globs.NAME = gdoc.title
+        globs.TAB = gdoc.sheet1.title
+        globs.sheet = gdoc.sheet1
+      except:
+        pass
       try:
         gdoc.sheet1.find('?')
         readytopip = True
@@ -422,18 +427,12 @@ def main():
         flash('You can then find your keywords under the Harvest tab.')
       else:
         session.pop('_flashes', None)
-        flash('Pipulate will process the "%s" tab in the "%s" Google Spreadsheet.' % (globs.TAB, globs.DOCLINK))
-        flash("You can target any sheet simply by clicking the bookmarklet on that Google Spreadsheet.")
+        flash('This will apply to %s in "%s".' % (globs.TAB, globs.DOCLINK))
         if readytopip:
           flash('The question marks in %s indicate that you are ready to Pipulate.' % globs.NAME)
           flash("So, what are you waiting for? Hit that button!")
         elif globs.sheet.row_values(1)==[] and globs.sheet.row_values(2) == []:
-          flash("Because the first two rows of %s are blank, you can do one of the following:" % globs.TAB)
-          flash("Visit %s and set up %s with input values, a function and question mark," % (globs.DOCLINK, globs.TAB))
-          flash('Select "Crawl Website" from the menu,')
-          flash('Select an "Auto Setup" from menu,')
-          flash('Harvest keywords,')
-          flash('Watch a demo.')
+          flash('If you are new to Pipulate, watch the demo.')
         else:
           flash("It appears %s has no queston marks." % globs.TAB)
           flash('Maybe select "Add Columns" from the menu to add some KPIs.')
@@ -460,7 +459,7 @@ def LogUser(authkey):
   import os.path
   if os.path.isfile(globs.TOKEN) and os.path.getsize(globs.TOKEN) > 0:
     token = freshtoken(globs.TOKEN)
-    reds = Credentials(access_token=token)
+    creds = Credentials(access_token=token)
     import gspread
     gsp2 = gspread.authorize(creds)
     api = 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='
@@ -489,6 +488,8 @@ def LogUser(authkey):
       user = []
       if 'email' in adict:
         user.append(adict["email"].lower())
+      else:
+        return
       for item in ['name', 'link', 'locale', 'gender', 'id']:
         try:
           user.append(adict[item])
