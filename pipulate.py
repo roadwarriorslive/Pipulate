@@ -279,6 +279,7 @@ def main():
         globs.NAME = gdoc.title
         globs.TAB = gdoc.sheet1.title
         globs.sheet = gdoc.sheet1
+        globs.worksheets = gdoc.worksheets()
         needsPipulate = False
         out("Loaded %s sheet." % gdoc.title)
       except:
@@ -415,32 +416,29 @@ def main():
   menuTupleList = mainMenu()
 
   if request.method == 'GET':
-    try:
-      if menutwo:
-        pass
-      elif selectedtext and globs.SHEETS not in globs.PIPURL:
-        menudefault = "keywords"
-        session.pop('_flashes', None)
-        flash("Congratulations! You have chosen to harvest keywords.")
-        flash("The words filled into the above textarea will be inserted into %s." % globs.NAME)
-        flash("Insert commas between keywords, and each one will get its own row.")
-        flash("You can also add more keyword variations by just typing them in.")
-        flash('Then select "Harvest Keywords" from the dropdown menu.')
-        flash('You can then find your keywords under the Harvest tab.')
-      else:
-        session.pop('_flashes', None)
-        flash('This will apply to %s in <b>%s</b>.' % (globs.TAB, globs.DOCLINK))
-        if readytopip:
-          flash('The question marks in %s indicate that you are ready to Pipulate.' % globs.NAME)
-          flash("So, what are you waiting for? Hit that button!")
-        #elif globs.sheet.row_values(1)==[] and globs.sheet.row_values(2) == []:
-        #  flash('If you are new to Pipulate, watch the demo.')
-        else:
-          flash("It appears %s has no queston marks." % globs.TAB)
-          menuTupleList = [('initialize'      , "Initialize Sheet")] + menuTupleList
-          gotcha(menuTupleList)
-    except:
+    if menutwo:
       pass
+    elif selectedtext and globs.SHEETS not in globs.PIPURL:
+      menudefault = "keywords"
+      session.pop('_flashes', None)
+      flash("Congratulations! You have chosen to harvest keywords.")
+      flash("The words filled into the above textarea will be inserted into %s." % globs.NAME)
+      flash("Insert commas between keywords, and each one will get its own row.")
+      flash("You can also add more keyword variations by just typing them in.")
+      flash('Then select "Harvest Keywords" from the dropdown menu.')
+      flash('You can then find your keywords under the Harvest tab.')
+    else:
+      session.pop('_flashes', None)
+      flash('This will apply to %s in <b>%s</b>.' % (globs.TAB, globs.DOCLINK))
+      if readytopip:
+        flash('The question marks in %s indicate that you are ready to Pipulate.' % globs.NAME)
+        flash("So, what are you waiting for? Hit that button!")
+      #elif globs.sheet.row_values(1)==[] and globs.sheet.row_values(2) == []:
+      #  flash('If you are new to Pipulate, watch the demo.')
+      else:
+        flash("It appears %s has no queston marks." % globs.TAB)
+        if 'Config' not in globs.worksheets:
+          menuTupleList = [('qmarks'      , "Initialize Sheet")] + menuTupleList
   options = '<option value="off">What do you want to do?</option>\n'
   for item in menuTupleList:
     options += '<option value="%s">%s</options>\n' % (item[0], item[1])
@@ -644,7 +642,6 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
             yield unlock
           Stop() # Consider adding refresh_token logic for users (versus the scheduler)
         globs.DOCLINK = '<a href="%s/d/%s/edit#gid=0" target="_blank">%s</a>' % (globs.SHEETS, globs.DOCID, globs.NAME)
-        globs.gdoc = gdoc
       out("END LOGIN ATTEMPT", "2", '-')
 
       if globs.WEB: yield unlock

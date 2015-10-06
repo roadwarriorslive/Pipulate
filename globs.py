@@ -11,6 +11,7 @@
 
 config =    {}     # In-memory copy of everything from Config tab
 row1 =      []     # Copy of contents of sheet1, row 1 for many uses.
+worksheets =[]
 STOP =      False  # The Emergency Break so functions cans top Pipulate.
 DOCID =     None   # The Google Doc key for use anywhere in system
 DOCLINK =   None   # The full a href link for the Google Sheet.
@@ -23,7 +24,6 @@ KEYWORDS =  ''     # Constant containing selected text when bookmarklet clicked.
 html =      ''     # Avoids re-fetching HTML multiple times for same row.
 hobj =      ''     # Original Requests object for row's HTML with response headers.
 nest =      ''     # Controls nested indents of debug output.
-gdoc =      None
 sheet =     ''     # Makes sheet1 worksheet object accessible to user functions.
 TAB =       ''     # Name of Sheet1 on Tab
 numrows =   0      # Tracks latest number of rows in sheet1 (for InsertRows)
