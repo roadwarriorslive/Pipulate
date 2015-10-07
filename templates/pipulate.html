@@ -27,53 +27,6 @@
           $('#pipslate').css({'height':(($(window).height())-110)+'px'});
         });
       });
-      $(document).ready(function(){  
-        {% if form2: %}
-          $("#pipform").find("input[value='cancel']").on("click", function(){
-            window.history.back();
-          });
-          $("#pipform").change(function() {
-            if ($("#pipform input:checkbox:checked").length > 0 || $("#pipform input:radio:checked").length > 0) {
-              readytogo();
-            } else {
-              stopsignlock();
-            }
-          });
-        {% endif %}
-        {% if menudefault %}
-          $(function(){
-            $('#options option[value="{{ menudefault }}"]').prop('selected', 'selected').change();
-          })
-        {% endif %}
-        $( "#options" ).bind( "change", function() {
-          readytogo();
-        });
-        $("#pipulate").click(function() {
-          lockbutton();
-          $('#pipstream').html('');
-          $('#spinner').show();
-          $('#learnsomething').html("Sit back and relax. I'm starting to Pipulate...");
-          $('#pipform').submit();
-        });
-        $(function(){
-          $("input").prop('required',true);
-        });
-        {% if session and 'loggedin' in session and session['loggedin'] == '1': %}
-          stopsignlock();
-        {% endif %}
-        {%- if request.method == 'GET': -%}
-          $("#spinner").hide();
-          if ($("#magicbox").val()) {
-            $("#learnsomething").html('The area below is a textarea for visualizing JSON or harvesting keywords.')
-          }
-        {%- endif -%}
-        {% if form and 'pipurl' in form and form.pipurl.data == '': %}
-          $("#spinner").hide();
-          unlockbutton();
-          $("#learnsomething").html('Copy and paste a URL into field (even on mobile).');
-        {% endif %}
-      });
-
       function spinoff() {
         $('#plist > li').last().removeClass("progress");
         $('#plist > li').last().addClass("check");
@@ -402,5 +355,51 @@
         </ol>
       {% endif %}
     </div>
+    <script>
+      {% if form2: %}
+        $("#pipform").find("input[value='cancel']").on("click", function(){
+          window.history.back();
+        });
+        $("#pipform").change(function() {
+          if ($("#pipform input:checkbox:checked").length > 0 || $("#pipform input:radio:checked").length > 0) {
+            readytogo();
+          } else {
+            stopsignlock();
+          }
+        });
+      {% endif %}
+      {% if menudefault %}
+        $(function(){
+          $('#options option[value="{{ menudefault }}"]').prop('selected', 'selected').change();
+        })
+      {% endif %}
+      $( "#options" ).bind( "change", function() {
+        readytogo();
+      });
+      $("#pipulate").click(function() {
+        lockbutton();
+        $('#pipstream').html('');
+        $('#spinner').show();
+        $('#learnsomething').html("Sit back and relax. I'm starting to Pipulate...");
+        $('#pipform').submit();
+      });
+      $(function(){
+        $("input").prop('required',true);
+      });
+      {% if session and 'loggedin' in session and session['loggedin'] == '1': %}
+        stopsignlock();
+      {% endif %}
+      {%- if request.method == 'GET': -%}
+        $("#spinner").hide();
+        if ($("#magicbox").val()) {
+          $("#learnsomething").html('The area below is a textarea for visualizing JSON or harvesting keywords.')
+        }
+      {%- endif -%}
+      {% if form and 'pipurl' in form and form.pipurl.data == '': %}
+        $("#spinner").hide();
+        unlockbutton();
+        $("#learnsomething").html('Copy and paste a URL into field (even on mobile).');
+      {% endif %}
+    </script>
   </body>
 </html>
