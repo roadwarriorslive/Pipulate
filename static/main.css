@@ -57,7 +57,7 @@ th {
   width: 100%;
 }
 .pipmenu {
-  background-color: #9ED1F3;
+  background-color: #A1EAFF;
   left: 0px;
   padding-right: 32px;
   padding-top: 3px;
@@ -194,7 +194,7 @@ nav{
   color: white;
 }
 #pipurl {
-  background-color: bisque;
+  background-color: #FBCB86;
   font-size: 15px;
   font-weight: bold;
   width: -moz-calc(100% - 53px);

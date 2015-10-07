@@ -56,11 +56,11 @@
       });
       function stopsignlock() {
         $('#pipulate').prop("disabled", true);
-        $('#pipulate').css('color', 'red');
+        $('#pipulate').css('color', '#9A1111');
         $('#piplock').removeClass("pip-go");
         $('#piplock').removeClass("pip-lock");
         $('#piplock').addClass("pip-stopsign");
-        $('#piplock').css('color', 'red');
+        $('#piplock').css('color', '#9A1111');
         $('#pipulate').fadeTo(0,1);
       }
       function stopsignunlock() {
@@ -117,7 +117,7 @@
         },800);
       }
       function redlock() {
-        $('#piplock').css('color', 'red');
+        $('#piplock').css('color', '#9A1111');
       }
       function whitelock() {
         $('#piplock').css('color', 'white');
