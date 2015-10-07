@@ -215,11 +215,11 @@
               <script>
                 redlock();
               </script>
-            {% elif glock == '-': -%}
+            {% else %}
               <script>
                 whitelock();
               </script>
-            {%- endif -%}
+            {% endif -%}
             {%- if learn or magic: -%}
             <script>
               {%- if magic: -%}
@@ -264,13 +264,13 @@
                   // Flash stormy weather (gdata) problem-with-api symbol
                   stormyweather();
                 </script>
-              {%- else -%}
+              {% else -%}
                 <script>
                   $('li').removeClass("progress");
                   $('li').addClass("check");
                 </script>
                 <li class="progress">{{ lineitem|safe }}</li>
-              {%- endif -%}
+              {%- endif %}
               <script>
                 $("#pipstream").scrollTop($("#pipstream")[0].scrollHeight);
               </script>
