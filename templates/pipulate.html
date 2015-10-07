@@ -70,13 +70,16 @@
         $('#piplock').addClass("pip-go");
         $('#piplock').css('color', 'white');
       }
-      function readytogo() {
+      function checkreadiness() {
+        stopsignunlock();
         if ($( "#options option:selected" ).val() == 'off') {
           stopsignlock();
-        else if ($('#pipurl').length > 0 && $('#pipurl').val() != '') {
-          stopsignlock();
-        } else {
+        }
+        else if (($('#pipurl').length > 0) && ($('#pipurl').val() != '')) {
           stopsignunlock();
+        }
+        else {
+          stopsignlock();
         }
       }
 
@@ -368,7 +371,7 @@
     <script>
       // Everything in this script tag executes like being in an anonymous funciton bound to JQuery's document.ready.
       $("#options").bind( "change", function() {
-        readytogo();
+        checkreadiness();
       });
       {% if menudefault %}
         $(function(){
@@ -381,7 +384,7 @@
         });
         $("#pipform").change(function() {
           if ($("#pipform input:checkbox:checked").length > 0 || $("#pipform input:radio:checked").length > 0) {
-            readytogo();
+            checkreadiness();
           } else {
             stopsignlock();
           }
@@ -406,15 +409,11 @@
           $("#learnsomething").html('The area below is a textarea for visualizing JSON or harvesting keywords.')
         }
       {%- endif -%}
-      {% if form and 'pipurl' in form and form.pipurl.data == '': %}
-        $("#spinner").hide();
-        unlockbutton();
-      {% endif %}
-      $("#pipurl").keypress(function() {
-        if ($('#pipurl').length > 0 && $('#pipurl').val() != '') && ($( "#options option:selected" ).val() != 'off') {
-          unlockbutton();
-        }
+      $("#pipurl").keyup(function() {
+        checkreadiness();
       });
+      checkreadiness();
+      $("#spinner").hide();
     </script>
   </body>
 </html>
