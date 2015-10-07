@@ -59,7 +59,12 @@ from functions import *
 #       |_|   |_|                               PHP-style web templates. It takes time to grok, but is worth it.
 #
 socket.setdefaulttimeout(10.0)
+
 app = Flask(__name__) #                         <-- This is a rather big moment in this application's lifecycle.
+if (os.path.isfile(globs.FILE) and
+      os.path.getsize(globs.FILE) > 0):
+    app.config.from_pyfile(globs.FILE, silent=False)
+    app.config['SESSION_TYPE'] = 'filesystem'   # Ensures secret is always set for first page-load after server restart.
 
 def stream_template(template_name, **context):  # There's a rather awesome bit of Python magic going on here. This is
   """Open inexpensive Flask-based streaming.""" # essentially a replacement for render_template() but which repeatedly
