@@ -72,6 +72,13 @@
         $('#piplock').css('color', 'white');
       }
       function checkreadiness() {
+        {% if form2: %}
+        if ($("#pipform input:checkbox:checked").length > 0 || $("#pipform input:radio:checked").length > 0) {
+          stopsignunlock();
+        } else {
+          stopsignlock();
+        }
+        {% else %}
         if ($( "#options option:selected" ).val() == 'off') {
           stopsignlock();
         }
@@ -81,8 +88,8 @@
         else {
           stopsignlock();
         }
+        {% endif %}
       }
-
       function spinoff() {
         $('#plist > li').last().removeClass("progress");
         $('#plist > li').last().addClass("check");
@@ -372,18 +379,6 @@
           $('#options option[value="{{ menudefault }}"]').prop('selected', 'selected').change();
         })
       {% endif %}
-      {% if form2: %}
-        $("#pipform").find("input[value='cancel']").on("click", function(){
-          window.history.back();
-        });
-        $("#pipform").change(function() {
-          if ($("#pipform input:checkbox:checked").length > 0 || $("#pipform input:radio:checked").length > 0) {
-            checkreadiness();
-          } else {
-            stopsignlock();
-          }
-        });
-      {% endif %}
       $("#pipulate").click(function() {
         lockbutton();
         $('#pipstream').html('');
@@ -406,6 +401,14 @@
       $("#pipurl").keyup(function() {
         checkreadiness();
       });
+      {% if form2: %}
+        $("#pipform").find("input[value='cancel']").on("click", function(){
+          window.history.back();
+        });
+        $("#pipform").change(function() {
+          checkreadiness();
+        }); 
+      {% endif %}
       checkreadiness();
       $("#spinner").hide();
     </script>

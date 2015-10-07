@@ -430,8 +430,7 @@ def main():
       session.pop('_flashes', None)
       flash('This will apply to %s in <b>%s</b>.' % (globs.TAB, globs.DOCLINK))
       if readytopip:
-        flash('The question marks in %s indicate that you are ready to Pipulate.' % globs.NAME)
-        flash("So, what are you waiting for? Hit that button!")
+        flash('Everything set up properly. Click button to proceed.')
       #elif globs.sheet.row_values(1)==[] and globs.sheet.row_values(2) == []:
       #  flash('If you are new to Pipulate, watch the demo.')
       else:
