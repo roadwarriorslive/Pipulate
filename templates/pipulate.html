@@ -1,4 +1,31 @@
 <html>
+  <script>
+    if (location.hash) {
+      var myhash = location.hash
+      if (myhash.indexOf('access_token') > 0) {
+        document.write('One moment, redirecting...');
+        window.stop();
+        myhash = myhash.substring(1, myhash.length);
+        if (localStorage) {
+          var regex = /(?:access_token=)(\S+?)(?:&|$)/;
+          var match = regex.exec(myhash);
+          localStorage.setItem('oa2', match[1]);
+        } 
+        window.location = "http://{{ request.headers['Host'] }}?" + myhash;
+      }
+    }
+    {% if request.args and 'l' in request.args and request.args['l'] == '1' and session and 'oa2' in session: %}
+      if (localStorage) {
+        localStorage.setItem('oa2', '{{ session["oa2"] }}');
+      } 
+      {% elif request.args and 'logout' in request.args: %}
+        localStorage.clear();
+      {% elif not session: %}
+      if (localStorage.getItem("oa2") != null) {
+        window.location = "http://{{ request.headers['Host'] }}?access_token=" + localStorage.getItem("oa2");
+      }
+    {% endif %}
+  </script>
   <head>
     <title>Pipulate Free and Open Source (FOSS) SEO Software</title>
     <meta name="description" content="Pipulate Collects Data directly into Spreadsheets for SEO and Social Media monitoring.">
@@ -36,17 +63,23 @@
         $('#piplock').css('color', 'red');
         $('#pipulate').fadeTo(0,1);
       }
+      function stopsignunlock() {
+        $('#pipulate').prop("disabled", false);
+        $('#pipulate').css('color', 'white');
+        $('#piplock').removeClass("pip-attention");
+        $('#piplock').addClass("pip-go");
+        $('#piplock').css('color', 'white');
+      }
       function readytogo() {
         if ($( "#options option:selected" ).val() == 'off') {
           stopsignlock();
+        else if ($('#pipurl').length > 0 && $('#pipurl').val() != '') {
+          stopsignlock();
         } else {
-          $('#pipulate').prop("disabled", false);
-          $('#pipulate').css('color', 'white');
-          $('#piplock').removeClass("pip-attention");
-          $('#piplock').addClass("pip-go");
-          $('#piplock').css('color', 'white');
+          stopsignunlock();
         }
       }
+
       function spinoff() {
         $('#plist > li').last().removeClass("progress");
         $('#plist > li').last().addClass("check");
@@ -94,29 +127,6 @@
         $('#piplock').removeClass("pip-lock");
         $('#pipulate').css('color', 'white');
       }
-      if (location.hash) {
-        var myhash = location.hash
-        if (myhash.indexOf('access_token') > 0) {
-          myhash = myhash.substring(1, myhash.length);
-          if (localStorage) {
-            var regex = /(?:access_token=)(\S+?)(?:&|$)/;
-            var match = regex.exec(myhash);
-            localStorage.setItem('oa2', match[1]);
-          } 
-          window.location = "http://{{ request.headers['Host'] }}?" + myhash;
-        }
-      }
-      {% if request.args and 'l' in request.args and request.args['l'] == '1' and session and 'oa2' in session: %}
-        if (localStorage) {
-          localStorage.setItem('oa2', '{{ session["oa2"] }}');
-        } 
-        {% elif request.args and 'logout' in request.args: %}
-          localStorage.clear();
-        {% elif not session: %}
-        if (localStorage.getItem("oa2") != null) {
-          window.location = "http://{{ request.headers['Host'] }}?access_token=" + localStorage.getItem("oa2");
-        }
-      {% endif %}
     </script>
   </head>
   <body>
@@ -377,11 +387,6 @@
           }
         });
       {% endif %}
-      $("#pipurl").keypress(function() {
-        if($('#pipurl').length > 0 && $('#pipurl').val() != '') {
-          unlockbutton();
-        }
-      });
       $("#pipulate").click(function() {
         lockbutton();
         $('#pipstream').html('');
@@ -401,10 +406,15 @@
           $("#learnsomething").html('The area below is a textarea for visualizing JSON or harvesting keywords.')
         }
       {%- endif -%}
-      {% if form and 'pipurl' in form and form.pipurl.data != '': %}
+      {% if form and 'pipurl' in form and form.pipurl.data == '': %}
         $("#spinner").hide();
         unlockbutton();
       {% endif %}
+      $("#pipurl").keypress(function() {
+        if ($('#pipurl').length > 0 && $('#pipurl').val() != '') && ($( "#options option:selected" ).val() != 'off') {
+          unlockbutton();
+        }
+      });
     </script>
   </body>
 </html>

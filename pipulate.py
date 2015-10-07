@@ -422,12 +422,10 @@ def main():
     elif selectedtext and globs.SHEETS not in globs.PIPURL:
       menudefault = "keywords"
       session.pop('_flashes', None)
-      flash("Congratulations! You have chosen to harvest keywords.")
-      flash("The words filled into the above textarea will be inserted into %s." % globs.NAME)
+      flash("Words highlighted. Preparing to harvest keywords.")
       flash("Insert commas between keywords, and each one will get its own row.")
       flash("You can also add more keyword variations by just typing them in.")
-      flash('Then select "Harvest Keywords" from the dropdown menu.')
-      flash('You can then find your keywords under the Harvest tab.')
+      flash('Select "Harvest Keywords" from the dropdown menu.')
     else:
       session.pop('_flashes', None)
       flash('This will apply to %s in <b>%s</b>.' % (globs.TAB, globs.DOCLINK))
