@@ -55,8 +55,8 @@
         });
       });
       function stopsignlock() {
-        $('#pipulate').css('color', 'red');
         $('#pipulate').prop("disabled", true);
+        $('#pipulate').css('color', 'red');
         $('#piplock').removeClass("pip-go");
         $('#piplock').removeClass("pip-lock");
         $('#piplock').addClass("pip-stopsign");
@@ -65,13 +65,13 @@
       }
       function stopsignunlock() {
         $('#pipulate').prop("disabled", false);
+        $('#pipulate').fadeTo(0,1);
         $('#pipulate').css('color', 'white');
         $('#piplock').removeClass("pip-attention");
         $('#piplock').addClass("pip-go");
         $('#piplock').css('color', 'white');
       }
       function checkreadiness() {
-        stopsignunlock();
         if ($( "#options option:selected" ).val() == 'off') {
           stopsignlock();
         }
@@ -116,19 +116,11 @@
         $('#piplock').css('color', 'white');
       }
       function lockbutton() {
-        $('#pipulate').css("opacity", .5);
         $('#pipulate').prop("disabled", true);
+        $('#pipulate').css("opacity", .5);
         $('#piplock').removeClass("pip-go");
         $('#piplock').removeClass("pip-stopsign");
         $('#piplock').addClass("pip-lock");
-      }
-      function unlockbutton() {
-        whitelock();
-        $('#pipulate').prop("disabled", false);
-        $('#pipulate').fadeTo(0,1);
-        $('#piplock').addClass("pip-go");
-        $('#piplock').removeClass("pip-lock");
-        $('#pipulate').css('color', 'white');
       }
     </script>
   </head>
@@ -172,6 +164,11 @@
               <select class="select pipmenu" id="options" name="options">{{ select|safe }}</select>
               <button id="pipulate" class="button primary" type="submit">Pipulate<i id="piplock" class="pip-go"></i></button>
             </div>
+            <script>
+              $("#options").bind( "change", function() {
+                checkreadiness();
+              });
+            </script>
             {% if request.method == 'POST': %}
               <script>
                 lockbutton();
@@ -370,9 +367,6 @@
     </div>
     <script>
       // Everything in this script tag executes like being in an anonymous funciton bound to JQuery's document.ready.
-      $("#options").bind( "change", function() {
-        checkreadiness();
-      });
       {% if menudefault %}
         $(function(){
           $('#options option[value="{{ menudefault }}"]').prop('selected', 'selected').change();
