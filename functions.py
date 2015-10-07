@@ -21,6 +21,12 @@ from common import *                                      #For if user function 
 # Take a look at some support-functions you can call from your own functions.
 # The jobs done by these are so common, they get used almost everywhere.
 
+def sleep():
+  import time, datetime
+  time.sleep(10)
+  i = datetime.datetime.now()
+  return i.strftime("%m/%d/%Y %H:%M:%S")
+
 def gethtml(url):
   '''Return HTML text from given URL. Makes attempt to recycle pre-fetched
   HTML from current if any of them used the same URL input parameter.'''

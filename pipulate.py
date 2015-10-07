@@ -618,6 +618,8 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
               stop = False
               break
             except gspread.httpsession.HTTPError, e:
+              # This should redirect to a login, rather than display a message
+              # but you can't redirect from inside a generator. Address later.
               out("No token found, session expired. Switch to HTML5 localStorage.")
               if globs.WEB:
                 yield "I am sorry, the sesson has expired. Please log back in.", "Log back in", "", ""
