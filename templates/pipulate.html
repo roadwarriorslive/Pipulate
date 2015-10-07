@@ -27,6 +27,30 @@
           $('#pipslate').css({'height':(($(window).height())-110)+'px'});
         });
       });
+      function stopsignlock() {
+        $('#pipulate').css('color', 'red');
+        $('#pipulate').prop("disabled", true);
+        $('#piplock').removeClass("pip-go");
+        $('#piplock').removeClass("pip-lock");
+        $('#piplock').addClass("pip-stopsign");
+        $('#piplock').css('color', 'red');
+        $('#pipulate').fadeTo(0,1);
+      }
+      function readytogo() {
+        if ($( "#options option:selected" ).val() == 'off') {
+          stopsignlock();
+        } else {
+          $('#pipulate').prop("disabled", false);
+          $('#pipulate').css('color', 'white');
+          $('#piplock').removeClass("pip-attention");
+          $('#piplock').addClass("pip-go");
+          $('#piplock').css('color', 'white');
+        }
+      }
+      $( "#options" ).bind( "change", function() {
+        alert('hi');
+        readytogo();
+      });
       function spinoff() {
         $('#plist > li').last().removeClass("progress");
         $('#plist > li').last().addClass("check");
@@ -58,26 +82,6 @@
       }
       function whitelock() {
         $('#piplock').css('color', 'white');
-      }
-      function stopsignlock() {
-        $('#pipulate').css('color', 'red');
-        $('#pipulate').prop("disabled", true);
-        $('#piplock').removeClass("pip-go");
-        $('#piplock').removeClass("pip-lock");
-        $('#piplock').addClass("pip-stopsign");
-        $('#piplock').css('color', 'red');
-        $('#pipulate').fadeTo(0,1);
-      }
-      function readytogo() {
-        if ($( "#options option:selected" ).val() == 'off') {
-          stopsignlock();
-        } else {
-          $('#pipulate').prop("disabled", false);
-          $('#pipulate').css('color', 'white');
-          $('#piplock').removeClass("pip-attention");
-          $('#piplock').addClass("pip-go");
-          $('#piplock').css('color', 'white');
-        }
       }
       function lockbutton() {
         $('#pipulate').css("opacity", .5);
@@ -356,6 +360,12 @@
       {% endif %}
     </div>
     <script>
+      // Everything in this script tag executes like being in an anonymous funciton bound to JQuery's document.ready.
+      {% if menudefault %}
+        $(function(){
+          $('#options option[value="{{ menudefault }}"]').prop('selected', 'selected').change();
+        })
+      {% endif %}
       {% if form2: %}
         $("#pipform").find("input[value='cancel']").on("click", function(){
           window.history.back();
@@ -368,13 +378,10 @@
           }
         });
       {% endif %}
-      {% if menudefault %}
-        $(function(){
-          $('#options option[value="{{ menudefault }}"]').prop('selected', 'selected').change();
-        })
-      {% endif %}
-      $( "#options" ).bind( "change", function() {
-        readytogo();
+      $("#pipurl").keypress(function() {
+        if($('#pipurl').length > 0 && $('#pipurl').val() != '') {
+          unlockbutton();
+        }
       });
       $("#pipulate").click(function() {
         lockbutton();
@@ -396,6 +403,7 @@
         }
       {%- endif -%}
       {% if form and 'pipurl' in form and form.pipurl.data == '': %}
+        alert('hit');
         $("#spinner").hide();
         unlockbutton();
         $("#learnsomething").html('Copy and paste a URL into field (even on mobile).');
