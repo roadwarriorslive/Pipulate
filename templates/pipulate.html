@@ -47,10 +47,6 @@
           $('#piplock').css('color', 'white');
         }
       }
-      $( "#options" ).bind( "change", function() {
-        alert('hi');
-        readytogo();
-      });
       function spinoff() {
         $('#plist > li').last().removeClass("progress");
         $('#plist > li').last().addClass("check");
@@ -361,6 +357,9 @@
     </div>
     <script>
       // Everything in this script tag executes like being in an anonymous funciton bound to JQuery's document.ready.
+      $("#options").bind( "change", function() {
+        readytogo();
+      });
       {% if menudefault %}
         $(function(){
           $('#options option[value="{{ menudefault }}"]').prop('selected', 'selected').change();
