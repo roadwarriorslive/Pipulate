@@ -401,11 +401,9 @@
           $("#learnsomething").html('The area below is a textarea for visualizing JSON or harvesting keywords.')
         }
       {%- endif -%}
-      {% if form and 'pipurl' in form and form.pipurl.data == '': %}
-        alert('hit');
+      {% if form and 'pipurl' in form and form.pipurl.data != '': %}
         $("#spinner").hide();
         unlockbutton();
-        $("#learnsomething").html('Copy and paste a URL into field (even on mobile).');
       {% endif %}
     </script>
   </body>
