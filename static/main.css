@@ -363,7 +363,7 @@ nav{
 #plist > li.checkbox:before {
   -webkit-animation: spin 0s;
   animation: spin 0s;
-  content: "\e81e"; 
+  content: "\e80a"; 
 }
 
 #plist > li.check:before {
