@@ -1,5 +1,6 @@
 <html>
   <script>
+    var red = '#904747';
     if (location.hash) {
       var myhash = location.hash
       if (myhash.indexOf('access_token') > 0) {
@@ -39,6 +40,8 @@
     <link rel="stylesheet" href="./static/css/mikelevin.css">
     <link rel="stylesheet" href="./static/css/animation.css"><!--[if IE 7]><link rel="stylesheet" href="css/mikelevin-ie7.css"><![endif]-->
     <link rel="stylesheet" href="./static/main.css">
+    <script src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+    <script src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
     {#
           _                  ____            _       _     _         _   _                _ 
          | | __ ___   ____ _/ ___|  ___ _ __(_)_ __ | |_  (_)_ __   | | | | ___  __ _  __| |
@@ -56,11 +59,11 @@
       });
       function stopsignlock() {
         $('#pipulate').prop("disabled", true);
-        $('#pipulate').css('color', '#9A1111');
+        $('#pipulate').css('color', red);
         $('#piplock').removeClass("pip-go");
         $('#piplock').removeClass("pip-lock");
         $('#piplock').addClass("pip-stopsign");
-        $('#piplock').css('color', '#9A1111');
+        $('#piplock').css('color', red);
         $('#pipulate').fadeTo(0,1);
       }
       function stopsignunlock() {
@@ -117,7 +120,7 @@
         },800);
       }
       function redlock() {
-        $('#piplock').css('color', '#9A1111');
+        $('#piplock').css('color', red);
       }
       function whitelock() {
         $('#piplock').css('color', 'white');
@@ -300,7 +303,7 @@
             $('#spinner').css('display', 'none');
           </script>
         {% else: %}
-          <a id="login" class="button pip" href="{{ loginlink }}">LOGIN... &nbsp;<i id="piplock" class="pip-icon pip-googleplus"></i></a>
+          <a id="login" class="button pip" href="{{ loginlink }}">LOGIN...&nbsp;<i id="piplogin" class="pip-icon pip-googleplus"></i></a>
           <div style="height: 100%"><img id="piplogo" alt="Pipulate Free and Open Source SEO Software" src="./static/svg/pipulate-logo.svg" /></div>
         {% endif %}
         </div>

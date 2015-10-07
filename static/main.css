@@ -12,6 +12,9 @@ pseudo.button {
   font-size: 16px;
   color: black;
 }
+.piplogin {
+  color: white;
+}
 .labelhead {
   font-weight: bold;
 }
@@ -203,12 +206,13 @@ nav{
 }
 #learnsomething{
   background-color: lightgrey;
-  font-size: 11px;
+  font-size: 12px;
   height: 24px;
-  line-height: 2.4;
+  line-height: 2.2;
   margin-bottom: 0px;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: -1px;
   width: 100%;
 }
 #magicbox{
@@ -222,7 +226,7 @@ nav{
   color: white;
   margin-left: auto;
   margin-right:auto;
-  margin-top: 0px;
+  margin-top: -1px;
   position: relative;
   width: 100%;
 }
