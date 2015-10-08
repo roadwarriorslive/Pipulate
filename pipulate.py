@@ -2187,7 +2187,7 @@ def prePipulators():
 
 def repipulate():
   """Operation bullet-proofing Pipulate begins!"""
-  for x in range(0, 10):
+  for x in range(1, 11):
     for yieldme in Pipulate(label="Question mark replacement, pass #%s" % x):
       yield yieldme
     else:
