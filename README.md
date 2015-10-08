@@ -89,7 +89,7 @@ You may or may not share back your creations to the Github/Pipulate community.
 7. [FAQ](#7-faq)
 8. [Roadmap](#8-roadmap)
 9. [License](#9-license)
-10. [License](#10-changes)
+10. [Changes](#10-changes)
 
 ## 1\. Introduction
 ### Overview
@@ -434,7 +434,7 @@ instances.
 Pipulate uses the (MIT License as defined by OpenSource.org)[http://opensource.org/licenses/MIT].
 This repository's copy of the license is [here](./LICENSE.md).
 
-## 10\. Recent Changes
+## 10\. Changes
 ### Tue Sep  8 14:27:48 EDT 2015
 - Making every node able to git pull from main branch (test)
 ### Mon Aug 31 15:09:26 UTC 2015
@@ -449,3 +449,45 @@ This repository's copy of the license is [here](./LICENSE.md).
 - SEMRush and Moz KPI functions like Difficulty and DomainAuthority added.
 - Modest amounts of website crawling is now possible (maximum depth of 2).
 - Tons of cosmetic stuff to make it prettier.
+
+## Important concepts to find a home for:
+
+Pipulate is an entire programmable automated task manager from within a
+spreadsheet and has a job-instruction syntax (sub-set of Python) that has a few
+nuances that need to be understood to be used well. They are:
+
+### The Conventional Behavior Is Question Mark Replacement
+The parent instance of Pipulate itself (instance of the Pipulate() monolithic
+generator) when run in simple question mark replacement mode never received a
+list of tuple instructions as an argument. In this (most common) case, it will
+be pipulating completely by convention, meaning it will look for question marks
+to replace in the first tab (sheet1) only.
+
+### Increased Control During Pre-pipulation Phase
+However, the parent instance of Pipulate may have been created by a secondary
+Pipulate menu -- one of the ones that offers such things as adding columns and
+such. If Pipulate was called from a secondary menu, then there will be a
+pre-pipulate phase that comes before (the now optional) conventional question
+mark replacement phase to do setup, cleanup, and any additional work. This
+pre-pipulation phase can keep the conventional question mark replacement from
+happening happening by using a stop-instruction as the last tuple in the list.
+This is how a "cleanup" phase would be accomplished -- you just throw a
+conventional question mark replacement instruction tuple in with the other
+instructions. Put cleanup after it, then issue a stop instruction.
+
+Soooo...
+
+Pipulate can either be simple question mark replacement of sheet1 -- the simple
+original concept in which Pipulate itself was born -- OR it can be a sort of
+player piano doing a bunch of stuff according to sheet music that you feed in
+as a parameter call.
+
+### One-level-deep Recursion Only
+However, you never send an additional (or nested) list of tuple instructions
+down to a second-phase Pipulate. It's going to just be considered bad form,
+because really there's no good reason to allow the complexity of potentially
+out-of-control recursion in an application like this.
+
+After Pipulate steps through this optional pre-pipulation phase, it is optional
+to "let" the conventional behavior to step in and
+

@@ -409,6 +409,7 @@ def main():
             form.pipurl.data = request.args.get('u')
             globs.PIPURL = request.args.get('u')
             session['u'] = request.args.get('u')
+          # Taken out to prevent "misfires"
           #if session and 'u' in session:
           #  form.pipurl.data = session['u']
           #  globs.PIPURL = session['u']
