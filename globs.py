@@ -11,8 +11,9 @@
 
 config =    {}     # In-memory copy of everything from Config tab
 row1 =      []     # Copy of contents of sheet1, row 1 for many uses.
-tabnames =  []
-worksheets =None
+tabnames =  []     # A list of all the worksheet (table) names (not objects)
+funcscrapes=[]     # A lower-case list of every function and scraper in system.
+worksheets =None   # A list of all the worksheet objects (useful in sheet music)
 STOP =      False  # The Emergency Break so functions cans top Pipulate.
 DOCID =     None   # The Google Doc key for use anywhere in system
 DOCLINK =   None   # The full a href link for the Google Sheet.

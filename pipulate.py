@@ -558,6 +558,9 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
     gsp = None
     gdoc = None
     stop = True
+    gfuncs = [x.lower() for x in globals().keys() if x[:2] != '__']
+    scrapers = [x[0].lower() for x in scrapes()]
+    globs.funcscrapes = set(gfuncs + scrapers)
     if session or (dockey and token):
       out("LOGIN ATTEMPT", "2")
       sheet = ''
@@ -761,12 +764,9 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
               globs.row1 = lowercaselist(gdoc.worksheet(globs.TAB).row_values(1))
             if not globs.numrows:
               globs.numrows = len(globs.sheet.col_values(1))
-            gfuncs = [x for x in globals().keys() if x[:2] != '__']
-            scrapers = [x[0] for x in scrapes()]
-            unified = set(gfuncs + scrapers)
             colrange = None
             for acol in globs.row1:
-              if acol in unified:
+              if acol in globs.funcscrapes:
                 yme = "?'s for %s" % acol
                 if globs.WEB: yield yme, "", "", ""
                 qcol = globs.letter[globs.row1.index(acol) + 1]
@@ -1236,7 +1236,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
           yield "Double-check and try again.", "", "", ""
           yield "heart", "", "", ""
         return # permissible here?
-      if not [i for i in globs.row1 if i in lowercaselist([x for x in globals().keys() if x[:2] != '__'])]:
+      if not [i for i in globs.row1 if i in globs.funcscrapes]:
         if globs.WEB:
           yme = "No Pipulate functions found in %s tab." % globs.TAB
           yield yme, "Look at the list of options under the Docs tab.", "", ""
