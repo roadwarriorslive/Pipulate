@@ -351,7 +351,7 @@ def main():
       if form.magicbox.data:
         globs.KEYWORDS = form.magicbox.data
         form.magicbox.data = None
-      streamit = stream_with_context(Pipulate(label="Main Pipulation Sequence (?-Replacement)..."))
+      streamit = stream_with_context(repipulate())
     else:
       flash('Please enter a URL to Pipulate.')
   else:
@@ -2184,3 +2184,12 @@ def prePipulators():
     'checklist':    SEOChecklist,
     'keywordlist':  KeywordChecklist
   }
+
+def repipulate():
+  """Operation bullet-proofing Pipulate begins!"""
+  for x in range(0, 10):
+    for yieldme in Pipulate(label="Question mark replacement, pass #%s" % x):
+      yield yieldme
+    else:
+      break
+
