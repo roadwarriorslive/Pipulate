@@ -115,12 +115,12 @@ def gotcha(x=''):
     else:
       out("Gotcha !!! %s !!! </%s>" % (x, globs.nest[-1:]))
   else:
-    out("Gotcha!!! </%s>" % globs.nest[-1:])
+    out("Gotcha (No value found). </%s>" % globs.nest[-1:])
   globs.nest = globs.nest[:-2]
   if x:
     raise RuntimeError('Forcing STOP with Gotcha: %s' % x)
   else:
-    raise RuntimeError('Forcing STOP with Gotcha')
+    raise RuntimeError('Forcing STOP with Gotcha (no value found)')
 
 def InsertRows(onesheet, listoflists, lastrowused=''):
   """Inserts a list-of-lists as rows into spreadsheet from lastrowused."""

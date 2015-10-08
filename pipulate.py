@@ -409,9 +409,9 @@ def main():
             form.pipurl.data = request.args.get('u')
             globs.PIPURL = request.args.get('u')
             session['u'] = request.args.get('u')
-          if session and 'u' in session:
-            form.pipurl.data = session['u']
-            globs.PIPURL = session['u']
+          #if session and 'u' in session:
+          #  form.pipurl.data = session['u']
+          #  globs.PIPURL = session['u']
         except:
           pass
   #    ____ _____ _____                                                   What better place to "GET" messages than
