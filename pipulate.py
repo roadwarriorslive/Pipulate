@@ -954,7 +954,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
           yield spinerr
           yield unlock
         Stop()
-      yme = "%s rows with question marks found in %s." % (globs.numrows, globs.TAB)
+      yme = "%s rows with question marks found in %s." % (globs.numrows-1, globs.TAB)
       out(yme)
       if globs.WEB: yield yme, "", "", ""
       if globs.numrows == 0 and globs.MODE == 'qmarks':
@@ -1236,10 +1236,14 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
           yield "Double-check and try again.", "", "", ""
           yield "heart", "", "", ""
         return # permissible here?
+      if not [i for i in globs.row1 if i in lowercaselist([x for x in globals().keys() if x[:2] != '__'])]:
+        if globs.WEB:
+          yme = "No Pipulate functions found in %s tab." % globs.TAB
+          yield yme, "Look at the list of options under the Docs tab.", "", ""
+          yield "heart", "", "", ""
+        return # permissible here?
       therange = range(qstart, qend)
       blankrows = 0 #Lets us skip occasional blank rows
-      if globs.WEB:
-        yield "Beginning to process rows with question marks...", "", "", ""
       for index, rowdex in enumerate(therange): #Start stepping through every row.
         if rowdex in qset:
           out("maxrowsperhour: %s" % maxrowsperhour)
