@@ -1232,10 +1232,8 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
         # Yield values that will un-nest console output
         if globs.WEB:
           yme = "No ?'s found in %s Sheet." % globs.DOCLINK
-          yield yme, "", "", ""
-          yme = 'New to this? Watch <a target="_blank" href="https://docs.google.com/presentation/d/10lr_d1uyLMOnWsMzbenKiPlFE5-BIt9bxVucw7O4GSI/edit?usp=sharing">Demo</a> &amp; read <a target="_blank" href="https://github.com/miklevin/pipulate/blob/master/README.md">Docs</a>. '
           yield yme, "The first worksheet in your spreadsheet needs something in it.", "", ""
-          yield "But congratulations; you found Pipulate.", "", "", ""
+          yield "Double-check and try again.", "", "", ""
           yield "heart", "", "", ""
         return # permissible here?
       therange = range(qstart, qend)
