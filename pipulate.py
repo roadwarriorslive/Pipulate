@@ -1523,6 +1523,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
     if globs.WEB:
       #yme = 'Pipulation complete. Do a little victory dance. %s' % globs.PBNJMAN
       yield "Pipulate cycle complete.", 'Pipulate Cycle Complete', "", ""
+      yield "heart", "", "", ""
       yield spinoff
     out("PIPULATION OVER", "1", '-')
   except Exception as e:
