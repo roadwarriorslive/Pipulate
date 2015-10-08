@@ -361,58 +361,59 @@ def main():
     #  |_| (_| | |_| |  __/ |  | |_| \__ \ |_| |  | | | | | (_| | to pass data between systems, sessions, or
     #  (_)\__, |\__,_|\___|_|   \__, |___/\__|_|  |_|_| |_|\__, | what have you. That's why you'll see logout
     #        |_|                |___/                      |___/  handling and client-to-server data handoffs.
-    if request.args and 's' in request.args:
-      form.magicbox.data = request.args.get('s')
-      selectedtext = request.args.get('s')
-    if request.args and 'access_token' in request.args: # Oops... necessary evil. Redirect quickly.
-      try:
-        LogUser(request.args['access_token'])
-      except:
-        pass
-      try:
-        session['oa2'] = request.args.get("access_token")
-        session['loggedin'] = "1"
-      except:
-        pass
-      try:
-        session['i'] -= 1 # Don't skip a cute message, just becuse I redirect.
-      except:
-        pass
-      if 'u' in session and 's' in session:
-        out("EXITING MAIN FUNCTION REDIRECT WITH URL AND TEXT", "0", '-')
-        #return redirect(url_for('main', u=session['u'], s=session['s'], l='1'))
-        return redirect(url_for('main', u=session['u'], s=session['s']))
-      elif 'u' in session:
-        out("EXITING MAIN FUNCTION REDIRECT WITH URL", "0", '-')
-        #return redirect(url_for('main', u=session['u'], l='1'))
-        return redirect(url_for('main', u=session['u']))
-      else:
-        out("Redirecting, no URL known")
-        out("EXITING MAIN FUNCTION REDIRECT", "0", '-')
-        #return redirect(url_for('main', l='1'))
-        return redirect(url_for('main'))
-    elif request.args and 'logout' in request.args: # Logging out
-      if session:
-        if 'oa2' in session:
-          revokeurl = 'https://accounts.google.com/o/oauth2/revoke?token=' + session['oa2']
-          requests.get(revokeurl, timeout=5)
-        if 'u' in request.args:
-          form.pipurl.data = request.args.get('u')
-          globs.PIPURL = request.args.get('u')
-        session.pop('loggedin', None)
-    elif request.args: # Move selected text and current url into session object.
-      try:
-        if 's' in request.args:
-          session['s'] = request.args.get('s')
-        if 'u' in request.args:
-          form.pipurl.data = request.args.get('u')
-          globs.PIPURL = request.args.get('u')
-          session['u'] = request.args.get('u')
-        if session and 'u' in session:
-          form.pipurl.data = session['u']
-          globs.PIPURL = session['u']
-      except:
-        pass
+    if request.args:
+      if 's' in request.args:
+        form.magicbox.data = request.args.get('s')
+        selectedtext = request.args.get('s')
+      if 'access_token' in request.args: # Oops... necessary evil. Redirect quickly.
+        try:
+          LogUser(request.args['access_token'])
+        except:
+          pass
+        try:
+          session['oa2'] = request.args.get("access_token")
+          session['loggedin'] = "1"
+        except:
+          pass
+        try:
+          session['i'] -= 1 # Don't skip a cute message, just becuse I redirect.
+        except:
+          pass
+        if 'u' in session and 's' in session:
+          out("EXITING MAIN FUNCTION REDIRECT WITH URL AND TEXT", "0", '-')
+          #return redirect(url_for('main', u=session['u'], s=session['s'], l='1'))
+          return redirect(url_for('main', u=session['u'], s=session['s']))
+        elif 'u' in session:
+          out("EXITING MAIN FUNCTION REDIRECT WITH URL", "0", '-')
+          #return redirect(url_for('main', u=session['u'], l='1'))
+          return redirect(url_for('main', u=session['u']))
+        else:
+          out("Redirecting, no URL known")
+          out("EXITING MAIN FUNCTION REDIRECT", "0", '-')
+          #return redirect(url_for('main', l='1'))
+          return redirect(url_for('main'))
+      elif 'logout' in request.args: # Logging out
+        if session:
+          if 'oa2' in session:
+            revokeurl = 'https://accounts.google.com/o/oauth2/revoke?token=' + session['oa2']
+            requests.get(revokeurl, timeout=5)
+          if 'u' in request.args:
+            form.pipurl.data = request.args.get('u')
+            globs.PIPURL = request.args.get('u')
+          session.pop('loggedin', None)
+      else: # Move selected text and current url into session object.
+        try:
+          if 's' in request.args:
+            session['s'] = request.args.get('s')
+          if 'u' in request.args:
+            form.pipurl.data = request.args.get('u')
+            globs.PIPURL = request.args.get('u')
+            session['u'] = request.args.get('u')
+          if session and 'u' in session:
+            form.pipurl.data = session['u']
+            globs.PIPURL = session['u']
+        except:
+          pass
   #    ____ _____ _____                                                   What better place to "GET" messages than
   #   / ___| ____|_   _|  _ __ ___   ___  ___ ___  __ _  __ _  ___  ___   where the GET method is being used to build
   #  | |  _|  _|   | |   | '_ ` _ \ / _ \/ __/ __|/ _` |/ _` |/ _ \/ __|  the normally much more stream-y UI. But it's
@@ -433,7 +434,7 @@ def main():
       flash('Select "Harvest Keywords" from the dropdown menu.')
     else:
       session.pop('_flashes', None)
-      flash('This will apply to %s in <b>%s</b>.' % (globs.TAB, globs.DOCLINK))
+      flash('This uses %s in your Google sheet named <b>%s</b>.' % (globs.TAB, globs.DOCLINK))
       if readytopip:
         flash('Everything set up properly. Click button to proceed.')
       #elif globs.sheet.row_values(1)==[] and globs.sheet.row_values(2) == []:
@@ -624,7 +625,8 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
               # but you can't redirect from inside a generator. Address later.
               out("No token found, session expired. Switch to HTML5 localStorage.")
               if globs.WEB:
-                yield "I am sorry, the sesson has expired. Please log back in.", "Log back in", "", ""
+                yme = 'I am sorry, the sesson has expired. Please <a href="%s">log back in.</a>' % getLoginlink()
+                yield yme, "Log back in", "", ""
                 yield spinerr
                 break
             except:
