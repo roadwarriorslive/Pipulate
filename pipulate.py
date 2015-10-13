@@ -1185,7 +1185,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
           tellrow = 'all'
         if globs.WEB: yield "Job requested to process %s row(s) every %s %s" % (tellrow, number, name), "", "", ""
       else:
-        if globs.WEB: yield "Pipulate running in ?-replacement mode.", "", "", ""
+        if globs.WEB: yield "?-replacement beginning.", "", "", ""
       if left and right and now:
         if globs.WEB:
           yield "%s = Start of last time window" % left, "", "", ""
@@ -1232,7 +1232,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
         # Yield values that will un-nest console output
         if globs.WEB:
           yme = "No ?'s found in %s Sheet." % globs.DOCLINK
-          yield yme, "The first worksheet in your spreadsheet needs something in it.", "", ""
+          yield yme, "The first worksheet in your spreadsheet needs to be set up.", "", ""
           yield "Double-check and try again.", "", "", ""
           yield "heart", "", "", ""
         return # permissible here?
@@ -1489,30 +1489,30 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                 if globs.WEB: yield "", "", newrow, ""
             for index, onecell in enumerate(CellList):
               onecell.value = newrow[index]
-            if globs.STOP:
+            #if globs.STOP:
+            #  if globs.WEB:
+            #    yield "Pipulate deliberately stopped. Feels like a success.", "Pipulation Stopped", "", ""
+            #    yield spinoff
+            #  #Stop() !!!
+            #else:
+            result = None
+            stop = True
+            for x in range(10):
+              if globs.WEB: yield lock
+              try:
+                result = globs.sheet.update_cells(CellList)
+                stop = False
+                break
+              except:
+                out("Writing row to spreadsheet, retry %s of %s" %(x, 10))
+                time.sleep(5)
+                if globs.WEB: yield dontgetfrustrated(x)
+            if stop:
               if globs.WEB:
-                yield "Pipulate deliberately stopped. Feels like a success.", "Pipulation Stopped", "", ""
-                yield spinoff
-              #Stop() !!!
-            else:
-              result = None
-              stop = True
-              for x in range(10):
-                if globs.WEB: yield lock
-                try:
-                  result = globs.sheet.update_cells(CellList)
-                  stop = False
-                  break
-                except:
-                  out("Writing row to spreadsheet, retry %s of %s" %(x, 10))
-                  time.sleep(5)
-                  if globs.WEB: yield dontgetfrustrated(x)
-              if stop:
-                if globs.WEB:
-                  yield badtuple
-                  yield spinerr
-                  yield unlock
-                Stop()
+                yield badtuple
+                yield spinerr
+                yield unlock
+              Stop()
           elif onerow.count('') == len(onerow):
             blankrows += 1
             if blankrows > 1:
@@ -1522,7 +1522,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
       if globs.WEB: yield 'Please Login to Google', "", "", ""
     if globs.WEB:
       #yme = 'Pipulation complete. Do a little victory dance. %s' % globs.PBNJMAN
-      yield "Pipulate cycle complete.", 'Pipulate Cycle Complete', "", ""
+      yield "?-replacement complete.", "Question marks replaced!", "", ""
       yield "heart", "", "", ""
       yield spinoff
     out("PIPULATION OVER", "1", '-')
