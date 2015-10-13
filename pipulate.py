@@ -304,7 +304,7 @@ def main():
       elif needsPipulate and 'access_token' not in request.args:
         out("EXITING MAIN FUNCTION RENDER INDOCTRINATE", "0", '-')
         return render_template('pipulate.html', form=form, select=None)
-  globs.DOCLINK = '<a href="%s/d/%s/edit#gid=0" target="_blank">%s</a>' % (globs.SHEETS, globs.DOCID, globs.NAME)
+  globs.DOCLINK = '<b><a href="%s/d/%s/edit#gid=0" target="_blank">%s<i class="pip-icon pip-export"></i></a></b>' % (globs.SHEETS, globs.DOCID, globs.NAME)
   menutwo = False
   if request.method == 'POST':
     #  ____   ___  ____ _____   ____  _                              _   Shazam! is the block in which we create the
@@ -435,7 +435,7 @@ def main():
       flash('Select "Harvest Keywords" from the dropdown menu.')
     else:
       session.pop('_flashes', None)
-      flash('This uses %s in your Google sheet named <b>%s</b>.' % (globs.TAB, globs.DOCLINK))
+      flash('This uses %s in your Google sheet named %s' % (globs.TAB, globs.DOCLINK))
       if readytopip:
         flash('Everything set up properly. Click button to proceed.')
       #elif globs.sheet.row_values(1)==[] and globs.sheet.row_values(2) == []:
@@ -652,12 +652,12 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
             yield spinerr
             yield unlock
           Stop() # Consider adding refresh_token logic for users (versus the scheduler)
-        globs.DOCLINK = '<a href="%s/d/%s/edit#gid=0" target="_blank">%s</a>' % (globs.SHEETS, globs.DOCID, globs.NAME)
+        globs.DOCLINK = '<b><a href="%s/d/%s/edit#gid=0" target="_blank">%s<i class="pip-icon pip-export"></i></a></b>' % (globs.SHEETS, globs.DOCID, globs.NAME)
       out("END LOGIN ATTEMPT", "2", '-')
 
       if globs.WEB: yield unlock
       out("%s successfully opened." % globs.NAME)
-      yme = "%s Sheet Opened" % globs.DOCLINK
+      yme = '%s Sheet Opened' % globs.DOCLINK
       yield yme, "Spreadsheet Opened", "", ""
 
       if (globs.MODE == 'keywords'
@@ -951,6 +951,15 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
           time.sleep(10)
       if stop == True:
         if globs.WEB:
+          yield spinerr
+          yield unlock
+        Stop()
+      if globs.numrows > globs.maxrows:
+        yme = "%s rows is too many rows. Max is %s." % (globs.numrows, globs.maxrows)
+        if globs.WEB:
+          yield yme, "Too many rows for Pipulate", "", ""
+          yield "Use this link to run job in background.", "", "", ""
+          yield "You will be able to stop the job from the Config tab.", "", "", ""
           yield spinerr
           yield unlock
         Stop()
