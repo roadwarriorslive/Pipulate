@@ -92,8 +92,8 @@ def Stop():
                                           |_|      
   ''')
   if globs.WEB:
-    #raise StopIteration('Forcing STOP with Stop()')
-    raise SystemExit('Forcing STOP with Stop()')
+    #raise SystemExit('Forcing STOP with Stop()')
+    raise StopIteration('Forcing STOP with Stop()')
   else:
     pass
 
