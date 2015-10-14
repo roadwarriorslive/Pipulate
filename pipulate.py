@@ -868,6 +868,12 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
         out("Tabs Read!")
         if globs.WEB:
           yield "Tabs successfully found/created!", "Tabs Created", tabs, ""
+      #        _       _                           __ _       
+      #   __ _| | ___ | |__  ___   ___ ___  _ __  / _(_) __ _ 
+      #  / _` | |/ _ \| '_ \/ __| / __/ _ \| '_ \| |_| |/ _` |
+      # | (_| | | (_) | |_) \__ \| (_| (_) | | | |  _| | (_| |
+      #  \__, |_|\___/|_.__/|___(_)___\___/|_| |_|_| |_|\__, |
+      #  |___/                                          |___/ 
       stop = True
       for x in range(5):
         if globs.WEB: yield lock
@@ -887,6 +893,14 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
           yield unlock
         Stop()
       out("Config tab copied to globals.")
+
+      # I should apply this to everything that can get "bumped up" to globs from globs.config
+      if 'maxrows' in globs.config:
+        try:
+          globs.maxrows = int(globs.config['maxrows'])
+        except:
+          pass
+
       maxrowsperhour = 0
       if 'maxrowsperhour' in globs.config:
         maxrowsperhour = globs.config['maxrowsperhour']
