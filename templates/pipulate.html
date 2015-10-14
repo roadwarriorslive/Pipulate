@@ -296,7 +296,9 @@
               {%- elif lineitem == "countdown" -%}
                 <script>
                   setIntervalX(function () {
-                     $(".countdown").last().text(parseInt($(".countdown").last().text())-1);
+                     if (parseInt($(".countdown").last().text()) > 1) {
+                       $(".countdown").last().text(parseInt($(".countdown").last().text())-1);
+                     }
                   }, 1000, parseInt($(".countdown").last().text()));
                 </script>
               {% else -%}
