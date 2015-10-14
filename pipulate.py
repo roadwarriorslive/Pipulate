@@ -1395,8 +1395,9 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                       except Exception as e:
                         print traceback.format_exc()
                         if globs.WEB:
-                          yme = 'We have a problem in %s. Retry %s of %s in <span id="countdown">%s</span> seconds.' % (collabel, x, retries, delay*x)
+                          yme = 'We have a problem in %s. Retry %s of %s in <span class="countdown">%s</span> seconds.' % (collabel, x, retries, delay*x)
                           yield yme, "", "", ""
+                          yield "countdown", "", "", ""
                         time.sleep(delay*x)
                     if stop == True:
                       out("Function End (Failed)", "4", '-')
@@ -2215,17 +2216,19 @@ def prePipulators():
 
 def repipulate():
   """Operation bullet-proofing Pipulate begins!"""
-  retries = 3
-  delay = 10
+  retries = 1
+  delay = 120
   for x in range(1, retries+1):
     out("Pipulate Iteration %s" % x)
     if x != 1:
-      time.sleep(delay*x)
+      time.sleep(delay*(x-1))
     for yieldme in Pipulate(label="?-replacement phase, pass #%s of %s possible (for retries)." % (x, retries)):
       yield yieldme
     if x != retries:
-      yme = "Pass #%s of %s of ?-replacement phase in %s seconds." % (x+1, retries, delay*x)
+      yme = "Pass #%s of %s possible ?-replacement phases will start in %s seconds." % (x+1, retries, delay*x)
       yield yme, "Retrying ?=replacement", "", ""
   yield "Finished!", "Finished!", "", ""
+  yield "heart", "", "", ""
+
 def foo():
   Stop()

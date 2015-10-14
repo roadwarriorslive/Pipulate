@@ -130,6 +130,17 @@
         $('#piplock').removeClass("pip-stopsign");
         $('#piplock').addClass("pip-lock");
       }
+      function setIntervalX(callback, delay, repetitions) {
+          var x = 0;
+          var intervalID = window.setInterval(function () {
+
+             callback();
+
+             if (++x === repetitions) {
+                 window.clearInterval(intervalID);
+             }
+          }, delay);
+      }
     </script>
   </head>
   <body>
@@ -281,6 +292,12 @@
                 <script>
                   // Flash stormy weather (gdata) problem-with-api symbol
                   stormyweather();
+                </script>
+              {%- elif lineitem == "countdown" -%}
+                <script>
+                  setIntervalX(function () {
+                     $(".countdown").last().text(parseInt($(".countdown").last().text())-1);
+                  }, 1000, parseInt($(".countdown").last().text()));
                 </script>
               {% else -%}
                 <script>
