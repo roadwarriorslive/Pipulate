@@ -657,7 +657,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
 
       if globs.WEB: yield unlock
       out("%s successfully opened." % globs.NAME)
-      yme = 'Opened Spreadsheet: %s' % globs.DOCLINK
+      yme = 'Successfully Opened Spreadsheet: %s' % globs.DOCLINK
       yield yme, "Spreadsheet Opened", "", ""
 
       if (globs.MODE == 'keywords'
@@ -1338,7 +1338,9 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                   collabel = globs.row1[coldex]
                   if collabel in transfuncs.keys():
                     stop = True
-                    for x in range(3):
+                    retries = 3
+                    delay = 5
+                    for x in range(1, retries+1):
                       #   __                  _   _
                       #  / _|_   _ _ __   ___| |_(_) ___  _ __  ___
                       # | |_| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
@@ -1393,13 +1395,13 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                       except Exception as e:
                         print traceback.format_exc()
                         if globs.WEB:
-                          yme = 'We have a problem in %s. Retrying in <span id="countdown">%s</span> seconds.' % (collabel, globs.LONGRETRY)
+                          yme = 'We have a problem in %s. Retry %s of %s in <span id="countdown">%s</span> seconds.' % (collabel, x, retries, delay*x)
                           yield yme, "", "", ""
-                        time.sleep(globs.LONGRETRY)
+                        time.sleep(delay*x)
                     if stop == True:
                       out("Function End (Failed)", "4", '-')
                       if globs.WEB:
-                        yme = "Something went wrong in the %s function. Stopping." % collabel
+                        yme = "Something went wrong in the %s function." % collabel
                         yield yme, "", "", ""
                         yield spinerr
                         yield unlock
@@ -2214,13 +2216,16 @@ def prePipulators():
 def repipulate():
   """Operation bullet-proofing Pipulate begins!"""
   retries = 3
-  delay = 5
-  for x in range(1, retries):
+  delay = 10
+  for x in range(1, retries+1):
     out("Pipulate Iteration %s" % x)
-    for yieldme in Pipulate(label="Question mark replacement, pass #%s of %s." % (x, retries)):
+    if x != 1:
+      time.sleep(delay*x)
+    for yieldme in Pipulate(label="?-replacement phase, pass #%s of %s possible (for retries)." % (x, retries)):
       yield yieldme
-    yme = "Retrying ?-replacement in %s seconds." % (delay*x)
-    yield yme, "Retrying ?=replacement", "", ""
-    time.sleep(delay*x)
+    if x != retries:
+      yme = "Pass #%s of %s of ?-replacement phase in %s seconds." % (x+1, retries, delay*x)
+      yield yme, "Retrying ?=replacement", "", ""
+  yield "Finished!", "Finished!", "", ""
 def foo():
   Stop()
