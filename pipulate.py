@@ -657,7 +657,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
 
       if globs.WEB: yield unlock
       out("%s successfully opened." % globs.NAME)
-      yme = '%s Sheet Opened' % globs.DOCLINK
+      yme = 'Opened Spreadsheet: %s' % globs.DOCLINK
       yield yme, "Spreadsheet Opened", "", ""
 
       if (globs.MODE == 'keywords'
@@ -1393,7 +1393,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                       except Exception as e:
                         print traceback.format_exc()
                         if globs.WEB:
-                          yme = "We have a problem in %s. Retrying in %s seconds." % (collabel, globs.LONGRETRY)
+                          yme = 'We have a problem in %s. Retrying in <span id="countdown">%s</span> seconds.' % (collabel, globs.LONGRETRY)
                           yield yme, "", "", ""
                         time.sleep(globs.LONGRETRY)
                     if stop == True:
@@ -2213,10 +2213,14 @@ def prePipulators():
 
 def repipulate():
   """Operation bullet-proofing Pipulate begins!"""
-  for x in range(1, 11):
+  retries = 3
+  delay = 5
+  for x in range(1, retries):
     out("Pipulate Iteration %s" % x)
-    for yieldme in Pipulate(label="Question mark replacement, pass #%s" % x):
+    for yieldme in Pipulate(label="Question mark replacement, pass #%s of %s." % (x, retries)):
       yield yieldme
-
+    yme = "Retrying ?-replacement in %s seconds." % (delay*x)
+    yield yme, "Retrying ?=replacement", "", ""
+    time.sleep(delay*x)
 def foo():
   Stop()
