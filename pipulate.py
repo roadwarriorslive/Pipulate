@@ -1547,10 +1547,11 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
       if globs.WEB: yield 'Please Login to Google', "", "", ""
     if globs.WEB:
       #yme = 'Pipulation complete. Do a little victory dance. %s' % globs.PBNJMAN
-      yield "?-replacement complete.", "Question marks replaced!", "", ""
+      yield "?-Replacement complete.", "Question marks replaced!", "", ""
       yield "heart", "", "", ""
       yield spinoff
     out("PIPULATION OVER", "1", '-')
+    yield "stop", "", "", ""
   except Exception as e:
     exceptiondata = traceback.format_exc()
     print(exceptiondata)
@@ -2221,7 +2222,9 @@ def repipulate():
     out("Pipulate Iteration %s" % x)
     if x != 1:
       time.sleep(delay*(x-1))
-    for yieldme in Pipulate(label="Pipulate ?-Replacement phase starting: pass #%s of %s." % (x, retries)):
+    for yieldme in Pipulate(label="?-Replacement phase starting: pass #%s of %s." % (x, retries)):
+      if yieldme == ("stop", "", "", ""):
+        raise StopIteration
       yield yieldme
     if x != retries:
       yme = 'Pausing <span class="countdown">%s</span> seconds before pass #%s of %s.' % (delay*x, x+1, retries)
@@ -2232,4 +2235,5 @@ def repipulate():
   yield "heart", "", "", ""
 
 def foo():
-  Stop()
+  return 'bar'
+  #Stop()

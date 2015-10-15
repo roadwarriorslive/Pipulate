@@ -385,7 +385,8 @@ nav{
 #plist > li.heart:before {
   -webkit-animation: spin 0s;
   animation: spin 0s;
-  content: "\e85a"; 
+  content: "\e86e"; 
+  color: black;
 }
 
 #plist > li.piplogo:before {
