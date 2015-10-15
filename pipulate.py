@@ -533,6 +533,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
   qstart = 1
   qend = 1
   badtuple = (globs.GBAD, globs.GBAD, "", "")
+  stop = ("stop", "", "", "")
   lock = ("", "", "", "+")
   unlock = ("", "", "", "-")
   spinerr = "spinerr", "", "", ""
@@ -1255,13 +1256,13 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
           yield yme, "The first worksheet in your spreadsheet needs to be set up.", "", ""
           yield "Double-check and try again.", "", "", ""
           yield "heart", "", "", ""
-        return # permissible here?
+        yield stop
       if not [i for i in globs.row1 if i in globs.funcscrapes]:
         if globs.WEB:
           yme = "No Pipulate functions found in %s tab." % globs.TAB
           yield yme, "Look at the list of options under the Docs tab.", "", ""
           yield "heart", "", "", ""
-        return # permissible here?
+        yield stop
       therange = range(qstart, qend)
       blankrows = 0 #Lets us skip occasional blank rows
       for index, rowdex in enumerate(therange): #Start stepping through every row.
@@ -1551,7 +1552,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
       yield "heart", "", "", ""
       yield spinoff
     out("PIPULATION OVER", "1", '-')
-    yield "stop", "", "", ""
+    yield stop
   except Exception as e:
     exceptiondata = traceback.format_exc()
     print(exceptiondata)
