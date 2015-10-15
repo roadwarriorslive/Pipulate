@@ -111,17 +111,8 @@
         $('#plist > li').last().addClass("piplogo");
       }
       function heart() {
-        setTimeout(function(){
-          $('#plist > li').last().removeClass("progress");
-          $('#plist > li').last().addClass("heart");
-        },800);
-      }
-      function stormyweather() {
-        $('#spinner').hide();
-        $('#stormyweather').fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100);
-        setTimeout(function(){
-          $('#spinner').css('display', 'block');
-        },800);
+        $('#plist > li').last().removeClass("progress");
+        $('#plist > li').last().addClass("finished");
       }
       function redlock() {
         $('#piplock').css('color', red);
@@ -202,14 +193,6 @@
               </script>
             {% endif %}
             <div id="magicdiv">
-              <div id="stormyweather" class="stormyweather">
-                <i class="pip-cloud-flash-alt cloud"></i>
-              </div>
-              <div id="spinner" class="spinner">
-                <div class="bounce1"></div>
-                <div class="bounce2"></div>
-                <div class="bounce3"></div>
-              </div>
               {% if request.method == 'POST': %}
                 <div id="learn"><span id="learnsomething">First, we connect to Google Docs...</span></div>
               {% else %}
@@ -275,7 +258,7 @@
             {%- if lineitem -%}
               {%- if lineitem == "spinon" -%}
                 <script>
-                  // Lock button and display spinner
+                  // Lock button
                   $('#pipulate').prop("disabled", true);
                   $('#pipulate').fadeTo("fast",.5);
                 </script>
@@ -300,11 +283,6 @@
                 <script>
                   // Unlock button and gracefully show user things are fubar.
                   spinerr();
-                </script>
-              {%- elif lineitem == "stormyweather" -%}
-                <script>
-                  // Flash stormy weather (gdata) problem-with-api symbol
-                  stormyweather();
                 </script>
               {%- elif lineitem == "countdown" -%}
                 <script>
@@ -338,10 +316,6 @@
           {%- endfor -%}
           </ul>
           {%- endif -%}
-          <script>
-            $('#spinner').hide();
-            $('#spinner').css('display', 'none');
-          </script>
         {% else: %}
           <a id="login" class="button pip" href="{{ loginlink }}">LOGIN...&nbsp;<i id="piplogin" class="pip-icon pip-googleplus"></i></a>
           <div style="height: 100%"><img id="piplogo" alt="Pipulate Free and Open Source SEO Software" src="./static/svg/pipulate-logo.svg" /></div>
@@ -425,7 +399,6 @@
       $("#pipulate").click(function() {
         lockbutton();
         $('#pipstream').html('');
-        $('#spinner').show();
         $('#learnsomething').html("Sit back and relax. I'm starting to Pipulate...");
         $('#pipform').submit();
       });
@@ -436,7 +409,6 @@
         stopsignlock();
       {% endif %}
       {%- if request.method == 'GET': -%}
-        $("#spinner").hide();
         if ($("#magicbox").val()) {
           $("#learnsomething").html('The area below is a textarea for visualizing JSON or harvesting keywords.')
         }
@@ -453,7 +425,6 @@
         }); 
       {% endif %}
       checkreadiness();
-      $("#spinner").hide();
     </script>
   </body>
 </html>
