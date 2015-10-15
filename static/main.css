@@ -17,17 +17,17 @@ pseudo.button {
   color: white;
 }
 .labelhead {
-  color: #000088;
+  color: #023131;
   font-size: larger;
   font-weight: bold;
   line-height: 1.3em;
 }
 .newrow {
   font-weight: bold !important;
-  color: #000088 !important;
+  color: #023131 !important;
 }
 #plist > li.newrow:before {
-  color: #000088 !important;
+  color: #023131 !important;
 }
 
 #stopsign {
@@ -401,7 +401,7 @@ nav{
   -webkit-animation: spin 0s;
   animation: spin 0s;
   content: "\e808"; 
-  color: #000088;
+  color: #023131;
   font-size: 1.5em;
   text-indent: -1.4em;
   line-height: 1.1em;
