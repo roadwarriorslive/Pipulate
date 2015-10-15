@@ -658,7 +658,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
 
       if globs.WEB: yield unlock
       out("%s successfully opened." % globs.NAME)
-      yme = 'Successfully Opened Spreadsheet: %s' % globs.DOCLINK
+      yme = 'Successfully opened spreadsheet: %s' % globs.DOCLINK
       yield yme, "Spreadsheet Opened", "", ""
 
       if (globs.MODE == 'keywords'
@@ -807,7 +807,6 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
       # | (_| | (_) | (_) | (_| | \__ \ | | |  __/  __/ |_|_|   for precisely the things it's good at. But
       #  \__, |\___/ \___/ \__,_| |___/_| |_|\___|\___|\__(_)   it must be there, you must have access, any
       #  |___/                                                  servers in the picture must have access too.
-      if globs.WEB: yield "Checking Tabs...", "Then we check for tabs...", "", ""
 
       # Documentation Tab
       if 'docs' in gdoc.worksheets():
@@ -868,7 +867,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
       if tabs:
         out("Tabs Read!")
         if globs.WEB:
-          yield "Tabs successfully found/created!", "Tabs Created", tabs, ""
+          yield "Required tabs for Pipulate successfully found/created!", "Tabs Created", tabs, ""
       #        _       _                           __ _       
       #   __ _| | ___ | |__  ___   ___ ___  _ __  / _(_) __ _ 
       #  / _` | |/ _ \| '_ \/ __| / __/ _ \| '_ \| |_| |/ _` |
@@ -910,9 +909,6 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
       if 'secondsbetweenrows' in globs.config and globs.config['secondsbetweenrows']:
         secondsbetweenrows = int(globs.config['secondsbetweenrows'])
       out("secondsbetweenrows : %s" % secondsbetweenrows)
-      if globs.WEB:
-        yme = "Counting rows in %s tab..." % globs.TAB
-        yield yme, "Counting rows", '', ''
       out("Counting rows in Pipulate tab.")
       stop = True
       for x in range(5):
@@ -978,7 +974,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
           yield spinerr
           yield unlock
         Stop()
-      yme = "%s rows with question marks found in %s." % (globs.numrows-1, globs.TAB)
+      yme = "%s rows with question marks found in %s." % (globs.numrows, globs.TAB)
       out(yme)
       if globs.WEB: yield yme, "", "", ""
       if globs.numrows == 0 and globs.MODE == 'qmarks':
@@ -1208,8 +1204,6 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
         if tellrow == 0:
           tellrow = 'all'
         if globs.WEB: yield "Job requested to process %s row(s) every %s %s" % (tellrow, number, name), "", "", ""
-      else:
-        if globs.WEB: yield "?-replacement beginning.", "", "", ""
       if left and right and now:
         if globs.WEB:
           yield "%s = Start of last time window" % left, "", "", ""
@@ -2224,12 +2218,13 @@ def repipulate():
     out("Pipulate Iteration %s" % x)
     if x != 1:
       time.sleep(delay*(x-1))
-    for yieldme in Pipulate(label="?-replacement phase, pass #%s of %s possible (for retries)." % (x, retries)):
+    for yieldme in Pipulate(label="Pipulate ?-Replacement phase starting: pass #%s of %s." % (x, retries)):
       yield yieldme
     if x != retries:
-      yme = 'Pass #%s of %s possible ?-replacement phases will start in <span class="countdown">%s</span> seconds.' % (x+1, retries, delay*x)
-      yield yme, "Retrying ?=replacement", "", ""
+      yme = 'Pausing <span class="countdown">%s</span> seconds before pass #%s of %s.' % (delay*x, x+1, retries)
+      yield yme, "Retrying ?-replacement", "", ""
       yield "countdown", "", "", ""
+      yield "", "", "", ""
   yield "Finished!", "Finished!", "", ""
   yield "heart", "", "", ""
 
