@@ -211,9 +211,9 @@
                 <div class="bounce3"></div>
               </div>
               {% if request.method == 'POST': %}
-                <div id="learnsomething">First, we connect to Google Docs...</div>
+                <div id="learn"><span id="learnsomething">First, we connect to Google Docs...</span></div>
               {% else %}
-                <div id="learnsomething">{{ cyclemotto }}</div>
+                <div id="learn"><span id="learnsomething">{{ cyclemotto }}</span></div>
               {% endif %}
               {{ form.magicbox(cols="60", rows="4", placeholder="This window shows the JSON getting zapped around.") }}
             </div>
@@ -260,8 +260,7 @@
                 $("#magicbox").val(JSON.stringify(pjson));
               {%- endif -%}
               {%- if learn: -%}
-                $('#learnsomething').html('{{ learn|safe }}');
-                $('#learnsomething').velocity("transition.fadeIn");
+                $('#learnsomething').html('{{ learn|safe }}').velocity("transition.fadeIn")
               {%- endif -%}
             </script>
             {%- endif -%}

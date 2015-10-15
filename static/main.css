@@ -17,8 +17,10 @@ pseudo.button {
   color: white;
 }
 .labelhead {
-  font-weight: bold;
   color: #000088;
+  font-size: larger;
+  font-weight: bold;
+  line-height: 1.3em;
 }
 #stopsign {
   margin-top: 60px;
@@ -206,10 +208,8 @@ nav{
   width: -webkit-calc(100% - 53px);
   width: calc(100% - 53px);
 }
-#learnsomething{
+#learn{
   background-color: lightgrey;
-  font-family: Arial Black, Arial Black, Gadget, sans-serif;
-  font-size: 12px;
   height: 24px;
   line-height: 2.2;
   margin-bottom: -1px;
@@ -217,6 +217,10 @@ nav{
   margin-left: auto;
   margin-right: auto;
   width: 100%;
+}
+#learnsomething{
+  font-family: Arial Black, Arial Black, Gadget, sans-serif;
+  font-size: 12px;
 }
 #magicbox{
   -moz-box-sizing: border-box;    /* Firefox, other Gecko */
@@ -389,12 +393,17 @@ nav{
   animation: spin 0s;
   content: "\e808"; 
   color: #000088;
+  font-size: 1.5em;
+  text-indent: -1.4em;
+  line-height: 1.1em;
 }
 #plist > li.warning:before {
   -webkit-animation: spin 0s;
   animation: spin 0s;
   content: "\e80d"; 
   color: #F9F933;
+  font-size: larger;
+  text-indent: -1.7em;
 }
 #plist > li.stopsign:before {
   -webkit-animation: spin 0s;

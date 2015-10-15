@@ -867,7 +867,8 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
       if tabs:
         out("Tabs Read!")
         if globs.WEB:
-          yield "Required tabs for Pipulate successfully found/created!", "Tabs Created", tabs, ""
+          yield "Required tabs for Pipulate successfully found/created!", "", tabs, ""
+          yield "", "Tabs Finished", "", ""
       #        _       _                           __ _       
       #   __ _| | ___ | |__  ___   ___ ___  _ __  / _(_) __ _ 
       #  / _` | |/ _ \| '_ \/ __| / __/ _ \| '_ \| |_| |/ _` |
@@ -1008,7 +1009,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
       transscrape = ziplckey(nam, nam)
       out("Scrapers loaded.")
 
-      if globs.WEB: yield "Analyzing spreadsheet for request...", "Reading spreadsheet...", "", ""
+      if globs.WEB: yield "Analyzing spreadsheet for request...", "", "", ""
 
       out("Loading row1 into globals.")
       stop = True
@@ -1391,15 +1392,16 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                       except Exception as e:
                         print traceback.format_exc()
                         if globs.WEB:
-                          yme = 'Problem in %s. Retry %s of %s in <span class="countdown">%s</span> seconds...' % (collabel, x, retries, delay*x)
-                          yield yme, "", "", ""
+                          yme = 'Problem in %s. Retry #%s of %s in <span class="countdown">%s</span> seconds...' % (collabel, x, retries, delay*x)
+                          yme2 = 'Problem in %s. Retry #%s of %s...' % (collabel, x, retries)
+                          yield yme, yme2, "", ""
                           yield "countdown", "", "", ""
                           yield "warning", "", "", ""
                         time.sleep(delay*x)
                     if stop == True:
                       out("Function End (Failed)", "4", '-')
                       if globs.WEB:
-                        yme = "Something went wrong in %s. Did not complete." % collabel
+                        yme = "Something wrong in %s. ?-Replacement did not complete." % collabel
                         yield yme, "", "", ""
                         yield spinerr
                         yield unlock
@@ -2223,7 +2225,7 @@ def repipulate():
       yield yieldme
     if x != retries:
       yme = 'Pausing <span class="countdown">%s</span> seconds before pass #%s of %s.' % (delay*x, x+1, retries)
-      yield yme, "Retrying ?-replacement", "", ""
+      yield yme, "Retrying ?-Replacement Phase", "", ""
       yield "countdown", "", "", ""
       yield "", "", "", ""
   yield "Finished!", "Finished!", "", ""
