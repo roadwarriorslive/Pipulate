@@ -139,9 +139,7 @@
       function setIntervalX(callback, delay, repetitions) {
           var x = 0;
           var intervalID = window.setInterval(function () {
-
              callback();
-
              if (++x === repetitions) {
                  window.clearInterval(intervalID);
              }
@@ -321,7 +319,7 @@
                 </script>
                 <li class="progress" id="li{{loop.index}}">{{ lineitem|safe }}</li>
                 <script>
-                  $('#li{{loop.index}}').velocity("transition.slideUpIn", { stagger: 55, drag: true, duration: 325 });
+                  // $('#li{{loop.index}}').velocity("transition.slideUpIn", { stagger: 55, drag: true, duration: 325 });
                 </script>
               {% endif %}
               <script>

@@ -1398,8 +1398,8 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                         if globs.WEB:
                           yme = 'Problem in %s. Retry %s of %s in <span class="countdown">%s</span> seconds...' % (collabel, x, retries, delay*x)
                           yield yme, "", "", ""
-                          yield "warning", "", "", ""
                           yield "countdown", "", "", ""
+                          yield "warning", "", "", ""
                         time.sleep(delay*x)
                     if stop == True:
                       out("Function End (Failed)", "4", '-')
@@ -2218,8 +2218,8 @@ def prePipulators():
 
 def repipulate():
   """Operation bullet-proofing Pipulate begins!"""
-  retries = 1
-  delay = 5
+  retries = 3
+  delay = 10
   for x in range(1, retries+1):
     out("Pipulate Iteration %s" % x)
     if x != 1:
