@@ -402,8 +402,6 @@ nav{
   animation: spin 0s;
   content: "\e80d"; 
   color: #F9F933;
-  font-size: larger;
-  text-indent: -1.7em;
 }
 #plist > li.stopsign:before {
   -webkit-animation: spin 0s;
