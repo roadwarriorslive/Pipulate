@@ -1120,8 +1120,9 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
           if blankrows > 1:
             out("Found second blank row, so trending scan complete.")
             break
-      yme = "%s trending jobs found. Analyzing frequency." % len(trendlistoflists)
-      if globs.WEB: yield yme, "", "", ""
+      if len(trendlistoflists) > 0:
+        yme = "%s trending jobs found. Analyzing frequency." % len(trendlistoflists)
+        if globs.WEB: yield yme, "", "", ""
       trendingrowsfinished = True
       out("Done looking for asterisks", "2", "-")
       #  _   _                   ___                           _

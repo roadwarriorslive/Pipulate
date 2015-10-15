@@ -208,13 +208,14 @@ nav{
 }
 #learnsomething{
   background-color: lightgrey;
+  font-family: Arial Black, Arial Black, Gadget, sans-serif;
   font-size: 12px;
   height: 24px;
   line-height: 2.2;
+  margin-bottom: -1px;
   margin-bottom: 0px;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: -1px;
   width: 100%;
 }
 #magicbox{

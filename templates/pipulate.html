@@ -259,7 +259,10 @@
                 var pjson = {{ magic|safe }};
                 $("#magicbox").val(JSON.stringify(pjson));
               {%- endif -%}
-              {%- if learn: -%}$("#learnsomething").html('{{ learn|safe }}');{%- endif -%}
+              {%- if learn: -%}
+                $('#learnsomething').html('{{ learn|safe }}');
+                $('#learnsomething').velocity("transition.fadeIn");
+              {%- endif -%}
             </script>
             {%- endif -%}
             {# 
@@ -319,7 +322,7 @@
                 </script>
                 <li class="progress" id="li{{loop.index}}">{{ lineitem|safe }}</li>
                 <script>
-                  // $('#li{{loop.index}}').velocity("transition.slideUpIn", { stagger: 55, drag: true, duration: 325 });
+                  $('#li{{loop.index}}').velocity("transition.slideLeftIn", { drag: true, duration: 100 });
                 </script>
               {% endif %}
               <script>
