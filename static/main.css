@@ -22,6 +22,14 @@ pseudo.button {
   font-weight: bold;
   line-height: 1.3em;
 }
+.newrow {
+  font-weight: bold !important;
+  color: #000088 !important;
+}
+#plist > li.newrow:before {
+  color: #000088 !important;
+}
+
 #stopsign {
   margin-top: 60px;
 }
@@ -574,3 +582,4 @@ nav{
 
 select:hover { background-color: #C4F2FF; }
 #pipurl:hover { background-color: #FFDBA7; }
+

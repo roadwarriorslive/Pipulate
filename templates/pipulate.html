@@ -319,7 +319,14 @@
                   $('li').removeClass("progress");
                   $('li').addClass("check");
                 </script>
-                <li class="progress" id="li{{loop.index}}">{{ lineitem|safe }}</li>
+                {% if lineitem[:14] == 'Pipulating row': %}
+                  <li class="progress newrow" id="li{{loop.index}}">{{ lineitem|safe }}</li>
+                  <script>
+                    $('li{{loop.index}}')
+                  </script>
+                {% else %}
+                  <li class="progress" id="li{{loop.index}}">{{ lineitem|safe }}</li>
+                {% endif %}
                 <script>
                   $('#li{{loop.index}}').velocity("transition.slideLeftIn", { drag: true, duration: 100 });
                 </script>
