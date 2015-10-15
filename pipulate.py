@@ -2218,8 +2218,8 @@ def prePipulators():
 
 def repipulate():
   """Operation bullet-proofing Pipulate begins!"""
-  retries = 3
-  delay = 30
+  retries = 1
+  delay = 5
   for x in range(1, retries+1):
     out("Pipulate Iteration %s" % x)
     if x != 1:

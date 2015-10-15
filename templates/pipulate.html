@@ -244,7 +244,7 @@
             {% endif %}
           {% endwith %}
           {% if data %}
-          <ul id="plist">
+      <ul id="plist">
           {% for lineitem, learn, magic, glock in data: -%}
             {%- if glock == '+' : %}
               <script>
@@ -314,13 +314,16 @@
                      }
                   }, 1000, parseInt($(".countdown").last().text()));
                 </script>
-              {% else -%}
+              {% else %}
                 <script>
                   $('li').removeClass("progress");
                   $('li').addClass("check");
                 </script>
-                <li class="progress">{{ lineitem|safe }}</li>
-              {%- endif %}
+                <li class="progress" id="li{{loop.index}}">{{ lineitem|safe }}</li>
+                <script>
+                  $('#li{{loop.index}}').velocity("transition.slideUpIn", { stagger: 55, drag: true, duration: 325 });
+                </script>
+              {% endif %}
               <script>
                 $("#pipstream").scrollTop($("#pipstream")[0].scrollHeight);
               </script>
