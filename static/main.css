@@ -373,6 +373,7 @@ nav{
   -webkit-animation: spin 0s;
   animation: spin 0s;
   content: "\e80a"; 
+  color: #AAC0D6;
 }
 
 #plist > li.heart:before {
@@ -381,10 +382,23 @@ nav{
   content: "\e85a"; 
 }
 
+#plist > li.piplogo:before {
+  -webkit-animation: spin 0s;
+  animation: spin 0s;
+  content: "\e808"; 
+  color: #000088;
+}
 #plist > li.warning:before {
   -webkit-animation: spin 0s;
   animation: spin 0s;
   content: "\e80d"; 
+  color: #E8E875;
+}
+#plist > li.stopsign:before {
+  -webkit-animation: spin 0s;
+  animation: spin 0s;
+  content: "\e806"; 
+  color: #7B0000;
 }
 @media (min-width: 360px) and (max-width: 500px) {
   #mobileinstructions {

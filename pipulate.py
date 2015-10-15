@@ -541,6 +541,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
   if label:
     yme = '<span class="labelhead">%s</span>' % label
     yield yme, label, "", ""
+    yield "piplogo", "", "", ""
   #                                            _     _         _                Try to keep your try blocks small to isolate where the
   #   ___  _ __   ___  __   _____ _ __ _   _  | |__ (_) __ _  | |_ _ __ _   _   errors are coming from. Or do this. Python is a very
   #  / _ \| '_ \ / _ \ \ \ / / _ \ '__| | | | | '_ \| |/ _` | | __| '__| | | |  pragmatic language, and sometimes you have to take
@@ -1395,14 +1396,15 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                       except Exception as e:
                         print traceback.format_exc()
                         if globs.WEB:
-                          yme = 'We have a problem in %s. Retry %s of %s in <span class="countdown">%s</span> seconds.' % (collabel, x, retries, delay*x)
+                          yme = 'Problem in %s. Retry %s of %s in <span class="countdown">%s</span> seconds...' % (collabel, x, retries, delay*x)
                           yield yme, "", "", ""
+                          yield "warning", "", "", ""
                           yield "countdown", "", "", ""
                         time.sleep(delay*x)
                     if stop == True:
                       out("Function End (Failed)", "4", '-')
                       if globs.WEB:
-                        yme = "Something went wrong in the %s function." % collabel
+                        yme = "Something went wrong in %s. Did not complete." % collabel
                         yield yme, "", "", ""
                         yield spinerr
                         yield unlock
@@ -2216,8 +2218,8 @@ def prePipulators():
 
 def repipulate():
   """Operation bullet-proofing Pipulate begins!"""
-  retries = 1
-  delay = 120
+  retries = 3
+  delay = 30
   for x in range(1, retries+1):
     out("Pipulate Iteration %s" % x)
     if x != 1:
@@ -2225,8 +2227,9 @@ def repipulate():
     for yieldme in Pipulate(label="?-replacement phase, pass #%s of %s possible (for retries)." % (x, retries)):
       yield yieldme
     if x != retries:
-      yme = "Pass #%s of %s possible ?-replacement phases will start in %s seconds." % (x+1, retries, delay*x)
+      yme = 'Pass #%s of %s possible ?-replacement phases will start in <span class="countdown">%s</span> seconds.' % (x+1, retries, delay*x)
       yield yme, "Retrying ?=replacement", "", ""
+      yield "countdown", "", "", ""
   yield "Finished!", "Finished!", "", ""
   yield "heart", "", "", ""
 

@@ -98,17 +98,23 @@
         $('#plist > li').last().addClass("check");
         // stopsignlock();
       }
+      function spinerr() {
+        $('#plist > li').last().removeClass("progress");
+        $('#plist > li').last().addClass("stopsign");
+      }
+      function warning() {
+        $('#plist > li').last().removeClass("progress");
+        $('#plist > li').last().addClass("warning");
+      }
+      function piplogo() {
+        $('#plist > li').last().removeClass("progress");
+        $('#plist > li').last().addClass("piplogo");
+      }
       function heart() {
         setTimeout(function(){
           $('#plist > li').last().removeClass("progress");
           $('#plist > li').last().addClass("heart");
         },800);
-        // stopsignlock();
-      }
-      function spinerr() {
-        $('#plist > li').last().removeClass("progress");
-        $('#plist > li').last().addClass("warning");
-        // stopsignlock();
       }
       function stormyweather() {
         $('#spinner').hide();
@@ -280,8 +286,15 @@
                 </script>
               {%- elif lineitem == "heart" -%}
                 <script>
-                  // Hypnotize 'em
                   heart();
+                </script>
+              {%- elif lineitem == "piplogo" -%}
+                <script>
+                  piplogo();
+                </script>
+              {%- elif lineitem == "warning" -%}
+                <script>
+                  warning();
                 </script>
               {%- elif lineitem == "spinerr" -%}
                 <script>
