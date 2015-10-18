@@ -402,6 +402,13 @@ nav{
   color: #FFA9A9; 
 }
 
+#plist > li.documentation:before {
+  -webkit-animation: spin 0s;
+  animation: spin 0s;
+  content: "\e83b"; 
+  color: #FFFFFF; 
+}
+
 #plist > li.piplogo:before {
   -webkit-animation: spin 0s;
   animation: spin 0s;

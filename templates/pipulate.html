@@ -105,6 +105,10 @@
         $('#plist > li').last().removeClass("progress");
         $('#plist > li').last().addClass("success");
       }
+      function documentation() {
+        $('#plist > li').last().removeClass("progress");
+        $('#plist > li').last().addClass("documentation");
+      }
       function warning() {
         $('#plist > li').last().removeClass("progress");
         $('#plist > li').last().addClass("warning");
@@ -284,6 +288,10 @@
               {%- elif lineitem == "finished" -%}
                 <script>
                   finished();
+                </script>
+              {%- elif lineitem == "docs" -%}
+                <script>
+                  documentation();
                 </script>
               {%- elif lineitem == "piplogo" -%}
                 <script>

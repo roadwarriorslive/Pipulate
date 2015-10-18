@@ -615,12 +615,15 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
           except gspread.httpsession.HTTPError, e:
             out("Login appeared successful, but rejected on document open attempt.")
             yme = 'Please <a href="%s">Log In</a> again first.' % getLoginlink()
-            if globs.WEB: yield yme, "Login under the \"burger button\" in the upper-right.", "", ""
+            if globs.WEB: 
+              yield yme, "Login under the \"burger button\" in the upper-right.", "", ""
+              yield warning
+              yield flush
             if session and 'loggedin' in session:
               session.pop('loggedin', None)
             if 'u' not in session and globs.PIPURL:
               session['u'] = globs.PIPURL
-            break
+            raise SystemExit
           except gspread.exceptions.NoValidUrlKeyFound:
             try:
               gdoc = gsp.open(globs.NAME)
@@ -641,7 +644,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                 yme = 'I am sorry, the sesson has expired. Please <a href="%s">log back in.</a>' % getLoginlink()
                 yield yme, "Log back in", "", ""
                 yield spinerr
-              raise StopIteration
+              raise SystemExit
             except:
               if globs.WEB:
                 yield "I see you're on a URL that is not a Google Spreadsheet. Would you like to grab links?", "", "", ""
@@ -742,6 +745,9 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
               Stop()
           elif inst == 'message':
             yield instruction[1]
+          elif inst == 'docs':
+            yield instruction[1], '', '', ''
+            yield "docs", "", "", ""
           elif inst == 'table':
             out("IPM Make table on sheet1")
             aobj = instruction[1]
@@ -876,7 +882,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
           yield badtuple
           yield spinerr
           yield unlock
-        Stop()
+        raise StopIteration
       tabs = None
       try:
         tabs = [sheet.title for sheet in gdoc.worksheets()]
@@ -910,7 +916,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
           yield badtuple
           yield spinerr
           yield unlock
-        Stop()
+        raise StopIteration
       out("Config tab copied to globals.")
 
       # I should apply this to everything that can get "bumped up" to globs from globs.config
@@ -948,7 +954,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
           yield badtuple
           yield spinerr
           yield unlock
-        Stop()
+        raise StopIteration
       stop = True
       for x in range(5):
         if globs.WEB: yield lock
@@ -967,7 +973,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
           yield badtuple
           yield spinerr
           yield unlock
-        Stop()
+        raise StopIteration
       stop = True
       for x in range(10):
         if globs.WEB: yield lock
@@ -1029,7 +1035,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
           yield badtuple
           yield spinerr
           yield unlock
-        Stop()
+        raise StopIteration
       pat = [[d['pattern']][0] for d in lod]
       typ = [[d['type']][0] for d in lod]
       nam = [[d['name']][0] for d in lod]
@@ -1054,7 +1060,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
           yield badtuple
           yield spinerr
           yield unlock
-        Stop()
+        raise StopIteration
       trendlistoflists = []
       out("Scanning row 1 for function and scraper names.")
       fargs = {}
@@ -1121,7 +1127,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
             yield badtuple
             yield spinerr
             yield unlock
-          Stop()
+          raise StopIteration
         if onerow:
           if rowdex == 2: #Looking for trending requests
             if '*' in onerow:
@@ -1570,7 +1576,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                 yield badtuple
                 yield spinerr
                 yield unlock
-              Stop()
+              raise StopIteration
           elif onerow.count('') == len(onerow):
             blankrows += 1
             if blankrows > 1:
@@ -2160,9 +2166,11 @@ def SERPTrack():
     ('clear', ''),
     ('message', ("Setting up SERP fields.", "", "", "")),
     ('table', [
-      ('Keyword','SERPs', 'positions'),
-      ('[replace me]', '?', '?')
+      ('Site', 'Keyword','TimeStamp', 'SERPs', 'Positions', 'Position', 'TopURL', 'Count'),
+      ('[your site]', '[your keyword 1] ', '?', '?', '?', '?', '?', '1'),
+      ('[your site]', '[your keyword 2]', '?', '?', '?', '?', '?', '1')
     ]),
+    ('docs', 'Just set up SERPs and wondering what to do next? <a href="#">Read this doc.</a>'),
     ('stop', '')
   ], label='Setting up SERP tracking...')
 
