@@ -1984,7 +1984,7 @@ class SetupForm(PipForm2):
   radios = RadioField(choices=[
     ('checklist',   'SEO Checklist'),
     ('keywordlist', 'Keyword Build'),
-    ('serps',       'Ranking Monitor'),
+    ('serps',       'Setup SERP-Tracking'),
     ('seocop',      'Code Cop (not ready)'),
     ('fillmarks',   "Flood-?'s (KEEPS data)."),
     ('resetmarks',  "Reset-?'s (WIPES data)."),
@@ -2136,6 +2136,13 @@ def RunTests():
     ('stop', '')
   ], label='Run Tests')
 
+def SERPTrack():
+  '''Set up Search Engine Result Position Tracking'''
+  return Pipulate([
+    ('clear', ''),
+    ('stop', '')
+  ], label='Setting up SERP tracking...')
+
 def ClearSheet1():
   '''Clear Sheet 1'''
   return Pipulate([
@@ -2227,7 +2234,7 @@ def Cancel():
 def prePipulators():
   return {
     'clear':        ClearSheet1,
-    'serps':        Cancel,
+    'serps':        SERPTrack,
     'cancel':       Cancel,
     'linksonpage':  LinksOnPage,
     'quickcrawl':   QuickCrawl,
