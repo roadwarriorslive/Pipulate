@@ -746,6 +746,10 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
           elif inst == 'sheet':
             out("IPM Make table on any sheet")
             tabname = instruction[1]
+            if globs.WEB:
+              yme = "Making new tab: %s" % tabname
+              yield yme, "Making new tab.", "", ""
+              yield purge
             aobj = instruction[2]
             row1 = aobj[0]
             lol = aobj[1:]
