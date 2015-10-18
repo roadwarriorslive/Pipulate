@@ -641,13 +641,13 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                 yme = 'I am sorry, the sesson has expired. Please <a href="%s">log back in.</a>' % getLoginlink()
                 yield yme, "Log back in", "", ""
                 yield spinerr
-                break
+              raise StopIteration
             except:
               if globs.WEB:
                 yield "I see you're on a URL that is not a Google Spreadsheet. Would you like to grab links?", "", "", ""
                 yield "If so, just <a href='https://docs.google.com/spreadsheets/create' target='_blank'>create</a> a new Spreadsheet, name it \"Pipulate\" and click Pipulate again.", "Google Spreadsheet Not Found.", "", ""
                 yield 'New to this odd but awesome approach? Watch the <a target="_blank" href="http://goo.gl/v71kw8">Demo</a> and read the <a target="_blank" href="http://goo.gl/p2zQa4">Docs</a>.', "", "", ""
-                break
+              raise StopIteration
           except gspread.exceptions.SpreadsheetNotFound:
             if globs.WEB: yield "Please give the document a name to force first save.", "", "", ""
             break
@@ -660,7 +660,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
             yield badtuple
             yield spinerr
             yield unlock
-          yield stopit
+          raise StopIteration
         globs.DOCLINK = '<b><a href="%s/d/%s/edit#gid=0" target="_blank">%s<i class="pip-icon pip-link-ext"></i></a></b>' % (globs.SHEETS, globs.DOCID, globs.NAME)
       out("END LOGIN ATTEMPT", "2", '-')
 
