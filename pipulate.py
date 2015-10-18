@@ -535,11 +535,13 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
   qstart = 1
   qend = 1
   badtuple = (globs.GBAD, globs.GBAD, "", "")
+  purge = ("", "", "", "")
   lock = ("", "", "", "+")
   unlock = ("", "", "", "-")
   stopit = ("stop", "", "", "")
   spinerr = "spinerr", "", "", ""
   spinoff = "spinoff", "", "", ""
+  warning = ("warning", "", "", "")
   success = ("success", "", "", "")
   finished = ("finished", "", "", "")
   out("PIPULATION BEGINNING", "1")
@@ -969,7 +971,13 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
           yield spinerr
           yield unlock
         Stop()
-      if globs.numrows > globs.maxrows:
+      if globs.numrows == 0:
+        if globs.WEB:
+          yield "Nothing to pipulate.", "Make sure sheet is set up correctly.", "", ""
+          yield warning
+          yield unlock
+        yield stopit
+      elif globs.numrows > globs.maxrows:
         yme = "%s rows is too many rows. Max is %s." % (globs.numrows, globs.maxrows)
         if globs.WEB:
           yield yme, "Too many rows for Pipulate", "", ""
@@ -977,7 +985,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
           yield "You will be able to stop the job from the Config tab.", "", "", ""
           yield spinerr
           yield unlock
-        Stop()
+        yield stopit
       yme = "%s rows with question marks found in %s." % (globs.numrows, globs.TAB)
       out(yme)
       if globs.WEB: yield yme, "", "", ""
@@ -1400,7 +1408,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                           yme2 = 'Problem in %s. Retry #%s of %s...' % (collabel, x, retries)
                           yield yme, yme2, "", ""
                           yield "countdown", "", "", ""
-                          yield "warning", "", "", ""
+                          yield warning
                         time.sleep(delay*x)
                     if stop == True:
                       out("Function End (Failed)", "4", '-')
