@@ -388,11 +388,18 @@ nav{
   color: #AAC0D6;
 }
 
-#plist > li.finished:before {
+#plist > li.success:before {
   -webkit-animation: spin 0s;
   animation: spin 0s;
   content: "\e86e"; 
   color: #023131;
+}
+
+#plist > li.finished:before {
+  -webkit-animation: spin 0s;
+  animation: spin 0s;
+  content: "\e85b"; 
+  color: #FFA9A9; 
 }
 
 #plist > li.piplogo:before {

@@ -536,7 +536,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
   qstart = 1
   qend = 1
   badtuple = (globs.GBAD, globs.GBAD, "", "")
-  purge = ("", "", "", "")
+  flush = ("", "", "", "")
   lock = ("", "", "", "+")
   unlock = ("", "", "", "-")
   stopit = ("stop", "", "", "")
@@ -544,6 +544,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
   spinoff = "spinoff", "", "", ""
   warning = ("warning", "", "", "")
   finished = ("finished", "", "", "")
+  success = ("success", "", "", "")
   out("PIPULATION BEGINNING", "1")
   if label:
     yme = '<span class="labelhead">%s</span>' % label
@@ -749,7 +750,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
             if globs.WEB:
               yme = "Making new tab: %s" % tabname
               yield yme, "Making new tab.", "", ""
-              yield purge
+              yield flush
             aobj = instruction[2]
             row1 = aobj[0]
             lol = aobj[1:]
@@ -809,8 +810,8 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
               yield yme, "", "", ""
               yield spinoff
               yield finished
-              yield purge
-            yield stopit
+              yield flush
+            raise StopIteration
       #                        _       _               _  ___   At some point in the future, there wil be
       #   __ _  ___   ___   __| |  ___| |__   ___  ___| ||__ \  something better than Google Spreadsheets.
       #  / _` |/ _ \ / _ \ / _` | / __| '_ \ / _ \/ _ \ __|/ /  Until that day, let us use it excessively
@@ -995,7 +996,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
       out(yme)
       if globs.WEB: 
         yield yme, "", "", ""
-        yield purge
+        yield flush
       if globs.numrows == 0 and globs.MODE == 'qmarks':
         if globs.WEB:
           yme = "Ready to go, but no question marks found."
@@ -1280,7 +1281,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
           yme = "No Pipulate functions found in %s tab." % globs.TAB
           yield yme, "Look at the list of options under the Docs tab.", "", ""
           yield warning
-          yield purge
+          yield flush
         yield stopit
       therange = range(qstart, qend)
       blankrows = 0 #Lets us skip occasional blank rows
@@ -1568,9 +1569,8 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
     if globs.WEB:
       #yme = 'Pipulation complete. Do a little victory dance. %s' % globs.PBNJMAN
       yield "?-Replacement complete.", "Question marks replaced!", "", ""
-      yield finished
+      yield success
       yield spinoff
-    yield stopit
     out("PIPULATION OVER", "1", '-')
   except Exception as e:
     exceptiondata = traceback.format_exc()
