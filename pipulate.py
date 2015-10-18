@@ -996,7 +996,10 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
           yield spinerr
           yield unlock
         yield stopit
-      yme = "%s rows with question marks found in %s." % (globs.numrows, globs.TAB)
+      s = ''
+      if globs.numrows > 1:
+        s = 's'
+      yme = "%s row%s found in %s." % (globs.numrows, s, globs.TAB)
       out(yme)
       if globs.WEB: 
         yield yme, "", "", ""
@@ -1031,9 +1034,6 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
       scrapepatterns = ziplckey(nam, pat)
       transscrape = ziplckey(nam, nam)
       out("Scrapers loaded.")
-
-      if globs.WEB: yield "Analyzing spreadsheet for request...", "", "", ""
-
       out("Loading row1 into globals.")
       stop = True
       for x in range(10):
@@ -1276,15 +1276,16 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
         if globs.WEB:
           yme = "No ?'s found in sheet."
           yield yme, "The first worksheet in your spreadsheet needs to be set up.", "", ""
-          yield flush
-          yield spinerr
+          yield warning
           yield finished
+          yield flush
         yield stopit
       if not [i for i in globs.row1 if i in globs.funcscrapes]:
         if globs.WEB:
           yme = "No Pipulate functions found in %s tab." % globs.TAB
           yield yme, "Look at the list of options under the Docs tab.", "", ""
           yield warning
+          yield finished
           yield flush
         yield stopit
       therange = range(qstart, qend)
