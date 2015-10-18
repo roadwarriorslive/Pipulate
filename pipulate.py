@@ -739,6 +739,8 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
               yield "Failed to clear Sheet 1", "", "", ""
               yield spinerr
               Stop()
+          elif inst == 'message':
+            yield instruction[1]
           elif inst == 'table':
             out("IPM Make table on sheet1")
             aobj = instruction[1]
@@ -1415,6 +1417,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                         yme = "<li>%s</li>" % (collabel)
                         if globs.WEB:
                           yield yme, "", "", ""
+                          yield flush
                         break
                       except Exception as e:
                         print traceback.format_exc()
@@ -1511,7 +1514,9 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                               newrow[coldex] = None
                         out('%s worked.' % collabel)
                         yme = "<li>%s</li>" % (collabel)
-                        if globs.WEB: yield yme, "", "", ""
+                        if globs.WEB:
+                          yield yme, "", "", ""
+                          yield flush
                         stop = False
                         break
                       except Exception as e:
@@ -1577,6 +1582,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
       yield success
       yield flush
       yield spinoff
+    yield stopit
     out("PIPULATION OVER", "1", '-')
   except Exception as e:
     exceptiondata = traceback.format_exc()
@@ -2151,6 +2157,11 @@ def SERPTrack():
   '''Set up Search Engine Result Position Tracking'''
   return Pipulate([
     ('clear', ''),
+    ('message', ("Setting up SERP fields.", "", "", "")),
+    ('table', [
+      ('Keyword','SERPs', 'positions'),
+      ('[replace me]', '?', '?')
+    ]),
     ('stop', '')
   ], label='Setting up SERP tracking...')
 
