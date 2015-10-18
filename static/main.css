@@ -28,6 +28,7 @@ pseudo.button {
 }
 #plist > li.newrow:before {
   color: #023131 !important;
+  content: "\e808" !important;
 }
 
 #stopsign {
@@ -231,14 +232,11 @@ nav{
   font-size: 12px;
 }
 #magicbox{
-  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-  -webkit-border-radius:0px;
-  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
   background-color: darkslategray;
-  border-radius:0px;
   border: 2px solid lightgrey;
   box-sizing: border-box;         /* Opera/IE 8+ */
   color: white;
+  font-family: Arial Black, Arial Black, Gadget, sans-serif;
   margin-left: auto;
   margin-right:auto;
   margin-top: -1px;
@@ -365,7 +363,7 @@ nav{
   -webkit-animation: spin 2s infinite linear;
   -webkit-transform-origin: -1.5em 7.5px;
   animation: spin 2s infinite linear;
-  content: '\e820';
+  content: '\e808';
   float: left;
   font-family: 'mikelevin';
   text-indent: -2em;
@@ -374,7 +372,7 @@ nav{
 #plist > li.progress:before {
   -webkit-animation: spin 2s infinite linear;
   animation: spin 2s infinite linear;
-  content: "\e820"; 
+  content: "\e808"; 
 }
 
 #plist > li.checkbox:before {

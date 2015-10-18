@@ -435,9 +435,9 @@ def main():
       flash('Select "Harvest Keywords" from the dropdown menu.')
     else:
       session.pop('_flashes', None)
-      flash('This uses %s in your Google sheet named %s' % (globs.TAB, globs.DOCLINK))
+      flash('This targets %s in your Google sheet named %s' % (globs.TAB, globs.DOCLINK))
       if readytopip:
-        flash('Everything set up properly. Click button to proceed.')
+        flash('Everything seems set up properly. Click button to proceed.')
       #elif globs.sheet.row_values(1)==[] and globs.sheet.row_values(2) == []:
       #  flash('If you are new to Pipulate, watch the demo.')
       else:

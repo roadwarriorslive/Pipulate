@@ -198,7 +198,7 @@
               {% else %}
                 <div id="learn"><span id="learnsomething">{{ cyclemotto }}</span></div>
               {% endif %}
-              {{ form.magicbox(cols="60", rows="4", placeholder="This window shows the JSON getting zapped around.") }}
+              {{ form.magicbox(cols="60", rows="4", placeholder="['This', 'area', 'shows', 'data']") }}
             </div>
           </form>
           {#
@@ -306,7 +306,7 @@
                   <li class="progress" id="li{{loop.index}}">{{ lineitem|safe }}</li>
                 {% endif %}
                 <script>
-                  $('#li{{loop.index}}').velocity("transition.slideLeftIn", { drag: true, duration: 100 });
+                  $('#li{{loop.index}}').velocity("transition.slideLeftIn", { drag: true, duration: 600 });
                 </script>
               {% endif %}
               <script>
