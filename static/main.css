@@ -392,9 +392,15 @@ nav{
   -webkit-animation: spin 0s;
   animation: spin 0s;
   content: "\e86e"; 
-  color: black;
+  color: #023131;
 }
 
+#plist > li.success:before {
+  -webkit-animation: spin 0s;
+  animation: spin 0s;
+  content: "\e85b"; 
+  color: #023131;
+}
 #plist > li.piplogo:before {
   -webkit-animation: spin 0s;
   animation: spin 0s;
@@ -482,7 +488,7 @@ nav{
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
 
-.pip-export {
+.pip-link-ext {
   color: #4AFEFF;
 }
 .pressthis{

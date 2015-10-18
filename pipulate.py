@@ -304,7 +304,7 @@ def main():
       elif needsPipulate and 'access_token' not in request.args:
         out("EXITING MAIN FUNCTION RENDER INDOCTRINATE", "0", '-')
         return render_template('pipulate.html', form=form, select=None)
-  globs.DOCLINK = '<b><a href="%s/d/%s/edit#gid=0" target="_blank">%s<i class="pip-icon pip-export"></i></a></b>' % (globs.SHEETS, globs.DOCID, globs.NAME)
+  globs.DOCLINK = '<b><a href="%s/d/%s/edit#gid=0" target="_blank">%s<i class="pip-icon pip-link-ext"></i></a></b>' % (globs.SHEETS, globs.DOCID, globs.NAME)
   menutwo = False
   if request.method == 'POST':
     #  ____   ___  ____ _____   ____  _                              _   Shazam! is the block in which we create the
@@ -537,9 +537,10 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
   badtuple = (globs.GBAD, globs.GBAD, "", "")
   lock = ("", "", "", "+")
   unlock = ("", "", "", "-")
+  stopit = ("stop", "", "", "")
   spinerr = "spinerr", "", "", ""
   spinoff = "spinoff", "", "", ""
-  stopit = ("stop", "", "", "")
+  success = ("success", "", "", "")
   finished = ("finished", "", "", "")
   out("PIPULATION BEGINNING", "1")
   if label:
@@ -657,7 +658,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
             yield spinerr
             yield unlock
           Stop() # Consider adding refresh_token logic for users (versus the scheduler)
-        globs.DOCLINK = '<b><a href="%s/d/%s/edit#gid=0" target="_blank">%s<i class="pip-icon pip-export"></i></a></b>' % (globs.SHEETS, globs.DOCID, globs.NAME)
+        globs.DOCLINK = '<b><a href="%s/d/%s/edit#gid=0" target="_blank">%s<i class="pip-icon pip-link-ext"></i></a></b>' % (globs.SHEETS, globs.DOCID, globs.NAME)
       out("END LOGIN ATTEMPT", "2", '-')
 
       if globs.WEB: yield unlock
@@ -785,7 +786,6 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                     cell.value = '?'
                 result = globs.sheet.update_cells(CellList)
             yield "Question marks filled in!", "Ready to pipulate.", "", ""
-            yield "You are ready to pipulate.", "", "", ""
           elif inst == 'add':
             if not globs.row1:
               globs.row1 = lowercaselist(gdoc.worksheet(globs.TAB).row_values(1))
@@ -802,7 +802,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
             yield yme, "", "", ""
             yield spinoff
             yield "", "", "", ""
-            yield ("finished", "", "", "")
+            yield success
             raise StopIteration
       #                        _       _               _  ___   At some point in the future, there wil be
       #   __ _  ___   ___   __| |  ___| |__   ___  ___| ||__ \  something better than Google Spreadsheets.

@@ -96,11 +96,14 @@
       function spinoff() {
         $('#plist > li').last().removeClass("progress");
         $('#plist > li').last().addClass("check");
-        // stopsignlock();
       }
       function spinerr() {
         $('#plist > li').last().removeClass("progress");
         $('#plist > li').last().addClass("stopsign");
+      }
+      function success() {
+        $('#plist > li').last().removeClass("progress");
+        $('#plist > li').last().addClass("success");
       }
       function warning() {
         $('#plist > li').last().removeClass("progress");
@@ -266,6 +269,10 @@
                 <script>
                   // Unlock button and remove spinner, failed pipulation
                   spinoff();
+                </script>
+              {%- elif lineitem == "success" -%}
+                <script>
+                  success();
                 </script>
               {%- elif lineitem == "finished" -%}
                 <script>
