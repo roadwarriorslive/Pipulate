@@ -1576,8 +1576,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
     else: #No session object found
       if globs.WEB: yield 'Please Login to Google', "", "", ""
     if globs.WEB:
-      #yme = 'Pipulation complete. Do a little victory dance. %s' % globs.PBNJMAN
-      yield "?-Replacement complete.", "Question marks replaced!", "", ""
+      yield '<span class="newrow">?-Replacement complete.</span>', "Question marks replaced!", "", ""
       yield success
       yield flush
       yield spinoff
