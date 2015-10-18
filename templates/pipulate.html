@@ -110,7 +110,7 @@
         $('#plist > li').last().removeClass("progress");
         $('#plist > li').last().addClass("piplogo");
       }
-      function heart() {
+      function finished() {
         $('#plist > li').last().removeClass("progress");
         $('#plist > li').last().addClass("finished");
       }
@@ -267,9 +267,9 @@
                   // Unlock button and remove spinner, failed pipulation
                   spinoff();
                 </script>
-              {%- elif lineitem == "heart" -%}
+              {%- elif lineitem == "finished" -%}
                 <script>
-                  heart();
+                  finished();
                 </script>
               {%- elif lineitem == "piplogo" -%}
                 <script>

@@ -535,11 +535,12 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
   qstart = 1
   qend = 1
   badtuple = (globs.GBAD, globs.GBAD, "", "")
-  stop = ("stop", "", "", "")
   lock = ("", "", "", "+")
   unlock = ("", "", "", "-")
   spinerr = "spinerr", "", "", ""
   spinoff = "spinoff", "", "", ""
+  stopit = ("stop", "", "", "")
+  finished = ("finished", "", "", "")
   out("PIPULATION BEGINNING", "1")
   if label:
     yme = '<span class="labelhead">%s</span>' % label
@@ -801,7 +802,8 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
             yield yme, "", "", ""
             yield spinoff
             yield "", "", "", ""
-            Stop()
+            yield ("finished", "", "", "")
+            raise StopIteration
       #                        _       _               _  ___   At some point in the future, there wil be
       #   __ _  ___   ___   __| |  ___| |__   ___  ___| ||__ \  something better than Google Spreadsheets.
       #  / _` |/ _ \ / _ \ / _` | / __| '_ \ / _ \/ _ \ __|/ /  Until that day, let us use it excessively
@@ -1255,14 +1257,14 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
           yme = "No ?'s found in %s Sheet." % globs.DOCLINK
           yield yme, "The first worksheet in your spreadsheet needs to be set up.", "", ""
           yield "Double-check and try again.", "", "", ""
-          yield "heart", "", "", ""
-        yield stop
+          yield "finished", "", "", ""
+        yield stopit
       if not [i for i in globs.row1 if i in globs.funcscrapes]:
         if globs.WEB:
           yme = "No Pipulate functions found in %s tab." % globs.TAB
           yield yme, "Look at the list of options under the Docs tab.", "", ""
-          yield "heart", "", "", ""
-        yield stop
+          yield "finished", "", "", ""
+        yield stopit
       therange = range(qstart, qend)
       blankrows = 0 #Lets us skip occasional blank rows
       for index, rowdex in enumerate(therange): #Start stepping through every row.
@@ -1301,7 +1303,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
               yield "GData Timed Out","Sorry, GDATA Failed. Try again.", "", ""
               yield spinerr
               yield unlock
-            yield stop
+            yield stopit
 
           onerow = []
           for cell in CellList:
@@ -1549,10 +1551,9 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
     if globs.WEB:
       #yme = 'Pipulation complete. Do a little victory dance. %s' % globs.PBNJMAN
       yield "?-Replacement complete.", "Question marks replaced!", "", ""
-      yield "heart", "", "", ""
+      yield "finished", "", "", ""
       yield spinoff
     out("PIPULATION OVER", "1", '-')
-    yield stop
   except Exception as e:
     exceptiondata = traceback.format_exc()
     print(exceptiondata)
@@ -2056,7 +2057,8 @@ def RinseAndRepeat():
   '''Interrogates worksheet and inserts question marks wherever they can go'''
   return Pipulate([
     ('resetmarks', ''),
-    ('?', '')
+    ('?', ''),
+    ('stop', '')
   ], label="Resetting data back to ?'s and repipulating...")
 
 def ResetQMarks():
@@ -2104,6 +2106,7 @@ def AddColumns(checks):
   # Pipulate is the player piano. It normally tries to replace question marks.
   # So when fed a list of tuples, it will interpret them as it's music instructions.
   lot.append(('fillmarks', ''))
+  lot.append(('stop', ''))
   return Pipulate(lot, label="Adding Columns")
 
 def RunTests():
@@ -2235,7 +2238,7 @@ def repipulate():
       time.sleep(delay*(x-1))
     for yieldme in Pipulate(label="?-Replacement phase starting: pass #%s of %s..." % (x, retries)):
       if yieldme == ("stop", "", "", ""):
-        raise StopIteration
+        raise RuntimeError
       yield yieldme
     if x != retries:
       yme = 'Pausing <span class="countdown">%s</span> seconds before pass #%s of %s.' % (delay*x, x+1, retries)
@@ -2243,7 +2246,7 @@ def repipulate():
       yield "countdown", "", "", ""
       yield "", "", "", ""
   yield "Finished!", "Finished!", "", ""
-  yield "heart", "", "", ""
+  yield "finished", "", "", ""
 
 def foo():
   return 'bar'
