@@ -313,7 +313,9 @@ def main():
     # |  __/| |_| |___) || |    ___) | | | | (_| |/ / (_| | | | | | |_|  data paramater of a stream_template() call
     # |_|    \___/|____/ |_|   |____/|_| |_|\__,_/___\__,_|_| |_| |_(_)  enabling our magic streaming output. Shazam!
     #
-    if form2 and form2.secondary.data == 'on':
+    if form and 'options' in form and form.options.data == 'repipulate':
+      streamit = stream_with_context(prePipulators()['repipulate']())
+    elif form2 and 'secondary' in form2 and form2.secondary.data == 'on':
       menutwo = True
       psKey = globs.MODE
       if 'radios' in form2:
@@ -781,10 +783,8 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                   elif not cell.value:
                     cell.value = '?'
                 result = globs.sheet.update_cells(CellList)
-            yield "Question marks filled in!", "Ready for some serious pipulating", "", ""
-            yield "You're now ready for some serious pipulating!", "", "", ""
-            yield spinoff
-            Stop()
+            yield "Question marks filled in!", "Ready to pipulate.", "", ""
+            yield "You are ready to pipulate.", "", "", ""
           elif inst == 'add':
             if not globs.row1:
               globs.row1 = lowercaselist(gdoc.worksheet(globs.TAB).row_values(1))
@@ -1301,7 +1301,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
               yield "GData Timed Out","Sorry, GDATA Failed. Try again.", "", ""
               yield spinerr
               yield unlock
-            Stop()
+            yield stop
 
           onerow = []
           for cell in CellList:
@@ -1935,6 +1935,7 @@ def mainMenu():
   ''' Creates the entire cadence of the system.'''
   return [
     ('qmarks'      , "Replace ?'s"),
+    ('repipulate'  , "Repipulate"),
     ('menu:setup'  , "Do Auto Setup"),
     ('menu:crawl'  , "Crawl a Website"),
     ('menu:column' , "Add Some Columns"),
@@ -1949,8 +1950,7 @@ def mainMenu():
 #  |_____| |_| |_|\__,_|\__,_|_|   \__, | |_| |_| |_|\___|_| |_|\__,_| |_|\_\___|\__, |___/  section. The values of the
 #                                  |___/                                         |___/       dict override default forms.
 def secondaryMenu():
-  '''Everything prefixed with "menu" in the mainMenu function becomes input
-  here. '''
+  '''Everything prefixed with "menu" in the mainMenu function becomes input here. '''
   return {
     'clear':        ClearSheet1Form(csrf_enabled=False),
     'crawl':        CrawlTypesForm(csrf_enabled=False),
@@ -2052,16 +2052,25 @@ def SEOChecklist():
     ('sheet', 'SEOChecklist', seochecklistlist())
   ], label='Making SEO Checklist')
 
+def RinseAndRepeat():
+  '''Interrogates worksheet and inserts question marks wherever they can go'''
+  return Pipulate([
+    ('resetmarks', ''),
+    ('?', '')
+  ], label="Resetting data back to ?'s and repipulating...")
+
 def ResetQMarks():
   '''Interrogates worksheet and inserts question marks wherever they can go'''
   return Pipulate([
-    ('resetmarks', '')
+    ('resetmarks', ''),
+    ('stop', '')
   ], label="Resetting ?'s")
 
 def FillQMarks():
   '''Interrogates worksheet and inserts question marks wherever they can go'''
   return Pipulate([
-    ('fillmarks', '')
+    ('fillmarks', ''),
+    ('stop', '')
   ], label="Flooding ?'s")
 
 def MakeSitemap():
@@ -2211,6 +2220,7 @@ def prePipulators():
     'sitemap':      MakeSitemap,
     'fillmarks':    FillQMarks,
     'resetmarks':   ResetQMarks,
+    'repipulate':   RinseAndRepeat,
     'checklist':    SEOChecklist,
     'keywordlist':  KeywordChecklist
   }
