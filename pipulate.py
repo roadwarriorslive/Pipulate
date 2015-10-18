@@ -2059,8 +2059,9 @@ def SEOChecklist():
   '''Sets up a new worksheet for tracking SEO Client setup and deliverables.'''
   out("Setting up New SEO Client.")
   return Pipulate([
-    ('sheet', 'SEOChecklist', seochecklistlist())
-  ], label='Making SEO Checklist')
+    ('sheet', 'SEOChecklist', seochecklistlist()),
+    ('stop', '')
+  ], label='Making SEO Checklist...')
 
 def RinseAndRepeat():
   '''Interrogates worksheet and inserts question marks wherever they can go'''
@@ -2222,6 +2223,7 @@ def Cancel():
 def prePipulators():
   return {
     'clear':        ClearSheet1,
+    'serps':        Cancel,
     'cancel':       Cancel,
     'linksonpage':  LinksOnPage,
     'quickcrawl':   QuickCrawl,
