@@ -594,7 +594,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
           if globs.WEB:
             yield "Google Login unsuccessful.", "", "", ""
             yield spinoff
-          Stop()
+          raise StopIteration
         else:
           out("Login successful.")
         out("Opening Spreadsheet...")
@@ -736,8 +736,9 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                 yield "Sheet1 Cleared!", "Now, go do something awesome!", "", ""
                 yield spinoff
             except:
-              yield "Failed to clear Sheet 1", "", "", ""
-              yield spinerr
+              if globs.WEB:
+                yield "Failed to clear Sheet 1", "", "", ""
+                yield spinerr
               Stop()
           elif inst == 'message':
             yield instruction[1]
