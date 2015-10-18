@@ -779,24 +779,27 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
               globs.row1 = lowercaselist(gdoc.worksheet(globs.TAB).row_values(1))
             if not globs.numrows:
               globs.numrows = len(globs.sheet.col_values(1))
-            colrange = None
-            for acol in globs.row1:
-              if acol in globs.funcscrapes:
-                yme = "?'s for %s" % acol
-                if globs.WEB:
-                  yield yme, "", "", ""
-                  yield flush
-                qcol = globs.letter[globs.row1.index(acol) + 1]
-                nr = globs.numrows
-                colrange = '%s%s:%s%s' % (qcol, 2, qcol, nr)
-                CellList = globs.sheet.range(colrange)
-                for cell in CellList:
-                  if inst == 'resetmarks':
-                    cell.value = '?'
-                  elif not cell.value:
-                    cell.value = '?'
-                result = globs.sheet.update_cells(CellList)
-            yield "Question marks filled in!", "Ready to pipulate.", "", ""
+            if globs.numrows > 1:
+              colrange = None
+              for acol in globs.row1:
+                if acol in globs.funcscrapes:
+                  yme = "Resetting ?'s for %s" % acol
+                  if globs.WEB:
+                    yield yme, "", "", ""
+                    yield flush
+                  qcol = globs.letter[globs.row1.index(acol) + 1]
+                  nr = globs.numrows
+                  colrange = '%s%s:%s%s' % (qcol, 2, qcol, nr)
+                  CellList = globs.sheet.range(colrange)
+                  for cell in CellList:
+                    if inst == 'resetmarks':
+                      cell.value = '?'
+                    elif not cell.value:
+                      cell.value = '?'
+                  result = globs.sheet.update_cells(CellList)
+              yield "Question marks filled in!", "Ready to pipulate.", "", ""
+            else:
+              yield "Sheet too short for ?'s.", "", "", ""
           elif inst == 'add':
             if not globs.row1:
               globs.row1 = lowercaselist(gdoc.worksheet(globs.TAB).row_values(1))
@@ -811,7 +814,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
             out("This is a forced-stop from the IPM")
             if globs.WEB:
               yme = "Pipulation Complete! Do a little victory dance!" + globs.PBNJMAN
-              yield yme, "", "", ""
+              yield yme, "Pipulation Complete!", "", ""
               yield spinoff
               yield finished
               yield flush
@@ -1277,6 +1280,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
           yme = "No ?'s found in sheet."
           yield yme, "The first worksheet in your spreadsheet needs to be set up.", "", ""
           yield warning
+          yield flush
           yield finished
           yield flush
         yield stopit
@@ -1575,6 +1579,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
       #yme = 'Pipulation complete. Do a little victory dance. %s' % globs.PBNJMAN
       yield "?-Replacement complete.", "Question marks replaced!", "", ""
       yield success
+      yield flush
       yield spinoff
     out("PIPULATION OVER", "1", '-')
   except Exception as e:

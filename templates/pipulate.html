@@ -265,7 +265,9 @@
 
             #}
             {%- if lineitem -%}
-              {%- if lineitem == "spinon" -%}
+              {%- if lineitem == "stop" -%}
+
+              {%- elif lineitem == "spinon" -%}
                 <script>
                   // Lock button
                   $('#pipulate').prop("disabled", true);
