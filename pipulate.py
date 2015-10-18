@@ -543,7 +543,6 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
   spinerr = "spinerr", "", "", ""
   spinoff = "spinoff", "", "", ""
   warning = ("warning", "", "", "")
-  success = ("success", "", "", "")
   finished = ("finished", "", "", "")
   out("PIPULATION BEGINNING", "1")
   if label:
@@ -660,7 +659,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
             yield badtuple
             yield spinerr
             yield unlock
-          Stop() # Consider adding refresh_token logic for users (versus the scheduler)
+          yield stopit
         globs.DOCLINK = '<b><a href="%s/d/%s/edit#gid=0" target="_blank">%s<i class="pip-icon pip-link-ext"></i></a></b>' % (globs.SHEETS, globs.DOCID, globs.NAME)
       out("END LOGIN ATTEMPT", "2", '-')
 
@@ -805,12 +804,13 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
               out(instruction)
           elif inst == 'stop':
             out("This is a forced-stop from the IPM")
-            yme = "Pipulation Complete! Do a little victory dance!" + globs.PBNJMAN
-            yield yme, "", "", ""
-            yield spinoff
-            yield "", "", "", ""
-            yield success
-            raise StopIteration
+            if globs.WEB:
+              yme = "Pipulation Complete! Do a little victory dance!" + globs.PBNJMAN
+              yield yme, "", "", ""
+              yield spinoff
+              yield finished
+              yield purge
+            yield stopit
       #                        _       _               _  ___   At some point in the future, there wil be
       #   __ _  ___   ___   __| |  ___| |__   ___  ___| ||__ \  something better than Google Spreadsheets.
       #  / _` |/ _ \ / _ \ / _` | / __| '_ \ / _ \/ _ \ __|/ /  Until that day, let us use it excessively
@@ -2153,7 +2153,7 @@ def ClearSheet1():
   return Pipulate([
     ('clear', ''),
     ('stop', '')
-  ], label='Clear Sheet')
+  ], label='Clearing Sheet1...')
 
 def LinksOnPage():
   '''Collect links from displaying page.'''
