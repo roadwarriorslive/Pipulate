@@ -444,6 +444,7 @@ def main():
       #  flash('If you are new to Pipulate, watch the demo.')
       else:
         flash("It appears %s has no queston marks." % globs.TAB)
+        flash("warning")
         if 'Config' not in globs.tabnames:
           menuTupleList = [('qmarks'      , "Initialize Sheet")] + menuTupleList
   options = '<option value="off">What do you want to do?</option>\n'
@@ -992,7 +993,9 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
         yield stopit
       yme = "%s rows with question marks found in %s." % (globs.numrows, globs.TAB)
       out(yme)
-      if globs.WEB: yield yme, "", "", ""
+      if globs.WEB: 
+        yield yme, "", "", ""
+        yield purge
       if globs.numrows == 0 and globs.MODE == 'qmarks':
         if globs.WEB:
           yme = "Ready to go, but no question marks found."
@@ -1276,7 +1279,8 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
         if globs.WEB:
           yme = "No Pipulate functions found in %s tab." % globs.TAB
           yield yme, "Look at the list of options under the Docs tab.", "", ""
-          yield "finished", "", "", ""
+          yield warning
+          yield purge
         yield stopit
       therange = range(qstart, qend)
       blankrows = 0 #Lets us skip occasional blank rows
@@ -1564,8 +1568,9 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
     if globs.WEB:
       #yme = 'Pipulation complete. Do a little victory dance. %s' % globs.PBNJMAN
       yield "?-Replacement complete.", "Question marks replaced!", "", ""
-      yield "finished", "", "", ""
+      yield finished
       yield spinoff
+    yield stopit
     out("PIPULATION OVER", "1", '-')
   except Exception as e:
     exceptiondata = traceback.format_exc()
@@ -1984,7 +1989,7 @@ class SetupForm(PipForm2):
   radios = RadioField(choices=[
     ('checklist',   'SEO Checklist'),
     ('keywordlist', 'Keyword Build'),
-    ('serps',       'Setup SERP-Tracking'),
+    ('serps',       'Setup SERP Tracking'),
     ('seocop',      'Code Cop (not ready)'),
     ('fillmarks',   "Flood-?'s (KEEPS data)."),
     ('resetmarks',  "Reset-?'s (WIPES data)."),
@@ -2268,7 +2273,7 @@ def repipulate():
       yield "countdown", "", "", ""
       yield "", "", "", ""
   yield "Finished!", "Finished!", "", ""
-  yield "finished", "", "", ""
+  yield finished
 
 def foo():
   return 'bar'

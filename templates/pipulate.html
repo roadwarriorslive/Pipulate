@@ -222,7 +222,13 @@
             {% if messages %}
               <ul id="plist">
               {% for message in messages %}
-                <li class="checkbox" style="content: '\e81e';" > {{ message | safe }}</li>
+                {%- if message == "warning" -%}
+                  <script>
+                    warning();
+                  </script>
+                {% else %}
+                  <li class="checkbox" style="content: '\e81e';" > {{ message | safe }}</li>
+                {% endif %}
               {% endfor %}
               </ul>
             {% endif %}

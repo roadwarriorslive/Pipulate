@@ -391,14 +391,14 @@ nav{
 #plist > li.finished:before {
   -webkit-animation: spin 0s;
   animation: spin 0s;
-  content: "\e86e"; 
+  content: "\e81a"; 
   color: #023131;
 }
 
 #plist > li.success:before {
   -webkit-animation: spin 0s;
   animation: spin 0s;
-  content: "\e85b"; 
+  content: "\e81a"; 
   color: #023131;
 }
 #plist > li.piplogo:before {
