@@ -1254,9 +1254,10 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
       if not qset and not trended:
         # Yield values that will un-nest console output
         if globs.WEB:
-          yme = "No ?'s found in %s Sheet." % globs.DOCLINK
+          yme = "No ?'s found in sheet."
           yield yme, "The first worksheet in your spreadsheet needs to be set up.", "", ""
           yield "Double-check and try again.", "", "", ""
+          yield spinerr
           yield "finished", "", "", ""
         yield stopit
       if not [i for i in globs.row1 if i in globs.funcscrapes]:
