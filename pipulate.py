@@ -772,9 +772,6 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
               for yieldme in Pipulate():
                 yield yieldme
           elif inst == 'fillmarks' or inst == 'resetmarks': #Fill in question marks
-            if globs.WEB:
-              yield "Looking for where question marks should go...", "Looking for functions and scraper names", "", ""
-              yield flush
             if not globs.row1:
               globs.row1 = lowercaselist(gdoc.worksheet(globs.TAB).row_values(1))
             if not globs.numrows:
@@ -1963,7 +1960,7 @@ def mainMenu():
   ''' Creates the entire cadence of the system.'''
   return [
     ('qmarks'      , "Replace ?'s"),
-    ('repipulate'  , "Repipulate"),
+    ('repipulate'  , "Re-Pipulate"),
     ('menu:setup'  , "Do Auto Setup"),
     ('menu:crawl'  , "Crawl a Website"),
     ('menu:column' , "Add Some Columns"),
