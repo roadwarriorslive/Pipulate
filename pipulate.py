@@ -668,6 +668,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
       out("%s successfully opened." % globs.NAME)
       yme = 'Successfully opened spreadsheet: %s' % globs.DOCLINK
       yield yme, "Spreadsheet Opened", "", ""
+      yield flush
 
       if (globs.MODE == 'keywords'
         and globs.KEYWORDS
@@ -773,6 +774,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
           elif inst == 'fillmarks' or inst == 'resetmarks': #Fill in question marks
             if globs.WEB:
               yield "Looking for where question marks should go...", "Looking for functions and scraper names", "", ""
+              yield flush
             if not globs.row1:
               globs.row1 = lowercaselist(gdoc.worksheet(globs.TAB).row_values(1))
             if not globs.numrows:
@@ -781,7 +783,9 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
             for acol in globs.row1:
               if acol in globs.funcscrapes:
                 yme = "?'s for %s" % acol
-                if globs.WEB: yield yme, "", "", ""
+                if globs.WEB:
+                  yield yme, "", "", ""
+                  yield flush
                 qcol = globs.letter[globs.row1.index(acol) + 1]
                 nr = globs.numrows
                 colrange = '%s%s:%s%s' % (qcol, 2, qcol, nr)
@@ -878,8 +882,8 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
       if tabs:
         out("Tabs Read!")
         if globs.WEB:
-          yield "Required tabs for Pipulate successfully found/created!", "", tabs, ""
-          yield "", "Tabs Finished", "", ""
+          yield "Required tabs for Pipulate successfully found/created!", "Tabs created", tabs, ""
+          yield flush
       #        _       _                           __ _       
       #   __ _| | ___ | |__  ___   ___ ___  _ __  / _(_) __ _ 
       #  / _` | |/ _ \| '_ \/ __| / __/ _ \| '_ \| |_| |/ _` |
@@ -1272,9 +1276,9 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
         if globs.WEB:
           yme = "No ?'s found in sheet."
           yield yme, "The first worksheet in your spreadsheet needs to be set up.", "", ""
-          yield "Double-check and try again.", "", "", ""
+          yield flush
           yield spinerr
-          yield "finished", "", "", ""
+          yield finished
         yield stopit
       if not [i for i in globs.row1 if i in globs.funcscrapes]:
         if globs.WEB:
