@@ -2084,9 +2084,9 @@ def SetupClient():
   '''Sets up new SEO client spreadsheet.'''
   out("Setting up new SEO client.")
   return Pipulate([
-    ('sheet', 'Roadmap', [('1','2','3'),('a','b','c')]),
-    ('sheet', 'Keywords',[('1','2','3'),('a','b','c')]),
+    ('sheet', 'Roadmap', seochecklistlist()),
     ('sheet', 'Pages',[('1','2','3'),('a','b','c')]),
+    ('sheet', 'Keywords',[('1','2','3'),('a','b','c')]),
     ('sheet', 'SERPs',[('1','2','3'),('a','b','c')])
   ], label="Setting up new SEO Client...")
 
