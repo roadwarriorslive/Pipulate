@@ -2083,9 +2083,14 @@ class ClearSheet1Form(PipForm2):
 def SetupClient():
   '''Sets up new SEO client spreadsheet.'''
   out("Setting up new SEO client.")
+  if not globs.PIPURL:
+    if form and 'pipurl' in form:
+      globs.PIPURL = form.pipurl.data
+  crawl = ('url','GetLinks'), (globs.PIPURL, '?')
   return Pipulate([
     ('sheet', 'Roadmap', seochecklistlist()),
-    ('sheet', 'Pages',[('1','2','3'),('a','b','c')]),
+    ('sheet', 'Pages', crawl),
+    ('?', 'pages'),
     ('sheet', 'Keywords',[('1','2','3'),('a','b','c')]),
     ('sheet', 'SERPs',[('1','2','3'),('a','b','c')])
   ], label="Setting up new SEO Client...")
@@ -2316,7 +2321,7 @@ def repipulate():
       yield "countdown", "", "", ""
       yield "", "", "", ""
   yield "Finished!", "Finished!", "", ""
-  yield finished
+  yield "finished", "", "", ""
 
 def foo():
   return 'bar'
