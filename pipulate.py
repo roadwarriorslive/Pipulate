@@ -319,6 +319,8 @@ def main():
     #
     if form and 'options' in form and form.options.data == 'repipulate':
       streamit = stream_with_context(prePipulators()['repipulate']())
+    elif form and 'options' in form and form.options.data == 'client':
+      streamit = stream_with_context(prePipulators()['client']())
     elif form2 and 'secondary' in form2 and form2.secondary.data == 'on':
       menutwo = True
       psKey = globs.MODE
@@ -2078,6 +2080,16 @@ class ClearSheet1Form(PipForm2):
 #  |___/_| |_|\___|\___|\__| |_| |_| |_|\__,_|___/_|\___|   In any case, we just feed these instructions into the part
 #                                                           of Pipulate there waiting to execute final menu choices.
 
+def SetupClient():
+  '''Sets up new SEO client spreadsheet.'''
+  out("Setting up new SEO client.")
+  return Pipulate([
+    ('sheet', 'Roadmap', [('1','2','3'),('a','b','c')]),
+    ('sheet', 'Keywords',[('1','2','3'),('a','b','c')]),
+    ('sheet', 'Pages',[('1','2','3'),('a','b','c')]),
+    ('sheet', 'SERPs',[('1','2','3'),('a','b','c')])
+  ], label="Setting up new SEO Client...")
+
 def KeywordChecklist():
   '''Sets up a new worksheet for the keyword build phase.'''
   out("Setting up New Keyword process.")
@@ -2270,6 +2282,7 @@ def prePipulators():
   return {
     'clear':        ClearSheet1,
     'serps':        SERPTrack,
+    'client':       SetupClient,
     'cancel':       Cancel,
     'linksonpage':  LinksOnPage,
     'quickcrawl':   QuickCrawl,
