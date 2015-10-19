@@ -784,8 +784,8 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
             if not globs.row1:
               globs.row1 = lowercaselist(gdoc.worksheet(globs.TAB).row_values(1))
             if not globs.numrows:
-              globs.numrows = len(globs.sheet.col_values(1))
-            if globs.numrows > 1:
+              globs.numrows = len(gdoc.worksheet(globs.TAB).col_values(1))
+            if int(globs.numrows) > 1:
               colrange = None
               for acol in globs.row1:
                 if acol in globs.funcscrapes:
@@ -805,7 +805,11 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                   result = globs.sheet.update_cells(CellList)
               yield "Question marks filled in!", "Ready to pipulate.", "", ""
             else:
-              yield "Sheet too short for ?'s.", "", "", ""
+              if globs.WEB:
+                yield "Sheet too short for ?'s.", "", "", ""
+                yield warning
+                yield flush
+              raise SystemExit
           elif inst == 'add':
             if not globs.row1:
               globs.row1 = lowercaselist(gdoc.worksheet(globs.TAB).row_values(1))
@@ -824,7 +828,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
               yield spinoff
               yield finished
               yield flush
-            raise StopIteration
+            raise SystemExit
       #                        _       _               _  ___   At some point in the future, there wil be
       #   __ _  ___   ___   __| |  ___| |__   ___  ___| ||__ \  something better than Google Spreadsheets.
       #  / _` |/ _ \ / _ \ / _` | / __| '_ \ / _ \/ _ \ __|/ /  Until that day, let us use it excessively
@@ -995,7 +999,8 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
           yield "Nothing to pipulate.", "Make sure sheet is set up correctly.", "", ""
           yield warning
           yield unlock
-        yield stopit
+          yield flush
+        raise SystemExit
       elif globs.numrows > globs.maxrows:
         yme = "%s rows is too many rows. Max is %s." % (globs.numrows, globs.maxrows)
         if globs.WEB:

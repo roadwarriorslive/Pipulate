@@ -143,6 +143,14 @@
              }
           }, delay);
       }
+      function fasterForm() {
+        var mySelect = $( "#options option:selected" ).val();
+        var submitFor = ['menu:setup', 'menu:crawl', 'menu:column', 'menu:graph', 'menu:keywords'];
+        if (mySelect !== 'qmarks' && mySelect !== 'off') {
+          $('#pipform').submit();
+          lockbutton();
+        }
+      }
     </script>
   </head>
   <body>
@@ -182,7 +190,7 @@
           <form id="pipform" method="POST" action="/">
             <div id="paste"><span id="pastelabel">Url: </span>{{ form.pipurl(size=80) }}</div>
             <div id="pipselector">
-              <select class="select pipmenu" id="options" name="options">{{ select|safe }}</select>
+              <select class="select pipmenu" id="options" name="options" onchange="fasterForm();">{{ select|safe }}</select>
               <button id="pipulate" class="button primary" type="submit">Pipulate<i id="piplock" class="pip-go"></i></button>
             </div>
             <script>
