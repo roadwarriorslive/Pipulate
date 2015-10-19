@@ -2291,7 +2291,7 @@ def repipulate():
       time.sleep(delay*(x-1))
     for yieldme in Pipulate(label="?-Replacement phase starting: pass #%s of %s..." % (x, retries)):
       if yieldme == ("stop", "", "", ""):
-        raise RuntimeError
+        raise SystemExit
       yield yieldme
     if x != retries:
       yme = 'Pausing <span class="countdown">%s</span> seconds before pass #%s of %s.' % (delay*x, x+1, retries)

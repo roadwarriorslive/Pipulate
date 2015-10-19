@@ -365,6 +365,7 @@ def rushdifficulty(keyword):
   lastchunk[1] = "%s%s" % (kwcol, globs.numrows)
   chunks[-1] = "%s:%s" % (lastchunk[0], lastchunk[1])
   for chunk in chunks:
+    out("Chunk: %s" % (chunk))
     CellList1 = globs.sheet.range(chunk)
     try:
       CellList2 = globs.sheet.range(chunk.replace(kwcol, mycol))
@@ -398,9 +399,12 @@ def rushdifficulty(keyword):
     for cindex, acell in enumerate(CellList1):
       acell = acell.value.lower()
       if acell in scoredict:
-        CellList2[cindex].value = scoredict[acell]
+        score = scoredict[acell]
+        if not score:
+          score = '-1'
+        CellList2[cindex].value = score
       else:
-        CellList2[cindex].value = 'N/A'
+        CellList2[cindex].value = '-1'
     globs.sheet.update_cells(CellList2)
     time.sleep(5)
   globs.STOP = True
