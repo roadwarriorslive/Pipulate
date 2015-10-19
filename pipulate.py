@@ -2102,7 +2102,7 @@ def RinseAndRepeat():
     ('resetmarks', ''),
     ('?', ''),
     ('stop', '')
-  ], label="Resetting data back to ?'s and repipulating...")
+  ], label="Resetting data back to ?s and repipulating...")
 
 def ResetQMarks():
   '''Interrogates worksheet and inserts question marks wherever they can go'''
@@ -2116,7 +2116,7 @@ def FillQMarks():
   return Pipulate([
     ('fillmarks', ''),
     ('stop', '')
-  ], label="Flooding ?'s")
+  ], label="Flooding ?s")
 
 def MakeSitemap():
   '''Offer user some visualizations to choose from.'''

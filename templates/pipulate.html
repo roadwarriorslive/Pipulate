@@ -70,7 +70,8 @@
         $('#pipulate').prop("disabled", false);
         $('#pipulate').fadeTo(0,1);
         $('#pipulate').css('color', 'white');
-        $('#piplock').removeClass("pip-attention");
+        $('#piplock').removeClass("pip-stopsign");
+        $('#piplock').removeClass("pip-lock");
         $('#piplock').addClass("pip-go");
         $('#piplock').css('color', 'white');
       }
@@ -134,6 +135,14 @@
         $('#piplock').removeClass("pip-stopsign");
         $('#piplock').addClass("pip-lock");
       }
+      function unlockbutton() {
+        $('#pipulate').prop("disabled", false);
+        $('#pipulate').css("opacity", 1);
+        $('#piplock').removeClass("pip-stopsign");
+        $('#piplock').removeClass("pip-lock");
+        $('#piplock').addClass("pip-go");
+        $('#piplock').css('color', 'white');
+      }
       function setIntervalX(callback, delay, repetitions) {
           var x = 0;
           var intervalID = window.setInterval(function () {
@@ -147,8 +156,8 @@
         var mySelect = $( "#options option:selected" ).val();
         var submitFor = ['menu:setup', 'menu:crawl', 'menu:column', 'menu:graph', 'menu:keywords'];
         if (mySelect !== 'qmarks' && mySelect !== 'off') {
-          $('#pipform').submit();
           lockbutton();
+          $('#pipform').submit();
         }
       }
     </script>
@@ -204,7 +213,7 @@
               </script>
             {% else %}
               <script>
-                stopsignlock();
+                unlockbutton();
               </script>
             {% endif %}
             <div id="magicdiv">
@@ -264,7 +273,7 @@
                 $("#magicbox").val(JSON.stringify(pjson));
               {%- endif -%}
               {%- if learn: -%}
-                $('#learnsomething').html('{{ learn|safe }}').velocity("transition.fadeIn")
+                $('#learnsomething').html('{{ learn|safe }}').velocity("transition.fadeIn");
               {%- endif -%}
             </script>
             {%- endif -%}
