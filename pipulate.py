@@ -1558,12 +1558,6 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                 if globs.WEB: yield "", "", newrow, ""
             for index, onecell in enumerate(CellList):
               onecell.value = newrow[index]
-            #if globs.STOP:
-            #  if globs.WEB:
-            #    yield "Pipulate deliberately stopped. Feels like a success.", "Pipulation Stopped", "", ""
-            #    yield spinoff
-            #  #Stop() !!!
-            #else:
             result = None
             stop = True
             for x in range(10):
@@ -1980,6 +1974,7 @@ def mainMenu():
     ('qmarks'      , "Replace ?'s"),
     ('repipulate'  , "Re-Pipulate"),
     ('menu:setup'  , "Do Auto Setup"),
+    ('client'      , "Add New Client"),
     ('menu:crawl'  , "Crawl a Website"),
     ('menu:column' , "Add Some Columns"),
     ('menu:graph'  , "Make Visualization"),

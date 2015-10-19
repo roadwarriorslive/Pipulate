@@ -154,9 +154,10 @@
       }
       function fasterForm() {
         var mySelect = $( "#options option:selected" ).val();
-        var submitFor = ['menu:setup', 'menu:crawl', 'menu:column', 'menu:graph', 'menu:keywords'];
         if (mySelect !== 'qmarks' && mySelect !== 'off') {
           lockbutton();
+          $('#pipstream').html('');
+          $('#magicbox').html('');
           $('#pipform').submit();
         }
       }
@@ -437,6 +438,7 @@
       $("#pipulate").click(function() {
         lockbutton();
         $('#pipstream').html('');
+        $('#magicbox').html('');
         $('#learnsomething').html("Sit back and relax. I'm starting to Pipulate...");
         $('#pipform').submit();
       });
