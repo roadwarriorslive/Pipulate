@@ -200,11 +200,12 @@
           <form id="pipform" method="POST" action="/">
             <div id="paste"><span id="pastelabel">Url: </span>{{ form.pipurl(size=80) }}</div>
             <div id="pipselector">
-              <select class="select pipmenu" id="options" name="options" onchange="fasterForm();">{{ select|safe }}</select>
+              <select class="select pipmenu" id="options" name="options">{{ select|safe }}</select>
               <button id="pipulate" class="button primary" type="submit">Pipulate<i id="piplock" class="pip-go"></i></button>
             </div>
             <script>
               $("#options").bind( "change", function() {
+                fasterForm();
                 checkreadiness();
               });
             </script>
