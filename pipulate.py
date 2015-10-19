@@ -269,6 +269,9 @@ def main():
       if request.args and 'u' in request.args and globs.SHEETS in request.args.get('u'):
         needsPipulate = False
         tasteMe = request.args.get('u')
+      elif request.args and 'u' in request.args and globs.SHEETS not in request.args.get('u'):
+        needsPipulate = False
+        menudefault = 'client'
       elif request.method == 'POST':
         needsPipulate = False
       if tasteMe:
@@ -293,7 +296,8 @@ def main():
       try:
         gdoc.sheet1.find('?')
         readytopip = True
-        menudefault = "qmarks"
+        if not menudefault:
+          menudefault = "qmarks"
       except:
         pass
       # Indoctrinate new Pipulate users here
@@ -1974,7 +1978,7 @@ def mainMenu():
     ('qmarks'      , "Replace ?'s"),
     ('repipulate'  , "Re-Pipulate"),
     ('menu:setup'  , "Do Auto Setup"),
-    ('client'      , "Add New Client"),
+    ('client'      , "Setup New Client"),
     ('menu:crawl'  , "Crawl a Website"),
     ('menu:column' , "Add Some Columns"),
     ('menu:graph'  , "Make Visualization"),
@@ -2303,4 +2307,3 @@ def repipulate():
 
 def foo():
   return 'bar'
-  #Stop()

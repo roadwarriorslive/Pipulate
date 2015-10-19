@@ -154,7 +154,7 @@
       }
       function fasterForm() {
         var mySelect = $( "#options option:selected" ).val();
-        if (mySelect !== 'qmarks' && mySelect !== 'off') {
+        if (mySelect !== 'qmarks' && mySelect !== 'off' && mySelect !== 'client') {
           lockbutton();
           $('#pipstream').html('');
           $('#magicbox').html('');
