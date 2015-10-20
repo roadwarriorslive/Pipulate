@@ -80,40 +80,40 @@ def stripParams(text):
 def listNuker(text):
   pattern = r"<\s*(ol|ul)\s*.*?>.*?<\s*/(ol|ul)\s*>"
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
-  listless = pat.sub('', text)
+  listless = pat.sub(' ', text)
   pattern = r"<\s*li\s*.*?>.*?<\s*/li\s*>"
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
-  listless = pat.sub('', listless)
+  listless = pat.sub(' ', listless)
   pattern = r"(<\s*(li|ol|ul)\s*.*?>)|(<\s*/(li|ol|ul)\s*>)"
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
-  listless = pat.sub('', listless)
+  listless = pat.sub(' ', listless)
   return listless
  
 def noTag(text, tag):
   pattern = r"(<\s*%s\s*.*?>)|(<\s*/%s\s*>)" % (tag, tag)
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
-  tagless = pat.sub('', text)
+  tagless = pat.sub(' ', text)
   return tagless
  
 def noTagBlock(text, tag):
   pattern = r"<\s*%s\s*.*?>.*?<\s*/%s\s*>" % (tag, tag)
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
-  byeblock = pat.sub('', text)
+  byeblock = pat.sub(' ', text)
   return byeblock
  
 def noComments(text):
   pattern = r"<!--.*?-->"
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
-  byeblock = pat.sub('', text)
+  byeblock = pat.sub(' ', text)
   return byeblock
  
 def singleizer(text):
   pattern = r"\t|\r"
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
-  singled = pat.sub('', text)
+  singled = pat.sub(' ', text)
   pattern = r"^.{,30}$"
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL | re.MULTILINE)
-  singled = pat.sub('', singled)
+  singled = pat.sub(' ', singled)
   pattern = r"\n{2,}"
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
   singled = pat.sub(r'\n', singled)
@@ -122,7 +122,7 @@ def singleizer(text):
   singled = pat.sub(r'\n', singled)
   pattern = r"^\n|\n$"
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
-  singled = pat.sub('', singled)
+  singled = pat.sub(' ', singled)
   return singled
  
 def convert_html_entities(s):

@@ -265,7 +265,7 @@ def getlinks(url):
   links = list(links)
   y = len(links)
   q = ['?']*y
-  linkslist = zip(links,['1']*y,q,q,q)
+  linkslist = zip(links,['1']*y,q,q,q,q,q,q,q)
   InsertRows(globs.sheet, linkslist, 2)
   return "0"
 
@@ -323,8 +323,11 @@ def extractkeywords(url):
   return stackum
 
 def topkeyword(extractkeywords):
-  kwlist = extractkeywords.split('\n')
-  return kwlist[0]
+  try:
+    kwlist = extractkeywords.split('\n')
+    return kwlist[0]
+  except:
+    return []
 
 def mozsig(expires):
   import hmac, base64
