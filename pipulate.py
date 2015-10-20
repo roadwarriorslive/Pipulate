@@ -1438,12 +1438,17 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                           yield flush
                         break
                       except Exception as e:
+                        errortype, errormessage, traceback = sys.exc_info()
+                        errortype = errortype.__name__
+                        out("errortype: %s" % errortype)
+                        out("errormessage: %s" % errormessage)
+                        out("traceback: %s" % traceback)
                         out("Exception: %s" % Exception)
                         out("as e: %s" % e)
                         if globs.WEB:
                           yield e, e, '', ''
                           yield warning
-                          yme = "Problem in function: %s!" % collabel
+                          yme = "Problem in function: %s: %s!" % (collabel, errortype)
                           yield yme, yme, '', ''
                           yield spinerr
                           yield flush

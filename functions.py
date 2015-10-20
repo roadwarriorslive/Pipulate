@@ -302,21 +302,19 @@ def pins(url):
 # And now what you've all been waiting for! If you write a Python function that
 # just works stand-alone elsewhere, simply paste it here to extend Pipulate.
 
-def noTagBlock(text, tag):
-  pattern = r"<\s*%s\s*.*?>.*?<\s*/%s\s*>" % (tag, tag)
-  pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
-  byeblock = pat.sub('', text)
-  return byeblock
-
 def extractkeywords(url):
   import rake, operator, re
   html = gethtml(url)
-  scrubbed = html
-  for nuketagblock in ['script', 'style', 'noscript', 'form', 'object', 'embed', 'select']:
-    scrubbed = noTagBlock(scrubbed, nuketag)
-  scrubbed = re.sub('<[^<]+?>', '', html)
-  rake_object = rake.Rake("SmartStoplist.txt", 5, 3, 4)
-  keywords = rake_object.run(scrubbed)
+  title = scraper(html, '//title/text()')
+  description = scraper(html, "//meta[translate(@name, 'ABCDEFGHJIKLMNOPQRSTUVWXYZ', 'abcdefghjiklmnopqrstuvwxyz')='description']/@content")
+  from markdown import *
+  scrubbed = markdown(html)
+  newtxt = "%s %s %s" % (title, description, scrubbed)
+  newtxt = newtxt.replace('\n', ' ')
+  newtxt = re.sub('<[^<]+?>', ' ', newtxt)
+  newtxt = re.sub(' +',' ', newtxt)
+  rake_object = rake.Rake("SmartStoplist.txt", 3, 4, 2)
+  keywords = rake_object.run(newtxt)
   stackum = ''
   for keyword in keywords:
     candidate = keyword[0].split()
