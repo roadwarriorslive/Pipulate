@@ -158,20 +158,26 @@ def jsonapi(endpoint, url, jkey):
 def scrapes():
   """Define the functions available and modifiable from the Scrapers tab."""
   s = []
-  s.append(['title',       'xpath', "//title/text()"])
-  s.append(['description', 'xpath', "//meta[translate(@name, 'ABCDEFGHJIKLMNOPQRSTUVWXYZ', 'abcdefghjiklmnopqrstuvwxyz')='description']/@content"])
-  s.append(['metakeywords','xpath', "//meta[translate(@name, 'ABCDEFGHJIKLMNOPQRSTUVWXYZ', 'abcdefghjiklmnopqrstuvwxyz')='keywords']/@content"])
-  s.append(['headlines',   'xpath', '//html/body/*[local-name() = "h1" or local-name() = "h2" or local-name() = "h3"]/text()'])
   s.append(['canonical',   'xpath', "/html/head/link[@rel = 'canonical']/@href"])
-  s.append(['mobile',      'xpath', "/html/head/link[@media = 'only screen and (max-width: 640px)']/@href"])
-  s.append(['tweettotal',  'xpath', "//span[.='Tweets']/following-sibling::span/text()"])
-  s.append(['following',   'xpath', "//span[.='Following']/following-sibling::span/text()"])
+  s.append(['description', 'xpath', "//meta[translate(@name, 'ABCDEFGHJIKLMNOPQRSTUVWXYZ', 'abcdefghjiklmnopqrstuvwxyz')='description']/@content"])
   s.append(['followers',   'xpath', "//span[.='Followers']/following-sibling::span/text()"])
-  s.append(['views',       'xpath', "//div[@class='watch-view-count']/text()"])
-  s.append(['thumbsup',    'xpath', "//button[@id='watch-like']/span/text()"])
-  s.append(['thumbsdown',  'xpath', "//button[@id='watch-dislike']/span/text()"])
-  s.append(['subscribers', 'regex', r"subscriber-count.*?>(?P<scrape>[0-9,]+?)<"])
+  s.append(['following',   'xpath', "//span[.='Following']/following-sibling::span/text()"])
   s.append(['ga',          'regex', r"(?:\'|\")(?P<scrape>UA-.*?)(?:\'|\")"])
+  s.append(['h1',          'xpath', '//*[self::h1 or self::H1]/text()'])
+  s.append(['h2',          'xpath', '//*[self::h2 or self::H2]/text()'])
+  s.append(['h3',          'xpath', '//*[self::h3 or self::H3]/text()'])
+  s.append(['h4',          'xpath', '//*[self::h4 or self::H4]/text()'])
+  s.append(['h5',          'xpath', '//*[self::h5 or self::H5]/text()'])
+  s.append(['h6',          'xpath', '//*[self::h6 or self::H6]/text()'])
+  s.append(['headlines',   'xpath', '//*[self::h1 or self::h2 or self::h3 or self::h4 or self::h5 or self::h6 or self::H1 or self::H2 or self::H3 or self::H4 or self::H5 or self::H6]/text()'])
+  s.append(['metakeywords','xpath', "//meta[translate(@name, 'ABCDEFGHJIKLMNOPQRSTUVWXYZ', 'abcdefghjiklmnopqrstuvwxyz')='keywords']/@content"])
+  s.append(['mobile',      'xpath', "/html/head/link[@media = 'only screen and (max-width: 640px)']/@href"])
+  s.append(['subscribers', 'regex', r"subscriber-count.*?>(?P<scrape>[0-9,]+?)<"])
+  s.append(['thumbsdown',  'xpath', "//button[@id='watch-dislike']/span/text()"])
+  s.append(['thumbsup',    'xpath', "//button[@id='watch-like']/span/text()"])
+  s.append(['title',       'xpath', "//title/text()"])
+  s.append(['tweettotal',  'xpath', "//span[.='Tweets']/following-sibling::span/text()"])
+  s.append(['views',       'xpath', "//div[@class='watch-view-count']/text()"])
   return s
 
 #  ____                 ___                     _                
