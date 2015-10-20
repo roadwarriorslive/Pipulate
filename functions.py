@@ -161,6 +161,7 @@ def scrapes():
   s.append(['title',       'xpath', "//title/text()"])
   s.append(['description', 'xpath', "//meta[translate(@name, 'ABCDEFGHJIKLMNOPQRSTUVWXYZ', 'abcdefghjiklmnopqrstuvwxyz')='description']/@content"])
   s.append(['metakeywords','xpath', "//meta[translate(@name, 'ABCDEFGHJIKLMNOPQRSTUVWXYZ', 'abcdefghjiklmnopqrstuvwxyz')='keywords']/@content"])
+  s.append(['headlines',   'xpath', '//html/body/*[local-name() = "h1" or local-name() = "h2" or local-name() = "h3"]/text()'])
   s.append(['canonical',   'xpath', "/html/head/link[@rel = 'canonical']/@href"])
   s.append(['mobile',      'xpath', "/html/head/link[@media = 'only screen and (max-width: 640px)']/@href"])
   s.append(['tweettotal',  'xpath', "//span[.='Tweets']/following-sibling::span/text()"])

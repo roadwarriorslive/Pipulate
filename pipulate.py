@@ -1498,8 +1498,11 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                             except lxml.etree.XPathEvalError:
                               out("BAD XPATH PATTERN")
                               yme = "Bad xpath: %s" % spattern
-                              if globs.WEB: yield yme, "Bad XPATH Pattern!", "", ""
-                              Stop()
+                              if globs.WEB: 
+                                yield yme, "Bad XPATH Pattern!", "", ""
+                                yield spinerr
+                                yield flush
+                              raise SystemExit
                             except:
                               out("OTHER LXML ERROR")
                               if globs.WEB: yield "LXML parser problem. Check URL source", "LXML Problem!", "", ""
@@ -2027,7 +2030,7 @@ class AddColumnsForm(PipForm2):
   choices = [
     ('add:URL',                                    'URL'),
     ('add:Keyword',                                'Keyword'),
-    ('add:URL,Archive,Title,Description,Canonical,H1,H2', 'Manual Crawl (title, description, canonical, h1, etc.'),
+    ('add:URL,Archive,Title,Description,Canonical,Headlines', 'Manual Crawl (title, description, canonical, h1, etc.'),
     ('add:TimeStamp,Count',                        'TimeStamp & Count (scheduling requirements)'),
     ('add:Site,Keyword,Positions,Position,TopUrl', 'SERPs (search engine results pages)'),
     ('add:Site,Keyword,LookForUrl,SERPs,Positions,TopUrl,Position,FoundUrl,InPosition', 'SERPs 2 (find particular page)'),
