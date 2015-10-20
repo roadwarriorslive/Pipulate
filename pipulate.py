@@ -1931,7 +1931,7 @@ def adq(aval):
   if aval == None:
     return None #None-in/None-out. This special keyword shouldn't be quoted.
   else:
-    return "r'%s'" % (aval) #ALMOST everything else should be quoted.
+    return "r'''%s'''" % (aval) #ALMOST everything else should be quoted.
 
 def stringify_children(node):
   from lxml.etree import tostring
