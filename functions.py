@@ -245,7 +245,7 @@ def crawl(linksto, depth='0'):
 
 def getlinks(url):
   """Grab HTML from a URL, parse links and add a row per link to spreadsheet."""
-  fcols = ['Depth', 'Archive', 'Title', 'Description']
+  fcols = ['Depth', 'Archive', 'Title', 'Description', 'H1', 'H2', 'ExtractKeywords', 'TopKeyword']
   therange = 'B1:%s2' % globs.letter[len(fcols)+1]
   CellList = globs.sheet.range(therange)
   vals = fcols + ['0'] + ['?']*(len(fcols)-1)

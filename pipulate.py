@@ -2030,12 +2030,10 @@ class AddColumnsForm(PipForm2):
   choices = [
     ('add:URL',                                    'URL'),
     ('add:Keyword',                                'Keyword'),
-    ('add:URL,Archive,Title,Description,Canonical,Headlines', 'Manual Crawl (title, description, canonical, h1, etc.'),
+    ('add:URL,Archive,Title,Description,Canonical,H1,H2,ExtractedKeyword,TopKeyword', 'Manual Crawl (title, description, canonical, h1, etc.'),
     ('add:TimeStamp,Count',                        'TimeStamp & Count (scheduling requirements)'),
     ('add:Site,Keyword,Positions,Position,TopUrl', 'SERPs (search engine results pages)'),
     ('add:Site,Keyword,LookForUrl,SERPs,Positions,TopUrl,Position,FoundUrl,InPosition', 'SERPs 2 (find particular page)'),
-    ('add:Archive',                                'Archive (save page in spreadsheet)'),
-    ('add:Difficulty',                             'SEMRush Difficulty (process singles)'),
     ('add:RushDifficulty',                         'SEMRush Difficulty (batches 50/time)'),
     ('add:DomainAuthority,PageAuthority',          'Moz Domain and Page Authority'),
     ('add:URL,Title,Description,Canonical,H1,H2',  'Enhanced SEO Crawl fields'),
@@ -2089,7 +2087,7 @@ def SetupClient():
   if not globs.PIPURL:
     if form and 'pipurl' in form:
       globs.PIPURL = form.pipurl.data
-  crawl = ('url','GetLinks', '', '', ''), (globs.PIPURL, '?', '', '', '')
+  crawl = ('url','GetLinks', '', '', '','','','',''), (globs.PIPURL, '?', '', '', '','','','','')
   return Pipulate([
     ('sheet', 'Roadmap', seochecklistlist()),
     ('sheet', 'Pages', crawl),
