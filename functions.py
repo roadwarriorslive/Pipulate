@@ -316,8 +316,8 @@ def extractkeywords(url):
   return stackum
 
 def topkeyword(extractkeywords):
-  kwlist = extractkeywords
-  return kwlist
+  kwlist = extractkeywords.split('\n')
+  return kwlist[0]
 
 def mozsig(expires):
   import hmac, base64
