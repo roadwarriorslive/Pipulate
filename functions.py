@@ -302,6 +302,19 @@ def pins(url):
 # And now what you've all been waiting for! If you write a Python function that
 # just works stand-alone elsewhere, simply paste it here to extend Pipulate.
 
+def extractkeywords(url):
+  import rake, operator, re
+  html = gethtml(url)
+  scrubbed = re.sub('<[^<]+?>', '', html)
+  rake_object = rake.Rake("SmartStoplist.txt", 5, 3, 4)
+  keywords = rake_object.run(scrubbed)
+  stackum = ''
+  for keyword in keywords:
+    candidate = keyword[0].split()
+    if len(candidate) > 1:
+      stackum += keyword[0] + '\n'
+  return stackum
+
 def mozsig(expires):
   import hmac, base64
   from hmac import new
