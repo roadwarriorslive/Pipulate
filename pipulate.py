@@ -1438,6 +1438,18 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                           yield flush
                         break
                       except Exception as e:
+                        out("Exception: %s" % Exception)
+                        out("as e: %s" % e)
+                        if globs.WEB:
+                          yield e, e, '', ''
+                          yield warning
+                          yme = "Problem in function: %s!" % collabel
+                          yield yme, yme, '', ''
+                          yield spinerr
+                          yield flush
+                        yield stopit
+                        raise SystemExit
+                        gotcha()
                         print traceback.format_exc()
                         if globs.WEB:
                           yme = 'Problem in %s. Retry #%s of %s in <span class="countdown">%s</span> seconds...' % (collabel, x, retries, delay*x)
