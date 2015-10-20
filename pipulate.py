@@ -2086,11 +2086,11 @@ def SetupClient():
   if not globs.PIPURL:
     if form and 'pipurl' in form:
       globs.PIPURL = form.pipurl.data
-  crawl = ('url','GetLinks'), (globs.PIPURL, '?')
+  crawl = ('url','GetLinks', '', '', ''), (globs.PIPURL, '?', '', '', '')
   return Pipulate([
     ('sheet', 'Roadmap', seochecklistlist()),
     ('sheet', 'Pages', crawl),
-    ('?', 'pages'),
+    ('?', 'Pages'),
     ('sheet', 'Keywords',[('1','2','3'),('a','b','c')]),
     ('sheet', 'SERPs',[('1','2','3'),('a','b','c')])
   ], label="Setting up new SEO Client...")
