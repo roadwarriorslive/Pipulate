@@ -188,7 +188,7 @@ def choptld(apex):
   return apex[:apex.find('.')]
 
 def brand(url):
-  return choptld(apex(url))
+  return choptld(apex(url)).replace('-', ' ')
 
 def checkurl(url):
   import re

@@ -305,6 +305,7 @@ def pins(url):
 def extractkeywords(url):
   import rake, operator, re
   html = gethtml(url)
+  brandfilter = brand(url)
   title = scraper(html, '//title/text()')
   description = scraper(html, "//meta[translate(@name, 'ABCDEFGHJIKLMNOPQRSTUVWXYZ', 'abcdefghjiklmnopqrstuvwxyz')='description']/@content")
   from markdown import *
@@ -317,9 +318,11 @@ def extractkeywords(url):
   keywords = rake_object.run(newtxt)
   stackum = ''
   for keyword in keywords:
-    candidate = keyword[0].split()
+    kw = keyword[0]
+    candidate = kw.split()
     if len(candidate) > 1:
-      stackum += keyword[0] + '\n'
+      if kw.replace(' ', '') != brandfilter.replace(' ', ''):
+        stackum += keyword[0] + '\n'
   return stackum
 
 def topkeyword(extractkeywords):
