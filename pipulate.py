@@ -654,9 +654,9 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
               raise SystemExit
             except:
               if globs.WEB:
-                yield "I see you're on a URL that is not a Google Spreadsheet. Would you like to grab links?", "", "", ""
-                yield "If so, just <a href='https://docs.google.com/spreadsheets/create' target='_blank'>create</a> a new Spreadsheet, name it \"Pipulate\" and click Pipulate again.", "Google Spreadsheet Not Found.", "", ""
-                yield 'New to this odd but awesome approach? Watch the <a target="_blank" href="http://goo.gl/v71kw8">Demo</a> and read the <a target="_blank" href="http://goo.gl/p2zQa4">Docs</a>.', "", "", ""
+                yield "Please <a href='https://docs.google.com/spreadsheets/create' target='_blank'>create a spreadsheet</a> named \"Pipulate\" and click button again.", "Google Spreadsheet Not Found.", "", ""
+                yield warning
+                yield flush
               raise StopIteration
           except gspread.exceptions.SpreadsheetNotFound:
             if globs.WEB: yield "Please give the document a name to force first save.", "", "", ""
@@ -2104,13 +2104,15 @@ def SetupClient():
   if not globs.PIPURL:
     if form and 'pipurl' in form:
       globs.PIPURL = form.pipurl.data
-  crawl = ('url','GetLinks', '', '', '','','','',''), (globs.PIPURL, '?', '', '', '','','','','')
   return Pipulate([
+    ('table', [
+      ('url','GetLinks'),
+      (globs.PIPURL, '?')
+    ]),
+    ('?', ''),
     ('sheet', 'Roadmap', seochecklistlist()),
-    ('sheet', 'Pages', crawl),
-    ('?', 'Pages'),
-    ('sheet', 'Keywords',[('1','2','3'),('a','b','c')]),
-    ('sheet', 'SERPs',[('1','2','3'),('a','b','c')])
+    ('sheet', 'Meetings', meetings()),
+    ('stop', '')
   ], label="Setting up new SEO Client...")
 
 def KeywordChecklist():

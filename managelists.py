@@ -98,25 +98,35 @@ def keywordbuildchecklist():
     ('Portfolio',   "Setup Tracking",                   '',       '')
   ]
 
+def meetings():
+  return [
+    ('Date', 'Subject', 'Attendees', 'Agenda', 'NextSteps')
+  ]
+
 def seochecklistlist():
   return [
     ('DateStamp', 'Task',                          'Category',    'Phase', 'StartDate', 'Recurrence', 'WhetherDue', 'Status', 'Notes'),
     (datestamp(), 'Monthly',                       'Reports',     '2',     '',          'True',       'True',       '?',      ''),
     (datestamp(), 'UXReport',                      'Reports',     '2',     '',          'True',       'True',       '?',      ''),
+    (datestamp(), 'Statement of Work into Notes',  'Onboarding',  '1',     '',          'False',      'True',       '?',      ''),
+    (datestamp(), 'Customize Checklist per SOW',   'Onboarding',  '1',     '',          'False',      'True',       '?',      ''),
     (datestamp(), 'Setup Project Management',      'Onboarding',  '1',     '',          'False',      'True',       '?',      ''),
+    (datestamp(), 'List ALL sites in play',        'Onboarding',  '1',     '',          'False',      'True',       '?',      ''),
+    (datestamp(), 'Top-level Quick Audit',         'Onboarding',  '1',     '',          'False',      'True',       '?',      ''),
+    (datestamp(), 'Perform & Archive Deep Crawl',  'Onboarding',  '1',     '',          'False',      'True',       '?',      ''),
+    (datestamp(), 'Record Top-level Findings',     'Onboarding',  '1',     '',          'False',      'True',       '?',      ''),
     (datestamp(), 'Conduct Discovery Meeting',     'Onboarding',  '1',     '',          'False',      'True',       '?',      ''),
-    (datestamp(), 'Archive Top-level Pages',       'Onboarding',  '1',     '',          'False',      'True',       '?',      ''),
-    (datestamp(), 'Get AW/GWT/Analytics Logins',   'Onboarding',  '1',   '',          'False',      'True',       '?',      ''),
+    (datestamp(), 'Get AW/GWT/Analytics Logins',   'Onboarding',  '1',     '',          'False',      'True',       '?',      ''),
     (datestamp(), 'Inventory Content Assets',      'Onboarding',  '1',     '',          'False',      'True',       '?',      ''),
     (datestamp(), 'Build Keyword Universe',        'Onboarding',  '1',     '',          'False',      'True',       '?',      ''),
     (datestamp(), 'Build Keyword Portfolio',       'Onboarding',  '1',     '',          'False',      'True',       '?',      ''),
     (datestamp(), 'Setup SERP Tracking',           'Onboarding',  '1',     '',          'False',      'True',       '?',      ''),
-    (datestamp(), 'Setup Optional Tracking',       'Onboarding',  '1',     '',          'False',      'True',       '?',      ''),
+    (datestamp(), 'Setup Any Other Tracking',      'Onboarding',  '1',     '',          'False',      'True',       '?',      ''),
     (datestamp(), 'SEO Software Training',         'Onboarding',  '1',     '',          'False',      'True',       '?',      ''),
     (datestamp(), 'Review Crawl & robots.txt',     'SiteAudit',   '2',     '',          'False',      'False',      '?',      ''),
     (datestamp(), 'Architecture & URL',            'SiteAudit',   '2',     '',          'False',      'False',      '?',      ''),
     (datestamp(), 'Analytics Goals',               'SiteAudit',   '2',     '',          'False',      'True',       '?',      ''),
-    (datestamp(), 'Responsive & Mobile Friendly',  'SiteAudit',   '2',  '',          'False',      'False',      '?',      ''),
+    (datestamp(), 'Responsive & Mobile Friendly',  'SiteAudit',   '2',     '',          'False',      'False',      '?',      ''),
     (datestamp(), 'Product & Categories',          'SiteAudit',   '2',     '',          'False',      'False',      '?',      ''),
     (datestamp(), 'Titles, Descriptions',          'SiteAudit',   '2',     '',          'False',      'False',      '?',      ''),
     (datestamp(), 'Body Copy',                     'SiteAudit',   '2',     '',          'False',      'False',      '?',      ''),
@@ -138,7 +148,7 @@ def seochecklistlist():
     (datestamp(), 'Social Media Signals',          'Offsite',     '2',     '',          'True',       'False',      '?',      ''),
     (datestamp(), 'Conversion',                    'UXTesting',   '2',     '',          'True',       'False',      '?',      ''),
     (datestamp(), 'Usability',                     'UXTesting',   '2',     '',          'True',       'False',      '?',      ''),
-    (datestamp(), 'Multivariate/Heatmap/Playback', 'UXTesting',   '2', '',          'True',       'False',      '?',      '')
+    (datestamp(), 'Multivariate/Heatmap/Playback', 'UXTesting',   '2',     '',          'True',       'False',      '?',      '')
   ]
 
 def dontgetfrustrated(x):
