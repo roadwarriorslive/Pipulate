@@ -8,7 +8,7 @@
        |_|   |_| .__/ \__,_|_|\__,_|\__\___|(_)___\___/|_| |_| |_|     - So that I can achieve more while straining less
                | |                                                     - So that I can improve my life and impact the world
           THIS |IS YOUR BROWSER                                        - So that I can help teach others to do the same
- THIS IS      \   /                               THIS IS PIPULATE     - So that I can turn a life's work into legacy
+ THIS IS      \` `/                               THIS IS PIPULATE     - So that I can turn a life's work into legacy
    YOU         \ / ___ ____                     (disposable servers)   - So that I can get the kick of a performer
               ,_V_/site\___\___. ...which       ,------------------.   - So that the rewards become compounding
     O         |                ||    SENDS      |   ...to the      |   - Attracting a nice growing community
