@@ -649,7 +649,8 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
               if globs.WEB:
                 yme = 'I am sorry, the sesson has expired. Please <a href="%s">log back in.</a>' % getLoginlink()
                 yield yme, "Log back in", "", ""
-                yield spinerr
+                yield warning
+                yield flush
               raise SystemExit
             except:
               if globs.WEB:
@@ -1440,29 +1441,28 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                       except Exception as e:
                         errortype, errormessage, traceback = sys.exc_info()
                         errortype = errortype.__name__
+                        fname = os.path.split(traceback.tb_frame.f_code.co_filename)[1]
+                        lineno = traceback.tb_lineno
                         out("errortype: %s" % errortype)
                         out("errormessage: %s" % errormessage)
                         out("traceback: %s" % traceback)
                         out("Exception: %s" % Exception)
-                        out("as e: %s" % e)
                         if globs.WEB:
                           yield e, e, '', ''
                           yield warning
-                          yme = "Problem in function: %s: %s!" % (collabel, errortype)
+                          yme = "%s in function: %s in file %s line %s." % (errortype, collabel, fname, lineno)
                           yield yme, yme, '', ''
                           yield spinerr
                           yield flush
                         yield stopit
                         raise SystemExit
-                        gotcha()
-                        print traceback.format_exc()
-                        if globs.WEB:
-                          yme = 'Problem in %s. Retry #%s of %s in <span class="countdown">%s</span> seconds...' % (collabel, x, retries, delay*x)
-                          yme2 = 'Problem in %s. Retry #%s of %s...' % (collabel, x, retries)
-                          yield yme, yme2, "", ""
-                          yield "countdown", "", "", ""
-                          yield warning
-                        time.sleep(delay*x)
+                        #if globs.WEB:
+                        #  yme = 'Problem in %s. Retry #%s of %s in <span class="countdown">%s</span> seconds...' % (collabel, x, retries, delay*x)
+                        #  yme2 = 'Problem in %s. Retry #%s of %s...' % (collabel, x, retries)
+                        #  yield yme, yme2, "", ""
+                        #  yield "countdown", "", "", ""
+                        #  yield warning
+                        #time.sleep(delay*x)
                     if stop == True:
                       out("Function End (Failed)", "4", '-')
                       if globs.WEB:

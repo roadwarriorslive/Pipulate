@@ -325,14 +325,17 @@ def extractkeywords(url):
     if len(candidate) > 1:
       if kw.replace(' ', '') != brandfilter.replace(' ', ''):
         stackum += keyword[0] + '\n'
-  return stackum
+  if stackum:
+    return stackum
+  else:
+    return None
 
 def topkeyword(extractkeywords):
   try:
     kwlist = extractkeywords.split('\n')
     return kwlist[0]
   except:
-    return ''
+    return None
 
 def mozsig(expires):
   import hmac, base64
@@ -496,6 +499,8 @@ def serps(keyword='', topkeyword=''):
   """Return non-customized JSON search results for keyword from Google."""
   if topkeyword:
     keyword = topkeyword
+  elif not keyword:
+    return None
   times = 6
   api = "http://ajax.googleapis.com/ajax/services/search/web"
   returnme = []
@@ -541,9 +546,12 @@ def topurl(url, positions=''):
   apexdom = apex(url)
   if positions:
     urldict = json.loads(positions)
-    for thepos, aurl in urldict.iteritems():
-      if apexdom in aurl:
-        return aurl
+    if urldict:
+      for thepos, aurl in urldict.iteritems():
+        if apexdom in aurl:
+          return aurl
+    else:
+      return None
 
 def foundurl(lookforurl, positions=''):
   """Return a looked-for URL, given a positions object."""
