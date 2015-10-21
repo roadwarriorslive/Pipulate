@@ -305,12 +305,14 @@ def pins(url):
 def extractkeywords(url):
   import rake, operator, re
   html = gethtml(url)
+  urlkws = urltokw(url)
   brandfilter = brand(url)
   title = scraper(html, '//title/text()')
   description = scraper(html, "//meta[translate(@name, 'ABCDEFGHJIKLMNOPQRSTUVWXYZ', 'abcdefghjiklmnopqrstuvwxyz')='description']/@content")
   from markdown import *
   scrubbed = markdown(html)
-  newtxt = "%s %s %s" % (title, description, scrubbed)
+  newtxt = "%s %s %s %s" % (title, description, scrubbed, urlkws)
+  #newtxt = "%s %s %s %s" % (urlkws, title, description, scrubbed)
   newtxt = newtxt.replace('\n', ' ')
   newtxt = re.sub('<[^<]+?>', ' ', newtxt)
   newtxt = re.sub(' +',' ', newtxt)

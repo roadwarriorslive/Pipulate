@@ -190,6 +190,21 @@ def choptld(apex):
 def brand(url):
   return choptld(apex(url)).replace('-', ' ')
 
+def urltokw(url):
+  noproto = choprotocol(url)
+  if '/' in noproto:
+    import re
+    path = noproto[noproto.find('/'):]
+    kws = re.sub('[/_-]+', ' ', path)
+    kws = re.sub(' +',' ', kws)
+    return kws.strip()
+  else:
+    return None
+
+def choprotocol(url):
+  import re
+  return re.sub('(http://|https://)','', url)
+
 def checkurl(url):
   import re
   regex = re.compile(
