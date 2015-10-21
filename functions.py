@@ -332,7 +332,7 @@ def topkeyword(extractkeywords):
     kwlist = extractkeywords.split('\n')
     return kwlist[0]
   except:
-    return []
+    return ''
 
 def mozsig(expires):
   import hmac, base64
