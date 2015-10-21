@@ -492,8 +492,10 @@ def instagram_followers(instagram_name):
   sendback = regex(url, pattern)
   return sendback
 
-def serps(keyword):
+def serps(keyword='', topkeyword=''):
   """Return non-customized JSON search results for keyword from Google."""
+  if topkeyword:
+    keyword = topkeyword
   times = 6
   api = "http://ajax.googleapis.com/ajax/services/search/web"
   returnme = []
@@ -504,8 +506,10 @@ def serps(keyword):
     time.sleep(1)
   return json.dumps(returnme)
 
-def positions(keyword, serps=''):
+def positions(keyword='', serps='', topkeyword=''):
   """Return a position/url paired JSON dict of all results for keyword."""
+  if topkeyword:
+    keyword = topkeyword
   if not serps:
     def gserps(keyword):
       global serps
@@ -530,12 +534,15 @@ def positions(keyword, serps=''):
   else:
     return "Error"
 
-def topurl(site, positions=''):
+def topurl(url, positions=''):
   """Return the top performing URL for a site given a positions object."""
+  if not url:
+    return "lite value required in column or Config tab."
+  apexdom = apex(url)
   if positions:
     urldict = json.loads(positions)
     for thepos, aurl in urldict.iteritems():
-      if site in aurl:
+      if apexdom in aurl:
         return aurl
 
 def foundurl(lookforurl, positions=''):
@@ -546,8 +553,13 @@ def foundurl(lookforurl, positions=''):
       if lookforurl.lower() == aurl.lower():
         return aurl
 
-def position(keyword, site, positions=''):
+def position(keyword='', url='', positions='', topkeyword=''):
   """Return the position a provided site is in for a given keyword."""
+  if not url:
+    return "lite value required in column or Config tab."
+  apexdom = apex(url)
+  if topkeyword:
+    keyword = topkeyword
   if not positions:
     def gpositions(keyword):
       global positions
@@ -556,7 +568,7 @@ def position(keyword, site, positions=''):
   elif positions:
     urldict = json.loads(positions)
     for thepos, aurl in urldict.iteritems():
-      if site in aurl:
+      if apexdom in aurl:
         return thepos
 
 def inposition(keyword, lookforurl, positions=''):
