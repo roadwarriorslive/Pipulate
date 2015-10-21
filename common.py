@@ -184,6 +184,12 @@ def apex(url):
   else:
     return None
 
+def choptld(apex):
+  return apex[:apex.find('.')]
+
+def brand(url):
+  return choptld(apex(url))
+
 def checkurl(url):
   import re
   regex = re.compile(
