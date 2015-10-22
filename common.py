@@ -899,37 +899,37 @@ def sampleData():
   }); // on dom ready''' % (nodes, edges)
 
 def markdown(url):
-  text = url
+  html = url
   if checkurl(url):
-    text = gethtml(url)
-  text = barebones(text)
-  text = addmarkdown(text)
-  text = just2LR(text)
-  return text
+    html = gethtml(url)
+  html = barebones(html)
+  html = addmarkdown(html)
+  html = just2LR(html)
+  return html
 
 def barebones(url):
-  text = url
+  html = url
   if checkurl(url):
-    text = gethtml(url)
-    if not text:
+    html = gethtml(url)
+    if not html:
       return None
   for nuketagblock in ['title', 'head']:
-    text = noTagBlock(text, nuketagblock)
-  text = justBody(text)
-  text = noComments(text)
+    html = noTagBlock(html, nuketagblock)
+  html = bodycopy(html)
+  html = noComments(html)
   for nuketagblock in ['script', 'style', 'noscript', 'form', 'object', 'embed', 'select']:
-    text = noTagBlock(text, nuketagblock)
-  text = stripParams(text)
-  text = lowercaseTags(text)
-  text = listNuker(text)
+    html = noTagBlock(html, nuketagblock)
+  html = stripParams(html)
+  html = lowercaseTags(html)
+  html = listNuker(html)
   for nuketag in ['div', 'span', 'img', 'a', 'b', 'i', 'param', 'table',
     'td', 'tr', 'font', 'title', 'head', 'meta', 'strong', 'em', 'iframe']:
-    text = noTag(text, nuketag)
-  text = singleizer(text)
-  text = convert_html_entities(text)
-  return text
+    html = noTag(html, nuketag)
+  html = singleizer(html)
+  html = convert_html_entities(html)
+  return html
 
-def justBody(text):
+def bodycopy(text):
   pattern = r"<\s*body\s*.*?>(?P<capture>.*)<\s*/body\s*>"
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
   bodymat = pat.search(text)
