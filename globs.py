@@ -33,7 +33,6 @@ maxrows =   10000  # The maximum size spreadsheet you can pipulate
 ROWMAX =    2000   # The size over which a row will not attempt to insert into sheet.
 EMPTY =     '[]'   # How to populate cell if nothing returned
 LONGRETRY = 10     # Number of seconds between retries that you really want to succeed.
-NONE =      '[None]'                                        # Alternative to Empty 
 NAME =      "Pipulate"                                      # Default GSheet file name.
 HOST =      "pipulate.com"                                  # Gets overwritten if 'Host' in request.headers
 DOMURL =    "http://pipulate.com"                           # Default for Login Button

@@ -1546,7 +1546,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                                   frag += '\r\n'
                                 newrow[coldex] = frag
                             else:
-                              newrow[coldex] = globs.NONE
+                              newrow[coldex] = None
                           elif stype.lower() == 'regex':
                             match = re.search(spattern, html, re.S | re.I)
                             if match:
