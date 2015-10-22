@@ -68,7 +68,9 @@ def archive(url):
     cpat = re.compile(pat, re.S | re.I)
     return cpat.sub(replacement, string) 
   import base64, bz2
-  somehtml = requests.get(url).text
+  somehtml = gethtml(url)
+  if not somehtml:
+    return None
   globs.html = somehtml
   import re
   badpats = ['id="__EVENTVALIDATION" value=".*?"', 'id="__VIEWSTATE" value=".*?"']
