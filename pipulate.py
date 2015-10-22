@@ -49,7 +49,7 @@ from flask import (Flask,
                   redirect,                                                 # Out code most DAMP.
                   url_for,
                   flash)                                            # (Descriptive And Meaningful Phrases)
-from functions import *
+# from functions import *
 
 #                          _          __  __    This ain't PHP. It's kinda like a .NET codebehind, but way more awesome
 #   __ _ _ __  _ __    ___| |_ _   _ / _|/ _|   because it's Python. But Python resisting doing things like plugging whole
@@ -1396,6 +1396,10 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                       fname = transfuncs[globs.row1[coldex]]
                       farg = fargs[coldex]
                       evalme = "%s(" % fname #Begin building string that will eventually be eval'd
+                      yme = "<li>%s...</li>" % (collabel)
+                      if globs.WEB:
+                        yield yme, "", "", ""
+                        yield flush
                       if farg:
                         #The function we're looking at DOES have required arguments.
                         for anarg in farg:
@@ -1433,10 +1437,6 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                           newrow[coldex] = tastereturn
                         stop = False
                         out('%s worked' % collabel)
-                        yme = "<li>%s</li>" % (collabel)
-                        if globs.WEB:
-                          yield yme, "", "", ""
-                          yield flush
                         break
                       except Exception as e:
                         errortype, errormessage, traceback = sys.exc_info()
@@ -1487,6 +1487,10 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                         sname = transscrape[globs.row1[coldex]]
                         stype = scrapetypes[sname]
                         spattern = scrapepatterns[sname]
+                        yme = "<li>%s...</li>" % (collabel)
+                        if globs.WEB:
+                          yield yme, "", "", ""
+                          yield flush
                         if 'url' in globs.row1 or 'archive' in globs.row1:
                           if globs.WEB: yield lock
                           if 'archive' in globs.row1:
@@ -1501,6 +1505,8 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                           if not html:
                             if globs.WEB:
                               yield "HTML not available. Possible Content-Type error. Continuing.", "Skipping this row and trying next row.", "", ""
+                              yield warning
+                              yield flush
                             out("HTML NOT AVAILABLE")
                             newrow[coldex] = "<Error>HTML Not Available</Error>"
                             stop = False
@@ -1551,10 +1557,6 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                             else:
                               newrow[coldex] = None
                         out('%s worked.' % collabel)
-                        yme = "<li>%s</li>" % (collabel)
-                        if globs.WEB:
-                          yield yme, "", "", ""
-                          yield flush
                         stop = False
                         break
                       except Exception as e:
@@ -2231,7 +2233,7 @@ def LinksOnPage():
       ('url','GetLinks'),
       (globs.PIPURL, '?')
     ])
-  ], label='Links On Page')
+  ], label='Getting Links On Page...')
 
 def QuickCrawl():
   '''Collect links from displaying page and then visit each for more data..'''
