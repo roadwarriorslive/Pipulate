@@ -923,9 +923,9 @@ def barebones(url):
   # Same as above, but a second-pass on the usual code-bloating suspects in between body tags.
   for nuketagblock in ['script', 'style', 'noscript', 'form', 'object', 'embed', 'select']:
     html = deletenode(html, nuketagblock)
-  html = stripParams(html)
-  html = lowercaseTags(html)
-  html = listNuker(html)
+  html = stripparams(html)
+  html = lowercasetags(html)
+  html = striplists(html)
   # This strips out the following tags, but leaves the in-between content in place.
   for nuketag in ['div', 'span', 'img', 'a', 'b', 'i', 'param', 'table',
     'td', 'tr', 'font', 'title', 'head', 'meta', 'strong', 'em', 'iframe']:
@@ -976,32 +976,52 @@ def addmarkdown(url):
   html = html.strip()
   return html
  
-def lesslines(text):
+def lesslines(url):
   """Takes in html and returns html stripped of any more than 2 successive line returns"""
+  html = url
+  if checkurl(url):
+    html = gethtml(url)
+    if not html:
+      return None
   pattern = r"\n{2,}"
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
-  less = pat.sub(r'\n\n', text)
+  less = pat.sub(r'\n\n', html)
   pattern = " {2,}"
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
   less = pat.sub('', less)
   return less
  
-def lowercaseTags(text):
+def lowercasetags(url):
+  html = url
+  if checkurl(url):
+    html = gethtml(url)
+    if not html:
+      return None
   pattern = r"<(/?[a-zA-Z0-9]+)>"
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
-  lowered = pat.sub(r'<\1>'.lower(), text)
+  lowered = pat.sub(r'<\1>'.lower(), html)
   return lowered
  
-def stripParams(text):
+def stripparams(url):
+  html = url
+  if checkurl(url):
+    html = gethtml(url)
+    if not html:
+      return None
   pattern = r"(<\s*[a-zA-Z0-9]+).*?(?:>)"
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
-  nopram = pat.sub(r'\1>', text)
+  nopram = pat.sub(r'\1>', html)
   return nopram
  
-def listNuker(text):
+def striplists(url):
+  html = url
+  if checkurl(url):
+    html = gethtml(url)
+    if not html:
+      return None
   pattern = r"<\s*(ol|ul)\s*.*?>.*?<\s*/(ol|ul)\s*>"
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
-  listless = pat.sub('', text)
+  listless = pat.sub('', html)
   pattern = r"<\s*li\s*.*?>.*?<\s*/li\s*>"
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
   listless = pat.sub('', listless)
