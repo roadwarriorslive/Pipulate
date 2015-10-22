@@ -307,6 +307,8 @@ def pins(url):
 def extractkeywords(url):
   import rake, operator, re
   html = gethtml(url)
+  if not html:
+    return None
   urlkws = urltokw(url)
   brandfilter = brand(url)
   title = scraper(html, '//title/text()')
@@ -909,6 +911,8 @@ def barebones(url):
   text = url
   if checkurl(url):
     text = gethtml(url)
+    if not text:
+      return None
   for nuketagblock in ['title', 'head']:
     text = noTagBlock(text, nuketagblock)
   text = justBody(text)

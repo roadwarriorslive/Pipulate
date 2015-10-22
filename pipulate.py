@@ -1508,7 +1508,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                               yield warning
                               yield flush
                             out("HTML NOT AVAILABLE")
-                            newrow[coldex] = "<Error>HTML Not Available</Error>"
+                            newrow[coldex] = None
                             stop = False
                             break
                           if globs.WEB: yield unlock
