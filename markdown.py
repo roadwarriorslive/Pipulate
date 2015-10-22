@@ -1,15 +1,7 @@
 import requests, re, htmlentitydefs
  
 def markdown(text):
-  for nuketagblock in ['title', 'head']:
-    text = noTagBlock(text, nuketagblock)
-  text = justBody(text)
-  text = noComments(text)
-  for nuketagblock in ['script', 'style', 'noscript', 'form',
-    'object', 'embed', 'select']:
-    text = noTagBlock(text, nuketagblock)
-  text = stripParams(text)
-  text = lowercaseTags(text)
+  text = barebones(text)
   text = listNuker(text)
   for nuketag in ['div', 'span', 'img', 'a', 'b', 'i', 'param', 'table',
     'td', 'tr', 'font', 'title', 'head', 'meta', 'strong', 'em', 'iframe']:
@@ -18,6 +10,17 @@ def markdown(text):
   text = convert_html_entities(text)
   #text = addmarkdown(text)
   text = just2LR(text)
+  return text
+
+def barebones(text):
+  for nuketagblock in ['title', 'head']:
+    text = noTagBlock(text, nuketagblock)
+  text = justBody(text)
+  text = noComments(text)
+  for nuketagblock in ['script', 'style', 'noscript', 'form', 'object', 'embed', 'select']:
+    text = noTagBlock(text, nuketagblock)
+  text = stripParams(text)
+  text = lowercaseTags(text)
   return text
 
 def justBody(text):
@@ -80,12 +83,14 @@ def listNuker(text):
   return listless
  
 def noTag(text, tag):
+  """Takes text and a tag and returns text with tags removed, but in-between text still there."""
   pattern = r"(<\s*%s\s*.*?>)|(<\s*/%s\s*>)" % (tag, tag)
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
   tagless = pat.sub(' ', text)
   return tagless
  
 def noTagBlock(text, tag):
+  """Takes text and a tag and returns text with tags and in-between content delted."""
   pattern = r"<\s*%s\s*.*?>.*?<\s*/%s\s*>" % (tag, tag)
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
   byeblock = pat.sub(' ', text)
