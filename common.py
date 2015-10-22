@@ -206,6 +206,7 @@ def choprotocol(url):
   return re.sub('(http://|https://)','', url)
 
 def checkurl(url):
+  """Take any string and check if it matches URL pattern. If so, return true."""
   import re
   regex = re.compile(
     r'^https?://'  # http:// or https://
