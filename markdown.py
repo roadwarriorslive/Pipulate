@@ -18,18 +18,8 @@ def markdown(text):
   text = convert_html_entities(text)
   #text = addmarkdown(text)
   text = just2LR(text)
-  if len(text) < 5000:
-    return text
-  else:
-    return text[:5000]+'...'
- 
-def getHTML(url):
-  try:
-    response = requests.get(url)
-  except:
-    return ''
-  return response.text
- 
+  return text
+
 def justBody(text):
   pattern = r"<\s*body\s*.*?>(?P<capture>.*)<\s*/body\s*>"
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
