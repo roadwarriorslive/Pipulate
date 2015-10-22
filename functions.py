@@ -309,8 +309,7 @@ def extractkeywords(url):
   brandfilter = brand(url)
   title = scraper(html, '//title/text()')
   description = scraper(html, "//meta[translate(@name, 'ABCDEFGHJIKLMNOPQRSTUVWXYZ', 'abcdefghjiklmnopqrstuvwxyz')='description']/@content")
-  from markdown import *
-  scrubbed = markdown(html)
+  scrubbed = barebones(html)
   newtxt = "%s %s %s %s" % (title, description, scrubbed, urlkws)
   #newtxt = "%s %s %s %s" % (urlkws, title, description, scrubbed)
   newtxt = newtxt.replace('\n', ' ')
@@ -464,7 +463,7 @@ def volume(keyword):
     try:
       return rtext.splitlines()[1]
     except:
-      return "N/A"
+      return "-1"
   else:
     return "In the Config tab, put semrush under name and the api key under value to proceed."
 
@@ -900,17 +899,14 @@ def markdown(url):
   if checkurl(url):
     text = gethtml(url)
   text = barebones(text)
-  text = listNuker(text)
-  for nuketag in ['div', 'span', 'img', 'a', 'b', 'i', 'param', 'table',
-    'td', 'tr', 'font', 'title', 'head', 'meta', 'strong', 'em', 'iframe']:
-    text = noTag(text, nuketag)
-  text = singleizer(text)
-  text = convert_html_entities(text)
-  #text = addmarkdown(text)
+  text = addmarkdown(text)
   text = just2LR(text)
   return text
 
-def barebones(text):
+def barebones(url):
+  text = url
+  if checkurl(url):
+    text = gethtml(url)
   for nuketagblock in ['title', 'head']:
     text = noTagBlock(text, nuketagblock)
   text = justBody(text)
@@ -919,6 +915,12 @@ def barebones(text):
     text = noTagBlock(text, nuketagblock)
   text = stripParams(text)
   text = lowercaseTags(text)
+  text = listNuker(text)
+  for nuketag in ['div', 'span', 'img', 'a', 'b', 'i', 'param', 'table',
+    'td', 'tr', 'font', 'title', 'head', 'meta', 'strong', 'em', 'iframe']:
+    text = noTag(text, nuketag)
+  text = singleizer(text)
+  text = convert_html_entities(text)
   return text
 
 def justBody(text):
