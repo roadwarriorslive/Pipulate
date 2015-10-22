@@ -899,12 +899,14 @@ def sampleData():
   }); // on dom ready''' % (nodes, edges)
 
 def markdown(url):
+  """ http://mikelev.in/2014/01/stripping-html-text-markdown-readability/ """
   html = url
   if checkurl(url):
     html = gethtml(url)
+    if not html:
+      return None
   html = barebones(html)
   html = addmarkdown(html)
-  html = just2LR(html)
   return html
 
 def barebones(url):
@@ -913,55 +915,75 @@ def barebones(url):
     html = gethtml(url)
     if not html:
       return None
+  # This chops out the following tags AND all the presumably extraneous content in-between.
   for nuketagblock in ['title', 'head']:
-    html = noTagBlock(html, nuketagblock)
+    html = deletenode(html, nuketagblock)
   html = bodycopy(html)
-  html = noComments(html)
+  html = stripcomments(html)
+  # Same as above, but a second-pass on the usual code-bloating suspects in between body tags.
   for nuketagblock in ['script', 'style', 'noscript', 'form', 'object', 'embed', 'select']:
-    html = noTagBlock(html, nuketagblock)
+    html = deletenode(html, nuketagblock)
   html = stripParams(html)
   html = lowercaseTags(html)
   html = listNuker(html)
+  # This strips out the following tags, but leaves the in-between content in place.
   for nuketag in ['div', 'span', 'img', 'a', 'b', 'i', 'param', 'table',
     'td', 'tr', 'font', 'title', 'head', 'meta', 'strong', 'em', 'iframe']:
-    html = noTag(html, nuketag)
+    html = deletetag(html, nuketag)
   html = singleizer(html)
   html = convert_html_entities(html)
+  html = lesslines(html)
   return html
 
-def bodycopy(text):
+def bodycopy(url):
+  html = url
+  if checkurl(url):
+    html = gethtml(url)
+    if not html:
+      return None
   pattern = r"<\s*body\s*.*?>(?P<capture>.*)<\s*/body\s*>"
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
-  bodymat = pat.search(text)
+  bodymat = pat.search(html)
   if bodymat:
     return bodymat.group('capture')
   else:
-    return ''
+    return None
  
-def addmarkdown(text):
-  text = text.replace('<p>', "\n")
-  text = text.replace('</p>', "")
-  text = text.replace('<hr>', "\n---\n")
-  text = text.replace('<blockquote>', "\n> ")
-  text = text.replace('</blockquote>', "")
-  text = text.replace('<h1>', "\n# ")
-  text = text.replace('<h2>', "\n## ")
-  text = text.replace('<h3>', "\n### ")
-  text = text.replace('<h4>', "\n#### ")
-  text = text.replace('</h1>', "")
-  text = text.replace('</h2>', "")
-  text = text.replace('</h3>', "")
-  text = text.replace('</h4>', "")
-  text = text.strip()
-  return text
+def addmarkdown(url):
+  html = url
+  if checkurl(url):
+    html = gethtml(url)
+    if not html:
+      return None
+  html = html.replace('<p>', "\n")
+  html = html.replace('</p>', "")
+  html = html.replace('<hr>', "\n---\n")
+  html = html.replace('<blockquote>', "\n> ")
+  html = html.replace('</blockquote>', "")
+  html = html.replace('<h1>', "\n# ")
+  html = html.replace('<h2>', "\n## ")
+  html = html.replace('<h3>', "\n### ")
+  html = html.replace('<h4>', "\n#### ")
+  html = html.replace('<h5>', "\n##### ")
+  html = html.replace('<h6>', "\n###### ")
+  html = html.replace('</h1>', "")
+  html = html.replace('</h2>', "")
+  html = html.replace('</h3>', "")
+  html = html.replace('</h4>', "")
+  html = html.replace('</h5>', "")
+  html = html.replace('</h6>', "")
+  html = lesslines(html)
+  html = html.strip()
+  return html
  
-def just2LR(text):
+def lesslines(text):
+  """Takes in html and returns html stripped of any more than 2 successive line returns"""
   pattern = r"\n{2,}"
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
   less = pat.sub(r'\n\n', text)
   pattern = " {2,}"
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
-  less = pat.sub(' ', less)
+  less = pat.sub('', less)
   return less
  
 def lowercaseTags(text):
@@ -979,51 +1001,78 @@ def stripParams(text):
 def listNuker(text):
   pattern = r"<\s*(ol|ul)\s*.*?>.*?<\s*/(ol|ul)\s*>"
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
-  listless = pat.sub(' ', text)
+  listless = pat.sub('', text)
   pattern = r"<\s*li\s*.*?>.*?<\s*/li\s*>"
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
-  listless = pat.sub(' ', listless)
+  listless = pat.sub('', listless)
   pattern = r"(<\s*(li|ol|ul)\s*.*?>)|(<\s*/(li|ol|ul)\s*>)"
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
-  listless = pat.sub(' ', listless)
+  listless = pat.sub('', listless)
   return listless
  
-def noTag(text, tag):
-  """Takes text and a tag and returns text with tags removed, but in-between text still there."""
+def deletetag(url, tag):
+  """Takes html and a tag and returns html with tags removed, but in-between html still there."""
+  html = url
+  if checkurl(url):
+    html = gethtml(url)
+    if not html:
+      return None
   pattern = r"(<\s*%s\s*.*?>)|(<\s*/%s\s*>)" % (tag, tag)
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
-  tagless = pat.sub(' ', text)
+  tagless = pat.sub('', html)
   return tagless
  
-def noTagBlock(text, tag):
-  """Takes text and a tag and returns text with tags and in-between content delted."""
+def deletenode(url, tag):
+  """Takes html and a tag and returns html with tags and in-between content delted."""
+  html = url
+  if checkurl(url):
+    html = gethtml(url)
+    if not html:
+      return None
   pattern = r"<\s*%s\s*.*?>.*?<\s*/%s\s*>" % (tag, tag)
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
-  byeblock = pat.sub(' ', text)
+  byeblock = pat.sub('', html)
   return byeblock
  
-def noComments(text):
+def stripcomments(url):
+  """Return HTML with comments stripped out"""
+  html = url
+  if checkurl(url):
+    html = gethtml(url)
+    if not html:
+      return None
   pattern = r"<!--.*?-->"
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
-  byeblock = pat.sub(' ', text)
+  byeblock = pat.sub('', html)
   return byeblock
  
-def singleizer(text):
+def singleizer(url):
+  """Return HTML with repeated spaces and line returns collapsed to single spaces and line returns"""
+  html = url
+  if checkurl(url):
+    html = gethtml(url)
+    if not html:
+      return None
+  #First we replace tabs and carriage returns with spaces
   pattern = r"\t|\r"
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
-  singled = pat.sub(' ', text)
+  singled = pat.sub('', html)
+  #Next, we replace... what is that? Beginning of line, repeating 30 times, I think.
   pattern = r"^.{,30}$"
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL | re.MULTILINE)
-  singled = pat.sub(' ', singled)
+  singled = pat.sub('', singled)
+  #Replace any double-line returns with single line return
   pattern = r"\n{2,}"
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
   singled = pat.sub(r'\n', singled)
+  #Again, double check! I wrote it, and I know it's needed. Scrubbing is an artform!
   pattern = r"\n.{,10}\n"
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
   singled = pat.sub(r'\n', singled)
+  #Yep, got to re-trace my thinking.
   pattern = r"^\n|\n$"
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
-  singled = pat.sub(' ', singled)
+  singled = pat.sub('', singled)
   return singled
  
 def convert_html_entities(s):
