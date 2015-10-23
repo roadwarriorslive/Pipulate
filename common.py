@@ -902,6 +902,15 @@ def markdown(url):
   html = addmarkdown(html)
   return html
 
+def stripbr(url):
+  html = url
+  if checkurl(url):
+    html = gethtml(url)
+    if not html:
+      return None
+  html = re.sub('(?i)<br *?/?>', '\n', html)
+  return html 
+
 def barebones(url):
   html = url
   if checkurl(url):
@@ -919,11 +928,15 @@ def barebones(url):
   html = stripparams(html)
   html = lowercasetags(html)
   html = striplists(html)
+  html = stripbr(html)
   # This strips out the following tags, but leaves the in-between content in place.
-  for nuketag in ['div', 'span', 'img', 'a', 'b', 'i', 'param', 'table',
+  for nuketag in ['label', 'section', 'article', 'div', 'span', 'img', 'a', 'b', 'i', 'param', 'table',
     'td', 'tr', 'font', 'title', 'head', 'meta', 'strong', 'em', 'iframe']:
     html = deletetag(html, nuketag)
-  html = singleizer(html)
+  html = stripwhitespace(html)
+  html = stripcrlf(html)
+  html = onetagoneline(html)
+  return html
   html = convert_html_entities(html)
   html = lesslines(html)
   return html
@@ -1042,7 +1055,7 @@ def deletenode(url, tag):
     html = gethtml(url)
     if not html:
       return None
-  pattern = r"<\s*%s\s*.*?>.*?<\s*/%s\s*>" % (tag, tag)
+  pattern = r"<\s*?%s\s*?.*?>.*?<\s*?/%s\s*?>" % (tag, tag)
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
   byeblock = pat.sub('', html)
   return byeblock
@@ -1059,35 +1072,43 @@ def stripcomments(url):
   byeblock = pat.sub('', html)
   return byeblock
  
-def singleizer(url):
-  """Return HTML with repeated spaces and line returns collapsed to single spaces and line returns"""
+def stripwhitespace(url):
   html = url
   if checkurl(url):
     html = gethtml(url)
     if not html:
       return None
-  #First we replace tabs and carriage returns with spaces
-  pattern = r"\t|\r"
+  pattern = r"[^\S\n]{2,}"
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
-  singled = pat.sub('', html)
-  #Next, we replace... what is that? Beginning of line, repeating 30 times, I think.
-  pattern = r"^.{,30}$"
-  pat = re.compile(pattern, re.IGNORECASE | re.DOTALL | re.MULTILINE)
-  singled = pat.sub('', singled)
-  #Replace any double-line returns with single line return
-  pattern = r"\n{2,}"
+  html = pat.sub('', html)
+  return html
+
+def stripcrlf(url):
+  html = url
+  if checkurl(url):
+    html = gethtml(url)
+    if not html:
+      return None
+  pattern = r"(\r?\n){2,}"
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
-  singled = pat.sub(r'\n', singled)
-  #Again, double check! I wrote it, and I know it's needed. Scrubbing is an artform!
-  pattern = r"\n.{,10}\n"
+  html = pat.sub('\n', html)
+  return html
+
+def onetagoneline(url):
+  def pertag(match):
+    return re.sub(r'\r?\n', ' ', match.group())
+  html = url
+  if checkurl(url):
+    html = gethtml(url)
+    if not html:
+      return None
+  pattern = r"<.*?>[\s\S]+?</.*?>"
   pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
-  singled = pat.sub(r'\n', singled)
-  #Yep, got to re-trace my thinking.
-  pattern = r"^\n|\n$"
-  pat = re.compile(pattern, re.IGNORECASE | re.DOTALL)
-  singled = pat.sub('', singled)
-  return singled
- 
+  html = pat.sub(pertag, html)
+  html = re.sub('> ', '>', html)
+  html = re.sub(' <', '<', html)
+  return html
+
 def convert_html_entities(s):
   import htmlentitydefs
   matches = re.findall("&#\d+;", s)
