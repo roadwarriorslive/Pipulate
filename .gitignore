@@ -8,3 +8,4 @@
 *.dir
 __pycache__/
 .DS_Store
+/mypipulate
