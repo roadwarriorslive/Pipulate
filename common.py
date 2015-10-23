@@ -899,17 +899,25 @@ def markdown(url):
     if not html:
       return None
   html = barebones(html)
-  html = addmarkdown(html)
+  html = html.replace('<p>', "\n")
+  html = html.replace('</p>', "")
+  html = html.replace('<hr>', "\n---\n")
+  html = html.replace('<blockquote>', "\n> ")
+  html = html.replace('</blockquote>', "")
+  html = html.replace('<h1>', "\n# ")
+  html = html.replace('<h2>', "\n## ")
+  html = html.replace('<h3>', "\n### ")
+  html = html.replace('<h4>', "\n#### ")
+  html = html.replace('<h5>', "\n##### ")
+  html = html.replace('<h6>', "\n###### ")
+  html = html.replace('</h1>', "")
+  html = html.replace('</h2>', "")
+  html = html.replace('</h3>', "")
+  html = html.replace('</h4>', "")
+  html = html.replace('</h5>', "")
+  html = html.replace('</h6>', "")
+  html = lesslines(html)
   return html
-
-def stripbr(url):
-  html = url
-  if checkurl(url):
-    html = gethtml(url)
-    if not html:
-      return None
-  html = re.sub('(?i)<br *?/?>', '\n', html)
-  return html 
 
 def barebones(url):
   html = url
@@ -941,6 +949,15 @@ def barebones(url):
   html = lesslines(html)
   return html
 
+def stripbr(url):
+  html = url
+  if checkurl(url):
+    html = gethtml(url)
+    if not html:
+      return None
+  html = re.sub('(?i)<br *?/?>', '\n', html)
+  return html 
+
 def bodycopy(url):
   html = url
   if checkurl(url):
@@ -961,25 +978,6 @@ def addmarkdown(url):
     html = gethtml(url)
     if not html:
       return None
-  html = html.replace('<p>', "\n")
-  html = html.replace('</p>', "")
-  html = html.replace('<hr>', "\n---\n")
-  html = html.replace('<blockquote>', "\n> ")
-  html = html.replace('</blockquote>', "")
-  html = html.replace('<h1>', "\n# ")
-  html = html.replace('<h2>', "\n## ")
-  html = html.replace('<h3>', "\n### ")
-  html = html.replace('<h4>', "\n#### ")
-  html = html.replace('<h5>', "\n##### ")
-  html = html.replace('<h6>', "\n###### ")
-  html = html.replace('</h1>', "")
-  html = html.replace('</h2>', "")
-  html = html.replace('</h3>', "")
-  html = html.replace('</h4>', "")
-  html = html.replace('</h5>', "")
-  html = html.replace('</h6>', "")
-  html = lesslines(html)
-  html = html.strip()
   return html
  
 def lesslines(url):
