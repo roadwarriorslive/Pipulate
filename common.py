@@ -1,16 +1,15 @@
-#  _   _                 _____                 _   _                 
-# | | | |___  ___ _ __  |  ___|   _ _ __   ___| |_(_) ___  _ __  ___ 
-# | | | / __|/ _ \ '__| | |_ | | | | '_ \ / __| __| |/ _ \| '_ \/ __|
-# | |_| \__ \  __/ |    |  _|| |_| | | | | (__| |_| | (_) | | | \__ \
-#  \___/|___/\___|_|    |_|   \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
-#                                                                    
-# Welcome to User Functions, a file that lets you extend Pipulate's capability.
-# Let's meet some libraries and modules we make available to every function.
+#   ____                                        _____                 _   _                 
+#  / ___|___  _ __ ___  _ __ ___   ___  _ __   |  ___|   _ _ __   ___| |_(_) ___  _ __  ___ 
+# | |   / _ \| '_ ` _ \| '_ ` _ \ / _ \| '_ \  | |_ | | | | '_ \ / __| __| |/ _ \| '_ \/ __|
+# | |__| (_) | | | | | | | | | | | (_) | | | | |  _|| |_| | | | | (__| |_| | (_) | | | \__ \
+#  \____\___/|_| |_| |_|_| |_| |_|\___/|_| |_| |_|   \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
+#                                                                                           
+# This file is imported by all other modules, along with globs.py, providing a consistent set
+# of common helper functions. Take a look at how gethtml works to recycle a HTML fetches.
 
 import os, requests, datetime, json, time, urlparse, re   #All standard system libraries
 from flask import session                                 #For if user function needs session info
 import globs                                              #All objects treated as global variables (but somehow less despised)
-from common import *                                      #For if user function neeeds framework functions
 
 #  _   _      _                   _____                 _   _                 
 # | | | | ___| |_ __   ___ _ __  |  ___|   _ _ __   ___| |_(_) ___  _ __  ___ 
