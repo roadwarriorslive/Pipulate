@@ -11,6 +11,40 @@ import os, requests, datetime, json, time, urlparse, re   #All standard system l
 from flask import session                                 #For if user function needs session info
 import globs                                              #All objects treated as global variables (but somehow less despised)
 
+#  ____                                   ____        __ _       _ _   _                 
+# / ___|  ___ _ __ __ _ _ __   ___ _ __  |  _ \  ___ / _(_)_ __ (_) |_(_) ___  _ __  ___ 
+# \___ \ / __| '__/ _` | '_ \ / _ \ '__| | | | |/ _ \ |_| | '_ \| | __| |/ _ \| '_ \/ __|
+#  ___) | (__| | | (_| | |_) |  __/ |    | |_| |  __/  _| | | | | | |_| | (_) | | | \__ \
+# |____/ \___|_|  \__,_| .__/ \___|_|    |____/ \___|_| |_|_| |_|_|\__|_|\___/|_| |_|___/
+#                      |_|                                                               
+# Many times, you don't even need to write a function when a scraper will do.
+# If you did something nifty in the Scrapers tab, just make a new entry here.
+
+def scrapes():
+  """Define the functions available and modifiable from the Scrapers tab."""
+  s = []
+  s.append(['canonical',   'xpath', "/html/head/link[@rel = 'canonical']/@href"])
+  s.append(['description', 'xpath', "//meta[translate(@name, 'ABCDEFGHJIKLMNOPQRSTUVWXYZ', 'abcdefghjiklmnopqrstuvwxyz')='description']/@content"])
+  s.append(['followers',   'xpath', "//span[.='Followers']/following-sibling::span/text()"])
+  s.append(['following',   'xpath', "//span[.='Following']/following-sibling::span/text()"])
+  s.append(['ga',          'regex', r"(?:\'|\")(?P<scrape>UA-.*?)(?:\'|\")"])
+  s.append(['h1',          'xpath', '//*[self::h1 or self::H1]/text()'])
+  s.append(['h2',          'xpath', '//*[self::h2 or self::H2]/text()'])
+  s.append(['h3',          'xpath', '//*[self::h3 or self::H3]/text()'])
+  s.append(['h4',          'xpath', '//*[self::h4 or self::H4]/text()'])
+  s.append(['h5',          'xpath', '//*[self::h5 or self::H5]/text()'])
+  s.append(['h6',          'xpath', '//*[self::h6 or self::H6]/text()'])
+  s.append(['headlines',   'xpath', '//*[self::h1 or self::h2 or self::h3 or self::h4 or self::h5 or self::h6 or self::H1 or self::H2 or self::H3 or self::H4 or self::H5 or self::H6]/text()'])
+  s.append(['metakeywords','xpath', "//meta[translate(@name, 'ABCDEFGHJIKLMNOPQRSTUVWXYZ', 'abcdefghjiklmnopqrstuvwxyz')='keywords']/@content"])
+  s.append(['mobile',      'xpath', "/html/head/link[@media = 'only screen and (max-width: 640px)']/@href"])
+  s.append(['subscribers', 'regex', r"subscriber-count.*?>(?P<scrape>[0-9,]+?)<"])
+  s.append(['thumbsdown',  'xpath', "//button[@id='watch-dislike']/span/text()"])
+  s.append(['thumbsup',    'xpath', "//button[@id='watch-like']/span/text()"])
+  s.append(['title',       'xpath', "//title/text()"])
+  s.append(['tweettotal',  'xpath', "//span[.='Tweets']/following-sibling::span/text()"])
+  s.append(['views',       'xpath', "//div[@class='watch-view-count']/text()"])
+  return s
+
 #  _   _      _                   _____                 _   _                 
 # | | | | ___| |_ __   ___ _ __  |  ___|   _ _ __   ___| |_(_) ___  _ __  ___ 
 # | |_| |/ _ \ | '_ \ / _ \ '__| | |_ | | | | '_ \ / __| __| |/ _ \| '_ \/ __|
@@ -19,12 +53,6 @@ import globs                                              #All objects treated a
 #              |_|                                                            
 # Take a look at some support-functions you can call from your own functions.
 # The jobs done by these are so common, they get used almost everywhere.
-
-def sleep():
-  import time, datetime
-  time.sleep(10)
-  i = datetime.datetime.now()
-  return i.strftime("%m/%d/%Y %H:%M:%S")
 
 def gethtml(url):
   '''Return HTML text from given URL. Makes attempt to recycle pre-fetched
@@ -54,11 +82,8 @@ def gethtml(url):
     globs.html = globs.hobj.text
   return globs.html
 
-def unarchive(archive):
-  import base64, bz2
-  binary = base64.b64decode(archive)
-  newhtml = bz2.decompress(binary)
-  return newhtml
+def cancel():
+  globs.STOP = True
 
 def archive(url):
   '''Return HTML text for given URL. Simple wrapper for gethtml function.'''
@@ -88,6 +113,12 @@ def archive(url):
     'base64.decode(bz2.decompress(this))': cellfriendly
     }
   return json.dumps(whatisthatmess)
+
+def unarchive(archive):
+  import base64, bz2
+  binary = base64.b64decode(archive)
+  newhtml = bz2.decompress(binary)
+  return newhtml
 
 def walkdict(obj, key):
   """Take a JSON object and key and return the first matched value from the object."""
@@ -146,40 +177,6 @@ def jsonapi(endpoint, url, jkey):
   respobj = requests.get(thecall, timeout=5)
   adict = respobj.json()
   return walkdict(adict, jkey)
-
-#  ____                                   ____        __ _       _ _   _                 
-# / ___|  ___ _ __ __ _ _ __   ___ _ __  |  _ \  ___ / _(_)_ __ (_) |_(_) ___  _ __  ___ 
-# \___ \ / __| '__/ _` | '_ \ / _ \ '__| | | | |/ _ \ |_| | '_ \| | __| |/ _ \| '_ \/ __|
-#  ___) | (__| | | (_| | |_) |  __/ |    | |_| |  __/  _| | | | | | |_| | (_) | | | \__ \
-# |____/ \___|_|  \__,_| .__/ \___|_|    |____/ \___|_| |_|_| |_|_|\__|_|\___/|_| |_|___/
-#                      |_|                                                               
-# Many times, you don't even need to write a function when a scraper will do.
-# If you did something nifty in the Scrapers tab, just make a new entry here.
-
-def scrapes():
-  """Define the functions available and modifiable from the Scrapers tab."""
-  s = []
-  s.append(['canonical',   'xpath', "/html/head/link[@rel = 'canonical']/@href"])
-  s.append(['description', 'xpath', "//meta[translate(@name, 'ABCDEFGHJIKLMNOPQRSTUVWXYZ', 'abcdefghjiklmnopqrstuvwxyz')='description']/@content"])
-  s.append(['followers',   'xpath', "//span[.='Followers']/following-sibling::span/text()"])
-  s.append(['following',   'xpath', "//span[.='Following']/following-sibling::span/text()"])
-  s.append(['ga',          'regex', r"(?:\'|\")(?P<scrape>UA-.*?)(?:\'|\")"])
-  s.append(['h1',          'xpath', '//*[self::h1 or self::H1]/text()'])
-  s.append(['h2',          'xpath', '//*[self::h2 or self::H2]/text()'])
-  s.append(['h3',          'xpath', '//*[self::h3 or self::H3]/text()'])
-  s.append(['h4',          'xpath', '//*[self::h4 or self::H4]/text()'])
-  s.append(['h5',          'xpath', '//*[self::h5 or self::H5]/text()'])
-  s.append(['h6',          'xpath', '//*[self::h6 or self::H6]/text()'])
-  s.append(['headlines',   'xpath', '//*[self::h1 or self::h2 or self::h3 or self::h4 or self::h5 or self::h6 or self::H1 or self::H2 or self::H3 or self::H4 or self::H5 or self::H6]/text()'])
-  s.append(['metakeywords','xpath', "//meta[translate(@name, 'ABCDEFGHJIKLMNOPQRSTUVWXYZ', 'abcdefghjiklmnopqrstuvwxyz')='keywords']/@content"])
-  s.append(['mobile',      'xpath', "/html/head/link[@media = 'only screen and (max-width: 640px)']/@href"])
-  s.append(['subscribers', 'regex', r"subscriber-count.*?>(?P<scrape>[0-9,]+?)<"])
-  s.append(['thumbsdown',  'xpath', "//button[@id='watch-dislike']/span/text()"])
-  s.append(['thumbsup',    'xpath', "//button[@id='watch-like']/span/text()"])
-  s.append(['title',       'xpath', "//title/text()"])
-  s.append(['tweettotal',  'xpath', "//span[.='Tweets']/following-sibling::span/text()"])
-  s.append(['views',       'xpath', "//div[@class='watch-view-count']/text()"])
-  return s
 
 #  ____                 ___                     _                
 # |  _ \ _____      __ |_ _|_ __  ___  ___ _ __| |_ ___ _ __ ___ 
@@ -763,9 +760,6 @@ def sheetinitializer(sheet1key):
   sinit = {}
   sinit['crawl'] = (['source', 'crawl'], [globs.PIPURL, '?'])
   return sinit[sheet1key]
-
-def cancel():
-  globs.STOP = True
 
 def length(archive):
   return len(archive)
