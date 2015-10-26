@@ -315,7 +315,7 @@ def extractkeywords(url):
   newtxt = newtxt.replace('\n', ' ')
   newtxt = re.sub('<[^<]+?>', ' ', newtxt)
   newtxt = re.sub(' +',' ', newtxt)
-  rake_object = rake.Rake("SmartStoplist.txt", 3, 4, 2)
+  rake_object = rake.Rake("/var/pipulate/SmartStoplist.txt", 3, 4, 2)
   keywords = rake_object.run(newtxt)
   stackum = ''
   for keyword in keywords:
@@ -917,6 +917,7 @@ def markdown(url):
   html = html.replace('</h5>', "")
   html = html.replace('</h6>', "")
   html = lesslines(html)
+  html = html.strip()
   return html
 
 def barebones(url):
@@ -944,9 +945,9 @@ def barebones(url):
   html = stripwhitespace(html)
   html = stripcrlf(html)
   html = onetagoneline(html)
-  return html
   html = convert_html_entities(html)
   html = lesslines(html)
+  html = html.strip()
   return html
 
 def stripbr(url):
