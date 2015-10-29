@@ -1,32 +1,26 @@
-"""    Because life's too short to not collect  ABOUT THE AUTHOR:           # From Pipulate, Import *              column 1
-       data in the same place you work with it  http://mikelev.in                                                         2
-        _____ _             _       _           http://levinux.com     - What is Pipulate and why? It's...                3
-       |  __ (_)           | |     | |          http://pipulate.com    - An attempt to scratch my own itch                |
-       | |__) | _ __  _   _| | __ _| |_ ___    ___ ___  _ __ ___       - So that I can structure my mind better           V
-       |  ___/ | '_ \| | | | |/ _` | __/ _ \  / __/ _ \| '_ ` _ \      - So that I can structure my behavior better
-       | |   | | |_) | |_| | | (_| | ||  __/ | (_| (_) | | | | | |     - So that I can remember more and forget less
-       |_|   |_| .__/ \__,_|_|\__,_|\__\___|(_)___\___/|_| |_| |_|     - So that I can achieve more while straining less
-               | |                                                     - So that I can improve my life and impact the world
-          THIS |IS YOUR BROWSER                                        - So that I can help teach others to do the same
- THIS IS      \` `/                               THIS IS PIPULATE     - So that I can turn a life's work into legacy
-   YOU         \ / ___ ____                     (disposable servers)   - So that I can get the kick of a performer
-              ,_V_/site\___\___. ...which       ,------------------.   - So that the rewards become compounding
-    O         |                ||    SENDS      |   ...to the      |   - Attracting a nice growing community
-   /|\---1.-----> bookmarklet ----------2.-------> Pipulate Server |   - To chat with a bit as I get old
-   ( ) CLICK  | with a website ||      URL and  |   | which checks |   - Because, we make our own why.
+"""    Because life's too short to not collect  ABOUT THE AUTHOR:       # THE PIPULATE TO-DO LIST:
+       data in the same place you work with it  http://mikelev.in       - Email Support
+        _____ _             _       _           http://levinux.com      - Port to Python 3
+       |  __ (_)           | |     | |          http://pipulate.com     - Support yield from and decorators
+       | |__) | _ __  _   _| | __ _| |_ ___    ___ ___  _ __ ___        - Consider forking threads for non-web runs
+       |  ___/ | '_ \| | | | |/ _` | __/ _ \  / __/ _ \| '_ ` _ \
+       | |   | | |_) | |_| | | (_| | ||  __/ | (_| (_) | | | | | |
+       |_|   |_| .__/ \__,_|_|\__,_|\__\___|(_)___\___/|_| |_| |_|
+               | |
+          THIS |IS YOUR BROWSER
+ THIS IS      \` `/                               THIS IS PIPULATE
+   YOU         \ / ___ ____                     (disposable servers)
+              ,_V_/site\___\___. ...which       ,------------------.
+    O         |                ||    SENDS      |   ...to the      |
+   /|\---1.-----> bookmarklet ----------2.-------> Pipulate Server |
+   ( ) CLICK  | with a website ||      URL and  |   | which checks |
   =====       |   displaying.  ||       context '---|---|--|--|----'
-    |         |                ||                   |   |  |  |             # THE PIPULATE TO-DO LIST HIT PARADE:
-    5.        '----------------'|      then sends   |   |  |  '-------> ?   - More Departmential Auto Setups
-  SEE THE--->  | to Google Sheet|<-------4.---------'   |  '----3.----> ?   - Better Cytoscape visualization
-  RESULTS      '----------------'  a response           '-------------> ?   - Site crawl keyword extraction
-                                                          ...stuff on net   - Email support
+    |         |                ||                   |   |  |  |
+    5.        '----------------'|      then sends   |   |  |  '-------> ?
+  SEE THE--->  | to Google Sheet|<-------4.---------'   |  '----3.----> ?
+  RESULTS      '----------------'  a response           '-------------> ?
+                                                          ...stuff on net
 
- If you like what you see expressed here in this project, there is countless more where that came from. Though I hate the
- notion of yet another platform or framework or architecture, that is indeed exactly what I've built here, but lightweight
- and pragmatic and in a "ready-position" for change. I love the never-ending fight against obsolessence, marginalzing and
- disnintermediation. A good fight with naysayers also intensifies the heat in which this product is forged, and makes it
- better overall. Follow my antics, from a Catskills Geek-Dad to seasoned SEO-pro in highly competitive NYC. Join me here.
- {'more' : ['https://twitter.com/miklevin', 'https://www.linkedin.com/in/miklevin', 'https://instagram.com/miklevin/']}
 """
 
 #  _                            _     _   _     _       While it may look it, this is not the entry-point for Pipulate.
@@ -39,16 +33,16 @@
 import sys, os, socket, urlparse, re, gspread
 import requests, traceback, datetime, time, json
 import globs
-from common import *                                                        # AN ODE TO STYLE
+from common import *
 from flask import (Flask,
-                  stream_with_context,                                      # This is not DRY.
-                  render_template,                                          # I'll tell you why.
-                  Response,                                                 # Though you may gripe,
-                  request,                                                  # I like to type
-                  session,                                                  # In vim and stamp
-                  redirect,                                                 # Out code most DAMP.
+                  stream_with_context,
+                  render_template,
+                  Response,
+                  request,
+                  session,
+                  redirect,
                   url_for,
-                  flash)                                            # (Descriptive And Meaningful Phrases)
+                  flash)
 # from functions import *
 
 #                          _          __  __    This ain't PHP. It's kinda like a .NET codebehind, but way more awesome
@@ -475,12 +469,12 @@ def main():
 
 def LogUser(authkey):
   """Track usage of the Pipulate bookmarklet per user on main domain instance."""
-  #  _                _   _               
-  # | |    ___   __ _| | | |___  ___ _ __ 
+  #  _                _   _
+  # | |    ___   __ _| | | |___  ___ _ __
   # | |   / _ \ / _` | | | / __|/ _ \ '__|
-  # | |__| (_) | (_| | |_| \__ \  __/ |   
-  # |_____\___/ \__, |\___/|___/\___|_|   
-  #             |___/                     
+  # | |__| (_) | (_| | |_| \__ \  __/ |
+  # |_____\___/ \__, |\___/|___/\___|_|
+  #             |___/
   import os.path
   if os.path.isfile(globs.TOKEN) and os.path.getsize(globs.TOKEN) > 0:
     token = freshtoken(globs.TOKEN)
@@ -621,7 +615,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
           except gspread.httpsession.HTTPError, e:
             out("Login appeared successful, but rejected on document open attempt.")
             yme = 'Please <a href="%s">Log In</a> again first.' % getLoginlink()
-            if globs.WEB: 
+            if globs.WEB:
               yield yme, "Login under the \"burger button\" in the upper-right.", "", ""
               yield warning
               yield flush
@@ -904,12 +898,12 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
         if globs.WEB:
           yield "Required tabs for Pipulate successfully found/created!", "Tabs created", tabs, ""
           yield flush
-      #        _       _                           __ _       
-      #   __ _| | ___ | |__  ___   ___ ___  _ __  / _(_) __ _ 
+      #        _       _                           __ _
+      #   __ _| | ___ | |__  ___   ___ ___  _ __  / _(_) __ _
       #  / _` | |/ _ \| '_ \/ __| / __/ _ \| '_ \| |_| |/ _` |
       # | (_| | | (_) | |_) \__ \| (_| (_) | | | |  _| | (_| |
       #  \__, |_|\___/|_.__/|___(_)___\___/|_| |_|_| |_|\__, |
-      #  |___/                                          |___/ 
+      #  |___/                                          |___/
       stop = True
       for x in range(5):
         if globs.WEB: yield lock
@@ -1022,7 +1016,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
         s = 's'
       yme = "%s row%s found in %s." % (globs.numrows, s, globs.TAB)
       out(yme)
-      if globs.WEB: 
+      if globs.WEB:
         yield yme, "", "", ""
         yield flush
       if globs.numrows == 0 and globs.MODE == 'qmarks':
@@ -1321,7 +1315,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
               yme = "Maximum number of rows (%s) reached on this run." % maxrowsperhour
               yield yme, "Maximum rows-per-click processed", "", ""
             break
-          if secondsbetweenrows: 
+          if secondsbetweenrows:
             out("Waiting %s seconds between rows..." % secondsbetweenrows)
             if globs.WEB:
               yme = "Waiting %s seconds between processing each row." % secondsbetweenrows
@@ -1521,7 +1515,7 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                             except lxml.etree.XPathEvalError:
                               out("BAD XPATH PATTERN")
                               yme = "Bad xpath: %s" % spattern
-                              if globs.WEB: 
+                              if globs.WEB:
                                 yield yme, "Bad XPATH Pattern!", "", ""
                                 yield spinerr
                                 yield flush
