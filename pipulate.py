@@ -1,25 +1,33 @@
-"""    Because life's too short to not collect  ABOUT THE AUTHOR:       # THE PIPULATE TO-DO LIST:
-       data in the same place you work with it  http://mikelev.in       - Email Support
-        _____ _             _       _           http://levinux.com      - Port to Python 3
-       |  __ (_)           | |     | |          http://pipulate.com     - Support yield from and decorators
-       | |__) | _ __  _   _| | __ _| |_ ___    ___ ___  _ __ ___        - Consider forking threads for non-web runs
-       |  ___/ | '_ \| | | | |/ _` | __/ _ \  / __/ _ \| '_ ` _ \
-       | |   | | |_) | |_| | | (_| | ||  __/ | (_| (_) | | | | | |
-       |_|   |_| .__/ \__,_|_|\__,_|\__\___|(_)___\___/|_| |_| |_|
-               | |
-          THIS |IS YOUR BROWSER
- THIS IS      \` `/                               THIS IS PIPULATE
-   YOU         \ / ___ ____                     (disposable servers)
-              ,_V_/site\___\___. ...which       ,------------------.
-    O         |                ||    SENDS      |   ...to the      |
-   /|\---1.-----> bookmarklet ----------2.-------> Pipulate Server |
-   ( ) CLICK  | with a website ||      URL and  |   | which checks |
-  =====       |   displaying.  ||       context '---|---|--|--|----'
-    |         |                ||                   |   |  |  |
-    5.        '----------------'|      then sends   |   |  |  '-------> ?
-  SEE THE--->  | to Google Sheet|<-------4.---------'   |  '----3.----> ?
-  RESULTS      '----------------'  a response           '-------------> ?
-                                                          ...stuff on net
+"""                         Because life's too short to not collect  ABOUT THE AUTHOR:                                    1
+                            data in the same place you work with it  http://mikelev.in                                    2
+                             _____ _             _       _           http://levinux.com                                   3
+                            |  __ (_)           | |     | |          http://pipulate.com                                  |
+                            | |__) | _ __  _   _| | __ _| |_ ___    ___ ___  _ __ ___                                     V
+                            |  ___/ | '_ \| | | | |/ _` | __/ _ \  / __/ _ \| '_ ` _ \
+                            | |   | | |_) | |_| | | (_| | ||  __/ | (_| (_) | | | | | |
+                            |_|   |_| .__/ \__,_|_|\__,_|\__\___|(_)___\___/|_| |_| |_|
+                                    | |
+                               THIS |IS YOUR BROWSER
+                      THIS IS      \` `/                               THIS IS PIPULATE
+                        YOU         \ / ___ ____                     (disposable servers)
+                                   ,_V_/site\___\___. ...which       ,------------------.
+                         O         |                ||    SENDS      |   ...to the      |
+                        /|\---1.-----> bookmarklet ----------2.-------> Pipulate Server |
+                        ( ) CLICK  | with a website ||      URL and  |   | which checks |
+                       =====       |   displaying.  ||       context '---|---|--|--|----'
+                         |         |                ||                   |   |  |  |
+                         5.        '----------------'|      then sends   |   |  |  '-------> ?
+                       SEE THE--->  | to Google Sheet|<-------4.---------'   |  '----3.----> ?
+                       RESULTS      '----------------'  a response           '-------------> ?
+                                                                            ...stuff on net
+
+
+# THE PIPULATE TO-DO LIST:
+- Email Support
+- Port to Python 3
+- Support yield from and decorators
+- Consider forking threads for non-web runs
+- Also support https://cse.google.com/cse/ and main UI scraping for serps
 
 """
 
