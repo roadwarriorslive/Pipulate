@@ -23,11 +23,18 @@
 
 
 # THE PIPULATE TO-DO LIST:
+- nginx load balancer on Wable network
+- Break off 2 Rackspace pipulate instances
+- Dyamically importing user functions
 - Email Support
 - Port to Python 3
 - Support yield from and decorators
-- Consider forking threads for non-web runs
+- Consider forking threads that don't stream I/O to browser
 - Also support https://cse.google.com/cse/ and main UI scraping for serps
+- Accessing and saving-local Google Webmaster Tools data.
+- Google Analytics API
+- Saving Google search results (both for SERPS and non-SERPS purposes)
+- Calculate relative "difficulty" scores among fixed data sets
 
 """
 
