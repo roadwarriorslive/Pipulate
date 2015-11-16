@@ -125,6 +125,7 @@ def walkdict(obj, key):
   stack = obj.items()
   while stack:
     k, v = stack.pop()
+    out("key: %s value: %s" % (k, v))
     if isinstance(v, dict):
       stack.extend(v.iteritems())
     else:
@@ -629,15 +630,24 @@ def fb(url):
   return json.dumps(jobj)
 
 def shares(url, fb=''):
-  """Return the number of times a given URL was shared in Facebook."""
+  """Return the number of times a given URL was liked in Facebook."""
   if not fb:
     def gfb(url):
       global fb
       return fb(url)
-    fb = json.loads(gfb(url))
+    try:
+      fb = json.loads(gfb(url))
+    except:
+      return "Error"
   else:
-    fb = json.loads(fb)
-  return walkdict(fb, "share_count")
+    try:
+      fb = json.loads(fb)
+    except:
+      return "Error"
+  if 'data' in fb:
+    return walkdict(fb['data'][0], "share_count")
+  else:
+    return "Error"
 
 def likes(url, fb=''):
   """Return the number of times a given URL was liked in Facebook."""
