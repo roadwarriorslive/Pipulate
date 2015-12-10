@@ -1665,7 +1665,7 @@ def firstdir(url):
   parsed = urlparse.urlparse(url)
   path = parsed[2]
   pathlist = path.split("/")
-  fpath = pathlist[0]
+  fpath = pathlist[1]
   if '.' not in fpath:
     return fpath
   else:
