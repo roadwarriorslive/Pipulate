@@ -1660,10 +1660,12 @@ def url_root(url):
   parsed = urlparse.urlparse(url)
   return "%s://%s%s" % (parsed[0], parsed[1], parsed[2])
 
-def urlpath(url):
+def firstdir(url):
   """Return path from url"""
   parsed = urlparse.urlparse(url)
-  return parsed[2]
+  path = parsed[2]
+  pathlist = os.path.split(path)
+  return pathlist[0]
 
 def getLoginlink(gobackurl=''):
   """Return the HTML code required for an OAuth2 login link."""

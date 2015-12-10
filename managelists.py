@@ -14,6 +14,7 @@ def documentation():
   s.append(['Difficulty',           'Keyword',   'Keyword',                   'Return SEMRush Keyword Difficulty.', ''])
   s.append(['DomainAuthority',      'MOZ',       'Url',                       'Return Moz Domain Authority score for a URL.', ''])
   s.append(['ExtractKeywords',      'Crawl',     'Url',                       "Return a list of keywords extracted from URL in depending order of likely importance.", ''])
+  s.append(['FirstDir',             'Crawl',     'Url',                       "Return first directory (folder) from a URL.", ''])
   s.append(['Fb',                   'Facebook',  'Url',                       'Return Facebook likes, shares, clicks and comments as JSON.', ''])
   s.append(['Followers',            'Twitter',   'Url',                       'Return Twitter followers count.', ''])
   s.append(['Following',            'Twitter',   'Url',                       'Return Twitter following count.', ''])
