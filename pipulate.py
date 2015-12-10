@@ -23,6 +23,9 @@
 
 
 # THE PIPULATE TO-DO LIST:
+- Get rid of annoying timeouts making you log back in, and potentially interrupting jobs!
+- Get rid of the stormy weather messaging, and just figure out how to do exponential back-off (never stop on API hiccups)
+
 - nginx load balancer on Wable network
 - Break off 2 Rackspace pipulate instances
 - Dyamically importing user functions
