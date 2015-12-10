@@ -1660,7 +1660,7 @@ def url_root(url):
   parsed = urlparse.urlparse(url)
   return "%s://%s%s" % (parsed[0], parsed[1], parsed[2])
 
-def path(url):
+def urlpath(url):
   """Return path from url"""
   parsed = urlparse.urlparse(url)
   return parsed[2]
