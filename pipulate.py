@@ -1665,7 +1665,11 @@ def firstdir(url):
   parsed = urlparse.urlparse(url)
   path = parsed[2]
   pathlist = path.split("/")
-  return pathlist[1]
+  fpath = pathlist[0]
+  if '.' not in fpath:
+    return fpath
+  else:
+    return ""
 
 def getLoginlink(gobackurl=''):
   """Return the HTML code required for an OAuth2 login link."""
