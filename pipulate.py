@@ -1664,8 +1664,8 @@ def firstdir(url):
   """Return path from url"""
   parsed = urlparse.urlparse(url)
   path = parsed[2]
-  pathlist = os.path.split(path)
-  return pathlist[0]
+  pathlist = path.split("/")
+  return pathlist[1]
 
 def getLoginlink(gobackurl=''):
   """Return the HTML code required for an OAuth2 login link."""
