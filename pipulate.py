@@ -1,13 +1,15 @@
 """                         Because life's too short to not collect  ABOUT THE AUTHOR:                                    1
                             data in the same place you work with it  http://mikelev.in                                    2
-                             _____ _             _       _           http://levinux.com                                   3
-                            |  __ (_)           | |     | |          http://pipulate.com                                  |
+                                                                     http://levinux.com                                   3
+                             _____ _             _       _           http://pipulate.com                                  |
+                            |  __ (_)           | |     | |          
                             | |__) | _ __  _   _| | __ _| |_ ___    ___ ___  _ __ ___                                     V
                             |  ___/ | '_ \| | | | |/ _` | __/ _ \  / __/ _ \| '_ ` _ \
                             | |   | | |_) | |_| | | (_| | ||  __/ | (_| (_) | | | | | |
                             |_|   |_| .__/ \__,_|_|\__,_|\__\___|(_)___\___/|_| |_| |_|
                                     | |
                                THIS |IS YOUR BROWSER
+                                    | |
                       THIS IS      \` `/                               THIS IS PIPULATE
                         YOU         \ / ___ ____                     (disposable servers)
                                    ,_V_/site\___\___. ...which       ,------------------.
