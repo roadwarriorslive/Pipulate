@@ -926,6 +926,12 @@ def markdown(url):
   html = html.replace('</h4>', "")
   html = html.replace('</h5>', "")
   html = html.replace('</h6>', "")
+  html = html.replace('<li>', "")
+  html = html.replace('</li>', "")
+  html = html.replace('<ul>', "")
+  html = html.replace('<ol>', "")
+  html = html.replace('</ul>', "")
+  html = html.replace('</ol>', "")
   html = lesslines(html)
   html = html.strip()
   return html
@@ -942,11 +948,12 @@ def barebones(url):
   html = bodycopy(html)
   html = stripcomments(html)
   # Same as above, but a second-pass on the usual code-bloating suspects in between body tags.
-  for nuketagblock in ['script', 'style', 'noscript', 'form', 'object', 'embed', 'select']:
+  for nuketagblock in ['header', 'footer', 'nav', 'script', 'style', 'noscript', 'form', 'object', 'embed', 'select']:
     html = deletenode(html, nuketagblock)
   html = stripparams(html)
   html = lowercasetags(html)
-  html = striplists(html)
+  # html = striplists(html)
+  html = stripemptyhtml(html)
   html = stripbr(html)
   # This strips out the following tags, but leaves the in-between content in place.
   for nuketag in ['label', 'section', 'article', 'div', 'span', 'img', 'a', 'b', 'i', 'param', 'table',
@@ -957,7 +964,20 @@ def barebones(url):
   html = onetagoneline(html)
   html = convert_html_entities(html)
   html = lesslines(html)
+  html = html.replace('\n', ' ')
+  html = html.replace('  ', ' ')
   html = html.strip()
+  return html
+
+def stripemptyhtml(url):
+  html = url
+  if checkurl(url):
+    html = gethtml(url)
+    if not html:
+      return None
+  for anel in ('li', 'ul', 'ol'):
+    repme = "<%s></%s>"
+    html = html.replace(repme, "")
   return html
 
 def stripbr(url):

@@ -1386,11 +1386,13 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                   if 'url' in globs.row1: #Only fetch html once per row if possible
                     if globs.WEB: yield lock
                     try:
-                      if 'archive' in globs.row1:
-                        prehtml = onerow[globs.row1.index('archive')]
-                        globs.html = unarchive(prehtml)
-                      else:
-                        globs.html = gethtml(onerow[globs.row1.index('url')])
+                      # if 'archive' in globs.row1:
+                      #   prehtml = onerow[globs.row1.index('archive')]
+                      #   gotcha("2")
+                      #   globs.html = unarchive(prehtml)
+                      # else:
+                      #   globs.html = gethtml(onerow[globs.row1.index('url')])
+                      globs.html = gethtml(onerow[globs.row1.index('url')])
                     except:
                       pass
                     if globs.WEB: yield unlock
