@@ -1434,7 +1434,10 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                         # | |___ \ V /| | | | |___ \ V / (_| | | |_      _/ __/   into an actual instance of that function
                         # |_____| \_/ |_|_| |_____| \_/ \__,_|_|   |_||_||_____|  called with those parameters. Grok it.
                         #
-                        tastereturn = eval(evalme)
+                        try:
+                          tastereturn = eval(evalme)
+                        except:
+                          tasterun = None
                         if type(tastereturn) == tuple:
                           newrow[coldex] = tastereturn[0]
                           if len(tastereturn) > 1:
