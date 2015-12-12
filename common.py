@@ -902,7 +902,16 @@ def sampleData():
   }); // on dom ready''' % (nodes, edges)
 
 def exhume(keyword):
-  return keyword
+  tuples = [
+    ('u1', 'foo bar'),
+    ('u2', 'ham eggs'),
+    ('u3', 'parrot not dead yet'),
+    ('u4', 'software parrot not dead yet')
+  ]
+  for pair in tuples:
+    if keyword in pair[1]:
+      return pair[0]
+  return None
 
 def markdown(url):
   """ http://mikelev.in/2014/01/stripping-html-text-markdown-readability/ """
