@@ -302,7 +302,7 @@ def main():
         globs.TAB = gdoc.sheet1.title
         globs.sheet = gdoc.sheet1
         globs.worksheets = gdoc.worksheets()
-        globs.tabnames = lowercaselist([sheet.title for sheet in globs.worksheets])
+        globs.tabnames = [sheet.title for sheet in globs.worksheets]
         needsPipulate = False
         out("Loaded %s sheet." % gdoc.title)
       except:
@@ -946,14 +946,15 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
 
       if not globs.tabnames:
         globs.worksheets = gdoc.worksheets()
-        globs.tabnames = lowercaselist([sheet.title for sheet in globs.worksheets])
+        globs.tabnames = [sheet.title for sheet in globs.worksheets]
 
       # The ideal place to check if one of the table names appears in the config tab names
       for item in globs.tabnames:
         for name in globs.config:
-          if name == item:
-            gotcha(name)
-
+          if name.lower() == item.lower():
+            if globs.config[name] == 'tuplelist':
+              globs.obs[name] = gdoc.worksheet(item).get_all_values()
+              gotcha(globs.obs[name])
 
       # I should apply this to everything that can get "bumped up" to globs from globs.config
       if 'maxrows' in globs.config:

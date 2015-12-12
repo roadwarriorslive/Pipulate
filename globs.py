@@ -9,6 +9,7 @@
 #                        But to do so, use a globs prefix
 #                         It's the price you have to pay
 
+obs =       {}     # The obs in globs stay resident for jobs.
 config =    {}     # In-memory copy of everything from Config tab
 row1 =      []     # Copy of contents of sheet1, row 1 for many uses.
 tabnames =  []     # A list of all the worksheet (table) names (not objects)
