@@ -944,6 +944,19 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
         raise StopIteration
       out("Config tab copied to globals.")
 
+      if not globs.tabnames:
+        globs.worksheets = gdoc.worksheets()
+        globs.tabnames = [sheet.title for sheet in globs.worksheets]
+
+      # The ideal place to check if one of the table names appears in the config tab names
+      for item in globs.tabnames:
+        out(item)
+      out('***config***')
+      for name in globs.config:
+        out(name)
+      gotcha("done")
+
+
       # I should apply this to everything that can get "bumped up" to globs from globs.config
       if 'maxrows' in globs.config:
         try:
