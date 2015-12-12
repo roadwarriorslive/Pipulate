@@ -908,10 +908,11 @@ def exhume(keyword):
     ('u3', 'parrot not dead yet'),
     ('u4', 'software parrot not dead yet')
   ]
+  rlist = []
   for pair in tuples:
     if keyword in pair[1]:
-      return pair[0]
-  return None
+      rlist.append(pair[0])
+  return rlist
 
 def markdown(url):
   """ http://mikelev.in/2014/01/stripping-html-text-markdown-readability/ """
