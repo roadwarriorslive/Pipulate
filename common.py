@@ -901,6 +901,9 @@ def sampleData():
 
   }); // on dom ready''' % (nodes, edges)
 
+def exhume(keyword):
+  return keyword
+
 def markdown(url):
   """ http://mikelev.in/2014/01/stripping-html-text-markdown-readability/ """
   html = url
