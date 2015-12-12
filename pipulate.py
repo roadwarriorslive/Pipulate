@@ -952,9 +952,8 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
       for item in globs.tabnames:
         for name in globs.config:
           if name.lower() == item.lower():
-            if globs.config[name] == 'tuplelist':
+            if globs.config[name] == 'list':
               globs.obs[name] = gdoc.worksheet(item).get_all_values()
-              gotcha(globs.obs[name])
 
       # I should apply this to everything that can get "bumped up" to globs from globs.config
       if 'maxrows' in globs.config:
