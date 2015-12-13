@@ -1448,7 +1448,8 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                         try:
                           tastereturn = eval(evalme)
                         except:
-                          tasterun = None
+                          yield "Problem in function", "", "", ""
+                          Stop() #                                            <-- This is where you could keep things running
                         if type(tastereturn) == tuple:
                           newrow[coldex] = tastereturn[0]
                           if len(tastereturn) > 1:

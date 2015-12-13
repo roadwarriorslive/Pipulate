@@ -902,16 +902,23 @@ def sampleData():
   }); // on dom ready''' % (nodes, edges)
 
 def exhume(keyword):
-  tuples = [
-    ('u1', 'foo bar'),
-    ('u2', 'ham eggs'),
-    ('u3', 'parrot not dead yet'),
-    ('u4', 'software parrot not dead yet')
-  ]
   rlist = []
-  for pair in tuples:
-    if keyword in pair[1]:
-      rlist.append(pair[0])
+  for arow in globs.obs['crawl']:
+    if keyword in arow[1]:
+      rlist.append(arow[0])
+  return rlist
+
+def exhumate(keyword):
+  stems = keyword.split()
+  rlist = []
+  chit = 0
+  for arow in globs.obs['crawl']:
+    for stem in stems:
+      if stem in arow[1]:
+        chit = chit + 1
+        if chit == 2:
+          rlist.append(arow[0])
+          break
   return rlist
 
 def markdown(url):
