@@ -911,14 +911,13 @@ def exhume(keyword):
 def exhumate(keyword):
   stems = keyword.split()
   rlist = []
-  chit = 0
   for arow in globs.obs['crawl']:
+    chit = 0
     for stem in stems:
       if stem in arow[1]:
         chit = chit + 1
-        if chit == 2:
-          rlist.append(arow[0])
-          break
+    if chit == len(stems):
+      rlist.append(arow[0])
   return rlist
 
 def markdown(url):
