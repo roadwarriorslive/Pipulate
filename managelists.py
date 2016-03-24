@@ -36,6 +36,7 @@ def documentation():
   s.append(['Mobile',               'Mobile',    'Url',                       'Return link tag URL that should be show for screens less than 640px.', ''])
   s.append(['Mobilicious',          'Mobile',    'Url, Mobile, Mcanonical',   'Return Pass or Fail depending on whether Mobile and Mobilecanonical match.', ''])
   s.append(['PageAuthority',        'MOZ',       'Url',                       'Return Moz Page Authority score for a URL.', ''])
+  s.append(['Path',                 'URL',       'Url',                       'Return path from URL (including filename)', ''])
   s.append(['Pins',                 'Social',    'Url',                       'Not yet implemented.', ''])
   s.append(['Plusses',              'Social',    'Url',                       'Return Google Plus count on a URL.', ''])
   s.append(['Position',             'Serps',     'Keyword, Site, (Serps)',    'Return the actual position for a given site for a given keyword.', ''])

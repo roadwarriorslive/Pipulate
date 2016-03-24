@@ -28,7 +28,10 @@
 - Get rid of annoying timeouts making you log back in, and potentially interrupting jobs!
 - Get rid of the stormy weather messaging, and just figure out how to do exponential back-off (never stop on API hiccups)
 
+- Switch login technique to OAuth-persistent (offline app)
+
 - Port to Python 3
+
 - nginx load balancer on Wable network (or something node?)
 - Break off 2 Rackspace pipulate instances
 - Dyamically importing user functions

@@ -1421,6 +1421,17 @@ def hostname(url):
   else:
     return None
 
+def path(url):
+  from urlparse import urlparse
+  if url:
+    if '//' in url:
+      return urlparse(url).path
+    else:
+      url = 'http://' + url
+      return urlparse(url).path
+  else:
+    return None
+
 def apex(url):
   """Usually returns the apex or registered domain, given a URL."""
   from urlparse import urlparse
