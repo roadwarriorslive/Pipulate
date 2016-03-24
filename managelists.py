@@ -18,6 +18,7 @@ def documentation():
   s.append(['Fb',                   'Facebook',  'Url',                       'Return Facebook likes, shares, clicks and comments as JSON.', ''])
   s.append(['Followers',            'Twitter',   'Url',                       'Return Twitter followers count.', ''])
   s.append(['Following',            'Twitter',   'Url',                       'Return Twitter following count.', ''])
+  s.append(['FullURL',              'URL',       'Url',                       'Return fully qualified http (not secure) URL given hostname and path.', ''])
   s.append(['Ga',                   'Crawl',     'Url',                       'Return Google Analytics ID to check if GA installed on page.', ''])
   s.append(['GetLinks',             'Crawl',     'Url',                       'Return list of links found on page. Adds rows.', ''])
   s.append(['H1',                   'Crawl',     'Url',                       'Return contents of H1 tag.', ''])

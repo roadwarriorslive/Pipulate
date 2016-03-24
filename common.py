@@ -1432,6 +1432,10 @@ def path(url):
   else:
     return None
 
+def fullurl(hostname, path):
+  if hostname and path:
+    return "http://%s%s" % (hostname, path)
+
 def apex(url):
   """Usually returns the apex or registered domain, given a URL."""
   from urlparse import urlparse
