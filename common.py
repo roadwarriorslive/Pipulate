@@ -242,6 +242,21 @@ def crawl(linksto, depth='0'):
     else:
       return "can't reach"
 
+def linklist(url):
+  """Return a JSON list of all on-domain links on the page."""
+  apexdom = apex(url)
+  import lxml.html
+  ro = requests.get(url, timeout=5)
+  doc = lxml.html.fromstring(ro.text)
+  doc.make_links_absolute(url)
+  somelinks = doc.xpath('/html/body//a/@href')
+  plinks = set()
+  for alink in somelinks:
+    if urlparse.urlparse(alink)[1][-len(apexdom):] == apexdom:
+      plinks.add(alink)
+  plinks = list(plinks)
+  return plinks
+
 def getlinks(url):
   """Grab HTML from a URL, parse links and add a row per link to spreadsheet."""
   fcols = ['Depth', 'Archive', 'Title', 'Description', 'H1', 'H2', 'ExtractKeywords', 'TopKeyword', 'SERPs', 'Positions', 'Position', 'TopURL']
@@ -267,6 +282,26 @@ def getlinks(url):
   linkslist = zip(links,['1']*y,q,q,q,q,q,q,q)
   InsertRows(globs.sheet, linkslist, 2)
   return "0"
+
+def kicktire(linklist):
+  try:
+    linklist = eval(linklist)
+    #return linklist[0]
+    for alink in linklist:
+      if 'tech' in alink:
+        return alink
+    for alink in linklist:
+      if 'business' in alink:
+        return alink
+    return '-'
+    #for alink in linklist:
+    #  if 'tech' in lower(alink):
+    #    return alink
+    #  elif 'busi' in lower(alink):
+    #    return alink
+    #return '-'
+  except:
+    pass
 
 #   ___                         _ ____   ___  _   _      _    ____ ___     
 #  / _ \ _ __   ___ _ __       | / ___| / _ \| \ | |    / \  |  _ \_ _|___ 
@@ -300,6 +335,17 @@ def pins(url):
 #                                                                      
 # And now what you've all been waiting for! If you write a Python function that
 # just works stand-alone elsewhere, simply paste it here to extend Pipulate.
+
+def referrerkeyword(referrer):
+  pattern = 'q=(?P<scrape>.*?)(&|$)'
+  match = re.search(pattern, referrer, re.S | re.I)
+  if match:
+    if "scrape" in match.groupdict().keys():
+      keyword = match.group("scrape")
+      keyword = keyword.replace('+', ' ')
+      return keyword
+  else:
+    return None
 
 def extractkeywords(url):
   import rake, operator, re
@@ -1363,6 +1409,11 @@ def InsertRows(onesheet, listoflists, lastrowused=''):
   if stop:
     Stop()
   return
+
+def hostname(url):
+  from urlparse import urlparse
+  if url:
+    return urlparse(url).hostname
 
 def apex(url):
   """Usually returns the apex or registered domain, given a URL."""
