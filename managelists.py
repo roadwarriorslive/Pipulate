@@ -27,6 +27,7 @@ def documentation():
   s.append(['H5',                   'Crawl',     'Url',                       'Return contents of H5 tag.', ''])
   s.append(['H6',                   'Crawl',     'Url',                       'Return contents of H6 tag.', ''])
   s.append(['Headlines',            'Crawl',     'Url',                       'Return all headlines from the page, stuffed and stacked in a single cell.', ''])
+  s.append(['Hostname',             'Url',       'Url',                       'Return hostname (subdomain, apex and TLD without protocol)', ''])
   s.append(['Instagram_Followers',  'Social',    'Instagram_Name',            'Return Instagram Followers count.', ''])
   s.append(['JsonApi',              'Generic',   'Endpoint, Url, Jkey',       "Return response code from any JSON API that doesn't require login.", ''])
   s.append(['Likes',                'Facebook',  'Url',                       'Return Facebook likes for given URL.', ''])

@@ -1413,7 +1413,13 @@ def InsertRows(onesheet, listoflists, lastrowused=''):
 def hostname(url):
   from urlparse import urlparse
   if url:
-    return urlparse(url).hostname
+    if '//' in url:
+      return urlparse(url).hostname
+    else:
+      url = 'http://' + url
+      return urlparse(url).hostname
+  else:
+    return None
 
 def apex(url):
   """Usually returns the apex or registered domain, given a URL."""
