@@ -361,25 +361,30 @@ def extractkeywords(url):
   #newtxt = "%s %s %s %s" % (urlkws, title, description, scrubbed)
   newtxt = newtxt.replace('\n', ' ')
   newtxt = re.sub('<[^<]+?>', ' ', newtxt)
+  newtxt = re.sub('%.*?%', ' ', newtxt)
   newtxt = re.sub(' +',' ', newtxt)
   rake_object = rake.Rake("/var/pipulate/SmartStoplist.txt", 3, 4, 2)
   keywords = rake_object.run(newtxt)
-  stackum = ''
+  tuplist = []
   for keyword in keywords:
     kw = keyword[0]
     candidate = kw.split()
     if len(candidate) > 1:
       if kw.replace(' ', '') != brandfilter.replace(' ', ''):
-        stackum += keyword[0] + '\n'
-  if stackum:
-    return stackum
+        #tuplist.append((str(candidate[0]), round(candidate[1], 1)))
+        try:
+          tuplist.append((str(keyword[0]), round(keyword[1], 2)))
+        except:
+          pass
+  if tuplist:
+    return tuplist
   else:
     return None
 
 def topkeyword(extractkeywords):
   try:
-    kwlist = extractkeywords.split('\n')
-    return kwlist[0]
+    tuplist = eval(extractkeywords)
+    return tuplist[0]
   except:
     return None
 
@@ -1502,4 +1507,3 @@ def datestamp():
   now = datetime.datetime.now()
   now = now.strftime("%B %d, %Y")
   return now
-

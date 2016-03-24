@@ -27,11 +27,9 @@
 # THE PIPULATE TO-DO LIST:
 - Get rid of annoying timeouts making you log back in, and potentially interrupting jobs!
 - Get rid of the stormy weather messaging, and just figure out how to do exponential back-off (never stop on API hiccups)
-
 - Switch login technique to OAuth-persistent (offline app)
-
 - Port to Python 3
-
+- Incorporate Splash or Mechanize for headless browsing.
 - nginx load balancer on Wable network (or something node?)
 - Break off 2 Rackspace pipulate instances
 - Dyamically importing user functions
@@ -1450,9 +1448,17 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                         #
                         try:
                           tastereturn = eval(evalme)
-                        except:
+                        except Exception as e:
+                          errortype, errormessage, traceback = sys.exc_info()
+                          errortype = errortype.__name__
+                          fname = os.path.split(traceback.tb_frame.f_code.co_filename)[1]
+                          lineno = traceback.tb_lineno
+                          out("errortype: %s" % errortype)
+                          out("errormessage: %s" % errormessage)
+                          out("traceback: %s" % traceback)
+                          out("Exception: %s" % Exception)
                           yield "Problem in function", "", "", ""
-                          #Stop() #                                            <-- This is where you could keep things running
+                          Stop() #                                            <-- This is where you could keep things running
                         if type(tastereturn) == tuple:
                           newrow[coldex] = tastereturn[0]
                           if len(tastereturn) > 1:
@@ -2382,8 +2388,8 @@ def repipulate():
       time.sleep(delay*(x-1))
     for yieldme in Pipulate(label="?-Replacement phase starting: pass #%s of %s..." % (x, retries)):
       if yieldme == ("stop", "", "", ""):
-        #raise SystemExit
-        pass
+        raise SystemExit
+        #pass
       yield yieldme
     if x != retries:
       yme = 'Pausing <span class="countdown">%s</span> seconds before pass #%s of %s.' % (delay*x, x+1, retries)
