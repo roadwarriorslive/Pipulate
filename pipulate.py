@@ -25,6 +25,7 @@
 
 
 # THE PIPULATE TO-DO LIST:
+- Support this library https://github.com/google/oauth2client
 - Get rid of annoying timeouts making you log back in, and potentially interrupting jobs!
 - Get rid of the stormy weather messaging, and just figure out how to do exponential back-off (never stop on API hiccups)
 - Switch login technique to OAuth-persistent (offline app)
