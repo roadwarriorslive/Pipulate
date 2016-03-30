@@ -337,12 +337,13 @@ def pins(url):
 # just works stand-alone elsewhere, simply paste it here to extend Pipulate.
 
 def referrerkeyword(referrer):
+  from urllib import unquote_plus as unquote
   pattern = 'q=(?P<scrape>.*?)(&|$)'
   match = re.search(pattern, referrer, re.S | re.I)
   if match:
     if "scrape" in match.groupdict().keys():
       keyword = match.group("scrape")
-      keyword = keyword.replace('+', ' ')
+      keyword = unquote(keyword)
       return keyword
   else:
     return None

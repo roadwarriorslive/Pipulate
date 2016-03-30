@@ -25,21 +25,22 @@
 
 
 # THE PIPULATE TO-DO LIST:
-- Support this library https://github.com/google/oauth2client
+- Google Analytics API
+- Google Search Console API
+- Support this library? https://github.com/google/oauth2client
 - Get rid of annoying timeouts making you log back in, and potentially interrupting jobs!
 - Get rid of the stormy weather messaging, and just figure out how to do exponential back-off (never stop on API hiccups)
 - Switch login technique to OAuth-persistent (offline app)
 - Port to Python 3
+- Support yield from and decorators
 - Incorporate Splash or Mechanize for headless browsing.
 - nginx load balancer on Wable network (or something node?)
 - Break off 2 Rackspace pipulate instances
 - Dyamically importing user functions
 - Email Support
-- Support yield from and decorators
 - Consider forking threads that don't stream I/O to browser
 - Also support https://cse.google.com/cse/ and main UI scraping for serps
 - Accessing and saving-local Google Webmaster Tools data.
-- Google Analytics API
 - Saving Google search results (both for SERPS and non-SERPS purposes)
 - Calculate relative "difficulty" scores among fixed data sets
 
@@ -1646,7 +1647,8 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                 yield badtuple
                 yield spinerr
                 yield unlock
-              raise StopIteration
+              # raise StopIteration
+              # !!!
           elif onerow.count('') == len(onerow):
             blankrows += 1
             if blankrows > 1:

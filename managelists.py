@@ -44,6 +44,7 @@ def documentation():
   s.append(['Positions',            'Serps',     'Keyword, (Positions)',      'Return all the SERP positions as easily readable JSON for a given keyword.', ''])
   s.append(['PreCrawl',             'Crawl',     'Url',                       'Make one row per link found on url, setting stage for Crawl.', ''])
   s.append(['Redirect_Chain',       'Crawl',     'Url',                       'Not yet implemented', ''])
+  s.append(['ReferrerKeyword',      'Crawl',     'Url',                       "Return a the keyword from an http referrer request variable", ''])
   s.append(['RegEx',                'Crawl',     'Text, Pattern',             'Return matched group named (?P<scrape>blah) given text and pattern.', ''])
   s.append(['Response',             'Crawl',     'Url',                       'Return http response code from fetching given URL.', ''])
   s.append(['RushDifficulty',       'Keyword',   'Keyword',                   'Return SEMRush Keyword Difficulty, batched. Processes 50 at a time. Only first question mark required.', ''])
