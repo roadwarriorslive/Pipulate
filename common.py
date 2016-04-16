@@ -358,7 +358,7 @@ def extractkeywords(url):
   title = scraper(html, '//title/text()')
   description = scraper(html, "//meta[translate(@name, 'ABCDEFGHJIKLMNOPQRSTUVWXYZ', 'abcdefghjiklmnopqrstuvwxyz')='description']/@content")
   scrubbed = barebones(html)
-  newtxt = "%s %s %s %s" % (title, description, scrubbed, urlkws)
+  newtxt = "%s %s %s %s %s %s" % (title, title, urlkws, urlkws, description, scrubbed)
   #newtxt = "%s %s %s %s" % (urlkws, title, description, scrubbed)
   newtxt = newtxt.replace('\n', ' ')
   newtxt = re.sub('<[^<]+?>', ' ', newtxt)
