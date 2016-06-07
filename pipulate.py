@@ -292,6 +292,8 @@ def main():
       elif request.method == 'POST':
         needsPipulate = False
       if tasteMe:
+        if '#' in tasteMe:
+          tasteMe = tasteMe[:tasteMe.find('#')]
         gdoc = gsp.open_by_url(tasteMe)
       else:
         out("Attempting to load %s sheet." % globs.NAME)
