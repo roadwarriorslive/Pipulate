@@ -242,6 +242,21 @@ def crawl(linksto, depth='0'):
     else:
       return "can't reach"
 
+def linklist(url):
+  """Return a JSON list of all on-domain links on the page."""
+  apexdom = apex(url)
+  import lxml.html
+  ro = requests.get(url, timeout=5)
+  doc = lxml.html.fromstring(ro.text)
+  doc.make_links_absolute(url)
+  somelinks = doc.xpath('/html/body//a/@href')
+  plinks = set()
+  for alink in somelinks:
+    if urlparse.urlparse(alink)[1][-len(apexdom):] == apexdom:
+      plinks.add(alink)
+  plinks = list(plinks)
+  return plinks
+
 def getlinks(url):
   """Grab HTML from a URL, parse links and add a row per link to spreadsheet."""
   fcols = ['Depth', 'Archive', 'Title', 'Description', 'H1', 'H2', 'ExtractKeywords', 'TopKeyword', 'SERPs', 'Positions', 'Position', 'TopURL']
@@ -267,6 +282,26 @@ def getlinks(url):
   linkslist = zip(links,['1']*y,q,q,q,q,q,q,q)
   InsertRows(globs.sheet, linkslist, 2)
   return "0"
+
+def kicktire(linklist):
+  try:
+    linklist = eval(linklist)
+    #return linklist[0]
+    for alink in linklist:
+      if 'tech' in alink:
+        return alink
+    for alink in linklist:
+      if 'business' in alink:
+        return alink
+    return '-'
+    #for alink in linklist:
+    #  if 'tech' in lower(alink):
+    #    return alink
+    #  elif 'busi' in lower(alink):
+    #    return alink
+    #return '-'
+  except:
+    pass
 
 #   ___                         _ ____   ___  _   _      _    ____ ___     
 #  / _ \ _ __   ___ _ __       | / ___| / _ \| \ | |    / \  |  _ \_ _|___ 
@@ -301,6 +336,18 @@ def pins(url):
 # And now what you've all been waiting for! If you write a Python function that
 # just works stand-alone elsewhere, simply paste it here to extend Pipulate.
 
+def referrerkeyword(referrer):
+  from urllib import unquote_plus as unquote
+  pattern = 'q=(?P<scrape>.*?)(&|$)'
+  match = re.search(pattern, referrer, re.S | re.I)
+  if match:
+    if "scrape" in match.groupdict().keys():
+      keyword = match.group("scrape")
+      keyword = unquote(keyword)
+      return keyword
+  else:
+    return None
+
 def extractkeywords(url):
   import rake, operator, re
   html = gethtml(url)
@@ -311,29 +358,34 @@ def extractkeywords(url):
   title = scraper(html, '//title/text()')
   description = scraper(html, "//meta[translate(@name, 'ABCDEFGHJIKLMNOPQRSTUVWXYZ', 'abcdefghjiklmnopqrstuvwxyz')='description']/@content")
   scrubbed = barebones(html)
-  newtxt = "%s %s %s %s" % (title, description, scrubbed, urlkws)
+  newtxt = "%s %s %s %s %s %s" % (title, title, urlkws, urlkws, description, scrubbed)
   #newtxt = "%s %s %s %s" % (urlkws, title, description, scrubbed)
   newtxt = newtxt.replace('\n', ' ')
   newtxt = re.sub('<[^<]+?>', ' ', newtxt)
+  newtxt = re.sub('%.*?%', ' ', newtxt)
   newtxt = re.sub(' +',' ', newtxt)
   rake_object = rake.Rake("/var/pipulate/SmartStoplist.txt", 3, 4, 2)
   keywords = rake_object.run(newtxt)
-  stackum = ''
+  tuplist = []
   for keyword in keywords:
     kw = keyword[0]
     candidate = kw.split()
     if len(candidate) > 1:
       if kw.replace(' ', '') != brandfilter.replace(' ', ''):
-        stackum += keyword[0] + '\n'
-  if stackum:
-    return stackum
+        #tuplist.append((str(candidate[0]), round(candidate[1], 1)))
+        try:
+          tuplist.append((str(keyword[0]), round(keyword[1], 2)))
+        except:
+          pass
+  if tuplist:
+    return tuplist
   else:
     return None
 
 def topkeyword(extractkeywords):
   try:
-    kwlist = extractkeywords.split('\n')
-    return kwlist[0]
+    tuplist = eval(extractkeywords)
+    return tuplist[0]
   except:
     return None
 
@@ -1364,6 +1416,32 @@ def InsertRows(onesheet, listoflists, lastrowused=''):
     Stop()
   return
 
+def hostname(url):
+  from urlparse import urlparse
+  if url:
+    if '//' in url:
+      return urlparse(url).hostname
+    else:
+      url = 'http://' + url
+      return urlparse(url).hostname
+  else:
+    return None
+
+def path(url):
+  from urlparse import urlparse
+  if url:
+    if '//' in url:
+      return urlparse(url).path
+    else:
+      url = 'http://' + url
+      return urlparse(url).path
+  else:
+    return None
+
+def fullurl(hostname, path):
+  if hostname and path:
+    return "http://%s%s" % (hostname, path)
+
 def apex(url):
   """Usually returns the apex or registered domain, given a URL."""
   from urlparse import urlparse
@@ -1430,4 +1508,3 @@ def datestamp():
   now = datetime.datetime.now()
   now = now.strftime("%B %d, %Y")
   return now
-

@@ -25,19 +25,22 @@
 
 
 # THE PIPULATE TO-DO LIST:
+- Google Analytics API
+- Google Search Console API
+- Support this library? https://github.com/google/oauth2client
 - Get rid of annoying timeouts making you log back in, and potentially interrupting jobs!
 - Get rid of the stormy weather messaging, and just figure out how to do exponential back-off (never stop on API hiccups)
-
-- nginx load balancer on Wable network
+- Switch login technique to OAuth-persistent (offline app)
+- Port to Python 3
+- Support yield from and decorators
+- Incorporate Splash or Mechanize for headless browsing.
+- nginx load balancer on Wable network (or something node?)
 - Break off 2 Rackspace pipulate instances
 - Dyamically importing user functions
 - Email Support
-- Port to Python 3
-- Support yield from and decorators
 - Consider forking threads that don't stream I/O to browser
 - Also support https://cse.google.com/cse/ and main UI scraping for serps
 - Accessing and saving-local Google Webmaster Tools data.
-- Google Analytics API
 - Saving Google search results (both for SERPS and non-SERPS purposes)
 - Calculate relative "difficulty" scores among fixed data sets
 
@@ -289,6 +292,8 @@ def main():
       elif request.method == 'POST':
         needsPipulate = False
       if tasteMe:
+        if '#' in tasteMe:
+          tasteMe = tasteMe[:tasteMe.find('#')]
         gdoc = gsp.open_by_url(tasteMe)
       else:
         out("Attempting to load %s sheet." % globs.NAME)
@@ -1447,7 +1452,15 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                         #
                         try:
                           tastereturn = eval(evalme)
-                        except:
+                        except Exception as e:
+                          errortype, errormessage, traceback = sys.exc_info()
+                          errortype = errortype.__name__
+                          fname = os.path.split(traceback.tb_frame.f_code.co_filename)[1]
+                          lineno = traceback.tb_lineno
+                          out("errortype: %s" % errortype)
+                          out("errormessage: %s" % errormessage)
+                          out("traceback: %s" % traceback)
+                          out("Exception: %s" % Exception)
                           yield "Problem in function", "", "", ""
                           Stop() #                                            <-- This is where you could keep things running
                         if type(tastereturn) == tuple:
@@ -1485,8 +1498,10 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                           yield yme, yme, '', ''
                           yield spinerr
                           yield flush
-                        yield stopit
-                        raise SystemExit
+                        # !!!
+                        #yield stopit
+                        #raise SystemExit
+                        
                         #if globs.WEB:
                         #  yme = 'Problem in %s. Retry #%s of %s in <span class="countdown">%s</span> seconds...' % (collabel, x, retries, delay*x)
                         #  yme2 = 'Problem in %s. Retry #%s of %s...' % (collabel, x, retries)
@@ -1634,7 +1649,8 @@ def Pipulate(preproc='', dockey='', targettab="", token='', label='', determined
                 yield badtuple
                 yield spinerr
                 yield unlock
-              raise StopIteration
+              # raise StopIteration
+              # !!!
           elif onerow.count('') == len(onerow):
             blankrows += 1
             if blankrows > 1:
@@ -2369,7 +2385,7 @@ def prePipulators():
 
 def repipulate():
   """Operation bullet-proofing Pipulate begins!"""
-  retries = 3
+  retries = 1
   delay = 10
   for x in range(1, retries+1):
     out("Pipulate Iteration %s" % x)
@@ -2378,6 +2394,7 @@ def repipulate():
     for yieldme in Pipulate(label="?-Replacement phase starting: pass #%s of %s..." % (x, retries)):
       if yieldme == ("stop", "", "", ""):
         raise SystemExit
+        #pass
       yield yieldme
     if x != retries:
       yme = 'Pausing <span class="countdown">%s</span> seconds before pass #%s of %s.' % (delay*x, x+1, retries)
