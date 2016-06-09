@@ -85,14 +85,17 @@ def gethtml(url):
 def cancel():
   globs.STOP = True
 
-def archive(url):
+def archive(url, text=''):
   '''Return HTML text for given URL. Simple wrapper for gethtml function.'''
   def replacepat(pat, replacement, string):
     import re
     cpat = re.compile(pat, re.S | re.I)
     return cpat.sub(replacement, string) 
   import base64, bz2
-  somehtml = gethtml(url)
+  if text:
+    somehtml = text
+  else:
+    somehtml = gethtml(url)
   if not somehtml:
     return None
   globs.html = somehtml
@@ -555,9 +558,13 @@ def google(keyword=''):
     searchurl = '%s%s' % ('https://www.google.com/search?q=', keyword)
     sleep(16)
     if searchurl:
-      try:
-        return archive(searchurl)
-      except:
+      somehtml = gethtml(searchurl)
+      if somehtml:
+        if 'To continue, please type the characters below' in somehtml:
+          raise SystemExit('CAPTCHA!')
+        else:
+          return archive('', somehtml)
+      else:
         return ''
     else:
       return ''
@@ -565,27 +572,33 @@ def google(keyword=''):
     return ''
 
 def googlextract(google):
-  import base64, bz2, re
-  binary = base64.b64decode(google)
-  html = bz2.decompress(binary)
-  pattern = re.compile(b'<a href=\"/url\?q=(.*?)&')
-  binarylist = re.findall(pattern, html)
-  newlist = [str(x.decode('ascii')) for x in binarylist]
-  return newlist
+  if google:
+    import base64, bz2, re
+    binary = base64.b64decode(google)
+    html = bz2.decompress(binary)
+    pattern = re.compile(b'<a href=\"/url\?q=(.*?)&')
+    binarylist = re.findall(pattern, html)
+    newlist = [str(x.decode('ascii')) for x in binarylist]
+    return newlist
+  else:
+    return ''
 
 def homepagefinder(googlextract):
-  from urlparse import urlparse
-  serps = eval(googlextract)
-  domainlist = [urlparse(x)[1] for x in serps]
-  domainlist = [x for x in domainlist if x != 'en.wikipedia.org']
-  counts = dict()
-  for i in domainlist:
-    counts[i] = counts.get(i, 0) + 1
-  winner = max(counts, key=counts.get)
-  if winner in serps[0]:
-    return serps[0]
+  if googlextract:
+    from urlparse import urlparse
+    serps = eval(googlextract)
+    domainlist = [urlparse(x)[1] for x in serps]
+    domainlist = [x for x in domainlist if x != 'en.wikipedia.org']
+    counts = dict()
+    for i in domainlist:
+      counts[i] = counts.get(i, 0) + 1
+    winner = max(counts, key=counts.get)
+    if winner in serps[0]:
+      return serps[0]
+    else:
+      return "Check"
   else:
-    return "Check"
+    return ''
 
 def serps(keyword='', topkeyword=''):
   """Return non-customized JSON search results for keyword from Google."""
