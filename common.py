@@ -547,13 +547,53 @@ def instagram_followers(instagram_name):
   sendback = regex(url, pattern)
   return sendback
 
+def google(keyword=''):
+  from urllib import quote
+  from time import sleep
+  if keyword:
+    keyword = quote(keyword)
+    searchurl = '%s%s' % ('https://www.google.com/search?q=', keyword)
+    sleep(16)
+    if searchurl:
+      try:
+        return archive(searchurl)
+      except:
+        return ''
+    else:
+      return ''
+  else:
+    return ''
+
+def googlextract(google):
+  import base64, bz2, re
+  binary = base64.b64decode(google)
+  html = bz2.decompress(binary)
+  pattern = re.compile(b'<a href=\"/url\?q=(.*?)&')
+  binarylist = re.findall(pattern, html)
+  newlist = [str(x.decode('ascii')) for x in binarylist]
+  return newlist
+
+def homepagefinder(googlextract):
+  from urlparse import urlparse
+  serps = eval(googlextract)
+  domainlist = [urlparse(x)[1] for x in serps]
+  domainlist = [x for x in domainlist if x != 'en.wikipedia.org']
+  counts = dict()
+  for i in domainlist:
+    counts[i] = counts.get(i, 0) + 1
+  winner = max(counts, key=counts.get)
+  if winner in serps[0]:
+    return serps[0]
+  else:
+    return "Check"
+
 def serps(keyword='', topkeyword=''):
   """Return non-customized JSON search results for keyword from Google."""
   if topkeyword:
     keyword = topkeyword
   elif not keyword:
     return None
-  times = 6
+  times = 1
   api = "http://ajax.googleapis.com/ajax/services/search/web"
   returnme = []
   for start in [8*n for n in range(0,times)]:
