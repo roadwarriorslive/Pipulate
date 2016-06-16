@@ -298,7 +298,7 @@ def getlinks(url):
   InsertRows(globs.sheet, linkslist, 2)
   return "0"
 
-def kicktire(linklist):
+def techfinder(linklist):
   try:
     linklist = eval(linklist)
     #return linklist[0]
