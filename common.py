@@ -247,18 +247,30 @@ def crawl(linksto, depth='0'):
 
 def linklist(url):
   """Return a JSON list of all on-domain links on the page."""
-  apexdom = apex(url)
-  import lxml.html
-  ro = requests.get(url, timeout=5)
-  doc = lxml.html.fromstring(ro.text)
-  doc.make_links_absolute(url)
-  somelinks = doc.xpath('/html/body//a/@href')
-  plinks = set()
-  for alink in somelinks:
-    if urlparse.urlparse(alink)[1][-len(apexdom):] == apexdom:
-      plinks.add(alink)
-  plinks = list(plinks)
-  return plinks
+  try:
+      if url:
+          apexdom = ''
+          if url[:4] != 'http':
+              url = 'http://%s' % url
+          import lxml.html
+          try:
+              ro = requests.get(url, timeout=5)
+          except:
+            return ''
+          apexdom = apex(url)
+          doc = lxml.html.fromstring(ro.text)
+          doc.make_links_absolute(url)
+          somelinks = doc.xpath('/html/body//a/@href')
+          plinks = set()
+          for alink in somelinks:
+            if urlparse.urlparse(alink)[1][-len(apexdom):] == apexdom:
+              plinks.add(alink)
+          plinks = list(plinks)
+          return plinks
+      else:
+          return ''
+  except:
+    return ''
 
 def getlinks(url):
   """Grab HTML from a URL, parse links and add a row per link to spreadsheet."""
@@ -293,9 +305,9 @@ def kicktire(linklist):
     for alink in linklist:
       if 'tech' in alink:
         return alink
-    for alink in linklist:
-      if 'business' in alink:
-        return alink
+    #for alink in linklist:
+    #  if 'business' in alink:
+    #    return alink
     return '-'
     #for alink in linklist:
     #  if 'tech' in lower(alink):
@@ -556,7 +568,7 @@ def google(keyword=''):
   if keyword:
     keyword = quote(keyword)
     searchurl = '%s%s' % ('https://www.google.com/search?q=', keyword)
-    sleep(16)
+    sleep(3)
     if searchurl:
       somehtml = gethtml(searchurl)
       if somehtml:
