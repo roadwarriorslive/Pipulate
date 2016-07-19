@@ -1,4 +1,6 @@
-.DS_Store
-.ipynb_checkpoints/
-oauth.dat
 *.csv
+myauth.py
+oauth.dat
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
