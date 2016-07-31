@@ -112,8 +112,8 @@ coding should feel like -- basically what you're doing when you're talking or
 writing English (or whatever is your native spoken language), for that is
 coding too. You are ***ENCODING*** your thoughts and ideas into... language!
 Surprise, you're already a coder! That's your reward for getting this far, in
-this long rant of a README. Surprise! You've begun reading my "interactively,
-learn Python" book, in which I teach you to be an SEO.
+this long rant of a README. Python is just like English in this way. It will
+begin to roll off your tongue and fingers, naturally.
 
 And now to tick off the Java compsci one-right-way because I read the design
 patterns book in school crowd. Many of today's Java folks are this generation
