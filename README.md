@@ -99,10 +99,10 @@ against JavaScript, but I'm ALSO betting on Python.
 But Python needs that boost in the arm. Done! You can take the IPython out of
 IPython Notebook, but we all know what the Pi in Raspberry Pi stands for. No
 amount of revisionism can erase Python -- and I smile at the thought of all
-that Ruby railing and JavaScript prototype object rattling that such fightin
-words probably invokes. But Ruby has Rails and JavaScript has the browser. What
-does poor ol' Python have, except the fact that the entire Google empire was
-built on it's shoulders?
+that Ruby railing and JavaScript prototype rattling that such fightin words
+probably invokes. But Ruby has Rails and JavaScript has the browser. What does
+poor ol' Python have, except the fact that the entire Google empire was built
+on it's shoulders?
 
 No, Python's game changer is not Django or even yet another framework. It's
 because it's Jupyter Notebook in its ability to let you fully learn and see and
