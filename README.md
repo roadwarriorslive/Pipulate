@@ -89,7 +89,7 @@ loosely-typed event-driven concurrent design that runs quite nicely on the
 server as well, thanks to node.js. You would be the "full web stack" crowd -- a
 euphemism for "I also dabble in node". All legit. All valid. All inferior to
 learning Python through Jupyter Notebook. This is because... FOSS and science.
-Because Fernando Perez make a MatLab Notebook killer on Python first, and
+Because Fernando Perez made a MatLab Notebook killer on Python first, and
 everyone's been jumping on that bandwagon ever since. Access to 2-billion users
 because JavaScript is the default language of browsers isn't enough to elevate
 JavaScript over something that already exists as a better native spoken machine
