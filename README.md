@@ -18,12 +18,13 @@ working the biz, here in New York -- even though I jumped from in-house (where
 all the interesting work is) to agency-side (where all the PowerPoints are). I
 was the SEO for Apple, Kraft, JCPenney, and was even at the top of the Empire
 State Building as the SEO for SAP for awhile, tackling some of the industry's
-biggest challenges. My SEO Kung Fu was good, but this was (and is always) an
+biggest challenges. My SEO Kung Fu has always been good, but SEO is always an
 industry in flux. Assume nothing. Be proactive. Nobody should be waiting for
 RankBrain to gradually get smarter and stop rewarding our sites by 100 1%
 increments. We should be getting out ahead of Google, and change the
 cat-and-mouse game into a human domesticating the cat game. Us nextgen SEOs are
-raising Google like a child and need to start thinking about it that way.
+interacting with Google as it grows like a child, and need to start thinking
+about it that way.
 
 As a father of a 5 year-old, I am beginning to recognize the process of
 watching an thing gradually develop, and in-turn become something that itself
