@@ -4,49 +4,113 @@ Now you have a machine gun ho ho ho. If you know that quote and are in this
 biz, then hello old-timer. If not, then welcome millennial newb! I promise you
 boring coding industry buzzword jockeying for an awesome future-talk which if
 you survive the boredom, just may be synaptically rewiring. I'm the
-silver-tongue snake-oil salesmen (I **wish** I could cite that quote) who made
-the still-going-strong HitTail SEO tool in 2006, and SEO Notebook is my latest
-stay-relevant-ware that I'm peddling for some audience and Github street cred.
+silver-tongue snake-oil salesmen (I ***wish*** I could cite that quote) who
+made the still-going-strong HitTail SEO tool in 2006, and SEO Notebook is my
+latest stay-relevant-ware that I'm peddling for some audience and Github street
+cred.  As this README.md probably already indicates, this is something a little
+bit different. So if you're into SEO, learning Python, and a burgeoning nextgen
+SEO community, then forge on!
 
-It's 10 years later, and I've done a number of interesting things working the
-biz, here in New York. I was even at the top of the Empire State Building as
-the primary SEO for SAP there for a few months. My SEO Kung Fu was good, but
-this was an industry in flux. Nobody should be waiting for RankBrain to
-gradually get smarter and stop rewarding our sites by 100 1% increments. We
-should be getting out ahead of Google, and change the cat-and-mouse game into a
-human domesticating the cat game. Us nextgen SEOs are raising Google like a
-child. So, let's get programming!
+It's 10 years after HitTail, and I've done a number of interesting things
+working the biz, here in New York -- even though I jumped from in-house (where
+all the interesting work is) to agency-side (where all the PowerPoints are). I
+was the SEO for Apple, Kraft, JCPenney, and was even at the top of the Empire
+State Building as the SEO for SAP for awhile, tackling some of the industry's
+biggest challenges. My SEO Kung Fu was good, but this was (and is always) an
+industry in flux. Assume nothing. Be proactive. Nobody should be waiting for
+RankBrain to gradually get smarter and stop rewarding our sites by 100 1%
+increments. We should be getting out ahead of Google, and change the
+cat-and-mouse game into a human domesticating the cat game. Us nextgen SEOs are
+raising Google like a child and need to start thinking about it that way. 
 
-But where to start? Many of you Macolites are going to think Ruby, because it's
+As a father of a 5 year-old, I am beginning to recognize the process of
+watching an thing gradually develop, and in-turn become something that itself
+can begin to recognize a process. Watching a child grow up is precisely one
+such meta-experience, which I do believe is exactly what we're seeing with
+Google. Now, Google has machine learning machine guns like TensorFlow ho ho ho.
+This is not yet-another-skynet-warning (YASW?) but rather, stating the obvious.
+
+Proof? Just watch your customized Google Auto-Suggest (the part that fills in
+under your dropdown menu while you type) get smarter and smarter, combining
+recently used terms with new terms, simply because the data is there to support
+that it may be a good idea! Auto Suggest is going to be a clear stage on which
+you can watch Google's IQ grow. This is all obviously human-aided, but Google's
+learning and we should all be preparing for a world where, rather than hunting
+you down, certain classes of robots should instead should instead be thought of
+as something you can't trick... not very well, and not for long.
+
+Somehow, I feel Google's going to grow smarter from a RankBrain perspective at
+a much faster rate than a human being grows smarter growing up. We're all just
+given 100 years on this planet, and such. Google's part of the first generation
+of Machine Learning super-systems that's going to be given much, much longer
+than that, so long as it remains successful as a public company. It may never
+become SkyNet, but it will pass the Turning Test sometime soon. Batteries and
+miniaturization to make it something we all can have in our houses serving us
+is a much larger challenge. Though, we should kinda sorta be preparing for that
+too, with our Raspberry Pi's and autolocomitive telepresence projects (my own
+version coming soon).
+
+Our projects should really be just that interesting, and coming to us naturally
+as we thing, and implemented naturally as we can express ourselves in our
+historically spoken and written languages that we learn for communicating to
+other human beings. Human-to-machine languages should be no less interesting or
+expressive than English, and should be no less pleasurable and beautiful than
+finely crafted poetry, and should be no more limiting than then best that
+today's state of technology and recorded history has ever made possible. We are
+in a new FOSS society (free and open source software) where the best ideas
+eventually and ultimately rise to the top (once they penetrate a layer of ego
+and generational curmudgeondgy). So, it's time to get coding and speaking to
+machines as naturally as I'm speaking to you in English.
+
+Python is that language. The Anaconda install is your starting point. I'll make
+a case briefly. Many of you Macolites are going to think Ruby, because it's
 what Rails is on, and ROR has enjoyed a certain degree of cool-kids notoriety
 due to Ruby being shipped with Macs, and Rails being the first joyful framework
 to catch the fancy of the hordes of ASP and PHP refuges in the early zero's.
-Others will figure JavaScript is the one language to rule them all, thanks to
-a loosely-typed even-driven concurrent design that runs quite nicely on the
+Others will figure JavaScript is the one language to rule them all, thanks to a
+loosely-typed even-driven concurrent design that runs quite nicely on the
 server as well, thanks to node.js. You would be the "full web stack" crowd -- a
 euphemism for "I also dabble in node". All legit. All valid. All inferior to
-learning Python through Jupyter Notebook.
+learning Python through Jupyter Notebook. This is because... FOSS and science.
+Because Fernando Perez make a MatLab Notebook killer on Python first, and
+everyone's been jumping on that bandwagon ever since.
+
+Because Python's version of a Ruby on Rails-like game changer is not Django or
+yet another framework. It's because it's Jupyter Notebook in its ability to let
+you fully learn and see and appreciate Python itself as the framework it is.
+Python is precisely the level of abstraction you should be dealing at in order
+to make coding feel like what coding should feel like -- basically what you're
+doing when you're talking or writing English (or whatever is your native spoken
+language), for that is coding too. You are ***ENCODING*** your thoughts and
+ideas into... language! Surprise, you're already a coder! That's your reward
+for getting this far, in this long rant of a README. Surprise! You've begun
+reading my "interactively, learn Python" book, in which I teach you to be an
+SEO. And now to tick off a few people.
 
 You Java-folks, there's nothing I can do for you. You are today's generation of
 BASIC'ally myopic static-typed ludites that will never open your mind to a
-language that discourages getters and setters. Pythonic code can be brief and
-beautiful, and fully legitimate from a compsci standpoint, because of use-case
-appropriateness. We do not need to use the define-everything-compulsively
-mentality required for something that you know will grow to become millions of
-lines of code interacted with by hundreds of developers, such as sees to be the
-assumption of a language that makes you public static void the most basic hello
-world's. Just use Python. It's a language by a very smart individual trying to
-make solving impressively complex tasks easy for YOU -- the newb learner.
-Python is anti-elitist in nature.
+language that discourages getters and setters. Their way is right, and theirs
+is the direct word of the very fine Design Patterns book, which itself is
+correct from its point of view, but is not the be-all/end-all of how people
+should express themselves through code on this planet.
 
-So why not kick off a Github repo with dem's fightin' words? Sure, it's
-troll-bait and flame tinder. But this is Jupyter Notebook, damn it! The
+Pythonic code can be brief and beautiful, and fully legitimate from a
+java==compsci standpoint, because of use-case appropriateness. We do not need
+to use the define-everything-compulsively mentality required for something that
+you know will grow to become millions of lines of code interacted with by
+hundreds of developers, such as sees to be the assumption of a language that
+makes you public static void the most basic hello world's. Just use Python.
+It's a language by a very smart individual trying to make solving impressively
+complex tasks easy for YOU -- the newb learner. Python is anti-elitist in
+nature.
+
 Scientists are now onboard with this Python thing -- no... they were already
-onboard. Now, they're just opening the door and saying "Hey, the water's nice
-and comfortable over here... hop on by!" with such innovative solutions to
-sharing code-execution-environments as Anaconda by Continuum.io, which I at
-first dismissed as just a bunch of pre-installs that non-Linux users had to
-suffer (you could always run a VM on your Mac/Windows, which I did). And then I
+onboard long ago with a rich 25 year history. What's different is that now
+they're just opening the door and saying "Hey, the water's nice and comfortable
+over here... hop on by!" with such innovative solutions to sharing
+code-execution-environments as Anaconda by Continuum.io, which I at first
+dismissed as just a bunch of pre-installs that non-Linux users had to suffer
+(you could always run a VM on your Mac/Windows, which I did). And then I
 realized how nice it was when your encapsulation layer was a web-based IDE.
 Wow! Throw in Github-friendliness and the ability to stream output to the user
 through the duration of sometimes long-running jobs... and dead-simple multiple
@@ -100,3 +164,11 @@ in the series is a strong jumping-on point for this particular bandwagon.
 
 Apologies for those who would prefer a README to be of a more concrete how-to
 nature. That, like so many things in this project, is coming soon.
+
+-- Mike Levin
+
+Things to do here:
+
+- Add all my links to follow this project's development on YouTube and such
+- Actually use this system to do various clever things - show use-cases
+- "Can" the using of this system, probably an examples sub-folder
