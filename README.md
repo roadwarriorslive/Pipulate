@@ -24,7 +24,7 @@ industry in flux. Assume nothing. Be proactive. Nobody should be waiting for
 RankBrain to gradually get smarter and stop rewarding our sites by 100 1%
 increments. We should be getting out ahead of Google, and change the
 cat-and-mouse game into a human domesticating the cat game. Us nextgen SEOs are
-interacting with Google as it grows like a child, and need to start thinking
+interacting with Google as it grows like a child, and we need to start thinking
 about it that way.
 
 As a father of a 5 year-old, I am beginning to recognize the process of
