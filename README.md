@@ -109,7 +109,7 @@ writing English (or whatever is your native spoken language), for that is
 coding too. You are ***ENCODING*** your thoughts and ideas into... language!
 Surprise, you're already a coder! That's your reward for getting this far, in
 this long rant of a README. Surprise! You've begun reading my "interactively,
-learn Python" book, in which I teach you to be an SEO. 
+learn Python" book, in which I teach you to be an SEO.
 
 And now to tick off the Java compsci one-right-way because I read the design
 patterns book in school crowd. Many of today's Java folks are this generation
@@ -128,21 +128,24 @@ hundreds of developers, such as sees to be the assumption of a language that
 makes you public static void the most basic hello world's. Just use Python.
 It's a language by a very smart individual trying to make solving impressively
 complex tasks easy for YOU -- the newb learner. Python is anti-elitist in
-nature.
+nature. And wouldn't you Java folks like to leave behind the curly brackets and
+overhead overkill dot-dot-dot-everything while still having static typed
+variables? Try Python 3.x and MyPy. You might be pleasantly surprised how nice
+codebases become on large projects with the best of both worlds.
 
-Scientists are now onboard with this Python thing -- no... they were already
-onboard long ago with a rich 25 year history. What's different is that now
-they're just opening the door and saying "Hey, the water's nice and comfortable
-over here... hop on by!" with such innovative solutions to sharing
-code-execution-environments as Anaconda by Continuum.io, which I at first
-dismissed as just a bunch of pre-installs that non-Linux users had to suffer
-(you could always run a VM on your Mac/Windows, which I did). And then I
-realized how nice it was when your encapsulation layer was a web-based IDE.
-Wow! Throw in Github-friendliness and the ability to stream output to the user
-through the duration of sometimes long-running jobs... and dead-simple multiple
-Python VM kernel maintenance? Wow, out goes my Pipulate UI work, and in comes
-Jupyter Notebook... uh... SEO Notebook... and probably, SEO Lab, that that's a
-story for another time.
+And maybe most recently significant is that the Scientists are now onboard with
+this Python thing -- no... they were already onboard long ago with a rich 25
+year history. What's different is that now they're just opening the door and
+saying "Hey, the water's nice and comfortable over here... hop on by!" with
+such innovative solutions to sharing code-execution-environments as Anaconda by
+Continuum.io, which I at first dismissed as just a bunch of pre-installs that
+non-Linux users had to suffer (you could always run a VM on your Mac/Windows,
+which I did). And then I realized how nice it was when your encapsulation layer
+was a web-based IDE. Wow! Throw in Github-friendliness and the ability to
+stream output to the user through the duration of sometimes long-running
+jobs... and dead-simple multiple Python VM kernel maintenance? Wow, out goes my
+Pipulate UI work, and in comes Jupyter Notebook... uh... SEO Notebook... and
+probably, SEO Lab, that that's a story for another time.
 
 So, this project exists basically to sharpen my SEO-blade again, as I switch to
 a new master, yet again. I am much more effective in Samurai mode, because
@@ -152,7 +155,7 @@ paper-work you need to do -- principally, both go WAY UP! I'm a draw-a-paycheck
 sort of guy, but I'm not satisfied with static situations. Things must be
 dynamic! I must be able to express myself creatively, and to great effect. I
 feel the need to move mountains, and be recognized for carrying out monumental
-and communally useful tasks. 
+and communally useful tasks.
 
 Those are the accolades normally going to folks like Linus and Guido. More
 recently, I've been coming to appreciate those to whom you must connect a last
