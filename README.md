@@ -109,15 +109,16 @@ writing English (or whatever is your native spoken language), for that is
 coding too. You are ***ENCODING*** your thoughts and ideas into... language!
 Surprise, you're already a coder! That's your reward for getting this far, in
 this long rant of a README. Surprise! You've begun reading my "interactively,
-learn Python" book, in which I teach you to be an SEO. And now to tick off a
-few people.
+learn Python" book, in which I teach you to be an SEO. 
 
-You Java-folks, there's nothing I can do for you. You are today's generation of
-BASIC'ally myopic static-typed ludites that will never open your mind to a
-language that discourages getters and setters. Their way is right, and theirs
-is the direct word of the very fine Design Patterns book, which itself is
-correct from its point of view, but is not the be-all/end-all of how people
-should express themselves through code on this planet.
+And now to tick off the Java compsci one-right-way because I read the design
+patterns book in school crowd. Many of today's Java folks are this generation
+of <a target="_blank" href="http://www.cs.utexas.edu/users/EWD/transcriptions/EWD04xx/EWD498.html">BASIC</a>ally
+myopic static-typed ludites that will never open your mind to a language that
+discourages getters and setters.  Their way is right, and theirs is the direct
+word of the very fine Design Patterns book, which itself is correct from its
+point of view, but is not the be-all/end-all of how people should express
+themselves through code on this planet.
 
 Pythonic code can be brief and beautiful, and fully legitimate from a
 java==compsci standpoint, because of use-case appropriateness. We do not need
