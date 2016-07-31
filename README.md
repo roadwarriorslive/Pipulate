@@ -141,8 +141,9 @@ such innovative solutions to sharing code-execution-environments as Anaconda by
 Continuum.io, which I at first dismissed as just a bunch of pre-installs that
 non-Linux users had to suffer (you could always run a VM on your Mac/Windows,
 which I did). And then I realized how nice it was when your encapsulation layer
-was a web-based IDE. Wow! Throw in Github-friendliness and the ability to
-stream output to the user through the duration of sometimes long-running
+was a web-based IDE (and NOT a whole Linux machine VM) that unlocked all the
+power of your local machine. Wow! Throw in Github-friendliness and the ability
+to stream output to the user through the duration of sometimes long-running
 jobs... and dead-simple multiple Python VM kernel maintenance? Wow, out goes my
 Pipulate UI work, and in comes Jupyter Notebook... uh... SEO Notebook... and
 probably, SEO Lab, that that's a story for another time.
