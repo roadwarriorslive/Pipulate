@@ -21,14 +21,18 @@ industry in flux. Assume nothing. Be proactive. Nobody should be waiting for
 RankBrain to gradually get smarter and stop rewarding our sites by 100 1%
 increments. We should be getting out ahead of Google, and change the
 cat-and-mouse game into a human domesticating the cat game. Us nextgen SEOs are
-raising Google like a child and need to start thinking about it that way. 
+raising Google like a child and need to start thinking about it that way.
 
 As a father of a 5 year-old, I am beginning to recognize the process of
 watching an thing gradually develop, and in-turn become something that itself
-can begin to recognize a process. Watching a child grow up is precisely one
-such meta-experience, which I do believe is exactly what we're seeing with
-Google. Now, Google has machine learning machine guns like TensorFlow ho ho ho.
-This is not yet-another-skynet-warning (YASW?) but rather, stating the obvious.
+can begin to recognize a process. This is what's happening with Google, and
+I'll be carrying out my own Machine Learning education here, starting with this
+Github repo. Machine Learning techniques will get blended in with SEO Notebook
+if even just for familiarity's sake, because Google sure is. There very culture
+is gradually being re-written around ML. And as they do, their own secret
+weapons improve -- eventually, exponentially.  Now, Google has machine learning
+machine guns like TensorFlow ho ho ho. This is not yet-another-skynet-warning
+(YASW?) but rather, stating the obvious.
 
 Proof? Just watch your customized Google Auto-Suggest (the part that fills in
 under your dropdown menu while you type) get smarter and smarter, combining
@@ -39,19 +43,28 @@ learning and we should all be preparing for a world where, rather than hunting
 you down, certain classes of robots should instead should instead be thought of
 as something you can't trick... not very well, and not for long.
 
-Somehow, I feel Google's going to grow smarter from a RankBrain perspective at
-a much faster rate than a human being grows smarter growing up. We're all just
-given 100 years on this planet, and such. Google's part of the first generation
-of Machine Learning super-systems that's going to be given much, much longer
-than that, so long as it remains successful as a public company. It may never
-become SkyNet, but it will pass the Turning Test sometime soon. Batteries and
-miniaturization to make it something we all can have in our houses serving us
-is a much larger challenge. Though, we should kinda sorta be preparing for that
-too, with our Raspberry Pi's and autolocomitive telepresence projects (my own
-version coming soon).
+I feel that Google is on the verge of growing smarter from a RankBrain
+perspective at a much faster rate than a human being grows smarter growing up.
+We're all just given 100 years on this planet, and such. Google's part of the
+first generation of Machine Learning super-systems that's going to be given
+much, much longer than that, so long as it remains successful as a public
+company. We in the field don't have to really concern ourselves with THAT
+long-term (though, I certainly am as a father), but we should understand the
+compelling reason behind these steps along the way, as things like the Panda
+algorithm tweaks that we all fell in love with as the new Google Dance went
+away, to replace by "Phantom". Well, there are no phantoms. It's just better
+systems.
+
+Google's AI stuff may never evolve into SkyNet, but it will pass the Turning
+Test sometime soon; you can be assured of that. Batteries and miniaturization
+to make it something we all can have in our houses serving us like Ex Machina
+housekepers is a much larger challenge. Though, we should kinda sorta be
+preparing for that too, with our Raspberry Pi's and autolocomitive telepresence
+projects (my own version coming soon). Baby-steps! Lucrative. Relevant. Fun.
+These are the attributes of my projects and my approach.
 
 Our projects should really be just that interesting, and coming to us naturally
-as we thing, and implemented naturally as we can express ourselves in our
+as we think, and implemented naturally as we can express ourselves in our
 historically spoken and written languages that we learn for communicating to
 other human beings. Human-to-machine languages should be no less interesting or
 expressive than English, and should be no less pleasurable and beautiful than
