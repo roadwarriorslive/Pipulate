@@ -115,9 +115,9 @@ Surprise, you're already a coder! That's your reward for getting this far, in
 this long rant of a README. Python is just like English in this way. It will
 begin to roll off your tongue and fingers, naturally.
 
-And now to tick off the Java compsci one-right-way because I read the design
-patterns book in school crowd. Many of today's Java folks are this generation
-of <a href="http://www.cs.utexas.edu/users/EWD/transcriptions/EWD04xx/EWD498.html">BASIC</a>ally
+And now to tick off the Java compsci only-one-right-way contingent  because I
+read the design patterns book in school crowd. Many of today's Java folks are
+this generation of <a href="http://www.cs.utexas.edu/users/EWD/transcriptions/EWD04xx/EWD498.html">BASIC</a>ally
 myopic static-typed ludites that will never open your mind to a language that
 discourages getters and setters.  Their way is right, and theirs is the direct
 word of the very fine Design Patterns book, which itself is correct from its
