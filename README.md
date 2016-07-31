@@ -28,8 +28,8 @@ interacting with Google as it grows like a child, and we need to start thinking
 about it that way.
 
 As a father of a 5 year-old, I am beginning to recognize the process of
-watching an thing gradually develop, and in-turn become something that itself
-can begin to recognize a process. This is what's happening with Google, and
+watching a thing gradually develop, and in-turn become something that itself
+can begin to recognize  processes. This is what's happening with Google, and
 I'll be carrying out my own Machine Learning education here, starting with this
 Github repo. Machine Learning techniques will get blended in with SEO Notebook
 if even just for familiarity's sake, because Google sure is. Their very culture
