@@ -86,19 +86,31 @@ server as well, thanks to node.js. You would be the "full web stack" crowd -- a
 euphemism for "I also dabble in node". All legit. All valid. All inferior to
 learning Python through Jupyter Notebook. This is because... FOSS and science.
 Because Fernando Perez make a MatLab Notebook killer on Python first, and
-everyone's been jumping on that bandwagon ever since.
+everyone's been jumping on that bandwagon ever since. Access to 2-billion users
+because JavaScript is the default language of browsers isn't enough to elevate
+JavaScript over something that already exists as a better native spoken machine
+language and is already in the position to put up a good fight. I wouldn't bet
+against JavaScript, but I'm ALSO betting on Python.
 
-Because Python's version of a Ruby on Rails-like game changer is not Django or
-yet another framework. It's because it's Jupyter Notebook in its ability to let
-you fully learn and see and appreciate Python itself as the framework it is.
-Python is precisely the level of abstraction you should be dealing at in order
-to make coding feel like what coding should feel like -- basically what you're
-doing when you're talking or writing English (or whatever is your native spoken
-language), for that is coding too. You are ***ENCODING*** your thoughts and
-ideas into... language! Surprise, you're already a coder! That's your reward
-for getting this far, in this long rant of a README. Surprise! You've begun
-reading my "interactively, learn Python" book, in which I teach you to be an
-SEO. And now to tick off a few people.
+But Python needs that boost in the arm. Done! You can take the IPython out of
+IPython Notebook, but we all know what the Pi in Raspberry Pi stands for. No
+amount of revisionism can erase Python -- and I smile at the thought of all
+that Ruby railing and JavaScript prototype object rattling that such fightin
+words probably invokes. But Ruby has Rails and JavaScript has the browser. What
+does poor ol' Python have, except the fact that the entire Google empire was
+built on it's shoulders?
+
+No, Python's game changer is not Django or even yet another framework. It's
+because it's Jupyter Notebook in its ability to let you fully learn and see and
+appreciate Python itself as the framework it is.  Python is precisely the level
+of abstraction you should be dealing at in order to make coding feel like what
+coding should feel like -- basically what you're doing when you're talking or
+writing English (or whatever is your native spoken language), for that is
+coding too. You are ***ENCODING*** your thoughts and ideas into... language!
+Surprise, you're already a coder! That's your reward for getting this far, in
+this long rant of a README. Surprise! You've begun reading my "interactively,
+learn Python" book, in which I teach you to be an SEO. And now to tick off a
+few people.
 
 You Java-folks, there's nothing I can do for you. You are today's generation of
 BASIC'ally myopic static-typed ludites that will never open your mind to a
