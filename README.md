@@ -44,8 +44,8 @@ recently used terms with new terms, simply because the data is there to support
 that it may be a good idea! Auto Suggest is going to be a clear stage on which
 you can watch Google's IQ grow. This is all obviously human-aided, but Google's
 learning and we should all be preparing for a world where, rather than hunting
-you down, certain classes of robots should instead should instead be thought of
-as something you can't trick... not very well, and not for long.
+you down, certain classes of robots should instead be thought of as something
+you can't trick... not very well, and not for long.
 
 I feel that Google is on the verge of growing smarter from a RankBrain
 perspective at a much faster rate than a human being grows smarter growing up.
