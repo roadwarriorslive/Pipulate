@@ -81,7 +81,7 @@ what Rails is on, and ROR has enjoyed a certain degree of cool-kids notoriety
 due to Ruby being shipped with Macs, and Rails being the first joyful framework
 to catch the fancy of the hordes of ASP and PHP refuges in the early zero's.
 Others will figure JavaScript is the one language to rule them all, thanks to a
-loosely-typed even-driven concurrent design that runs quite nicely on the
+loosely-typed event-driven concurrent design that runs quite nicely on the
 server as well, thanks to node.js. You would be the "full web stack" crowd -- a
 euphemism for "I also dabble in node". All legit. All valid. All inferior to
 learning Python through Jupyter Notebook. This is because... FOSS and science.
