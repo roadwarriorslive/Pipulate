@@ -2,14 +2,14 @@ Greetings Diehards,
 
 Now you have a machine gun ho ho ho. If you know that quote and are in this
 biz, then hello old-timer. If not, then welcome millennial newb! I promise you
-boring coding industry buzzword jockeying for an awesome future-talk which if
-you survive the boredom, just may be synaptically rewiring. I'm the
-silver-tongue snake-oil salesmen (I ***wish*** I could cite that quote) who
-made the still-going-strong HitTail SEO tool in 2006, and SEO Notebook is my
-latest stay-relevant-ware that I'm peddling for some audience and Github street
-cred.  As this README.md probably already indicates, this is something a little
-bit different. So if you're into learning Python and/or a burgeoning nextgen
-SEO community, then forge on! Even if you're only interested in Python, SEO
+boring coding industry buzzword highly speculative future-talk which if you
+survive the boredom, just may be synaptically rewiring. I'm the silver-tongue
+snake-oil salesmen (I ***wish*** I could cite that quote) who made the
+still-going-strong HitTail SEO tool in 2006, and SEO Notebook is my latest
+stay-relevant-ware that I'm peddling for some audience and Github street cred.
+As this README.md probably already indicates, this is something a little bit
+different. So if you're into learning Python and/or a burgeoning nextgen SEO
+community, then forge on! Even if you're only interested in Python, SEO
 Notebook may be of interest as a sample project designed to generically
 interact with the Web and whatever random APIs you please.
 
@@ -31,7 +31,7 @@ watching an thing gradually develop, and in-turn become something that itself
 can begin to recognize a process. This is what's happening with Google, and
 I'll be carrying out my own Machine Learning education here, starting with this
 Github repo. Machine Learning techniques will get blended in with SEO Notebook
-if even just for familiarity's sake, because Google sure is. There very culture
+if even just for familiarity's sake, because Google sure is. Their very culture
 is gradually being re-written around ML. And as they do, their own secret
 weapons improve -- eventually, exponentially.  Now, Google has machine learning
 machine guns like TensorFlow ho ho ho. This is not yet-another-skynet-warning
