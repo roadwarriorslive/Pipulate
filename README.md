@@ -8,10 +8,11 @@ snake-oil salesmen (I ***wish*** I could cite that quote) who made the
 still-going-strong HitTail SEO tool in 2006, and SEO Notebook is my latest
 stay-relevant-ware that I'm offering in order to develop some audience and
 Github street cred.  As this README.md probably already indicates, this is
-something a little bit different. So if you're into learning Python and/or a
-burgeoning nextgen SEO community, then forge on! Even if you're only interested
-in Python, SEO Notebook may be of interest as a sample project designed to
-generically interact with the Web and whatever random APIs you please.
+something a little bit different. So if you're into learning Python and/or
+joining a burgeoning nextgen SEO community, then forge on! Even if you're only
+interested in Python, SEO Notebook may be of interest as a sample project
+designed to generically interact with the Web and whatever random APIs you
+please.
 
 It's 10 years after HitTail, and I've done a number of interesting things
 working the biz, here in New York -- even though I jumped from in-house (where
