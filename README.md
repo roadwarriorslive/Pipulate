@@ -1,3 +1,5 @@
+# A Letter to SEOs
+
 Greetings Diehards,
 
 Now you have a machine gun ho ho ho. If you know that quote and are in this
@@ -62,7 +64,7 @@ systems.
 Google's AI stuff may never evolve into SkyNet, but it will pass the Turning
 Test sometime soon; you can be assured of that. Batteries and miniaturization
 to make it something we all can have in our houses serving us like Ex Machina
-housekepers is a much larger challenge. Though, we should kinda sorta be
+housekeepers is a much larger challenge. Though, we should kinda sorta be
 preparing for that too, with our Raspberry Pi's and autolocomitive telepresence
 projects (my own version coming soon). Baby-steps! Lucrative. Relevant. Fun.
 These are the attributes of my projects and my approach.
@@ -200,8 +202,51 @@ nature. That, like so many things in this project, is coming soon.
 
 -- Mike Levin
 
-Things to do here:
+## Things to do next here:
 
+- Explain the implementation
 - Add all my links to follow this project's development on YouTube and such
 - Actually use this system to do various clever things - show use-cases
 - "Can" the using of this system, probably an examples sub-folder
+
+## Explanation of Implementation
+
+SEO Notebook is the Jupyter Notebook-based implementation of the pipulation
+process that uses Google Spreadsheets for I/O.
+
+At its simplest, you put a partially filled-in spreadsheet, and get it back as
+fully filled-in as it can be, as a result of an automation process that follows
+conventions that feel intuitively obvious, such as processing the spreadsheet
+left-to-right and top-to-bottom, plugging values from rows into functions
+named by columns, and then plugging the output into the intersecting cells
+until complete. You can use a system like this for such simple tasks as filling
+in a set of Title Tag values belonging to URLs, or as complicated as things
+that take 2 or 3 passes to create derivative indexes like spin-your-own SEO
+Optimization Difficulty scores. Obvious, no? Very easy to explain. I can hardly
+believe it's not already part of everybody's (in the data biz) daily process.
+Maybe it's a good idea whose time has come.
+
+Different Pipulate implementations against this specification can make
+different decisions regarding behavior, to be most appropriate for the
+use-case. Past versions, such as the Github repo miklevin/pipulate took full
+responsibility for building the UI, with the Flask web framework and other
+components. The SEO Notebook implementation does away with even this small
+amount of UI development by leveraging the Jupyter Notebook to eliminate the
+all user interface development. I expect some of the whiz-bang features folks
+have come to expect in a UI will come back as we move this project from today's
+Jupyter Notebook into tomorrow's Jupyter Lab, which has much enhanced support
+for widgets both for parameterized input (sliders, etc.) and great output
+(interactive JavaScript data visualizations).
+
+Google Sheets is additionally integral to this implementation as the preferred
+simple way to prepare and receive the output of pipulate job requests.
+
+This implementation is also intended to give strong identities to the 3
+sub-components of this project:
+
+- SEO Notebook - the Jupyter Notebook-based implementation of the pipulation
+  process (eventually to be base in Jupyter Lab)
+- GoodSheet - the package that generically controls access-to and interaction
+  with Google Sheets, including handling OAuth2 login.
+- Pipulate - a library of functions that can be used within any framework
+  implementing the pipulation process.
