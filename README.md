@@ -1,3 +1,5 @@
+See SEO Notebook in use here <a href="https://youtu.be/DVZz-Mld0M0">https://youtu.be/DVZz-Mld0M0</a>
+
 # A Letter to SEOs
 
 Greetings Diehards,
