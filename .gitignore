@@ -1,6 +1,9 @@
+*.bak
 *.csv
+*.dat
 *.db
-oauth.dat
-__pycache__/
-.ipynb_checkpoints/
+*.dir
+*.swp
 .DS_Store
+.ipynb_checkpoints/
+__pycache__/
