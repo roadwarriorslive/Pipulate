@@ -7,38 +7,33 @@ Greetings Diehards,
 Now you have a machine gun ho ho ho. If you know that quote and are in this
 biz, then hello old-timer. If not, then welcome millennial newb! This is where
 Pipulate is moving. The Jupyter Notebook user interface is perfect for what I
-was trying to do with Pipulate, and is way better than anythign I could build.
-So, let's jump on the same bandwagon as all the Data Scientists who are
-discovering and adopting Python for science... but our science is SEO!
+was trying to do with Pipulate, and is way better than anything I could build
+myself. So, let's jump on the same bandwagon as all the Data Scientists who are
+discovering and adopting Python for science... but for common SEO, social media
+and other audience development tasks. I'm porting Pipulate INTO SEO Notebook.
 
-It's 10 years after HitTail, and I've done a number of interesting things
-working the biz, here in New York -- even though I jumped from in-house (where
-all the interesting work is) to agency-side (where all the PowerPoints are). I
-was the SEO for Apple, Kraft, JCPenney, and was even at the top of the Empire
-State Building for awhile. And now, this is where I'm hanging my hat while the
-dust settles around RankBrain, and we see how our industry has transformed
-again.
+It's 10 years since I've made my enduring HitTail keyword suggestion tool, and
+I've done a number of interesting things working the biz, here in New York --
+even though I jumped from in-house (where all the interesting work is) to
+agency-side (where all the PowerPoints are). I was the SEO for Apple, Kraft,
+JCPenney, and was even at the top of the Empire State Building for awhile. And
+now, this is where I'm hanging my hat while the dust settles around RankBrain,
+and we see how our industry is transforming again. Google's getting smarter.
 
 As a father of a 5 year-old, I am recognizing parallels with Google "growing
 up". Machine Learning techniques will get blended in with SEO Notebook if even
 just for familiarity's sake, because Google sure is. Their very culture is
 gradually being re-written around ML. And as they do, their own secret weapons
 improve -- eventually, exponentially. Now, Google has machine learning machine
-guns like TensorFlow ho ho ho. This is not yet-another-skynet-warning (YASW?)
-but rather, stating the obvious.
+guns like TensorFlow. We SEOs AT LEAST have to keep pace with our tools, and
+Jupyter Notebook is about 1000x smarter than yet another whitewashed vendor
+provided tool.
 
-Google's AI stuff may never evolve into SkyNet, but it will pass the Turning
-Test sometime soon; you can be assured of that.  Our projects should take
-baby-steps in that same direction, be lucrative, relevant and fun.
-Human-to-machine languages should be no less interesting or expressive than
-English, and should be no less pleasurable and beautiful than finely crafted
-poetry. And that's where Python fits in. SEOs should learn Python... period!
-
-This is a good place to begin.
+And so this project is where I live and breathe my SEO-work, daily now. Feel
+free to join me.
 
 ## Things to do next here:
 
-- Move this "Letter" somewhere else and do more traditional README
 - Explain the implementation in more detail / write a pipulate specification?
 - Add all my links to follow this project's development on YouTube and such
 - Actually use this system to do various clever things - show use-cases
