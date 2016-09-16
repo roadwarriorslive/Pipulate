@@ -6,4 +6,5 @@
 *.swp
 .DS_Store
 .ipynb_checkpoints/
+external/
 __pycache__/
