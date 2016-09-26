@@ -4,6 +4,7 @@
 *.db
 *.dir
 *.swp
+private.py
 .DS_Store
 .ipynb_checkpoints/
 external/
