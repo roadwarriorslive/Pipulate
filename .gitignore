@@ -5,6 +5,7 @@
 *.dir
 *.swp
 private.py
+tests.ipynb
 .DS_Store
 .ipynb_checkpoints/
 external/
