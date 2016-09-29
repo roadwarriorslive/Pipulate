@@ -4,6 +4,7 @@
 *.db
 *.dir
 *.swp
+debug.log
 private.py
 tests.ipynb
 .DS_Store
