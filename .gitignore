@@ -4,6 +4,7 @@
 *.db
 *.dir
 *.swp
+defaults.pkl
 debug.log
 private.py
 tests.ipynb
