@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1100"
+   height="1100"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="levinux-icon-framed.svg"
+   inkscape:export-filename="C:\Users\Mike Levin\Desktop\levinux.png"
+   inkscape:export-xdpi="40.91"
+   inkscape:export-ydpi="40.91">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35355339"
+     inkscape:cx="172.46226"
+     inkscape:cy="641.2797"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1216"
+     inkscape:window-height="748"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,47.637832)">
+    <circle
+       style="fill:#ffffff;fill-opacity:1;stroke:#005a00;stroke-width:38.99499893;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path6041"
+       cx="550"
+       cy="502.36218"
+       r="484.35397" />
+    <path
+       style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#005a00;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:15;marker:none;enable-background:accumulate"
+       d="m 582.43854,74.264168 0,559.503492 c -0.26317,33.76814 3.85183,55.79401 11.87891,65.01595 8.02562,9.22281 21.46861,13.0823 41.11935,11.90432 l 194.63151,0 c 49.15957,3.50171 84.35918,-8.21977 105.08276,-35.71298 8.76013,-11.62273 17.84987,-31.18715 26.49912,-55.85878 C 972.25952,581.73702 978.098,542.69285 978.098,501.90431 978.098,276.03383 803.52034,91.114544 582.43854,74.264168 Z m 267.73255,732.574112 -601.25604,0 c 77.33213,76.5666 183.33039,123.62189 300.62802,123.62189 117.29763,0 223.2959,-47.05529 300.62802,-123.62189 z M 185.86542,727.17085 c 57.91239,1.76698 95.57901,-6.8144 112.39283,-25.64009 16.81295,-18.8254 23.79878,-58.40638 21.93032,-119.0433 l 0,-442.29162 C 200.95697,216.3692 121.902,349.69914 121.902,501.90431 c 0,82.76299 23.45842,159.72166 63.96342,225.26654 z"
+       id="path3020"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccccscccscccccsc" />
+    <g
+       id="g3022"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Kozuka Mincho Pro H;-inkscape-font-specification:Kozuka Mincho Pro H Heavy"
+       transform="translate(85.357143,9.6428572)" />
+  </g>
+</svg>

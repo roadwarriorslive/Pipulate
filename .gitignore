@@ -1,0 +1,12 @@
+*.pyc
+*.pkl
+*.swp
+*.db
+*.csv
+*.bak
+*.dat
+*.dir
+__pycache__/
+.DS_Store
+/mypipulate
+/venv
