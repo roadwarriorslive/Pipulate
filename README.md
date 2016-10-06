@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Free &amp; Open Source SEO Software
 Welcome to Pipulate, a free and open source SEO tool that crawls sites directly
 into Google Docs, producing pretty, interactive sitemap visualizations--sort of
@@ -491,3 +492,8 @@ out-of-control recursion in an application like this.
 After Pipulate steps through this optional pre-pipulation phase, it is optional
 to "let" the conventional behavior to step in and
 
+=======
+See SEO Notebook in use here <a href="https://youtu.be/DVZz-Mld0M0">https://youtu.be/DVZz-Mld0M0</a>
+
+https://github.com/miklevin/SEONotebook/blob/master/pipulate.ipynb
+>>>>>>> seonotebook/master

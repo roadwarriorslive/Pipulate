@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 *.pyc
 *.pkl
 *.swp
@@ -10,3 +11,19 @@ __pycache__/
 .DS_Store
 /mypipulate
 /venv
+=======
+*.bak
+*.csv
+*.dat
+*.db
+*.dir
+*.swp
+defaults.pkl
+debug.log
+private.py
+tests.ipynb
+.DS_Store
+.ipynb_checkpoints/
+external/
+__pycache__/
+>>>>>>> seonotebook/master
