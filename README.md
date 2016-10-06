@@ -1,7 +1,9 @@
 # Free &amp; Open Source SEO Software That Teaches You Python
-Mike Levin, an SEO in New York City. That is, I help people connect their
-website content with their intended audience, and I'm here to teach you how to
-do the same, perchance to learn a little Python 3.5 programming as you go.
+
+Hello World! I'm Mike Levin, an SEO in New York City. That is, I help people
+connect their website content with their intended audience, and I'm here to
+teach you how to do the same, perchance to learn a little Python 3.5
+programming as you go.
 
 This latest rendition of Pipulate runs from within an amazing programming
 environment called Jupyter Notebook, which replaces the prior version (still in
