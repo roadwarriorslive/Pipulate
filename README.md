@@ -49,6 +49,8 @@ https://github.com/miklevin/Pipulate/blob/master/pipulate.ipynb
 
 ## To Do
 
+- A strong visual way to turn on/off Pipulate colums (special token like
+  @functionname?
 - Make sure the Append() behavior adds rows when needed.
 - Make sure functions with order sensitivity work.
 - Convert data-types more elegantly when json/pyobjstrings are in cells.
