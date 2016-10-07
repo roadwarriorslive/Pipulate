@@ -3,8 +3,8 @@
 ## Who Am I?
 
 Hello World! I'm Mike Levin, an SEO in New York City. That is, I help people
-connect their website content with their intended audience, and I'm here to
-teach you how to do the same, perchance to learn a little Python 3.5
+like you connect website content with ***your*** intended audience, and I'm
+here to teach you how to do the same, perchance to learn a little Python 3.5
 programming as you go. 
 
 ***My*** intended audience for this project is SEO specialists looking for
