@@ -5,10 +5,12 @@
 Hello World! I'm Mike Levin, an SEO in New York City. That is, I help people
 connect their website content with their intended audience, and I'm here to
 teach you how to do the same, perchance to learn a little Python 3.5
-programming as you go. ***My*** intended audience for this project is SEO
-specialists looking for beter, more long-term tools that they can customize
-themselves -- or just people looking for a good project to get started with
-learning Python, SEO, and very soon, machine learning and data science.
+programming as you go. 
+
+***My*** intended audience for this project is SEO specialists looking for
+beter, more long-term tools that they can customize themselves -- or just
+people looking for a good project to get started with learning Python, SEO, and
+very soon, machine learning and data science.
 
 ## What Is This?  
 
