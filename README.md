@@ -5,20 +5,22 @@
 Hello World! I'm Mike Levin, an SEO in New York City. That is, I help people
 connect their website content with their intended audience, and I'm here to
 teach you how to do the same, perchance to learn a little Python 3.5
-programming as you go. My intended audience is SEO consultants and experts
-looking for beter, more long-term tools that they can customize themselves.
+programming as you go. ***My*** intended audience for this project is SEO
+specialists looking for beter, more long-term tools that they can customize
+themselves -- or just people looking for a good project to get started with
+learning Python, SEO, and very soon, machine learning and data science.
 
-# What Is This?  
+## What Is This?  
 
 This latest rendition of Pipulate runs from within an amazing programming
 environment called Jupyter Notebook, which replaces the prior version of
 Pipulate (still in this repo's history) that ran on Python 2.7 on a webserver.
 The old webserver approach made this tool a bit hard to set up, and didn't
-exactly encourage you to go in and start customizing the Python code.  But this
+exactly encourage you to go in and start customizing the Python code. But this
 version takes advantage of the game-changing tool in data science being taken
 up by scientists all over the world to make their research more shareable.
 
-# Jupyter Notebook
+## Jupyter Notebook
 
 The moment I truly groked what Jupyter Notebook was, I re-wrote Pipulate from
 scratch, targeting it and Python 3.5, making the code one-tenth of its original
@@ -29,7 +31,7 @@ and the whole coding thing is lots more accessible to non-technical folks who
 need these sort of data manipulation abilities the most... scientists! It's a
 bandwagon that marketers would do well for themselves to jump onto.
 
-# Next Steps
+## Next Steps
 
 I encourage you to take a look at the new code, and I'll start posting
 links to the YouTube videos here that will introduce you to the new system and
