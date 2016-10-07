@@ -66,6 +66,11 @@ https://github.com/miklevin/Pipulate/blob/master/pipulate.ipynb
   - How each open Python notebook gets its own VM process (server)
   - How closing a tab (without halting) doesn't actually stop it
   - How this gets used to achieve reliable scheduling
+  - How this means your "server" will be "Desktop" machine (not headless)
+  - How this means you can have multiple, indpenedently running instances of
+    Pipulate, each having it's own "tab" (VM)
+  - How VMs, even though running separately, can derrive from the same
+    kernel/virtual environment (not bound to app-folder like virtualenv)
 - How the 2 repo systems, pip and conda, co-exist and interplay
   - How even though you have pip, you DON'T use virtualenv, because Anaconda
     has conda built-in.
@@ -75,4 +80,8 @@ https://github.com/miklevin/Pipulate/blob/master/pipulate.ipynb
   - How even after that, you have to do a pip-install -r requirements.txt
   - How even after that, you may still have to conda install --name MyEnv
     --file condarequirements.txt
+
+## Longer-Term
+
+- Update Levinux to support MiniConda3, Jupyter Notebook & the new Pipulate
 
