@@ -58,3 +58,21 @@ https://github.com/miklevin/Pipulate/blob/master/pipulate.ipynb
 - Report on which proxies were actually used for what (maybe)
 - Add Geolocation to proxy discovery and selection process.
 
+## Important to Get Across
+
+- How virtualenv's work under Anaconda
+  - How Jupyter Notebook "kernels" are actually those virtualenv's
+  - How those same kernels are actually bona fide virtual machines
+  - How each open Python notebook gets its own VM process (server)
+  - How closing a tab (without halting) doesn't actually stop it
+  - How this gets used to achieve reliable scheduling
+- How the 2 repo systems, pip and conda, co-exist and interplay
+  - How even though you have pip, you DON'T use virtualenv, because Anaconda
+    has conda built-in.
+  - Why conda is a necessary thing for difficult-to-resolve platform dependency
+    issues, particularly under Windows (conda does what pip can't)
+  - How you have to initiate a "conda" command to set up the venv/vm
+  - How even after that, you have to do a pip-install -r requirements.txt
+  - How even after that, you may still have to conda install --name MyEnv
+    --file condarequirements.txt
+
