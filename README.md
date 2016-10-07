@@ -62,7 +62,8 @@ https://github.com/miklevin/Pipulate/blob/master/pipulate.ipynb
 
 - How virtualenv's work under Anaconda
   - How Jupyter Notebook "kernels" are actually those virtualenv's
-  - How those same kernels are actually bona fide virtual machines
+  - How bona fide Python virtual machines (VMs) are actually "spun up" from
+    those kernels, whenever you make a new Jupyter Notebook file/tab.
   - How each open Python notebook gets its own VM process (server)
   - How closing a tab (without halting) doesn't actually stop it
   - How this gets used to achieve reliable scheduling
