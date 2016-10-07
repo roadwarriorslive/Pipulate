@@ -45,3 +45,16 @@ important Jupyter Notebook already is, Github already renders them correctly:
 
 https://github.com/miklevin/Pipulate/blob/master/pipulate.ipynb
 
+# Important Notes
+
+## To Do
+
+- Make sure the Append() behavior adds rows when needed.
+- Make sure functions with order sensitivity work.
+- Convert data-types more elegantly when json/pyobjstrings are in cells.
+- Settle on explicit representation for Empties and Nones.
+- Add Timestamps to debug and console output, especially while scheduling.
+- Defer generating the proxy list until actual need for proxy occurs.
+- Report on which proxies were actually used for what (maybe)
+- Add Geolocation to proxy discovery and selection process.
+
