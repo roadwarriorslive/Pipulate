@@ -40,10 +40,7 @@ continuum.io website, and download Anaconda for your host operating system:
 
 https://www.continuum.io/downloads
 
-I'm working on the instructions, so check back soon. And just to show you how
-important Jupyter Notebook already is, Github already renders them correctly:
-
-https://github.com/miklevin/Pipulate/blob/master/pipulate.ipynb
+I'm working on the instructions, so check back soon.
 
 # Important Notes
 
