@@ -1,5 +1,16 @@
 # Free &amp; Open Source SEO Software That Teaches You Python
 
+<img src="http://mikelevinseo.com/LogoSVGs/pipulate-logo.svg" width="640px">
+<div style="width:100%;text-align:center">
+<ul style="width:80%;text-align:left; margin:0 auto;">
+<li>Pipulate is a system for scheduled and ad hoc SEO jobs and tasks that runs under Jupyter Notebook.</li>
+<li>Jupyter Notebook is an environment for easily distributing, sharing and running programming code.</li>
+<li>This combines the power of your desktop with the best of the generally server-based tools around.</li>
+<li>Once you get this working (not too hard), your SEO and Social Media career will never be the same.</li>
+<li>Get started by downloading and installing the Python 3.5 version of <a href="https://www.continuum.io/downloads">Anaconda</a> for your desktop OS.</li>
+</ul>
+</div>
+
 ## Who Am I?
 
 Hello World! I'm Mike Levin, an SEO in New York City. That is, I help people
@@ -40,7 +51,11 @@ continuum.io website, and download Anaconda for your host operating system:
 
 https://www.continuum.io/downloads
 
-I'm working on the instructions, so check back soon.
+I'm working on the instructions, so check back soon. In the meanwhile, take a
+look at the code, and how well Github renders Jupyter Notebook .ipynb files
+(and think about what that means):
+
+http://localhost:8888/notebooks/pipulate/pipulate.ipynb
 
 # Important Notes
 
