@@ -41,6 +41,10 @@ The old webserver approach made this tool a bit hard to set up, and didn't
 exactly encourage you to go in and start customizing the Python code. But this
 version takes advantage of the game-changing tool in data science being taken
 up by scientists all over the world to make their research more shareable.
+Pipulate is a lightweight framework that runs on Jupyter Notebook, letting you
+easily carry out the most common (and often expensive) tasks in the industry,
+while preparing you to customize and take it much farther, per your unique
+requirements and ideas.
 
 ## Jupyter Notebook
 
