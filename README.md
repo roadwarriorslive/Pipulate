@@ -56,7 +56,7 @@ or not. The funny thing here is that now that Jupyter Notebook exists, Python,
 and the whole coding thing is lots more accessible to non-technical folks --
 like scientists! Anyone who needs to manipulate a lot of data as part of their
 job would do well for themselves to consider jumping onto the Anaconda, Jupyter
-Notebook and Python bandwagon. Pipulate will help you make that jump.
+Notebook and Python bandwagon. Pipulate will help you jump.
 
 ## Next Steps
 
