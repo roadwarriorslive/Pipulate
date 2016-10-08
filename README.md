@@ -17,7 +17,7 @@ running programming <a href="https://github.com/miklevin/Pipulate/blob/master/pi
 Hello World! I'm Mike Levin, an SEO in New York City. That is, I help people
 like you connect website content with your intended audience. Probably what I'm
 best known for is creating the enduring <a href="https://www.hittail.com/"
-target="_blank">HitTail</a> keyword tool from 2006. My most recent Pipulte
+target="_blank">HitTail</a> keyword tool from 2006. My most recent Pipulate
 project (this) is me attempting teach you how to do the same, while learning
 Python 3.5 and developing <a
 href="https://www.continuum.io/anaconda-overview">superpowers.</a> as you go.
