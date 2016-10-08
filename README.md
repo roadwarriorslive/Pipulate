@@ -53,9 +53,10 @@ scratch, targeting it and Python 3.5, making the code one-tenth of its original
 size, making it easier to run, and much more enticing to get you to go in and
 customize it to your own purposes -- whether you're already a Python programmer
 or not. The funny thing here is that now that Jupyter Notebook exists, Python,
-and the whole coding thing is lots more accessible to non-technical folks who
-need these sort of data manipulation abilities the most... scientists! It's a
-bandwagon that marketers would do well for themselves to jump onto.
+and the whole coding thing is lots more accessible to non-technical folks --
+like scientists! Anyone who needs to manipulate a lot of data as part of their
+job would do well for themselves to consider jumping onto the Anaconda, Jupyter
+Notebook and Python bandwagon. Pipulate will help you make that jump.
 
 ## Next Steps
 
