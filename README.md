@@ -1,5 +1,3 @@
-# Free &amp; Open Source SEO Software That Teaches You Python
-
 <p align="center"><img src="http://mikelevinseo.com/LogoSVGs/pipulate-logo.svg" width="640px"></p>
 <div style="width:100%;text-align:center">
 <ul style="width:80%;text-align:left; margin:0 auto;">
@@ -10,6 +8,8 @@
 <li>Get started by downloading and installing the Python 3.5 version of <a href="https://www.continuum.io/downloads">Anaconda</a> for your desktop OS.</li>
 </ul>
 </div>
+
+# Free &amp; Open Source SEO Software to Teaches You Python 3.5
 
 ## Who Am I?
 
