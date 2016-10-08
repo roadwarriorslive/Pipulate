@@ -15,9 +15,9 @@ running programming <a href="https://github.com/miklevin/Pipulate/blob/master/pi
 ## Who is Mike Levin?
 
 Hello World! I'm Mike Levin, an SEO in New York City. That is, I help people
-like you connect website content with your intended audience. The Pipulte is me
-attempting teach you how to do the same, while learning Python 3.5 and
-developing <a href="https://www.continuum.io/anaconda-overview">superpowers.</a> 
+like you connect website content with your intended audience. The Pipulte
+project is me attempting teach you how to do the same, while learning Python
+3.5 and developing <a href="https://www.continuum.io/anaconda-overview">superpowers.</a> 
 as you go. My intended audience for this project is SEO and Social Media
 professionals (and hopefuls) who want the skills they're developing to survive
 the in the long-run of a 5 or 10 year career, while every other tool goes
