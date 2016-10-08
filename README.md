@@ -21,7 +21,13 @@ project is me attempting teach you how to do the same, while learning Python
 as you go. My intended audience for this project is SEO and Social Media
 professionals (and hopefuls) who want the skills they're developing to survive
 the in the long-run of a 5 or 10 year career, while every other tool goes
-obsolete.
+obsolete. Follow my work at:
+
+- [Subscribe to my YouTube Channel](https://www.youtube.com/mikelevin)
+- [Follow me on Twitter](https://twitter.com/miklevin)
+- [Connect on LinkedIn](https://www.linkedin.com/in/miklevin)
+- [My SEO Daily Work Journal](http://mikelevinseo.com)
+- [My WordPress Site](http://mikelev.in/)
 
 ## What Is Pipulate?  
 
