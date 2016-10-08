@@ -14,12 +14,13 @@
 ## Who Am I?
 
 Hello World! I'm Mike Levin, an SEO in New York City. That is, I help people
-like you connect website content with your intended audience, and I'm here to
-teach you how to do the same, perchance to learn a little Python 3.5
-programming as you go. My intended audience for this project is SEO specialists
-looking for beter long-term tools that they can customize themselves -- or just
-people looking for a good project to get started with learning Python, SEO, and
-soon, machine learning and data science.
+like you connect website content with your intended audience. The Pipulte
+project is how I'm attempting teach you how to do the same, perchance to learn
+a little Python 3.5 as you go. My intended audience for this project is SEO and
+Social Media professionals (and hopefuls) looking for a few secret weapons that
+will survive the in the long-run of a 5 or 10 year career, while every other
+tool goes obsolete. Or it's just people looking for a good project to get
+started with learning Python, SEO, machine learning and data science.
 
 ## What Is This?  
 
