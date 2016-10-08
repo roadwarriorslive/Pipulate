@@ -1,7 +1,7 @@
 # Free &amp; Open Source SEO Software That Teaches You Python
 
-<img src="http://mikelevinseo.com/LogoSVGs/pipulate-logo.svg" width="640px">
 <div style="width:100%;text-align:center">
+<img src="http://mikelevinseo.com/LogoSVGs/pipulate-logo.svg" width="640px">
 <ul style="width:80%;text-align:left; margin:0 auto;">
 <li>Pipulate is a system for scheduled and ad hoc SEO jobs and tasks that runs under Jupyter Notebook.</li>
 <li>Jupyter Notebook is an environment for easily distributing, sharing and running programming code.</li>
