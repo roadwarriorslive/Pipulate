@@ -9,7 +9,7 @@
 </ul>
 </div>
 
-# Free &amp; Open Source SEO Software to Teaches You Python 3.5
+# Free &amp; Open Source SEO Software to teach you Python 3.5
 
 ## Who is Mike Levin?
 
