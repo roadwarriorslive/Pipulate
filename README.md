@@ -98,9 +98,9 @@ https://github.com/miklevin/Pipulate/blob/master/pipulate.ipynb
   - How closing a tab (without halting) doesn't actually stop it
   - How this gets used to achieve reliable scheduling
   - How this means your "server" will be "Desktop" machine (not headless)
-  - How this means you can have multiple, indpenedently running instances of
+  - How this means you can have multiple, independently running instances of
     Pipulate, each having it's own "tab" (VM)
-  - How VMs, even though running separately, can derrive from the same
+  - How VMs, even though running separately, can derive from the same
     kernel/virtual environment (not bound to app-folder like virtualenv)
 - How the 2 repo systems, pip and conda, co-exist and interplay
   - How even though you have pip, you DON'T use virtualenv, because Anaconda
@@ -111,6 +111,66 @@ https://github.com/miklevin/Pipulate/blob/master/pipulate.ipynb
   - How even after that, you have to do a pip-install -r requirements.txt
   - How even after that, you may still have to conda install --name MyEnv
     --file condarequirements.txt
+
+## Installation Instructions
+
+I am currently working on the pip freeze requirements.txt file to make
+installation much easier, but until then, I'm getting the explicit
+(top-of-the-dependency-chain) pip requirements documented here, especially
+since I will support the minimal version of Anaconda, called MiniConda, for my
+lightweight Linux virtual machine, Levinux. The hardest dependencies are the
+OS-provided XML-parsing services (for things like BeautifulSoup4 to do
+screen-scraping), which if you're on a Debian-based Linux derivative (Ubuntu,
+mostly), you can take care of these dependencies with:
+
+    apt-get install libpq-dev python-dev
+
+### Anaconda
+
+- Install Miniconda3 for your OS: 
+    - http://conda.pydata.org/docs/install/quick.html
+    - http://conda.pydata.org/miniconda.html
+
+During the install, you will at some point be promoted whether you want to
+update the environment variables to make typing the following commands easier
+(not having to specify paths). Answer Yes to this question.
+
+    conda create -n py35 python=3.5 jupyter
+    source activate py35
+    pip install gspread
+    pip install httplib2
+    pip install google-api-python-client
+    pip install bs4
+    pip install lxml
+    jupyter notebook
+
+### MiniConda3
+
+- Install Miniconda3 for your OS: 
+    - http://conda.pydata.org/docs/install/quick.html
+    - http://conda.pydata.org/miniconda.html
+
+When you install MiniConda, it gives you a choice of whether to add the path to
+the environment variables to the .bashrc, but I'll give the instructions for if
+you answer "no" to this question so that you can see where everything goes.
+
+    ~/miniconda3/bin/conda create -n py35 python=3.5 jupyter
+    source ~/miniconda3/bin/activate py35
+    pip install gspread
+    pip install httplib2
+    pip install google-api-python-client
+    pip install bs4
+    pip install lxml
+    ~/miniconda3/bin/jupyter notebook
+
+And finally, you'll need a private.py file that you create yourself, because...
+well, because everything private that you never want to risk committing to a
+git repo goes in there. Currently, the system only expects a few values needed
+for performing Google Analytics and Search Console reports from your website.
+So, you have to make a file in the repo folder named private.py and contains:
+
+    site = '[http://www.yoursite.com]/'
+    gaid = '[your google analytics id]'
 
 ## Longer-Term
 
