@@ -21,6 +21,7 @@ __pycache__/
 defaults.pkl
 debug.log
 private.py
+test.ipynb
 tests.ipynb
 .DS_Store
 .ipynb_checkpoints/
