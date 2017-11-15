@@ -5,7 +5,8 @@ custom Flask webserver hosting stuff, calling for a server somewhere (even if
 virtual on your desktop) when you've already got the power of your native
 desktop there. The question is how to tap it in order to build an awesome SEO
 product that isn't brittle and tied to the such-and-such conditions of your
-local machine. How to do SEO coding quickly, portably and full of love?
+local machine. How to do SEO coding quickly, portably and full of love and free
+of (most) vendor dependencies?
 
 ## Enter Anaconda
 
