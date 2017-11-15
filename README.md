@@ -67,7 +67,7 @@ to eventually more Machine Learning processes.
 
 But I get ahead of myself.
 
-# A Tale of 2 Panas
+## A Tale of 2 Pandas
 
 After having dealt with one type of Panda for many years (the Google nickname
 for some tweaks they did to fight SEO spammers), I've finally discovered and
@@ -122,7 +122,7 @@ with Python, typical of "technical" SEO's looking at how to reposition
 themselves now that Google is finally waking up and some sort of android robot
 nearly thinking thingie is taking over for PageRank and the link graph.
 
-# SEO Leadership
+## SEO Leadership
 
 The iron is hot. It's time for me to step in and illuminate the way for a bunch
 of other technical SEO's looking at how to reposition themselves in this
