@@ -3,9 +3,9 @@
 This is another Pipulate reboot, but this time it's to get rid of all the
 custom Flask webserver hosting stuff, calling for a server somewhere (even if
 virtual on your desktop) when you've already got the power of your native
-desktop there. The question is how to tap it and not have your app go all
-brittle, based on the just-so code execution conditions of that particular
-local machine.
+desktop there. The question is how to tap it in order to build an awesome SEO
+product that isn't brittle and tied to the such-and-such conditions of your
+local machine. How to do SEO coding quickly, portably and full of love?
 
 ## Enter Anaconda
 
