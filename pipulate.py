@@ -3,6 +3,7 @@ from creds import *  # Put creds.py file in this same folder containing:
 # client_secret = "Your Google client secret from same site (keep file secure)"
 
 import sys
+import os
 import gspread
 import httplib2
 import shelve
@@ -69,7 +70,10 @@ def oauth():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         parents=parent_parsers)
     flags = parser.parse_args(['--noauth_local_webserver'])
-    http = credentials.authorize(http=httplib2.Http())
+    try:
+        http = credentials.authorize(http=httplib2.Http())
+    except AttributeError:
+        pass
     if credentials is None or credentials.invalid:
         credentials = tools.run_flow(flow, storage, flags)
     else:
