@@ -20,7 +20,9 @@ followers, the action occurs here. I'll produce YouTube videos so you can
 follow along in its evolution. I'll also probably have to rebase this at some
 point to get rid of all the orphaned git cruft here in the invisible .git
 folder. Believe me, it's much worse over on Levinux. But gitub cred is cred,
-and so... reboot!
+and so an in-location... reboot! Apologies to anyone still on the older Flask
+webserver system. And so we move forward in an interesting, creative and
+totally appropriate new direction:
 
 ## What's New? (Mostly Jupyter Notebook)
 
