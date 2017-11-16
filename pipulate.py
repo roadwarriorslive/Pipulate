@@ -11,6 +11,7 @@ from datetime import datetime, timedelta, date
 from oauth2client.client import OAuth2WebServerFlow
 from oauth2client import file, tools
 from os import makedirs
+import pandas as pd
 
 filename = "oauth.dat"
 
@@ -271,7 +272,7 @@ def cl_lol_to_sheet(cell_list, lol, sheet):
     sheet.update_cells(cell_list)
 
 
-def cell_list_to_tuples(cell_list):
+def cl_to_tuples(cell_list):
     """Return a list of tuples given a GSpread cell list.."""
 
     list_of_tuples = list()
@@ -296,7 +297,7 @@ def cl_df_fits(cl, df):
     return False
 
 
-def get_cell_list(sheet, row1, col1, col2, smart=False):
+def get_cl(sheet, row1, col1, col2, smart=False):
     """Return GSpread cell list given kk"""
 
     last_row = sheet.row_count
