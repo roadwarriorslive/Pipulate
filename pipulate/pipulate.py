@@ -296,7 +296,7 @@ def cl_df_fits(cl, df):
     return False
 
 
-def get_cell_list(sheet, row1, col1, col2, smart=False):
+def get_cl(sheet, row1, col1, col2, smart=False):
     """Return GSpread cell list given kk"""
 
     last_row = sheet.row_count
