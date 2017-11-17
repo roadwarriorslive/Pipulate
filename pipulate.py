@@ -231,22 +231,29 @@ def gsc_url_keyword(prop, start, end, query, url):
 # NEW FUNCTIONS FOR GSHEET/PANDAS
 
 
-def cl_df_from_sheet(sheet, row1, col1, col2, label_row=False, smart=False):
+def cl_df_from_sheet(sheet, row1, col1, col2, row2=False, columns=False, guess=False):
     """Return cell list and dataframe (tuple) from Google Sheet."""
 
-    if smart:
-        cl = get_cl(sheet=sheet, row1=row1, col1=col1, col2=col2, smart=True)
+    if row2:
+        cl = get_cl(sheet=sheet, row1=row1, col1=col1, col2=col2, row2=row2)
+    elif guess:
+        cl = get_cl(sheet=sheet, row1=row1, col1=col1, col2=col2, guess=True)
     else:
         cl = get_cl(sheet=sheet, row1=row1, col1=col1, col2=col2)
     list_of_tuples = cl_to_tuples(cl)
-    if label_row:
-        column_names = sheet.range(label_row, aa(col1), label_row, aa(col2))
+    if columns:
+        column_names = sheet.range(columns, aa(col1), columns, aa(col2))
         column_names = [x.value for x in column_names]
     else:
         column_names = sheet.range(row1, aa(col1), row1, aa(col2))
         column_names = [cc(x.col) for x in column_names]
     df = pd.DataFrame(list_of_tuples, columns=column_names)
     return cl, df
+
+
+def pipulate(sheet, row, left, right, guess=True, row2=False):
+    """Alias for what I belive will be the most common use of pipulate"""
+    return cl_df_from_sheet(sheet, row, left, right, guess=guess, row2=row2)
 
 
 def cl_df_to_sheet(sheet, cl, df):
@@ -261,6 +268,11 @@ def cl_df_to_sheet(sheet, cl, df):
         return True
         print('cl and df must be same shape')
     return False
+
+
+def populate(sheet, cl, df):
+    """Alias for cl_df_to_sheet"""
+    return cl_df_to_sheet(sheet, cl, df)
 
 
 def cl_lol_to_sheet(cell_list, lol, sheet):
@@ -297,11 +309,13 @@ def cl_df_fits(cl, df):
     return False
 
 
-def get_cl(sheet, row1, col1, col2, smart=False):
+def get_cl(sheet, row1, col1, col2, guess=False, row2=False):
     """Return GSpread cell list given kk"""
 
     last_row = sheet.row_count
-    if smart:
+    if row2:
+        last_row = row2
+    elif guess:
         last_row = len(list(filter(None, sheet.col_values(1))))
     col1 = aa(col1)
     col2 = aa(col2)
