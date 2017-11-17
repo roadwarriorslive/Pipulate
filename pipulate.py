@@ -1,4 +1,4 @@
-from creds import *  # Put creds.py file in this same folder containing:
+import apis  # Put apis.py file in this same folder containing:
 # client_id = "Your Google client ID from https://console.cloud.google.com/"
 # client_secret = "Your Google client secret from same site (keep file secure)"
 
@@ -6,11 +6,9 @@ import sys
 import os
 import gspread
 import httplib2
-import shelve
-from datetime import datetime, timedelta, date
+from datetime import datetime
 from oauth2client.client import OAuth2WebServerFlow
 from oauth2client import file, tools
-from os import makedirs
 import pandas as pd
 
 filename = "oauth.dat"
@@ -54,12 +52,11 @@ def oauth():
 
     path = os.path.dirname(os.path.realpath('__file__'))
     path_filename = os.path.join(path, filename)
-    flow = OAuth2WebServerFlow(client_id, client_secret, scopes,
+    flow = OAuth2WebServerFlow(apis.client_id, apis.client_secret, scopes,
                                redirect_uri='urn:ietf:wg:oauth:2.0:oob',
                                response_type='code',
                                prompt='consent',
                                access_type='offline')
-    authorize_url = flow.step1_get_authorize_url()
     storage = file.Storage(path_filename)
     credentials = storage.get()
     argparser = argparse.ArgumentParser(add_help=False)
@@ -82,8 +79,8 @@ def oauth():
     with open(path_filename) as json_file:
         jdata = json.load(json_file)
     token = jdata['access_token']
-    creds = MyCreds(access_token=token)
-    connect = gspread.authorize(creds)
+    access = AccessToken(access_token=token)
+    connect = gspread.authorize(access)
     return connect
 
 
@@ -98,11 +95,16 @@ def gsc():
 
 
 def spreadsheet(key):
-    """Return instance of accessble GShet by GDoc key."""
+    """Return instance of GSheet by key."""
     return oauth().open_by_key(key)
 
 
-class MyCreds(object):
+def key(key):
+    """Alias to Return instance of GSheet by key."""
+    return oauth().open_by_key(key)
+
+
+class AccessToken(object):
     """Return authentication object given access_token."""
     def __init__(self, access_token=None):
         self.access_token = access_token
@@ -124,7 +126,6 @@ def gsheet_link(gsheet_key):
 def Log(yval, xval, sheet):
     """Insert date into 'log' tab at by row/col named index."""
 
-    sheets = sheet.worksheets()
     logsheet = sheet.worksheet('logs')
     row_count = logsheet.row_count
     col_list = logsheet.row_values(1)
@@ -136,7 +137,7 @@ def Log(yval, xval, sheet):
             ydex = a_cell.value
             if ydex == yval:
                 cell_dex = i+col_list.index(xval)
-                cell_value = common.human_date(datetime.now())
+                cell_value = human_date(datetime.now())
                 log_cells[cell_dex].value = cell_value
                 logsheet.update_cells(log_cells)
                 break
@@ -145,7 +146,6 @@ def Log(yval, xval, sheet):
 def Check(yval, xval, sheet):
     """Checks if today's date arleady in row/col named index."""
 
-    sheets = sheet.worksheets()
     logsheet = sheet.worksheet('logs')
     return_truth = False
     row_count = logsheet.row_count
@@ -158,7 +158,7 @@ def Check(yval, xval, sheet):
             ydex = a_cell.value
             if ydex == yval:
                 cell_dex = i+col_list.index(xval)
-                today_human = common.human_date(datetime.now())
+                today_human = human_date(datetime.now())
                 cell_value = log_cells[cell_dex].value
                 if cell_value == today_human:
                     return_truth = True
@@ -222,7 +222,7 @@ def gsc_url_keyword(prop, start, end, query, url):
     dat = service.searchanalytics().query(siteUrl=prop, body=request).execute()
     val = []
     if 'rows' in dat:  # For the foolish Hobgoblins of PEP8 consistency
-        r = data['rows'][0]
+        r = dat['rows'][0]
         val = [start] + [r['keys'][0]] + [r['keys'][1]] + [
             r['position']] + [r['clicks']] + [r['impressions']] + [r['ctr']]
     return val
@@ -322,6 +322,14 @@ def cc(c):
 def df_to_lol(df):
     """Return a list of lists from Pandas dataframe."""
     return [list(x) for x in df.values]
+
+
+def human_date(a_datetime, time=False):
+    """Return datetime object as American-friendly string."""
+    if time:
+        return ('{0:%m/%d/%Y %H:%M:%S}'.format(a_datetime))
+    else:
+        return ('{0:%m/%d/%Y}'.format(a_datetime))
 
 
 class Unbuffered(object):
