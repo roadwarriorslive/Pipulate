@@ -118,7 +118,7 @@ def get_email():
     return email
 
 
-def gsheet_link(gsheet_key):
+def link(gsheet_key):
     """Return GSheet URL for data from Web UI."""
     return 'https://docs.google.com/spreadsheets/d/%s/edit' % gsheet_key
 

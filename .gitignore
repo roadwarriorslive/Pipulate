@@ -3,6 +3,7 @@
 *.dat
 *.db
 *.dir
+*.ipynb
 *.pkl
 *.pyc
 *.swp
