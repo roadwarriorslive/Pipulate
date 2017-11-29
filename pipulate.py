@@ -338,6 +338,14 @@ def df_to_lol(df):
     return [list(x) for x in df.values]
 
 
+def api_date(a_datetime, time=False):
+    """Return datetime string in Google API friendly format."""
+    if time:
+        return ('{0:%Y-%m-%d %H:%M:%S}'.format(a_datetime))
+    else:
+        return ('{0:%Y-%m-%d}'.format(a_datetime))
+
+    
 def human_date(a_datetime, time=False):
     """Return datetime object as American-friendly string."""
     if time:
