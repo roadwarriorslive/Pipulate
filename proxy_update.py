@@ -99,6 +99,9 @@ def Main():
 			out.write(proxy + '\n')
 	print('goodproxies.txt updated.')
 	print("The bad blocks are: ", bad_blocks)
+	with open('badproxies.txt', 'w') as out:
+		for proxy in bad_blocks:
+			out.write(proxy + '\n')
 
 if __name__ == '__main__':
 	Main()

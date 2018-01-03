@@ -10,6 +10,7 @@ from datetime import datetime
 from oauth2client.client import OAuth2WebServerFlow
 from oauth2client import file, tools
 import pandas as pd
+from time import sleep
 
 filename = "oauth.dat"
 
@@ -258,16 +259,15 @@ def pipulate(sheet, row, left, right, guess=True, row2=False):
 
 def cl_df_to_sheet(sheet, cl, df):
     """Update existing GSpread cell list with a same-shaped dataframe."""
-
+    success = False
     if cl_df_fits(cl, df):
         lol = df.values.tolist()
         flat = [y for x in lol for y in x]
         for i, cell in enumerate(cl):
             cell.value = flat[i]
+            success = True
         sheet.update_cells(cl)
-        return True
-        print('cl and df must be same shape')
-    return False
+    return success
 
 
 def populate(sheet, cl, df):
