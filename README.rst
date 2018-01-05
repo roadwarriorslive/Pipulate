@@ -10,7 +10,7 @@ APIs? If you have a gmail or corporate GSuite email that you can use, simply::
 This will open your web browser and cause a standard Google Password prompt.
 Choose which Google account you want to use and login. It will give you a long
 string of characters to copy back into Jupyter Notebook. All data manipulations
-are achived using Python pandas 3rd party library, so as your next command,
+are achieved using Python pandas 3rd party library, so as your next command,
 import pandas::
 
     import pandas as pd
@@ -54,4 +54,24 @@ numbers in the spreadsheet, because GSpread converts all numbers to strings::
     gs.populate(tab, cl, df)
     df['B'] = df['A'].astype(int) * 2
 
+Now say you wanted to apply a function to every line of the DataFrame to do
+something like retrieve a title tag from a web address, and you had a function
+that looked like::
 
+	def status_code(url):
+		import requests
+		rv = 'failed'
+		try:
+			rv = requests.get(url).status_code
+		except:
+			pass
+		return rv            
+
+Now you can get the status code of every URL in column A with::
+
+	df['B'] = df['A'].apply(status_code)
+
+This is where the "framework" known as Pandas steps in with its own
+conventions. Pandas knows to take the function named in the apply method and
+for every row of the dataframe, plug the value found in column A into the
+function called status_code and plug the resulting value into column B.
