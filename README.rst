@@ -2,9 +2,9 @@
 Pipulate - Automate Google Sheets
 ########################################
 
-Have you ever had to manipulate data in a Google Spreadsheet and got tripped up
-on how difficult it is to use Google's OAuth2 login, and dealing with complex
-APIs? If you have a gmail or corporate GSuite email that you can use, simply::
+Have you ever become frustrated trying to automate data-jobs directly in Google
+Spreadsheet due to tricky OAuth2 login issues or just dealing with the complex
+APIs? If you have a gmail or corporate G Suite email that you can use, simply::
 
     import pipulate as gs
 
@@ -20,9 +20,9 @@ import pandas::
 Configuring a job
 ****************************************
 
-Next, you set the arguments standing for the spreadsheet (file) and worksheet
-(tab) you want to manipulate, along with the cell range defined as a set of row
-and column indexes, using row-numbers and column-letters that display in
+Set the arguments standing for the spreadsheet (file) and worksheet (tab) you
+want to manipulate, along with the cell range defined as a set of row and
+column indexes, using row-numbers and column-letters that display in
 spreadsheet user interfaces::
 
     key = '[Your GSheet key]'
@@ -34,13 +34,22 @@ spreadsheet user interfaces::
 Connecting to sheet
 ****************************************
 
-Now that we've set the parameters, we need to open the connection to the Google
-Sheet (as if it were a database) and populate a couple of "compatibly shaped"
-objects, a GSpread "cell_list" and a Pandas DataFrame object::
+Open the connection to the Google Sheet (as if it were a database) and copy a
+rectangular range in both the GSpread "cell_list" format and as a Pandas
+DataFrame. This is pipulating... setting the stage with 2 similar shapes::
 
     sheet = gs.key(key)
     tab = sheet.worksheet(tab_name)
     cl, df = gs.pipulate(tab, rows, cols)
+
+Even though the cl is a cell_list from GSpread, it is also very similar to a
+simple Python list; only difference is that it has some extra attributes thrown
+in to represent spreadsheets (like row and col attributes per cell). The df on
+the other hand is a Pandas DataFrame and is very much like a spreadsheet with
+rows, columns and all the accompanying built-in spreadsheet-like (and database)
+capabilities that the pandas framework provides. That is why we MANIPULATE the
+df and then push it back into the location of the otherwise untouched cl... and
+then pipulate.
 
 ****************************************
 Your first pipulation
@@ -55,6 +64,8 @@ compatibly-shaped cell_list object. This is the magic moment. Watch the
 spreadseet in the borwser as you do this. You will see the values change!::
 
     gs.populate(tab, cl, df)
+
+Congratulations. You've just pipulated.
 
 Plugging data dynamically into Google Sheets is nothing new. Pipulate just
 clarifies and simplifies the process. To do something slightly more
