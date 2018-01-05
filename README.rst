@@ -223,6 +223,10 @@ be AWARE of where to grab the date from::
         clicks = gsc_clicks(url, keyword, adate) 
         return clicks
 
+And there you have it. That's pretty much the basic use of Pipulate for
+completely open-ended semi-automated Python Kung Fu in Google Sheets. Let the
+crazy ad hoc SEO investigations of your dreams begin. Just add functions ;-)
+
 ****************************************
 Working with very large lists
 ****************************************
