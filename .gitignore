@@ -4,6 +4,7 @@
 *.db
 *.dir
 *.ipynb
+*.ini
 *.pkl
 *.pyc
 *.swp
