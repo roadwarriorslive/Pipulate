@@ -97,14 +97,14 @@ function called status_code and plug the resulting value into column B. Look
 carefully at what's going on here, because it's about to get a lot more
 complicated.
 
+****************************************
+Using values from other columns in row for function arguments
+****************************************
+
 While the above example is powerful, it's not nearly as powerful as feeding TWO
 arguments to the function using values from out of each row of the dataframe.
 To do that, we simply call the .apply() method of the ENTIRE DATAFRAME and not
 just a row::
-
-****************************************
-Using values from other columns in row for function arguments
-****************************************
 
     df['B'] = df.apply(funcname, axis=1)
 
@@ -164,7 +164,7 @@ but altered rectangular spreadsheet range back in, this entire system is just
 becoming adept at Pandas using GSheets instead of CSVs.
 
 ****************************************
-Inserting arbirary argument values into function
+Inserting arbirary arguments into function
 ****************************************
 
 This takes us to our final example. When stepping row-by-row through a Python
