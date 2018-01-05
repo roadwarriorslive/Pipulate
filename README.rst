@@ -227,9 +227,9 @@ And there you have it. That's pretty much the basic use of Pipulate for
 completely open-ended semi-automated Python Kung Fu in Google Sheets. Let the
 crazy ad hoc SEO investigations of your dreams begin. Just add functions ;-)
 
-########################################
+****************************************
 Working with very large lists
-########################################
+****************************************
 
 Google Sheet is not always the best place to process very large lists, but the
 alternative is often worse, so the trick is to just decide by what size chunks
