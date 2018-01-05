@@ -250,6 +250,10 @@ To use step-by-stride with Pipulate we take a basic example and simply add a
     #df['B'] = 'foo'
     #gs.populate(tab, cl, df)
 
+****************************************
+Step by stride
+****************************************
+
 In the above example, we only added a "stride" variable and edited out the last
 2 lines that updates the sheet. Say the sheet were 10,000 rows long. Updating A
 LOT of data with one of these AJAX-y data-calls is never a good idea. The
@@ -258,10 +262,6 @@ are going on while you wait, and the likelihood of an entire update failing
 because of a single row failing goes up. The solution is to travel 10,000 rows
 by 100-row strides (or smaller) and we wanted it to take 1000 steps. We replace
 the last 2 lines with the following step-by-stride code::
-
-****************************************
-Step by stride
-****************************************
 
     steps = rows[1] - rows[0] + 1
     for i in range(steps):
