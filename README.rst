@@ -227,9 +227,9 @@ And there you have it. That's pretty much the basic use of Pipulate for
 completely open-ended semi-automated Python Kung Fu in Google Sheets. Let the
 crazy ad hoc SEO investigations of your dreams begin. Just add functions ;-)
 
-****************************************
+########################################
 Working with very large lists
-****************************************
+########################################
 
 Google Sheet is not always the best place to process very large lists, but the
 alternative is often worse, so the trick is to just decide by what size chunks
@@ -258,6 +258,10 @@ are going on while you wait, and the likelihood of an entire update failing
 because of a single row failing goes up. The solution is to travel 10,000 rows
 by 100-row strides (or smaller) and we wanted it to take 1000 steps. We replace
 the last 2 lines with the following step-by-stride code::
+
+****************************************
+Step by stride
+****************************************
 
     steps = rows[1] - rows[0] + 1
     for i in range(steps):
