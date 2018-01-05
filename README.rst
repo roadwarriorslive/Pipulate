@@ -1,5 +1,6 @@
-Pipulate
-=======================
+********************
+Pipulate - Automate Google Sheets
+********************
 
 Have you ever had to manipulate data in a Google Spreadsheet and got tripped up
 on how difficult it is to use Google's OAuth2 login, and dealing with complex
