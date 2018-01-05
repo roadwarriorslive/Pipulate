@@ -1,65 +1,56 @@
 Pipulate
 =======================
 
-This project aims to combine the convenience of interacting with data through
-Spreadsheet software with the power of manipulating data through the Python
-Pandas package. It does this by alleviating the number one barrier: OAUth2
-
-If you have a gmail or corporate GSuite email that you can use, simply:
+Have you ever had to manipulate data in a Google Spreadsheet and got tripped up
+on how difficult it is to use Google's OAuth2 login, and dealing with complex
+APIs? If you have a gmail or corporate GSuite email that you can use, simply:
 
     import pipulate as gs
 
-This will give you a long convoluted string to paste into your web browser
-address bar that will cause a standard Google Password Prompt. Choose which
-Google account you want to use and login. It will give you a long string of
-characters (token) to copy back to your Python code execution environment
-(often, Jupyter Notebook, I suppose), and you will now have access to Google
-Sheets. Create a new Sheet for this purpose, give it a name, and copy the
-document identification key from the URL, and use like this:
+This will open your web browser and cause a standard Google Password Prompt.
+Choose which Google account you want to use and login. It will give you a long
+string of characters (token) to copy back to your Python code execution. All
+data manipulations are achived using Python pandas 3rd party library, so as
+your next command, import pandas:
 
-    key = 'insert your key here'
+    import pandas as pd
+
+Next, you set the arguments standing for the spreadsheet (file) and worksheet
+(tab) you want to manipulate, along with the cell range defined as a set of row
+and column indexes, using row-numbers and column-letters that display in
+spreadsheet user interfaces.
+
+    key = '[Your GSheet key]'
+    tab_name = 'Sheet1'
+    rows = (2, 10)
+    cols = ('a', 'b')
+
+Now that we've set the parameters, we need to open the connection to the Google
+Sheet (as if it were a database) and populate a couple of "compatibly shaped"
+objects, a GSpread "cell_list" and a Pandas DataFrame object.
+
     sheet = gs.key(key)
-    tab = sheet.sheet1
+    tab = sheet.worksheet(tab_name)
+    cl, df = gs.pipulate(tab, rows, cols)
 
-You now actually have a live connection to Sheet1 of that web spreadsheet and
-can start manipulating it in any way you would with the GSpread API. If you
-fill column A with a bunch of URLs and want the length of their homepages
-in column B, you would do the following:
-
-    cl, df = gs.pipulate(tab, 2, 'a', 'b')
-
-This says grab all the data starting from row 2 from column A to column B. This
-default guesses the bottom row based on the first empty row. You have now
-populated identicaly shaped:
-
-- GSpread cell_list
-- Pandas DataFrame
-
-You can do any manipulations you like to put data into column B of the
-dataframe, for example just filling it with foo:
+Now say you wanted to just plug the value "foo" into column B.
 
     df['B'] = 'foo'
 
-And then you could update it back to the spreadsheet like this:
+And you can now "push" your changed dataframe object back into the still
+compatibly-shaped cell_list object:
 
     gs.populate(tab, cl, df)
 
-What about those homepage length counts? First let's grab requests:
+To do something slightly more interesting, you can simply copy the contents of
+column A to B:
 
-    import requests
+    df['B'] = df['A']
 
-Pipulate is designed to move the heavy-lifting of spreadsheet data manipulation
-onto your local machine where you can tap the power of Pandas under Python
-(often under Jupyter Notebook) to crunch numbers, crawl websites, chat with
-APIs, or whatever it needs to do Python-side, and then push the (identically
-shaped) results back out to the spreadsheet it grabbed from.
+Say there were numbers in column A and you wanted column be to be that number
+times 2. Notice I have to convert column A to integers even if they look like
+numbers in the spreadsheet, because GSpread converts all numbers to strings.
 
-This is different from Google JavaScript-based AppScript that runs on the
-Google cloud. Instead, this leverages the old (never depricated?) GData API
-that was around before the Google API Console that deals purely with row &
-column data (no formatting) similarly to the Excel-centric way (A1:B2) of the
-OpenPyXL package. I hope to soon make this work with either GSpread or
-OpenPyXL.
+    df['B'] = df['A'].astype(int) * 2
 
-----
 
