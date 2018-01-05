@@ -134,22 +134,22 @@ appear in column C.
 
 Remember that the Python code is running under your control so you are not
 limited as you would be using Google's own built-in Apps Script (Google's
-answer to Visual Basic for Applications or VBA) for the same purposes. Your
-Python code is running on your local machine (often via Jupyter Notebook) or
-the cloud or on cheap hardware like Raspberry Pi's. All your data manipulation
-or "creative work" is taking place in Pandas DataGrids which you are "painting"
-onto in memory. Aside from "copying" the initial range out of a spreadsheet and
-then "pasting" the identically-shaped but altered-content range back in, this
-entire system is just becoming adept at Pandas using GSheets instead of CSVs.
+answer to VBA) for the same purposes. Your Python code is running on your local
+machine (often via Jupyter Notebook) or the cloud or on cheap hardware like
+Raspberry Pi's. All your data manipulation or "creative work" is taking place
+in Pandas DataGrids which you are "painting" onto in memory. Aside from copying
+the initial range out of a spreadsheet and then pasting the identically-shaped
+but altered rectangular spreadsheet range back in, this entire system is just
+becoming adept at Pandas using GSheets instead of CSVs.
 
-And this takes us to our final example. When stepping row-by-row through a
-Python Pandas DataFrame, it is often desirable to insert "meta" attributes that
-can be used in the function WITHOUT HARD-WIRING MAGIC NUMBERS into the function
-or putting it in the other obvious place, which is its own dedicated column in
-the spreadsheet. Now say this was a date and it was the same date for every
-row. It would be a wasted column to copy the exact same date down an entire
-column. Instead, the Pandas API provides for passing in both fixed-position
-arguments and labeled arguments as follows::
+This takes us to our final example. When stepping row-by-row through a Python
+Pandas DataFrame, it is often desirable to insert "meta" attributes that can be
+used in the function WITHOUT HARD-WIRING MAGIC NUMBERS into the function or
+putting it in the other obvious place, which is its own dedicated column in the
+spreadsheet. Now say this was a date and it was the same date for every row. It
+would be a wasted column to copy the exact same date down an entire column.
+Instead, the Pandas API provides for passing in both fixed-position arguments
+and labeled arguments as follows::
 
     df['C'] = df.apply(funcname, axis=1, args=('X', 'Y'), foo='bar', spam='eggs')
 
