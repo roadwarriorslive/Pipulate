@@ -184,5 +184,5 @@ be AWARE of where to grab the date from::
         keyword = row[1]
         adate = kwargs['date']
         # Now we do something to get clicks
-        clicks = gsc_clicks(url, keyword, date) 
+        clicks = gsc_clicks(url, keyword, adate) 
         return clicks
