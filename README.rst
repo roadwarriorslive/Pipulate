@@ -2,7 +2,7 @@
 Pipulate - Automate Google Sheets
 ########################################
 
-Have you ever become frustrated trying to automate data-jobs directly in Google
+Have you ever been frustrated trying to automate data-jobs directly in Google
 Spreadsheet due to tricky OAuth2 login issues or just dealing with the complex
 APIs? If you have a gmail or corporate G Suite email that you can use, simply::
 
@@ -109,7 +109,7 @@ carefully at what's going on here, because it's about to get a lot more
 complicated.
 
 ****************************************
-Using values from other columns in row for function arguments
+Giving function data from entire row as an argument
 ****************************************
 
 While the above example is powerful, it's not nearly as powerful as feeding TWO
@@ -175,7 +175,7 @@ but altered rectangular spreadsheet range back in, this entire system is just
 becoming adept at Pandas using GSheets instead of CSVs.
 
 ****************************************
-Inserting arbirary arguments into function
+Giving function "extra" argument data
 ****************************************
 
 This takes us to our final example. When stepping row-by-row through a Python
@@ -222,3 +222,71 @@ be AWARE of where to grab the date from::
         # Now we do something to get clicks
         clicks = gsc_clicks(url, keyword, adate) 
         return clicks
+
+****************************************
+Working with very large lists
+****************************************
+
+Google Sheet is not always the best place to process very large lists, but the
+alternative is often worse, so the trick is to just decide by what size chunks
+you should process at a time. This concept is sometimes called step-by-stride.
+To use step-by-stride with Pipulate we take a basic example and simply add a
+"stride" variable and edit out the last 2 lines that set and push the values::
+
+    import pandas as pd
+    import pipulate as gs
+    stride = 10
+    key = '[Your GSheet key]'
+    tab_name = 'Sheet1'
+    rows = (1, 1000)
+    cols = ('a', 'b')
+    sheet = gs.key(key)
+    tab = sheet.worksheet(tab_name)
+    cl, df = gs.pipulate(tab, rows, cols)
+    #df['B'] = 'foo'
+    #gs.populate(tab, cl, df)
+
+In the above example, we added a "stride" variable and edited out the last 2
+lines that updates the sheet. Say the sheet were 1,000 rows long and we are
+telling it to travel 1000 rows by 10-row strides and we wanted it to take 100
+steps. We replace the last 2 lines with the following step-by-stride code::
+
+    steps = rows[1] - rows[0] + 1
+    for i in range(steps):
+        row = i % stride
+        if not row:
+            r1 = rows[0] + i
+            r2 = r1 + stride - 1
+            rtup = (r1, r2)
+            print('Cells %s to %s:' % rtup)
+            cl, df = gs.pipulate(tab, rtup, cols)
+            df['B'] = 'foo'
+            gs.populate(tab, cl, df)
+
+And that's pretty much it. All together, the code to process 10,000 rows by
+100-row long strides directly in Google Sheets for accomplishing almost
+anything you can write in a function looks are 100 long looks like this. Just
+replace the line with 'foo' with one of the fancier pandas API calls described
+above::
+
+    import pandas as pd
+    import pipulate as gs
+    stride = 100
+    key = '[Your GSheet key]'
+    tab_name = 'Sheet1'
+    rows = (1, 10000)
+    cols = ('a', 'b')
+    sheet = gs.key(key)
+    tab = sheet.worksheet(tab_name)
+    cl, df = gs.pipulate(tab, rows, cols)
+    steps = rows[1] - rows[0] + 1
+    for i in range(steps):
+        row = i % stride
+        if not row:
+            r1 = rows[0] + i
+            r2 = r1 + stride - 1
+            rtup = (r1, r2)
+            print('Cells %s to %s:' % rtup)
+            cl, df = gs.pipulate(tab, rtup, cols)
+            df['B'] = 'foo'
+            gs.populate(tab, cl, df)
