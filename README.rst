@@ -206,7 +206,7 @@ use::
         return rv
 
 In this way our functions can either per-row input parameters found in the
-selected range OR it can use input values injected probably in API-calls to
+selected range OR it can use values injected directly into the API-calls to
 pandas. Say you had a URL, keyword and you wanted to look up some metric like
 number of clicks on that URL for that keyword for a given day::
 
