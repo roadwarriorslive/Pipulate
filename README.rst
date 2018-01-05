@@ -1,6 +1,6 @@
-********************
+########################################
 Pipulate - Automate Google Sheets
-********************
+########################################
 
 Have you ever had to manipulate data in a Google Spreadsheet and got tripped up
 on how difficult it is to use Google's OAuth2 login, and dealing with complex
@@ -15,6 +15,10 @@ are achieved using Python pandas 3rd party library, so as your next command,
 import pandas::
 
     import pandas as pd
+
+****************************************
+Configuring a job
+****************************************
 
 Next, you set the arguments standing for the spreadsheet (file) and worksheet
 (tab) you want to manipulate, along with the cell range defined as a set of row
