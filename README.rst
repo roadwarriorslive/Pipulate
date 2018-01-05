@@ -38,7 +38,8 @@ Now say you wanted to just plug the value "foo" into column B::
     df['B'] = 'foo'
 
 And you can now "push" your changed dataframe object back into the still
-compatibly-shaped cell_list object::
+compatibly-shaped cell_list object. This is the magic moment. Watch the
+spreadseet in the borwser as you do this. You will see the values change!::
 
     gs.populate(tab, cl, df)
 
@@ -82,7 +83,7 @@ complicated.
 While the above example is powerful, it's not nearly as powerful as feeding TWO
 arguments to the function using values from out of each row of the dataframe.
 To do that, we simply call the .apply() method of the ENTIRE DATAFRAME and not
-just a row:
+just a row::
 
     df['B'] = df.apply(funcname, axis=1)
 
@@ -113,23 +114,23 @@ However now the count_times function has more responsibility than the
 status_code function. Specifically, it needs to know to get the URL from column
 A and the keyword from column B, so we rewrite status_code as follows::
 
-	def count_times(row):
-		import requests
-		url = row[0]
-		keyword = row[1]
-		rv = None
-		try:
-			ro = requests.get(url)
-		except:
-			pass
-		rv = '--'
-		if ro and ro.status_code == 200:
-			rv = ro.text.count(keyword)
-		return rv
+    def count_times(row):
+        import requests
+        url = row[0]
+        keyword = row[1]
+        rv = None
+        try:
+            ro = requests.get(url)
+        except:
+            pass
+        rv = '--'
+        if ro and ro.status_code == 200:
+            rv = ro.text.count(keyword)
+        return rv
 
 With the above example, you put the URL you want to examine in column A and the
 text whose occurrences you want to count on the page in column B. The results
-appear in column C. 
+appear in column C.
 
 Remember that the Python code is running under your control so you are not
 limited as you would be using Google's own built-in Apps Script (Google's
@@ -141,3 +142,47 @@ onto in memory. Aside from "copying" the initial range out of a spreadsheet and
 then "pasting" the altered range back in, this entire system is just becoming
 adept at Pandas using GSheets instead of CSVs.
 
+And this takes us to our final example. When stepping row-by-row through a
+Python Pandas DataFrame, it is often desirable to insert "meta" attributes that
+can be used in the function WITHOUT HARD-WIRING MAGIC NUMBERS into the function
+or putting it in the other obvious place, which is its own dedicated column in
+the spreadsheet. Now say this was a date and it was the same date for every
+row. It would be a wasted column to copy the exact same date down an entire
+column. Instead, the Pandas API provides for passing in both fixed-position
+arguments and labeled arguments as follows::
+
+    df['C'] = df.apply(funcname, axis=1, args=('X', 'Y'), foo='bar', spam='eggs')
+
+Exactly like we had to tell the function WHICH values from the row we are
+interested in INSIDE the named function, we ALSO have to show which position
+out of the tuple-like fixed-position arguments to use and which labeled data to
+use::
+
+    def funcname(row):
+        url = row[0]
+        keyword = row[1]
+        arg_one = args[0]
+        arg_two = args[1]
+        label_one = kwargs['foo']
+        label_two = kwargs['spam']
+        rv = 'default'
+        #do stuff here
+        return rv
+
+In this way our functions can either per-row input parameters found in the
+selected range OR it can use input values injected probably in API-calls to
+pandas. Say you had a URL, keyword and you wanted to look up some metric like
+number of clicks on that URL for that keyword for a given day::
+
+    df['C'] = df.apply(search_console, axis=1, adate='2018-01-01')
+
+All we have to do is make the function that this Pandas command is invoking to
+be AWARE of where to grab the date from::
+
+    def search_console(row):
+        url = row[0]
+        keyword = row[1]
+        adate = kwargs['date']
+        # Now we do something to get clicks
+        clicks = gsc_clicks(url, keyword, date) 
+        return clicks
