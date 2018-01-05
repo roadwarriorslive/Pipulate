@@ -182,10 +182,10 @@ When stepping row-by-row through a Python Pandas DataFrame, it is often
 desirable to insert "meta" attributes that can be used in the function WITHOUT
 HARD-WIRING MAGIC NUMBERS into the function or putting it in the other obvious
 place, which is its own dedicated column in the spreadsheet. Now say this was a
-date and it was the same date for every row. It would be a wasted column to
-copy the exact same date down an entire column.  Instead, the Pandas API
-provides for passing in both fixed-position arguments and labeled arguments as
-follows::
+date and it was the same date for every row. It would be a waste to copy the
+exact same date down an entire column. Instead, the Pandas API provides for
+passing in both fixed-position arguments and labeled arguments by sort of
+"side-loading" them in as follows::
 
     df['C'] = df.apply(funcname, axis=1, args=('X', 'Y'), foo='bar', spam='eggs')
 
