@@ -139,8 +139,8 @@ Python code is running on your local machine (often via Jupyter Notebook) or
 the cloud or on cheap hardware like Raspberry Pi's. All your data manipulation
 or "creative work" is taking place in Pandas DataGrids which you are "painting"
 onto in memory. Aside from "copying" the initial range out of a spreadsheet and
-then "pasting" the altered range back in, this entire system is just becoming
-adept at Pandas using GSheets instead of CSVs.
+then "pasting" the identically-shaped but altered-content range back in, this
+entire system is just becoming adept at Pandas using GSheets instead of CSVs.
 
 And this takes us to our final example. When stepping row-by-row through a
 Python Pandas DataFrame, it is often desirable to insert "meta" attributes that
