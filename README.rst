@@ -239,10 +239,10 @@ To use step-by-stride with Pipulate we take a basic example and simply add a
 
     import pandas as pd
     import pipulate as gs
-    stride = 10
+    stride = 100
     key = '[Your GSheet key]'
     tab_name = 'Sheet1'
-    rows = (1, 1000)
+    rows = (1, 10000)
     cols = ('a', 'b')
     sheet = gs.key(key)
     tab = sheet.worksheet(tab_name)
@@ -250,10 +250,14 @@ To use step-by-stride with Pipulate we take a basic example and simply add a
     #df['B'] = 'foo'
     #gs.populate(tab, cl, df)
 
-In the above example, we added a "stride" variable and edited out the last 2
-lines that updates the sheet. Say the sheet were 1,000 rows long and we are
-telling it to travel 1000 rows by 10-row strides and we wanted it to take 100
-steps. We replace the last 2 lines with the following step-by-stride code::
+In the above example, we only added a "stride" variable and edited out the last
+2 lines that updates the sheet. Say the sheet were 10,000 rows long. Updating A
+LOT of data with one of these AJAX-y data-calls is never a good idea. The
+bigger the attempted update of a GSheet in one-pass, the more mysterious things
+are going on while you wait, and the likelihood of an entire update failing
+because of a single row failing goes up. The solution is to travel 10,000 rows
+by 100-row strides (or smaller) and we wanted it to take 1000 steps. We replace
+the last 2 lines with the following step-by-stride code::
 
     steps = rows[1] - rows[0] + 1
     for i in range(steps):
