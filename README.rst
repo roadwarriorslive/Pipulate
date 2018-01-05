@@ -30,6 +30,10 @@ spreadsheet user interfaces::
     rows = (2, 10)
     cols = ('a', 'b')
 
+****************************************
+Connecting to sheet
+****************************************
+
 Now that we've set the parameters, we need to open the connection to the Google
 Sheet (as if it were a database) and populate a couple of "compatibly shaped"
 objects, a GSpread "cell_list" and a Pandas DataFrame object::
@@ -37,6 +41,10 @@ objects, a GSpread "cell_list" and a Pandas DataFrame object::
     sheet = gs.key(key)
     tab = sheet.worksheet(tab_name)
     cl, df = gs.pipulate(tab, rows, cols)
+
+****************************************
+Your first pipulation
+****************************************
 
 Now say you wanted to just plug the value "foo" into column B::
 
@@ -60,6 +68,10 @@ numbers in the spreadsheet, because GSpread converts all numbers to strings::
 
     gs.populate(tab, cl, df)
     df['B'] = df['A'].astype(int) * 2
+
+****************************************
+Applying a function
+****************************************
 
 Now say you wanted to apply a function to every line of the DataFrame to do
 something like retrieve a title tag from a web address, and you had a function
@@ -89,6 +101,10 @@ While the above example is powerful, it's not nearly as powerful as feeding TWO
 arguments to the function using values from out of each row of the dataframe.
 To do that, we simply call the .apply() method of the ENTIRE DATAFRAME and not
 just a row::
+
+****************************************
+Using values from other columns in row for function arguments
+****************************************
 
     df['B'] = df.apply(funcname, axis=1)
 
@@ -146,6 +162,10 @@ in Pandas DataGrids which you are "painting" onto in memory. Aside from copying
 the initial range out of a spreadsheet and then pasting the identically-shaped
 but altered rectangular spreadsheet range back in, this entire system is just
 becoming adept at Pandas using GSheets instead of CSVs.
+
+****************************************
+Inserting arbirary argument values into function
+****************************************
 
 This takes us to our final example. When stepping row-by-row through a Python
 Pandas DataFrame, it is often desirable to insert "meta" attributes that can be
