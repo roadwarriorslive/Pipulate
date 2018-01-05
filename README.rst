@@ -265,9 +265,8 @@ steps. We replace the last 2 lines with the following step-by-stride code::
 
 And that's pretty much it. All together, the code to process 10,000 rows by
 100-row long strides directly in Google Sheets for accomplishing almost
-anything you can write in a function looks are 100 long looks like this. Just
-replace the line with 'foo' with one of the fancier pandas API calls described
-above::
+anything you can write in a function to replace 'foo' with one of the fancier
+pandas API calls described above::
 
     import pandas as pd
     import pipulate as gs
