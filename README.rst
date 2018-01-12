@@ -355,7 +355,7 @@ system (not covered here). First we connect to SQL::
     conn = psycopg2.connect(constr)
 
 ****************************************
-Building very long SQL WHERE's 
+Building very long SQL WHERE's
 ****************************************
 
 Next, we're going to need to build a string fragment for use in the SQL query
@@ -376,7 +376,14 @@ almost the exact above pattern (yay, Python!)::
     urls = df['A'].tolist()
     urls = "url = '%s'" % "' OR url = '".join(urls)
 
-Now, we unify the SQL fragment above with the rest of the SQL statement::
+The 2 lines above convert a Pandas DataFrame into a standard Python list and
+then employs several different APIs within a few inches: comprehensions, string
+formatting and replacement, and the join method. Don't feel bad if you don't
+understand it at a glance. When people talk about being expressive AND brief in
+Python, this is what they mean. Being able to read and write statements like
+those above is a pure joy. You can look at the urls value in Jupyter Notebook
+to confirm it's a standard Python list. Now, we unify the SQL fragment above
+with the rest of the SQL statement::
 
 	def sql_stmt(urls, start, end):
 		return """SELECT
@@ -396,12 +403,72 @@ Now, we unify the SQL fragment above with the rest of the SQL statement::
 Using Pandas CSVs as SQL temp table
 ****************************************
 
-You can now use the above function to populate a Pandas DataFrame:: 
+You can now use the above function that really only returns the not-executed
+multi-line text string which is used to populate a Pandas DataFrame and cache
+the results locally just in case you come back during a separate Jupyter
+Notebook session, you won't have to re-execute the query (unless you want the
+freshet data)::
 
     df_sql = pd.read_sql(sql_stmt(urls, start='2018-01-01', end='2018-01-31'), con=conn)
     df_sql.to_csv('df_sql.csv') #In case you need it later
     df_sql = pd.read_csv('df_sql.csv', index_col=0) #Optional / already in memory
 
-We will now use this data source that now contains a list of URLs and the
-number of hits each got in that time-window to create your own Pipulate data
-source (or service).
+****************************************
+Correlating URLs in Google Sheet and Pandas Dataframe
+****************************************
+
+We will now use this data source which now contains the "result" list of URLs
+with the accompanying the number of hits each got in that time-window to create
+your own Pipulate data source (or service). The GROUP BY in the query and
+sum(hits) is aggregating all the hit counters into one entry per URL. The
+correlation here is similar to an Excel VLookup. We make a pipualte function
+for the DataFrame.appy() method to use THIS local data::
+
+	def hits(row, **kwargs):
+		url = row[1]
+		df_obj = kwargs['df_obj']
+		retval = 'Not found'
+		try:
+			retval = df_obj.loc[df_obj['url'] == url]
+			retval = retval['hits'].iloc[0]
+		except:
+			pass
+		return retval
+
+****************************************
+Using local Pandas DataFrame as "external" datasource
+****************************************
+
+Now instead of hitting the remote, slow, expensive SQL database every time, we
+execute the SQL once at the beginning and can use the local data to pipulate::
+
+    key = '[Your GSheet key]'
+    tab_name = 'Sheet1'
+    rows = (1, 1000)
+    cols = ('a', 'b')
+    sheet = gs.key(key)
+    tab = sheet.worksheet(tab_name)
+
+    cl, df = gs.pipulate(tab, rows, cols)
+	df['B'] = df.apply(hits, axis=1, df_obj=df_sql)
+    gs.populate(tab, cl, df)
+
+Or if it's over a huge list or is error-prone and will need rows entirely
+skipped because of bad data or whatever, we can step by stride by replacing the
+above 3 lines with::
+
+    stride = 10
+	steps = rows[1] - rows[0] + 1
+	for i in range(steps):
+		row = i % stride
+		if not row:
+			r1 = rows[0] + i
+			r2 = r1 + stride - 1
+			rtup = (r1, r2)
+			print('Cells %s to %s:' % rtup)
+			cl, df = gs.pipulate(tab, rtup, cols)
+			try:
+				df['B'] = df.apply(hits, axis=1, df_obj=df_sql)
+				gs.populate(tab, cl, df)
+			except:
+				pass
