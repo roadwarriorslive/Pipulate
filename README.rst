@@ -220,7 +220,7 @@ be AWARE of where to grab the date from::
         keyword = row[1]
         adate = kwargs['date']
         # Now we do something to get clicks
-        clicks = gsc_clicks(url, keyword, adate) 
+        clicks = gsc_clicks(url, keyword, adate)
         return clicks
 
 And there you have it. That's pretty much the basic use of Pipulate for
@@ -301,3 +301,107 @@ pandas API calls described above::
             cl, df = gs.pipulate(tab, rtup, cols)
             df['B'] = 'foo'
             gs.populate(tab, cl, df)
+
+########################################
+SQL Data Sources
+########################################
+
+It's easiest to pipulate when you only have to apply one quick function to
+every line of a list because it takes advantage of the Pandas framework
+conventions; how the .apply() method works in particular. HOWEVER, if your
+per-row query is a slow and expensive SQL query INSIDE a pipulate function like
+this (the WRONG way)::
+
+	def hits(row, **kwargs):
+		import psycopg2
+		import apis
+		url = row[1]
+		start = kwargs['start']
+		end = kwargs['end']
+		a = apis.constr
+		atup = tuple(a[x] for x in a.keys())
+		user, password, host, port, dbname = atup
+		constr = "user='%s' password='%s' host='%s' port='%s' dbname='%s'" % atup
+		conn = psycopg2.connect(constr)
+		sql = """SELECT
+			url,
+			sum(hits) as hits
+		FROM
+			table_name
+		WHERE
+			url = '%s'
+			AND date >= '%s'
+			AND date <= '%s'
+		GROUP BY
+			url
+		""" % (url, start, end)
+		df = pd.read_sql(sql, con=conn)
+		return df['hits'].iloc[0]
+
+****************************************
+Connecting to SQL from Pandas
+****************************************
+
+We now  want to move the SQL query OUTSIDE the function intended to be called
+from .apply(). Instead, you get all the records in one go and plop them onto
+your drive as a CSV file and hit THAT later in the function from .apply().
+Getting psycopg2 installed is usually easiest through Anaconda's conda repo
+system (not covered here). First we connect to SQL::
+
+    a = apis.constr
+    atup = tuple(a[x] for x in a.keys())
+    user, password, host, port, dbname = atup
+    constr = "user='%s' password='%s' host='%s' port='%s' dbname='%s'" % atup
+    conn = psycopg2.connect(constr)
+
+****************************************
+Building very long SQL WHERE's 
+****************************************
+
+Next, we're going to need to build a string fragment for use in the SQL query
+that calls out every single URL that we want to get data back on. One of the
+worst parts about SQL is "in list" manipulations. The only way to be sure is a
+pattern like this::
+
+    WHERE
+        url = 'example1'
+        OR url = 'example2'
+        OR url = 'example3'
+        OR url = 'example4'
+
+...and so on for as many URLs as you have to check. They're probably in your
+Google sheet already, so let's grab them into a list in a way that creates
+almost the exact above pattern (yay, Python!)::
+
+    urls = df['A'].tolist()
+    urls = "url = '%s'" % "' OR url = '".join(urls)
+
+Now, we unify the SQL fragment above with the rest of the SQL statement::
+
+	def sql_stmt(urls, start, end):
+		return """SELECT
+			url,
+			sum(hits) as hits
+		FROM
+			table_name
+		WHERE
+			%s
+			AND date >= '%s'
+			AND date <= '%s'
+		GROUP BY
+			url
+		""" % (sql_urls, start, end)
+
+****************************************
+Using Pandas CSVs as SQL temp table
+****************************************
+
+You can now use the above function to populate a Pandas DataFrame:: 
+
+    df_sql = pd.read_sql(sql_stmt(urls, start='2018-01-01', end='2018-01-31'), con=conn)
+    df_sql.to_csv('df_sql.csv') #In case you need it later
+    df_sql = pd.read_csv('df_sql.csv', index_col=0) #Optional / already in memory
+
+We will now use this data source that now contains a list of URLs and the
+number of hits each got in that time-window to create your own Pipulate data
+source (or service).
