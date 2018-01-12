@@ -376,13 +376,14 @@ almost the exact above pattern (yay, Python!)::
     urls = df['A'].tolist()
     urls = "url = '%s'" % "' OR url = '".join(urls)
 
-The 2 lines above convert a Pandas DataFrame into a standard Python list. When
-people talk about being expressive AND brief in Python, this is what they mean.
-Being able to read and write statements like those above is a pure joy. You can
-look at the urls value in Jupyter Notebook to confirm it's good (if a bit
-wordy) valid SQL that will slip right into a query. Now, we unify the SQL
-fragment above with the rest of the SQL statement using the endlessly beautiful
-possibilities of the Python API::
+The 2 lines above convert a Pandas DataFrame into a standard Python list and
+then into a fragement of a SQL statement. When people talk about being
+expressive AND brief in Python, this is what they mean.  Being able to read and
+write statements like those above is a pure joy. You can look at the urls value
+in Jupyter Notebook to confirm it's good (if a bit wordy) valid SQL that will
+slip right into a query. Now, we unify the SQL fragment above with the rest of
+the SQL statement using the endlessly beautiful possibilities of the Python
+API::
 
     def sql_stmt(urls, start, end):
         return """SELECT
