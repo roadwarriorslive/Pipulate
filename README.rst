@@ -316,31 +316,31 @@ conventions; how the .apply() method works in particular. HOWEVER, if your
 per-row query is a slow and expensive SQL query INSIDE a pipulate function like
 this (the WRONG way)::
 
-	def hits(row, **kwargs):
-		import psycopg2
-		import apis
-		url = row[1]
-		start = kwargs['start']
-		end = kwargs['end']
-		a = apis.constr
-		atup = tuple(a[x] for x in a.keys())
-		user, password, host, port, dbname = atup
-		constr = "user='%s' password='%s' host='%s' port='%s' dbname='%s'" % atup
-		conn = psycopg2.connect(constr)
-		sql = """SELECT
-			url,
-			sum(hits) as hits
-		FROM
-			table_name
-		WHERE
-			url = '%s'
-			AND date >= '%s'
-			AND date <= '%s'
-		GROUP BY
-			url
-		""" % (url, start, end)
-		df = pd.read_sql(sql, con=conn)
-		return df['hits'].iloc[0]
+    def hits(row, **kwargs):
+        import psycopg2
+        import apis
+        url = row[1]
+        start = kwargs['start']
+        end = kwargs['end']
+        a = apis.constr
+        atup = tuple(a[x] for x in a.keys())
+        user, password, host, port, dbname = atup
+        constr = "user='%s' password='%s' host='%s' port='%s' dbname='%s'" % atup
+        conn = psycopg2.connect(constr)
+        sql = """SELECT
+            url,
+            sum(hits) as hits
+        FROM
+            table_name
+        WHERE
+            url = '%s'
+            AND date >= '%s'
+            AND date <= '%s'
+        GROUP BY
+            url
+        """ % (url, start, end)
+        df = pd.read_sql(sql, con=conn)
+        return df['hits'].iloc[0]
 
 ****************************************
 Connecting to SQL from Pandas
@@ -389,19 +389,19 @@ those above is a pure joy. You can look at the urls value in Jupyter Notebook
 to confirm it's a standard Python list. Now, we unify the SQL fragment above
 with the rest of the SQL statement::
 
-	def sql_stmt(urls, start, end):
-		return """SELECT
-			url,
-			sum(hits) as hits
-		FROM
-			table_name
-		WHERE
-			%s
-			AND date >= '%s'
-			AND date <= '%s'
-		GROUP BY
-			url
-		""" % (sql_urls, start, end)
+    def sql_stmt(urls, start, end):
+        return """SELECT
+            url,
+            sum(hits) as hits
+        FROM
+            table_name
+        WHERE
+            %s
+            AND date >= '%s'
+            AND date <= '%s'
+        GROUP BY
+            url
+        """ % (sql_urls, start, end)
 
 ****************************************
 Using Pandas CSVs as SQL temp table
@@ -428,16 +428,16 @@ sum(hits) is aggregating all the hit counters into one entry per URL. The
 correlation here is similar to an Excel VLookup. We make a pipualte function
 for the DataFrame.appy() method to use THIS local data::
 
-	def hits(row, **kwargs):
-		url = row[1]
-		df_obj = kwargs['df_obj']
-		retval = 'Not found'
-		try:
-			retval = df_obj.loc[df_obj['url'] == url]
-			retval = retval['hits'].iloc[0]
-		except:
-			pass
-		return retval
+    def hits(row, **kwargs):
+        url = row[1]
+        df_obj = kwargs['df_obj']
+        retval = 'Not found'
+        try:
+            retval = df_obj.loc[df_obj['url'] == url]
+            retval = retval['hits'].iloc[0]
+        except:
+            pass
+        return retval
 
 ****************************************
 Using local Pandas DataFrame as "external" datasource
@@ -454,7 +454,7 @@ execute the SQL once at the beginning and can use the local data to pipulate::
     tab = sheet.worksheet(tab_name)
 
     cl, df = gs.pipulate(tab, rows, cols)
-	df['B'] = df.apply(hits, axis=1, df_obj=df_sql)
+    df['B'] = df.apply(hits, axis=1, df_obj=df_sql)
     gs.populate(tab, cl, df)
 
 Or if it's over a huge list or is error-prone and will need rows entirely
@@ -462,17 +462,17 @@ skipped because of bad data or whatever, we can step by stride by replacing the
 above 3 lines with::
 
     stride = 10
-	steps = rows[1] - rows[0] + 1
-	for i in range(steps):
-		row = i % stride
-		if not row:
-			r1 = rows[0] + i
-			r2 = r1 + stride - 1
-			rtup = (r1, r2)
-			print('Cells %s to %s:' % rtup)
-			cl, df = gs.pipulate(tab, rtup, cols)
-			try:
-				df['B'] = df.apply(hits, axis=1, df_obj=df_sql)
-				gs.populate(tab, cl, df)
-			except:
-				pass
+    steps = rows[1] - rows[0] + 1
+    for i in range(steps):
+        row = i % stride
+        if not row:
+            r1 = rows[0] + i
+            r2 = r1 + stride - 1
+            rtup = (r1, r2)
+            print('Cells %s to %s:' % rtup)
+            cl, df = gs.pipulate(tab, rtup, cols)
+            try:
+                df['B'] = df.apply(hits, axis=1, df_obj=df_sql)
+                gs.populate(tab, cl, df)
+            except:
+                pass
