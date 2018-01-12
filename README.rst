@@ -63,10 +63,6 @@ And you can now "push" your changed dataframe object back into the still
 compatibly-shaped cell_list object. This is the magic moment. Watch the
 spreadseet in the borwser as you do this. You will see the values change!::
 
-****************************************
-Be sure to watch your Google Sheet!
-****************************************
-
     gs.populate(tab, cl, df)
 
 Congratulations. You've just pipulated.
