@@ -1,7 +1,3 @@
-import apis  # Put apis.py file in this same folder containing:
-# client_id = "Your Google client ID from https://console.cloud.google.com/"
-# client_secret = "Your Google client secret from same site (keep file secure)"
-
 import sys
 import os
 import gspread
@@ -13,7 +9,8 @@ import pandas as pd
 from time import sleep
 
 filename = "oauth.dat"
-
+client_id =     "769904540573-knscs3mhvd56odnf7i8h3al13kiqulft.apps.googleusercontent.com"
+client_secret = "D2F1D--b_yKNLrJSPmrn2jik"
 
 def create_google_service(filename, api_name, version):
     """Return instance of Google Service object."""
