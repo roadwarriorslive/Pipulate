@@ -2,10 +2,9 @@
 Pipulate - Automate Google Sheets
 ########################################
 
-Wouldn't it be nice to pull data from data sources all over the Internet
-directly into Google Sheets easily, using a language such as Python? Have you
-ever actually tried doing that and run into the tricky OAuth2 login challenges?
-Well, if you have a gmail or corporate G Suite email that you can use, simply::
+Have you ever tried to manipulate data directly in Google Spreadsheets a little
+bit more like it was a database, only to be frustrated by the OAuth2 login
+issues, or maybe the complexity of the APIs? With Pipulate, you simply::
 
     import pipulate as gs
 
