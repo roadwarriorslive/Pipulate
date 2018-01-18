@@ -147,13 +147,39 @@ clarifies and simplifies the process. To do something slightly more
 interesting, you can simply copy the contents of column A to B::
 
     df['B'] = df['A']
+    gs.populate(tab, cl, df)
+
+****************************************
+Working with numbers
+****************************************
 
 Say there were numbers in column A and you wanted column be to be that number
 times 2. Notice I have to convert column A to integers even if they look like
 numbers in the spreadsheet, because GSpread converts all numbers to strings::
 
-    gs.populate(tab, cl, df)
     df['B'] = df['A'].astype(int) * 2
+
+This example will throw an error if you try it on the Zen of Python data, you
+would get ValueError: invalid literal for int() with base 10: 'The Zen of
+Python, by Tim Peters'. But you can put numbers in column A and execute this to
+see a simple x2 operation, to start to acquaint you with how genuinely
+automate-able algorithms can start to replace tedious manual Excel work without
+proprietary vendor nonsense. 
+
+****************************************
+Cheerleading for Anaconda, Jupyter Notebook and Pandas
+****************************************
+
+This also shows you that even if you know Python, there's some Pandas (and
+numpy) learning to do here for things like casting datatypes which is different
+than Python. Python sits on NumPy which is one of those hyper-optimized (in C)
+Python libraries that provides N-dimensional arrays that are actually different
+animals than native Python lists, tuples or dicts. df.astype() is a method that
+Pandas DataFrames inherit from NumPy numerical arrays. Pandas is a FRAMEWORK on
+top of NumPy, which explains why I dumped my older Flash-based Pipulate
+projects in favor of this nearly identically purposed framework with its own
+world of juggernaut of groundswell support among scientists. Yeah, I think I'll
+use that.
 
 ****************************************
 Applying a function
