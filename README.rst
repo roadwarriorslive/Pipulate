@@ -51,11 +51,11 @@ too. So just go ahead and import Pandas::
 Configuring a job
 ****************************************
 
-In that same Jupyter Notebook .ipynb file you installed pipulate from, you can
-now set the values that will allow you to connect to our spreadsheet (file) and
-worksheet (tab), along with the cell range defined as a set of row and column
-indexes, using row-numbers and column-letters that display in spreadsheet user
-interfaces::
+In that same Jupyter Notebook that you imported pipulate and pandas into, you
+can now set the values that will allow you to connect to our spreadsheet (file)
+and worksheet (tab), along with the cell range defined as a set of row and
+column indexes, using row-numbers and column-letters that display in
+spreadsheet user interfaces::
 
     key = '[Your GSheet key]'
     tab_name = 'Sheet1'
