@@ -199,12 +199,12 @@ above, but appending strings to an already already string-type column)::
 Cheerleading for Anaconda, Jupyter Notebook and Pandas
 ****************************************
 
-The above example also shows that even if you know Python, there's some new
-learning to do here for things like casting datatypes, which is actually
-different from pure Python. Pandas sits on NumPy which is a popular C-optimized
-Python library that provides N-dimensional arrays for the same kind of work
-that IBM dinosaurs still do in Fortran for science and stuff. Pandas is a
-FRAMEWORK on top of NumPy for such work, but which turns out to be perfectly
+The above example with .astype() also shows that even if you know Python,
+there's some new learning to do here for things like casting datatypes, which
+is actually different from pure Python. Pandas sits on NumPy which is a popular
+C-optimized Python library that provides N-dimensional arrays for the same kind
+of work that IBM dinosaurs still do in Fortran for science and stuff. Pandas is
+a FRAMEWORK on top of NumPy for such work, but which turns out to be perfectly
 designed for what I used to use Pipulate for when it was a Flash-based Web app. 
 
 ****************************************
