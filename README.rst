@@ -269,6 +269,10 @@ we will desire to apply this command::
 
     df['C'] = df.apply(count_times, axis=1)
 
+****************************************
+CAVEAT! Pipulate functions need to be row/argument "aware"
+****************************************
+
 However now the count_times function has more responsibility than the
 status_code function. Specifically, it needs to know to get the URL from column
 A and the keyword from column B, so we rewrite status_code as follows::
@@ -289,30 +293,44 @@ A and the keyword from column B, so we rewrite status_code as follows::
 
 With the above example, you put the URL you want to examine in column A and the
 text whose occurrences you want to count on the page in column B. The results
-appear in column C.
+appear in column C. This is where it starts getting more complex, and there are
+ALWAYS costs to complexity. Mapping has to go somewhere, and I currently choose
+to put it INSIDE Pipulate functions, which is not necessarily the best
+long-term decision, but complex as it may be, you're going to be able to follow
+everything that's going on right there in front of you without maintaining
+some awful set of per-project externalized mapping tables... ugh! You'll suffer
+through that sort of thing soon enough. For here, for now; MAGIC NUMBERS!
+
+****************************************
+FYI: Python execution-context choices
+****************************************
 
 Remember that the Python code is running under your control so you are not
 limited as you would be using Google's own built-in Apps Script (Google's
 answer to VBA) for the same purposes. Your Python code is running on your local
-machine (often via Jupyter Notebook) or the cloud or on cheap hardware like
-Raspberry Pi's. All your data manipulation or "creative work" is taking place
-in Pandas DataGrids which you are "painting" onto in memory. Aside from copying
-the initial range out of a spreadsheet and then pasting the identically-shaped
-but altered rectangular spreadsheet range back in, this entire system is just
+machine (via Jupyter Notebook) and can easily be moved to the cloud or on cheap
+hardware like Raspberry Pi's. Truth be told, Jupyter Notebook is optional.
+
+All your data manipulation or "creative work" is taking place in Pandas
+DataGrids which you are "painting" onto in memory. Aside from copying the
+initial range out of a spreadsheet and then pasting the identically-shaped but
+altered rectangular spreadsheet range back in, this entire system is just
 becoming adept at Pandas using GSheets instead of CSVs.
 
 ****************************************
-Giving function "extra" argument data
+Giving your function "extra" argument data per row
 ****************************************
 
 When stepping row-by-row through a Python Pandas DataFrame, it is often
 desirable to insert "meta" attributes that can be used in the function WITHOUT
-HARD-WIRING MAGIC NUMBERS into the function or putting it in the other obvious
-place, which is its own dedicated column in the spreadsheet. Now say this was a
-date and it was the same date for every row. It would be a waste to copy the
-exact same date down an entire column. Instead, the Pandas API provides for
-passing in both fixed-position arguments and labeled arguments by sort of
-"side-loading" them in as follows::
+putting those numbers wastefully on every row of the spreadsheet you're
+manipulating. It would be a dedicated column for ONE VALUE repeated all the way
+down the column! Not efficient or elegant at all. 
+
+Say the data we wanted to add is a date and it was the same date for every row.
+It would be a waste to copy the exact same date down an entire column. Instead,
+the Pandas API provides for passing in both fixed-position arguments and
+labeled arguments by sort of "side-loading" them in as follows::
 
     df['C'] = df.apply(funcname, axis=1, args=('X', 'Y'), foo='bar', spam='eggs')
 
