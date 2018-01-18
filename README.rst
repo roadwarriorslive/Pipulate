@@ -10,12 +10,11 @@ new Python 3 notebook, and then type::
 
     !pip install pipulate
 
-Pipulate is an easy way to use Python to help perform online investigations we
-SEO and Social Media folks like doing. This makes those real. I recommend
-against cloning this Github repo if you're not planning on helping me expand
-the (extremely minimal) system. Once you pip install pipulate, everything else
-gets done in new Jupyter Notebook .ipynb files kept in arbitrary directories,
-like the one I assume you're in right now. Next step::
+Pipulate facilitates online data-investigations that marketers and others like
+doing by simplifying the Python part. I recommend against cloning this Github
+repo if you're not actually going to help me expand the framework. I expect
+that most people here will simply want to work in your own arbitrary new
+Jupyter Notebook folder and .ipynb file where your next step is::
 
     import pipulate as gs
 
@@ -24,18 +23,18 @@ must click, which will open another tab in your browser presenting a Google
 login prompt. Choose which Google account you want to use to access Sheets. It
 must have permission to the sheet you're manipulating. It also asks for various
 other Google Service permissions while it has the chance, in case you plan on
-using this to track YouTube view-counts and such.
+using this to track YouTube view-counts and such. Pipulate is good sheet (gs).
 
 ****************************************
 Of Pandas & Dependencies
 ****************************************
 
 Pipulate is designed to let you do all your challenging work in Pandas. Pandas
-is not part of Python "core", but then neither is Google Sheets or the GSpread
-API, so no reason to complain. You're drinking deep of both the Google and
-Python Koolaid with Pipulate. You could do a lot worse. Any disenfranchised
-SQL-ites out there, Python Pandas is where you should be going anyway. It's not
-like Oracle's going to buy Python too. Go ahead and import Pandas:
+is not part of Python "core", but then neither is Google Sheets or GSpread, so
+don't complain. You're drinking deep of both the Google and Python Koolaid with
+Pipulate. You could do a lot worse. Any disenfranchised SQL-ites out there,
+Python Pandas is where you should be going anyway. It's not like Oracle's going
+to buy Python too. Go ahead and import Pandas::
 
     import pandas as pd
 
@@ -80,16 +79,29 @@ this and hit Enter::
 
     cl
 
-This GSpread cell_list is nearly a normal flat python list with just a few has
-extra attributes layered on, such as cl[0]._row to see what row a cell belongs
-to and such. But you don't need to know that because you just leave cl alone at
-this point and do all your manipulations in the Pandas DataFrame (df) which
-have built-in capabilities that make it the equivalent of a very powerful
-spreadsheet and database combined. We now manipulate the df and then push it
-back into the location of the otherwise untouched cl. You can inspect the
-current state of the df::
+GSpread cell_lists are normal flat Python lists with just a few has extra
+attributes layered-on, such as cl[0]._row to see what row a cell belongs to and
+cl[0]._col for its column. But you don't need to know that because you just
+leave cl alone at this point and do all your manipulations in the Pandas
+DataFrame (df) which have built-in capabilities that make it the equivalent of
+a very powerful spreadsheet and database combined. We now manipulate the df and
+then push it back into the location of the otherwise untouched cl. Just to
+satisfy curiosity, you can inspect the current state of the df::
 
     df
+
+****************************************
+Jupyter Notebook is a REPL enviornment
+****************************************
+
+You can inspect objects like cl and df this way because you are in a REPL
+(read, eval, print, loop) code execution environment for Python code execution
+where the contents of a cl or df just sort of "hang around" in memory
+mid-execution for your casual perusal and interactive massaging. This is as
+opposed to invoking the normal Python interpreter from a command-line or
+webserver where interaction with the user only occurs where the developer
+programmed it to occur. With REPLs like Jupyter Notebook, your interaction with
+"still executing" code is... well, a small miracle. Take advantage of it.
 
 ****************************************
 Your first pipulation
