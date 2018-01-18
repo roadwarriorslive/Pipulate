@@ -77,7 +77,8 @@ type on its very own line::
 
 ...and you will now have 20 nice new lines about the Zen of Python to
 copy/paste from Jupyter Notebook to a newly-made Google Sheet you can use for
-the below exercise.
+the below exercise. In other words, create a new Google Sheet and paste the 20
+Zen of Python lines into cells A1:A20. You are now ready to pipulate.
 
 ****************************************
 Connecting to sheet
