@@ -166,7 +166,8 @@ see a simple *2 operation and acquaint yourself with how automate-able things
 start to become when you replace tedious manual Excel processes with
 automation. Yes, there are the proprietary vendor embedded-languages like
 Microsoft's VBA (Visual Basic for Applications) or Google's App Script
-(GSheet's VBA-equivalent) designed to do similar things.
+(GSheet's VBA-equivalent) designed to do similar things... but... if I need to
+explain it, you're in the wrong place.
 
 ****************************************
 Cheerleading for Anaconda, Jupyter Notebook and Pandas
