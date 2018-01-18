@@ -208,7 +208,7 @@ a FRAMEWORK on top of NumPy for such work, but which turns out to be perfectly
 designed for what I used to use Pipulate for when it was a Flash-based Web app. 
 
 ****************************************
-Applying a function
+Applying Python function to Google Sheet row
 ****************************************
 
 Now say you wanted to apply a function to every line of the DataFrame to do
