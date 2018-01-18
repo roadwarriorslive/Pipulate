@@ -24,7 +24,8 @@ must click, which will open another tab in your browser presenting a Google
 login prompt. Choose which Google account you want to use to access Sheets. It
 must have permission to the sheet you're manipulating. It also asks for various
 other Google Service permissions while it has the chance, in case you plan on
-using this to track YouTube view-counts and such. Pipulate is good sheet (gs).
+using this to track YouTube view-counts and such. In case you're wondering why
+import it as gs, it's because pipulate is goodsheet.
 
 ****************************************
 Of Pandas & Dependencies
