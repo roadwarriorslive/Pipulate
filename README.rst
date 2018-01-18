@@ -384,7 +384,7 @@ this (the WRONG way)::
 Connecting to SQL from Pandas
 ****************************************
 
-We now  want to move the SQL query OUTSIDE the function intended to be called
+We now want to move the SQL query OUTSIDE the function intended to be called
 from .apply(). Instead, you get all the records in one go and plop them onto
 your drive as a CSV file and hit THAT later in the function from .apply().
 Getting psycopg2 installed is usually easiest through Anaconda's conda repo
