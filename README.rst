@@ -24,7 +24,7 @@ must click, which will open another tab in your browser presenting a Google
 login prompt. Choose which Google account you want to use to access Sheets. It
 must have permission to the sheet you're manipulating. It also asks for various
 other Google Service permissions while it has the chance, in case you plan on
-using this to track YouTube view-counts and such. Now import pandas::
+using this to track YouTube view-counts and such.
 
 ****************************************
 Of Pandas & Dependencies
@@ -35,7 +35,7 @@ is not part of Python "core", but then neither is Google Sheets or the GSpread
 API, so no reason to complain. You're drinking deep of both the Google and
 Python Koolaid with Pipulate. You could do a lot worse. Any disenfranchised
 SQL-ites out there, Python Pandas is where you should be going anyway. It's not
-like Oracle's going to buy Python too::
+like Oracle's going to buy Python too. Go ahead and import Pandas:
 
     import pandas as pd
 
