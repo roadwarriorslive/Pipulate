@@ -11,7 +11,7 @@ new Python 3 notebook, and then type::
     !pip install pipulate
 
 Pipulate is an easy way to use Python to help perform online investigations we
-like done by SEOs and Social Media folk. This makes those real. I recommend
+SEO and Social Media folks like doing. This makes those real. I recommend
 against cloning this Github repo if you're not planning on helping me expand
 the (extremely minimal) system. Once you pip install pipulate, everything else
 gets done in new Jupyter Notebook .ipynb files kept in arbitrary directories,
