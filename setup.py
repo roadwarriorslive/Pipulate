@@ -11,6 +11,7 @@ setup(
   author_email = 'miklevin@gmail.com',
   url = 'https://github.com/miklevin/pipulate',
   python_requires='>=3',
+  install_requires=['gspread', 'httplib2', 'google-api-python-client'],
   keywords = ['data', 'datascience', 'spreadsheet', 'pandas', 'gspread', 'gdata', 'seo']
 )
 
