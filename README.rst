@@ -14,8 +14,8 @@ Make a new Python 3 notebook, and then type::
 Pipulate facilitates online data-investigations that marketers and others like
 doing by simplifying the Python part. You don't even need to clone this Github
 repo. Pipulate is just a library you just call at the top of your own arbitrary
-new Jupyter Notebook in whatever directory and .ipynb file. Your next step in
-that file is::
+new Jupyter Notebook in whatever directory and .ipynb file you happen to be
+working in. Your next step in that file is::
 
     import pipulate as gs
 
