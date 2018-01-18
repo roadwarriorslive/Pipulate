@@ -4,9 +4,10 @@ Pipulate - Automate Google Sheets for SEO & Social Media
 
 Have you ever tried to programatically manipulate data in Google Spreadsheets
 like it was a database only to be frustrated by OAuth2 login issues, API
-complexity, or simply not really knowing how to program yet? Well then, go
-install https://www.anaconda.com/download/ then start Jupyter Notebook. Make a
-new Python 3 notebook, and then type::
+complexity, or simply not really knowing how to program yet? If like me your
+life evolves around changing data in spreadsheets and you simply MUST automate,
+then go install https://www.anaconda.com/download/ then start Jupyter Notebook.
+Make a new Python 3 notebook, and then type::
 
     !pip install pipulate
 
