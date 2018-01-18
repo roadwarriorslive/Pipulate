@@ -24,7 +24,7 @@ must click, which will open another tab in your browser presenting a Google
 login prompt. Choose which Google account you want to use to access Sheets. It
 must have permission to the sheet you're manipulating. It also asks for various
 other Google Service permissions while it has the chance, in case you plan on
-using this to track YouTube view-counts and such. 
+using this to track YouTube view-counts and such.
 
 In case you're wondering why I recommend (conventionally) importing pipulate as
 gs, it's because Pipulate is actually Goodsheet (my parallel project that
@@ -162,24 +162,23 @@ numbers in the spreadsheet, because GSpread converts all numbers to strings::
 This example will throw an error if you try it on the Zen of Python data, you
 would get ValueError: invalid literal for int() with base 10: 'The Zen of
 Python, by Tim Peters'. But you can put numbers in column A and execute this to
-see a simple x2 operation, to start to acquaint you with how genuinely
-automate-able algorithms can start to replace tedious manual Excel work without
-proprietary vendor nonsense. 
+see a simple *2 operation and acquaint yourself with how automate-able things
+start to become when you replace tedious manual Excel processes with
+automation. Yes, there are the proprietary vendor embedded-languages like
+Microsoft's VBA (Visual Basic for Applications) or Google's App Script
+(GSheet's VBA-equivalent) designed to do similar things.
 
 ****************************************
 Cheerleading for Anaconda, Jupyter Notebook and Pandas
 ****************************************
 
-This also shows you that even if you know Python, there's some Pandas (and
-numpy) learning to do here for things like casting datatypes which is different
-than Python. Python sits on NumPy which is one of those hyper-optimized (in C)
-Python libraries that provides N-dimensional arrays that are actually different
-animals than native Python lists, tuples or dicts. df.astype() is a method that
-Pandas DataFrames inherit from NumPy numerical arrays. Pandas is a FRAMEWORK on
-top of NumPy, which explains why I dumped my older Flash-based Pipulate
-projects in favor of this nearly identically purposed framework with its own
-world of juggernaut of groundswell support among scientists. Yeah, I think I'll
-use that.
+The above example also shows that even if you know Python, there's some new
+learning to do here for things like casting datatypes, which is actually
+different from pure Python. Pandas sits on NumPy which is a popular C-optimized
+Python library that provides N-dimensional arrays for the same kind of work
+that IBM dinosaurs still do in Fortran for science and stuff. Pandas is a
+FRAMEWORK on top of NumPy for such work, but which turns out to be perfectly
+designed for what I used to use Pipulate for when it was a Flash-based Web app. 
 
 ****************************************
 Applying a function
