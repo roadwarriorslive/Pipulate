@@ -1,5 +1,5 @@
 ########################################
-Pipulate - Automate Google Sheets
+Pipulate - Automate Google Sheets for SEO & Social Media
 ########################################
 
 Have you ever tried to programatically manipulate data in Google Spreadsheets
