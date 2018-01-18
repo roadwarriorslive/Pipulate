@@ -50,7 +50,7 @@ def oauth():
 
     path = os.path.dirname(os.path.realpath('__file__'))
     path_filename = os.path.join(path, filename)
-    flow = OAuth2WebServerFlow(apis.client_id, apis.client_secret, scopes,
+    flow = OAuth2WebServerFlow(client_id, client_secret, scopes,
                                redirect_uri='urn:ietf:wg:oauth:2.0:oob',
                                response_type='code',
                                prompt='consent',
