@@ -12,10 +12,9 @@ new Python 3 notebook, and then type::
 
 Pipulate facilitates online data-investigations that marketers and others like
 doing by simplifying the Python part. You don't even need to clone this Github
-repo if like most people here, you will simply want to work in your
-own arbitrary new Jupyter Notebook folder/file where you'll sort of be
-developing your own secret plug-ins for Pipulate. Your next step in the same
-notebook you installed Pipualte from is::
+repo. Pipulate is just a library you just call at the top of your own
+investigations that you perform in arbitrary new Jupyter Notebook folder/files.
+The next step in the same notebook you installed Pipualte from is::
 
     import pipulate as gs
 
