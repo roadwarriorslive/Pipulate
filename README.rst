@@ -11,6 +11,27 @@ Make a new Python 3 notebook, and then type::
 
     !pip install pipulate
 
+****************************************
+For the impatient
+****************************************
+
+For the impatient among you, the shortest way to express pipulating and testing
+your install is as follows, but I suggest you read the rest of the way through
+the documentation, at least up to where I talk about df.apply() to get what's
+really going on here (the ability to apply a Python functions per row in Google
+Sheets)::
+
+    import pipulate as gs
+    sheet= gs.key('replace-me-with-your-google-sheet-key-from-url')
+    tab = sheet.worksheet('Sheet1')
+    cl, df = gs.pipulate(tab, (1, 20), ('a', 'b'))
+    df['B'] = 'foo'
+    gs.populate(tab, cl, df)
+
+****************************************
+A tour through Pipulate
+****************************************
+
 Pipulate facilitates online data-investigations that marketers and others like
 doing by simplifying the Python part. You don't even need to clone this Github
 repo. Pipulate is just a library you just call at the top of your own arbitrary
