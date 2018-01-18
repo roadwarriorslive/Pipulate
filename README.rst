@@ -188,7 +188,12 @@ start to become when you replace tedious manual Excel processes with
 automation. Yes, there are the proprietary vendor embedded-languages like
 Microsoft's VBA (Visual Basic for Applications) or Google's App Script
 (GSheet's VBA-equivalent) designed to do similar things... but... if I need to
-explain it, you're in the wrong place.
+explain it, you're in the wrong place. 
+
+If you wanted to append foo to column A and put the result in column B (like
+above, but appending strings to an already already string-type column)::
+
+    df['B'] = df['A'] + 'foo'
 
 ****************************************
 Cheerleading for Anaconda, Jupyter Notebook and Pandas
