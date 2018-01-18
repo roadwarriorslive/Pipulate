@@ -11,10 +11,10 @@ new Python 3 notebook, and then type::
     !pip install pipulate
 
 Pipulate facilitates online data-investigations that marketers and others like
-doing by simplifying the Python part. I recommend against cloning this Github
-repo if you're not actually going to help me expand the framework. I expect
-that most people here will simply want to work in your own arbitrary new
-Jupyter Notebook folder and .ipynb file where your next step is::
+doing by simplifying the Python part. You don't even need to clone this Github
+repo if like I suspect most people here, you will simply want to work in your
+own arbitrary new Jupyter Notebook folder and .ipynb file where your next step
+is::
 
     import pipulate as gs
 
