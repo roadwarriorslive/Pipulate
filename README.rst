@@ -59,7 +59,7 @@ interfaces::
 
     key = '[Your GSheet key]'
     tab_name = 'Sheet1'
-    rows = (2, 10)
+    rows = (1, 20)
     cols = ('a', 'b')
 
 Be sure to use the long string of characters copied out of a Google Sheet URL
@@ -68,6 +68,16 @@ by slashes. The tab_name is always "Sheet1" on a freshly-made sheet. If you
 rename it or want to manipulate a different tab, be sure to make it match this.
 The rows and cols tuple defines the rectangular region you will want to
 manipulate.
+
+It may happen that you don't have a Google Sheet set up and have NOTHING in
+mind for this first experience. Okay, go to a new cell in Jupyter Notebook and
+type on its very own line::
+
+    import this
+
+...and you will now have 20 nice new lines about the Zen of Python to
+copy/paste from Jupyter Notebook to a newly-made Google Sheet you can use for
+the below exercise.
 
 ****************************************
 Connecting to sheet
