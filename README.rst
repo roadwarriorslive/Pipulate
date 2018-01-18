@@ -2,17 +2,40 @@
 Pipulate - Automate Google Sheets
 ########################################
 
-Have you ever tried to manipulate data directly in Google Spreadsheets a little
-bit more like it was a database, only to be frustrated by the OAuth2 login
-issues, or maybe the complexity of the APIs? With Pipulate, you simply::
+Have you ever tried to programatically manipulate data in Google Spreadsheets
+like it was a database only to be frustrated by OAuth2 login issues, API
+complexity, or simply not really knowing how to program yet? Well then, go
+install https://www.anaconda.com/download/ then start Jupyter Notebook. Make a
+new Python 3 notebook, and then type::
+
+    !pip install pipulate
+
+Pipulate is an easy way to use Python to help perform online investigations we
+like done by SEOs and Social Media folk. This makes those real. I recommend
+against cloning this Github repo if you're not planning on helping me expand
+the (extremely minimal) system. Once you pip install pipulate, everything else
+gets done in new Jupyter Notebook .ipynb files kept in arbitrary directories,
+like the one I assume you're in right now. Next step::
 
     import pipulate as gs
 
-This will open your web browser and cause a standard Google Password prompt.
-Choose which Google account you want to use and login. It will give you a long
-string of characters to copy back into Jupyter Notebook. All data manipulations
-are achieved using Python pandas 3rd party library, so as your next command,
-import pandas::
+This will cause an enormous link to appear in your Jupyter Notebook that you
+must click, which will open another tab in your browser presenting a Google
+login prompt. Choose which Google account you want to use to access Sheets. It
+must have permission to the sheet you're manipulating. It also asks for various
+other Google Service permissions while it has the chance, in case you plan on
+using this to track YouTube view-counts and such. Now import pandas::
+
+****************************************
+Of Pandas & Dependencies
+****************************************
+
+Pipulate is designed to let you do all your challenging work in Pandas. Pandas
+is not part of Python "core", but then neither is Google Sheets or the GSpread
+API, so no reason to complain. You're drinking deep of both the Google and
+Python Koolaid with Pipulate. You could do a lot worse. Any disenfranchised
+SQL-ites out there, Python Pandas is where you should be going anyway. It's not
+like Oracle's going to buy Python too::
 
     import pandas as pd
 
@@ -20,15 +43,22 @@ import pandas::
 Configuring a job
 ****************************************
 
-Set the arguments standing for the spreadsheet (file) and worksheet (tab) you
-want to manipulate, along with the cell range defined as a set of row and
-column indexes, using row-numbers and column-letters that display in
-spreadsheet user interfaces::
+In that same Jupyter Notebook .ipynb file, you can now set the values that will
+allow you to connect to our spreadsheet (file) and worksheet (tab), along with
+the cell range defined as a set of row and column indexes, using row-numbers
+and column-letters that display in spreadsheet user interfaces::
 
     key = '[Your GSheet key]'
     tab_name = 'Sheet1'
     rows = (2, 10)
     cols = ('a', 'b')
+
+Be sure to use the long string of characters copied out of a Google Sheet URL
+for the key. That's the long string of alphanumeric gobbledygook not broken up
+by slashes. The tab_name is always "Sheet1" on a freshly-made sheet. If you
+rename it or want to manipulate a different tab, be sure to make it match this.
+The rows and cols tuple defines the rectangular region you will want to
+manipulate.
 
 ****************************************
 Connecting to sheet
@@ -36,20 +66,30 @@ Connecting to sheet
 
 Open the connection to the Google Sheet (as if it were a database) and copy a
 rectangular range in both the GSpread "cell_list" format and as a Pandas
-DataFrame. This is pipulating... setting the stage with 2 similar shapes::
+DataFrame. This is setting the stage to pipulate, by creating two identical
+shapes, but of different types (one from GSpread and the other from Pandas)::
 
     sheet = gs.key(key)
     tab = sheet.worksheet(tab_name)
     cl, df = gs.pipulate(tab, rows, cols)
 
-Even though the cl is a cell_list from GSpread, it is also very similar to a
-simple Python list; only difference is that it has some extra attributes thrown
-in to represent spreadsheets (like row and col attributes per cell). The df on
-the other hand is a Pandas DataFrame and is very much like a spreadsheet with
-rows, columns and all the accompanying built-in spreadsheet-like (and database)
-capabilities that the pandas framework provides. That is why we MANIPULATE the
-df and then push it back into the location of the otherwise untouched cl... and
-then pipulate.
+Even though the cl is a cell_list from GSpread, it is also very similar to one
+of Python's "core" lists. At this point because Jupyter Notebook lets you
+inspect the contexts of cl or df simply by running them on their own line. Type
+this and hit Enter::
+
+    cl
+
+This GSpread cell_list is nearly a normal flat python list with just a few has
+extra attributes layered on, such as cl[0]._row to see what row a cell belongs
+to and such. But you don't need to know that because you just leave cl alone at
+this point and do all your manipulations in the Pandas DataFrame (df) which
+have built-in capabilities that make it the equivalent of a very powerful
+spreadsheet and database combined. We now manipulate the df and then push it
+back into the location of the otherwise untouched cl. You can inspect the
+current state of the df::
+
+    df
 
 ****************************************
 Your first pipulation
@@ -60,8 +100,10 @@ Now say you wanted to just plug the value "foo" into column B::
     df['B'] = 'foo'
 
 And you can now "push" your changed dataframe object back into the still
-compatibly-shaped cell_list object. This is the magic moment. Watch the
-spreadseet in the borwser as you do this. You will see the values change!::
+compatibly-shaped cell_list object. This is the magic moment. Feel free to peek
+at it first "in memory" by just typing df all by itself again in a Jupyter
+Notebook cell. Then type the following command and watch the spreadsheet in the
+browser as you do this. You will see the values change!::
 
     gs.populate(tab, cl, df)
 
@@ -377,8 +419,8 @@ almost the exact above pattern (yay, Python!)::
     urls = "url = '%s'" % "' OR url = '".join(urls)
 
 The 2 lines above convert a Pandas DataFrame into a standard Python list and
-then into a fragement of a SQL statement. When people talk about being
-expressive AND brief in Python, this is what they mean.  Being able to read and
+then into a fragment of a SQL statement. When people talk about being
+expressive AND brief in Python, this is what they mean. Being able to read and
 write statements like those above is a pure joy. You can look at the urls value
 in Jupyter Notebook to confirm it's good (if a bit wordy) valid SQL that will
 slip right into a query. Now, we unify the SQL fragment above with the rest of
@@ -422,7 +464,7 @@ with the accompanying the number of hits each got in that time-window to create
 your own Pipulate data source (or service). The GROUP BY in the query and
 sum(hits) is aggregating all the hit counters into one entry per URL. The
 correlation here is similar to an Excel VLookup. We make a pipualte function
-for the DataFrame.appy() method to use THIS local data::
+for the DataFrame.apply() method to use THIS local data::
 
     def hits(row, **kwargs):
         url = row[1]
