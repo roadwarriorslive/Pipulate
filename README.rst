@@ -42,8 +42,8 @@ Things about OAuth2 you should eventually know
 Upon first-run, Pipulate asks you once for access once and never again until
 things goes wrong and you have to login again. We've all seen Google forget
 passwords you've asked it to remember before, sending you instead to the
-browser for re-authentication (sometimes with double-authentication). Same
-thing here. That's just a (good) thing with paranoid OAuth2.
+browser for re-authentication (sometimes with double-verify). Same thing here.
+That's just a (good) thing with paranoid OAuth2.
 
 Even with Google's extra security, you should be aware that a file named
 ouath.dat is dropped in your working directory (where you Jupyter Notebook
