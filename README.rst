@@ -33,7 +33,7 @@ Things even the impatient must know
 - You must be on Python >= 3.x.
 - You must be using a Google Spreadsheet in online mode.
 - You must copy the "key" found in the URL to the above code.
-- You must be able to recognize row indexes when you see them.
+- You must be able to recognize row and column indexes when you see them.
 - When the Google prompt pops up, you must grant permission with an account
   that has access to the GSheet you're editing (can be the same account).
 
