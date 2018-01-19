@@ -34,6 +34,7 @@ Things even the impatient must know
 - You must copy the "key" found in the URL to the above code.
 - When the Google prompt pops up, you must grant permission with an account
   that has access to the GSheet you're editing (can be the same account).
+- You must be able to recognize row indexes when you see them.
 
 ****************************************
 Things about OAuth2 you should eventually know
