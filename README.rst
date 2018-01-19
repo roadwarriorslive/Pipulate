@@ -32,18 +32,18 @@ Things even the impatient must know
 - You must be using a Google Spreadsheet in online mode.
 - You must be on Python >= 3.x.
 - You must copy the "key" found in the URL to the above code.
-- When the Google prompt pops up, you must use an account that also has
-  permission to edit the GSheet you're editing (can/probably will be the same
-  account).
+- When the Google prompt pops up, you must grant permission with an account
+  that has access to the GSheet you're editing (can be the same account).
 
 ****************************************
 Things about OAuth2 you should eventually know
 ****************************************
 
-Pipulate asks you once for access once and never again until things goes wrong
-and you have to login again. We've all seen Google forget passwords you've
-asked it to remember before, sending you instead to the browser for
-re-authentication (sometimes with double-authentication). Same thing here.
+Upon first-run, Pipulate asks you once for access once and never again until
+things goes wrong and you have to login again. We've all seen Google forget
+passwords you've asked it to remember before, sending you instead to the
+browser for re-authentication (sometimes with double-authentication). Same
+thing here. That's just a (good) thing with paranoid OAuth2.
 
 Even with Google's extra security, you should be aware that a file named
 ouath.dat is dropped in your working directory (where you Jupyter Notebook
