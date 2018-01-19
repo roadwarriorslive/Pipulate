@@ -29,8 +29,8 @@ Python functions and df.apply() in Pandas to grok full power.::
 Things even the impatient must know
 ****************************************
 
-- You must be using a Google Spreadsheet in online mode.
 - You must be on Python >= 3.x.
+- You must be using a Google Spreadsheet in online mode.
 - You must copy the "key" found in the URL to the above code.
 - You must be able to recognize row indexes when you see them.
 - When the Google prompt pops up, you must grant permission with an account
