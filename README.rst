@@ -76,10 +76,12 @@ must have permission to the sheet you're manipulating. It also asks for various
 other Google Service permissions while it has the chance, in case you plan on
 using this to track YouTube view-counts and such.
 
-In case you're wondering why I recommend (conventionally) importing pipulate as
-gs, it's because Pipulate is actually Goodsheet (my parallel project that
-became the new Pipulate) and I like the way gs.pipulate() looks. The old
-Goodsheet is now fully wrapped into Pipulate.
+In case you're wondering why I recommend the convention of importing pipulate
+as gs, it's because my other project GoodSheet got fully wrapped in here, and I
+like reminding everyone Pipualte is GoodSheet. I also got very fond of how
+gs.pipulate() looks, and I think you will too in how it avoids the verbosity of
+pipulate.pipulate() or abbreviation-confusion of pi.pipulate() vs.
+pip.pipulate(), etc.
 
 ****************************************
 Of Pandas & Dependencies
