@@ -15,18 +15,47 @@ Make a new Python 3 notebook, and then type::
 For the impatient
 ****************************************
 
-For the impatient among you, the shortest way to express pipulating and testing
-your install is as follows, but I suggest you read the rest of the way through
-the documentation, at least up to where I talk about df.apply() to get what's
-really going on here (the ability to apply a Python functions per row in Google
-Sheets)::
+The quickest way to pipulate is as follows, but I suggest you read through to
+Python functions and df.apply() in Pandas to grok full power.::
 
     import pipulate as gs
-    sheet= gs.key('replace-me-with-your-google-sheet-key-from-url')
+    sheet = gs.key('Your-GSheet-gobbledygook-key-here')
     tab = sheet.worksheet('Sheet1')
     cl, df = gs.pipulate(tab, (1, 20), ('a', 'b'))
     df['B'] = 'foo'
     gs.populate(tab, cl, df)
+
+****************************************
+Things even the impatient must know
+****************************************
+
+- You must be using a Google Spreadsheet in online mode.
+- You must be on Python >= 3.x.
+- You must copy the "key" found in the URL to the above code.
+- When the Google prompt pops up, you must use an account that also has
+  permission to edit the GSheet you're editing (can/probably will be the same
+  account).
+
+****************************************
+Things about OAuth2 you should eventually know
+****************************************
+
+Pipulate asks you once for access once and never again until things goes wrong
+and you have to login again. We've all seen Google forget passwords you've
+asked it to remember before, sending you instead to the browser for
+re-authentication (sometimes with double-authentication). Same thing here.
+
+Even with Google's extra security, you should be aware that a file named
+ouath.dat is dropped in your working directory (where you Jupyter Notebook
+.ipynb files save) which allows full access to your Google stuff. Be warned.
+Those creating actual automations around Pipulate (taking it out of Jupyter
+Notebook and into cron or whatever) should monitor for failed logins.
+
+The refresh token is a temporary password that gets you a temporary password.
+Normal re-logging USING the refresh token happens all the time to invisibly log
+you back in after normal time-expired logout which invalidates the old
+temporary password, requiring the refresh token be used to acquire a new one.
+Open oauth.dat in a text editor to see the tokens.
 
 ****************************************
 A tour through Pipulate
