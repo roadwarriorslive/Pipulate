@@ -15,8 +15,9 @@ Make a new Python 3 notebook, and then type::
 For the impatient
 ****************************************
 
-The quickest way to pipulate is as follows, but I suggest you read through to
-Python functions and df.apply() in Pandas to grok full power.::
+The quickest way to pipulate is as follows, but I suggest you read through this
+documentation down to where I cover Python functions and how they get called by
+the Pandas df.apply() method in order to properly grok the power here.::
 
     import pipulate as gs
     sheet = gs.key('Your-GSheet-gobbledygook-key-here')
