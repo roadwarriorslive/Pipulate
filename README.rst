@@ -53,11 +53,11 @@ ouath.dat is dropped in your working directory (where you Jupyter Notebook
 Those creating actual automations around Pipulate (taking it out of Jupyter
 Notebook and into cron or whatever) should monitor for failed logins.
 
-The refresh token is a temporary password that gets you a temporary password.
-Normal re-logging USING the refresh token happens all the time to invisibly log
-you back in after normal time-expired logout which invalidates the old
-temporary password, requiring the refresh token be used to acquire a new one.
-Open oauth.dat in a text editor to see the tokens.
+The refresh token is a temporary "password" that gets you a temporary
+"password". Normal re-logging USING the refresh token happens all the time to
+invisibly log you back in after normal time-expired logout which invalidates
+the old temporary "password", requiring the refresh token be used to acquire a
+new one.  Open oauth.dat in a text editor to see the tokens.
 
 ****************************************
 A tour through Pipulate
