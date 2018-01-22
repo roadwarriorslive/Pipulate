@@ -655,12 +655,8 @@ above 3 lines with::
 Did somebody say SEO?
 ########################################
 
-Of course a system like this is immediately going to be used to collect SERPs.
-SERPs are the Search Engine Result Pages that contain all the information about
-how your site (and your competitors) are doing on such-and-such a keyword when
-such-and-such a search is performed under such-and-such conditions. Now, these
-details vary wildly, but don't forget that the Google empire was built on
-delivering those top-10 best blue links insanely faster, better and with less
-clutter than anyone else, so performing these sorts of exercises still have
-value, even thought technically violate the Google terms of service, so caveat
-emptor.
+Coming soon:
+
+- Connecting to your Google Analytics
+- Connecting to your Google Search Console
+- Capturing search engine result pages (SERPs)
