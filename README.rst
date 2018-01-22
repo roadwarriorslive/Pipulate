@@ -20,11 +20,13 @@ documentation down to where I cover Python functions and how they get called by
 the Pandas df.apply() method in order to properly grok the power here.::
 
     import pipulate as gs
-    sheet = gs.key('Your-GSheet-gobbledygook-key-here')
-    tab = sheet.worksheet('Sheet1')
-    cl, df = gs.pipulate(tab, (1, 20), ('a', 'b'))
+    import pandas as pd
+    key = 'Your GSheet Key Here'
+    tab = gs.key(key).sheet1
+    cl, df = gs.pipulate(tab, rows=(1, 20), cols=('a', 'b'))
     df['B'] = 'foo'
     gs.populate(tab, cl, df)
+    print(gs.link(key))
 
 ****************************************
 Things even the impatient must know
@@ -83,7 +85,8 @@ as gs, it's because my other project GoodSheet got fully wrapped in here, and I
 like reminding everyone Pipualte is GoodSheet. I also got very fond of how
 gs.pipulate() looks, and I think you will too in how it avoids the verbosity of
 pipulate.pipulate() or abbreviation-confusion of pi.pipulate() vs.
-pip.pipulate(), etc.
+pip.pipulate(), etc. And anyone who discovered Pipulate and got THIS far, reach
+out to me and let me know. I'll try to reboot a Pipulate community again.
 
 ****************************************
 Of Pandas & Dependencies
@@ -221,10 +224,10 @@ start to become when you replace tedious manual Excel processes with
 automation. Yes, there are the proprietary vendor embedded-languages like
 Microsoft's VBA (Visual Basic for Applications) or Google's App Script
 (GSheet's VBA-equivalent) designed to do similar things... but... if I need to
-explain it, you're in the wrong place. 
+explain it, you're in the wrong place.
 
 If you wanted to append foo to column A and put the result in column B (like
-above, but appending strings to an already already string-type column)::
+above, but appending strings to an already already string-type column).::
 
     df['B'] = df['A'] + 'foo'
 
@@ -238,7 +241,7 @@ is actually different from pure Python. Pandas sits on NumPy which is a popular
 C-optimized Python library that provides N-dimensional arrays for the same kind
 of work that IBM dinosaurs still do in Fortran for science and stuff. Pandas is
 a FRAMEWORK on top of NumPy for such work, but which turns out to be perfectly
-designed for what I used to use Pipulate for when it was a Flash-based Web app. 
+designed for what I used to use Pipulate for when it was a Flash-based Web app.
 
 ****************************************
 Applying Python function to Google Sheet row
@@ -647,3 +650,17 @@ above 3 lines with::
                 gs.populate(tab, cl, df)
             except:
                 pass
+
+########################################
+Did somebody say SEO?
+########################################
+
+Of course a system like this is immediately going to be used to collect SERPs.
+SERPs are the Search Engine Result Pages that contain all the information about
+how your site (and your competitors) are doing on such-and-such a keyword when
+such-and-such a search is performed under such-and-such conditions. Now, these
+details vary wildly, but don't forget that the Google empire was built on
+delivering those top-10 best blue links insanely faster, better and with less
+clutter than anyone else, so performing these sorts of exercises still have
+value, even thought technically violate the Google terms of service, so caveat
+emptor.
