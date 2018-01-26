@@ -7,9 +7,12 @@ like it was a database only to be frustrated by OAuth2 login issues, API
 complexity, or simply not really knowing how to program yet? If like me your
 life revolves around changing data in spreadsheets and you simply MUST
 automate, then go install https://www.anaconda.com/download/ then start Jupyter
-Notebook.  Make a new Python 3 notebook, and then type::
+Notebook. Make a new Python 3 notebook, and then type::
 
     !pip install pipulate
+
+The exclamation point is Jupyter Notebook !command syntax for executing
+operating system commands (not Python) as if from the command-line.
 
 ****************************************
 For the impatient
@@ -650,6 +653,15 @@ above 3 lines with::
                 gs.populate(tab, cl, df)
             except:
                 pass
+
+########################################
+Hitting the APIs directly
+########################################
+
+Pipulate processes lists, and when things go wrong you sometimes want to leave
+both Pipulate and Pandas and focus directly on the Python function. When it
+comes time to hit an API directly, you put the Python code directly into
+Jupyter Notebook so that you can play around with it.
 
 ########################################
 Did somebody say SEO?
