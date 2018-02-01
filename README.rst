@@ -106,13 +106,26 @@ also asks for various other Google Service permissions while it has the chance,
 in case you plan on using Pipulate to track your YouTube view-counts and such,
 which you should totally do.
 
+****************************************
+Pipulate naming conventions
+****************************************
+
 In case you're wondering why I recommend the convention of importing pipulate
 as gs, it's because my other project GoodSheet got fully wrapped in here, and I
 like reminding everyone Pipualte is GoodSheet. I also got very fond of how
 gs.pipulate() looks, and I think you will too in how it avoids the verbosity of
 pipulate.pipulate() or abbreviation-confusion of pi.pipulate() vs.
-pip.pipulate(), etc. And anyone who discovered Pipulate and got THIS far, reach
-out to me and let me know. I'll try to reboot a Pipulate community again.
+pip.pipulate(), etc. 
+
+You can think of Pipulate a lot like the Flask web microframework. Flask
+doesn't do much for you except provide a library for you that you can use in
+your otherwise normal Python code. Flask becomes an instance of a Flask object
+using the odd convention app = Flask(__name__), then all of Flask is accessed
+through this app object. Similarly, Pipulate is accessed through the gs object,
+and the act of pipulating and its symmetrical act of populating is
+gs.pipulate() and gs.populate(), respectively. Everything else about Pipulate
+is pretty much learning how to do a bunch of stupid Pandas tricks in-between
+those two commands.
 
 ****************************************
 Of Pandas & Dependencies
