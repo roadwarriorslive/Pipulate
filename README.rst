@@ -2,17 +2,30 @@
 Pipulate - Automate Google Sheets for SEO & Social Media
 ########################################
 
-Have you ever tried to programatically manipulate data in Google Spreadsheets
-like it was a database only to be frustrated by OAuth2 login issues, API
-complexity, or simply not really knowing how to program yet? If like me your
-life revolves around changing data in spreadsheets and you simply MUST
-automate, then go install https://www.anaconda.com/download/ then start Jupyter
+The time comes in every marketer's life when you want to use those beloved
+spreadsheets of yours as either a database or a dashboard. Why shouldn't they
+just update themselves? This is the future, after all. Simply connecting to
+Google Services shouldn't be the insurrmountable challange that it is, mostly
+thanks to OAuth2 and crappy APIs. I fix that for you here, and teach you how to
+"pipulate" your dumbass SEO or Social Media career over to Data Science.
+
+Step #1: Go install https://www.anaconda.com/download/ then start Jupyter
 Notebook. Make a new Python 3 notebook, and then type::
 
     !pip install pipulate
 
 The exclamation point is Jupyter Notebook !command syntax for executing
-operating system commands (not Python) as if from the command-line.
+operating system commands (not Python) as if from the command-line, so all this
+is doing is installing Pipulate and its requirements that are not already
+covered by the Anaconda install. If you're doing this on a non-Anaconda system,
+you will need to pip install pandas first... and pray. 
+
+Hint: some Python libraries like Pandas have long dependency-chains with such
+hellish cross-platform issues (C-compiling, OS driver installs, etc.) that it
+called for the creation of Anaconda in the first place so that non-IT-pros and
+mere mortals (such as scientests) could actually do this stuff. It's a good
+bandwagon to jump onto -- possibly bigger than JavaScript, though few will put
+themselves out on such a limb espousing such nonsense right now.
 
 ****************************************
 For the impatient
