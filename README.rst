@@ -2,8 +2,15 @@
 pipulate v0.1.6
 ===============
 
-:Author: `Mike Levin <http://mikelev.in>`_
+:Author: `Mike Levin, SEO <http://mikelev.in>`_
 
+
+The time comes in every marketer's life when you want to use those beloved
+spreadsheete of yours as either a database or a dashboard. Why shouldn't they
+just update themselves? This is the future, after all. Simply connecting to
+Google Services shouldn't be the insurrmountable challange that it is, mostly
+thanks to OAuth2 and crappy APIs. I fix that for you here, and teach you how to
+"pipulate" your dumbass SEO or Social Media career over to Data Science.
 
 .. contents::
     :backlinks: none
@@ -14,13 +21,6 @@ pipulate v0.1.6
 ######################################## 
 Pipulate - Automate Google Sheets for SEO & Social Media 
 ########################################
-
-The time comes in every marketer's life when you want to use those beloved
-spreadsheete of yours as either a database or a dashboard. Why shouldn't they
-just update themselves? This is the future, after all. Simply connecting to
-Google Services shouldn't be the insurrmountable challange that it is, mostly
-thanks to OAuth2 and crappy APIs. I fix that for you here, and teach you how to
-"pipulate" your dumbass SEO or Social Media career over to Data Science.
 
 Step #1: Go install https://www.anaconda.com/download/ then start Jupyter
 Notebook. Make a new Python 3 notebook, and then type::
