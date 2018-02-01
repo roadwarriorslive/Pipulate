@@ -7,7 +7,7 @@ pipulate v0.1.6 - Automate Google Sheets for SEO
 
 The time comes in every marketer's life when we want to use our beloved
 spreadsheets (the perfect data-API for humans) as a daily dashboard. We should
-be able to automate our spreadsheets **outside** the limited code-execution
+be able to automate our spreadsheets ***outside*** the limited code-execution
 environment they themselves (brittlely) provide, with both a high level of
 reliability and little-to-no vendor dependencies aside from Google's own.
 However, the truth is that the simple challenge of programatically logging into
@@ -92,6 +92,9 @@ The refresh token is a temporary "password" that gets you a temporary
 invisibly log you back in after normal time-expired logout which invalidates
 the old temporary "password", requiring the refresh token be used to acquire a
 new one. Open oauth.dat in a text editor to see the tokens.
+
+I take care of these details so you don't have to, but still you should know
+HOW it's working and what it means to have that oauth.dat file sitting around.
 
 ######################################## 
 A tour through Pipulate
