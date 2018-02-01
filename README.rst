@@ -40,9 +40,9 @@ mere mortals (such as scientests) could actually do this stuff. It's a good
 bandwagon to jump onto — possibly bigger than JavaScript, though few will put
 themselves out on such a limb espousing such nonsense right now.
 
-****************************************
+######################################## 
 For the impatient
-****************************************
+########################################
 
 The quickest way to pipulate is as follows, but I suggest you read through this
 documentation down to where I cover Python functions and how they get called by
@@ -90,9 +90,9 @@ invisibly log you back in after normal time-expired logout which invalidates
 the old temporary "password", requiring the refresh token be used to acquire a
 new one.  Open oauth.dat in a text editor to see the tokens.
 
-****************************************
+######################################## 
 A tour through Pipulate
-****************************************
+########################################
 
 Pipulate facilitates online data-investigations that marketers and others like
 doing by simplifying the Python part. You don't even need to clone this Github
@@ -434,9 +434,9 @@ And there you have it. That's pretty much the basic use of Pipulate for
 completely open-ended semi-automated Python Kung Fu in Google Sheets. Let the
 crazy ad hoc SEO investigations of your dreams begin. Just add functions ;-)
 
-****************************************
+########################################
 Working with very large lists
-****************************************
+########################################
 
 Google Sheet is not always the best place to process very large lists, but the
 alternative is often worse, so the trick is to just decide by what size chunks
