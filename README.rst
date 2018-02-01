@@ -76,25 +76,15 @@ Things about OAuth2 you should eventually know
 ****************************************
 
 Upon first-run, Pipulate asks you once for access and then not again until
-things goes wrong and you have to login again. We've all seen Google forget
-passwords you've asked it to remember before, sending you instead to the
-browser for re-authentication (sometimes with double-verify). Same thing here.
-That's just a (good) thing with paranoid OAuth2.
-
-Even with Google's extra security, you should be aware that a file named
-ouath.dat is dropped in your working directory (where you Jupyter Notebook
-.ipynb files save) which allows full access to your Google stuff. Be warned.
-Those creating actual automations around Pipulate (taking it out of Jupyter
-Notebook and into cron or whatever) should monitor for failed logins.
-
-The refresh token is a temporary "password" that gets you a temporary
-"password". Normal re-logging USING the refresh token happens all the time to
-invisibly log you back in after normal time-expired logout which invalidates
-the old temporary "password", requiring the refresh token be used to acquire a
-new one. Open oauth.dat in a text editor to see the tokens.
-
-I take care of these details so you don't have to, but still you should know
-HOW it's working and what it means to have that oauth.dat file sitting around.
+things goes wrong and you have to login again. You should be aware that a file
+named ouath.dat is dropped in your working directory (where you Jupyter
+Notebook .ipynb files save) which allows full access to your Google stuff.
+There is a refresh token there that grants new rapidly-expiring access tokens,
+but which itself doesn't expire. It is used to frequently re-log you in
+invisibly in the background. Open oauth.dat in a text editor to see the tokens.
+Occasionally, Google WILL make even the refresh token have to be recreated with
+a new Web login, so just be aware of that especially if you build real
+automations (non-Jupyter Notebook) around Pipulate.
 
 ######################################## 
 A tour through Pipulate
