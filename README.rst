@@ -14,9 +14,6 @@ pipulate v0.1.6
 Introduction
 ============
 
-What is pipulate?
-------------------
-
 ######################################## 
 Pipulate - Automate Google Sheets for SEO & Social Media 
 ########################################
