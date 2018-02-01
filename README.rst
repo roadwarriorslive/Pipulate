@@ -11,9 +11,6 @@ pipulate v0.1.6
 .. sectnum::
 
 
-Introduction
-============
-
 ######################################## 
 Pipulate - Automate Google Sheets for SEO & Social Media 
 ########################################
