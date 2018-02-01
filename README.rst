@@ -39,7 +39,7 @@ you will need to pip install pandas first... and pray.
 Hint: some Python libraries like Pandas have long dependency-chains with such
 hellish cross-platform issues (C-compiling, OS driver installs, etc.) that it
 called for the creation of Anaconda in the first place so that non-IT-pros and
-mere mortals (such as scientests) could actually do this stuff. It's a good
+mere mortals (such as scientists) could actually do this stuff. It's a good
 bandwagon to jump onto — possibly bigger than JavaScript, though few will put
 themselves out on such a limb espousing such nonsense right now.
 
@@ -75,7 +75,7 @@ Things even the impatient must know
 Things about OAuth2 you should eventually know
 ****************************************
 
-Upon first-run, Pipulate asks you once for access once and never again until
+Upon first-run, Pipulate asks you once for access and then not again until
 things goes wrong and you have to login again. We've all seen Google forget
 passwords you've asked it to remember before, sending you instead to the
 browser for re-authentication (sometimes with double-verify). Same thing here.
@@ -91,7 +91,7 @@ The refresh token is a temporary "password" that gets you a temporary
 "password". Normal re-logging USING the refresh token happens all the time to
 invisibly log you back in after normal time-expired logout which invalidates
 the old temporary "password", requiring the refresh token be used to acquire a
-new one.  Open oauth.dat in a text editor to see the tokens.
+new one. Open oauth.dat in a text editor to see the tokens.
 
 ######################################## 
 A tour through Pipulate
@@ -110,7 +110,8 @@ must click, which will open another tab in your browser presenting a Google
 login prompt. Choose which Google account you want to use to access Sheets. It
 must have permission to the sheet you're manipulating. It also asks for various
 other Google Service permissions while it has the chance, in case you plan on
-using this to track YouTube view-counts and such.
+using Pipulate to track your YouTube view-counts and such, which you should
+totally do.
 
 In case you're wondering why I recommend the convention of importing pipulate
 as gs, it's because my other project GoodSheet got fully wrapped in here, and I
