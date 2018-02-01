@@ -1,9 +1,28 @@
-########################################
-Pipulate - Automate Google Sheets for SEO & Social Media
+===============
+pycparser v0.1.6
+===============
+
+:Author: `Mike Leviny <http://mikelev.in>`_
+
+
+.. contents::
+    :backlinks: none
+
+.. sectnum::
+
+
+Introduction
+============
+
+What is pipulate?
+------------------
+
+######################################## 
+Pipulate - Automate Google Sheets for SEO & Social Media 
 ########################################
 
 The time comes in every marketer's life when you want to use those beloved
-spreadsheets of yours as either a database or a dashboard. Why shouldn't they
+spreadsheete of yours as either a database or a dashboard. Why shouldn't they
 just update themselves? This is the future, after all. Simply connecting to
 Google Services shouldn't be the insurrmountable challange that it is, mostly
 thanks to OAuth2 and crappy APIs. I fix that for you here, and teach you how to
@@ -24,7 +43,7 @@ Hint: some Python libraries like Pandas have long dependency-chains with such
 hellish cross-platform issues (C-compiling, OS driver installs, etc.) that it
 called for the creation of Anaconda in the first place so that non-IT-pros and
 mere mortals (such as scientests) could actually do this stuff. It's a good
-bandwagon to jump onto -- possibly bigger than JavaScript, though few will put
+bandwagon to jump onto — possibly bigger than JavaScript, though few will put
 themselves out on such a limb espousing such nonsense right now.
 
 ****************************************
@@ -33,7 +52,7 @@ For the impatient
 
 The quickest way to pipulate is as follows, but I suggest you read through this
 documentation down to where I cover Python functions and how they get called by
-the Pandas df.apply() method in order to properly grok the power here.::
+the Pandas df.apply() method in order to properly grok the power here::
 
     import pipulate as gs
     import pandas as pd
