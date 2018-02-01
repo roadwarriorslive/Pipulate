@@ -1,15 +1,15 @@
 ===============
-pipulate v0.1.6
+pipulate v0.1.6 - Automate Google Sheets for SEO & Social Media 
 ===============
 
 :Author: `Mike Levin, SEO <http://mikelev.in>`_
 
 
-The time comes in every marketer's life when you want to use those beloved
-spreadsheete of yours as either a database or a dashboard. Why shouldn't they
-just update themselves? This is the future, after all. Simply connecting to
-Google Services shouldn't be the insurrmountable challange that it is, mostly
-thanks to OAuth2 and crappy APIs. I fix that for you here, and teach you how to
+The time comes in every marketer's life when you want to use our beloved
+spreadsheets as either a database or a dashboard. Why shouldn't they just
+update themselves? This is the future, after all. Simply connecting to Google
+Services shouldn't be the insurrmountable challange that it is, mostly thanks
+to OAuth2 and crappy APIs. I fix that for you here, and teach you how to
 "pipulate" your dumbass SEO or Social Media career over to Data Science.
 
 .. contents::
@@ -19,7 +19,7 @@ thanks to OAuth2 and crappy APIs. I fix that for you here, and teach you how to
 
 
 ######################################## 
-Pipulate - Automate Google Sheets for SEO & Social Media 
+Installing Pipulate
 ########################################
 
 Step #1: Go install https://www.anaconda.com/download/ then start Jupyter
@@ -41,7 +41,7 @@ bandwagon to jump onto — possibly bigger than JavaScript, though few will put
 themselves out on such a limb espousing such nonsense right now.
 
 ****************************************
-For the impatient
+Quick-start for the impatient
 ****************************************
 
 The quickest way to pipulate is as follows, but I suggest you read through this
@@ -90,9 +90,9 @@ invisibly log you back in after normal time-expired logout which invalidates
 the old temporary "password", requiring the refresh token be used to acquire a
 new one.  Open oauth.dat in a text editor to see the tokens.
 
-****************************************
+====================
 A tour through Pipulate
-****************************************
+====================
 
 Pipulate facilitates online data-investigations that marketers and others like
 doing by simplifying the Python part. You don't even need to clone this Github
