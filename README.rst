@@ -5,12 +5,13 @@ pipulate v0.1.6 - Automate Google Sheets for SEO
 :Author: `Mike Levin, SEO <http://mikelev.in>`_
 
 
-The time comes in every marketer's life when you want to use our beloved
-spreadsheets as either a database or a dashboard. Why shouldn't they just
-update themselves? This is the future, after all. Simply connecting to Google
-Services shouldn't be the insurrmountable challange that it is, mostly thanks
-to OAuth2 and crappy APIs. I fix that for you here, and teach you how to
-"pipulate" your dumbass SEO or Social Media career over to Data Science.
+The time comes in every marketer's life when we want to use our beloved
+spreadsheets (the perfect data-API for humans) as a daily dashboard. We should
+be able to automate our spreadsheets *outside* the limited code-execution
+environment they themselves (brittlely) provide, but in fact simply connecting
+to Google Services is an insurmountable challenge for exactly the type of
+people who need to do it most. I fix that for you here, and teach you how to
+"pipulate" your old-school SEO or Social Media career over to Data Science.
 
 .. contents::
     :backlinks: none
