@@ -98,13 +98,13 @@ working in. Your next step in that file is::
 
     import pipulate as gs
 
-This will cause an enormous link to appear in your Jupyter Notebook that you
-must click, which will open another tab in your browser presenting a Google
-login prompt. Choose which Google account you want to use to access Sheets. It
-must have permission to the sheet you're manipulating. It also asks for various
-other Google Service permissions while it has the chance, in case you plan on
-using Pipulate to track your YouTube view-counts and such, which you should
-totally do.
+This will cause an enormous Google Web login-link to appear in your Jupyter
+Notebook that you must click, which will open another tab in your browser
+presenting a Google login prompt. Choose which Google account you want to use
+to access Sheets. It must have permission to the sheet you're manipulating. It
+also asks for various other Google Service permissions while it has the chance,
+in case you plan on using Pipulate to track your YouTube view-counts and such,
+which you should totally do.
 
 In case you're wondering why I recommend the convention of importing pipulate
 as gs, it's because my other project GoodSheet got fully wrapped in here, and I
