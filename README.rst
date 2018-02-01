@@ -41,7 +41,7 @@ bandwagon to jump onto — possibly bigger than JavaScript, though few will put
 themselves out on such a limb espousing such nonsense right now.
 
 ****************************************
-Quick-start for the impatient
+For the impatient
 ****************************************
 
 The quickest way to pipulate is as follows, but I suggest you read through this
@@ -90,9 +90,9 @@ invisibly log you back in after normal time-expired logout which invalidates
 the old temporary "password", requiring the refresh token be used to acquire a
 new one.  Open oauth.dat in a text editor to see the tokens.
 
-====================
+****************************************
 A tour through Pipulate
-====================
+****************************************
 
 Pipulate facilitates online data-investigations that marketers and others like
 doing by simplifying the Python part. You don't even need to clone this Github
