@@ -1,8 +1,8 @@
 ===============
-pycparser v0.1.6
+pipulate v0.1.6
 ===============
 
-:Author: `Mike Leviny <http://mikelev.in>`_
+:Author: `Mike Levin <http://mikelev.in>`_
 
 
 .. contents::
