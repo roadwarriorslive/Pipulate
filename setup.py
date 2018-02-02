@@ -4,15 +4,15 @@ setup(
   packages = ['pipulate'],
   version = '0.1.6',
   download_url = 'https://github.com/miklevin/pipulate/archive/0.1.6.tar.gz',
-  description = 'Manipulate data in Google Sheets',
-  long_description='Integrate Google Sheets with your Python Pandas data work.',
+  description = 'Simplifes Google Spreadsheet Automation',
+  long_description='Simplifies Google OAuth2 login and Ties together GSpread and Pandas with a clea API for manipulating data in Google spreadsheets for SEO SERP tracking, dashboards, and other investigations.',
   author = 'Mike Levin, SEO',
   license='MIT',
   author_email = 'miklevin@gmail.com',
   url = 'https://github.com/miklevin/pipulate',
   python_requires='>=3',
   install_requires=['gspread', 'httplib2', 'google-api-python-client'],
-  keywords = ['data', 'datascience', 'spreadsheet', 'pandas', 'gspread', 'gdata', 'seo']
+  keywords = ['seo', 'google', 'sheets', 'pandas', 'gspread', 'gdata', 'google sheets', 'google spreadsheets', 'google sheet', 'google spreadsheet', 'spreadsheets', 'spreadsheet', 'database', 'databases', 'datascience', 'data science']
 )
 
 classifiers=[
