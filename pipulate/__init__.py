@@ -92,6 +92,11 @@ def gsc():
     return create_google_service(filename, "webmasters", "v3")
 
 
+def name(name):
+    """Return instance of GSheet by document name"""
+    return oauth().open(name)
+
+
 def spreadsheet(key):
     """Return instance of GSheet by key."""
     return oauth().open_by_key(key)
@@ -246,6 +251,9 @@ def cl_df_from_sheet(sheet, row1, col1, col2, row2=False, columns=False, guess=F
         column_names = sheet.range(row1, aa(col1), row1, aa(col2))
         column_names = [cc(x.col) for x in column_names]
     df = pd.DataFrame(list_of_tuples, columns=column_names)
+    print("Success! You can now look at your df. It's shape is %s rows x %s cols." % df.shape) 
+    print("Do pandas stuff like df['B'] = 'foo', but keep its shape.") 
+    print("Update GSheet with changes: gs.populate(cl, df)")
     return cl, df
 
 
@@ -307,8 +315,8 @@ def cl_df_fits(cl, df):
 
     cl_rows = len(set([x.row for x in cl]))
     cl_cols = max([x.col for x in cl])
-    print('cell_list shape: (%s, %s)' % (cl_rows, cl_cols))
-    print('DataFrame shape: (%s, %s)' % df.shape)
+    print('GSpread cell_list (cl) shape: (%s, %s)' % (cl_rows, cl_cols))
+    print('Pandas  DataFrame (dl) shape: (%s, %s)' % df.shape)
     if df.shape == (cl_rows, cl_cols):
         return True
     return False
