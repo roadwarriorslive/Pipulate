@@ -2,8 +2,8 @@ from distutils.core import setup
 setup(
   name = 'pipulate',
   packages = ['pipulate'],
-  version = '0.1.7',
-  download_url = 'https://github.com/miklevin/pipulate/archive/0.1.7.tar.gz',
+  version = '0.1.8',
+  download_url = 'https://github.com/miklevin/pipulate/archive/0.1.8.tar.gz',
   description = 'Simplifes Google Spreadsheet Automation',
   long_description='Simplifies Google OAuth2 login and Ties together GSpread and Pandas with a clea API for manipulating data in Google spreadsheets for SEO SERP tracking, dashboards, and other investigations.',
   author = 'Mike Levin, SEO',

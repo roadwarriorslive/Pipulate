@@ -1,5 +1,5 @@
 ===============
-pipulate v0.1.6 - Automate Google Sheets for SEO
+pipulate v0.1.8 - Automate Google Sheets for SEO
 ===============
 
 :Author: `Mike Levin, SEO <http://mikelev.in>`_
