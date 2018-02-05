@@ -10,8 +10,9 @@ spreadsheets (the perfect data-API for humans) as a daily dashboard. We should
 be able to automate our spreadsheets beyond what IMPORTHTML and IMPORTXML
 allow. However, the truth is that the simple challenge of logging into Google
 Spreadsheets to manipulate stuff in the background is just beyond the reach of
-folks who need it most. I fix that for you here, and teach you how to
-"pipulate" your old-school SEO or Social Media career over to Data Science.
+folks who need it most. I fix that for you here, along with simplifying a few
+other common tasks to allow you "pipulate" your old-school SEO or Social Media
+career over to Data Science.
 
 .. contents::
     :backlinks: none
