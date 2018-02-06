@@ -60,8 +60,9 @@ Things even the impatient must know
 - You must be using a Google Spreadsheet in online mode.
 - You must exactly match 'Your Sheet Name' with your actual sheet name.
 - You must be able to recognize row and column indexes when you see them.
-- When the Google prompt pops up, you must (one-time) click that giant blue
-  link login the same Google account you used to make the Google Sheet.
+- When you import pipulate as gs, Google will (1-time) throw up a giant blue
+  link that you must click and login with the same Google account you used to
+  make the Google Sheet with.
 
 ****************************************
 Things about OAuth2 you should eventually know
