@@ -134,7 +134,7 @@ to push the changes back into Google Sheet.
 
 
 ****************************************
-Of Pandas & Dependencies
+Of Pandas & dependencies
 ****************************************
 
 Pipulate is designed to let you do all your challenging data-manipulation work
@@ -321,7 +321,7 @@ a FRAMEWORK on top of NumPy for such work, but which turns out to be perfectly
 designed for what I used to use Pipulate for when it was a Flash-based Web app.
 
 ****************************************
-Applying Python function to Google Sheet row
+Applying a Python function to every row of a Google Sheet
 ****************************************
 
 Now say you wanted to apply a function to every line of the DataFrame to do
@@ -349,7 +349,7 @@ carefully at what's going on here, because it's about to get a lot more
 complicated.
 
 ****************************************
-Giving function data from entire row as an argument
+Giving Python function entire row of Google Sheet as input
 ****************************************
 
 While the above example is powerful, it's not nearly as powerful as feeding TWO
@@ -383,7 +383,7 @@ we will desire to apply this command::
     df['C'] = df.apply(count_times, axis=1)
 
 ****************************************
-CAVEAT! Pipulate functions need to be row/argument "aware"
+CAVEAT! Row-aware Pipulate functions grab values from row by index
 ****************************************
 
 However now the count_times function has more responsibility than the
