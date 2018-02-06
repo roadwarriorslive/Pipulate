@@ -74,10 +74,11 @@ named ouath.dat is dropped in your working directory (where you Jupyter
 Notebook .ipynb files save) which allows full access to your Google stuff.
 There is a refresh token there that grants new rapidly-expiring access tokens,
 but which itself doesn't expire. It is used to frequently re-log you in
-invisibly in the background. Open oauth.dat in a text editor to see the tokens.
-Occasionally, Google WILL make even the refresh token have to be recreated with
-a new Web login, so just be aware of that especially if you build real
-automations (non-Jupyter Notebook) around Pipulate.
+invisibly in the background. If you're interested in seeing these tokens, you
+can open oauth.dat in a text editor. It really helps to start to demystify
+OAuth2. Occasionally, Google WILL make even the refresh token have to be
+recreated with a new Web login, so just be aware of that especially if you
+build real automations (non-Jupyter Notebook) around Pipulate.
 
 ######################################## 
 A tour through Pipulate
