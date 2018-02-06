@@ -24,23 +24,18 @@ pipulating.
 Installing Pipulate
 ########################################
 
-Step #1: Go install https://www.anaconda.com/download/ then start Jupyter
-Notebook. Make a new Python 3 notebook, and then type::
+Step #1: Install https://www.anaconda.com/download/ start Jupyter Notebook.
+Make a new Python 3 notebook, and then type::
 
     !pip install pipulate
 
-The exclamation point is Jupyter Notebook !command syntax for executing
-operating system commands (not Python) as if from the command-line, so all this
-is doing is installing Pipulate and its requirements that are not already
-covered by the Anaconda install. If you're doing this on a non-Anaconda system,
-you will need to pip install pandas first... and pray. 
-
-Hint: some Python libraries like Pandas have long dependency-chains with such
-hellish cross-platform issues (C-compiling, OS driver installs, etc.) that it
-called for the creation of Anaconda in the first place so that non-IT-pros and
-mere mortals (such as scientists) could actually do this stuff. It's a good
-bandwagon to jump onto — possibly bigger than JavaScript, though few will put
-themselves out on such a limb espousing such nonsense right now.
+This command executes as an operating system command (because of the
+exclamation mark) and not Python code. It may take awhile, but you will
+eventually get the output of the pip program vomit out a bunch of messages
+about installing this-and-that dependency. Most Pipulate requirements are
+already met by Anaconda, but if you're in some other Python environment, you
+can install all the rest of the requirements for Pipulate with pip install
+pandas (a VERY BIG install).
 
 ######################################## 
 For the impatient
@@ -52,12 +47,10 @@ the Pandas df.apply() method in order to properly grok the power here::
 
     import pipulate as gs
     import pandas as pd
-    key = 'Your GSheet Key Here'
-    tab = gs.key(key).sheet1
+    tab = gs.name('Your Sheet Name').sheet1
     cl, df = gs.pipulate(tab, rows=(1, 20), cols=('a', 'b'))
     df['B'] = 'foo'
     gs.populate(tab, cl, df)
-    print(gs.link(key))
 
 ****************************************
 Things even the impatient must know
