@@ -4,15 +4,15 @@ pipulate v0.1.8 - Automate Google Sheets for SEO
 
 :Author: `Mike Levin, SEO <http://mikelev.in>`_
 
-There's a reason spreadsheets remain as popular as they are as a place to store
-and manipulate data in the face of database products. It's because spreadsheets
-have a superior API for humans. Since people like spreadsheets so much it's
-would be the ideal place to actually do more automation stuff; if only the
-surrouding technology would support it—in a non-brittle way. Many of us have
-tried and run into the limits of IMPORTHTML/XML and AppScript/VBA. There has
-got to be a better way, and Pipulate is it. Whether you're trying to reposition
-yourself as a Datamaster the field of Marketing or just a kid trying to learn
-to code, you've come to the right pipulate. Read on!
+There's a reason spreadsheets remain as popular as they do in the face of far
+more capable database products. It's because spreadsheets have a superior API
+for humans. Their user interface (vs. SQL and such) is much more intutive.
+Okay fine, since people love their spreadsheets so much, let's let it be both
+the database and the reporting layer. But that business-logic layer... and that
+big-picture automation layer... no. Let those be Python. And so they shall be.
+If this strikes a cord with you, what are you waiting for? Let's get
+pipulating.
+
 
 .. contents::
     :backlinks: none
