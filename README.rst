@@ -118,18 +118,18 @@ Pipulate naming conventions
 ****************************************
 
 In case you're wondering why I recommend the convention of importing pipulate
-as gs, it's because my other project GoodSheet got fully wrapped in here, and I
-like reminding everyone Pipualte is GoodSheet. I also got very fond of how
-gs.pipulate() looks, and I think it helps that gs also stands for Google Sheet.
-It also avoids the verbosity of pipulate.pipulate() or abbreviation-confusion
-of pi.pipulate() vs. pip.pipulate(), etc. 
+as gs, it's because my other Github module GoodSheet got fully wrapped in here,
+and I like reminding everyone Pipualte is in fact GoodSheet. I also got very fond of
+how gs.pipulate() looks, and I think it helps that gs also stands for Google
+Sheet.  It also avoids the verbosity of pipulate.pipulate() or
+abbreviation-confusion of pi.pipulate() vs. pip.pipulate(), etc. 
 
 For those familiar with the Flask web microframework, it might help to think of
 Pipulate as something lightly sprinkled in to connect GSpread and Pandas, and
 not really trying to do all that much itself except a few API innovations to
 help. The act of pipulating is just picking up an Excel-style rectangular
 spreadsheet range as both a GSpread cell_list and a Pandas DataFrame, altering
-the df completely with Pandas, and then using the symmtrical act of populating
+the df completely with Pandas, and then using the symmetrical act of populating
 to push the changes back into Google Sheet.
 
 
