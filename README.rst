@@ -119,9 +119,9 @@ Pipulate naming conventions
 
 In case you're wondering why I recommend the convention of importing pipulate
 as gs, it's because my other Github module GoodSheet got fully wrapped in here,
-and I like reminding everyone Pipualte is in fact GoodSheet. I also got very fond of
-how gs.pipulate() looks, and I think it helps that gs also stands for Google
-Sheet.  It also avoids the verbosity of pipulate.pipulate() or
+and I like reminding everyone Pipualte is in fact GoodSheet. I also got very
+fond of how gs.pipulate() looks, and I think it helps that gs also stands for
+Google Sheet. It also avoids the verbosity of pipulate.pipulate() or
 abbreviation-confusion of pi.pipulate() vs. pip.pipulate(), etc. 
 
 For those familiar with the Flask web microframework, it might help to think of
@@ -141,11 +141,11 @@ Pipulate is designed to let you do all your challenging data-manipulation work
 in Pandas. Pandas is not part of Python "core", but then neither is Google
 Sheets or GSpread, so don't complain. You're drinking deep of both the Google
 and Python Koolaid with Pipulate. You could do a lot worse. Any disenfranchised
-SQL-ites out there, Python Pandas is where you should be going anyway. Not to
-put too fine a point on it, but SQL has let you down (admit it). You need a
-more universal "general case" data manipulation API, and Pandas is it whether
-you realize it today or tomorrow. It's not like Oracle's going to buy Python
-too. So just go ahead and import Pandas::
+SQL-users out there, Python Pandas is where you should be going. Not to put too
+fine a point on it, but SQL has let you down). You need a more universal
+lightweight "general case" data manipulation tool, and Pandas is it whether you
+realize it yet or not. It's not like Oracle's going to buy Python too. So just
+go ahead and import Pandas::
 
     import pandas as pd
 
@@ -169,7 +169,7 @@ sake of avoiding future confusion about which document you're working on. Be
 sure to use the long string of characters copied out of a Google Sheet URL for
 the key. That's the long string of alphanumeric gobbledygook not broken up by
 slashes. The tab_name is always "Sheet1" on a freshly-made sheet. If you rename
-it or want to manipulate a different tab, be sure to make it match this.  The
+it or want to manipulate a different tab, be sure to make it match this. The
 rows and cols tuple defines the rectangular region you will want to manipulate.
 
 It may happen that you don't have a Google Sheet set up and have NOTHING in
@@ -407,7 +407,7 @@ When stepping row-by-row through a Python Pandas DataFrame, it is often
 desirable to insert "meta" attributes that can be used in the function WITHOUT
 putting those numbers wastefully on every row of the spreadsheet you're
 manipulating. Say the data we wanted to add is a date and it was the same date
-for every row.  It would be a waste to copy the exact same date down an entire
+for every row. It would be a waste to copy the exact same date down an entire
 column. Instead, the Pandas API provides for passing in both fixed-position
 arguments and labeled arguments by sort of "side-loading" them in as follows::
 
