@@ -234,7 +234,7 @@ before building resilient automations.
 I'm also helping you jump on the same bandwagon that's helping scientists solve
 the crisis of reproducibility that hit their field a few years back when they
 realized that 70% of published scientific research was unreproducible. While
-much credit goes to Jupyter Notebook, it's really Anaconda that gets it
+much credit goes to Jupyter Notebook, it's really Anaconda that gets it all
 installed and erases that pesky multi-platform issues that usually become very
 major stumbling blocks—even for scientists.
 
@@ -247,8 +247,8 @@ Say you wanted to just plug the value "foo" into column B::
     df['B'] = 'foo'
 
 You can now "push" your changed dataframe object back into the still
-compatibly-shaped cell_list object. This is the magic moment. Feel free to peek
-at it first "in memory" by just typing df all by itself::
+compatibly-shaped cell_list object, but peek at it first "in memory" by just
+typing df all by itself::
 
     df
 
