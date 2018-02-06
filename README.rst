@@ -98,10 +98,10 @@ step #1 already, then execute:
 Once pipulate is installed, you don't have to do that again, so after it's done
 (it can take awhile), you can delete the command and it's ugly output and get
 onto the real action. There are alternative ways to do pip installs in
-"Anaconda Prompts" but details vary on Macs vs. Windows vs. Linux, so I prefer
-to tell people how to do pip installs from within Anaconda. The --upgrade
-parameter ensures you always have the latest because I will be updating it
-often. Step #2, execute:
+"Anaconda Prompts" (with more control outside the browser) but details vary on
+Macs vs. Windows vs. Linux, so I prefer to tell people how to do pip installs
+from within Anaconda. The --upgrade parameter ensures you always have the
+latest because I will be updating it often. Step #2, execute:
 
     import pipulate as gs
 
