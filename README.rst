@@ -58,10 +58,10 @@ Things even the impatient must know
 
 - You must be on Python >= 3.x.
 - You must be using a Google Spreadsheet in online mode.
-- You must copy the "key" found in the URL to the above code.
+- You must exactly match 'Your Sheet Name' with your actual sheet name.
 - You must be able to recognize row and column indexes when you see them.
-- When the Google prompt pops up, you must grant permission with an account
-  that has access to the GSheet you're editing (can be the same account).
+- When the Google prompt pops up, you must (one-time) click that giant blue
+  link login the same Google account you used to make the Google Sheet.
 
 ****************************************
 Things about OAuth2 you should eventually know
