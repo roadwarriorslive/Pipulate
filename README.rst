@@ -142,7 +142,7 @@ in Pandas. Pandas is not part of Python "core", but then neither is Google
 Sheets or GSpread, so don't complain. You're drinking deep of both the Google
 and Python Koolaid with Pipulate. You could do a lot worse. Any disenfranchised
 SQL-users out there, Python Pandas is where you should be going. Not to put too
-fine a point on it, but SQL has let you down). You need a more universal
+fine a point on it, but SQL has let you down. You need a more universal
 lightweight "general case" data manipulation tool, and Pandas is it whether you
 realize it yet or not. It's not like Oracle's going to buy Python too. So just
 go ahead and import Pandas::
@@ -165,16 +165,15 @@ spreadsheet user interfaces::
     cols = ('a', 'b')
 
 It's good to switch from using GSheet file-names to their unique "keys" for the
-sake of avoiding future confusion about which document you're working on. Be
-sure to use the long string of characters copied out of a Google Sheet URL for
-the key. That's the long string of alphanumeric gobbledygook not broken up by
-slashes. The tab_name is always "Sheet1" on a freshly-made sheet. If you rename
-it or want to manipulate a different tab, be sure to make it match this. The
-rows and cols tuple defines the rectangular region you will want to manipulate.
+sake of avoiding future confusion about which document you're actually working
+on. It's far too easy to have 2 files with the same name. Be sure to use the
+long string of characters copied out of a Google Sheet URL for the key. That's
+the long string of alphanumeric gobbledygook not broken up by slashes. The
+tab_name is always "Sheet1" on a freshly-made sheet. If you rename it or want
+to manipulate a different tab, be sure to make it match this. The rows and cols
+tuple defines the rectangular region you will want to manipulate.
 
-It may happen that you don't have a Google Sheet set up and have NOTHING in
-mind for this first experience. Okay, go to a new cell in Jupyter Notebook and
-type on its very own line::
+Okay, let's generate some text to manipulate with Pipulate. Enter and execute::
 
     import this
 
@@ -188,7 +187,7 @@ Connecting to sheet
 ****************************************
 
 Open the connection to the Google Sheet (as if it were a database) and copy a
-rectangular range in both the GSpread "cell_list" format and as a Pandas
+rectangular range in both the GSpread cell_list format and as a Pandas
 DataFrame. This is setting the stage to pipulate, by creating two identical
 shapes, but of different types (one from GSpread and the other from Pandas)::
 
@@ -196,58 +195,72 @@ shapes, but of different types (one from GSpread and the other from Pandas)::
     tab = sheet.worksheet(tab_name)
     cl, df = gs.pipulate(tab, rows, cols)
 
-Even though the cl is a cell_list from GSpread, it is also very similar to one
-of Python's "core" lists. At this point because Jupyter Notebook lets you
-inspect the contexts of cl or df simply by running them on their own line. Type
-this and hit Enter::
+Even though the cl is a cell_list from GSpread, it is also very similar to
+Python's core datatype called list. Jupyter Notebook lets you inspect the
+contexts of cl or df simply by running them on their own line. Type this and
+hit Enter::
 
     cl
 
-GSpread cell_lists are normal flat Python lists with just a few has extra
-attributes layered-on, such as cl[0]._row to see what row a cell belongs to and
-cl[0]._col for its column. But you don't need to know that because you just
-leave cl alone at this point and do all your manipulations in the Pandas
-DataFrame (df) which have built-in capabilities that make it the equivalent of
-a very powerful spreadsheet and database combined. We now manipulate the df and
-then push it back into the location of the otherwise untouched cl. Just to
-satisfy curiosity, you can inspect the current state of the df::
+As you can see, GSpread cell_lists are just what one might call a
+one-dimensional array in other languages, which is the same as a normal Python
+list datatype. However, a few extra attributes have been layered onto each
+cell, such as cl[0]._row to see what row a cell belongs to and cl[0]._col for
+its column. In this way, GSpread avoids more complex shapes like a list of
+lists or a list of tuples, but it does make manipulating it directly as if a
+spreadsheet a challenge, which is pretty frustrating because that's the entire
+reason you use a library like GSpread.
+
+Have no fear; Pandas to the rescue! It's not the cl we're going to manipulate.
+It's the df, which is a Pandas DataFrame and has a lot of powerful
+database-like tricks built-in. All we have to do is NOT TOUCH the cl until such
+time as we push our changes back to the spreadsheet. You can also inspect the
+df with Jupyter Notebook::
 
     df
 
 ****************************************
-Jupyter Notebook is a REPL enviornment
+And now a word about Jupyter Notebook and REPL enviornments
 ****************************************
 
 You can inspect objects like cl and df this way because you are in a REPL
-(read, eval, print, loop) code execution environment for Python code execution
-where the contents of a cl or df just sort of "hang around" in memory
-mid-execution for your casual perusal and interactive massaging. This is as
-opposed to invoking the normal Python interpreter from a command-line or
-webserver where interaction with the user only occurs where the developer
-programmed it to occur. With REPLs like Jupyter Notebook, your interaction with
-"still executing" code is... well, a small miracle. Take advantage of it.
+(read, eval, print, loop) for Python code execution where the contents of a cl
+or df is just sort of "hanging around" frozen in memory MID-EXECUTION for your
+casual perusal. This is both a small miracle, and makes Jupyter Notebook the
+ideal place for for scientists and marketers to "feel their way around" data
+before building resilient automations.
+
+I'm also helping you jump on the same bandwagon that's helping scientists solve
+the crisis of reproducibility that hit their field a few years back when they
+realized that 70% of published scientific research was unreproducible. While
+much credit goes to Jupyter Notebook, it's really Anaconda that gets it
+installed and erases that pesky multi-platform issues that usually become very
+major stumbling blocks—even for scientists.
 
 ****************************************
 Your first pipulation
 ****************************************
 
-Now say you wanted to just plug the value "foo" into column B::
+Say you wanted to just plug the value "foo" into column B::
 
     df['B'] = 'foo'
 
-And you can now "push" your changed dataframe object back into the still
+You can now "push" your changed dataframe object back into the still
 compatibly-shaped cell_list object. This is the magic moment. Feel free to peek
-at it first "in memory" by just typing df all by itself again in a Jupyter
-Notebook cell. Then type the following command and watch the spreadsheet in the
-browser as you do this. You will see the values change!::
+at it first "in memory" by just typing df all by itself::
+
+    df
+
+Make the changes that you see in memory push back out to the spreasheet. Watch
+the browser as you populate to see the changes occur!::
 
     gs.populate(tab, cl, df)
 
 Congratulations. You've just pipulated.
 
 Plugging data dynamically into Google Sheets is nothing new. Pipulate just
-clarifies and simplifies the process. To do something slightly more
-interesting, you can simply copy the contents of column A to B::
+simplifies it. To do something slightly more interesting, you can simply copy
+the contents of column A to B::
 
     df['B'] = df['A']
     gs.populate(tab, cl, df)
@@ -267,15 +280,33 @@ would get ValueError: invalid literal for int() with base 10: 'The Zen of
 Python, by Tim Peters'. But you can put numbers in column A and execute this to
 see a simple *2 operation and acquaint yourself with how automate-able things
 start to become when you replace tedious manual Excel processes with
-automation. Yes, there are the proprietary vendor embedded-languages like
-Microsoft's VBA (Visual Basic for Applications) or Google's App Script
-(GSheet's VBA-equivalent) designed to do similar things... but... if I need to
-explain it, you're in the wrong place.
+automation. 
+
+****************************************
+Appending strings
+****************************************
 
 If you wanted to append foo to column A and put the result in column B (like
 above, but appending strings to an already already string-type column).::
 
     df['B'] = df['A'] + 'foo'
+
+
+****************************************
+Alternatives to Pipulate
+****************************************
+
+Embedded application languages like Microsoft's VBA or Google's AppScript can
+achieve similar results, but if I need to explain to you why these are not as
+good as using Python on the back-end, you're in the wrong place. The same goes
+for the ever-increasing selection of paid-for Excel and GDocs plug-ins and
+other proprietary vendor products which probably don't quite do what you need.
+
+Pipulate is mostly about Python and Pandas. You could replace gs.pipulate() and
+gs.populate() with pd.read_csv() and pd.to_csv() and take Google Sheets out of
+the equation entirely, or use Excel instead of GSheets by swapping PyExcel for
+GSpread. My thinking is that if you have to learn and master one tool for this
+sort of data manipulation, it might as well be Python/Pandas.
 
 ****************************************
 Cheerleading for Anaconda, Jupyter Notebook and Pandas
