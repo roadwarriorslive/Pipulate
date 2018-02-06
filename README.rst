@@ -4,14 +4,14 @@ pipulate v0.1.8 - Automate Google Sheets for SEO
 
 :Author: `Mike Levin, SEO <http://mikelev.in>`_
 
-There's a reason spreadsheets remain as popular as they do in the face of far
-more capable database products. It's because the spreadsheet user interface is
-designed for humans, so people like to have their corporate dashboards and
-stuff there. However as anyone who tried to build long-term durable automations
-around AppScript/VBA or in-spreadsheet functions like importhtml/xml will tell
-you, it's harder than it appears. There is a better way. Do all the cool stuff
-on the back-end with Python-powered Pandas in Jupyter Notebook from an Anaconda
-install. I'll get you past the big OAuth login challenge in seconds.
+There's a reason spreadsheets remain as popular as they do in the face of more
+capable databases. The spreadsheet user interface is designed for humans, so
+people like to have their corporate dashboards and stuff there. However as
+anyone who tried to build long-term durable automations around AppScript/VBA or
+in-spreadsheet functions like importhtml/xml will tell you, it's harder than it
+appears. There is a better way. Do all the cool stuff on the back-end with
+Python-powered Pandas in Jupyter Notebook from an Anaconda install. I'll get
+you past the big OAuth login challenge in seconds.
 
 
 .. contents::
