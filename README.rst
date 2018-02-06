@@ -84,11 +84,20 @@ build real automations (non-Jupyter Notebook) around Pipulate.
 A tour through Pipulate
 ########################################
 
-Pipulate facilitates online data-investigations that marketers and others like
-doing by simplifying the Python part. You don't even need to clone this Github
-repo. Pipulate is just a library you just call at the top of your own arbitrary
-new Jupyter Notebook in whatever directory and .ipynb file you happen to be
-working in. Your next step in that file is::
+Even if you're new to Python and computer programming, Pipulate is a good place
+to start. Run Jupyter Notebook by either looking for an icon named Jupyter
+Notebook in your Start Menu after an Anaconda install, or select
+Anaconda-Navigator from your Applications folder and Launch Jupyter Notebook
+from there. There's a few ways to get Jupyter Notebook running, but so long as
+something pops up in your web browser where you can choose New / Notebook:
+Python 3, then you found it. After you have a new Notebook, if you haven't done
+so already, execute:
+
+    !pip install pipulate
+
+Once pipulate is installed, you don't have to do that again, so after it's
+done (it can take awhile), you can delete the command and it's ugly output and
+get onto the real action. Now execute:
 
     import pipulate as gs
 
@@ -107,19 +116,18 @@ Pipulate naming conventions
 In case you're wondering why I recommend the convention of importing pipulate
 as gs, it's because my other project GoodSheet got fully wrapped in here, and I
 like reminding everyone Pipualte is GoodSheet. I also got very fond of how
-gs.pipulate() looks, and I think you will too in how it avoids the verbosity of
-pipulate.pipulate() or abbreviation-confusion of pi.pipulate() vs.
-pip.pipulate(), etc. 
+gs.pipulate() looks, and I think it helps that gs also stands for Google Sheet.
+It also avoids the verbosity of pipulate.pipulate() or abbreviation-confusion
+of pi.pipulate() vs. pip.pipulate(), etc. 
 
-You can think of Pipulate a lot like the Flask web microframework. Flask
-doesn't do much for you except provide a library for you that you can use in
-your otherwise normal Python code. Flask becomes an instance of a Flask object
-using the odd convention app = Flask(__name__), then all of Flask is accessed
-through this app object. Similarly, Pipulate is accessed through the gs object,
-and the act of pipulating and its symmetrical act of populating is
-gs.pipulate() and gs.populate(), respectively. Everything else about Pipulate
-is pretty much learning how to do a bunch of stupid Pandas tricks in-between
-those two commands.
+For those familiar with the Flask web microframework, it might help to think of
+Pipulate as something lightly sprinkled in to connect GSpread and Pandas, and
+not really trying to do all that much itself except a few API innovations to
+help. The act of pipulating is just picking up an Excel-style rectangular
+spreadsheet range as both a GSpread cell_list and a Pandas DataFrame, altering
+the df completely with Pandas, and then using the symmtrical act of populating
+to push the changes back into Google Sheet.
+
 
 ****************************************
 Of Pandas & Dependencies
