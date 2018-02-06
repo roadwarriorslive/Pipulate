@@ -27,7 +27,7 @@ Installing Pipulate
 Step #1: Install https://www.anaconda.com/download/ start Jupyter Notebook.
 Make a new Python 3 notebook and type::
 
-    !pip install pipulate
+    !pip install pipulate --upgrade
 
 This command executes as an operating system command (because of the
 exclamation mark) and not Python code. It may take awhile, but you will
@@ -91,13 +91,17 @@ Anaconda-Navigator from your Applications folder and Launch Jupyter Notebook
 from there. There's a few ways to get Jupyter Notebook running, but so long as
 something pops up in your web browser where you can choose New / Notebook:
 Python 3, then you found it. After you have a new Notebook, if you haven't done
-so already, execute:
+step #1 already, then execute:
 
-    !pip install pipulate
+    !pip install pipulate --upgrade
 
-Once pipulate is installed, you don't have to do that again, so after it's
-done (it can take awhile), you can delete the command and it's ugly output and
-get onto the real action. Now execute:
+Once pipulate is installed, you don't have to do that again, so after it's done
+(it can take awhile), you can delete the command and it's ugly output and get
+onto the real action. There are alternative ways to do pip installs in
+"Anaconda Prompts" but details vary on Macs vs. Windows vs. Linux, so I prefer
+to tell people how to do pip installs from within Anaconda. The --upgrade
+parameter ensures you always have the latest because I will be updating it
+often. Step #2, execute:
 
     import pipulate as gs
 
