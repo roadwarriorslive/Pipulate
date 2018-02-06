@@ -5,13 +5,13 @@ pipulate v0.1.8 - Automate Google Sheets for SEO
 :Author: `Mike Levin, SEO <http://mikelev.in>`_
 
 There's a reason spreadsheets remain as popular as they do in the face of far
-more capable database products. It's because spreadsheets have a superior API
-for humans. Their user interface (vs. SQL and such) is much more intutive.
-Okay fine, since people love their spreadsheets so much, let's let it be both
-the database and the reporting layer. But that business-logic layer... and that
-big-picture automation layer... no. Let those be Python. And so they shall be.
-If this strikes a cord with you, what are you waiting for? Let's get
-pipulating.
+more capable database products. It's because the spreadsheet user interface is
+designed for humans, so people like to have their corporate dashboards and
+stuff there. However as anyone who tried to build long-term durable automations
+around AppScript/VBA or in-spreadsheet functions like IMPORTHTML/XML can tell
+you, it's harder than it appears. There is a better way. Just do all the cool
+stuff on the back-end with Python-powered Pandas in Jupyter Notebook from an
+Anaconda install. I'll get you past the big OAuth login challenge in seconds.
 
 
 .. contents::
@@ -25,7 +25,7 @@ Installing Pipulate
 ########################################
 
 Step #1: Install https://www.anaconda.com/download/ start Jupyter Notebook.
-Make a new Python 3 notebook, and then type::
+Make a new Python 3 notebook and type::
 
     !pip install pipulate
 
@@ -150,12 +150,13 @@ spreadsheet user interfaces::
     rows = (1, 20)
     cols = ('a', 'b')
 
-Be sure to use the long string of characters copied out of a Google Sheet URL
-for the key. That's the long string of alphanumeric gobbledygook not broken up
-by slashes. The tab_name is always "Sheet1" on a freshly-made sheet. If you
-rename it or want to manipulate a different tab, be sure to make it match this.
-The rows and cols tuple defines the rectangular region you will want to
-manipulate.
+It's good to switch from using GSheet file-names to their unique "keys" for the
+sake of avoiding future confusion about which document you're working on. Be
+sure to use the long string of characters copied out of a Google Sheet URL for
+the key. That's the long string of alphanumeric gobbledygook not broken up by
+slashes. The tab_name is always "Sheet1" on a freshly-made sheet. If you rename
+it or want to manipulate a different tab, be sure to make it match this.  The
+rows and cols tuple defines the rectangular region you will want to manipulate.
 
 It may happen that you don't have a Google Sheet set up and have NOTHING in
 mind for this first experience. Okay, go to a new cell in Jupyter Notebook and
