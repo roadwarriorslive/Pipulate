@@ -37,7 +37,13 @@ with::
     #Do stuff to df in Jupyter Notebook using Pandas (but not to the cl)
     gs.populate(tab, cl, df) #Push altered df back into GSheet
 
-That's it. That's Pipulate. The rest is your imagination.
+That's it. That's Pipulate. The rest is your imagination. Even if you're new to
+Python and computer programming, Pipulate is a good place to start. That's
+because running Python from Jupyter Notebook in a Web browser from a fresh
+Anaconda install is a good place to start, and Pipulate just gives you
+something very immediately real-world useful to do there — especially if you're
+into SEO, want to track your Social Medias, or otherwise acquire stupid
+data-trick superpowers to impress friends and influence people.
 
 ######################################## 
 Installing Pipulate
@@ -103,14 +109,13 @@ build real automations (non-Jupyter Notebook) around Pipulate.
 A tour through Pipulate
 ########################################
 
-Even if you're new to Python and computer programming, Pipulate is a good place
-to start. Run Jupyter Notebook by either looking for an icon named Jupyter
-Notebook in your Start Menu after an Anaconda install, or select
-Anaconda-Navigator from your Applications folder and Launch Jupyter Notebook
-from there. There's a few ways to get Jupyter Notebook running, but so long as
-something pops up in your web browser where you can choose New / Notebook:
-Python 3, then you found it. After you have a new Notebook, if you haven't done
-step #1 already, then execute:
+After you've installed Anaconda, run Jupyter Notebook by either looking for an
+icon named Jupyter Notebook in your Start Menu after an Anaconda install, or
+select Anaconda-Navigator from your Applications folder and Launch Jupyter
+Notebook from there. There's a few ways to get Jupyter Notebook running, but so
+long as something pops up in your web browser where you can choose New /
+Notebook: Python 3, then you found it. After you have a new Notebook, if you
+haven't done step #1 already, then execute:
 
     !pip install pipulate --upgrade
 
