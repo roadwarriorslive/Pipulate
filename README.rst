@@ -37,10 +37,10 @@ way to easily pump data in and out of GSheets with::
 
 That's it. That's Pipulate. The rest is your imagination. Even if you're new to
 programming, Pipulate is a good place to start because Python in Jupyter
-Notebook is a good place to start. The Anaconda install makes installing
-Jupyter Notebook super-easy. If you're into SEO or tracking how well you're
-doing in Social Media like Twitter and YouTube for free in a way that launches
-a lifetime love of coding, then you're in the right place.
+Notebook is a good place to start — which the Anaconda install gives you. If
+you're into SEO or tracking how well you're doing in Social Media like Twitter
+and YouTube (for free), then you're in the right place. Who knows, it could
+even launch you on a new career in case YouTube doesn't work out.
 
 ######################################## 
 Installing Pipulate
