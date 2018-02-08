@@ -1,5 +1,4 @@
-===============
-pipulate v0.1.8 - Automate Google Sheets for SEO
+=============== pipulate v0.1.8 - Automate Google Sheets for SEO
 ===============
 
 :Author: `Mike Levin, SEO <http://mikelev.in>`_
@@ -22,28 +21,26 @@ up... and **nothing in-between**. For that, there's Pandas.
 
 
 ######################################## 
-Pipulate Philosophy
+Background & Philosophy
 ########################################
 
-I've worked on a long history of similar projects, building framework after
-exhausting framework, maintaining my own custom django-like libraries — and
-then I discovered the combination of Google Sheets, Jupyter Notebook and Pandas
-that together virtually obsolete all my past work in the most delightful way I
-could imagine — Python with Pandas (very mainstream stuff) *is my framework*,
-and then all I needed was a way to easily pump data in and out of GSheets
-with::
+I've performed data-investigation work many ways ways over the years, often
+building my own annoying-to-maintain systems. Then I discovered the combination
+of Google Sheets, Jupyter Notebook and Pandas that together virtually obsolete
+all my past work in the most delightful way I could imagine — Python with
+Pandas (very mainstream stuff) *is my framework*, and then all I needed was a
+way to easily pump data in and out of GSheets with::
 
     cl, df = gs.pipulate(tab, rows, cols) #Get range from GSheet
     #Do stuff to df in Jupyter Notebook using Pandas (but not to the cl)
     gs.populate(tab, cl, df) #Push altered df back into GSheet
 
 That's it. That's Pipulate. The rest is your imagination. Even if you're new to
-programming Python, Pipulate is a good place to start. That's because running
-Python from Jupyter Notebook in a Web browser from an Anaconda install is a
-good place to start. Pipulate just gives you something immediately useful in
-the real-world to do there — especially if you're into SEO, tracking Social
-Medias, or want to otherwise acquire stupid data-trick superpowers to impress
-friends and influence people.
+programming, Pipulate is a good place to start because Python in Jupyter
+Notebook is a good place to start. The Anaconda install makes installing
+Jupyter Notebook super-easy. If you're into SEO or tracking how well you're
+doing in Social Media like Twitter and YouTube for free in a way that launches
+a lifetime love of coding, then you're in the right place.
 
 ######################################## 
 Installing Pipulate
@@ -146,16 +143,16 @@ as gs, it's because my other Github module GoodSheet got fully wrapped in here,
 and I like reminding everyone Pipualte is in fact GoodSheet. I also got very
 fond of how gs.pipulate() looks, and I think it helps that gs also stands for
 Google Sheet. It also avoids the verbosity of pipulate.pipulate() or
-abbreviation-confusion of pi.pipulate() vs. pip.pipulate(), etc. 
+abbreviation-confusion of pi.pipulate() or pip.pipulate() or any of the other
+choices not nearly as beautiful as gs.pipulate().
 
 For those familiar with the Flask web microframework, it might help to think of
 Pipulate as something lightly sprinkled in to connect GSpread and Pandas, and
 not really trying to do all that much itself except a few API innovations to
 help. The act of pipulating is just picking up an Excel-style rectangular
 spreadsheet range as both a GSpread cell_list and a Pandas DataFrame, altering
-the df completely with Pandas, and then using the symmetrical act of populating
+the df completely with Pandas, and then using the symmetrical act of POPULATING
 to push the changes back into Google Sheet.
-
 
 ****************************************
 Of Pandas & dependencies
@@ -768,5 +765,6 @@ Did somebody say SEO?
 Coming soon:
 
 - Connecting to your Google Analytics
+
 - Connecting to your Google Search Console
 - Capturing search engine result pages (SERPs)
