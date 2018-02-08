@@ -22,6 +22,24 @@ up... and **nothing in-between**. For that, there's Pandas.
 
 
 ######################################## 
+Pipulate Philosophy
+########################################
+
+I've worked on a long history of similar projects, building framework after
+exhausting framework, maintaining my own custom django-like libraries—and then
+I discovered the combination of Google Sheets, Jupyter Notebook and Pandas that
+together virtually obsolete all my past work in the most delightful way I could
+imagine—Python with Pandas (very mainstream stuff) IS MY FRAMEWORK, and then
+all I needed was a way to easily pump data in and out of GSheets with minimal
+muss, fuss, and indeed even thought. It goes like this::
+
+    cl, df = gs.pipulate(tab, rows, cols) #Get range from GSheet
+    #Do stuff to df in Jupyter Notebook using Pandas (but not to the cl)
+    gs.populate(tab, cl, df) #Push altered df back into GSheet
+
+That's it. That's Pipulate. The rest is your imagination.
+
+######################################## 
 Installing Pipulate
 ########################################
 
