@@ -30,7 +30,8 @@ exhausting framework, maintaining my own custom django-like libraries — and
 then I discovered the combination of Google Sheets, Jupyter Notebook and Pandas
 that together virtually obsolete all my past work in the most delightful way I
 could imagine — Python with Pandas (very mainstream stuff) *is my framework*,
-and then all I needed was a way to easily pump data in and out of GSheets with
+and then all I needed was a way to easily pump data in and out of GSheets
+with::
 
     cl, df = gs.pipulate(tab, rows, cols) #Get range from GSheet
     #Do stuff to df in Jupyter Notebook using Pandas (but not to the cl)
