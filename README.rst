@@ -38,12 +38,12 @@ with::
     gs.populate(tab, cl, df) #Push altered df back into GSheet
 
 That's it. That's Pipulate. The rest is your imagination. Even if you're new to
-Python and computer programming, Pipulate is a good place to start. That's
-because running Python from Jupyter Notebook in a Web browser from a fresh
-Anaconda install is a good place to start. Pipulate just gives you something
-immediately useful in the real-world to do there — especially if you're into
-SEO, tracking your Social Medias, or want to otherwise acquire stupid
-data-trick superpowers to impress friends and influence people.
+programming Python, Pipulate is a good place to start. That's because running
+Python from Jupyter Notebook in a Web browser from an Anaconda install is a
+good place to start. Pipulate just gives you something immediately useful in
+the real-world to do there — especially if you're into SEO, tracking Social
+Medias, or want to otherwise acquire stupid data-trick superpowers to impress
+friends and influence people.
 
 ######################################## 
 Installing Pipulate
