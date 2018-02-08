@@ -1,4 +1,6 @@
-=============== pipulate v0.1.8 - Automate Google Sheets for SEO
+
+=============== 
+pipulate v0.1.8 - Automate Google Sheets for SEO
 ===============
 
 :Author: `Mike Levin, SEO <http://mikelev.in>`_
@@ -107,12 +109,12 @@ A tour through Pipulate
 ########################################
 
 After you've installed Anaconda, run Jupyter Notebook by either looking for an
-icon named Jupyter Notebook in your Start Menu after an Anaconda install, or
-select Anaconda-Navigator from your Applications folder and Launch Jupyter
-Notebook from there. There's a few ways to get Jupyter Notebook running, but so
-long as something pops up in your web browser where you can choose New /
-Notebook: Python 3, then you found it. After you have a new Notebook, if you
-haven't done step #1 already, then execute:
+icon named Jupyter Notebook in your Start Menu (Windows) after an Anaconda
+install, or select Anaconda-Navigator from your Applications folder (Mac) and
+Launch Jupyter Notebook from there. There's a few ways to get Jupyter Notebook
+running, but so long as something pops up in your web browser where you can
+choose New / Notebook: Python 3, then you found it. After you have a new
+Notebook, if you haven't done step #1 already, then execute:
 
     !pip install pipulate --upgrade
 
