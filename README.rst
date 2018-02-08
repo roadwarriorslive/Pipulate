@@ -40,9 +40,9 @@ with::
 That's it. That's Pipulate. The rest is your imagination. Even if you're new to
 Python and computer programming, Pipulate is a good place to start. That's
 because running Python from Jupyter Notebook in a Web browser from a fresh
-Anaconda install is a good place to start, and Pipulate just gives you
-something very immediately real-world useful to do there — especially if you're
-into SEO, want to track your Social Medias, or otherwise acquire stupid
+Anaconda install is a good place to start. Pipulate just gives you something
+immediately useful in the real-world to do there — especially if you're into
+SEO, tracking your Social Medias, or want to otherwise acquire stupid
 data-trick superpowers to impress friends and influence people.
 
 ######################################## 
