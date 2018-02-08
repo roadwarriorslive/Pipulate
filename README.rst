@@ -11,9 +11,9 @@ developer to do every little thing. It's a nice place to put daily dashboards,
 and you can use spreadsheets in many places where a database would be overkill.
 However as anyone who's tried to build durable long-term automations around
 spreadsheets using VBA, AppScript or any of the other obvious choices, it ain't
-so easy.  That's what I fix here with Pipulate; from challenging OAuth2 login
-to grabbing the range of the spreadsheet you're going to update to pushing the
-changes back up... and **nothing in-between**. For that, there's Pandas.
+so easy. That's what I fix here with Pipulate; from simplifying OAuth2 login to
+grabbing the row*col range of the spreadsheet you're going to update to pushing
+he changes back up... and **nothing in-between**. For that, there's Pandas.
 
 
 .. contents::
