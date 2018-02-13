@@ -12,8 +12,8 @@ and you can use spreadsheets in many places where a database would be overkill.
 However as anyone who's tried to build durable long-term automations around
 spreadsheets using VBA, AppScript or any of the other obvious choices, it ain't
 so easy. That's what I fix here with Pipulate; I simplify OAuth2 login, help
-you grab row x column range from the spreadsheet, and then help you push your
-changes back into the sheet. The rest (altering the data) is Pandas.
+you grab cell-ranges from the spreadsheet, and then help you push your changes
+back into the sheet. The rest (altering the data) is Pandas.
 
 
 .. contents::
@@ -752,21 +752,48 @@ above 3 lines with::
                 pass
 
 ########################################
-Hitting the APIs directly
+Developing Pipualte functions
 ########################################
 
-Pipulate processes lists, and when things go wrong you sometimes want to leave
-both Pipulate and Pandas and focus directly on the Python function. When it
-comes time to hit an API directly, you put the Python code directly into
-Jupyter Notebook so that you can play around with it.
+Because Pipulate functions are really just Python functions (generally being
+called through the Pandas DataFrame.apply() method), you can develop Pipulate
+functions just as you would any other Python funciton. 
 
-########################################
-Did somebody say SEO?
-########################################
+The only unusal concern is how when you feed an entire "row" of a dataframe to
+a Python function, it takes the form of an arbitrary variable name (usually
+row) containing a numerically indexed list of values (the values from the row,
+of course). This only means that a wee bit of "mapping" need be done inside the
+function. So say you needed to apply an arbirary function to column C using the
+data from both columns A and B in this form::
 
-Coming soon:
+    df['C'] = df.apply(arbitrary_function, axis=1)
 
-- Connecting to your Google Analytics
+...then you would need to write the arbitrary function like this::
 
-- Connecting to your Google Search Console
-- Capturing search engine result pages (SERPs)
+    def arbitrary_function(row):
+        value_from_A = row[0]
+        value_from_B = row[1]
+        # Do something here to
+        # populate return_value.
+        return return_value
+
+...so when you're developing functions, the idea is to simulate a Pandas
+DataFrame row in default Python list syntax to feed into the function for
+testing... which is this easy::
+
+    simulated_row = ['foo', 'bar']
+
+So in Jupyter Notebook actually feeding the simulated row to the arbitrary
+function for actually running and testing OUTSIDE the Pipulate framework looks
+like this::
+
+    arbitrary_function(simulated_row)
+
+...so developing functions for Pipulate is easy-peasy. Just design your
+functions to always just take in the first argument as a list whose values have
+meaning because of their fixed positions — which naturally represent the cell
+values from rows you'll be pulling in from a spreadsheet.
+
+By the way, namedtuples are the superior way of doing this when not bound by a
+pre-existing framework, but whatever. Pandas is worth it.
+
