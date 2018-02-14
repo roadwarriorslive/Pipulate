@@ -454,7 +454,7 @@ altered rectangular spreadsheet range back in, this entire system is just
 becoming adept at Pandas using GSheets instead of CSVs.
 
 ****************************************
-Giving your function "extra" argument data per row
+Giving your function "extra" argument data per row (grokking splat)
 ****************************************
 
 When stepping row-by-row through a Python Pandas DataFrame, it is often
@@ -467,16 +467,14 @@ arguments and labeled arguments by sort of "side-loading" them in as follows::
 
     df['C'] = df.apply(func, axis=1, args=('X', 'Y'), foo='bar', spam='eggs')
 
-Exactly like we had to tell the function WHICH values from the row we are
-interested in INSIDE the named function, we ALSO have to show which position
-out of the tuple-like fixed-position arguments to use and which labeled data to
-use. Grokking this may be the most difficult part of the Pipulate proposition
-for noobs. APIs are weird; weird but powerful. Something very Pythonic is going
-on here. The argument named \*args takes everything fed to the function in the
-location after required arguments (row) but before a series of arbitrary
+Grokking this may be the most difficult part of the Pipulate proposition for
+noobs. APIs are weird; weird but powerful. Something very Pythonic is going on
+here. The argument named \*args takes everything fed to the function in the
+location AFTER THE REQUIRED ARGUMENTS (row) but before the series of arbitrary
 name/value arguments (\*\*kwargs). I don't expect you (or anyone) to get this
 at first pass, but it's one of the reasons Python is used to create user-loved
-"API-wrappers" to every non-Python API out there.::
+"API-wrappers" to every non-Python API out there. Look at how you're going to
+have to ACCESS those values from inside a function::
 
     def func(row, *args, **kwargs):
         url = row[0]
@@ -485,9 +483,8 @@ at first pass, but it's one of the reasons Python is used to create user-loved
         arg2 = args[1]
         kwarg1 = kwargs['foo']
         kwarg2 = kwargs['spam']
-        rv = 'default'
-        #do stuff here
-        return rv
+        # Do stuff here
+        return stuff
 
 Just to put a fine point on it, because it's really that important, the very
 common pipulate function arguments::
@@ -535,8 +532,8 @@ we could feed it in an unlabeled fixed position::
         url = row[0]
         keyword = row[1]
         adate = args[0]
-        # Do stuff
-        return rv
+        # Do stuff here
+        return stuff
 
 Or for arbitrary reasons, feed it in with a label::
 
@@ -546,8 +543,8 @@ Or for arbitrary reasons, feed it in with a label::
         url = row[0]
         keyword = row[1]
         adate = kwargs['adate']
-        # Do stuff
-        return rv
+        # Do stuff here
+        return stuff
 
 And of course, you can do both at once::
 
@@ -563,8 +560,8 @@ And of course, you can do both at once::
         list_of_dates = args # We could break them out here.
         start = kwargs['start']
         end = kwargs['end']
-        # Do stuff
-        return rv
+        # Do stuff here
+        return stuff
 
 And there you have it. That's pretty much the basic use of Pipulate for
 completely open-ended semi-automated Python Kung Fu in Google Sheets. Let the
