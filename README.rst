@@ -505,9 +505,9 @@ those values from inside a function::
         return stuff
 
 That's an example where you have multiple labeled arguments like start and end
-dates. But if it's being side-loaded in a similar fashion as to how the first
-argument, the row, is coming in then you use the other type of splat that only
-uses a single asterisk in the funciton argument definition::
+dates. But if it's being side-loaded in a similar fashion similar to the row,
+is coming in then you use the other type of splat that only uses a single
+asterisk in the funciton argument definition::
 
     df['c'] = df.apply(func, axis=1, args=('two', 'peas'))
 
