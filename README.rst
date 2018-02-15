@@ -486,6 +486,10 @@ Pythonically, If you're in Jupyter Notebook, take a moment to run this::
 
     import this
 
+--------------------
+Splat type #2: \**kwargs by label (easier to explain first)
+--------------------
+
 The argument named (\*\*kwargs) accepts as a parameter EITHER a Python
 dictionary object (called a dict, which looks a lot like JSON) or it will
 accept the more common command-line convention of name=value, name2=value2...
@@ -504,10 +508,14 @@ those values from inside a function::
         # Do stuff here
         return stuff
 
-That's an example where you have multiple labeled arguments like start and end
-dates. But if it's being side-loaded in a similar fashion similar to the row,
-then you use the other type of splat that only uses a single asterisk in the
-function argument definition::
+--------------------
+Splat type #1: \**kwargs by label (easier to explain first)
+--------------------
+
+That was an example where you have multiple labeled arguments like start and
+end dates. But if it's being side-loaded in a similar fashion similar to the
+row, then you use the other type of splat that only uses a single asterisk in
+the function argument definition::
 
     df['c'] = df.apply(func, axis=1, args=('two', 'peas'))
 
