@@ -509,7 +509,7 @@ those values from inside a function::
         return stuff
 
 --------------------
-Splat type #1: \**kwargs by label (easier to explain first)
+Splat type #1: \*args by label
 --------------------
 
 That was an example where you have multiple labeled arguments like start and
