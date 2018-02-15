@@ -527,6 +527,10 @@ the function argument definition::
         # do stuff here
         return stuff
 
+--------------------
+Splat types 1 & 2 together
+--------------------
+
 And then as you would imagine, you can mix positional \*splatting with labeled
 \**splatting. You just have to use positional first and labeled second (or
 last, actually), because if you think about it, that's how it must be::
@@ -544,17 +548,33 @@ last, actually), because if you think about it, that's how it must be::
         # do stuff here
         return stuff
 
+--------------------
+One bourbon one scotch one beer
+--------------------
+
 Just to put a fine point on it, because it's really that important, the very
-common pipulate function arguments::
+common way to define a pipulate function and its arguments is::
 
     def func(row, *args, **kwargs):
 
-...is saying::
+...which gets invoked stand-alone like this::
 
-1. Define a function named func.
+    func(one_row, one_tuple, one_dict)
+
+...or via Pandas like this::
+
+    df.apply(func, axis=1, one_tuple, one_dict)
+
+...is the same as saying:
+
+1. Define a function named "func".
 2. Require something in position 1.
-3. Optionally expect a list of labeled things next.
-4. Optionally expect a list of name/value pairs as separate arguments, lastly.
+3. Optionally expect a tuple of next.
+4. Optionally expect a dictionary of labeled values as the last thing(s).
+
+--------------------
+Automatic unpacking of tuples and dicts in \*args and \*\*kwargs
+--------------------
 
 If passing all these lists and name/value pairs starts to get ugly, remember
 Python actually likes to unpack for tuples and dicts for you as you splat. So
@@ -584,9 +604,13 @@ two   net
 three org 
 ===== === 
 
+--------------------
+\*args and \*\*kwargs could just as well be \*pod and \*\*dates
+--------------------
+
 But you also need start and end dates and a few other values you need to throw
-in that you don't want to label ('two', 'peas').  The Pipulate function to
-could look like::
+in that you don't want to label ('two', 'peas'). The Pipulate function to could
+look like::
 
     def func(row, *pod, **dates):
         postion = row[0]
@@ -595,6 +619,10 @@ could look like::
         pea2 = pod[1]
         start = dates['start']
         end = dates['end']
+
+--------------------
+Testing functions without DataFrame.apply()
+--------------------
 
 If you don't really want to connect to Google Sheets and you just want to test
 your Pipulate function with dummy data to simulate the DataFrame.apply() call,
@@ -617,6 +645,10 @@ in on each step through the DataFrame::
 
 Whether you label the tuple or not in the call is optional, but if you do, it
 has to match the definition. Otherwise, its position is enough.
+
+--------------------
+How the parts snap together
+--------------------
 
 Some pretty cool concepts of bundling and unbundling of attributes between
 Python objects and more common command-line API style is going on here. You
