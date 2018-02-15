@@ -565,12 +565,16 @@ common way to define a pipulate function and its arguments is::
 
     df.apply(func, axis=1, one_tuple, one_dict)
 
+...or possibly like this::
+
+    df.apply(func, axis=1, ('two', 'peas'), foo=bar, spam=eggs, ping=pong)
+
 ...is the same as saying:
 
 1. Define a function named "func".
 2. Require something in position 1.
-3. Optionally expect a tuple of next.
-4. Optionally expect a dictionary of labeled values as the last thing(s).
+3. Optionally expect a tuple next.
+4. Optionally expect a dictionary or sequence of labeled values as the last thing(s).
 
 --------------------
 Automatic unpacking of tuples and dicts in \*args and \*\*kwargs
