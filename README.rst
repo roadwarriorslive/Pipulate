@@ -647,7 +647,7 @@ Whether you label the tuple or not in the call is optional, but if you do, it
 has to match the definition. Otherwise, its position is enough.
 
 --------------------
-How the parts snap together
+How parts like to snap together
 --------------------
 
 Some pretty cool concepts of bundling and unbundling of attributes between
