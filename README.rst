@@ -598,12 +598,12 @@ row of a Pandas DataFrame using the .apply() method is::
 
     my_val = func(a_list, a_tuple, a_dict)
 
-So say you were starting out with this data, but you needed to use start and
-end dates with it, along with 2 more pieces of standard information per row.
-
 --------------------
 Putting it all together
 --------------------
+
+So say you were starting out with this data, but you needed to use start and
+end dates with it, along with 2 more pieces of standard information per row.
 
 ===== === 
 one   com 
