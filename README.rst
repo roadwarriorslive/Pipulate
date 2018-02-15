@@ -621,8 +621,13 @@ we could feed it in an unlabeled fixed position::
     df['C'] = df.apply(func, axis=1, pod, dates)
 
 And there you have it. That's pretty much the basic use of Pipulate for
-completely open-ended semi-automated Python Kung Fu in Google Sheets. Let the
-crazy ad hoc SEO investigations of your dreams begin. Just add functions ;-)
+completely open-ended semi-automated Python Kung Fu in Google Sheets. If you're
+anything like me, you're feeling chills running down your back at the
+possibilities. If jumping onto the SCIENCE bandwagon that's occurring (to fix
+their "crisis of accountability") isn't also the future of SEO, then I don't
+know what is. All Pipulate does is let you get it in and out of GSheets easily,
+so you can focus on the hard parts. Let the crazy ad hoc SEO investigations of
+your dreams begin!
 
 ########################################
 Working with very large lists
