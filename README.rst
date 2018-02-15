@@ -567,7 +567,7 @@ common way to define a pipulate function and its arguments is::
 
 ...or possibly like this::
 
-    df.apply(func, axis=1, ('two', 'peas'), foo=bar, spam=eggs, ping=pong)
+    df.apply(func, axis=1, ('two', 'peas'), foo='bar', spam='eggs', ping='pong')
 
 ...is the same as saying:
 
