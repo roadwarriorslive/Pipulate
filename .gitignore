@@ -12,7 +12,6 @@
 .DS_Store
 .ipynb_checkpoints/
 /dist
-/mypipulate
 /py3
 __pycache__/
 MANIFEST
