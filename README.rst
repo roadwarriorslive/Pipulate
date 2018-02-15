@@ -506,8 +506,8 @@ those values from inside a function::
 
 That's an example where you have multiple labeled arguments like start and end
 dates. But if it's being side-loaded in a similar fashion similar to the row,
-is coming in then you use the other type of splat that only uses a single
-asterisk in the funciton argument definition::
+then you use the other type of splat that only uses a single asterisk in the
+function argument definition::
 
     df['c'] = df.apply(func, axis=1, args=('two', 'peas'))
 
@@ -519,7 +519,7 @@ asterisk in the funciton argument definition::
         # do stuff here
         return stuff
 
-And then as you would imagine, you can mix positonal \*splatting with labeled
+And then as you would imagine, you can mix positional \*splatting with labeled
 \**splatting. You just have to use positional first and labeled second (or
 last, actually), because if you think about it, that's how it must be::
 
@@ -562,7 +562,7 @@ this ugly form of the above API-call::
     df['C'] = df.apply(func, axis=1, pod, dates)
 
 So the common pattern for a Pipulate function which you plan to apply to every
-row of a Pandas DataFrame using the .appy() method is::
+row of a Pandas DataFrame using the .apply() method is::
 
     my_val = func(a_list, a_tuple, a_dict)
 
