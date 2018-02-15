@@ -598,9 +598,8 @@ row of a Pandas DataFrame using the .apply() method is::
 
     my_val = func(a_list, a_tuple, a_dict)
 
-...where a_list is the row's values as fed-in by Pandas, and the a_tuple and
-a_dict are positional and labeled arguments optionally provided by you. So say
-the data you're manipulating is:
+So say you were starting out with this data, but you needed to use start and
+end dates with it, along with 2 more pieces of standard information per row.
 
 ===== === 
 one   com 
@@ -608,13 +607,7 @@ two   net
 three org 
 ===== === 
 
---------------------
-\*args and \*\*kwargs could just as well be \*pod and \*\*dates
---------------------
-
-But you also need start and end dates and a few other values you need to throw
-in that you don't want to label ('two', 'peas'). The Pipulate function to could
-look like::
+The Pipulate function to could look like::
 
     def func(row, *pod, **dates):
         postion = row[0]
