@@ -460,7 +460,7 @@ Giving your function "extra" argument data per row (a tale of 2 splats)
 When stepping row-by-row through a Python Pandas DataFrame, it is often
 desirable to insert "meta" attributes that can be used in the function WITHOUT
 putting those numbers wastefully on every row of the spreadsheet you're
-manipulating. Say the data we wanted to add is a date and it was the same date
+manipulating. Say the data we wanted to add is a date and it was the same dates
 for every row. 
 
 ===== === ========== ==========
@@ -470,9 +470,12 @@ three org 2018-10-01 2018-10-31
 ===== === ========== ==========
 
 Since the date would be the same all the way down, using a whole column in a
-Google Sheet for it would be a waste. Instead, the Pandas API provides for
-passing in both fixed-position arguments and labeled arguments by sort of
-"side-loading" them in as follows::
+Google Sheet for it would be a waste. In fact, GSheets has some limit to how
+many cells you can have, so an extra column with nothing but repeated data is
+very "expensive" quota-wise and slows your sheet down. Instead, only keep the
+unique data per-row in the sheet. The Pandas API (and Python API in a broader
+sense) provides for passing in both fixed-position arguments and labeled
+arguments by sort of "side-loading" them in as follows::
 
     df['C'] = df.apply(func, axis=1, start='2018-01-01', end='2018-01-31')
 
