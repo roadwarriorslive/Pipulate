@@ -595,7 +595,9 @@ you can use the function directly like this::
                   end='2018-01-31')
 
 But when the time comes to use it with Panda's DataFrame.apply(), it would look
-like this::
+like this. Just a reminder, the word "func" is actually the name of the
+function that you've defined (with def) and axis=1 is what makes ROWS get fed
+in on each step through the DataFrame::
 
     df['C'] = df.apply(func, axis=1, 
                        pod=('two', 'peas'),
