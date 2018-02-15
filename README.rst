@@ -463,34 +463,74 @@ putting those numbers wastefully on every row of the spreadsheet you're
 manipulating. Say the data we wanted to add is a date and it was the same date
 for every row. 
 
-==== ==== ==========
-foo  bar  2018-10-01
-spam eggs 2018-10-01
-==== ==== ==========
+===== === ========== ==========
+one   com 2018-10-01 2018-10-31
+two   net 2018-10-01 2018-10-31
+three org 2018-10-01 2018-10-31
+===== === ========== ==========
 
-It would be a waste to copy the exact same date down an entire
-column. Instead, the Pandas API provides for passing in both fixed-position
-arguments and labeled arguments by sort of "side-loading" them in as follows::
+Since the date would be the same all the way down, using a whole column in a
+Google Sheet for it would be a waste. Instead, the Pandas API provides for
+passing in both fixed-position arguments and labeled arguments by sort of
+"side-loading" them in as follows::
 
-    df['C'] = df.apply(func, axis=1, args=('X', 'Y'), foo='bar', spam='eggs')
+    df['C'] = df.apply(func, axis=1, start='2018-01-01', end='2018-01-31')
 
-Grokking this may be the most difficult part of the Pipulate proposition for
-noobs. APIs are weird; weird but powerful. Something very Pythonic is going on
-here. The argument named \*args takes everything fed to the function in the
-location AFTER THE REQUIRED ARGUMENTS (row) but before the series of arbitrary
-name/value arguments (\*\*kwargs). I don't expect you (or anyone) to get this
-at first pass, but it's one of the reasons Python is used to create user-loved
-"API-wrappers" to every non-Python API out there. Look at how you're going to
-have to ACCESS those values from inside a function::
+APIs are weird. They work different ways in different languages, and this is
+how Python works. It's weird, but wonderful. There are subtle rules you have to
+get down here that just comes with experience. It's called learning to think
+Pythonically, If you're in Jupyter Notebook, take a moment to run this::
 
-    def func(row, *args, **kwargs):
-        url = row[0]
-        keyword = row[1]
+    import this
+
+The argument named (\*\*kwargs) accepts as a parameter EITHER a Python
+dictionary object (called a dict, which looks a lot like JSON) or it will
+accept the more common command-line convention of name=value, name2=value2...
+as if being typed-in a terminal. I had a lot of difficulty grokking this, but
+it's one of the reasons Python is used to create user-loved "API-wrappers" to
+every non-Python API out there. Look at how you're going to have to ACCESS
+those values from inside a function::
+
+    df['C'] = df.apply(func, axis=1, start='2018-01-01', end='2018-01-31')
+
+    def func(row, **kwargs):
+        number = row[0]
+        tld = row[1]
+        kwarg1 = kwargs['start']
+        kwarg2 = kwargs['end']
+        # Do stuff here
+        return stuff
+
+That's an example where you have multiple labeled arguments like start and end
+dates. But if it's being side-loaded in a similar fashion as to how the first
+argument, the row, is coming in then you use the other type of splat that only
+uses a single asterisk in the funciton argument definition::
+
+    df['c'] = df.apply(func, axis=1, args=('two', 'peas'))
+
+    def func(row, *args):
+        number = row[0]
+        tld = row[1]
         arg1 = args[0]
         arg2 = args[1]
-        kwarg1 = kwargs['foo']
-        kwarg2 = kwargs['spam']
-        # Do stuff here
+        # do stuff here
+        return stuff
+
+And then as you would imagine, you can mix positonal \*splatting with labeled
+\**splatting. You just have to use positional first and labeled second (or
+last, actually), because if you think about it, that's how it must be::
+
+    df['c'] = df.apply(func, axis=1, args=('two', 'peas'), 
+                       start='2018-01-01', end='2018-01-31')
+
+    def func(row, *args):
+        number = row[0]
+        tld = row[1]
+        kwarg1 = kwargs['start']
+        kwarg2 = kwargs['end']
+        arg1 = args[0]
+        arg2 = args[1]
+        # do stuff here
         return stuff
 
 Just to put a fine point on it, because it's really that important, the very
@@ -505,27 +545,65 @@ common pipulate function arguments::
 3. Optionally expect a list of labeled things next.
 4. Optionally expect a list of name/value pairs as separate arguments, lastly.
 
-So, valid input to a Pipulate function for testing (out of the context of
-Pandas and the DataFrame.apply() method) might look like::
+If passing all these lists and name/value pairs starts to get ugly, remember
+Python actually likes to unpack for tuples and dicts for you as you splat. So
+this ugly form of the above API-call::
+
+    df['c'] = df.apply(func, axis=1, args=('two', 'peas'), 
+                       start='2018-01-01', end='2018-01-31')
+
+...can be re-written in Python as::
+
+    pod = ('two', 'peas')
+    dates = {'start' : '2018-01-01', 'end': '2018-01-31'}
+    df['C'] = df.apply(func, axis=1, pod, dates)
+
+So the common pattern for a Pipulate function which you plan to apply to every
+row of a Pandas DataFrame using the .appy() method is::
 
     my_val = func(a_list, a_tuple, a_dict)
 
-If you were to show the contents of the variables, assuming that row 1 in the
-sheet contains the values A1, B1 and C1 in the respective cells AND you wanted
-to feed some names, then start and end-dates for some sort of look-up, the way
-you'd call it in testing using dummy data could be::
+...where a_list is the row's values as fed-in by Pandas, and the a_tuple and
+a_dict are positional and labeled arguments optionally provided by you. So say
+the data you're manipulating is:
 
-    my_val = func(['A1', 'B1', 'C1'], # From GSheet
-                  ('tom', 'dick', 'harry'),
+===== === 
+one   com 
+two   net 
+three org 
+===== === 
+
+But you also need start and end dates and a few other values you need to throw
+in that you don't want to label ('two', 'peas').  The Pipulate function to
+could look like::
+
+    def func(row, *pod, **dates):
+        postion = row[0]
+        tld = row[1]
+        pea1 = pod[0]
+        pea2 = pod[1]
+        start = dates['start']
+        end = dates['end']
+
+If you don't really want to connect to Google Sheets and you just want to test
+your Pipulate function with dummy data to simulate the DataFrame.apply() call,
+you can use the function directly like this::
+
+    my_val = func(['three', 'org'],
+                  ('two', 'peas'),
                   start='2018-01-01',
                   end='2018-01-31')
 
-In Python, we can break a long function call into multiple lines because
-anything between () or [] or {} can be broken into multiple lines usually
-between the elements of a sequence. That's great for testing, but when the real
-call is made as part of a multi-row pipulating process, it looks much simpler::
+But when the time comes to use it with Panda's DataFrame.apply(), it would look
+like this::
 
-    df['C'] = df.apply(func, axis=1, name_tuple, date_dict)
+    df['C'] = df.apply(func, axis=1, 
+                       pod=('two', 'peas'),
+                       start='2018-01-01',
+                       end='2018-01-31')
+
+Whether you label the tuple or not in the call is optional, but if you do, it
+has to match the definition. Otherwise, its position is enough.
 
 Some pretty cool concepts of bundling and unbundling of attributes between
 Python objects and more common command-line API style is going on here. You
@@ -533,42 +611,12 @@ don't have to use the Python objects as the argument parameters. You can break
 out and unbundle them yourself. If we only have one date parameter for example,
 we could feed it in an unlabeled fixed position::
 
-    df['C'] = df.apply(search_console, axis=1, '2018-01-01')
+    pod = ('two', 'peas')
+    dates = {'start' : '2018-01-01', 'end': '2018-01-31'}
 
-    def search_console(row, *args):
-        url = row[0]
-        keyword = row[1]
-        adate = args[0]
-        # Do stuff here
-        return stuff
+...which leads to the simplest form to look at::
 
-Or for arbitrary reasons, feed it in with a label::
-
-    df['C'] = df.apply(search_console, axis=1, adate='2018-01-01')
-
-    def search_console(row, **kwargs):
-        url = row[0]
-        keyword = row[1]
-        adate = kwargs['adate']
-        # Do stuff here
-        return stuff
-
-And of course, you can do both at once::
-
-    df['C'] = df.apply(search_console, 
-                       axis=1, 
-                       ('2018-01-01', '2018-01-02', '2018-01-03'),
-                       start='2018-01-01',
-                       end='2018-01-03')
-
-    def search_console(row, *args, **kwargs):
-        url = row[0]
-        keyword = row[1]
-        list_of_dates = args # We could break them out here.
-        start = kwargs['start']
-        end = kwargs['end']
-        # Do stuff here
-        return stuff
+    df['C'] = df.apply(func, axis=1, pod, dates)
 
 And there you have it. That's pretty much the basic use of Pipulate for
 completely open-ended semi-automated Python Kung Fu in Google Sheets. Let the
