@@ -584,7 +584,7 @@ If passing all these lists and name/value pairs starts to get ugly, remember
 Python actually likes to unpack for tuples and dicts for you as you splat. So
 this ugly form of the above API-call::
 
-    df['c'] = df.apply(func, axis=1, args=('two', 'peas'), 
+    df['C'] = df.apply(func, axis=1, args=('two', 'peas'), 
                        start='2018-01-01', end='2018-01-31')
 
 ...can be re-written in Python as::
@@ -601,6 +601,10 @@ row of a Pandas DataFrame using the .apply() method is::
 So say you were starting out with this data, but you needed to use start and
 end dates with it, along with 2 more pieces of standard information per row.
 
+--------------------
+Putting it all together
+--------------------
+
 ===== === 
 one   com 
 two   net 
@@ -616,6 +620,17 @@ The Pipulate function to could look like::
         pea2 = pod[1]
         start = dates['start']
         end = dates['end']
+
+...and calling it from Pandas, again, like this::
+
+    df['C'] = df.apply(func, axis=1, 
+                       pod=('two', 'peas'), 
+                       dates={'start' : '2018-01-01', 
+                               'end': '2018-01-31'
+                             }
+                       )
+
+Aren't you glad Python doesn't HAVE TO look like JavaScript?
 
 --------------------
 Testing functions without DataFrame.apply()
