@@ -454,14 +454,21 @@ altered rectangular spreadsheet range back in, this entire system is just
 becoming adept at Pandas using GSheets instead of CSVs.
 
 ****************************************
-Giving your function "extra" argument data per row (grokking splat)
+Giving your function "extra" argument data per row (a tale of 2 splats)
 ****************************************
 
 When stepping row-by-row through a Python Pandas DataFrame, it is often
 desirable to insert "meta" attributes that can be used in the function WITHOUT
 putting those numbers wastefully on every row of the spreadsheet you're
 manipulating. Say the data we wanted to add is a date and it was the same date
-for every row. It would be a waste to copy the exact same date down an entire
+for every row. 
+
+==== ==== ==========
+foo  bar  2018-10-01
+spam eggs 2018-10-01
+==== ==== ==========
+
+It would be a waste to copy the exact same date down an entire
 column. Instead, the Pandas API provides for passing in both fixed-position
 arguments and labeled arguments by sort of "side-loading" them in as follows::
 
