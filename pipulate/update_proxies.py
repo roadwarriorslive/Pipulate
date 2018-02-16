@@ -7,20 +7,20 @@ def Main():
 
     common_terms = list()
     try:
-        with open('proxy_words.txt') as proxy_words:
+        with open('words.txt') as proxy_words:
             for line in proxy_words:
                 common_terms.append(line[:-1])
     except:
-        print("Put your list of proxy_words.txt in repo folder")
+        print("Put your long list of words.txt in repo folder")
         raise SystemExit()
 
     common_agents = list()
     try:
-        with open('proxy_useragents.txt') as proxy_words:
+        with open('useragents.txt') as proxy_words:
             for line in proxy_words:
                 common_agents.append(line[:-1])
     except:
-        print("Put your list of proxy_useragents.txt in repo folder")
+        print("Put your long list of useragents.txt in repo folder")
         raise SystemExit()
 
     minimum_seconds = 10
