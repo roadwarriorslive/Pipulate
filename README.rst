@@ -76,7 +76,7 @@ the Pandas df.apply() method in order to properly grok the power here::
     df['B'] = 'foo'
     gs.populate(tab, cl, df)
 
-Or the slightly longer-form, but probably easy for maintenace::
+Or the slightly longer-form, but probably easy for maintenance::
 
     import pipulate as gs
     import pandas as pd
@@ -156,7 +156,7 @@ Pipulate naming conventions
 
 In case you're wondering why I recommend the convention of importing pipulate
 as gs, it's because my other Github module GoodSheet got fully wrapped in here,
-and I like reminding everyone Pipualte is in fact GoodSheet. I also got very
+and I like reminding everyone Pipulate is in fact GoodSheet. I also got very
 fond of how gs.pipulate() looks, and I think it helps that gs also stands for
 Google Sheet. It also avoids the verbosity of pipulate.pipulate() or
 abbreviation-confusion of pi.pipulate() or pip.pipulate() or any of the other
@@ -288,7 +288,7 @@ typing df all by itself::
 
     df
 
-Make the changes that you see in memory push back out to the spreasheet. Watch
+Make the changes that you see in memory push back out to the spreadsheet. Watch
 the browser as you populate to see the changes occur!::
 
     gs.populate(tab, cl, df)
