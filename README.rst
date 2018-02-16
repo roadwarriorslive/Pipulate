@@ -76,6 +76,20 @@ the Pandas df.apply() method in order to properly grok the power here::
     df['B'] = 'foo'
     gs.populate(tab, cl, df)
 
+Or the slightly longer-form, but probably easy for maintenace::
+
+    import pipulate as gs
+    import pandas as pd
+    key = 'gobbledygookdockeyhere'
+    tab_name = 'Sheet1'
+    rows = (1, 20)
+    cols = ('a', 'b')
+    sheet = gs.key(key)
+    tab = sheet.worksheet(tab_name)
+    cl, df = gs.pipulate(tab, rows, cols)
+    df['B'] = 'foo'
+    gs.populate(tab, cl, df)
+
 ****************************************
 Things even the impatient must know
 ****************************************
