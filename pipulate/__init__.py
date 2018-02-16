@@ -253,7 +253,7 @@ def cl_df_from_sheet(sheet, row1, col1, col2, row2=False, columns=False, guess=F
     df = pd.DataFrame(list_of_tuples, columns=column_names)
     print("Success! You can now look at your df. It's shape is %s rows x %s cols." % df.shape) 
     print("Do pandas stuff like df['B'] = 'foo', but keep its shape.") 
-    print("Update GSheet with changes: gs.populate(cl, df)")
+    print("Update GSheet with changes: gs.populate(tab, cl, df)")
     return cl, df
 
 
