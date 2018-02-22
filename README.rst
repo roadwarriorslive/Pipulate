@@ -1092,17 +1092,20 @@ file to kick-off Pipulate (or any other) Python scheduling job like this::
     [Install]
     WantedBy=multi-user.target
 
-You you've just dropped this file in location and you need a way to force the
-scheduling behavior to begin, you can do a one-time reloading of all the
-systemd-maintained jobs::
+You you've just dropped this file in location, but now it needs to be enabled.
+This is a one-time thing (unless you want it off for debugging or whatever)::
+
+    sudo systemctl enable zdsched.service 
+
+Once you start playing around with the invisible background system services
+(named daemons in Linux), the temptation is to keep rebooting your server to
+make sure your changes "took" (similar to Apache/IIS webserver issues).
+Whenever you're unsure and want to avoid a reboot, you can type::
 
     sudo systemctl daemon-reload
 
-After that, when you make modifications just within your script and not how
-it's scheduled, you can just restarting that particular service to ensure that
-the edits you made within the job are picked-up and held in memory for the next
-cycle. After that a normal system reboot pretty typically gets your job running
-again::
+If you want to just restart YOUR scheduling service and not all daemons, you
+can optionally do::
 
     sudo systemctl restart mysched.service
 
@@ -1123,20 +1126,26 @@ curiosity, this is what it's doing::
     sudo systemctl daemon-reload
     sudo systemctl restart mysched.service
 
+****************************************
+Shoving the work around to where it belongs
+****************************************
+
 This r.sh file comes into play again later, because in order to ensure the
 health of your scheduling server, we're going to give it a "clean slate" every
 morning by rebooting it, and we're going to schedule the running of this BASH
-script FROM PYTHON to do it.
+script FROM PYTHON to do it. This is an example of doing each thing in the
+place where it best belongs. Reboot from a bash script, respwan from systemd,
+and actually SCHEDULE from within a single master Python script.
 
 After such a reboot (and on any boot, really), we hand all scheduling
 responsibility immediately over to Python (even though systemd could do more)
 because as much better as it is over crontab, Python APIs are better still. We
-actually are using systemd as a pedantic task respawner. Think of it as someone
-watching for your script to exit that can 100% reliably re-start it. That's
-systemd in our scenario. After mysched.py is running, control is immediately
-handed over to the 3rd party "Schedule" package from PyPI/Github because it's
-API is better than the default sched module built-into Python. Such things on
-my mind are:
+actually are only using systemd as a pedantic task respawner. Think of it as
+someone watching for your python-script to exit that can 100% reliably re-start
+it. That's systemd in our scenario. After mysched.py is running, control is
+immediately handed over to the 3rd party "Schedule" package from PyPI/Github
+because it's API is better than the default sched module built-into Python.
+Such things on my mind are:
 
 - Period vs. Exact scheduling (every-x minutes vs every-day at y-o'clock)
 - Concurrency when I need it and crystal clarity when I don't
@@ -1148,7 +1157,7 @@ my mind are:
 For now, "pip install schedule" seems to do the job.
 
 ****************************************
-It's scheduling! think it through...
+Scheduling issues are more complex than you think.
 ****************************************
 
 When restarting a scheduling-script, you need to know that when it springs back
@@ -1393,6 +1402,9 @@ Once you're in Copy Mode, you can use Page Up & Page Down. You can also use
 Ctrl+B for back and Ctrl+F for forward. When you're done, hit the [Esc] key
 again. When you want to release the screen session, it's still Ctrl+A, D
 [Enter] to detach.
+
+And finally, it can feel a little "out of control" to have a script running
+insistently in the background with no way to stop. 
 
 The Unix/Linux-style type-in "terminal" interface that ships with Macs and can
 be installed with Windows using CygWin or their new Windows 10 BASH shell is
