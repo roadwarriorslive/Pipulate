@@ -1,5 +1,5 @@
 
-=============== 
+===============
 pipulate v0.1.8 - Automate Google Sheets for SEO
 ===============
 
@@ -22,7 +22,7 @@ back into the sheet. The rest (altering the data) is Pandas.
 .. sectnum::
 
 
-######################################## 
+########################################
 Background & Philosophy
 ########################################
 
@@ -44,7 +44,7 @@ you're into SEO or tracking how well you're doing in Social Media like Twitter
 and YouTube (for free), then you're in the right place. Who knows, it could
 even launch you on a new career in case YouTube doesn't work out.
 
-######################################## 
+########################################
 Installing Pipulate
 ########################################
 
@@ -61,7 +61,7 @@ already met by Anaconda, but if you're in some other Python environment, you
 can install all the rest of the requirements for Pipulate with pip install
 pandas (a VERY BIG install).
 
-######################################## 
+########################################
 For the impatient
 ########################################
 
@@ -118,7 +118,7 @@ OAuth2. Occasionally, Google WILL make even the refresh token have to be
 recreated with a new Web login, so just be aware of that especially if you
 build real automations (non-Jupyter Notebook) around Pipulate.
 
-######################################## 
+########################################
 A tour through Pipulate
 ########################################
 
@@ -317,7 +317,7 @@ would get ValueError: invalid literal for int() with base 10: 'The Zen of
 Python, by Tim Peters'. But you can put numbers in column A and execute this to
 see a simple *2 operation and acquaint yourself with how automate-able things
 start to become when you replace tedious manual Excel processes with
-automation. 
+automation.
 
 ****************************************
 Appending strings
@@ -475,7 +475,7 @@ When stepping row-by-row through a Python Pandas DataFrame, it is often
 desirable to insert "meta" attributes that can be used in the function WITHOUT
 putting those numbers wastefully on every row of the spreadsheet you're
 manipulating. Say the data we wanted to add is a date and it was the same dates
-for every row. 
+for every row.
 
 ===== === ========== ==========
 one   com 2018-10-01 2018-10-31
@@ -549,7 +549,7 @@ And then as you would imagine, you can mix positional \*splatting with labeled
 \**splatting. You just have to use positional first and labeled second (or
 last, actually), because if you think about it, that's how it must be::
 
-    df['c'] = df.apply(func, axis=1, args=('two', 'peas'), 
+    df['c'] = df.apply(func, axis=1, args=('two', 'peas'),
                        start='2018-01-01', end='2018-01-31')
 
     def func(row, *args):
@@ -598,7 +598,7 @@ If passing all these lists and name/value pairs starts to get ugly, remember
 Python actually likes to unpack for tuples and dicts for you as you splat. So
 this ugly form of the above API-call::
 
-    df['C'] = df.apply(func, axis=1, args=('two', 'peas'), 
+    df['C'] = df.apply(func, axis=1, args=('two', 'peas'),
                        start='2018-01-01', end='2018-01-31')
 
 ...can be re-written in Python as::
@@ -619,11 +619,11 @@ Putting it all together
 So say you were starting out with this data, but you needed to use start and
 end dates with it, along with 2 more pieces of standard information per row.
 
-===== === 
-one   com 
-two   net 
-three org 
-===== === 
+===== ===
+one   com
+two   net
+three org
+===== ===
 
 The Pipulate function to could look like::
 
@@ -637,9 +637,9 @@ The Pipulate function to could look like::
 
 ...and calling it from Pandas, again, like this::
 
-    df['C'] = df.apply(func, axis=1, 
-                       pod=('two', 'peas'), 
-                       dates={'start' : '2018-01-01', 
+    df['C'] = df.apply(func, axis=1,
+                       pod=('two', 'peas'),
+                       dates={'start' : '2018-01-01',
                                'end': '2018-01-31'
                              }
                        )
@@ -664,7 +664,7 @@ like this. Just a reminder, the word "func" is actually the name of the
 function that you've defined (with def) and axis=1 is what makes ROWS get fed
 in on each step through the DataFrame::
 
-    df['C'] = df.apply(func, axis=1, 
+    df['C'] = df.apply(func, axis=1,
                        pod=('two', 'peas'),
                        start='2018-01-01',
                        end='2018-01-31')
@@ -950,7 +950,7 @@ Developing Pipualte functions
 
 Because Pipulate functions are really just Python functions (generally being
 called through the Pandas DataFrame.apply() method), you can develop Pipulate
-functions just as you would any other Python funciton. 
+functions just as you would any other Python funciton.
 
 The only unusal concern is how when you feed an entire "row" of a dataframe to
 a Python function, it takes the form of an arbitrary variable name (usually
@@ -990,7 +990,7 @@ values from rows you'll be pulling in from a spreadsheet.
 By the way, namedtuples are the superior way of doing this when not bound by a
 pre-existing framework, but whatever. Pandas is worth it.
 
-######################################## 
+########################################
 Scheduling
 ########################################
 
@@ -1074,23 +1074,23 @@ service, like mysched.service. To create it, you may have to sudo vim or
 whatever command because its a protected system location. The contents of your
 file to kick-off Pipulate (or any other) Python scheduling job like this::
 
-	[Unit]
+    [Unit]
 
-	Description=Run Python script to handle scheduling
+    Description=Run Python script to handle scheduling
 
-	[Service]
-	Type=forking
-	Restart=always
-	RestartSec=5
-	User=ubuntu
-	Group=ubuntu
-	WorkingDirectory=/home/ubuntu/mysched/
-	ExecStart=/usr/bin/screen -dmS mysched /home/ubuntu/py35/bin/python /home/ubuntu/mysched/mysched.py
-	StandardOutput=syslog
-	StandardError=syslog
+    [Service]
+    Type=forking
+    Restart=always
+    RestartSec=5
+    User=ubuntu
+    Group=ubuntu
+    WorkingDirectory=/home/ubuntu/mysched/
+    ExecStart=/usr/bin/screen -dmS mysched /home/ubuntu/py35/bin/python /home/ubuntu/mysched/mysched.py
+    StandardOutput=syslog
+    StandardError=syslog
 
-	[Install]
-	WantedBy=multi-user.target
+    [Install]
+    WantedBy=multi-user.target
 
 You you've just dropped this file in location and you need a way to force the
 scheduling behavior to begin, you can do a one-time reloading of all the
@@ -1106,25 +1106,46 @@ again::
 
     sudo systemctl restart mysched.service
 
-Who wants to type a longer command when you can type a shorter command? Create
-a little script-file and put it in your new sbin. You are "logged into" a
-different server, remember? Name it "r.sh" for reboot, chmod +x it and put this
-in it. Now, whenever you edit any of your scheduling scripts (there will be
-many), you never have to worry about what's loaded into memory (same issue as
-with web development)::
+Who wants to type a longer command when you can type a shorter command? Since
+we're in a location where we're typically cd' into, we don't need to do that
+sbin trick we did on your local machine. In fact, I included r.sh in the repo,
+so just cd into the repo directory and make sure the service names I'm using
+match the ones you're using, and type::
+
+    r[Enter]
+
+...and it should reboot the service keeping mysched.py running. For your
+curiosity, this is what it's doing::
 
     #!/bin/bash
+    # This belongs in your sbin
 
     sudo systemctl daemon-reload
     sudo systemctl restart mysched.service
 
-Now if ever you want to be completely sure you restarted your scheduling script
-after making edits to mysched.py all you need to do is type::
+This r.sh file comes into play again later, because in order to ensure the
+health of your scheduling server, we're going to give it a "clean slate" every
+morning by rebooting it, and we're going to schedule the running of this BASH
+script FROM PYTHON to do it.
 
-    r[Enter]
+After such a reboot (and on any boot, really), we hand all scheduling
+responsibility immediately over to Python (even though systemd could do more)
+because as much better as it is over crontab, Python APIs are better still. We
+actually are using systemd as a pedantic task respawner. Think of it as someone
+watching for your script to exit that can 100% reliably re-start it. That's
+systemd in our scenario. After mysched.py is running, control is immediately
+handed over to the 3rd party "Schedule" package from PyPI/Github because it's
+API is better than the default sched module built-into Python. Such things on
+my mind are:
 
-...and your scheduling is restarted. I think of that as a very soft reboot of
-your scheduling routine. 
+- Period vs. Exact scheduling (every-x minutes vs every-day at y-o'clock)
+- Concurrency when I need it and crystal clarity when I don't
+- Minimal new "framework" language. If it feels like Django, turn and run.
+- Optional ability to "lock" long-running jobs. General collision handling.
+- Calls for little-enough code that if I make a mistake, I can easily recode.
+- Crystal clear clarity of what's going on, no matter where I may be.
+
+For now, "pip install schedule" seems to do the job.
 
 ****************************************
 It's scheduling! think it through...
@@ -1138,22 +1159,23 @@ realistic about how many reports you're going to be able to run on a given
 server on a given day. It can be like playing a giant game of Tetris, so it
 would be nice to have concurrency.
 
-Concurrency, you say? Are you suuuuure? There might be order-dependencies to
-how your script runs that you haven't thought about. I find that it's always a
-good idea to avoid concurrency and to keep it simple (a wonderful attribute of
-code) if the situation doesn't really call for concurrency. As hardware and
+Concurrency, you say? Are you suuuuure? There might be order-dependencies and
+race-conditions in your script runs that you haven't thought about. I find that
+it's always a good idea to avoid concurrency and to keep it simple (much good
+karma) if the situation doesn't really call for concurrency. As hardware and
 hosting gets cheaper, you can always slam out more EC2 instances and put less
-work per server. 
+work per server. Everything scales if you just size your work to fit one unit
+of generic Linux server.
 
 Staying conservative with your estimates and modest with your promises is
 always a good idea, specially given how flaky all those APIs you're pulling
 from could be, you ought to size out the job, then half it. Maybe even quarter
-it.  You won't be sorry. All that extra capacity in the server could be used
-for temp tables or other unexpected resource hogs you'll run into that you
-don't see today.
+it. You won't be sorry. All that extra capacity in the server could be used for
+temp tables or other unexpected resource hogs you'll run into that you don't
+see today.
 
 ****************************************
-In the beginning
+In the beginning...
 ****************************************
 
 The idea here with Pipulate is to make a very generic and almost organic (with
@@ -1179,107 +1201,203 @@ Oh yeah, so in the beginning::
     mkdir mysched
     cd mysched
     vim mysched.py
- 
+
+****************************************
+And then there was ASCII Art
+****************************************
+
 You can create your mysched.py however you like. I use vim, and it's spiritual
 and life-changing. It also solves how to be really productive on pretty much
 any machine you sit down at when doing tasks like this. Anyway, I just added
 that file to the github repo, but for ease-of-use, I'll show the development of
 our scheduling script here. First::
 
-	import schedule as sched
-	from pyfiglet import figlet_format
-	from colorama import Fore
-	from logzero import logger, setup_logger
+    from pyfiglet import figlet_format
+    from colorama import Fore
+    from logzero import logger, setup_logger
 
-	UTCRebootTime = '06:00' # Generally, 1-AM for me
-	beat_count = 0
-	font = 'standard'
-	subfont = 'cybermedium'
-	green = Fore.GREEN
-	white = Fore.WHITE
-	blue = Fore.BLUE
+    font = 'standard'
+    subfont = 'cybermedium'
+    green = Fore.GREEN
+    white = Fore.WHITE
+    blue = Fore.BLUE
 
-	ascii_art1 = figlet_format('Congratulations!', font=font)
-	ascii_art2 = figlet_format('Welcome to Wonderland.!', font=subfont)
-	print('%s%s%s' % (green, ascii_art1, white))
-	print('%s%s%s' % (blue, ascii_art2, white))
+    ascii_art1 = figlet_format('Congratulations!', font=font)
+    ascii_art2 = figlet_format('Welcome to Wonderland.!', font=subfont)
+    print('%s%s%s' % (green, ascii_art1, white))
+    print('%s%s%s' % (blue, ascii_art2, white))
 
-	logger = setup_logger(logfile='mysched.log', maxBytes=1000000, backupCount=3)
-	logger.info('This is some logger info.')
+    logger = setup_logger(logfile='mysched.log', maxBytes=1000000, backupCount=3)
+    logger.info('This is some logger info.')
 
-This should give you a good starting point for scheduling... there is none! But
-what we do have is very splashy color-coded ASCII art to open your scheduling
-routine. It should only ever be visible when you're restarting the script a lot
-for testing, or at around 1:00 AM, or whenever your daily reboot occurs. You
-can also see the log-file output that is also being written into mysched.log
-which you can look at to WHAT file did the logging (more on that later) and
-when.::
+This should give you a good starting point for scheduling... none! By stripping
+out everything that actually does scheduling, you can see how flashy
+color-coded ASCII art can color your day, your view, and your perception of
+time, rightness, and generally keep you on-track. Don't down-play the titles.
+It should only ever be visible when you're restarting the script a lot for
+testing, or at around 1:00 AM, or whenever your daily reboot occurs.
+
+Keep in mind that later-on, we're going to "seize" the command-line output
+stream (your view of the log-file) from anywhere you have a terminal program
+and ssh program. That could very well be (and often is in my case) your mobile
+phone. It's easier than you think; you don't even have to look at the actual
+log files; it just sort of streams down the screen like the Matrix. That's the
+effect I was going for (thank you LogZero).
+
+You can ALSO see the log-file output that is also being written into
+mysched.log which you can look at if say the script stopped running and the
+real-time output went away::
 
     [I 180222 19:36:56 mysched:20] This is some logger info.
     [I 180222 19:47:07 mysched:20] This is some logger info.
 
+****************************************
+The first scheduled event
+****************************************
+
 Going from this "blank" scheduling file to the next step really highlights a
 lot of the default power of the scheduling module.::
 
-	import schedule as sched
-	from pyfiglet import figlet_format
-	from colorama import Fore
-	from logzero import logger, setup_logger
-	from datetime import date, datetime, timedelta
-	import time
+    import schedule as sched
+    from pyfiglet import figlet_format
+    from colorama import Fore
+    from logzero import logger, setup_logger
+    from datetime import date, datetime, timedelta
+    import time
 
-	UTCRebootTime = '06:00' # Generally, 1-AM for me
-	beat_count = 0
-	font = 'standard'
-	subfont = 'cybermedium'
-	green = Fore.GREEN
-	white = Fore.WHITE
-	blue = Fore.BLUE
+    UTCRebootTime = '06:00' # Generally, 1-AM for me
+    beat_count = 0
+    font = 'standard'
+    subfont = 'cybermedium'
+    green = Fore.GREEN
+    white = Fore.WHITE
+    blue = Fore.BLUE
 
-	ascii_art1 = figlet_format('Congratulations!', font=font)
-	ascii_art2 = figlet_format('Welcome to Wonderland.!', font=subfont)
-	print('%s%s%s' % (green, ascii_art1, white))
-	print('%s%s%s' % (blue, ascii_art2, white))
+    ascii_art1 = figlet_format('Congratulations!', font=font)
+    ascii_art2 = figlet_format('Welcome to Wonderland.!', font=subfont)
+    print('%s%s%s' % (green, ascii_art1, white))
+    print('%s%s%s' % (blue, ascii_art2, white))
 
-	the_time = str(datetime.now().time())[:5]
-	logger = setup_logger(logfile='mysched.log', maxBytes=1000000, backupCount=3)
-	logger.info("We're not in Jupyter Notebook anymore. The time is %s." % the_time)
-
-
-	def main():
-		sched.every(10).minutes.do(heartbeat)
-		next_min = minute_adder(1).strftime('%H:%M')
-		logger.info("When the clock strikes %s, down the rabbit hole with you!" % next_min)
-		sched.every().day.at(next_min).do(the_queue)
-		sched.every().day.at(UTCRebootTime).do(reboot)
-		while True:
-			sched.run_pending()
-			time.sleep(1)
+    the_time = str(datetime.now().time())[:5]
+    logger = setup_logger(logfile='mysched.log', maxBytes=1000000, backupCount=3)
+    logger.info("We're not in Jupyter Notebook anymore. The time is %s." % the_time)
 
 
-	def heartbeat():
-		global beat_count
-		beat_count += 1
-		logger.info("Heartbeat %s at %s" % (beat_count, datetime.now()))
+    def main():
+        sched.every(10).minutes.do(heartbeat)
+        next_min = minute_adder(1).strftime('%H:%M')
+        logger.info("When the clock strikes %s, down the rabbit hole with you!" % next_min)
+        sched.every().day.at(next_min).do(the_queue)
+        sched.every().day.at(UTCRebootTime).do(reboot)
+        while True:
+            sched.run_pending()
+            time.sleep(1)
 
 
-	def the_queue():
-		logger.info("This is a scheduled event. Jump! Down the rabbit hole...")
+    def heartbeat():
+        global beat_count
+        beat_count += 1
+        logger.info("Heartbeat %s at %s" % (beat_count, datetime.now()))
 
 
-	def reboot():
-		logger.info("Rebooting system.")
-		import subprocess
-		p = subprocess.Popen(['sh', 'r.sh'], cwd='/home/ubuntu/pipulate/')
+    def the_queue():
+        logger.info("This is a scheduled event. Jump! Down the rabbit hole...")
 
 
-	def minute_adder(minutes):
-		the_time = datetime.now().time()
-		today = date.today()
-		beat = timedelta(minutes=minutes)
-		return_value = datetime.combine(today, the_time) + beat
-		return return_value
+    def reboot():
+        logger.info("Rebooting system.")
+        import subprocess
+        p = subprocess.Popen(['sh', 'r.sh'], cwd='/home/ubuntu/pipulate/')
 
 
-	if __name__ == '__main__':
-		main()
+    def minute_adder(minutes):
+        the_time = datetime.now().time()
+        today = date.today()
+        beat = timedelta(minutes=minutes)
+        return_value = datetime.combine(today, the_time) + beat
+        return return_value
+
+
+    if __name__ == '__main__':
+        main()
+
+You can, and I encourage you to run this directly with the standard Python
+command-line way of running it. If you haven't been doing it already, cd into
+that directory and run::
+
+    python mysched.py
+
+****************************************
+GNU screen, your portal to your scheduled world.
+****************************************
+
+Webmasters are dead. Long live the Datamaster! This is kind of like the LAMP
+stack, but for scheduling in the modern world with (what I consider) the least
+moving parts pushing around the "responsibilities". SQL-ish stuff goes to
+Pandas, logic stuff to Python, Task-respawning to Linux, Data-UI to Google
+Sheets... but what about WATCHING your scripts being run? What about getting
+that at-one Zen feeling with all those invisible plates you have spinning?
+
+If you put the service file in location at /etc/systemd/service/[mysched.py]
+and reboot already, then this script is running in the background right now.
+Wanna see it? It may be up to a bunch of those 10-minute heartbeats already.
+Type::
+
+    screen -d -r mysched
+
+That's the gnu screen program. It's a lot like tmux, but if you don't know what
+that is either, then it's a terminal server just like remote desktop software
+like RDP or VNC, but instead of being for Graphical Desktops like Windows or
+Mac, it's just for those type-in command-line terminals. It's a lot to type and
+remember, so drop this into your /usr/local/sbin, or maybe your ~/ home folder
+if sbin gives you trouble. I call it "ing.py" so that all together to see
+what's going on (starting from a terminal on Mac, Windows, whatever), I type::
+
+    go[Enter]
+    do[Enter]
+
+****************************************
+Get used to using Ctrl+A (let go) then d to detach
+****************************************
+
+And then if I want to just immediately exit out, I type::
+
+    Ctrl+D [Enter]
+
+If you want to activate the "do.sh" just make this file by that name, chmod +x
+it and drop it in your sbin or home::
+
+    #!/bin/bash
+    # Put this in your sbin or ~/ to be useful.
+
+    screen -d -r mysched
+
+This means that a secret invisible command-line task starts whenever the
+machine reboots that you can "connect to" with that command. The -d parameter
+means force it to detach from whatever other device it's showing on (the
+"seizing" the display I mentioned earlier) and the -r parameter means
+reconnect. Together, you can pretty much pull up your scheduling output
+anywhere anytime.
+
+But once you do, you are inside a terminal window session created by gnu screen
+and NOT by the original login-session you had. The -d parameter means force it
+to detach from whatever other device it's showing on (the "seizing" the
+display I mentioned earlier) and the -r parameter means reconnect. This gives
+you quite a bit of power to just scroll up and down the log-output (without
+having to load a single file) using GNU screen's buffer-scroll::
+
+    do[Enter] (to seize screen)
+    Ctrl+A [Esc] (to switch to scroll-back history)
+    Now you can use Page Up & Page Down.
+    You can also use Ctrl+B for back and Ctrl+F for forward.
+    When you're done, hit the [Esc] key again.
+    When you want to release the screen session, it's still:
+    Ctrl+D [Enter]
+
+The Unix/Linux-style type-in "terminal" interface that ships with Macs and can
+be installed with Windows using CygWin or their new Windows 10 BASH shell is
+your new portal into Wonderland. Jupyter Notebook gave you a taste of the power
+of Python, but you're not really realizing it until you're running reports
+during all that other delicious time when you're NOT sitting in front of a
+browser hitting a button and waiting for something to finish on your local
+machine.
