@@ -996,21 +996,37 @@ Scheduling
 
 Everything so far has been in Jupyter Notebook, and that's great for ad hoc
 work, but when it comes to "promoting" a good report to daily use, you need
-scheduling. And that sucks, because you need a machine running somewhere with
-as much reliability as you can get paying as little as possible.
+scheduling. And that's never pleasant, because you need a machine running
+somewhere with as much reliability as you can get paying as little as possible.
+That's just sort of a life lesson there. No matter how powerful you feel in
+Jupyter Notebook, you're not all that if you can't automated. The answer?
 
-Cloud... EC2 or whatever. Pick your poison. Likely, being server-like, whatever
-you're going to need a way to get into it, and for that you're likely to
-receive a key from Amazon or your devops Dept. Figure out how to login to that
-machine. It should be TOTALLY YOURS. This is your EC2 instance. There are
-others like it, but this one is yours. Learn how to get in and out of it fast,
-from almost anywhere. 
+****************************************
+Get yourself a Linux in the Cloud
+****************************************
 
-You figure out the ssh command to log in to your server, and do it manually a
-few times. This follows the model of putting the key file in a usually hidden
-directory on your system called .ssh which is usually in your home directory::
+Cloud... EC2 or whatever. Pick your poison. Whatever it is, being server-like
+(as it should be), you're going to need to get into it... and for that you're
+likely to receive a key from Amazon or your devops Dept. Figure out how to
+login to that machine. It should be TOTALLY YOURS. This is your EC2 instance.
+There are others like it, but this one is yours. Learn how to get in and out of
+it fast, from almost anywhere. You can do this on a Raspberry Pi too if you
+don't even want Amazon and a key in the picture.
+
+****************************************
+Logging into your server
+****************************************
+
+Once you figure out the ssh command to log in to your server, and do it
+manually a few times. This follows the model of putting the key file in a
+usually hidden directory on your system called .ssh which is usually in your
+home directory::
 
     ssh -i ~/.ssh/id_rsa_yourname ubuntu@55.25.123.156
+
+****************************************
+Making it a pleasure to log into your server
+****************************************
 
 Once this works for you, create a text file and name it something like go.sh
 and put it in your sbin. What's an sbin? It's a place you put little text-files
@@ -1028,19 +1044,30 @@ this text (your info) in a file called go.sh (or whatever) there. Do the chmod
 +x trick to make it executable, and then whenever you need to reach your
 server, just type go. It's really nice to open a shell and to be in your
 scheduling-environment just like that. We want to do everything immediately
-reasonable to make the text-based Linux shell environment (to remote servers
-like this scheduling one) as cool as possible::
+reasonable to make the text-based Linux shell environment as totally cool as
+Jupyter Notebook is::
 
     #!/bin/bash
 
     ssh -i ~/.ssh/id_rsa_yourname ubuntu@55.25.123.156
 
+****************************************
+A scheduler with a better API is a better scheduler
+****************************************
+
 We are not using crontab as our next step to achieve scheduling as some
 googling about how to do this on a stock Linux server may indicate. We DON'T
 like APIs where you have to drive nails through your head here at Pipulate. No,
 we side with RedHat and others on the matter of default Linux system service
-management, and go with systemd. It's just as mainstream now as crontab and
-considered a replacement or alternative. https://en.wikipedia.org/wiki/Systemd
+management and encourage you to use systemd. It's not the principles of the
+least moving parts but rather the principle of not having to learn advanced
+BASH script that's at play here. Thankfully, crontab's replacement systemd is
+considered a highly supported mainstream alternative.
+https://en.wikipedia.org/wiki/Systemd
+
+****************************************
+/etc/systemd/service/servicename.service
+****************************************
 
 You need a file in /etc/systemd/system which is the name of your service dot
 service, like mysched.service. To create it, you may have to sudo vim or
@@ -1079,16 +1106,12 @@ again::
 
     sudo systemctl restart mysched.service
 
-However, this does indicate a Python file named mysched.py to be in-memory and
-running 24 hours a day, 7 days a week without rest. We should give it a rest.
-But how? Oh, this is where it gets all philosophical. Oh, it's philosophical
-anyway because it's about easier and better APIs already. So the idea here with
-Pipulate is to make a very generic and almost organic (with a heart-beat) place
-to start plugging your scheduled extractions from Jupyter Notebook into, with
-the least muss and fuss... but also, the most power. But who wants to type a
-longer command when you can type a shorter command? Create a little script-file
-and put it in your new sbin. You are "logged into" a different server,
-remember? Name it "r.sh" for reboot, chmod +x it and put this in it::
+Who wants to type a longer command when you can type a shorter command? Create
+a little script-file and put it in your new sbin. You are "logged into" a
+different server, remember? Name it "r.sh" for reboot, chmod +x it and put this
+in it. Now, whenever you edit any of your scheduling scripts (there will be
+many), you never have to worry about what's loaded into memory (same issue as
+with web development)::
 
     #!/bin/bash
 
@@ -1101,17 +1124,92 @@ after making edits to mysched.py all you need to do is type::
     r[Enter]
 
 ...and your scheduling is restarted. I think of that as a very soft reboot of
-your scheduling routine. However, you need to know that when it springs back to
-life it may be in the middle or even towards the end of the daily time-cycle
+your scheduling routine. 
+
+****************************************
+It's scheduling! think it through...
+****************************************
+
+When restarting a scheduling-script, you need to know that when it springs back
+to life it may be in the middle or even towards the end of the daily time-cycle
 you're probably used to thinking in, so "today's" reports may never get a
 chance to run. You need to accommodate for this. You also need to be very
 realistic about how many reports you're going to be able to run on a given
-server on a given day. It would be nice to have concurrency, even though every
-fiber of my being tells me to avoid it because there will be order-dependencies
-and other issues that just generally make concurrency a bad idea when you don't
-really need to do it in that situation. So, I'm leaving my options open. What's
-inside mysched.py? Well, let's make it part of this github repo and start to
-build it up and document it here.
+server on a given day. It can be like playing a giant game of Tetris, so it
+would be nice to have concurrency.
 
+Concurrency, you say? Are you suuuuure? There might be order-dependencies to
+how your script runs that you haven't thought about. I find that it's always a
+good idea to avoid concurrency and to keep it simple (a wonderful attribute of
+code) if the situation doesn't really call for concurrency. As hardware and
+hosting gets cheaper, you can always slam out more EC2 instances and put less
+work per server. 
 
-https://github.com/nithinmurali/pygsheets
+Staying conservative with your estimates and modest with your promises is
+always a good idea, specially given how flaky all those APIs you're pulling
+from could be, you ought to size out the job, then half it. Maybe even quarter
+it.  You won't be sorry. All that extra capacity in the server could be used
+for temp tables or other unexpected resource hogs you'll run into that you
+don't see today.
+
+****************************************
+In the beginning
+****************************************
+
+The idea here with Pipulate is to make a very generic and almost organic (with
+a heart-beat) place to start plugging your scheduled extractions from Jupyter
+Notebook into, with the least muss and fuss... but also, the most power.
+Pipulate only exists to make GSheets easier; a 3rd party package from
+Github/PyPI which itself only exists to make gdata easier; a cryptic but
+GOOGLE-PROVIDED API to Google Sheets. GData is most definitely NOT made for
+humans. GSpread is made for those slightly more human. And for those entirely
+human, there's Pipulate. In fact, there's something other than GSpread that I
+just discovered which may have either tremendous impact or no impact at all
+here at Pipulate. I'll let you know, but go take a look in either case. Real
+kindred spirits over at https://github.com/nithinmurali/pygsheets
+
+Oh yeah, so in the beginning::
+
+    #Do whatever virtualenv stuff you do here
+    pip install schedule
+    pip install logzero
+    pip install pyfiglet
+    pip install colorama
+    cd ~/
+    mkdir mysched
+    cd mysched
+    vim mysched.py
+ 
+You can create your mysched.py however you like. I use vim, and it's spiritual
+and life-changing. It also solves how to be really productive on pretty much
+any machine you sit down at when doing tasks like this. Anyway, I just added
+that file to the github repo, but for ease-of-use, I'll show the development of
+our scheduling script here. First::
+
+	import schedule as sched
+	from pyfiglet import figlet_format
+	from colorama import Fore
+	from logzero import logger, setup_logger
+
+	UTCRebootTime = '06:00' # Generally, 1-AM for me
+	beat_count = 0
+	font = 'standard'
+	subfont = 'cybermedium'
+	green = Fore.GREEN
+	white = Fore.WHITE
+	blue = Fore.BLUE
+
+	ascii_art1 = figlet_format('Congratulations!', font=font)
+	ascii_art2 = figlet_format('Welcome to Wonderland.!', font=subfont)
+	print('%s%s%s' % (green, ascii_art1, white))
+	print('%s%s%s' % (blue, ascii_art2, white))
+
+	logger = setup_logger(logfile='mysched.log', maxBytes=1000000, backupCount=3)
+	logger.info('This is some logger info.')
+
+This should give you a good starting point for scheduling... there is none! But
+what we do have is very splashy color-coded ASCII art to open your scheduling
+routine, which will always show you in glorious form that you're at the very
+beginning of the script. You should only ever see this during testing, or at
+about 1:00 AM, after your daily reset. What daily reset, you say? Oh... let's
+schedule it!
