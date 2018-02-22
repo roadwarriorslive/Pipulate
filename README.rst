@@ -1388,11 +1388,11 @@ having to load a single file) using GNU screen's buffer-scroll::
 
     do[Enter] (to seize screen)
     Ctrl+A [Esc] (to switch to "Copy mode" with a scroll-back history)
-    Once you're in Copy Mode, you can use Page Up & Page Down.
-    You can also use Ctrl+B for back and Ctrl+F for forward.
-    When you're done, hit the [Esc] key again.
-    When you want to release the screen session, it's still:
-    Ctrl+A, D [Enter]
+
+Once you're in Copy Mode, you can use Page Up & Page Down. You can also use
+Ctrl+B for back and Ctrl+F for forward. When you're done, hit the [Esc] key
+again. When you want to release the screen session, it's still Ctrl+A, D
+[Enter] to detach.
 
 The Unix/Linux-style type-in "terminal" interface that ships with Macs and can
 be installed with Windows using CygWin or their new Windows 10 BASH shell is
