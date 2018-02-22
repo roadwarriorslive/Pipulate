@@ -1209,7 +1209,77 @@ our scheduling script here. First::
 
 This should give you a good starting point for scheduling... there is none! But
 what we do have is very splashy color-coded ASCII art to open your scheduling
-routine, which will always show you in glorious form that you're at the very
-beginning of the script. You should only ever see this during testing, or at
-about 1:00 AM, after your daily reset. What daily reset, you say? Oh... let's
-schedule it!
+routine. It should only ever be visible when you're restarting the script a lot
+for testing, or at around 1:00 AM, or whenever your daily reboot occurs. You
+can also see the log-file output that is also being written into mysched.log
+which you can look at to WHAT file did the logging (more on that later) and
+when.::
+
+    [I 180222 19:36:56 mysched:20] This is some logger info.
+    [I 180222 19:47:07 mysched:20] This is some logger info.
+
+Going from this "blank" scheduling file to the next step really highlights a
+lot of the default power of the scheduling module.::
+
+	import schedule as sched
+	from pyfiglet import figlet_format
+	from colorama import Fore
+	from logzero import logger, setup_logger
+	from datetime import date, datetime, timedelta
+	import time
+
+	UTCRebootTime = '06:00' # Generally, 1-AM for me
+	beat_count = 0
+	font = 'standard'
+	subfont = 'cybermedium'
+	green = Fore.GREEN
+	white = Fore.WHITE
+	blue = Fore.BLUE
+
+	ascii_art1 = figlet_format('Congratulations!', font=font)
+	ascii_art2 = figlet_format('Welcome to Wonderland.!', font=subfont)
+	print('%s%s%s' % (green, ascii_art1, white))
+	print('%s%s%s' % (blue, ascii_art2, white))
+
+	the_time = str(datetime.now().time())[:5]
+	logger = setup_logger(logfile='mysched.log', maxBytes=1000000, backupCount=3)
+	logger.info("We're not in Jupyter Notebook anymore. The time is %s." % the_time)
+
+
+	def main():
+		sched.every(10).minutes.do(heartbeat)
+		next_min = minute_adder(1).strftime('%H:%M')
+		logger.info("When the clock strikes %s, down the rabbit hole with you!" % next_min)
+		sched.every().day.at(next_min).do(the_queue)
+		sched.every().day.at(UTCRebootTime).do(reboot)
+		while True:
+			sched.run_pending()
+			time.sleep(1)
+
+
+	def heartbeat():
+		global beat_count
+		beat_count += 1
+		logger.info("Heartbeat %s at %s" % (beat_count, datetime.now()))
+
+
+	def the_queue():
+		logger.info("This is a scheduled event. Jump! Down the rabbit hole...")
+
+
+	def reboot():
+		logger.info("Rebooting system.")
+		import subprocess
+		p = subprocess.Popen(['sh', 'r.sh'], cwd='/home/ubuntu/pipulate/')
+
+
+	def minute_adder(minutes):
+		the_time = datetime.now().time()
+		today = date.today()
+		beat = timedelta(minutes=minutes)
+		return_value = datetime.combine(today, the_time) + beat
+		return return_value
+
+
+	if __name__ == '__main__':
+		main()
