@@ -990,3 +990,128 @@ values from rows you'll be pulling in from a spreadsheet.
 By the way, namedtuples are the superior way of doing this when not bound by a
 pre-existing framework, but whatever. Pandas is worth it.
 
+######################################## 
+Scheduling
+########################################
+
+Everything so far has been in Jupyter Notebook, and that's great for ad hoc
+work, but when it comes to "promoting" a good report to daily use, you need
+scheduling. And that sucks, because you need a machine running somewhere with
+as much reliability as you can get paying as little as possible.
+
+Cloud... EC2 or whatever. Pick your poison. Likely, being server-like, whatever
+you're going to need a way to get into it, and for that you're likely to
+receive a key from Amazon or your devops Dept. Figure out how to login to that
+machine. It should be TOTALLY YOURS. This is your EC2 instance. There are
+others like it, but this one is yours. Learn how to get in and out of it fast,
+from almost anywhere. 
+
+You figure out the ssh command to log in to your server, and do it manually a
+few times. This follows the model of putting the key file in a usually hidden
+directory on your system called .ssh which is usually in your home directory::
+
+    ssh -i ~/.ssh/id_rsa_yourname ubuntu@55.25.123.156
+
+Once this works for you, create a text file and name it something like go.sh
+and put it in your sbin. What's an sbin? It's a place you put little text-files
+that work a lot like commands, but you write them. They're really useful. This
+is your first Linux lesson from the Pipulate project. Linux (and Unix) won; get
+used to it. It'll be your next stop after Jupyter Notebook. Scheduling
+something you set-up in Jupyter Notebook is your natural "bridge" project. So
+by this point, you struggled through that ssh command; congratulations.
+Everything else is easy. Find your sbin by looking at your path::
+
+    echo $PATH
+
+Find your sbin in that gobbledygookdthen, then put something that looks like
+this text (your info) in a file called go.sh (or whatever) there. Do the chmod
++x trick to make it executable, and then whenever you need to reach your
+server, just type go. It's really nice to open a shell and to be in your
+scheduling-environment just like that. We want to do everything immediately
+reasonable to make the text-based Linux shell environment (to remote servers
+like this scheduling one) as cool as possible::
+
+    #!/bin/bash
+
+    ssh -i ~/.ssh/id_rsa_yourname ubuntu@55.25.123.156
+
+We are not using crontab as our next step to achieve scheduling as some
+googling about how to do this on a stock Linux server may indicate. We DON'T
+like APIs where you have to drive nails through your head here at Pipulate. No,
+we side with RedHat and others on the matter of default Linux system service
+management, and go with systemd. It's just as mainstream now as crontab and
+considered a replacement or alternative. https://en.wikipedia.org/wiki/Systemd
+
+You need a file in /etc/systemd/system which is the name of your service dot
+service, like mysched.service. To create it, you may have to sudo vim or
+whatever command because its a protected system location. The contents of your
+file to kick-off Pipulate (or any other) Python scheduling job like this::
+
+	[Unit]
+
+	Description=Run Python script to handle scheduling
+
+	[Service]
+	Type=forking
+	Restart=always
+	RestartSec=5
+	User=ubuntu
+	Group=ubuntu
+	WorkingDirectory=/home/ubuntu/mysched/
+	ExecStart=/usr/bin/screen -dmS mysched /home/ubuntu/py35/bin/python /home/ubuntu/mysched/mysched.py
+	StandardOutput=syslog
+	StandardError=syslog
+
+	[Install]
+	WantedBy=multi-user.target
+
+You you've just dropped this file in location and you need a way to force the
+scheduling behavior to begin, you can do a one-time reloading of all the
+systemd-maintained jobs::
+
+    sudo systemctl daemon-reload
+
+After that, when you make modifications just within your script and not how
+it's scheduled, you can just restarting that particular service to ensure that
+the edits you made within the job are picked-up and held in memory for the next
+cycle. After that a normal system reboot pretty typically gets your job running
+again::
+
+    sudo systemctl restart mysched.service
+
+However, this does indicate a Python file named mysched.py to be in-memory and
+running 24 hours a day, 7 days a week without rest. We should give it a rest.
+But how? Oh, this is where it gets all philosophical. Oh, it's philosophical
+anyway because it's about easier and better APIs already. So the idea here with
+Pipulate is to make a very generic and almost organic (with a heart-beat) place
+to start plugging your scheduled extractions from Jupyter Notebook into, with
+the least muss and fuss... but also, the most power. But who wants to type a
+longer command when you can type a shorter command? Create a little script-file
+and put it in your new sbin. You are "logged into" a different server,
+remember? Name it "r.sh" for reboot, chmod +x it and put this in it::
+
+    #!/bin/bash
+
+    sudo systemctl daemon-reload
+    sudo systemctl restart mysched.service
+
+Now if ever you want to be completely sure you restarted your scheduling script
+after making edits to mysched.py all you need to do is type::
+
+    r[Enter]
+
+...and your scheduling is restarted. I think of that as a very soft reboot of
+your scheduling routine. However, you need to know that when it springs back to
+life it may be in the middle or even towards the end of the daily time-cycle
+you're probably used to thinking in, so "today's" reports may never get a
+chance to run. You need to accommodate for this. You also need to be very
+realistic about how many reports you're going to be able to run on a given
+server on a given day. It would be nice to have concurrency, even though every
+fiber of my being tells me to avoid it because there will be order-dependencies
+and other issues that just generally make concurrency a bad idea when you don't
+really need to do it in that situation. So, I'm leaving my options open. What's
+inside mysched.py? Well, let's make it part of this github repo and start to
+build it up and document it here.
+
+
+https://github.com/nithinmurali/pygsheets
