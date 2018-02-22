@@ -1362,7 +1362,7 @@ Get used to using Ctrl+A (let go) then d to detach
 
 And then if I want to just immediately exit out, I type::
 
-    Ctrl+D [Enter]
+    Ctrl+A, D [Enter]
 
 If you want to activate the "do.sh" just make this file by that name, chmod +x
 it and drop it in your sbin or home::
@@ -1387,12 +1387,12 @@ you quite a bit of power to just scroll up and down the log-output (without
 having to load a single file) using GNU screen's buffer-scroll::
 
     do[Enter] (to seize screen)
-    Ctrl+A [Esc] (to switch to scroll-back history)
-    Now you can use Page Up & Page Down.
+    Ctrl+A [Esc] (to switch to "Copy mode" with a scroll-back history)
+    Once you're in Copy Mode, you can use Page Up & Page Down.
     You can also use Ctrl+B for back and Ctrl+F for forward.
     When you're done, hit the [Esc] key again.
     When you want to release the screen session, it's still:
-    Ctrl+D [Enter]
+    Ctrl+A, D [Enter]
 
 The Unix/Linux-style type-in "terminal" interface that ships with Macs and can
 be installed with Windows using CygWin or their new Windows 10 BASH shell is
