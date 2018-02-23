@@ -1489,4 +1489,16 @@ reason for this is that it makes you think through your work again. The way you
 work in Jupyter Notebook is going to be very different from the way you work on
 a Linux scheduling system. Your considerations are about 100x more complex, and
 so now is the time to start thinking about them. So make track.py in the same
-repo directory.
+repo directory::
+
+    vim hello_world.py
+
+Don't worry. I already put it in the repo for you. It is basically just a
+template for the ASCII art that I like to do. I think I've gone overboard with
+colors. I usually only use green for A-OK with other colors sprinkled in
+sparingly to capture my attention (warnings & stuff). Now that we've proven
+scheduling an external script, it's time to get serious about SEO::
+
+    vim track.py
+
+

@@ -38,6 +38,7 @@ def main():
 def the_queue():
     logger.info("This is a scheduled event. Jump! Down the rabbit hole...")
     do_it('hello_world')
+    do_it('track')
 
 
 def do_main(name):
