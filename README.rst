@@ -1413,3 +1413,64 @@ of Python, but you're not really realizing it until you're running reports
 during all that other delicious time when you're NOT sitting in front of a
 browser hitting a button and waiting for something to finish on your local
 machine.
+
+****************************************
+Making timestamps and caching pervasive
+****************************************
+
+You can't store everything locally, so don't try. You will run out of space,
+and there's nothing worse than having to do file-maintenance on Cloud hardware
+that's supposed to be sparing you from that nonsense. But neither can you write
+anything that's going to fill your hard drive up forever with past data.
+Hardware is hardware and resources are actually finite -- or rather, they're as
+finite as you're willing to pay for. So if we want to store the data long-term,
+it's got to be off-server, probably using a service such as Amazon S3. Using a
+"data bucket" NoSQL hash-table (call it what you will) is a good idea in
+situations like this because "deconstructing" everything into rows & columns
+for SQL-like RDBMS storage isn't worth it, and although field-stuffing into a
+Text or XML field in an RDBMS would work, it feels a lot like shoving a round
+peg into a square hole -- why do it if a round hole is sitting right there?
+This is more a place-holder for me to incorporate probably a decorator-based
+cache system that is back-ended by Amazon S3. That will solve a lot of ongoing
+server maintenance issues.
+
+########################################
+First Scheduled Script
+########################################
+
+Okay, so the above sets out the framework for scheduling. We have:
+
+- A daily reboot
+- An every-10-minutes heartbeat
+- Something beginning 1-minute after script runs
+
+So the idea now is to build-out from that 3rd point. We just just start putting
+references to different external Python filename.py's there, and they'll just
+run. But there's one more trick. I'm adding this function to mysched.py along
+with importing the importlib library to do the trick::
+
+    def do_main(name):
+        mod = importlib.import_module(name)
+        mod.main()
+
+This way, if you follow the Python if __name__ == '__main__' convention, you
+can use this to invoke the method (function) named "main" with it's standard
+(non-parameterized) call by just putting it in the same folder as mysched.py
+and referring to the file by name from within mysched.py like this::
+
+    do_main(filename)
+
+...and that's all you need to do to schedule something that uses that
+convention. Conversely, if the code in the external file is of the directly
+copy-pasted from Jupyter Notebook variety which is likely to NOT use a function
+called main (or even functions at all), then you can use the alternative
+version that just does it::
+
+    def do_it(name):
+        mod = importlib.import_module(name)
+
+...invoked with the very straight forward::
+
+    do_it(filename)
+
+
