@@ -1,9 +1,10 @@
+import time
+import importlib
+from datetime import date, datetime, timedelta
+from logzero import logger, setup_logger
 import schedule as sched
 from pyfiglet import figlet_format
 from colorama import Fore
-from logzero import logger, setup_logger
-from datetime import date, datetime, timedelta
-import time
 
 UTCRebootTime = '06:00' # Generally, 1-AM for me
 beat_count = 0
@@ -32,6 +33,15 @@ def main():
     while True:
         sched.run_pending()
         time.sleep(1)
+
+
+def do_main(name):
+    mod = importlib.import_module(name)
+    mod.main()
+
+
+def do_it(name):
+    mod = importlib.import_module(name)
 
 
 def heartbeat():
