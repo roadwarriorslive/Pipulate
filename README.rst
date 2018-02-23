@@ -8,12 +8,12 @@ pipulate v0.1.8 - Automate Google Sheets for SEO
 There's a reason spreadsheets remain as popular as they do in the face of more
 capable databases and reporting systems. Spreadsheets are designed for humans.
 You don't need a developer for every little thing. You can use them in many
-places where a database would be overkill, and they're great for dashboards.
-However as anyone who's tried to build durable long-term automations around
-spreadsheets using VBA, AppScript or any of the other obvious choices, it ain't
-so easy. That's what I fix here with Pipulate; I simplify OAuth2 login, help
-you grab cell-ranges from the spreadsheet, and then help you push your changes
-back into the sheet. The rest (altering the data) is Pandas.
+places where a database would be overkill. However as anyone who's tried to
+build durable long-term automations around spreadsheets using VBA, AppScript or
+any of the other obvious choices, it ain't so easy. That's what I fix here with
+Pipulate; I simplify OAuth2 login, help you grab cell-ranges from the
+spreadsheet, and then help you push your changes back into the sheet. The rest
+(altering the data) is Pandas.
 
 
 .. contents::
