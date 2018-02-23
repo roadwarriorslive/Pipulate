@@ -1092,17 +1092,20 @@ file to kick-off Pipulate (or any other) Python scheduling job like this::
     [Install]
     WantedBy=multi-user.target
 
-You you've just dropped this file in location and you need a way to force the
-scheduling behavior to begin, you can do a one-time reloading of all the
-systemd-maintained jobs::
+You you've just dropped this file in location, but now it needs to be enabled.
+This is a one-time thing (unless you want it off for debugging or whatever)::
+
+    sudo systemctl enable zdsched.service 
+
+Once you start playing around with the invisible background system services
+(named daemons in Linux), the temptation is to keep rebooting your server to
+make sure your changes "took" (similar to Apache/IIS webserver issues).
+Whenever you're unsure and want to avoid a reboot, you can type::
 
     sudo systemctl daemon-reload
 
-After that, when you make modifications just within your script and not how
-it's scheduled, you can just restarting that particular service to ensure that
-the edits you made within the job are picked-up and held in memory for the next
-cycle. After that a normal system reboot pretty typically gets your job running
-again::
+If you want to just restart YOUR scheduling service and not all daemons, you
+can optionally do::
 
     sudo systemctl restart mysched.service
 
@@ -1123,20 +1126,26 @@ curiosity, this is what it's doing::
     sudo systemctl daemon-reload
     sudo systemctl restart mysched.service
 
+****************************************
+Shoving the work around to where it belongs
+****************************************
+
 This r.sh file comes into play again later, because in order to ensure the
 health of your scheduling server, we're going to give it a "clean slate" every
 morning by rebooting it, and we're going to schedule the running of this BASH
-script FROM PYTHON to do it.
+script FROM PYTHON to do it. This is an example of doing each thing in the
+place where it best belongs. Reboot from a bash script, respwan from systemd,
+and actually SCHEDULE from within a single master Python script.
 
 After such a reboot (and on any boot, really), we hand all scheduling
 responsibility immediately over to Python (even though systemd could do more)
 because as much better as it is over crontab, Python APIs are better still. We
-actually are using systemd as a pedantic task respawner. Think of it as someone
-watching for your script to exit that can 100% reliably re-start it. That's
-systemd in our scenario. After mysched.py is running, control is immediately
-handed over to the 3rd party "Schedule" package from PyPI/Github because it's
-API is better than the default sched module built-into Python. Such things on
-my mind are:
+actually are only using systemd as a pedantic task respawner. Think of it as
+someone watching for your python-script to exit that can 100% reliably re-start
+it. That's systemd in our scenario. After mysched.py is running, control is
+immediately handed over to the 3rd party "Schedule" package from PyPI/Github
+because it's API is better than the default sched module built-into Python.
+Such things on my mind are:
 
 - Period vs. Exact scheduling (every-x minutes vs every-day at y-o'clock)
 - Concurrency when I need it and crystal clarity when I don't
@@ -1148,7 +1157,7 @@ my mind are:
 For now, "pip install schedule" seems to do the job.
 
 ****************************************
-It's scheduling! think it through...
+Scheduling issues are more complex than you think.
 ****************************************
 
 When restarting a scheduling-script, you need to know that when it springs back
@@ -1362,7 +1371,7 @@ Get used to using Ctrl+A (let go) then d to detach
 
 And then if I want to just immediately exit out, I type::
 
-    Ctrl+D [Enter]
+    Ctrl+A, D [Enter]
 
 If you want to activate the "do.sh" just make this file by that name, chmod +x
 it and drop it in your sbin or home::
@@ -1387,12 +1396,15 @@ you quite a bit of power to just scroll up and down the log-output (without
 having to load a single file) using GNU screen's buffer-scroll::
 
     do[Enter] (to seize screen)
-    Ctrl+A [Esc] (to switch to scroll-back history)
-    Now you can use Page Up & Page Down.
-    You can also use Ctrl+B for back and Ctrl+F for forward.
-    When you're done, hit the [Esc] key again.
-    When you want to release the screen session, it's still:
-    Ctrl+D [Enter]
+    Ctrl+A [Esc] (to switch to "Copy mode" with a scroll-back history)
+
+Once you're in Copy Mode, you can use Page Up & Page Down. You can also use
+Ctrl+B for back and Ctrl+F for forward. When you're done, hit the [Esc] key
+again. When you want to release the screen session, it's still Ctrl+A, D
+[Enter] to detach.
+
+And finally, it can feel a little "out of control" to have a script running
+insistently in the background with no way to stop. 
 
 The Unix/Linux-style type-in "terminal" interface that ships with Macs and can
 be installed with Windows using CygWin or their new Windows 10 BASH shell is
@@ -1401,3 +1413,64 @@ of Python, but you're not really realizing it until you're running reports
 during all that other delicious time when you're NOT sitting in front of a
 browser hitting a button and waiting for something to finish on your local
 machine.
+
+****************************************
+Making timestamps and caching pervasive
+****************************************
+
+You can't store everything locally, so don't try. You will run out of space,
+and there's nothing worse than having to do file-maintenance on Cloud hardware
+that's supposed to be sparing you from that nonsense. But neither can you write
+anything that's going to fill your hard drive up forever with past data.
+Hardware is hardware and resources are actually finite -- or rather, they're as
+finite as you're willing to pay for. So if we want to store the data long-term,
+it's got to be off-server, probably using a service such as Amazon S3. Using a
+"data bucket" NoSQL hash-table (call it what you will) is a good idea in
+situations like this because "deconstructing" everything into rows & columns
+for SQL-like RDBMS storage isn't worth it, and although field-stuffing into a
+Text or XML field in an RDBMS would work, it feels a lot like shoving a round
+peg into a square hole -- why do it if a round hole is sitting right there?
+This is more a place-holder for me to incorporate probably a decorator-based
+cache system that is back-ended by Amazon S3. That will solve a lot of ongoing
+server maintenance issues.
+
+########################################
+First Scheduled Script
+########################################
+
+Okay, so the above sets out the framework for scheduling. We have:
+
+- A daily reboot
+- An every-10-minutes heartbeat
+- Something beginning 1-minute after script runs
+
+So the idea now is to build-out from that 3rd point. We just just start putting
+references to different external Python filename.py's there, and they'll just
+run. But there's one more trick. I'm adding this function to mysched.py along
+with importing the importlib library to do the trick::
+
+    def do_main(name):
+        mod = importlib.import_module(name)
+        mod.main()
+
+This way, if you follow the Python if __name__ == '__main__' convention, you
+can use this to invoke the method (function) named "main" with it's standard
+(non-parameterized) call by just putting it in the same folder as mysched.py
+and referring to the file by name from within mysched.py like this::
+
+    do_main(filename)
+
+...and that's all you need to do to schedule something that uses that
+convention. Conversely, if the code in the external file is of the directly
+copy-pasted from Jupyter Notebook variety which is likely to NOT use a function
+called main (or even functions at all), then you can use the alternative
+version that just does it::
+
+    def do_it(name):
+        mod = importlib.import_module(name)
+
+...invoked with the very straight forward::
+
+    do_it(filename)
+
+
