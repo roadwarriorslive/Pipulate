@@ -996,6 +996,37 @@ By the way, namedtuples are the superior way of doing this when not bound by a
 pre-existing framework, but whatever. Pandas is worth it.
 
 ########################################
+Scraping Google Search Engine Result Pages (SERPs)
+########################################
+
+Well, you knew it was coming. Let's scrape some SERPs. It's sooo easy. But I
+suggest you get yourself an anonymous proxy server or twenty. Put them in a
+file named proxies.txt, 1-per-line. If ports are used, include them after the
+IP like this::
+
+    152.190.44.178:8080
+    53.117.213.95
+    250.227.39.116:8000
+    20.15.5.222
+
+Now load the file called get_search_results.ipynb. If you cloned the github
+repo and are working in Jupyuter Notebook, you can work directly in your cloned
+pipulate folder. I would suggest making a copy of files such as
+get_search_results.ipynb and keep the originals around as a sort of template.
+
+Anonymous web proxies go bad fast, so before you start a session, you should do
+a one-time refreshing of your proxy servers. Do that by running this block of
+code with update_proxies set to True. It will create a file in your repo folder
+called goodproxies.txt::
+
+    update_proxies = True
+    if update_proxies:    
+        import pipulate.update_proxies as up
+            up.Main()
+
+After you have a good new list of proxies
+
+########################################
 Scheduling
 ########################################
 
