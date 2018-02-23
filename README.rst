@@ -1095,7 +1095,7 @@ file to kick-off Pipulate (or any other) Python scheduling job like this::
 You you've just dropped this file in location, but now it needs to be enabled.
 This is a one-time thing (unless you want it off for debugging or whatever)::
 
-    sudo systemctl enable zdsched.service 
+    sudo systemctl enable zdsched.service
 
 Once you start playing around with the invisible background system services
 (named daemons in Linux), the temptation is to keep rebooting your server to
@@ -1404,7 +1404,7 @@ again. When you want to release the screen session, it's still Ctrl+A, D
 [Enter] to detach.
 
 And finally, it can feel a little "out of control" to have a script running
-insistently in the background with no way to stop. 
+insistently in the background with no way to stop.
 
 The Unix/Linux-style type-in "terminal" interface that ships with Macs and can
 be installed with Windows using CygWin or their new Windows 10 BASH shell is
@@ -1495,10 +1495,22 @@ repo directory::
 
 Don't worry. I already put it in the repo for you. It is basically just a
 template for the ASCII art that I like to do. I think I've gone overboard with
-colors. I usually only use green for A-OK with other colors sprinkled in
-sparingly to capture my attention (warnings & stuff). Now that we've proven
-scheduling an external script, it's time to get serious about SEO::
+colors. I usually only use green for OK with other colors sprinkled in
+sparingly to capture my attention (warnings & stuff). Thanking you for taking
+the red pill gets an exception. But now that we've proven scheduling an
+external script, it's time to add a SECOND external script and-get serious
+about SEO::
 
     vim track.py
 
+########################################
+Reminders & To-Do's
+########################################
 
+Reminder to self: add logic to system to always address columns by Excel-style
+letter-index::
+
+    for i, col in enumerate(cols):
+        letter = gs.cc(i+1)
+        eval(tab)[col] = letter
+        eval('%s2' % tab)[col] = '%s.%s' % (tab,letter)
