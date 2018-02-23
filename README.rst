@@ -6,9 +6,9 @@ pipulate v0.1.8 - Automate Google Sheets for SEO
 :Author: `Mike Levin, SEO <http://mikelev.in>`_
 
 There's a reason spreadsheets remain as popular as they do in the face of more
-capable databases. Spreadsheets are designed for humans. You don't rely on a
-developer to do every little thing. It's a nice place to put daily dashboards,
-and you can use spreadsheets in many places where a database would be overkill.
+capable databases and reporting systems. Spreadsheets are designed for humans.
+You don't need a developer for every little thing. You can use them in many
+places where a database would be overkill, and they're great for dashboards.
 However as anyone who's tried to build durable long-term automations around
 spreadsheets using VBA, AppScript or any of the other obvious choices, it ain't
 so easy. That's what I fix here with Pipulate; I simplify OAuth2 login, help
@@ -26,23 +26,28 @@ back into the sheet. The rest (altering the data) is Pandas.
 Background & Philosophy
 ########################################
 
-I've performed data-investigation work many ways ways over the years, often
-building my own annoying-to-maintain systems. Then I discovered the combination
-of Google Sheets, Jupyter Notebook and Pandas that together virtually obsolete
-all my past work in the most delightful way I could imagine — Python with
-Pandas (very mainstream stuff) *is my framework*, and then all I needed was a
-way to easily pump data in and out of GSheets with::
+I've done this sort of work for a long time, inventing my own systems until I
+discovered the combination of Google Sheets, Jupyter Notebook and Pandas. Once
+you can manipulate Pandas DataFrames, the only challenge then is easily getting
+them in and out of Google Spreadsheets for a really rocking system. That's
+where Pipulate comes in::
 
-    cl, df = gs.pipulate(tab, rows, cols) #Get range from GSheet
-    #Do stuff to df in Jupyter Notebook using Pandas (but not to the cl)
-    gs.populate(tab, cl, df) #Push altered df back into GSheet
+    cl, df = gs.pipulate(tab, rows, cols) 
+    #Do Pandas stuff to df in Jupyter Notebook
+    gs.populate(tab, cl, df) 
 
-That's it. That's Pipulate. The rest is your imagination. Even if you're new to
-programming, Pipulate is a good place to start because Python in Jupyter
-Notebook is a good place to start — which the Anaconda install gives you. If
-you're into SEO or tracking how well you're doing in Social Media like Twitter
-and YouTube (for free), then you're in the right place. Who knows, it could
-even launch you on a new career in case YouTube doesn't work out.
+That's it. That's Pipulate. Go install Anaconda 3.6 if you haven't already and
+get started on your new career as Datamaster. Track your SEO rankings, Social
+Media views and counts, whatever! This is your chance to easily and with a
+purpose hop onto the following bandwagons:
+
+- Python
+- Jupyter Notebook
+- Pandas
+- GSheets
+
+And while it's definitely NOT required, I'll teach you Linux, vim and git as
+well. This package is about repositioning careers as SEO continues to change.
 
 ########################################
 Installing Pipulate
