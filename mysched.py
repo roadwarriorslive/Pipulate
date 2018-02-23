@@ -35,6 +35,11 @@ def main():
         time.sleep(1)
 
 
+def the_queue():
+    do_it(hello_world)
+    logger.info("This is a scheduled event. Jump! Down the rabbit hole...")
+
+
 def do_main(name):
     mod = importlib.import_module(name)
     mod.main()
@@ -48,10 +53,6 @@ def heartbeat():
     global beat_count
     beat_count += 1
     logger.info("Heartbeat %s at %s" % (beat_count, datetime.now()))
-
-
-def the_queue():
-    logger.info("This is a scheduled event. Jump! Down the rabbit hole...")
 
 
 def reboot():

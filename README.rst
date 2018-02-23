@@ -1444,6 +1444,10 @@ Okay, so the above sets out the framework for scheduling. We have:
 - An every-10-minutes heartbeat
 - Something beginning 1-minute after script runs
 
+****************************************
+A way to schedule external Python scripts
+****************************************
+
 So the idea now is to build-out from that 3rd point. We just just start putting
 references to different external Python filename.py's there, and they'll just
 run. But there's one more trick. I'm adding this function to mysched.py along
@@ -1473,4 +1477,16 @@ version that just does it::
 
     do_it(filename)
 
+****************************************
+Making the file
+****************************************
 
+You will be using .py files and not the .ipynb files of Jupyter Notebook for
+scheduling. There are various ways to go about it, but I suggest just
+copy-pasting your separate text-blocks from JN over to your text-editor or
+whatever, and just re-build your script up from parts over server-side. The
+reason for this is that it makes you think through your work again. The way you
+work in Jupyter Notebook is going to be very different from the way you work on
+a Linux scheduling system. Your considerations are about 100x more complex, and
+so now is the time to start thinking about them. So make track.py in the same
+repo directory.
