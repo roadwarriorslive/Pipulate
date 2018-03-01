@@ -1539,6 +1539,51 @@ about SEO::
 
     vim track.py
 
+****************************************
+There's no place like ~/pipulate
+****************************************
+
+The hardest part for me in trying to grab the reins and gaining control of all
+the required parts of datamastering, is always staying centered. You always
+have to know where things are relative to either root "/" or home "~/". Even
+that is a Unix geek joke about symbolic links. Anyhoo, working directories
+usually tend to end up relative to ~/ 'cause you don't edit much in root. And
+that folder-name is likely going to be whatever your git repo. And if you're
+cloning from me with::
+
+    git clone git@github.com:miklevin/pipulate
+
+...then you have a directory probably something like this::
+
+    ~/pipulate
+
+...which you're always going to want to be in, especially if the machine you're
+working on is a cloud instance set up somewhere specifically for you
+specifically for this purpose. Then, you can get rid of a lot of typing by
+creating a file like this (given you're on Ubuntu / adjust to OS) as your
+.bash_profile. These are invisible configuration files (because of the dot at
+the beginning of their filename). .bash_profile is executed whenever your
+username (in this case, the default EC2 Ubuntu's "ubuntu" user::
+
+    source /home/ubuntu/py35/bin/activate /home/ubuntu/py35
+    PATH="$HOME/:$PATH"
+    clear
+    python ~/hi.py
+    cd /home/ubuntu/pipulate
+
+This answers such pressing questions as:
+
+- How do I always make sure I'm in the exact same Python virtualenv as the one
+  I use for scheduling?
+- How can I add little bash helper scripts to my repo and have them in my path
+  so I can easily use them?
+- How can I give myself a snazzy ASCII art login messing using Python and the
+  Figlet library?
+- How can I avoid typing cd pipulate every time I log into my scheduling
+  server?
+
+If you put 
+
 ########################################
 Reminders & To-Do's
 ########################################
