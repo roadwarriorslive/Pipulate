@@ -1582,7 +1582,23 @@ This answers such pressing questions as:
 - How can I avoid typing cd pipulate every time I log into my scheduling
   server?
 
-If you put 
+So now, whenever from your host machine you type::
+
+    go
+
+...you wil be logged automatically onto your cloud server and greeted with a
+warm welcome that will impress your friends. What does hi.py look like you
+ask?::
+
+	from pyfiglet import figlet_format
+	from colorama import Fore
+
+	def out(print_me, color=Fore.GREEN, font='standard'):
+		ascii_art = figlet_format(print_me, font=font)
+		print('%s%s%s' % (color, ascii_art, Fore.WHITE))
+
+	out('Welcome.')
+	out("Get pipulating!", font='cybermedium', color=Fore.WHITE)
 
 ########################################
 Reminders & To-Do's
