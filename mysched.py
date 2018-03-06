@@ -19,7 +19,7 @@ ascii_art2 = figlet_format('Welcome to Wonderland.!', font=subfont)
 print('%s%s%s' % (green, ascii_art1, white))
 print('%s%s%s' % (blue, ascii_art2, white))
 
-the_time = str(datetime.now().time())[:5]
+the_time = str(datetime.now().time())[:8]
 logger = setup_logger(logfile='mysched.log', maxBytes=1000000, backupCount=3)
 logger.info("We're not in Jupyter Notebook anymore. The time is %s." % the_time)
 
@@ -35,6 +35,12 @@ def main():
         time.sleep(1)
 
 
+def the_queue():
+    logger.info("This is a scheduled event. Jump! Down the rabbit hole...")
+    do_it('hello_world')
+    do_it('track')
+
+
 def do_main(name):
     mod = importlib.import_module(name)
     mod.main()
@@ -48,10 +54,6 @@ def heartbeat():
     global beat_count
     beat_count += 1
     logger.info("Heartbeat %s at %s" % (beat_count, datetime.now()))
-
-
-def the_queue():
-    logger.info("This is a scheduled event. Jump! Down the rabbit hole...")
 
 
 def reboot():

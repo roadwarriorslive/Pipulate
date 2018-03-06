@@ -6,14 +6,14 @@ pipulate v0.1.8 - Automate Google Sheets for SEO
 :Author: `Mike Levin, SEO <http://mikelev.in>`_
 
 There's a reason spreadsheets remain as popular as they do in the face of more
-capable databases. Spreadsheets are designed for humans. You don't rely on a
-developer to do every little thing. It's a nice place to put daily dashboards,
-and you can use spreadsheets in many places where a database would be overkill.
-However as anyone who's tried to build durable long-term automations around
-spreadsheets using VBA, AppScript or any of the other obvious choices, it ain't
-so easy. That's what I fix here with Pipulate; I simplify OAuth2 login, help
-you grab cell-ranges from the spreadsheet, and then help you push your changes
-back into the sheet. The rest (altering the data) is Pandas.
+capable databases and reporting systems. Spreadsheets are designed for humans.
+You don't need a developer for every little thing. You can use them in many
+places where a database would be overkill. However as anyone who's tried to
+build durable long-term automations around spreadsheets using VBA, AppScript or
+any of the other obvious choices, it ain't so easy. That's what I fix here with
+Pipulate; I simplify OAuth2 login, help you grab cell-ranges from the
+spreadsheet, and then help you push your changes back into the sheet. The rest
+(altering the data) is Pandas.
 
 
 .. contents::
@@ -26,23 +26,28 @@ back into the sheet. The rest (altering the data) is Pandas.
 Background & Philosophy
 ########################################
 
-I've performed data-investigation work many ways ways over the years, often
-building my own annoying-to-maintain systems. Then I discovered the combination
-of Google Sheets, Jupyter Notebook and Pandas that together virtually obsolete
-all my past work in the most delightful way I could imagine — Python with
-Pandas (very mainstream stuff) *is my framework*, and then all I needed was a
-way to easily pump data in and out of GSheets with::
+I've done this sort of work for a long time, inventing my own systems until I
+discovered the combination of Google Sheets, Jupyter Notebook and Pandas. Once
+you can manipulate Pandas DataFrames, the only challenge then is easily getting
+them in and out of Google Spreadsheets for a really rocking system. That's
+where Pipulate comes in::
 
-    cl, df = gs.pipulate(tab, rows, cols) #Get range from GSheet
-    #Do stuff to df in Jupyter Notebook using Pandas (but not to the cl)
-    gs.populate(tab, cl, df) #Push altered df back into GSheet
+    cl, df = gs.pipulate(tab, rows, cols) 
+    #Do Pandas stuff to df in Jupyter Notebook
+    gs.populate(tab, cl, df) 
 
-That's it. That's Pipulate. The rest is your imagination. Even if you're new to
-programming, Pipulate is a good place to start because Python in Jupyter
-Notebook is a good place to start — which the Anaconda install gives you. If
-you're into SEO or tracking how well you're doing in Social Media like Twitter
-and YouTube (for free), then you're in the right place. Who knows, it could
-even launch you on a new career in case YouTube doesn't work out.
+That's it. That's Pipulate. Go install Anaconda 3.6 if you haven't already and
+get started on your new career as Datamaster. Track your SEO rankings, Social
+Media views and counts, whatever! This is your chance to easily and with a
+purpose hop onto the following bandwagons:
+
+- Python
+- Jupyter Notebook
+- Pandas
+- GSheets
+
+And while it's definitely NOT required, I'll teach you Linux, vim and git as
+well. This package is about repositioning careers as SEO continues to change.
 
 ########################################
 Installing Pipulate
@@ -991,6 +996,37 @@ By the way, namedtuples are the superior way of doing this when not bound by a
 pre-existing framework, but whatever. Pandas is worth it.
 
 ########################################
+Scraping Google Search Engine Result Pages (SERPs)
+########################################
+
+Well, you knew it was coming. Let's scrape some SERPs. It's sooo easy. But I
+suggest you get yourself an anonymous proxy server or twenty. Put them in a
+file named proxies.txt, 1-per-line. If ports are used, include them after the
+IP like this::
+
+    152.190.44.178:8080
+    53.117.213.95
+    250.227.39.116:8000
+    20.15.5.222
+
+Now load the file called get_search_results.ipynb. If you cloned the github
+repo and are working in Jupyuter Notebook, you can work directly in your cloned
+pipulate folder. I would suggest making a copy of files such as
+get_search_results.ipynb and keep the originals around as a sort of template.
+
+Anonymous web proxies go bad fast, so before you start a session, you should do
+a one-time refreshing of your proxy servers. Do that by running this block of
+code with update_proxies set to True. It will create a file in your repo folder
+called goodproxies.txt::
+
+    update_proxies = True
+    if update_proxies:    
+        import pipulate.update_proxies as up
+            up.Main()
+
+After you have a good new list of proxies
+
+########################################
 Scheduling
 ########################################
 
@@ -1095,7 +1131,7 @@ file to kick-off Pipulate (or any other) Python scheduling job like this::
 You you've just dropped this file in location, but now it needs to be enabled.
 This is a one-time thing (unless you want it off for debugging or whatever)::
 
-    sudo systemctl enable zdsched.service 
+    sudo systemctl enable zdsched.service
 
 Once you start playing around with the invisible background system services
 (named daemons in Linux), the temptation is to keep rebooting your server to
@@ -1404,7 +1440,7 @@ again. When you want to release the screen session, it's still Ctrl+A, D
 [Enter] to detach.
 
 And finally, it can feel a little "out of control" to have a script running
-insistently in the background with no way to stop. 
+insistently in the background with no way to stop.
 
 The Unix/Linux-style type-in "terminal" interface that ships with Macs and can
 be installed with Windows using CygWin or their new Windows 10 BASH shell is
@@ -1444,6 +1480,10 @@ Okay, so the above sets out the framework for scheduling. We have:
 - An every-10-minutes heartbeat
 - Something beginning 1-minute after script runs
 
+****************************************
+A way to schedule external Python scripts
+****************************************
+
 So the idea now is to build-out from that 3rd point. We just just start putting
 references to different external Python filename.py's there, and they'll just
 run. But there's one more trick. I'm adding this function to mysched.py along
@@ -1473,4 +1513,101 @@ version that just does it::
 
     do_it(filename)
 
+****************************************
+Making the file
+****************************************
 
+You will be using .py files and not the .ipynb files of Jupyter Notebook for
+scheduling. There are various ways to go about it, but I suggest just
+copy-pasting your separate text-blocks from JN over to your text-editor or
+whatever, and just re-build your script up from parts over server-side. The
+reason for this is that it makes you think through your work again. The way you
+work in Jupyter Notebook is going to be very different from the way you work on
+a Linux scheduling system. Your considerations are about 100x more complex, and
+so now is the time to start thinking about them. So make track.py in the same
+repo directory::
+
+    vim hello_world.py
+
+Don't worry. I already put it in the repo for you. It is basically just a
+template for the ASCII art that I like to do. I think I've gone overboard with
+colors. I usually only use green for OK with other colors sprinkled in
+sparingly to capture my attention (warnings & stuff). Thanking you for taking
+the red pill gets an exception. But now that we've proven scheduling an
+external script, it's time to add a SECOND external script and-get serious
+about SEO::
+
+    vim track.py
+
+****************************************
+There's no place like ~/pipulate
+****************************************
+
+The hardest part for me in trying to grab the reins and gaining control of all
+the required parts of datamastering, is always staying centered. You always
+have to know where things are relative to either root "/" or home "~/". Even
+that is a Unix geek joke about symbolic links. Anyhoo, working directories
+usually tend to end up relative to ~/ 'cause you don't edit much in root. And
+that folder-name is likely going to be whatever your git repo. And if you're
+cloning from me with::
+
+    git clone git@github.com:miklevin/pipulate
+
+...then you have a directory probably something like this::
+
+    ~/pipulate
+
+...which you're always going to want to be in, especially if the machine you're
+working on is a cloud instance set up somewhere specifically for you
+specifically for this purpose. Then, you can get rid of a lot of typing by
+creating a file like this (given you're on Ubuntu / adjust to OS) as your
+.bash_profile. These are invisible configuration files (because of the dot at
+the beginning of their filename). .bash_profile is executed whenever your
+username (in this case, the default EC2 Ubuntu's "ubuntu" user::
+
+    source /home/ubuntu/py35/bin/activate /home/ubuntu/py35
+    PATH="$HOME/:$PATH"
+    clear
+    python ~/hi.py
+    cd /home/ubuntu/pipulate
+
+This answers such pressing questions as:
+
+- How do I always make sure I'm in the exact same Python virtualenv as the one
+  I use for scheduling?
+- How can I add little bash helper scripts to my repo and have them in my path
+  so I can easily use them?
+- How can I give myself a snazzy ASCII art login messing using Python and the
+  Figlet library?
+- How can I avoid typing cd pipulate every time I log into my scheduling
+  server?
+
+So now, whenever from your host machine you type::
+
+    go
+
+...you wil be logged automatically onto your cloud server and greeted with a
+warm welcome that will impress your friends. What does hi.py look like you
+ask?::
+
+	from pyfiglet import figlet_format
+	from colorama import Fore
+
+	def out(print_me, color=Fore.GREEN, font='standard'):
+		ascii_art = figlet_format(print_me, font=font)
+		print('%s%s%s' % (color, ascii_art, Fore.WHITE))
+
+	out('Welcome.')
+	out("Get pipulating!", font='cybermedium', color=Fore.WHITE)
+
+########################################
+Reminders & To-Do's
+########################################
+
+Reminder to self: add logic to system to always address columns by Excel-style
+letter-index::
+
+    for i, col in enumerate(cols):
+        letter = gs.cc(i+1)
+        eval(tab)[col] = letter
+        eval('%s2' % tab)[col] = '%s.%s' % (tab,letter)
