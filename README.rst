@@ -35,6 +35,8 @@ Background & Philosophy
     If you want to get out of
     The Vendor hole.
 
+.. highlight:: python
+
 I've done this sort of work for a long time, inventing my own systems until I
 discovered the magical combination of Google Sheets, Jupyter Notebook and
 Pandas. Once you can manipulate Pandas DataFrames, the only challenge then is
