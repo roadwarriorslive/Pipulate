@@ -53,10 +53,11 @@ system. That's where Pipulate comes in::
 
 That's it. That's Pipulate— it's just the rectangular data-range pull & push
 stuff (nothing in-between). So, `go get Anaconda 3.6 <https://www.anaconda.com/download/>`_ 
-and help me reposition SEO somewhere more than the Gut-feeling Intuiters of
-yesteryear and Data Scientists of tomorrow— Datamaster with a Python/Pandas
-industry-standard skill-set. Track your SEO rankings, Social Media views and
-counts, whatever!  Start in the shallow end with Jupyter Notebook and
+and help me reposition SEO somewhere more than the gut-feeling Intuiters of
+yesteryear and Data Scientists of tomorrow— the **Datamaster** with a
+Python/Pandas industry-standard skill-set that has vast room for adding your
+own creative expression and insight. Track your SEO rankings, Social Media
+views and counts, whatever! Start in the shallow end with Jupyter Notebook and
 "graduate" your work to generic scheduled Linux jobs that you can run almost
 anywhere. If you're a successful YouTuber worried about the gravy-train running
 dry, diversify your skills with something you'll probably love and can
