@@ -126,7 +126,8 @@ Things even the impatient must know
 
 - You must be on Python >= 3.x.
 - You must be using a Google Spreadsheet in online mode.
-- You must exactly match 'Your Sheet Name' with your actual sheet name.
+- You must exactly match 'Your Sheet Name' with your actual sheet name (or
+  switch to keys).
 - You must be able to recognize row and column indexes when you see them.
 - When you import pipulate as gs, Google will (1-time) throw up a giant blue
   link that you must click and login with the same Google account you used to
