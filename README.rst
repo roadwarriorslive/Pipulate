@@ -95,8 +95,9 @@ For the impatient
 ########################################
 
 The quickest way to pipulate is as follows, but I suggest you read through this
-documentation down to where I cover Python functions and how they get called by
-the Pandas df.apply() method in order to properly grok the power here::
+documentation where I cover creating Pipulate functions. The pandas concept of
+df.apply() is very important to grok. If you don't grok the word grok, go read
+Stranger in a Strange Land and return::
 
     import pipulate as gs
     import pandas as pd
