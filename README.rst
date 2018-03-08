@@ -43,24 +43,25 @@ Pandas. Once you can manipulate Pandas DataFrames, the only challenge then is
 easily getting them in and out of Google Spreadsheets for a really rocking
 system. That's where Pipulate comes in::
 
-    cl, df = gs.pipulate(tab, rows, cols)   # pulls range from GSheet
+    cl, df = gs.pipulate(tab, rows, cols)     # pulls range from GSheet
 
     # Do stuff to df object using pandas,
     # the new "must know" SQL-alternative.
-    # Just keep the "shape" intact, then...
+    # Just keep the row x col "shape" intact, then...
 
-    gs.populate(tab, cl, df)                # pushes range to GSheet
+    gs.populate(tab, cl, df)                  # pushes range to GSheet
 
-That's it. That's Pipulate— just the rectangular data-range pull & push stuff
-(nothing in-between). So `go get Anaconda 3.6 <https://www.anaconda.com/download/>`_
-and help me reposition SEO somewhere between scientists and intuitive feelers
-where we belong— Datamaster (with an industry-standard pandas skill-set). Track
-your SEO rankings, Social Media views and counts, whatever! Start in the
-shallow end with Jupyter Notebook and "graduate" your work to generic scheduled
-Linux jobs that you can run almost anywhere. If you're a successful YouTuber
-worried about the gravy-train running dry, diversify your skills with something
-you'll probably love and can definitely self-learn. This is your chance to jump
-with me onto the following surprisingly fun bandwagons:
+That's it. That's Pipulate— it's just the rectangular data-range pull & push
+stuff (nothing in-between). So, `go get Anaconda 3.6 <https://www.anaconda.com/download/>`_ 
+and help me reposition SEO somewhere more than the Gut-feeling Intuiters of
+yesteryear and Data Scientists of tomorrow— Datamaster with a Python/Pandas
+industry-standard skill-set. Track your SEO rankings, Social Media views and
+counts, whatever!  Start in the shallow end with Jupyter Notebook and
+"graduate" your work to generic scheduled Linux jobs that you can run almost
+anywhere. If you're a successful YouTuber worried about the gravy-train running
+dry, diversify your skills with something you'll probably love and can
+definitely self-learn. This is your chance to jump with me onto the following
+surprisingly fun bandwagons:
 
 - **Python** - programming for humans
 - **Jupyter Notebook** - programming for even more humans
@@ -71,9 +72,9 @@ And while it's definitely **not** required, I'll also teach you the timeless
 badass tools of tech: **Linux**, **vim** and **git**. Pipulate is about
 repositioning careers as SEO continues to change. Some tools are like shiny new
 pennies (Jupyter Notebook & pandas), while others have ascended to be the very
-fabric of our modern infotech-world— the true Samurai Kung Fu light saber
-weapons of tech where developing muscle-memory makes you dangerous... to your
-competitors.
+fabric of our modern infotech-world— the true Samurai Kung Fu vorpal light
+saber weapons of tech where developing muscle-memory makes you dangerous... to
+your competitors.
 
 ########################################
 Installing Pipulate
