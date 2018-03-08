@@ -31,7 +31,7 @@ Background & Philosophy
 ########################################
 ::
 
-    You gotta pay the Python toll 
+    You gotta pay the Python toll
     If you want to get out of
     The Vendor hole.
 
@@ -50,7 +50,7 @@ system. That's where Pipulate comes in::
     gs.populate(tab, cl, df)                # pushes range to GSheet
 
 That's it. That's Pipulate— just the rectangular data-range pull & push stuff
-(nothing in-between). So `go get Anaconda 3.6 <https://www.anaconda.com/download/>`_ 
+(nothing in-between). So `go get Anaconda 3.6 <https://www.anaconda.com/download/>`_
 and help me reposition SEO somewhere between scientists and intuitive feelers
 where we belong— Datamaster (with an industry-standard pandas skill-set). Track
 your SEO rankings, Social Media views and counts, whatever! Start in the
@@ -67,10 +67,9 @@ with me onto the following surprisingly fun bandwagons:
 
 And while it's definitely **not** required, I'll also teach you the timeless
 badass tools of tech: **Linux**, **vim** and **git** as well. This package is
-about repositioning careers as SEO continues to change.  Some tools are like
-shiny new pennies (pandas), and others are loooong in the tooth— the true
-Samurai Kung Fu weapons of tech where muscle memory makes you dangerous...
-forever.
+about repositioning careers as SEO continues to change. Some tools are like
+shiny new pennies (pandas), and others are loooong in the tooth (LPvg)— the
+true Samurai Kung Fu weapons of tech where muscle memory makes you dangerous.
 
 ########################################
 Installing Pipulate
@@ -1043,7 +1042,7 @@ code with update_proxies set to True. It will create a file in your repo folder
 called goodproxies.txt::
 
     update_proxies = True
-    if update_proxies:    
+    if update_proxies:
         import pipulate.update_proxies as up
             up.Main()
 
@@ -1613,15 +1612,15 @@ So now, whenever from your host machine you type::
 warm welcome that will impress your friends. What does hi.py look like you
 ask?::
 
-	from pyfiglet import figlet_format
-	from colorama import Fore
+    from pyfiglet import figlet_format
+    from colorama import Fore
 
-	def out(print_me, color=Fore.GREEN, font='standard'):
-		ascii_art = figlet_format(print_me, font=font)
-		print('%s%s%s' % (color, ascii_art, Fore.WHITE))
+    def out(print_me, color=Fore.GREEN, font='standard'):
+        ascii_art = figlet_format(print_me, font=font)
+        print('%s%s%s' % (color, ascii_art, Fore.WHITE))
 
-	out('Welcome.')
-	out("Get pipulating!", font='cybermedium', color=Fore.WHITE)
+    out('Welcome.')
+    out("Get pipulating!", font='cybermedium', color=Fore.WHITE)
 
 ########################################
 Reminders & To-Do's
