@@ -36,10 +36,10 @@ Background & Philosophy
     The Vendor hole.
 
 I've done this sort of work for a long time, inventing my own systems until I
-discovered the combination of Google Sheets, Jupyter Notebook and Pandas. Once
-you can manipulate Pandas DataFrames, the only challenge then is easily getting
-them in and out of Google Spreadsheets for a really rocking system. That's
-where Pipulate comes in::
+discovered the magical combination of Google Sheets, Jupyter Notebook and
+Pandas. Once you can manipulate Pandas DataFrames, the only challenge then is
+easily getting them in and out of Google Spreadsheets for a really rocking
+system. That's where Pipulate comes in::
 
     cl, df = gs.pipulate(tab, rows, cols) 
     #Do Pandas stuff to df in Jupyter Notebook
