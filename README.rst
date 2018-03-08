@@ -62,8 +62,9 @@ me onto the following surprisingly fun bandwagons:
 - **Pandas** - data manipulation for humans
 - **GSheets** - data manipulation for even more humans
 
-And while it's definitely NOT required, I'll teach you Linux, vim and git as
-well. This package is about repositioning careers as SEO continues to change.
+And while it's definitely NOT required, I'll teach you the timeless tools of
+tech: **Linux**, **vim** and **git** as well. This package is about
+repositioning careers as SEO continues to change.
 
 ########################################
 Installing Pipulate
