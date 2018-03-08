@@ -6,8 +6,8 @@ pipulate v0.1.8 - Automate Google Sheets for SEO
 :Author: `Mike Levin, SEO <http://mikelev.in>`_
 
 There's a reason spreadsheets remain as popular as they do in the face of more
-capable databases and reporting systems. Spreadsheets are designed for humans.
-You don't need a developer for every little thing. You can use them in many
+capable databases and reporting systems. Spreadsheets are designed for humans—
+you don't need a developer for every little thing. You can use them in many
 places where a database would be overkill. However as anyone who's tried to
 build durable long-term automations around spreadsheets using VBA, AppScript or
 any of the other obvious choices, it ain't so easy. That's what I fix here with
