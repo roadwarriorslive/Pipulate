@@ -1638,6 +1638,39 @@ ask?::
     out("Get pipulating!", font='cybermedium', color=Fore.WHITE)
 
 ########################################
+Getting over the hump
+########################################
+
+When getting started with any new investigation into data residing somewhere
+that you're supposed to fetch, transform, and extract some insights from begins
+with "where does the data come from?" and "Where do I put it?" questions. In
+Google Sheets, you don't really have the option of warehousing all the raw data
+pulls forever, unless you want your spreadsheets to get slower and slower, then
+go corrupt. Instead, you have to either use services like Amazon S3, a large
+local hard drive, or simply not warehouse as much data as you'd like.
+
+****************************************
+The Google Spreadsheet 100,000 cell limit
+****************************************
+
+Fortunately, you can do a lot in just the limited data-space of a single
+spreadsheet, which supports (at last check) about 100,000 cells in any
+Spreadsheet document before reaching a quota (and performance) limit. The 100K
+cells can be broken up any way over rows & columns.
+
+****************************************
+Trim the fat
+****************************************
+
+Because every spreadsheet gives you an automatic 1000 rows and 26 columns, it's
+easy to make the system use up 26,000 of those cells right away. This doesn't
+really happen in practice, but there is ambiguity so as a matter of style and
+preference, I like to delete all the rows and columns I'm not using. As in the
+field of SEO, we just don't want to send mixed signals to Google.
+
+To be continued...
+
+########################################
 Reminders & To-Do's
 ########################################
 
