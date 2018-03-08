@@ -376,8 +376,14 @@ other proprietary vendor products which probably don't quite do what you need.
 Pipulate is mostly about Python and Pandas. You could replace gs.pipulate() and
 gs.populate() with pd.read_csv() and pd.to_csv() and take Google Sheets out of
 the equation entirely, or use Excel instead of GSheets by swapping PyExcel for
-GSpread. My thinking is that if you have to learn and master one tool for this
-sort of data manipulation, it might as well be Python/Pandas.
+GSpread. There's also a new library pygsheets that does a few more things like
+named ranges and limited formatting I may switch to. Doesn't matter, because
+Pipulate is a lightweight wrapper to provide a lightweight spreadsheet
+manipulation API.
+
+My thinking is that if you have to learn and master one tool for this sort of
+data manipulation, it might as well be Python/Pandas. Shove all the complexity
+onto pandas... it's going to be around for awhile... and not cost you anything.
 
 ****************************************
 Cheerleading for Anaconda, Jupyter Notebook and Pandas
@@ -672,7 +678,7 @@ The Pipulate function to could look like::
 ...and calling it from Pandas, again, like this::
 
     df['C'] = df.apply(func, axis=1,
-                       pod=('two', 'peas'),
+                        od=('two', 'peas'),
                        dates={'start' : '2018-01-01',
                                'end': '2018-01-31'
                              }
