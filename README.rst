@@ -131,6 +131,7 @@ Things even the impatient must know
 - When you import pipulate as gs, Google will (1-time) throw up a giant blue
   link that you must click and login with the same Google account you used to
   make the Google Sheet with.
+- The meaning of the word grok.
 
 ****************************************
 Things about OAuth2 you should eventually know
