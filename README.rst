@@ -8,12 +8,15 @@ pipulate v0.1.8 - Automate Google Sheets for SEO
 There's a reason spreadsheets remain as popular as they do in the face of more
 capable databases and reporting systems. Spreadsheets are designed for humans—
 you don't need a developer for every little thing. You can use them in many
-places where a database would be overkill. However as anyone who's tried to
-build durable long-term automations around spreadsheets using VBA, AppScript or
-any of the other obvious choices, it ain't so easy. That's what I fix here with
-Pipulate; I simplify OAuth2 login, help you grab cell-ranges from the
-spreadsheet, and then help you push your changes back into the sheet. The rest
-(altering the data) is Pandas.
+places where a database would be overkill. However, as anyone who's tried to
+build durable long-term automations around spreadsheets using VBA, AppScript
+(or any of the other obvious choices), it ain't so easy. That's what I fix here
+with Pipulate; simply importing the library prompts you for Google's OAuth
+web-login, getting you immediately over the biggest hurdle. After that, there's
+a simple convention of selecting a block-shape and updating back into it. The
+rest is up to you and your imagination with Python pandas— the one data
+manipulation and analysis-tool that every SEO in the biz should be learning
+right now.
 
 .. image:: pipulate-logo.svg
 
