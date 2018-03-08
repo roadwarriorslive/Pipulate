@@ -50,8 +50,10 @@ system. That's where Pipulate comes in::
 
 `Go install Anaconda 3.6 <https://www.anaconda.com/download/>`_ if you haven't
 already and get started on your new career as Datamaster. Track your SEO
-rankings, Social Media views and counts, whatever! This is your chance to
-easily and with a purpose hop onto the following bandwagons:
+rankings, Social Media views and counts, whatever! Start in the shallow end
+with Jupyter Notebook and "graduate" your work to generic scheduled Linux jobs
+that you can run almost anywhere. This is your chance to easily and with a
+purpose hop onto the following bandwagons:
 
 - Python
 - Jupyter Notebook
