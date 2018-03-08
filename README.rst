@@ -57,10 +57,10 @@ the gravy-train running dry, diversify your skills with something you'll
 probably love and can definitely self-learn. This is your chance to jump with
 me onto the following surprisingly fun bandwagons:
 
-- Python - programming for humans
-- Jupyter Notebook - programming for even more humans
-- Pandas - data manipulation for humans
-- GSheets - data manipulation for even more humans
+- *Python* - programming for humans
+- *Jupyter* Notebook - programming for even more humans
+- *Pandas* - data manipulation for humans
+- *GSheets* - data manipulation for even more humans
 
 And while it's definitely NOT required, I'll teach you Linux, vim and git as
 well. This package is about repositioning careers as SEO continues to change.
