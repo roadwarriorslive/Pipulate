@@ -15,8 +15,7 @@ with Pipulate; simply importing the library prompts you for Google's OAuth
 web-login, getting you immediately over the biggest hurdle. After that, there's
 a simple convention of selecting a block-shape and updating back into it. The
 rest is up to you and your imagination with Python pandas— the one data
-manipulation and analysis-tool that every SEO in the biz should be learning
-right now.
+manipulation and analysis-tool that every SEO in the biz should be learning.
 
 .. image:: pipulate-logo.svg
 
