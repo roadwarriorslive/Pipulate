@@ -52,9 +52,10 @@ system. That's where Pipulate comes in::
 already and get started on your new career as Datamaster. Track your SEO
 rankings, Social Media views and counts, whatever! Start in the shallow end
 with Jupyter Notebook and "graduate" your work to generic scheduled Linux jobs
-that you can run almost anywhere. If you're a YouTuber, diversify your skills
-with something you'll probably love and can definitely self-learn. This is your
-chance to easily and with a purpose hop onto the following bandwagons:
+that you can run almost anywhere. If you're a successful YouTuber worried about
+the gravy-train running dry, diversify your skills with something you'll
+probably love and can definitely self-learn. This is your chance to jump with
+me onto the following surprisingly fun bandwagons:
 
 - Python
 - Jupyter Notebook
