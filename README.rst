@@ -48,10 +48,10 @@ system. That's where Pipulate comes in::
 
     gs.populate(tab, cl, df)                # does the push
 
-That's it. That's Pipulate. Go install Anaconda 3.6 if you haven't already and
-get started on your new career as Datamaster. Track your SEO rankings, Social
-Media views and counts, whatever! This is your chance to easily and with a
-purpose hop onto the following bandwagons:
+`Go install Anaconda 3.6 <https://www.anaconda.com/download/>`_ if you haven't
+already and get started on your new career as Datamaster. Track your SEO
+rankings, Social Media views and counts, whatever! This is your chance to
+easily and with a purpose hop onto the following bandwagons:
 
 - Python
 - Jupyter Notebook
