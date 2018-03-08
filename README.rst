@@ -41,12 +41,13 @@ Pandas. Once you can manipulate Pandas DataFrames, the only challenge then is
 easily getting them in and out of Google Spreadsheets for a really rocking
 system. That's where Pipulate comes in::
 
-    cl, df = gs.pipulate(tab, rows, cols)   # does the pull
+    cl, df = gs.pipulate(tab, rows, cols)   # pulls range from GSheet
 
-    # Do Pandas stuff to df object
-    # keeping its "shape" intact.
+    # Do stuff to df object using pandas,
+    # the new "must know" SQL-alternative.
+    # Just keep the "shape" intact, then...
 
-    gs.populate(tab, cl, df)                # does the push
+    gs.populate(tab, cl, df)                # pushes range to GSheet
 
 `Go install Anaconda 3.6 <https://www.anaconda.com/download/>`_ if you haven't
 already and get started on your new career as Datamaster. Track your SEO
