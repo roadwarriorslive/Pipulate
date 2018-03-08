@@ -21,6 +21,7 @@ spreadsheet, and then help you push your changes back into the sheet. The rest
 
 .. sectnum::
 
+.. image:: pipulate-logo.svg
 
 ########################################
 Background & Philosophy
@@ -1611,3 +1612,10 @@ letter-index::
         letter = gs.cc(i+1)
         eval(tab)[col] = letter
         eval('%s2' % tab)[col] = '%s.%s' % (tab,letter)
+
+Reminder to self: Pipulate Wisdom.
+
+Much of the complexity is in the data-transform. Separate as much of the "raw
+data" work as you can from the derivative output-data formats. Those can be
+re-generated different ways with better and better insights revealed and
+interactivity. But you may never be able to re-get that raw data. So focus!
