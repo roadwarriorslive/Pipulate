@@ -32,7 +32,8 @@ Background & Philosophy
 ::
 
     You gotta pay the Python toll 
-    If you want out of Vendor hole.
+    If you want to get out of
+    The Vendor hole.
 
 I've done this sort of work for a long time, inventing my own systems until I
 discovered the combination of Google Sheets, Jupyter Notebook and Pandas. Once
