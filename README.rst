@@ -58,7 +58,7 @@ probably love and can definitely self-learn. This is your chance to jump with
 me onto the following surprisingly fun bandwagons:
 
 - **Python** - programming for humans
-- **Jupyter** Notebook - programming for even more humans
+- **Jupyter Notebook** - programming for even more humans
 - **Pandas** - data manipulation for humans
 - **GSheets** - data manipulation for even more humans
 
