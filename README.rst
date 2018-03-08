@@ -162,7 +162,7 @@ install, or select Anaconda-Navigator from your Applications folder (Mac) and
 Launch Jupyter Notebook from there. There's a few ways to get Jupyter Notebook
 running, but so long as something pops up in your web browser where you can
 choose New / Notebook: Python 3, then you found it. After you have a new
-Notebook, if you haven't done step #1 already, then execute:
+Notebook, if you haven't done step #1 already, then execute::
 
     !pip install pipulate --upgrade
 
@@ -172,7 +172,7 @@ onto the real action. There are alternative ways to do pip installs in
 "Anaconda Prompts" (with more control outside the browser) but details vary on
 Macs vs. Windows vs. Linux, so I prefer to tell people how to do pip installs
 from within Anaconda. The --upgrade parameter ensures you always have the
-latest because I will be updating it often. Step #2, execute:
+latest because I will be updating it often. Step #2, execute::
 
     import pipulate as gs
 
