@@ -15,13 +15,12 @@ Pipulate; I simplify OAuth2 login, help you grab cell-ranges from the
 spreadsheet, and then help you push your changes back into the sheet. The rest
 (altering the data) is Pandas.
 
+.. image:: pipulate-logo.svg
 
 .. contents::
     :backlinks: none
 
 .. sectnum::
-
-.. image:: pipulate-logo.svg
 
 ########################################
 Background & Philosophy
