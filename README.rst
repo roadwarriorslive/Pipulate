@@ -17,6 +17,8 @@ spreadsheet, and then help you push your changes back into the sheet. The rest
 
 .. image:: pipulate-logo.svg
 
+Congratulations! You're about to learn to program Python (easily) for SEO.
+
 .. contents::
     :backlinks: none
 
