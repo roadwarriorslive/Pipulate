@@ -56,12 +56,13 @@ stuff (nothing in-between). So, `go get Anaconda 3.6 <https://www.anaconda.com/d
 and help me reposition SEO somewhere more than the gut-feeling Intuiters of
 yesteryear and Data Scientists of tomorrow— the **Datamaster** with a
 Python/Pandas industry-standard skill-set has vast room for creative expression
-and insight. Track your SEO rankings, Social Media views and counts, whatever!
-Start in the shallow end with Jupyter Notebook and "graduate" your work to
-generic scheduled Linux jobs that you can run almost anywhere. If you're a
-successful YouTuber worried about the gravy-train running dry, diversify your
-skills with something you'll probably love and can definitely self-learn. This
-is your chance to jump with me onto the following surprisingly fun bandwagons:
+and career-path flexibility (hedging your bet on SEO). Track your SEO rankings,
+Social Media views and counts, whatever!  Start in the shallow end with Jupyter
+Notebook and "graduate" your work to generic scheduled Linux jobs that you can
+run almost anywhere. If you're a successful YouTuber worried about the
+gravy-train running dry, diversify your skills with something you'll probably
+love and can definitely self-learn. This is your chance to jump with me onto
+the following surprisingly fun bandwagons:
 
 - **Python** - programming for humans
 - **Jupyter Notebook** - programming for even more humans
