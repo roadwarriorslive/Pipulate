@@ -49,15 +49,16 @@ system. That's where Pipulate comes in::
 
     gs.populate(tab, cl, df)                # pushes range to GSheet
 
-That's it. That's Pipulate— just the rectangle pull/push stuff (nothing
-in-between). So `Go install Anaconda 3.6 <https://www.anaconda.com/download/>`_
-if you haven't already and get started on your new career as Datamaster. Track
-your SEO rankings, Social Media views and counts, whatever! Start in the
-shallow end with Jupyter Notebook and "graduate" your work to generic scheduled
-Linux jobs that you can run almost anywhere. If you're a successful YouTuber
-worried about the gravy-train running dry, diversify your skills with something
-you'll probably love and can definitely self-learn. This is your chance to jump
-with me onto the following surprisingly fun bandwagons:
+That's it. That's Pipulate— just the rectangular data-range pull & push stuff
+(nothing in-between). So `go get Anaconda 3.6 <https://www.anaconda.com/download/>`_ 
+and start helping me reposition SEO somewhere between Scientists and intuitive
+feelers— Datamaster! Track your SEO rankings, Social Media views and counts,
+whatever!  Start in the shallow end with Jupyter Notebook and "graduate" your
+work to generic scheduled Linux jobs that you can run almost anywhere. If
+you're a successful YouTuber worried about the gravy-train running dry,
+diversify your skills with something you'll probably love and can definitely
+self-learn. This is your chance to jump with me onto the following surprisingly
+fun bandwagons:
 
 - **Python** - programming for humans
 - **Jupyter Notebook** - programming for even more humans
