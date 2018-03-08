@@ -66,7 +66,7 @@ with me onto the following surprisingly fun bandwagons:
 - **GSheets** - data manipulation for even more humans
 
 And while it's definitely **not** required, I'll also teach you the timeless
-badass tools of tech: **Linux**, **vim** and **git**. This package is about
+badass tools of tech: **Linux**, **vim** and **git**. Pipulate is about
 repositioning careers as SEO continues to change. Some tools are like shiny new
 pennies (Jupyter Notebook & pandas), while others have ascended to be the very
 fabric of our modern infotech-world— the true Samurai Kung Fu light saber
