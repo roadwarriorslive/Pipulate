@@ -51,7 +51,6 @@ system. That's where Pipulate comes in::
 
 That's it. That's Pipulate— just the rectangular data-range pull & push stuff
 (nothing in-between). So `go get Anaconda 3.6 <https://www.anaconda.com/download/>`_ 
-
 and help me reposition SEO somewhere between scientists and intuitive feelers
 where we belong— Datamaster (with an industry-standard pandas skill-set). Track
 your SEO rankings, Social Media views and counts, whatever! Start in the
