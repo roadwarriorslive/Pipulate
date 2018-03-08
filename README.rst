@@ -82,6 +82,7 @@ Installing Pipulate
 Step #1: Install https://www.anaconda.com/download/ start Jupyter Notebook.
 Make a new Python 3 notebook and type::
 
+.. code-block:: bash
     !pip install pipulate --upgrade
 
 This command executes as an operating system command (because of the
