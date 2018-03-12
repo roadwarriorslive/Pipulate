@@ -79,16 +79,37 @@ There's nothing to see here. Please move along.
 ****************************************
 
 If you're reading this, you're among the first who knows what's going on with
-me here with my latest version of Pipulate-- which amounts to yielding to the
+me here with my latest version of Pipulate— which amounts to yielding to the
 staggeringly cool process put into motion by Fernando Perez (invented iPython
 that's become Jupyter Notebook) and Continuum Analytics who put together the
 Anaconda FOSS equivalent to Mathematica, MATLAB, SAS or whathaveyou. It's data
 analysis stuff so scientists can solve their crisis of reproducibility a few
-years back that really shook 'em up and gave "the other side" a lot of ammo. If
-you want to fight with data, you better have some seriously good Kung Fu. It's
-just the medicine that a highly stressed SEO field needs. I got your cure right
-here, and it's really just the minimum baseline technical capabilities you
-should have today so that you may interact... with... anything.
+years back that really shook 'em up and gave "the other side" a lot of ammo. 
+
+If you want to fight data with data, you better have some seriously good Kung
+Fu. I'm the type of SEO who survives just fine at places like 360i with clients
+like Apple and JCPenney (I helped pull them out of the fire), and these are my
+tools now in their modern form. I prefer to work in-house where I can slip in
+work like this and not have to bill it evenly against each account I work on
+(yuck!). I can get into my grove, walking the walk as I talk the talk...
+in-house SEO-style... yeah. Good stuff.
+
+****************************************
+Be The Lightweight API-Monkey in the Middle (speaking standard panda)
+****************************************
+
+And so, here is my little gift to you, world of SEO. It's not DeepCrawl or
+Conductor or ahrefs. No, but it can connect to any of them. It could draw
+exactly the dashboard you want from out of all 3 systems (if you've got 'em)
+and give you just the dashboard you need under simple GMail security context,
+and not some per-seat license login nonsense. Innovate new reports in Jupyuter
+Notebook. Refine them. Copypasta them over to Linux scheduling where you fit it
+togehter like Tetris, squeezing every dollars worth out of your EC2 instance.
+
+This project is just the medicine that a highly stressed SEO field needs. I got
+your cure right here, and it's really just the minimum baseline technical
+capabilities you should have today so that you may interact...  with...
+anything.
 
 ****************************************
 All The Bands Whose Wagon's You're Hitching Star Too Are Belong To Us
