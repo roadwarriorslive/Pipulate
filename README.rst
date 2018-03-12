@@ -168,7 +168,7 @@ challenges me from a million views to a million followers.
 Challenge accepted, Adi. https://www.youtube.com/mikelevin
 
 ****************************************
-Did I Mention You're Either Old's Kool Or Fresh Meat?
+Did I Mention You're Either Old's Kool or Fresh Meat?
 ****************************************
 
 And while it's definitely **not** required, I'll also teach you the timeless
