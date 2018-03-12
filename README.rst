@@ -43,10 +43,41 @@ rapidly changing world so often that it hurts.
 
 No really, it hurts. Help me!
 
-So now, instead of inventing my own systems, I use my recently discovered Magic
-The Gathering unstoppable card-combination of Google Sheets, Jupyter Notebook
-and Pandas. It's like resurrecting elves from your graveyard for unlimited
+****************************************
+Of Stacked Decks & Killer Card Combinations
+****************************************
+
+So now, instead of inventing my own systems, I leverage the strength of the
+cards I'm dealt. This is familiar to anyone who place the Magic The Gathering
+card battle-game where certain card-combinations can't be played because they
+are too powerful and throw of the balance (and fairness) of the game.
+Thankfully for us SEOs, in real-life thankfully such killer combinations are
+not so easy to ban-- such as that of Google Sheets, Jupyter Notebook and
+Pandas. It's like resurrecting elves from your graveyard for unlimited
 fireballs-- the gift that keeps on giving.
+
+****************************************
+It's Pandas all the way down
+****************************************
+
+An Ode to Pandas::
+
+    I'm a #Python #pandas person'
+    'Cause #SEO will worsen
+    With each day the #AI's
+    Waking uuuup!
+    Solutions?
+    I've a' plenty!
+    But none are
+    Muscle-friendly;
+    Because
+    from #vim
+    I must reach
+    Juuuupyter!
+
+I used to be an amateur (very amateur) magician. You know, it's all the same
+feeling for me; magic, art and coding... 3 sides of an enternal golden braid...
+and a bit of performance art and decent salary-hunting.
 
 Once you can manipulate Pandas DataFrames, you have super-powers and are no
 longer an SEO. Your bullshit will smell more like statistically convincing
@@ -57,7 +88,11 @@ process. KNOW process. Invent process. Make process your own secret sauce in
 such a way where you can EVEN STILL jump-on and benefit from some pretty
 grown-up and destined to succeed bandwagons.
 
-That's where Pipulate comes in::
+****************************************
+That's where Pipulate comes in
+****************************************
+
+Here's the basic API-invocation for Pipulate::
 
     cl, df = gs.pipulate(tab, rows, cols)     # pulls range from GSheet
 
@@ -75,7 +110,7 @@ Python/Pandas industry-standard skill-set has vast room for creative expression
 and career-path flexibility (hedging your bet on SEO). 
 
 ****************************************
-There's nothing to see here. Please move along.
+there's nothing to see here. please move along.
 ****************************************
 
 If you're reading this, you're among the first who knows what's going on with
