@@ -80,18 +80,68 @@ gravy-train running dry, diversify your skills with something you'll probably
 love and can definitely self-learn. This is your chance to jump with me onto
 the following surprisingly fun bandwagons:
 
+****************************************
+All The Bands Whose Wagon's You're Hitching Star Too Are Belong To Us
+****************************************
+
 - **Python** - programming for humans
 - **Jupyter Notebook** - programming for even more humans
 - **Pandas** - data manipulation for humans
 - **GSheets** - data manipulation for even more humans
 
+...but mostly Python. Go read my love letter to Python even though I have to
+update it for 2018: http://mikelev.in/2011/01/python-programming-language-advantages/
+
+****************************************
+You Would Not, Could Not Learn to Code?
+****************************************
+
+I'm talking to YOU, Animation Gang! Sure, it's fun to animate today, but you
+will always be at the mercy of people who can express automation concepts as
+naturally as you speak English. Coding is not what you think. You already do
+it. You express your creative dynamic right-brained selves in an overwhelmingly
+technical and meticulous left-brained medium. I'm not sure if you understand
+what's giving you super-powers on YouTube, but when that foolish dancing gets
+tired and your energy runs out, come back here, sit down and learn to code
+Python. You'll green eggs and ham.
+
+- Automate Gimp
+- Automate Inkscape
+- Automate Blender
+- Automate ImageMagik
+- Automate Robots
+
+****************************************
+The Million-Follower YouTube Challenge... Accepted
+****************************************
+
+I could go on, but I think I make my point. My daughter challenged me to a
+million followers on YouTube by VidCon. I'm like, haha, not likely. No one's
+really interested in your dad's opinion that you're either either doing it
+old'skool or you're fresh meat. Your dad can reach a million followers by
+VidCon 2019 if I really focus and work on it. First step is to just catch
+Jaiden's or James' or Becca's or Tony's attention and mention my channel in one
+of their videos-- a 7 year old YouTuber's super-nerd Dad in New York trying to
+teach kids Python before their brains are poisoned with JavaScript. Oh... he
+was the first to unbox a Raspberry Pi on YouTube and got a million-view video
+out of it... then dropped the ball, because kid. Now kid loves YouTube and is
+challenges me from a million views to a million followers.
+
+Challenge accepted, Adi. https://www.youtube.com/mikelevin
+
+****************************************
+Did I Mention You're Either Old's Kool Or Fresh Meat?
+****************************************
+
 And while it's definitely **not** required, I'll also teach you the timeless
-badass tools of tech: **Linux**, **vim** and **git**. Pipulate is about
-repositioning careers as SEO continues to change. Some tools are like shiny new
-pennies (Jupyter Notebook & pandas), while others have ascended to be the very
-fabric of our modern infotech-world— the true Samurai Kung Fu vorpal light
-saber weapons of tech where developing muscle-memory makes you dangerous... to
-your competitors.
+badass tools of tech: **Linux**, **vim** and **git**-- or at least the minimum
+you need to know about each to project that "I'm Tony Stark" feeling.
+
+Pipulate is about repositioning careers as SEO continues to change. Some tools
+are like shiny new pennies (Jupyter Notebook & pandas), while others have
+ascended to be the very fabric of our modern infotech-world— the true Samurai
+Kung Fu vorpal light saber weapons of tech where developing muscle-memory makes
+you dangerous... to your competitors.
 
 ########################################
 Installing Pipulate
