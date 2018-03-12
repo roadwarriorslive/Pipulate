@@ -112,7 +112,7 @@ capabilities you should have today so that you may interact...  with...
 anything.
 
 ****************************************
-All The Bands Whose Wagon's You're Hitching Star Too Are Belong To Us
+All The Bands Whose Wagon's You're Hitching Your Star Too Are Belong To Us
 ****************************************
 
 Track your SEO rankings, Social Media views and counts, whatever!  Start in the
