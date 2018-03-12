@@ -32,8 +32,7 @@ Background & Philosophy
 ::
 
     You gotta pay the Python toll
-    If you want out of the
-    The Vendor-hole.
+    If you want out of the vendor hole.
 
 .. highlight:: python
 
