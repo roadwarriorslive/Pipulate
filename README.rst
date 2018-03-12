@@ -95,7 +95,7 @@ work like this and not have to bill it evenly against each account I work on
 in-house SEO-style... yeah. Good stuff.
 
 ****************************************
-Be The Lightweight API-Monkey in the Middle (speaking standard panda)
+Be a Lightweight Pandas-speaking API-Monkey in the Middle
 ****************************************
 
 And so, here is my little gift to you, world of SEO. It's not DeepCrawl or
