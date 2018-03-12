@@ -72,17 +72,34 @@ stuff (nothing in-between). So, `go get Anaconda 3.6 <https://www.anaconda.com/d
 and help me reposition SEO somewhere more than the gut-feeling Intuiters of
 yesteryear and Data Scientists of tomorrow— the **Datamaster** with a
 Python/Pandas industry-standard skill-set has vast room for creative expression
-and career-path flexibility (hedging your bet on SEO). Track your SEO rankings,
-Social Media views and counts, whatever!  Start in the shallow end with Jupyter
-Notebook and "graduate" your work to generic scheduled Linux jobs that you can
-run almost anywhere. If you're a successful YouTuber worried about the
-gravy-train running dry, diversify your skills with something you'll probably
-love and can definitely self-learn. This is your chance to jump with me onto
-the following surprisingly fun bandwagons:
+and career-path flexibility (hedging your bet on SEO). 
+
+****************************************
+There's nothing to see here. Please move along.
+****************************************
+
+If you're reading this, you're among the first who knows what's going on with
+me here with my latest version of Pipulate-- which amounts to yielding to the
+staggeringly cool process put into motion by Fernando Perez (invented iPython
+that's become Jupyter Notebook) and Continuum Analytics who put together the
+Anaconda FOSS equivalent to Mathematica, MATLAB, SAS or whathaveyou. It's data
+analysis stuff so scientists can solve their crisis of reproducibility a few
+years back that really shook 'em up and gave "the other side" a lot of ammo. If
+you want to fight with data, you better have some seriously good Kung Fu. It's
+just the medicine that a highly stressed SEO field needs. I got your cure right
+here, and it's really just the minimum baseline technical capabilities you
+should have today so that you may interact... with... anything.
 
 ****************************************
 All The Bands Whose Wagon's You're Hitching Star Too Are Belong To Us
 ****************************************
+
+Track your SEO rankings, Social Media views and counts, whatever!  Start in the
+shallow end with Jupyter Notebook and "graduate" your work to generic scheduled
+Linux jobs that you can run almost anywhere. If you're a successful YouTuber
+worried about the gravy-train running dry, diversify your skills with something
+you'll probably love and can definitely self-learn. This is your chance to jump
+with me onto the following surprisingly fun bandwagons:
 
 - **Python** - programming for humans
 - **Jupyter Notebook** - programming for even more humans
