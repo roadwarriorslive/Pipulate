@@ -1049,7 +1049,7 @@ API::
             AND date <= '%s'
         GROUP BY
             url
-        """ % (sql_urls, start, end)
+        """ % (urls, start, end)
 
 ****************************************
 Using Pandas CSVs as SQL temp table
@@ -1131,9 +1131,9 @@ Developing Pipualte functions
 
 Because Pipulate functions are really just Python functions (generally being
 called through the Pandas DataFrame.apply() method), you can develop Pipulate
-functions just as you would any other Python funciton.
+functions just as you would any other Python function.
 
-The only unusal concern is how when you feed an entire "row" of a dataframe to
+The only unusual concern is how when you feed an entire "row" of a dataframe to
 a Python function, it takes the form of an arbitrary variable name (usually
 row) containing a numerically indexed list of values (the values from the row,
 of course). This only means that a wee bit of "mapping" need be done inside the
