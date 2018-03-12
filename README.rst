@@ -32,16 +32,33 @@ Background & Philosophy
 ::
 
     You gotta pay the Python toll
-    If you want to get out of
-    The Vendor hole.
+    If you want out of the
+    The Vendor-hole.
 
 .. highlight:: python
 
-I've done this sort of work for a long time, inventing my own systems until I
-discovered the magical combination of Google Sheets, Jupyter Notebook and
-Pandas. Once you can manipulate Pandas DataFrames, the only challenge then is
-easily getting them in and out of Google Spreadsheets for a really rocking
-system. That's where Pipulate comes in::
+I've done ad hoc and scheduled data-churning work for a long time, where
+investigation becomes automated system becomes generalized tool. I've invented
+my own systems for this sort of stuff that's gone obsolete in the face of a
+rapidly changing world so often that it hurts.
+
+No really, it hurts. Help me!
+
+So now, instead of inventing my own systems, I use my recently discovered Magic
+The Gathering unstoppable card-combination of Google Sheets, Jupyter Notebook
+and Pandas. It's like resurrecting elves from your graveyard for unlimited
+fireballs-- the gift that keeps on giving.
+
+Once you can manipulate Pandas DataFrames, you have super-powers and are no
+longer an SEO. Your bullshit will smell more like statistically convincing
+correlations, though you will always attach the standard disclaimer, that does
+not mean causation. Therefore, our field remains Kung Fufu. Anyone who doesn't
+want to be called out on bad-science better be able to walk the walk. Show
+process. KNOW process. Invent process. Make process your own secret sauce in
+such a way where you can EVEN STILL jump-on and benefit from some pretty
+grown-up and destined to succeed bandwagons.
+
+That's where Pipulate comes in::
 
     cl, df = gs.pipulate(tab, rows, cols)     # pulls range from GSheet
 
