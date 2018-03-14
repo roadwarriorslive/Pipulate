@@ -9,15 +9,14 @@ capable databases and reporting systems. Spreadsheets are designed for humans—
 you don't need a developer for every little thing. You can use ledgers in many
 places where a database would be overkill. However, as anyone who's tried to
 build durable long-term automations around spreadsheets using VBA, AppScript
-(or any of the other obvious choices), it ain't so easy. 
+(or any of the other obvious choices), it ain't so easy. I fix that here.
 
-I fix that here by opening the mysterious world of Python-driven automation to
-newbs here with Pipulate; simply importing the library prompts you for Google's
-OAuth web-login, which gets you over the big showstopper you'll otherwise
-encounter right out of the starting gate. After that, there's a simple
-convention of selecting a block-shape and updating back into it. The rest is up
-to you and your imagination with Python pandas— the one data manipulation and
-analysis-tool that every SEO in the biz should be learning.
+First, I'll opening the mysterious world of Python-driven data-automation to
+newbs simply by having you import a library that auto-prompts you for Google's
+OAuth web-login, getting you right over the first show-stopping hurdle. After
+that, I advocate a simple convention of selecting ranges out of a spreadsheet,
+modifying them, and pushing the results back in. And that's mostly done with
+Pandas; the one data manipulation tool every SEO should right now be mastering.
 
 .. image:: pipulate-logo.svg
 
