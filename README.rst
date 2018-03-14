@@ -65,9 +65,9 @@ cards I'm dealt. This is familiar to anyone who place the Magic The Gathering
 card battle-game where certain card-combinations can't be played because they
 are too powerful and throw of the balance (and fairness) of the game.
 Thankfully for us SEOs, in real-life thankfully such killer combinations are
-not so easy to ban-- such as that of Google Sheets, Jupyter Notebook and
+not so easy to ban— such as that of Google Sheets, Jupyter Notebook and
 Pandas. It's like resurrecting elves from your graveyard for unlimited
-fireballs-- the gift that keeps on giving.
+fireballs the gift that keeps on giving.
 
 ****************************************
 It's Pandas all the way down
@@ -207,7 +207,7 @@ really interested in your dad's opinion that you're either either doing it
 old'skool or you're fresh meat. Your dad can reach a million followers by
 VidCon 2019 if I really focus and work on it. First step is to just catch
 Jaiden's or James' or Becca's or Tony's attention and mention my channel in one
-of their videos-- a 7 year old YouTuber's super-nerd Dad in New York trying to
+of their videos— a 7 year old YouTuber's super-nerd Dad in New York trying to
 teach kids Python before their brains are poisoned with JavaScript. Oh... he
 was the first to unbox a Raspberry Pi on YouTube and got a million-view video
 out of it... then dropped the ball, because kid. Now kid loves YouTube and is
@@ -220,7 +220,7 @@ Did I Mention You're Either Old's Kool or Fresh Meat?
 ****************************************
 
 And while it's definitely **not** required, I'll also teach you the timeless
-badass tools of tech: **Linux**, **vim** and **git**-- or at least the minimum
+badass tools of tech: **Linux**, **vim** and **git**— or at least the minimum
 you need to know about each to project that "I'm Tony Stark" feeling.
 
 Pipulate is about repositioning careers as SEO continues to change. Some tools
@@ -1647,17 +1647,17 @@ You can't store everything locally, so don't try. You will run out of space,
 and there's nothing worse than having to do file-maintenance on Cloud hardware
 that's supposed to be sparing you from that nonsense. But neither can you write
 anything that's going to fill your hard drive up forever with past data.
-Hardware is hardware and resources are actually finite -- or rather, they're as
+Hardware is hardware and resources are actually finite— or rather, they're as
 finite as you're willing to pay for. So if we want to store the data long-term,
 it's got to be off-server, probably using a service such as Amazon S3. Using a
 "data bucket" NoSQL hash-table (call it what you will) is a good idea in
 situations like this because "deconstructing" everything into rows & columns
 for SQL-like RDBMS storage isn't worth it, and although field-stuffing into a
 Text or XML field in an RDBMS would work, it feels a lot like shoving a round
-peg into a square hole -- why do it if a round hole is sitting right there?
-This is more a place-holder for me to incorporate probably a decorator-based
-cache system that is back-ended by Amazon S3. That will solve a lot of ongoing
-server maintenance issues.
+peg into a square hole— why do it if a round hole is sitting right there?  This
+is more a place-holder for me to incorporate probably a decorator-based cache
+system that is back-ended by Amazon S3. That will solve a lot of ongoing server
+maintenance issues.
 
 ########################################
 First Scheduled Script
