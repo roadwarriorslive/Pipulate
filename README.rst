@@ -11,11 +11,11 @@ places where a database would be overkill. However, as anyone who's tried to
 build durable long-term automations around spreadsheets using VBA, AppScript
 (or any of the other obvious choices), it ain't so easy. I fix that here.
 
-First, I'll opening the mysterious world of Python-driven data-automation to
+First, I plan to open the mysterious world of Python-driven data-automation to
 newbs simply by having you import a library that auto-prompts you for Google's
 OAuth web-login, getting you right over the first show-stopping hurdle. After
 that, I advocate a simple convention of selecting ranges out of a spreadsheet,
-modifying them, and pushing the results back in. And that's mostly done with
+modifying them, and pushing the results back in.  And that's mostly done with
 Pandas; the one data manipulation tool every SEO should right now be mastering.
 
 .. image:: pipulate-logo.svg
