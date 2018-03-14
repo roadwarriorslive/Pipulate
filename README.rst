@@ -45,7 +45,7 @@ I've done ad hoc and scheduled data-churning work for a long time, where
 investigation becomes automated system becomes generalized tool. I've invented
 my own systems for this sort of stuff that's gone obsolete in the face of a
 rapidly changing world so often that it hurts. No really, it hurts. Having now
-experienced almost-framework packages like Flash that merely help you connect
+experienced almost-framework packages like Flask that merely help you connect
 the dots begging to be connected, I'm like: yeah that. Pipulate should almost
 not be there, yet still rocking your world like... well, Flask. Think of this
 light-touch mentality as pretty much the opposite of Django, which is what most
@@ -544,7 +544,7 @@ is actually different from pure Python. Pandas sits on NumPy which is a popular
 C-optimized Python library that provides N-dimensional arrays for the same kind
 of work that IBM dinosaurs still do in Fortran for science and stuff. Pandas is
 a FRAMEWORK on top of NumPy for such work, but which turns out to be perfectly
-designed for what I used to use Pipulate for when it was a Flash-based Web app.
+designed for what I used to use Pipulate for when it was a Flask-based Web app.
 
 ****************************************
 Applying a Python function to every row of a Google Sheet
