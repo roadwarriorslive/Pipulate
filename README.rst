@@ -97,6 +97,10 @@ ahead of it as it replaces SQL as the ad hoc data langua franca du jour— and
 that ain't no fad. Legit bandwagon here that's perfect for SEO's, so ya had
 better get a jumpin. If you weren't a data-tech before, you are one now.
 
+****************************************
+From SEO to Data Tech to Datamaster
+****************************************
+
 Once you can manipulate Pandas DataFrames, you have super-powers and are no
 longer an SEO. Your bullshit will smell more like statistically convincing
 correlations, though you will always attach the standard disclaimer, that does
