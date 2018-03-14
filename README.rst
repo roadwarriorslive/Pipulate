@@ -41,15 +41,20 @@ of people who can use it. For everyone else cobbling it together, I'm here.
 
 .. highlight:: python
 
+****************************************
+A better way
+****************************************
+
 I've done ad hoc and scheduled data-churning work for a long time, where
 investigation becomes automated system becomes generalized tool. I've invented
 my own systems for this sort of stuff that's gone obsolete in the face of a
 rapidly changing world so often that it hurts. No really, it hurts. Having now
 experienced almost-framework packages like Flask that merely help you connect
-the dots begging to be connected, I'm like: yeah that. Pipulate should almost
-not be there, yet still rocking your world like... well, Flask. Think of this
-light-touch mentality as pretty much the opposite of Django, which is what most
-of my framework creations of the past more-or-less resembled. This is better.
+the dots begging to be connected (Requests & Workzeug in their case and GData &
+GSpread in mine), I'm like: yeah, Pipulate should be like that-- almost not
+there. Focus on what's important: Pandas! Think light-touch framework mentality
+as pretty much the opposite of Django, which is what most of my framework
+creations of the past more-or-less resembled. This is I think a better way.
 
 ****************************************
 Of Stacked Decks & Killer Card Combinations
