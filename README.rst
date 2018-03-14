@@ -35,6 +35,10 @@ Background & Philosophy
     You gotta pay the Python toll
     If you want out of the vendor hole.
 
+Congratulations to Conductor for the acquisition by WeWork. This should bring a
+normally inaccessible tier of SEO-product into the reach of exactly the sorts
+of people who can use it. For everyone else cobbling it together, I'm here.
+
 .. highlight:: python
 
 I've done ad hoc and scheduled data-churning work for a long time, where
