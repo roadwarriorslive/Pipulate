@@ -47,7 +47,7 @@ A better way
 
 I've done ad hoc and scheduled data-churning work for a long time, where
 investigation becomes automated system becomes generalized tool. I've invented
-my own systems for this sort of stuff that's gone obsolete in the face of a
+my own systems for this sort of stuff that have gone obsolete in the face of a
 rapidly changing world so often that it hurts. No really, it hurts. Having now
 experienced almost-framework packages like Flask that merely help you connect
 the dots begging to be connected (Requests & Workzeug in their case and GData &
