@@ -89,8 +89,13 @@ An Ode to Pandas::
     Juuuupyter!
 
 I used to be an amateur (very amateur) magician. You know, it's all the same
-feeling for me; magic, art and coding... 3 sides of an enternal golden braid...
-and a bit of performance art and decent salary-hunting.
+feeling for me; magic, art and coding... 3 sides of an eternal golden braid...
+and a bit of performance art, the constant hunt for a good paying gig, and
+getting down an bunch of cool new moves that will serve you for a few years
+until they stop working. Well, this pandas trick has got quite a few good years
+ahead of it as it replaces SQL as the ad hoc data langua franca du jour— and
+that ain't no fad. Legit bandwagon here that's perfect for SEO's, so ya had
+better get a jumpin. If you weren't a data-tech before, you are one now.
 
 Once you can manipulate Pandas DataFrames, you have super-powers and are no
 longer an SEO. Your bullshit will smell more like statistically convincing
