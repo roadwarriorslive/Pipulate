@@ -1,6 +1,6 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
-## Fri Mar 16 11:59:28 DST 2018
+## Fri Mar 16 
 ### Blank The Whipping Doc for Morbid. It's the only way to be sure.
 
 Okay, now down to business... again. And this time for real. This is very
