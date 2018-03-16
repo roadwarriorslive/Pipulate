@@ -3,7 +3,7 @@
 ## Fri Mar 16
 
     Different rhymes for different times
-    And we you don't renew 'em
+    And if you don't renew 'em
     From time to time, you'll fail to climb
     And fall down in a ruin.
 
