@@ -1,5 +1,74 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Fri Mar 16 11:59:28 DST 2018
+### Blank The Whipping Doc for Morbid. It's the only way to be sure.
+
+Okay, now down to business... again. And this time for real. This is very
+serious business. But my distractions were in forming a very focused mental
+model for this type of work today and FOREVER FORWARD MORE IMPORTANT THAN IT
+LOOKED distraction. Tired of leaping for peanuts.
+
+Speaking of speaking my mind. I know it's probably politically incorrect, but a
+WORK-IN-PROGRESS document is a whipping doc. It's got a very powerful concept
+there. You can blank the whipping doc. It is wise to blank the whipping doc, in
+fact because if you have a Purple Cow Farm with your format in it, All other
+instances than what's life will just muddle don't force a rhyme. vim out!
+
+--------------------------------------------------------------------------------
+## Fri Mar 16 
+### If I Saw a Purple Cow, I'd Pick Out a Good Nickname
+
+Time is an illusion. Okay, Purple Cow Farm in-hand, we have a solid "from"
+place, once our template-work (sculpting light) is done in whatever, wherever
+format woo hoo everything-independent where we can be. We copy all that
+artistic header-area stuff of the WORK-IN-PROGRESS document (anything, anywhere
+like Excel or another GSheet) into the Purple Cow document. You ALWAYS include
+the first data-row, which is the row usually immediately below your frozen
+title rows. There's some ambiguity around what we call this area, but I'll use
+header for consistency with typical office-speak. So, we put the complete
+header and first data-row into its own tab in The Purple Cow Farm. Things line
+Red/Green color-coding rules get carried in that first data-row, so it's really
+important. I wouldn't try blanking the data in there, or you're in for all
+sorts of accidental formatting-loss issues. Just assume all the data in Purple
+Cow is for-position-only (FPO). Okay... now we have a destination document.
+It's where we "blend into" and should be the SAME as your work-progress
+document, so you don't have to be giving out new Google Sheet URLs all the
+time. Even the SEO in me screams out no to that concept. WIP (work-in-progress)
+documents should get good strong nicknames and have a long life as such a
+kooky-nicknamed thing... until you rename it for a demo to a stakeholder who
+doesn't need to see it by that name. But then, it's almost an inside joke that
+it's really the such-and-such document, because you've touched them on an
+emotional level with a just-so-perfect nickname...
+
+And that my friends is SEO. Walk the walk so you can talk the talk... be DEEPLY
+engaged in the game by partaking in all the plentiful Noosphere being created
+by every move Google makes... every step it takes, we'll be... oh wait, it's
+watching us... nevermind.
+
+--------------------------------------------------------------------------------
+## Fri Mar 16
+### Just Invented Purple Cow Farms for Templates
+
+I just hit on a very, very powerful method. Why just use one journal in vim
+when you could be using two! One of them in a private git repo and the other in
+a public Github repo, but with no special effort taken to format or publish it,
+besides naming the file with a .md extension and putting it in the parent
+directory of a repo I think I'll be driving a lot of eyes to and think I'll be
+able to turn this into a good lesson in iron bars to not a prison make nor
+cubicles a circus. Minds both intent and focused can still squeak out a
+workplace. As non-technical people suspect and sometimes fear, the shell-game
+in doing very advanced-seeming stuff in tech requires a lot less actual work
+than what it appears. But that cover of being busy and stressed-out and always
+intently working on something is very important. Mechanical keyboards that you
+can feel click under your fingers is important too. Get into the zone whatever
+way you can, and if that means throwing up a shield of better not interrupt,
+then so be it. 1, 2, 3... 1? Templates are PURPLE! MAKE YOUR PURPLE TEMPLATE
+DOCUMENT. A purple cow farm. HAHAHA! You sometimes look for the proper amount
+of ridculoustemity in your nicknames. Ohhh, push this out.
+
+1, 2, 3... 1: Go find your Purple Cow.
+
+--------------------------------------------------------------------------------
 ## Fri Mar 16
 
     Different rhymes for different times
@@ -9,8 +78,18 @@
 
     Purple is for templates now;
     The other colors taken.
-    Make them be your purple cow
+    Make them be your Purple Cow
     To never be forsaken!
+
+    I've only got one document
+    That's named The Purple Cow Farm;
+    Templates-tabs-- from there are sent
+    With minimum of brain-harm.
+
+    The Purple Cow will teleport
+    The columns where they function
+    While you try to stop a fork
+    Off version we be junkin'
 
 --------------------------------------------------------------------------------
 ## Fri Mar 16 
