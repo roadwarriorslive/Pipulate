@@ -1,5 +1,52 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Fri Mar 16
+
+    Different rhymes for different times
+    And we you don't renew 'em
+    From time to time, you'll fail to climb
+    And fall down in a ruin.
+
+    Purple is for templates now;
+    The other colors taken.
+    Make them be your purple cow
+    To never be forsaken!
+
+--------------------------------------------------------------------------------
+## Fri Mar 16 
+
+Make donuts. 1, 2, 3... 1? Source Templates! It's all about reflecting the
+right light with the proper incantations. Everything will shine through your
+Google Docs templates, which you really should set up ahead of time, because
+although you CAN apply some formatting with PyGal which apparently doesn't use
+GData but something else more formal under the Developer Console (GData is so
+old it predates API-unification under-console). I need to get this stuff out,
+because it's important about Pipulate. Getting started on a project in the
+morning where ambitions are high because they realize the: if Data Samurai,
+then following views we've never before been able to consistently:
+
+- produce
+- make readily/easily available
+- yet still secure the data
+
+...that one would thing should easily be possible. It's not. But I'm here to
+solve that. You're gonna have to drink some Koolaid, so ya had better get used
+to it. What, you think Google is going away? What, you think the search game is
+going to be disrupted because of some AI-startup? Forget it. A 10x early-mover
+advantage in this game is exponentially more than you think. Thinks are
+learning and those learnings are persisting and trickling out all over have its
+input improved from all over the place... not human by a long-shot, but a damn
+bigger chasm that newcomers need to cross than you can imagine.
+
+So, why even try.
+
+Different game, lads. I'm in a different game, with what I hope is another 20
+years of exploi... ahem, exploration left to do.
+
+Forget the #xbook tag. Just publish in the Pipulate repo. This is what you were
+born to do. vim out.
+
+--------------------------------------------------------------------------------
 ## Fri Mar 16 
 
 I'm just kidding. I won't leak. But I'll probably sanitize as I type so that
