@@ -1849,3 +1849,24 @@ Much of the complexity is in the data-transform. Separate as much of the "raw
 data" work as you can from the derivative output-data formats. Those can be
 re-generated different ways with better and better insights revealed and
 interactivity. But you may never be able to re-get that raw data. So focus!
+
+########################################
+Experimential: The Zen of Pipulate
+########################################
+
+- Everything you need has already been done many, many times.
+- However, this does not spare you from SOME of the work.
+- Processes resist automation until sufficient TLC is applied.
+- And even then, it's all going to fall apart for 10 unexpected reasons.
+- Your job then is to build with that sort of resilience in mind
+- Even if it means scrapping-and-rebuilding quickly.
+
+****************************************
+Ideas for Tenants of the Pipulate System
+****************************************
+
+- Got a dataframe that was tough to get? Maybe it should be a .csv file.
+- Got a .csv file on your drive blocking you? Was it generated today?
+- It's better to pip install pipulate than git clone pipulate.
+- Directories you create to pipulate out of shouldn't all be repos.
+- Little secret-sauce pipulations belong in private Github gists.
