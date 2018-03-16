@@ -1,6 +1,75 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
-## Fri Mar 16 
+## Fri Mar
+### Getting down the rhythm of the Pipulate workflow
+
+You lost the flow. Time to re-establish. These things are taking you wayyyy
+longer than they should. I've got idea... I'm going to change my vim macro to
+only give the day in the timestamp... hahaha! Only the day is important to
+anyone who lacks the ability to see when the git commits occurred-- hahaha!
+Wow, I've become a tech asshole. You people have to watch me. I really don't
+want to become what I hate, those Green Arrows can eat my Blue Beetles. But not
+until after the work-and-hand is done. So far, we have...
+
+- Templates are for purple cows
+- Whipping docs get nuked for morbid
+- Copy from a Pipulating GSheets (create consistent compelling language here)
+- Copy from the Purple Cow farm.
+
+Now, you've got Whipping Doc with no more tabs than what you absolutely need...
+not quite true. One blank sheet may still be in there, which you can delete
+because you don't need anymore.
+
+Good language developing: "Oh yeah, that's a pipulating sheet. Don't reorganize
+those columns (or do) because that's pipulating live. It's a pipulating live
+pipulating sheet. Don't pipulate with me, I'll pipulate your pipulate.
+Recursion limit reached."
+
+Okay, recover state...
+
+- NOW ADD NEW TEMPLATE COLUMNS INTO LOCATION
+
+Ah, Newspace! A purple cow in the cow farm need not a column or row more than
+it need. It should indeed be pruned so you can click the copy-whole-spreadsheet
+magical place in all spreadsheet software. That is VERY GOOD. This is the sort
+of non-system system invention that Pipulate should be built from. Just know if
+you do these such-and-such obvious-in-hindsight things (trimming unnecessary
+rows and columns) everything will go more smoothly in your Pipulate workflow...
+something that is very worth getting worked-out just-so because of the
+effortless mastery things like fixed-position brings to them over time. Every
+fixed position where you can re-acquire home and recalibrate and regain state
+real quick is a treasure.
+
+Newsflash: Conditional formatting doesn't copy-paste even with "Paste special"
+between sheets. Consequently, there's definitely got to be a lot of
+right-clicking on tabs to "copy them into" other sheets. That seems to preserve
+it, but there's none of the required formatting in my Purple Cow Farm template
+tab, which I realized late in that project. And I fixed it in the Whipping Doc,
+but I have to copy it back from the Whipping Doc to the Purple Cow Farm... wow,
+this is going to work.
+
+Okay, confirmed. Copying sheets through GSheet's "Copy to" on the Tab's menu
+preserves the conditional formatting... pshwew! Purple cows can stay purple.
+Oh, always color-code a the tabs in The Purple Cow farm purple... color coding
+is going to be some powerful stuff in this non-system system.
+
+--------------------------------------------------------------------------------
+## Fri Mar
+
+Okay, when doing new work, the work-rhythm looks like this:
+
+Make sure the Purple Cow Farm has your template checked-in (so to speak).
+
+Nuke your whipping-doc for morbid. Know 2 things are about to be zapped into
+there. You are merging 2 source-documents:
+
+- Your live-deployed GSheet that's back-ended by "scheduled" pipulate.
+- Your template from the purple cow
+- Copy-to Recent from the "Tab" menu in GSheets is going to be a common thing.
+- Once a tab is copied that way, it gets renamed to "Copy of [Old sheet name]"
+
+--------------------------------------------------------------------------------
+## Fri Mar 16
 ### Blank The Whipping Doc for Morbid. It's the only way to be sure.
 
 Okay, now down to business... again. And this time for real. This is very
@@ -12,7 +81,8 @@ Speaking of speaking my mind. I know it's probably politically incorrect, but a
 WORK-IN-PROGRESS document is a whipping doc. It's got a very powerful concept
 there. You can blank the whipping doc. It is wise to blank the whipping doc, in
 fact because if you have a Purple Cow Farm with your format in it, All other
-instances than what's life will just muddle don't force a rhyme. vim out!
+instances than what's live in-scheduling will just muddle don't force a rhyme.
+vim out!
 
 --------------------------------------------------------------------------------
 ## Fri Mar 16 
