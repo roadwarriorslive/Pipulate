@@ -2,6 +2,64 @@
 --------------------------------------------------------------------------------
 ## Tue Mar 20 
 
+    let @j = '/Beginning of Journal^Mo^M^M^M^M^[kkkk80i-^[j! date^Mi## ^[^Mjzzi'
+
+...becomes:
+
+    let @j = '/Beginning of Journal^Mo^M^M^M^M^[kkkk80i-^[j! date^MwwwD0i##^[^Mjzzi'
+
+It's really that simple. Changed highly detailed timestamps from the Unix
+(Linux, of course) "date" command from highly detailed to just:
+
+    Tue Mar 20
+
+...with the addition of:
+
+    wwwD0
+
+...somewhere into a macro, which I keep in a .vimrc file, which I keep in a
+repo called vim in a public github repo so that I can pull it down from
+anywhere, get the idea?
+
+As an added bonus, if I leave my cursor at the top of the pipulate version of
+the journal, when I switch to it with a :bn (for buffer, next in vim-speak) I
+know just hitting the p for paste and then saving it, and then going back to
+the top of the document and hitting :bn again sort of "stages it" both to be
+published on the next inevitable commit and push of changes to the Pipulate
+project from this machine, but it's also staged for the very easy publishing of
+my next bit of stuff. No fancy system-building. Just one file in
+/usr/local/sbin so that every time I open a new terminal, I can just type:
+
+    j[Enter]
+
+...and have both journals loaded for easy permission-controlled publishing, yet
+all from just vim and git. No graphical OS really even required here. This is
+less than wristwatch-level power you're requiring here to host your
+journal/publishing system... for life. Just add Internet connection and common
+free stuff.
+
+--------------------------------------------------------------------------------
+## Tue Mar 20 11:06:48 DST 2018
+
+Okay, I have a lot to do today, but first it's time to eliminate accurate
+timestamps in my private journal macro. It's been attempted to be used against
+me even one little bit, so it's gone. But none of the actual benefits of the
+journal itself will be gone. Nope, rather my loud and very distinct inner voice
+is going to not be talked-over, and it's going to go, yup. Solution provided. I
+control the timestamps. I control the reality. Timestamps are only as accurate
+as the day's date. Morning, night, who knows? There's some sense of linear
+sequence, but I think out loud a lot on my lunchbreak and on the subway now
+with my Surface Book 2 laptop, where I can work anywhere quite well to be
+always-there, always-on and at my own expense for the best laptop in the world
+right now available-- although middle-of-the-line, because I'm not made of
+money. I just like my tools. And I think I need to assert myself from time to
+time to keep this situation and the opportunities here viable, and me free off
+all the signs of burn-out that have already set-in after just 2 years. Nope.
+Fix or leave. Fixing begun. Timestamps...
+
+--------------------------------------------------------------------------------
+## Tue Mar 20 
+
 Beginning of... oops can't type that or I'll mess up my Macro. Time to get
 a'crackin'. My mission today is this SQL Query thing to go back a year ago in
 revenue numbers... wow! I should of done that yesterday... or maybe even
