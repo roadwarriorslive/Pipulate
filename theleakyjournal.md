@@ -1,5 +1,126 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Tue Mar 20 
+
+Beginning of... oops can't type that or I'll mess up my Macro. Time to get
+a'crackin'. My mission today is this SQL Query thing to go back a year ago in
+revenue numbers... wow! I should of done that yesterday... or maybe even
+Friday, but wow. The office move, the new laptop freeing me to work anywhere,
+and all the settling in, which is... oh, let me tell you about it! But wow, can
+I do some cool samurai data moves on that thing now. I need a more full-time
+built-in WiFi, and I was hoping for... wait! I'm going to publish this. I know
+that. This is a critical part of the Datamaster journal-- calibrating one's
+tools for maximum effectiveness under all the conditions you're likely to find
+yourself in. For too long, I've used old Mabook Airs... 3 of them, to be
+precise, haha! I have 2 now still myself. Gotta set Adi up on one, but they're
+so old-school: no touch-screens and high-res artist's stylus. What's that you
+say? Neither do modern Macs? You've got to be kidding, that's got to be a
+joke... what? At least their Phablet has a Stylus so that Differently Thinking
+Artists can... what? No stylus, either? What happened? Does Apple still
+exist... oh, a consumer goods company yous say? Maximum profitability, sheep,
+Jobs is dead and all that? Okay, got it. Still wearing my Apple Watch and
+making the SE my wallet-phone. The NYC 212-NYB-1337 number is getting ported to
+the Note 8, because I needed a phone-number as cool as everything else in my
+life, now that my transplanted roots are really beginning to set in... here...
+in New York City, where I live with the best view of it right on the edge of
+Staten Island. I've finally gone UrbyLife.
+
+Okay, I still have a little publishing resistance because there are some
+annoying kung fu keyboard moves of loading another file on a different path
+into the second vim buffer. I can totally do it, but I'm fatigued just thinking
+about what that would take. 
+
+    The light! The light! 
+    The lite, the lite, the lite.
+    So, fight! So, fight! 
+    And fight and fight and fight.
+
+Even on this floor, there will be big-time mental distractions. The sound of
+your inside voice has to be as loud as the chatter, or else people won't
+realize their chatter is a part of your background noise while you're trying to
+work. That's okay. That's the cubicle deal. People type, and I'm using a very
+high quality keyboard, thank you very much. And I shouldn't HAVE TO try to
+drown it out with headphones blasting music into my head, and I'll damn-well
+talk about it as a focus and survival strategy for creatives in the cubicles of
+modern business, readily. It's a fine topic to discuss, especially at the very
+moment it's an issue, and you need something as your ohhhhm to regain center,
+and get back to some important work.
+
+Okay, there.
+
+Now where were we?
+
+Oh yes, make it so that publishing this will be nice and easy from here on out.
+And that means either a something.sh in your current directory (which you'll
+never be quite sure you're in) or putting it somewhere in your path, and
+chmod'ing it to have +x permissions (execution). So, this is your second step,
+because it is true, everything is a LITTLE BIT difficult. They used to joke
+about Unix that that was intentional to make an elite class of techs, and well
+yeah, sorta. It's called smart enough to appreciate inside jokes, and it's
+important in the Unix world, which WAS a priesthood even though its progenitors
+were badboys, because of the great commercial and proprietary potential of Unix
+to vendors like AT&T... and Novell... and SCO. Oops, proprietary was something
+special, was it? Not when it's the commodities, and basically free because it's
+only already-ripped-off data, because it's digital data. Blackbox copying has
+inconsequential cost, which is what Linux and RMS did. So...
+
+So, bash shortcuts in sbin. Sbin is a funny thing. It's supposed to be these
+tiny little one-off script files that you plan to use a lot, and they're still
+usually script or bash or shell files. They're all sort of the same since bash,
+the "Bourne-again shell", became so durn popular. It's got to be more than just
+the basic vanilla Unix "shell" with no command-line history or completion, so
+everyone at least uses the first mega-popular one that nothing else ever quite
+displaced. So, the language flavor of Unix scripting you should be using is
+bash, and they usually just have a .sh extension for shell.
+
+Okay, getting there might take a little while but the payoff is enormous. This
+entire seeing the sausage factory process of permanently improving my
+day-to-day workflow is being exposed here in the Pipulate repo for everyone to
+see... haha! But the world is different forever once achieved. Everything
+hinges on moments like these, such as the next time I want to publish like this
+won't be anywhere near as difficult.
+
+Keep my go/zd gnu screen session going that shows my every 10-minute heartbeat
+after the daily regimine of scripts stops running... or really is just paused
+waiting for later in the day when the speed-checks begin, so it gets a fair
+assessment of the speeds of different sites (can't run that during the night).
+But that report will probably be changing now that Google has an site speed
+check now for almost precisely the same scorecard type thing. So much I can gut
+and take a sawzaw to, and build newer better stuff to replace it... easily and
+more easily than maintaining the old stuff, and that's like one of the big
+points about having an employee like my. My stuff is only built to last for
+about a year until realities change. Lean into that. Allow scrap and rebuild to
+occur, but don't keep me playing little dutch boy and the dike. If a dam's
+going to bust if left unchecked and I've said so a lot, then I'm just going to
+let it bust. I'm not paid enough to keep old dams from busting AND building new
+ones. That's a losing proposition, so I've got a plan.
+
+That plan is sbin.
+
+Gotta always remind yourself of the location. 
+
+It's an odd incantation, but this is it:
+
+    echo $PATH
+
+9 times out of 10, it's going to be /usr/local/sbin and it's going to be the
+first thing in your path. Understand that, and you're going to understand a lot
+about Unix and Linux. The next step, I'm going to tell you to do in vim as your
+frustrating and fateful first encounter with the big green monster. Wanna be a
+badass tech always packing sharp quarrels in your quiver that'll really make
+'em shiver when they see the kind of tech who is really good as heck. Oh, I
+don't even need a .sh extension.
+
+    sudo vim /usr/local/sbin/j
+    :i
+    vim /home/journal/index.html /mnt/c/Users/whome/github/pipulate/theleakyjournal.md
+    [Esc]:wq
+    sudo chmod +x /usr/local/sbin/j
+
+Left out some details like how you should hit enter. Wave. Quit... tested! Wow!
+Now, go publish this shit.
+
+--------------------------------------------------------------------------------
 ## Fri Mar
 ### Getting down the rhythm of the Pipulate workflow
 
