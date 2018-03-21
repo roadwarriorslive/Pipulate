@@ -6,7 +6,7 @@ setup(
   download_url = 'https://github.com/miklevin/pipulate/archive/0.1.8.tar.gz',
   description = 'Simplifes Google Spreadsheet Automation',
   long_description='Simplifies Google OAuth2 login and Ties together GSpread and Pandas with a clea API for manipulating data in Google spreadsheets for SEO SERP tracking, dashboards, and other investigations.',
-  author = 'Mike Levin, SEO',
+  author = 'Mike Levin, HitTail Inventor & SEO in New York City',
   license='MIT',
   author_email = 'miklevin@gmail.com',
   url = 'https://github.com/miklevin/pipulate',
