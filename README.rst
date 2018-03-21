@@ -2,7 +2,7 @@
 pipulate v0.1.8 - Automate Google Sheets for SEO
 ===============
 
-:Author: `Mike Levin, HitTail Inventor & SEO in New York City<http://mikelev.in>`_
+:Author: `Mike Levin, HitTail Inventor & SEO in New York City <http://mikelev.in>`_
 
 There's a reason spreadsheets remain as popular as they do in the face of more
 capable databases and reporting systems. Spreadsheets are designed for humans—
