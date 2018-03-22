@@ -20,7 +20,14 @@ Pandas; the one data manipulation tool every SEO should right now be mastering.
 
 .. image:: pipulate-logo.svg
 
-Congratulations! You're about to learn to program Python (easily) for SEO.
+Congratulations! You're about to learn to program Python (easily) for SEO::
+
+    #  _____ _     _       _       ____  _             _       _       
+    # |_   _| |__ (_)___  (_)___  |  _ \(_)_ __  _   _| | __ _| |_ ___ 
+    #   | | | '_ \| / __| | / __| | |_) | | '_ \| | | | |/ _` | __/ _ \
+    #   | | | | | | \__ \ | \__ \ |  __/| | |_) | |_| | | (_| | ||  __/
+    #   |_| |_| |_|_|___/ |_|___/ |_|   |_| .__/ \__,_|_|\__,_|\__\___|
+    # There are many frameworks like it,  |_| but this one is mine. -- Mike L
 
 .. contents::
     :backlinks: none
