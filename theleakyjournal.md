@@ -1,5 +1,92 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Thu Mar 22 
+
+Joan. Pronounced Joe-ON. Remember it! This kind of shit is important, and you
+call yourself a wizard. No, actually I don't. I aspire to be a wizard. I
+partake of the wizardly arts and tools to do so, but I do not pretend 
+
+Marshalling. Always be marshalling your forces. This desk-and-office location
+both matters and doesn't matter routine is going to be hard to keep up if I
+don't make it true, pronto. There is a lot of slack cut around here for
+affectations, but I'm chock-full-o-affectations. I'm not sure if they're ready
+for another Matt Downs, whose light-symbol of excellence I keep as a talisman
+behind my abacus, which I keep around because you know, you never know.
+
+Ohhhh, this is going to be interesting. The Surface Book 2 is for journaling...
+personal journaling with timestamps and things. This is the way I type away
+like a madman and don't bother anyone. I just paid about $3,000 (after warranty
+and taxes) for a way to silence the one most objectively annoying affectation
+about me-- my love for high quality mechanical keyboards, of the preferrable
+buckling spring variety, but I like being reasonable and Cherry Brown will
+suffice. I'm on the dasKeyboard Silent Pro, which is anything but silent. They
+have renamed it since my purchase. Of course I'm publishing this. Labels are
+important, and the way I've expressed it here really gets to the point of
+everything.
+
+    Money's not really important to me
+    So, why not spend it
+    On a top of the line laptop
+    And get a lot more pleasure
+    Out of all the individual little
+    Now-moments that I'm trying to produce...
+    ...Well, right now.
+    In the Now.
+
+In reply to someone on Twitter about URLs with no hate.
+
+    While technically true and I do heart this
+    There's a critical point that you cannot miss
+    It's on the tip of my tongue... no need to send it
+    The bell was rung. It's our Dearest #Amendment.
+    by —Mike L
+    #NewPoems for a #NewAge
+
+On Martial Arts:
+
+    Marshalling is working
+    Though often looks like shirking
+    I'll tell you why it's not
+    Now listen up...
+
+Johnny Stay Focused
+
+    Let the real work begin...
+    What? Huh? Oh.
+    Yin emoters have no shield.
+    Ugh! Color your sound.
+    I need Apple.
+    iPhone dead.
+    Ugh.
+    I'm no music person
+    But those songs
+    That playlist
+    Apple's got me
+    Until I make my
+    Music cloud-mobile.
+    Johnny B. Goode.
+    He could filter out chatter
+    Just like ringing a bell.
+    
+
+I think I'm going to take on the persona of a critically insightful Statler
+Green Lantern, taunting the easily taunted with poetry that drops undeniable
+but painful truths around indiscriminately like Anvils. If you happen to get
+underneath one, sorry. Don't read what I write. It wasn't aimed specifically at
+you, and I warned you I was doing this here. So you know, South Park disclaimer
+and everything if you take any of this shit personally. I fling it freely and
+take quite a bit of it myself, secure in my knowledge that you're just
+British-emulating pompous asses and it quickly passes.
+
+All I'm doing here is really just talking freely into my personal journal
+anytime, anywhere. This is on my shiny new laptop that's like always on me now,
+and carried around all the time, so who knows when an entry really went in...
+so BAM free to publish the sanitized stuff. Wipe it off once and call it
+sanitized.
+
+I'm going to rock around the clock today.
+
+--------------------------------------------------------------------------------
 ## Wed Mar 21 
 
 Okay, I'm still going to "cut" journal entries, but now definitely it is to
