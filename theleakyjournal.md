@@ -1,5 +1,132 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Wed Mar 21 
+
+Okay, I'm still going to "cut" journal entries, but now definitely it is to
+label the posts. I have a macro @j set up to create a new journal entry. So...
+so, get that email to your boss out to let him know you're working from home
+and that all is well. Make sure all is well, and that on work VPN you can hit
+Redshift... running query. As soon as CSV's appear, my answer is a-ok! A-OK!
+Pshwew! Send email... done. Okay. Think EVERYTHING through.
+
+Don't feel like you're going to push everything here out to Pipulate's leaky
+journal. You're not. Write freely. Don't inhibit yourself. Strategize when and
+how you must. This is your safe place, which even if it leaks someday won't
+cause you too much grief, but in the meanwhile isn't going anywhere online
+that's supposed to be accessible to anyone. But like Github's secure.
+
+Okay, now that it's confirmed, let's do some serious shit here. Go back to HMA
+and start pulling down files locally you want to get off the Microsoft Cloud.
+That's gone on long enough. Consolidate on Google and make Microsoft 360, even
+at their $60 level, optional. Everything about Microsoft now should be optional
+except taking advantage of some killer hardware and a decent embedded Linux
+sub-system. Don't hold it against the hardware that what we call Windows 10 is
+up there in control. There's a word for that sort of stuff. It's called a
+driver. Windows is now a driver for Chrome (or Chromium if you prefer) browser
+and the Hyper.is Unix Shell terminal program built on Electron, which is a
+re-porpoising of Chrome components... so tight. Tite. All round.
+
+-------------------------------------------------------------------------------
+## Wed Mar 21 
+
+Well, here we go. A new work location, a new laptop, a new mission in life and
+view on the world, and definitely a new attitude.
+
+Installing HMA Pro! VPN (Hide My Ass) so that when I'm not on the office VPN, I
+can be here on my own at Urby, where the WiFi is open and the passwords are
+a'flying. I've got to talk to them about that. The proper way to do this is to
+have a secure WiFi network and freely advertise the password. With all this
+decoration around the place, they could use framed password art and it would
+still be more secure, because at least then the network traffic would be
+encoded. Same with the Subway. Sheesh, people! Just because your browser and
+most websites these days are using are using SSL security (thank goodness), not
+EVERYTHING is secured, like cookie data in the request headers, which just
+might carry a hijack-able token. People, don't use open WiFi without
+protections. Services like HideMyAss are only like $60/year and have so many
+local end-points these days, the slow-down of your surfing and even streaming
+is hardly noticeable.
+
+Wow, having color coding turned on in markdown really does make a nice little
+difference in the journaling process. Looking at even just a little bit of
+color adds some sort of emotional content. I get it. Don't know if I like the
+colors, but at least I'm being made aware I need to think about it. Also,
+without the wide-format 16x9 HDTV format of desktop monitors where side-by-side
+terminals are preferrable because you have plenty of horizontal space to work
+with, on a laptop like this I need to choose between 80-columns nearly filling
+up my whole screen (zooming-down occasionally for wide-format programming), or
+looking at tiny energy-sapping fonts all the time, reproducing the side-by-side
+80-column configuration I used when in "static mode" sitting at my desk.
+
+Oh, God, muscle memory is important. And no, I'm not using the Lord's name in
+vain here. Muscle memory is one of God's true gifts, and so denied to us in
+everyday tech. Okay, so HMA is done installing, and I quite the work-provided
+VPN and am trying my own. It connects. Using HMA Fast Mode, because who cares.
+This is not for anonymous surfing from anywhere in the world, though I'll talk
+plenty about that later. Rather, this is about just a minimum bit of protection
+against identity theft on public open networks shouldn't be such a thing,
+people COME ON! Okay, Google pushing all websites into end-to-end security
+helped, but hijacked cookie tokens and stuff. Use protection.
+
+--------------------------------------------------------------------------------
+## Tue Mar 20 
+
+Okay, that was interesting. Next? Okay, the big project for today. It's still
+about those revenue columns. Wow, that was a bigger project than I expected.
+Okay, hit home the going back a whole year thing. But definitely be cognizant
+of the fact that you now want to REGULARLY push out Pipulate and PrivateJournal
+commits together before you leave at the end of the day. There will ALWAYS be
+changes to pipulate now too.
+
+That's all about just sitting and looking at the existing SQL that makes the
+join and understanding how I would go about turning that into a filtered
+sub-set of that view, applying both:
+
+- The date-range filter (in several places and switching to dual-boundary)
+- The chained-up URL where condition that will have (ooo) issues.
+
+Wow, with this new datestamp situation, there's no longer to start a new
+journal entry. The whole idea of CUT! is gone. Just gone. And I think I may
+like it better this way. It takes off a lot of pressure. This is the test of
+whether... yep. The .vimrc change took. Good. It will be nice to have
+color-coding in my markdown file in vim now that it doesn't need to have a
+.html extension for my old... what was it? Strapdown.js, I think. It was a very
+good method for its day to push this out for every-day consumption where I
+could use what was it? Hotbox? To watch people read my journal from all over
+the world. Ah, those were the days. But alas, no. Now you read this shit
+through Github in the miklevin/Pipulate repo, or nowhere. Good luck, haha! I
+don't need no stinking voyeuristic JavaScript. There are more important
+Noosphere eggs to be frying. Let's get to one.
+
+I actually want to associate this challenging new in-Jupyter Notebook SQL work
+that I'm doing with my new laptop. My goal is to be able to go home tonight,
+and through both VPN and a repo-less way of transmitting simple sample code for
+Jupyter Notebook around, be doing this "revenue column" work. I'm basically
+joining tables from all over the place. But what's worse, I'm reaching for some
+really valuable data that has all sorts of challenges in reaching... hmmm,
+yummy and perfect! Okay, I've got this. No problem.
+
+Problem is, I'm changing floors at work and I generally do my best work... Ah,
+switched. I was going to say on a loud keyboard, but I couldn't bring myself to
+type it so loudly. When it's quiet here, switch to the laptop. 
+
+Wow, always having 2 journals loaded, now with the first named journal.md and
+the second named leakyjournal.md is a real kick, let me tell you. How such an
+obvious and uber-techie solution to pushing out sanitized private journal
+excerpts was so obvious and right under my nose for all this time makes one of
+the important points I want to make in this book (the book that this is going
+to be source data for) is that light touch solutions are almost always there.
+
+Light touch has got to be one of my catch phrases for all of this Alice in
+Wonderland tech analog book I'm making. Wow, things are falling together. Did
+you buy the wrong hardware or take up the wrong language years ago, and somehow
+feel committed to sticking with it, even though it's draining your soul? Well,
+good for you! Dynamic growth is scary, and isn't for everyone. Me? Let me keep
+bearing down on this Linux, Python, vim and git track. It's a good one.
+
+But portability of Jupyter Notebook like copy/paste locations that can be
+shared between machines... and maybe even...
+
+--------------------------------------------------------------------------------
 ## Tue Mar 20 
 
     let @j = '/Beginning of Journal^Mo^M^M^M^M^[kkkk80i-^[j! date^Mi## ^[^Mjzzi'
