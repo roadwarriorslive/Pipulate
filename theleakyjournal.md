@@ -2,6 +2,149 @@
 --------------------------------------------------------------------------------
 ## Thu Mar 22 
 
+Okay, that out of the way. Now let's look at the real work-items for the day.
+Be the data samurai you claim to be. The first few notes start:
+
+    Jupyter Notebook
+    Be deconstructionist.
+    Re-create zero in your mind.
+    When starting out, JN provides your zero.
+    But only because OS implementations of ~/ vary.
+    It sucks, but JN is your path to OS independence.
+
+Don't bother pushing this stuff out to Twitter into Lunder-Vand, which they
+don't even know yet is named that. Some day a "--Mike L" fan will discover this
+here and go "oh! Premium really un-published content which is also fodder for
+that book he's working on. And it's his even less filtered day-to-day thinking
+as he hashes through a problem.
+
+    When you get
+    Started for the day
+    You must reset zero point
+    And if you can, you can do
+    Most anything.
+
+My zero-coordinate is increasingly becoming Jupyter Notebook, and I'm going to
+have to advise that to my followers too. This is strange. It is not "a browser"
+and neither is it the ~/ "Home" conventional Unix/Linux location. It's
+something the Anaconda installation picks, and you have to rally about it.
+
+I'm still in the final throws of settling in. Soon...
+
+Most important thing now? 
+
+Gotta get that crazy query corralled and all argument supporting. Make your
+arguments to IT... not Boss. You've been challenged to rise to the occasion...
+so rise!
+
+The music is to fortify you against the background distractions. Shields up!
+But check your email and calendar first. Standard dumbass avoidance. It's also
+coming up on baking the donuts Friday. Get it out of the way Thursday. Don't
+feel the crunch.
+
+Don't think out loud too much, because you're going to publish. But it's safe
+to say I've got tables to know. You've always got tables to know. It sucks,
+but you always have tables to know. I can look in staging or live. Why not
+staging where I won't be blocking? Sure, why not? And even there, it's a view
+that you're dealign with and not a real table. It joins from 3 sources and is
+large and intimidating to a guy like me who was stabbed in the back and
+forsaken by SQL for it not having led me to sqllite years and years earlier,
+and instead spoilt my taste for it completely, because... pile driver! I don't
+need a pile driver. I need a hammer. If I wanted a pile driver, I'd have asked
+for one. What? Now I have to dba the pile driver? No thanks. Databases are NOT
+a welcome addition to your life in any way, whatsoever if you want to stay
+samurai mobile. If you're gonna get bogged down, get bogged down with data
+buckets of the sort of Amazon S3 or maybe MongoDB. Avoid tables. There's
+religion and career-commitment to a sub-sub-speciality there just to be Kung Fu
+effectiveness.
+
+Enter pandas. I have to get pandas into fingers.
+
+I'm switching my ACTUAL WORK over here to the new laptop to make myself
+portable. Put on the Light Show on my main monitor. There are many other light
+shows like it, but this one is mine. Show the heartbeat. Show the heart. Show
+the green. Show the mean. BE what you advocate. Rain it gently down on those
+around you. They'll be feeling it soon.
+
+Step #1. Ingratiate. Be your affectatious self, but respectfully. Use your
+laptop with the quiet keys when you can, but when you ARE working on the
+work-provided computer (it's nickname is staticlenovo). It's been put in my
+wide-screen multi-monitor configuration. And that means something OTHER THAN IT
+as the 3rd screen off to the left usually (but I can do right) so that I've got
+a 3-monitor system as spread out and taking-up of space as anyone around me,
+even on a tiny desk. 
+
+Remember, you've pretty much ALWAYS either got to be running the work-provided
+VPN or HMA Pro because you either need access to the firewalled Amazon services
+here at the office (or at home) over external networks like our guest wifi one
+here that everyone uses. So remember if my database connection stops working on
+my new machine, which I'm always walking around with, so it's all about running
+the VPN for work... and at home at Urby Staten Island where I'm always on the
+broadband down in the lobby. When I'm not cutting wires unlimited streaming
+2-phone family-line 50GB unthrottled/mo T-Mobile style, I'm leaching off the
+Urby wifi. Haha, can't wait for this journal to be discovered. Nobody's going
+to know what to make of it. My phone keeps cycling on and off. Keep an eye on
+it and make sure I've actually tested it.
+
+Relax. Go look at the SQL. Just look at it. Exercise
+
+Okay, I'm looking at the SQL. I'm not doing any relaxing... okay. Relax.
+
+Data MASTER. I'm not that yet. This is the trial by fire stuff.
+
+Get the barebones code that connects to Redshift. It's sitting in a file I'm
+using every day. And in principle, you're just stepping into an existing SQL
+statement changing a few things here and there. It's all just Python string
+manipulations. I'm going to take the power of Python string manipulation to an
+existing gobbledy
+
+	q = '''SELECT Top 10
+		blah,
+		blah, 
+		%s
+		lots
+		more
+		stuff
+		''' % 123
+
+Okay, that works. But this is not the sophisticated type of string formatting
+that I know is available these days. How does that go again? Google new python
+string formatting... ugh, the exhaustive version is
+https://www.python.org/dev/peps/pep-0498/ but the lite one is
+https://pyformat.info/
+
+Ooh, it looks like this:
+
+    '{} {}'.format('one', 'two')
+    '{1} {0}'.format('one', 'two')
+
+Sexy, sexy. So you can pop them off a list OR use a sort of RegEx
+back-referencing. Clever. That second one will definitely be it, because I'll
+be using the same date-range over and over. And I have to DEFINITELY watch my
+parenthesis. Incorrect order of operations would totally nuke this puppy, but I
+don't see that much parenthesis in this. Okay, test the new format:
+
+	q = '''SELECT Top 10
+		blah,
+		blah, 
+		{1}
+		lots
+		{0}
+		stuff {1}
+		'''.format('one', 'two')
+
+Okay, this is the marshalling. I'm going to have specific date ranges, which
+are actually already created. There is another SQL statement. I'm going to be
+looking for certain groupings where the URLs are found in a certain sub-set of
+URLs. I need to filter that sub-set of URLs based on a bunch of conditions.
+
+And now's when it gets real because I'm far enough along to work on the ACTUAL
+query. This is where the rubber hits the road and sanitization no longer
+possible in my notes. Peace out.
+
+--------------------------------------------------------------------------------
+## Thu Mar 22 
+
 Joan. Pronounced Joe-ON. Remember it! This kind of shit is important, and you
 call yourself a wizard. No, actually I don't. I aspire to be a wizard. I
 partake of the wizardly arts and tools to do so, but I do not pretend 
