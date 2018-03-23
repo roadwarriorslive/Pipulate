@@ -2,6 +2,56 @@
 --------------------------------------------------------------------------------
 ## Thu Mar 22 
 
+I was completely successful in my re-working of a view of a fixed daterange and
+no filter to one with a parameterized daterange and a set of 500 specifically
+matched rows. I did it by splicing into the view. There's other ways to think
+about it, but if you were soldering joints, these would be y-taps. I actually
+documented enough sanitized bits before it got all names of things and
+implementation details none of your business. 
+
+But it's always that way, isn't it? I've got one journal that I keep on the
+private side. If you don't support Github, you can use https://bitbucket.org/,
+the more commercially oriented Github. Reverse business plan. Private repo's
+free, but collaborative ones paid. So if you feel comfortable hanging around at
+more than Github go that way. Or infuse some great positive energy into the
+world by supporting Github at their $7/mo level. And frankly, if you stop
+paying them they don't take your private repos away. I'm sure it's a great PR
+thing. They have my loyalty for life. 
+
+Yay FOSS! Yay Linux! Yay Wikipedia! Yay Python! And Yay Anaconda and Jupyter
+Notebook people and the whole linage of people behind vim (back to the line
+editor). Anyhoo, a lot of stuff gets layered up, and I'm really digging living
+at those lower levels that Steve Jobs symbolically "made the enemy" with the
+Macintosh. User-unfriendly, one might say. One would be wrong. It's just a data
+samurai sword for those who know how to wield it. 
+
+And I spent A LOT of time learning how to wield vim, for which I am not for one
+moment sorry. First vim, then emacs or the other direction Sublime Atom Visual
+Whatever might float your boat. It's all cool, cause it's all vim emulation
+everywhere. 
+
+The only place I'm hard-wiring myself to vim would be in the loving gardening
+of my .vimrc file over the years to unleash all the proper light energies for
+the situation-- yet staying nearly default in all sane ways where you couldn't
+recreate the spirit of your .vimrc in any other environment in a sitting or
+two. So I think I'd be comfortable in nvim or neovim or maybe someday in emacs
+in evil mode. But there is SOME hard-wiring here. It's a hard wiring to a sort
+of text-navigation language... a LANGUAGE for editing text that leans into my
+whole muscle memory data samurai hypothesis. 
+
+I mean the vim bug has even bitten the hip Mac crowd. You should see some of
+these totally Matt and Trey vimmers getting all verklempt over plugins. Hey
+guys, real vimmers only edit their .vimrc's-- and not even all that much.
+Prepare for life after vim. Long live vim! If you don't take the pluge, you
+lack the sponge. Make the software portion of enabling you to express digitally
+get encoded into your DNA. It needs a free and open source license. Don't code
+anything you can't encode into your DNA license-free... that is if you really
+want you and your descendants to own it long term. Is this Dune? Are we at Dune
+already?
+
+--------------------------------------------------------------------------------
+## Thu Mar 22 
+
 Okay, that out of the way. Now let's look at the real work-items for the day.
 Be the data samurai you claim to be. The first few notes start:
 
