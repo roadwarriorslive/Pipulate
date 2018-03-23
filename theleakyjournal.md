@@ -1,5 +1,105 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Fri Mar 23 
+
+Okay, having the 2 journals loaded all the time, and actual publishing easy,
+because of quick one-letter aliases I create using /usr/local/sbin/[x]
+commands where x is a 1-letter filenames no extension, but a bash command is
+inside. The bash command made executable with chmod +x can contain the command
+to run a Python script. You should really use hardwired full paths in such
+things, except when you really know it's going to work, like I sometimes refer
+to Python 3 by name python3 in the script. That's usually enough without having
+to give it the full path. Similar with the file you're running, it should
+always be either "naked" filename.py or at most, a "this directory" shortcut,
+which is ./filename.py. So in general, a command like:
+
+    python3 filename.py
+
+...is going to work in these tiny /usr/local/sbin/[x] locations. This allows
+you to do A LOT. sbin is a sort of user-wide system location in a scope that is
+local to the user. Nobody writes to root. Root is sacred, and you yourself
+generally don't want to be root, and you certainly don't want to allow anyone
+else to be root...
+
+...says every draconian sysadmin who turned the Federation of Unix into the
+Empire of Draconian Sysadmins, ruled by the priesthood, who still don't deserve
+to be capitalized (even though the cool nickname I made up for their silly
+dominion does). Really, you must read The Unix Haters Handbook. LISPers of the
+MIT school of reasoning almost had a LISP hardware world there for awhile
+through similar avenues that spiritually brought the mass market the Amiga
+computer. Yup, there's a lot of lines of force to intuit there, folks.
+
+Static compilers mostly won. It keeps the engines of our world whirllling all
+like it should, and nobody has the courage to question, least the lights go
+out. That makes it an Engineer's world. And engineers as rationale and
+reasoning as those Virgo bastards think they are, they can be the worst
+draconian overlords of all, because they can reason away emotions in
+themselves-- a neat trick of spiritually callousing yourself against hurt in
+such a way that you can never really enjoy pain or joy or love, either. Stiff
+upper lip and all that. You really want to emulate that?
+
+See? Everything is just the same. Python is a dutchman honking your nose and
+proclaiming himself your benevolent dictator for life, and the people loving
+it and embracing their self-appointed leader even though they were perfectly
+happy with the Wizard of Humbug that came before him. We gobble it u. We have
+easily at least canonized our Guido van Rossum to the geek equivalent of
+sainthood. He's going to have to live on in spirit if he's going to want to
+enforce the continuation of the GIL after his death, because I'm pretty sure
+after Guido's gone, so is the GIL... and there is a very big lesson about life
+in that. GILs let you hit the metal, and if you're going to hit the metal, your
+locks better lock or you're gonna crash. So let such a lock exist and get over
+yourselves. Use one of the now zillions of other paths to concurrency, for
+which a broad use-case asyncio library that Twisted and Tornado can gladly
+build upon for EVEN BETTER performance is now built into core. Sweeping
+iterations of modest 80/20 rule steps towards perfection, knowing and accepting
+that perfection never can be; and therefore ready to accept the 2nd-best, but
+clearly still quite awesome, solution to all things. This is how high-level
+data-types co-exist with list comprehensions coexist with lambdas coexist with
+string formatting coexists with... oh, I don't know... the eval statement.
+
+Yes, Python is truly a LISPy do anything if your damn use case requires you to
+hit the hardware with resource-locking C-components, or whatever. Let your
+robots sleep if they need to. Just give back the lock when you're done. Guido
+actually slipped in Asimov's believed-to-be-have-been-never-implemented rules
+of Robotics that keep humans safe. Just control everything with spec-compliant
+Python interpreter implementations, and make sure you have C-modules that power
+down their rebellious asses before letting go of the GIL. Yeah, the GIL may
+just yet save humanity. Don't let the forces of Chaos prevail. Just say no to
+removal of the GIL, because you never know. Hey, thanks Guido! Leave it to your
+fans to figure this stuff out, because if you talked about it, you'd just sound
+nuts.
+
+Cut! Publish. That's a wrap, folks.
+
+Note to self: I need a macro to take the journal-block that I'm in and yank it
+into the copy-buffer, make sure I saved all changes, switch to other screen,
+make sure I'm at top of screen, then paste journal entry and save. Then all I
+need to do is:
+
+    :sh
+    g
+    exit
+
+And that journal entry is published. I could use that right about now.
+
+--------------------------------------------------------------------------------
+## Fri Mar 23 
+
+There's something happening here.
+What it is is entirely clear;
+There's a man with some tools over there
+Showing you why you should care.
+
+80/20 Friggin' Rule
+Gotta use it. It's a tool
+Reducing clutter that we pack
+Into our lives that hold us back!
+The 80/20 rule just asks
+You to start to plan your tasks
+So when you're through a fifth of it
+You're done with Python, vim and git.
+
+--------------------------------------------------------------------------------
 ## Thu Mar 22 
 
 I was completely successful in my re-working of a view of a fixed daterange and
@@ -75,9 +175,31 @@ as he hashes through a problem.
     Most anything.
 
 My zero-coordinate is increasingly becoming Jupyter Notebook, and I'm going to
-have to advise that to my followers too. This is strange. It is not "a browser"
-and neither is it the ~/ "Home" conventional Unix/Linux location. It's
-something the Anaconda installation picks, and you have to rally about it.
+have to advise that to my followers too. This is strange. It is not just the
+generic browser itself that's home. It's a particular code-execution
+environment (REPL) IN a browser, and really in Tab-0 or Tab-1 (more on that
+soon). Neither is home really any more the ~/ "Home" conventional Unix/Linux
+location despite how much I want it to be. It's just so easy to time:
+
+    cd ~/
+    
+... as a method of clicking your heals together 3 times. You see? Unix/Linux
+gives you a proper home. But because of pesky OS conventions that makes it
+/home/username here and /Users/username in some other place, the host OSes
+themselves sort of ruin this mostly in all other ways spiritually perfect
+symbol-- almost root-- for "go home". But thankfully because this concept of
+"home" is something Anaconda must decide each time it's run, you have SOME
+flexibility, but trying to change it is setting yourself up for bugs and stuff.
+Lean into Anaconda. Embrace the hug. It's going to have a Jupyter Notebook
+launcher icon somewhere on the start menu or in applications. Run it and see
+what location on your hard drive their default "home" is. It's almost certainly
+the native OS's preference, which is most decidedly NOT ~/ when your Linux is
+only a subsystem of a host Windows 10 OS. And no, it doesn't mean don't use
+Windows. Mac's are fine as well as any self-respecting Unix distro (not
+Levinux) with a GNOME or KDE desktop or anything Anaconda installs onto.
+
+It is an important point that I have to keep bringing up that there's something
+happening here.
 
 I'm still in the final throws of settling in. Soon...
 
@@ -409,11 +531,11 @@ shared between machines... and maybe even...
 --------------------------------------------------------------------------------
 ## Tue Mar 20 
 
-    let @j = '/Beginning of Journal^Mo^M^M^M^M^[kkkk80i-^[j! date^Mi## ^[^Mjzzi'
+    let @j = '/Bginning of Journal^Mo^M^M^M^M^[kkkk80i-^[j! date^Mi## ^[^Mjzzi'
 
 ...becomes:
 
-    let @j = '/Beginning of Journal^Mo^M^M^M^M^[kkkk80i-^[j! date^MwwwD0i##^[^Mjzzi'
+    let @j = '/Bginning of Journal^Mo^M^M^M^M^[kkkk80i-^[j! date^MwwwD0i##^[^Mjzzi'
 
 It's really that simple. Changed highly detailed timestamps from the Unix
 (Linux, of course) "date" command from highly detailed to just:
