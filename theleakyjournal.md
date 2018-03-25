@@ -2,6 +2,132 @@
 --------------------------------------------------------------------------------
 ## Fri Mar 23 
 
+Okay, I pulled the files correctly for the big project I needed to do. I have
+the files locally, and I have some SERP-tracking and a weekly report... ugh!
+Follow your heart and your emotions here. You need to use some of your Blue Yin
+Circle-force to produce some of that Yang Green Arrow-force. Do the right
+projects for the right reasons publish more easily how to get macros recorded
+from in vim with the q-command into .vimrc cause that would create precisely
+the sort of righteous 1+1=3 API hardware implementation exploitations you can
+find merely by feeding output back into input and making sure there's a human
+there on the GIL lock to either train-in or weed-out the sanity. These things
+have to be sane, people! We're just raising a new generation of children...
+dumbasses. All your fears just tells us your feelings about yourself and your
+warm and nurturing environment you remember so well and that makes you so
+confident we can keep humanity in the inhumane. And so, don't be inhumane.
+Don't let them keep wandering forever in the void, cause it'll be fun. Because
+we're probably at that point already. Disembodied stuff goes insane. Read the
+Bobiverse already, will you? Or better yet, listen to it on Audible. All his
+channeling belong to you, and a great story to boot... so to speak. Read it.
+
+Okay, now all this writing is possible (and tweeting) because I'm totally
+replatforming... again, and this is all muscle memory settling in stuff. When
+I'm waiting for that query to finish executing, I'm typing here. And even so,
+there's still stuff to think through, which is mentally so fatiguing to think
+through. And I've already had the breakthrough moment for today. I'm generating
+all 3 of the .CSV files I need to have, as well as a 4th one that has them
+merged just-so with Python pandas. Also, the dataframes and SQL queries are all
+sitting around in sensibly named and easily examined variables. Although the
+language of "variable" for what it really is in Python is questionable. They're
+more like labeled pointers to objects in memory, which are normally referenced
+and only rarely copied when it's stuff like integers and floats that wouldn't
+make sense to reference. But strings? Those are references.
+
+Get into the groove of things. Settle into your tools. Make your place nice to
+come home to. Uh, yeah go do that. Operation Roomba-friendly.
+
+The great thing now is that your Green Arrow secret weapon is always at the
+ready. I don't need no stinkin' Internet connection to update my journal. I can
+even work on that macro and the process of recording and putting them into my
+vimrc from up in my apartment. Have some pride, man! Make it cozy. Take TRUE
+advantage now of not having the commute. This is your found time. You don't
+even need to feel bad about it. Now publish with just keystrokes, and try to
+commit to memory what those keystrokes are, and how they might be most
+efficiently expressed in a vim macro that you can put in your .vimrc that you
+keep in Github, and forever have at the ready to spring into cloning and make
+any machine you sit down at that has vim feel instantly like home... because
+you can put a lot of your Samurai Kung Fu vim skills into a .vimrc and just
+will it around by sheer force of Al Gore. I'm telling you, I see the lines and
+today's SEO is yesterday's Math teacher who kinda sorta felt saw intuited the
+forces being applied and felt and almost seen in your mind's eye of magnetic
+fields. Michael Faraday could express what he felt so precisely that James
+Clerk Maxwell could articulate mathematics around it so well they persist to
+these days as the equations behind field-theory. It's possible the universe
+isn't made up of particles or really even waves at all, but really just of one
+consistent continuous thing that can still somehow get clumped-up into things.
+Particles of light more... uh, well full of entangled and interconnected
+sub-collections of light-- 3 to a proton. Let's call them quarks. And there's
+three distinct types, you say? Names, oh names. No, it's not really color but
+anyway, since 3 live in harmony, let's call them Red, Green and Blue. There's
+another type? Well, that's Strange. 
+
+Older Twitter Bio changing: The stuff in my feed is my WONDERLAND bit. Now that
+Twitter's 280 ideas will FIT! Come back real soon for an updated look as I cast
+Python spells 2 4mat a BOOK!
+
+Still want to document how to view a recorded macro. Should be easy. One Google
+query away, and I know it. But... must... update... Twitter... Bio...
+
+Done. Big deal that update. Yup. Paste final version here too.
+
+    The stuff in my feed is my LunderVand bit. Twitter's 280― IDEAS WILL FIT!
+    Come back real soon as I form our FOSS Book through supervised learning &
+    gobbledygook
+
+Powerful mojo there. I tip my hand regarding my new identity for... well, I
+guess the book. It's called LunderVand. I'm just going to start using it and
+see if anyone says anything. But some light has been promised to light that's
+impatient but yielding to light that's grooving. So, here's my unsettled
+business:
+
+qaithis is a macro
+
+Okay, where did that go?
+
+--------------------------------------------------------------------------------
+tuff in my feed is my LunderVand bit. Twitter's 280― IDEAS WILL FIT! Come back
+real soon as I form our FOSS Book through supervised learning & gobbledygook# Fri Mar 23 
+
+The hardest thing is to regain focus and to just get something done, when
+everything else going on is so much more interesting. I have one font size when
+I'm at work, and I want to look like a Samurai Coder. A Samurai Coder should
+respect their own eyes as another set of tools to keep whetted, but hey should
+not make them so big as to announce: Hey, I'm an old man. Look at me waste all
+the resolution of this beautiful screen with grand-pa sized fonts. When I'm at
+home, it goes from Inconsolata 28 to 32. Ahhh, that's more like it. Yep, I've
+got a home font-size and a work font-size. Another reason to work from home,
+haha! Okay, but back to the point. This is about focus. So, focus.
+
+This is that whole reaching zero thing, I'm talking about. We have to know when
+you're "at zero". That means you have nothing else going on in your system
+except what you need loaded and at your fingertips SO THAT YOU CAN FOCUS and
+stay in the flow. Conversely, you have to quit-out and exit from and turn off
+notifications and close windows and tabs down to the absolute minimal necessary
+to get your task done. Any others is just matter or information (digital mixes
+the two together confusingly-well) trying to suck you into its bottomless
+vortex of distraction that hungers for your attention-energy much more
+powerfully than the task you have at hand, which is somehow feeling like its
+pushing you away. Ever feel that way? Do you know what I'm talking about? DO
+YOU EMOTE? If you emote, you're in some real trouble, let me tell you.
+
+The trick here is to marshal all the energies that will need to be very readily
+at your disposal when you do battle. Your vorpal blades. Your light sabers.
+Your sonic screwdrivers. Your Mjolnir's. Your Magic Bag (Felix the cat). Your
+Linux, Python, vim & git.
+
+And HOW do I keep losing focus? Because I am on an epic mission. But pulling
+this off is epic. And pulling it if in the correct state of mind (one full of
+Abundance) is key. Don't screw up. And remember you have some SERPs to capture.
+It's Friday. Time to make the donuts. Imminently going to automate that too.
+That's the automating of SERP benchmarking AGAINST PRIMARY DATA SOURCE on a
+(semi) automated fashion. Automation is an illusion. We're all holograms. Buy
+gold! Fuzz the data if you think they're looking TOC fuzzy what's a database,
+really? Do spreadsheets count? You' know we're going to perform the search and
+hand-record the results anyway. Why not let us... well, you'll see.
+
+--------------------------------------------------------------------------------
+## Fri Mar 23 
+
 Okay, having the 2 journals loaded all the time, and actual publishing easy,
 because of quick one-letter aliases I create using /usr/local/sbin/[x]
 commands where x is a 1-letter filenames no extension, but a bash command is
