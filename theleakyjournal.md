@@ -1,5 +1,30 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Mon Mar 26 
+
+Okay, had a nice walk through the streets of Emerald City and drank in some
+light and captured some images. Recharged my battery, so to speak. Pouring
+spicy chicken udon noodle soup into me. Typing into my journal on my laptop
+figuring out my next key developmental pivotal fulcrum-point exercises... and
+I'm learning it starts with getting ONE new vim recording lifted from .viminfo
+and placed into .vimrc that's necessary to quiet my roaring subconscious. It's
+not letting me off the hook on this one. 1, 2, 3... 1?
+
+Practice the keystroke combination you want to record. In broad strokes, it is:
+
+From where my cursor is at...
+
+    [Esc]?---[Enter]
+    Shift+V
+    j/---[Enter]
+    ky
+    :b2[Enter]
+    gg[Enter]
+    p[Enter]
+    :w[Enter]
+    :b1
+
+--------------------------------------------------------------------------------
 ## Fri Mar 23 
 
 Okay, I pulled the files correctly for the big project I needed to do. I have
