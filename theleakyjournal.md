@@ -1,6 +1,65 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
 ## Mon Mar 26 
+### Getting Over Initial Inertial Hump (it's all in the head)
+
+Okay, I have my new macro on @p for publish. It mostly is what I thought it was
+going to be. Here's the finished product:
+
+    let @p = '?---Vj/---ky:b2ggpjo### '
+
+It's really 5 hyphens, but I'm showing it like this so it doesn't mess up the
+macro, just like I never spell bginning of journal correctly anywhere but...
+well, you know where. It's funny being able to write know knowing how easily
+I'm going to be able to push these out. 
+
+Make yourself accountable to YOURSELF on this. I'm going to have to drop HMA
+VPN pretty soon and go to PulseSecure. So be it. I'm getting in good habits
+running one or the other, but here at the office, i shouldn't artificially
+inhibit myself by running the wrong one. 1, 2. 3... pause syncing... okay,
+paused. Switch VPN. Okay, done. Confirm that you can generate... NO! I KNOW the
+SQL query works. This is evasion of the real issue at-hand. It's time to
+connect it into the template... the thing I'm avoiding because of how
+potentially difficult and ugly it is. But don't think of it that way. Think of
+it CORRECTLY so you can get through the work. 1, 2, 3... 1?
+
+This is completely a mental thing. Don't let the OLD DIFFICULTY of such tasks
+stymie like you. This is exactly the Luke Skywalker lifting the X-Wing fighter
+out of the Dagobah swamp. I'm marshalling my forces. Ugh! Okay... okay... I'm
+thinking I want the Pipulate readme as :b3... why not? In for a penny, in for a
+pound? Now that I'm doing this journaling thing, it's really 3 levels of
+sieving that I want to portray reaching the public. Some things from my private
+journal may reach the leaky journal (in PIpulate), and from there an occasional
+nugget will be further refined into README.rst gold. There's too much rambling
+over there now, and not enough focus. Okay, get it in /usr/local/sbin/j (and
+g). Ugh, tried it and wild goose chase. 2 files simultaneously loaded all the
+time is natural. 3 is a crowd. Shoot. Okay, good idea, but focus correctly now.
+Enough marshalling. You've marshalled. Now DO IT. 1, 2, 3... 1?
+
+COPYING! I need an easy way to copy existing worksheets. Do my changes on a
+shadow-sheet... WOW! Now THERE'S a nickname. A shadow sheet. Everything that
+has some serious experimentation and idea-churn going on should have a
+shadow-sheet. That can be applied across the board and provides a nice margin
+of error or buffer zone or however you want to think about it.
+
+Ugh, this is difficult because I'm making the big systemic decisions. I'm going
+to have to live with these things for maybe years, and its stressing me out. I
+want to do it right, but I also want to deliver to boss ASAP. Ugh, okay, go
+think through what the conventional process should look and feel like for this
+sort of thing.
+
+    We've got a house of sticks.
+    Create a house-of-stick copier.
+    Add necessary extra (empty) columns to original.
+    Ensure old report still works with new (empty) columns.
+    Copy house-of-sticks
+    Modify house-of-of-sticks
+    Fill previously empty columns on original.
+    Share out THAT link optionally
+    Copy data from copy to original
+
+--------------------------------------------------------------------------------
+## Mon Mar 26 
 
 Okay, had a nice walk through the streets of Emerald City and drank in some
 light and captured some images. Recharged my battery, so to speak. Pouring
@@ -23,6 +82,26 @@ From where my cursor is at...
     p[Enter]
     :w[Enter]
     :b1
+
+    :badd ~/.viminfo
+
+--------------------------------------------------------------------------------
+## Mon Mar 26 
+
+It's very interesting. I'm ALWAYS going to get far ahead with this out-loud
+internal voice journaling than I'll ever be with actually pushing stuff out
+through the leaky journal, which is exactly a huge part of the point.
+
+Today? The BIG Pipulate trick today... big pipulate trick on an old report.
+This is the non-intrusive post-patching procedure. This is not the brick house
+I'm promising the boss yet. This is the stick house with another retro-fit. But
+absorb and internalize that fact.
+
+Make brick houses just materialize into existence. It's got to be just no big
+deal (and it's not). Also, get this feedback loop of recorded macros ACTUALLY
+JUST BEING VISIBLE (and copy/paste-ready) in the .viminfo file. Using the
+technique of carefully capturing a macro and then copypasting it over to .vimrc
+and refining it.... That's Amiga Kung Fu right there. Thank God.
 
 --------------------------------------------------------------------------------
 ## Fri Mar 23 
@@ -102,16 +181,10 @@ Done. Big deal that update. Yup. Paste final version here too.
 Powerful mojo there. I tip my hand regarding my new identity for... well, I
 guess the book. It's called LunderVand. I'm just going to start using it and
 see if anyone says anything. But some light has been promised to light that's
-impatient but yielding to light that's grooving. So, here's my unsettled
-business:
-
-qaithis is a macro
-
-Okay, where did that go?
+impatient but yielding to light that's grooving.
 
 --------------------------------------------------------------------------------
-tuff in my feed is my LunderVand bit. Twitter's 280― IDEAS WILL FIT! Come back
-real soon as I form our FOSS Book through supervised learning & gobbledygook# Fri Mar 23 
+# Fri Mar 23 
 
 The hardest thing is to regain focus and to just get something done, when
 everything else going on is so much more interesting. I have one font size when
@@ -151,7 +224,7 @@ really? Do spreadsheets count? You' know we're going to perform the search and
 hand-record the results anyway. Why not let us... well, you'll see.
 
 --------------------------------------------------------------------------------
-## Fri Mar 23 
+## fri mar 23 
 
 Okay, having the 2 journals loaded all the time, and actual publishing easy,
 because of quick one-letter aliases I create using /usr/local/sbin/[x]
