@@ -1,5 +1,133 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Tue Mar 27 2018
+
+### Home, Hearth & HAL
+
+Almost can't believe how easy this is becoming. It's true that if you just put
+the mouse and pointer aside for like a year or 2, you can build a sort of
+muscle memory that works across all operating systems... so long as it's
+Unix/Linux, haha! So the punch-line in the entire world of technology is that
+the superior technology lost, and no it's not the Amiga. It's LISP hardware of
+the sort that reigned supreme while PC didn't mean politically correct or
+Intel. Actually, they called them Workstations back then, and they were
+Symbolics, and to varying degrees, CGI and Apollo-- the computers which Amiga
+users envied (NOT IBM-compatibles). Those all died along with Amiga, because
+economies of scale. It's not the complex instruction set (CISC, Intel) that
+won. It's Intel's self-admittedly paranoid Tic-Toc production-cycle ensuring
+the continuation of good ol' static-Moore's Law. Moore's Law says more of the
+same. Yawwwwn!
+
+The interesting stuff is everything BUT Moore's Law. OF COURSE what we have
+today is going to become smaller and cheaper, meaning you're always going to
+get more for your money-- for as long as diminishing returns can be kept from
+setting in. And with all that 3D circuit-stacking to go, I imagine we haven't
+really even begun to tap the potential of linear scaling. Just cube it. Heat?
+No problem! We'll use it to cook something. Central heating can come back.
+Home, hearth and HAL.
+
+--------------------------------------------------------------------------------
+## Tue Mar 27 2018
+
+### I'm a search engine lover, not an optimizer.
+
+The power of putter. Having Carroll on my laptop puttering around with
+/usr/local/sbin files is going to be... well, meta-productive. Certain things
+are not only productive in themselves, but also lead to more productivity.
+Productivity is the result of love. People who LOVE what they're doing are
+productive. I'm not optimizing, because optimization implies some best-achieved
+static state, and that ship has sailed. Sure, something like the PageRank
+algorithm will be there for awhile, and family jewels don't change so quickly.
+But they do change. It went from Apple II to Mac and from Mainframes to...
+well, I don't even know what IBM does anymore. But they survive. And we all
+survive as intelligent, resilient and robust organisms by seeing what's going
+on, trying new things and adapting. And if you do it well... well, then you're
+productive. And if you're being productive, again, it's not because you're an
+optimizer. It's because you're a LOVER of what you do.
+
+--------------------------------------------------------------------------------
+## Mon Mar 26 2018
+### Getting over the gom jabber
+
+I put the year back in my timestamp, haha! Okay, this is actually a lot of fun.
+Now I just got to get through the (formidable) work. Take one more walk-break,
+then come back and tackle this big-time.
+
+Okay, that was a good head clearing. This is the gom jabbar step. Stick your
+hand in the box. There will be pain, but it will not be real and you will get
+over it precisely because you are human and you understand what you are facing. 
+
+Let's do this.
+
+To cast away fear is to copy.
+
+For someone before you, even if that someone was you, has done the work for you
+and all you need do... is... copy. I know a lot of you like that, and so be it.
+You hear them criticised by say Raymond Hettinger as the PEP-8 hobgoblins too
+much consistency something something small minds. But when you yourself find
+you don't want to take a plunge off the deep end and maybe drown, it's always a
+good idea to give yourself an easy undo and always-available get out of jail
+free card.
+
+Yeah, I'm getting it. It's isolating the nuance were you (I) get hung up and
+make a big deal out of nicknaming and escalating that hang-up so I can show off
+how it's a solved-problem. Here's how it's solved for our immediate problems
+today, and here's why we're on the right path to an even better solution
+tomorrow. And with each subsequent iteration, we get forever more refined,
+shedding (yet still often archiving) yesterday's now-gangrenous deadwood. The
+beast of today should always be the most mightiest of all possible beasts,
+unburdened by the beasts of yesterday, but still able to recall them all and
+invoke them at will. Dune. Ben 10. Yadda yadda Yoda.
+
+Gotta make the rubber hit the road-a. And for that... a strong nickname.
+
+We're ready to modify a report big-time. It's time to work on a clone-copy.
+Yeah... clone copy is a powerful magic nickname. Don't worry, I made a
+clone-copy. First we clone-copy. Okay, so let me clone-copy.
+
+Clone-copy'ing is going to be one of the pipulate generalizations.
+
+Hmmm. I think I'll be going up to 0.1.9. And then I won't have any choice to go
+to version 0.2 soon. And this will be the first PyPI version I'll be pushing
+from my new laptop. I'll probably go through the twine thing AGAIN here. Wow,
+so much to cover in a competent covering of the must-knows of Linux, Python,
+vim and git, and I'm only just getting through of a few of them myself, like
+publishing in PyPI.
+
+And that's what I'm really up to now. Getting back into Pipulate development,
+which really is a different kind of work than I've been doing in Jupyter
+Notebook for awhile to get this tricky query correct. Now that it's correct, I
+need to use it like a function freely here and there. But what's more, I want
+to use it freely THERE where THERE is a copy of HERE. And so my next step is to
+add to Pipulate a generic ability to move "here" to "there"... unless it's SO
+easy directly in GSpread that it doesn't need any new API language invented
+around it, which actually is always preferable, unless it's not easy to
+remember or retype.
+
+Okay, getting over this mental hump. You are your own coach. Eliminate your
+muscle memory's mechanical meat from having to thing. It doesn't know what to
+do. Your thinking, creative, machete-your-way-through-it lambasting anything
+that tries to stop you mind in charge. Yup.
+
+Principles are required.
+
+First principle is that your live-deployed version that everyone is actually
+looking at every day is your own true master copy. Don't have templates in
+addition to that. You will lose them. They do not matter. This means, if there
+is work in progress with new columns in the works, then new "phantom" columns
+will be appearing in the live template. We will be copying from there lots and
+lots to be sure we're using the latest data in the course of development. So
+put the place-holder columns in location. 
+
+Ugh, I don't know about this first principle stuff. Just slosh your way through
+it and see how you did it. NO! That's wrong. That's how you get into these
+messes. Do it meticulously. Add columns to live document. Create shadow
+document where you MANUALLY copy in the tabs that need revision. Work on that
+new location. Once it looks correct, you can do a Pipulate Swap-a-Roo. THAT is
+an important concept. As long as the dataframes are the same shape... so having
+a scratch location... wow! I think I got it.
+
+--------------------------------------------------------------------------------
 ## Mon Mar 26 
 ### Getting Over Initial Inertial Hump (it's all in the head)
 
