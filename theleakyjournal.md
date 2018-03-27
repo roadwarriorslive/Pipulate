@@ -1,5 +1,54 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Tue Mar 27, 2018
+
+### All My Amiga Muscle Memory is Returning to Me
+
+And I updated my macro to put the comma between the day and the year. Wow, this
+is going to wreak havoc on whatever date parsers I make in the future to make
+sense of all my journal data. Or maybe it will be beyond all that by that time,
+and a digital archivist AI will come in and be thankful that it is as well
+structured as it is. But probably not. It'll probably be me.
+
+Anyhoo, all my old Amiga muscle memory is definitely kicking back in. Oh, how
+my fingers have missed something worth memorizing. Thank goodness. Working
+towards mastering something that is really worth mastering is food for teh
+soul. It's been enough years. I couldn't be stuck in the past with the Amiga,
+and I had to forge forward, so I did it on every platform but the right ones.
+But the right ones never existed. 
+
+And even today, it's a cobbled together hodgepodge-- one Hail Mary play to save
+us from the AT&T/GE-overlord dystopian Multics (called Unix) and another Hail
+Mary to save us from the new vendor-appointed priesthood of Unix (Linux), and a
+third Hail Mary to gently disarm every over-built fortified complex system by
+gently wrapping it in the least-offending Python API-wrapper. Master Python.
+Use anything, because everything's wrapped to use.
+
+So it's Linux, Python, vim and git. These are the 4 pillars of my Noah's Arc
+platform. It's not everything you REALLY need, but it is everything you REALLY
+need. There's even plenty of database layers in there, including sqlite3 built
+into Python. But I'm not going there now. Got to stay focused. Even though
+there's these 4 pillars, other tools (beyond GNU commands) often do factor in
+like Jupyter Notebook and the browser. Still, it's a good time for muscle
+memory... FINALLY!
+
+So... the gom jabbar test... get over it... get through it... this is your
+test. I'm going to publish this shit because the world has to see how an
+emoting artistic type gets through mind-numbingly dull "been there, done that,
+so over it" sort of work that stands between here and the promised land. It's
+difficult, because there are all sorts of mental obstacles to overcome along
+with a few physical ones. So, let's get started.
+
+I'm going to push this journal entry out now just to prove to myself that I
+can. But before I do, I want to recite to myself my spell options as they exist
+right now. My sbin commands are:
+
+1. j - load private & pipulate journals in vim (once per work-session)
+2. p - git pull journal, pipulate & vim (1st thing when switching machines)
+3. g - git commit journal, pipulate & vim (a few times per day)
+4. go - log into the EC2 instance
+
+--------------------------------------------------------------------------------
 ## Tue Mar 27 2018
 
 ### Home, Hearth & HAL
