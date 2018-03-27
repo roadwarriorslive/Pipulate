@@ -1,7 +1,44 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
 ## Tue Mar 27, 2018
+### Patch Houses of Sticks until Rebuilding with Bricks
 
+Okay, now that I can easily refine my vim macros through my .vimrc and push out
+my thinking though the leaky journal... well, it's a different world. I'm sorta
+bootstrapping myself back to being AT LEAST as capable as I was on Amiga
+hardware during the those days. I'm creating what will become the new days of
+rosy reminiscence, when I clearly defined Linux, Python, vim and git as my sort
+of Noah's Ark (I always spell it Arc). Cygnus Editor is now vim. It was vim
+back then, and I just didn't realize it when that Fred Fish disk passed through
+my fingers. I think I loaded it once. I respected what Unix was, but I didn't
+see how it was going to play such a major role in my future.
+
+Okay, now it's time to take those Samurai sword swipes. That's the reason it's
+Samurai and not just Kung Fu. You do even MORE marshalling for even FEWER
+seconds of actual force applied. But you are going to work your way through it
+in a forceful 1, 2, 3 way. Limited window. Make this count. Right frame of
+mind... oh shit! Music. One more excuse to run out for a minute. But then...
+definitely then. What to think about on your walk:
+
+- Setting up a Tab with extra columns.
+- Testing the OLD report still runs.
+- Copying that tab to a Shadow Sheet.
+- Defining 1st data-row in shadow sheet (preserves formatting)
+- Blanking everything below 1st data row.
+    - 1st data row is a strong nickname. 
+    - Separate words, but still powerful. Use it.
+- Do pandas work
+- Update Shadow Sheet
+- Optionally update original sheet (when ready to go-live)
+
+Do the work in vim & on the remote server. No reason to tie it to Jupyter
+Notebook anymore. This is going to be scheduled very shortly. It is very much a
+patch approach. Not great, but we patch houses of sticks until we can rebuild
+them with bricks.
+
+
+--------------------------------------------------------------------------------
+## Tue Mar 27, 2018
 ### All My Amiga Muscle Memory is Returning to Me
 
 And I updated my macro to put the comma between the day and the year. Wow, this
@@ -50,7 +87,6 @@ right now. My sbin commands are:
 
 --------------------------------------------------------------------------------
 ## Tue Mar 27 2018
-
 ### Home, Hearth & HAL
 
 Almost can't believe how easy this is becoming. It's true that if you just put
@@ -77,7 +113,6 @@ Home, hearth and HAL.
 
 --------------------------------------------------------------------------------
 ## Tue Mar 27 2018
-
 ### I'm a search engine lover, not an optimizer.
 
 The power of putter. Having Carroll on my laptop puttering around with
