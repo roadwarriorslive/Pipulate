@@ -1,5 +1,45 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Thu Mar 29, 2018
+### Amiga's Soul Recombining From the Cruxes of Commodore
+
+Having a center... or a focus is really just so important. I've fundamentally
+lacked an "external" center for 15 or 30 years now. I think my first true
+center focus was Deluxe Paint II on the Commodore Amiga 1000-- the first (and
+maybe only) AWESOME computer I owned. I still have it's plastic top, dremeled
+down to appropriate wall-hanging awesomeness. So what about the silicon? It's
+gone. I'm not going to ever get it running again, and it's not the matter that
+REALLY mattered, anyway. It was a sort of poison matter that fills-up and boggs
+down our lives. Just as I've been through purging after purging after purging,
+my "best friend" from over the decades is just going into a phase of live I'm
+just coming out of. I had great success, because I had Adi. Adi is something
+different. I know every parent feels that, but I'm "all-in" to make that so--
+but the pitfall-- the thing I have to watch-for more than anything, is to not
+SPOIL her. My last 12-or-so years (since my move to NYC) has been an exercise
+in regaining focus and center-enough to be productive professionally-- while
+all my very precious outside-work "centers" got ferociously torn away from me,
+in a whirlwind tour of a chapter of my life I had to have because I dearly love
+Adi and find purpose in life through her, but which truly tested my mettle.
+I've come out saner, stronger, and super. It's time to show the world a little
+of my super-- a little nerd kid from Philly who used to drive a and-refurbished
+1971 Mustang Convertible Boss design with a 351 Cleveland stock racecar engine.
+That was the hardware I was in love with at around 15 years old. Then I
+discovered the Amiga, and it became that hot MontCo Amiga 1000 that I spent
+$300 to fix the disk drive on, loaded a pirated copy of Deluxe Paint onto, and
+nothing has ever been the same. Science, math, physics, engineering-- all that
+stuff EXISTS to let you express yourself USING HARDWARE LIKE THIS. It will be
+interesting if I can ever recover my art from those days. I have a few
+printouts of my Amiga 1000 Deluxe Paint 2 moused art. But that turned out to be
+a siren's song; an illusion. What really was happening was a bubble-in-time
+space anomaly to occur to tip the future's hand to hardcore tea-leaf-readers
+like me who read a lot in the tea-leaves of the Amiga. All the good parts has
+been broken up spiritually and spread througout the universe in the form of 5
+rings... no wait, I mean in the form of a bunch of individually really good
+ideas that got implemented here-and-there, often times even exceeding the
+Amiga's divinely inspired #Exspecsifictations. Cut! Publish that. Undertones of
+Voldemort Cruxes. Very nice.
+
+--------------------------------------------------------------------------------
 ## Tue Mar 27, 2018
 ### Patch Houses of Sticks until Rebuilding with Bricks
 
