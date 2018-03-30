@@ -1,6 +1,78 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
 ## Thu Mar 29, 2018
+### Balancing To-Do Items With Motivational Thinking
+
+And ANOTHER journal-cut. I can do this as many times (or as few) throughout the
+day as I like. The data being preserved diligently and consistently is the
+ORDER in which things happened on that day, but not the precise time of day. I
+believe that only shows on the file's "last modified" property, which I'll have
+to think about. When I save is a thing. I can use "touch" in my "g" file...
+brilliant! Okay, done and tested. It'll be active the next time I use the g
+command, so be extra sure it means good morning.
+
+Okay, I made my noon deadline... barely. But that's okay. Now, think about
+automation. Also think about the parts of these types of projects you've always
+gotten wrong in the past and fix it. I need to start maybe doing illustrations
+or ASCII art of what I'm doing. This IS Pipulate, by the way.
+
+                                 	  _________________
+    The 80/20 Friggin' Rule      	 /  __________    //\                    _____________ 
+    Gotta use it, it's a tool    	|  (__________)  ||.'`------------------/----------- /
+    Reducing clutter that we pack	|    __________  ||`',================== __________ /
+    Into our lives to hold us back.  \__(__________)__\\/                   \__________/
+
+
+# The Pipulate and Levinux Experience
+- It's different for everyone, but it may go something like this.
+- Just knowing you should be able to do the sort of stuff you want to do easily
+  by now-- almost as if breathing, eating and sleeping. We should be coding.
+- Investigating what's out there, and becoming utterly confused.
+- Discovering the belief that some underlying tech must have "won".
+- The realization that it has. It's called Unix. But Linux will suffice.
+- The crestfallen disappointment realizing that Unix means C, and most paths
+  lead to C++ and utter confusion.
+- Backing off and asking hasn't someone fixed this? Answer: Yes! It's called
+  Java! Try Java. I hated C++. I virtually hate Java just as much.
+- Try other things. Isn't JavaScript the one true language to rule them all now
+  that the browser exclusively uses it? Uh yeah, do you code in PostScript too?
+- At some point the whole Turing Complete, so might as well use the tool that
+  suits you and your realities best settles in. It's nice to use nice tools.
+- Some end up back in proprietary-land. You do see some sharpies there.
+- But many find their way to Python, the one true language to rule them all.
+- Python rules them all by virtue of wrapping them all. Python for all things!
+
+--------------------------------------------------------------------------------
+## Thu Mar 29, 2018
+### /usr/local/sbin/g stands for Good Morning Everyone!
+
+Wow, it's so liberating to just create new journal entries, publish
+sub-sections, but it's all cached up in local files until I commit and push
+with git to github, which is my "g" command in sbin. I don't have to do that
+until the right moment strikes me. Maybe at the end of a lunch break period...
+or maybe only before I GET STARTED working each morning, so yesterday's things
+don't get pushed until tomorrow. Not a bad time-delay convention, and I think
+I'll take that up. "g" stands for good morning everyone!
+
+--------------------------------------------------------------------------------
+## Thu Mar 29, 2018
+### Don't Gift S3 White Elephants Nobody Will Want to Purge
+
+Okay, I'm wandering again. But I've got this under control. Just tidy up the
+template WHILE PEOPLE WATCH! Also update the data. That's done by deleting the
+"blocking" csv files. I'm going to have to do something about that during
+automation. That safety-net archival system would be nice, but that's STILL a
+rabbit-hole project. The 80/20-rule solution is rolling log-file style cache
+files. Keep maybe the last 2 month's worth in case MoM trending questions come
+up, but definitely not longer than that. I intuit the power of MoM because its
+based off of caches that can still recently be in local systems, and thus are
+easier to report on from those local nodes than some overbuilt s3 mess that you
+pay for the privilege of white elephant-ing forever. I know it's low, but still
+those data buckets have some cost, so it's best to design apps to work
+independently with a rolling 2-month daily cache (local storage allowing).
+
+--------------------------------------------------------------------------------
+## Thu Mar 29, 2018
 ### Amiga's Soul Recombining From the Cruxes of Commodore
 
 Having a center... or a focus is really just so important. I've fundamentally
