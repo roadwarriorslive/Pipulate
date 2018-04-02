@@ -1,5 +1,72 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Mon Apr  2, 2018
+### The Way of Pipulate, Inspirational Poem
+
+    Pardon me while I pontificate on what it is to Pipulate;
+    To Pipulate is to populate where prior was just template.
+    The template is a live report, most generally quite critical
+    That lives inside a Google Sheet for insights, analytical
+    Quite easy for the eyeballs that it's meant for to dissect it
+    While lacking double-verify, most bad-guys get deflected!
+    Though it's not Tableau or Studio, it is a rather free-win
+    When you know the strengths of APIs, you start to lean-in
+    Deflecting itches to keep caches no good'll ever come from
+    Spending just a little cash instead of time, you dumb-dumb.
+    Nothing's there but Google Sheets or buckets for the trending
+    And only if the thing you're doing's sure to need amending.
+    Otherwise, you purge surprises which'll always let us
+    Optimize our jobs to size and fit 'em like they're Tetris!
+
+------------------------------------------------------------------------------
+## Mon Apr  2, 2018
+### How Different can APIs be? Think Legos & Stickers
+
+If you want a lesson in API's, think Legos vs. stickers. How do they work?
+Aren't they really just the same thing? No? Oh, why not? Get into the details?
+They're both just sticking things together, right? Identical objects, and
+that's all you need to know. Sure, their APIs are a little different, but those
+are just the implementation-details only the children playing with the
+different toys need to think about. We parents have done our job by giving our
+children a toy where things stick together... check! How much can we bill the
+client new for those lines of Java we just produced? $10K for 2 weeks work?
+Great! This is a nice lifestyle-generating resource hogging loophole we've
+created. Now we must DEFEND! Lego-brand, DISNEY-ITIZE! Successful. Lego is now
+to toy-franchises profit-wise what Apple is to the mobile industry. Sure, other
+products may exist in that category, but there's no single other product that
+so many people want that will be assured a certain product-upgrade cycle
+momentum that will let you coast into mediocrity so slowly no one will notice
+until everyone you can blame is dead. Jump-ship, pull a diaspora, and a
+thousand points of seeds will blossom of light blah blah diversity basic
+story-arc of Dune. It's all about subtleties of the APIs-- especially as it
+pertains to the process of learning.
+
+--------------------------------------------------------------------------------
+## Fri Mar 30, 2018
+### Building and Building a Bonfire No Imminent Need to Ignite
+
+Well, admittedly it is several hours later on Friday, and this is a blessed and
+holy day off for me, with Adi not here. OMG! And I put all the work into
+setting up the Fortress of Adi-tude and Mikekopolis already. I have some
+laundry to do, and still want to do a little shopping for cat and food and
+Passover essentials. Haha! Who's going to be open who has... oh, any grocery
+store. I just need Matzoh here, not that much. And Granny's going to load me up
+with stuff before I leave with Adi tonight on pick-up. I'm going to try to
+arrive as late to that thing as possible. Maybe I'll get a storage facility
+stop in. That's the general neighborhood I want to be in for CostCo. Oh, the
+crowds! Think about Trader Joe's. Now, with my Jeep Wrangler and easy parking
+on both sides plus the little red wagon, I may be a Trader Joe's guy. Yeah,
+I'm a Trader Joe's guy... f-CostCo! Oh, I still need that small bookshelf...
+hmmm. No, hold out for GOOD matter. Have something in mind, and not just
+factory junk. Imprint on Adi. Every move is important right now. Be the Python
+spell-casting Kung Fu martial arts wizard you sometimes make out to be. Gotta
+finish with the marshalling. Who am I kidding? It's only just ever marshalling
+until it NEEDs to be otherwise. This challenge to a million subs on YouTube is
+interesting. That MIGHT be it. But I need time before I uncloak and let the
+world know who I am. No rush there, Marshal Lieutenant Commander Columbo just
+one more thing.
+
+--------------------------------------------------------------------------------
 ## Thu Mar 29, 2018
 ### Balancing To-Do Items With Motivational Thinking
 
