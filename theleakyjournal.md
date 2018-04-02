@@ -1,6 +1,52 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
 ## Mon Apr  2, 2018
+### The 2-Journal System In vim For a Firm Center
+
+When you get done with something you DON'T want to publish, it's a very good
+time to start a new journal entry using the @j vim macro. It's blogging just
+like any other blogging, except that it's all just into one long textfile that
+you start when you start your way down the Linux, Python, vim & git route, and
+which then can last with you just getting longer and longer as you add journal
+entries at the top.
+
+As you get better and better at vim and constructing little bash files in your
+/usr/local/sbin/ folder to initialize your vim editing environments in just
+such a fashion that it'll be a cinch to have TWO journals loaded at once, a
+private and a published one. All copy-paste challenges evaporate when you're
+just copying and pasting between your 1st and 2nd vim buffers. So basically I'm
+always editing 2 journals, copying over publishable bits, generally using the
+equivalent of one "blog entry" as the unit that my macro stages to be
+published. 
+
+When the time comes to publish, I have another sbin command to git commit and
+push everything. That way, I just keep working through the day like this, and
+when it dawns on me that I did something both publish-worthy and sanitized
+enough to publish, I just use my @p macro to copy it over to "The Leaky
+Journal", staging it for me to give it a headline, which after I do, I often
+copy back to this version (the private one you don't see except for the
+excerpted bits.
+
+I found that this 2-journal approach is indeed the system and software
+component of me always regaining center. Any machine that could support editing
+a text file that I could retrieve from Github with git and edit with vim could
+be "my instrument". I was now finally hardware-independent with the equivalent
+of my DNA now floating in the cloud. I have no delusions of security. Just
+don't put stuff there that's really all too private-- which gets to other
+issues of hardware and media we'll discuss later on. 
+
+The important point being that the 2-journal approach did give me a relative
+software center that I could instantiate and have my zero-coordinate on the
+idea-factory. Vaguely Amiga-like, but really just applications of things I've
+learned about Unix and a few pee-in-the-pool of Tech utilities I've come to
+believe in using over the years. I had a place I could narrate my life into and
+develop a talented and insightful inner voice. Check!
+
+Next... a better hardware instrument. Or maybe instruments with stylus. Or
+maybe type on a keyboard just like ringing a bell.
+
+--------------------------------------------------------------------------------
+## Mon Apr  2, 2018
 ### The Way of Pipulate, Inspirational Poem
 
     Pardon me while I pontificate on what it is to Pipulate;
