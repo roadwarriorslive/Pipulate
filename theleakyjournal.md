@@ -1,5 +1,75 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Tue Apr  3, 2018
+### Concerning Mastering Tools With Muscle Memory in Field of Tech
+
+Okay, this will be the last morning manually updating the revenue stuff. The
+automation is ready to go, and I just need to do some copy/pasting. Special
+emphasis on building date-range timestamps into the overall system.
+
+There's a lot of overall system stuff-- the house of brick stuff that I need to
+pivot to immediately after this patch-project. Today is about all the tiny
+little details of automation that I keep going through manually, with a
+particular emphasis on the preservation of conditional formatting. That is
+appearing to be quite an issue. Can I eliminate the NEED for conditional
+formatting? Doing it on the back-end, hard-wiring the green or red colors,
+perhaps using that OTHER library?
+
+There is almost NO UTILITY anymore in doing your day-to-day work on the
+company-provided laptop. I have to think about that machine and that work-area
+as the dual-monitor light-show and shrine to static focus... gone dynamic.
+Because even though shrines are useful to dynamic-type personalities as
+talismans of battery-recharging power, they are not required. In fact, an
+excessive dependency on this particular talisman or that is actually a bad
+thing... yes, even for a Samurai Warrior with a master-crafted sword. Such a
+master must also be able to be effective with a common everyday variety samurai
+sword-- yet one still worthy of its category label (not total junk).
+
+And then even junk you should be able to make deadly, but that should be
+considered the mastery of a different class of weapons (any old junk) and
+counted against the samurai master. The quality of your tools is important, but
+shouldn't turn you into a fop. This gets down to why I play around so much
+with Tiny Core Linux. You don't need even the full GNU Linux command set to do
+Linux server stuff. All you need is a software repo that you can refer to in
+server-build scripts. Need a Webserver? Run this script. Need a vim/Python dev
+machine? Run that script.
+
+In such cases, it's the essence of the thing that matters. Get Python 3.6
+developer branch so I have all the lovely core libraries, optional lxml parser
+and such. Do as much as you can with pip install, because it will be identical
+on every machine. Some stuff you can't avoid using tce-load, apt-get, rpm or
+whatever your remote package manager poison may be. The scripts to build
+servers to get yourself a new publishing or development platform on-demand
+isn't the valuable thing. Neither is the servers you build. It's the abstract
+notions of how such a server gets put together in such-and-such a way, and why.
+It's the ability to confidently re-create servers on demand, via scripting,
+manual installs or otherwise.
+
+So, this post is evolving into one about muscle memory again. A server you can
+rebuild quick is a server you can create through magical word-like
+incantations. There are also magical gestures, and magical gestures are tied to
+desktop gui software, and are a severe disadvantage to the wizard on a quest
+with a fellowship. Say a giant spider binds your arms and legs in a cocooon,
+and only your mouth is free-- you can still cast a spell. You might think that
+keystrokes on a keyboard are gestures, but not so! Typing is only really the
+method of encoding the spells for later release through reading. The committing
+of spells to memory so well you can improvise, jam, riff or what-have-you
+effortlessly and spontaneously... just as if you would write or speak.
+
+That's coding. That's speaking with a slightly more idea-speak and slightly
+less of the Queen's or Stallone's English. Coding in Python in particular is
+very pure, because of how white-space matters. What you DON'T SAY and how you
+DON'T SAY IT is important. When indenting takes care of most of your
+block-and-tackling, your offensive lineup has a lot more ability to see the
+landscape clearly, pivot and maneuver.
+
+This is therefore about going from Jupyter Notebook, where you INVENTED a new
+recipe of some such thing (just in time for Jupyter Lab), and it's now time to
+lift the code over to a filename.py file on a generic Linux cloud server where
+you do your scheduling. And if I dove right into those issues here, this would
+be much too long of a post. So, that's just the set-up for the next entry. Cut!
+
+--------------------------------------------------------------------------------
 ## Mon Apr  2, 2018
 ### The 2-Journal System In vim For a Firm Center
 
@@ -17,7 +87,7 @@ private and a published one. All copy-paste challenges evaporate when you're
 just copying and pasting between your 1st and 2nd vim buffers. So basically I'm
 always editing 2 journals, copying over publishable bits, generally using the
 equivalent of one "blog entry" as the unit that my macro stages to be
-published. 
+published.
 
 When the time comes to publish, I have another sbin command to git commit and
 push everything. That way, I just keep working through the day like this, and
@@ -33,7 +103,7 @@ a text file that I could retrieve from Github with git and edit with vim could
 be "my instrument". I was now finally hardware-independent with the equivalent
 of my DNA now floating in the cloud. I have no delusions of security. Just
 don't put stuff there that's really all too private-- which gets to other
-issues of hardware and media we'll discuss later on. 
+issues of hardware and media we'll discuss later on.
 
 The important point being that the 2-journal approach did give me a relative
 software center that I could instantiate and have my zero-coordinate on the
@@ -129,10 +199,10 @@ automation. Also think about the parts of these types of projects you've always
 gotten wrong in the past and fix it. I need to start maybe doing illustrations
 or ASCII art of what I'm doing. This IS Pipulate, by the way.
 
-                                 	  _________________
-    The 80/20 Friggin' Rule      	 /  __________    //\                    _____________ 
-    Gotta use it, it's a tool    	|  (__________)  ||.'`------------------/----------- /
-    Reducing clutter that we pack	|    __________  ||`',================== __________ /
+                                      _________________
+    The 80/20 Friggin' Rule          /  __________    //\                    _____________
+    Gotta use it, it's a tool       |  (__________)  ||.'`------------------/----------- /
+    Reducing clutter that we pack   |    __________  ||`',================== __________ /
     Into our lives to hold us back.  \__(__________)__\\/                   \__________/
 
 
@@ -250,7 +320,7 @@ definitely then. What to think about on your walk:
 - Copying that tab to a Shadow Sheet.
 - Defining 1st data-row in shadow sheet (preserves formatting)
 - Blanking everything below 1st data row.
-    - 1st data row is a strong nickname. 
+    - 1st data row is a strong nickname.
     - Separate words, but still powerful. Use it.
 - Do pandas work
 - Update Shadow Sheet
@@ -277,7 +347,7 @@ my fingers have missed something worth memorizing. Thank goodness. Working
 towards mastering something that is really worth mastering is food for teh
 soul. It's been enough years. I couldn't be stuck in the past with the Amiga,
 and I had to forge forward, so I did it on every platform but the right ones.
-But the right ones never existed. 
+But the right ones never existed.
 
 And even today, it's a cobbled together hodgepodge-- one Hail Mary play to save
 us from the AT&T/GE-overlord dystopian Multics (called Unix) and another Hail
@@ -364,7 +434,7 @@ then come back and tackle this big-time.
 
 Okay, that was a good head clearing. This is the gom jabbar step. Stick your
 hand in the box. There will be pain, but it will not be real and you will get
-over it precisely because you are human and you understand what you are facing. 
+over it precisely because you are human and you understand what you are facing.
 
 Let's do this.
 
@@ -426,7 +496,7 @@ addition to that. You will lose them. They do not matter. This means, if there
 is work in progress with new columns in the works, then new "phantom" columns
 will be appearing in the live template. We will be copying from there lots and
 lots to be sure we're using the latest data in the course of development. So
-put the place-holder columns in location. 
+put the place-holder columns in location.
 
 Ugh, I don't know about this first principle stuff. Just slosh your way through
 it and see how you did it. NO! That's wrong. That's how you get into these
@@ -437,7 +507,7 @@ an important concept. As long as the dataframes are the same shape... so having
 a scratch location... wow! I think I got it.
 
 --------------------------------------------------------------------------------
-## Mon Mar 26 
+## Mon Mar 26
 ### Getting Over Initial Inertial Hump (it's all in the head)
 
 Okay, I have my new macro on @p for publish. It mostly is what I thought it was
@@ -448,7 +518,7 @@ going to be. Here's the finished product:
 It's really 5 hyphens, but I'm showing it like this so it doesn't mess up the
 macro, just like I never spell bginning of journal correctly anywhere but...
 well, you know where. It's funny being able to write know knowing how easily
-I'm going to be able to push these out. 
+I'm going to be able to push these out.
 
 Make yourself accountable to YOURSELF on this. I'm going to have to drop HMA
 VPN pretty soon and go to PulseSecure. So be it. I'm getting in good habits
@@ -496,7 +566,7 @@ sort of thing.
     Copy data from copy to original
 
 --------------------------------------------------------------------------------
-## Mon Mar 26 
+## Mon Mar 26
 
 Okay, had a nice walk through the streets of Emerald City and drank in some
 light and captured some images. Recharged my battery, so to speak. Pouring
@@ -523,7 +593,7 @@ From where my cursor is at...
     :badd ~/.viminfo
 
 --------------------------------------------------------------------------------
-## Mon Mar 26 
+## Mon Mar 26
 
 It's very interesting. I'm ALWAYS going to get far ahead with this out-loud
 internal voice journaling than I'll ever be with actually pushing stuff out
@@ -541,7 +611,7 @@ technique of carefully capturing a macro and then copypasting it over to .vimrc
 and refining it.... That's Amiga Kung Fu right there. Thank God.
 
 --------------------------------------------------------------------------------
-## Fri Mar 23 
+## Fri Mar 23
 
 Okay, I pulled the files correctly for the big project I needed to do. I have
 the files locally, and I have some SERP-tracking and a weekly report... ugh!
@@ -600,7 +670,7 @@ Particles of light more... uh, well full of entangled and interconnected
 sub-collections of light-- 3 to a proton. Let's call them quarks. And there's
 three distinct types, you say? Names, oh names. No, it's not really color but
 anyway, since 3 live in harmony, let's call them Red, Green and Blue. There's
-another type? Well, that's Strange. 
+another type? Well, that's Strange.
 
 Older Twitter Bio changing: The stuff in my feed is my WONDERLAND bit. Now that
 Twitter's 280 ideas will FIT! Come back real soon for an updated look as I cast
@@ -621,7 +691,7 @@ see if anyone says anything. But some light has been promised to light that's
 impatient but yielding to light that's grooving.
 
 --------------------------------------------------------------------------------
-# Fri Mar 23 
+# Fri Mar 23
 
 The hardest thing is to regain focus and to just get something done, when
 everything else going on is so much more interesting. I have one font size when
@@ -661,7 +731,7 @@ really? Do spreadsheets count? You' know we're going to perform the search and
 hand-record the results anyway. Why not let us... well, you'll see.
 
 --------------------------------------------------------------------------------
-## fri mar 23 
+## fri mar 23
 
 Okay, having the 2 journals loaded all the time, and actual publishing easy,
 because of quick one-letter aliases I create using /usr/local/sbin/[x]
@@ -744,7 +814,7 @@ need to do is:
 And that journal entry is published. I could use that right about now.
 
 --------------------------------------------------------------------------------
-## Fri Mar 23 
+## Fri Mar 23
 
 There's something happening here.
 What it is is entirely clear;
@@ -761,14 +831,14 @@ So when you're through a fifth of it
 You're done with Python, vim and git.
 
 --------------------------------------------------------------------------------
-## Thu Mar 22 
+## Thu Mar 22
 
 I was completely successful in my re-working of a view of a fixed daterange and
 no filter to one with a parameterized daterange and a set of 500 specifically
 matched rows. I did it by splicing into the view. There's other ways to think
 about it, but if you were soldering joints, these would be y-taps. I actually
 documented enough sanitized bits before it got all names of things and
-implementation details none of your business. 
+implementation details none of your business.
 
 But it's always that way, isn't it? I've got one journal that I keep on the
 private side. If you don't support Github, you can use https://bitbucket.org/,
@@ -777,19 +847,19 @@ free, but collaborative ones paid. So if you feel comfortable hanging around at
 more than Github go that way. Or infuse some great positive energy into the
 world by supporting Github at their $7/mo level. And frankly, if you stop
 paying them they don't take your private repos away. I'm sure it's a great PR
-thing. They have my loyalty for life. 
+thing. They have my loyalty for life.
 
 Yay FOSS! Yay Linux! Yay Wikipedia! Yay Python! And Yay Anaconda and Jupyter
 Notebook people and the whole linage of people behind vim (back to the line
 editor). Anyhoo, a lot of stuff gets layered up, and I'm really digging living
 at those lower levels that Steve Jobs symbolically "made the enemy" with the
 Macintosh. User-unfriendly, one might say. One would be wrong. It's just a data
-samurai sword for those who know how to wield it. 
+samurai sword for those who know how to wield it.
 
 And I spent A LOT of time learning how to wield vim, for which I am not for one
 moment sorry. First vim, then emacs or the other direction Sublime Atom Visual
 Whatever might float your boat. It's all cool, cause it's all vim emulation
-everywhere. 
+everywhere.
 
 The only place I'm hard-wiring myself to vim would be in the loving gardening
 of my .vimrc file over the years to unleash all the proper light energies for
@@ -798,7 +868,7 @@ recreate the spirit of your .vimrc in any other environment in a sitting or
 two. So I think I'd be comfortable in nvim or neovim or maybe someday in emacs
 in evil mode. But there is SOME hard-wiring here. It's a hard wiring to a sort
 of text-navigation language... a LANGUAGE for editing text that leans into my
-whole muscle memory data samurai hypothesis. 
+whole muscle memory data samurai hypothesis.
 
 I mean the vim bug has even bitten the hip Mac crowd. You should see some of
 these totally Matt and Trey vimmers getting all verklempt over plugins. Hey
@@ -811,7 +881,7 @@ want you and your descendants to own it long term. Is this Dune? Are we at Dune
 already?
 
 --------------------------------------------------------------------------------
-## Thu Mar 22 
+## Thu Mar 22
 
 Okay, that out of the way. Now let's look at the real work-items for the day.
 Be the data samurai you claim to be. The first few notes start:
@@ -843,7 +913,7 @@ soon). Neither is home really any more the ~/ "Home" conventional Unix/Linux
 location despite how much I want it to be. It's just so easy to time:
 
     cd ~/
-    
+
 ... as a method of clicking your heals together 3 times. You see? Unix/Linux
 gives you a proper home. But because of pesky OS conventions that makes it
 /home/username here and /Users/username in some other place, the host OSes
@@ -864,7 +934,7 @@ happening here.
 
 I'm still in the final throws of settling in. Soon...
 
-Most important thing now? 
+Most important thing now?
 
 Gotta get that crazy query corralled and all argument supporting. Make your
 arguments to IT... not Boss. You've been challenged to rise to the occasion...
@@ -905,7 +975,7 @@ work-provided computer (it's nickname is staticlenovo). It's been put in my
 wide-screen multi-monitor configuration. And that means something OTHER THAN IT
 as the 3rd screen off to the left usually (but I can do right) so that I've got
 a 3-monitor system as spread out and taking-up of space as anyone around me,
-even on a tiny desk. 
+even on a tiny desk.
 
 Remember, you've pretty much ALWAYS either got to be running the work-provided
 VPN or HMA Pro because you either need access to the firewalled Amazon services
@@ -931,14 +1001,14 @@ statement changing a few things here and there. It's all just Python string
 manipulations. I'm going to take the power of Python string manipulation to an
 existing gobbledy
 
-	q = '''SELECT Top 10
-		blah,
-		blah, 
-		%s
-		lots
-		more
-		stuff
-		''' % 123
+    q = '''SELECT Top 10
+        blah,
+        blah,
+        %s
+        lots
+        more
+        stuff
+        ''' % 123
 
 Okay, that works. But this is not the sophisticated type of string formatting
 that I know is available these days. How does that go again? Google new python
@@ -957,14 +1027,14 @@ be using the same date-range over and over. And I have to DEFINITELY watch my
 parenthesis. Incorrect order of operations would totally nuke this puppy, but I
 don't see that much parenthesis in this. Okay, test the new format:
 
-	q = '''SELECT Top 10
-		blah,
-		blah, 
-		{1}
-		lots
-		{0}
-		stuff {1}
-		'''.format('one', 'two')
+    q = '''SELECT Top 10
+        blah,
+        blah,
+        {1}
+        lots
+        {0}
+        stuff {1}
+        '''.format('one', 'two')
 
 Okay, this is the marshalling. I'm going to have specific date ranges, which
 are actually already created. There is another SQL statement. I'm going to be
@@ -976,11 +1046,11 @@ query. This is where the rubber hits the road and sanitization no longer
 possible in my notes. Peace out.
 
 --------------------------------------------------------------------------------
-## Thu Mar 22 
+## Thu Mar 22
 
 Joan. Pronounced Joe-ON. Remember it! This kind of shit is important, and you
 call yourself a wizard. No, actually I don't. I aspire to be a wizard. I
-partake of the wizardly arts and tools to do so, but I do not pretend 
+partake of the wizardly arts and tools to do so, but I do not pretend
 
 Marshalling. Always be marshalling your forces. This desk-and-office location
 both matters and doesn't matter routine is going to be hard to keep up if I
@@ -1043,7 +1113,7 @@ Johnny Stay Focused
     Johnny B. Goode.
     He could filter out chatter
     Just like ringing a bell.
-    
+
 
 I think I'm going to take on the persona of a critically insightful Statler
 Green Lantern, taunting the easily taunted with poetry that drops undeniable
@@ -1063,7 +1133,7 @@ sanitized.
 I'm going to rock around the clock today.
 
 --------------------------------------------------------------------------------
-## Wed Mar 21 
+## Wed Mar 21
 
 Okay, I'm still going to "cut" journal entries, but now definitely it is to
 label the posts. I have a macro @j set up to create a new journal entry. So...
@@ -1090,7 +1160,7 @@ and the Hyper.is Unix Shell terminal program built on Electron, which is a
 re-porpoising of Chrome components... so tight. Tite. All round.
 
 -------------------------------------------------------------------------------
-## Wed Mar 21 
+## Wed Mar 21
 
 Well, here we go. A new work location, a new laptop, a new mission in life and
 view on the world, and definitely a new attitude.
@@ -1131,7 +1201,7 @@ people COME ON! Okay, Google pushing all websites into end-to-end security
 helped, but hijacked cookie tokens and stuff. Use protection.
 
 --------------------------------------------------------------------------------
-## Tue Mar 20 
+## Tue Mar 20
 
 Okay, that was interesting. Next? Okay, the big project for today. It's still
 about those revenue columns. Wow, that was a bigger project than I expected.
@@ -1170,7 +1240,7 @@ yummy and perfect! Okay, I've got this. No problem.
 
 Problem is, I'm changing floors at work and I generally do my best work... Ah,
 switched. I was going to say on a loud keyboard, but I couldn't bring myself to
-type it so loudly. When it's quiet here, switch to the laptop. 
+type it so loudly. When it's quiet here, switch to the laptop.
 
 Wow, always having 2 journals loaded, now with the first named journal.md and
 the second named leakyjournal.md is a real kick, let me tell you. How such an
@@ -1190,7 +1260,7 @@ But portability of Jupyter Notebook like copy/paste locations that can be
 shared between machines... and maybe even...
 
 --------------------------------------------------------------------------------
-## Tue Mar 20 
+## Tue Mar 20
 
     let @j = '/Bginning of Journal^Mo^M^M^M^M^[kkkk80i-^[j! date^Mi## ^[^Mjzzi'
 
@@ -1248,7 +1318,7 @@ all the signs of burn-out that have already set-in after just 2 years. Nope.
 Fix or leave. Fixing begun. Timestamps...
 
 --------------------------------------------------------------------------------
-## Tue Mar 20 
+## Tue Mar 20
 
 Beginning of... oops can't type that or I'll mess up my Macro. Time to get
 a'crackin'. My mission today is this SQL Query thing to go back a year ago in
@@ -1276,11 +1346,11 @@ Staten Island. I've finally gone UrbyLife.
 Okay, I still have a little publishing resistance because there are some
 annoying kung fu keyboard moves of loading another file on a different path
 into the second vim buffer. I can totally do it, but I'm fatigued just thinking
-about what that would take. 
+about what that would take.
 
-    The light! The light! 
+    The light! The light!
     The lite, the lite, the lite.
-    So, fight! So, fight! 
+    So, fight! So, fight!
     And fight and fight and fight.
 
 Even on this floor, there will be big-time mental distractions. The sound of
@@ -1345,7 +1415,7 @@ ones. That's a losing proposition, so I've got a plan.
 
 That plan is sbin.
 
-Gotta always remind yourself of the location. 
+Gotta always remind yourself of the location.
 
 It's an odd incantation, but this is it:
 
@@ -1454,7 +1524,7 @@ instances than what's live in-scheduling will just muddle don't force a rhyme.
 vim out!
 
 --------------------------------------------------------------------------------
-## Fri Mar 16 
+## Fri Mar 16
 ### If I Saw a Purple Cow, I'd Pick Out a Good Nickname
 
 Time is an illusion. Okay, Purple Cow Farm in-hand, we have a solid "from"
@@ -1531,7 +1601,7 @@ of ridculoustemity in your nicknames. Ohhh, push this out.
     Off version we be junkin'
 
 --------------------------------------------------------------------------------
-## Fri Mar 16 
+## Fri Mar 16
 
 Make donuts. 1, 2, 3... 1? Source Templates! It's all about reflecting the
 right light with the proper incantations. Everything will shine through your
@@ -1565,7 +1635,7 @@ Forget the #xbook tag. Just publish in the Pipulate repo. This is what you were
 born to do. vim out.
 
 --------------------------------------------------------------------------------
-## Fri Mar 16 
+## Fri Mar 16
 
 I'm just kidding. I won't leak. But I'll probably sanitize as I type so that
 when I copy/paste daily journal entries over here, I won't have to do much
@@ -1610,7 +1680,7 @@ then you're not out here. STOP! Reports checked. Now, bake donuts. Recover this
 state. It is important. vim out!
 
 --------------------------------------------------------------------------------
-## Fri Mar 16 
+## Fri Mar 16
 
 It's time to bake the donuts.
 
@@ -1630,7 +1700,7 @@ landscape.
 - What plates need spinning (think about 3rd or else there goes your day)
 
 --------------------------------------------------------------------------------
-## Thu Mar 15 
+## Thu Mar 15
 
 Might as well be on the best. I want to be on the best hardware of my life
 while I'm doing the best work of my life.
