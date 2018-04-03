@@ -1,53 +1,249 @@
-
 ===============
 pipulate v0.1.8 - Automate Google Sheets for SEO
 ===============
 
-:Author: `Mike Levin, SEO <http://mikelev.in>`_
+:Author: `Mike Levin, HitTail Inventor & SEO in New York City <http://mikelev.in>`_
 
 There's a reason spreadsheets remain as popular as they do in the face of more
-capable databases and reporting systems. Spreadsheets are designed for humans.
-You don't need a developer for every little thing. You can use them in many
-places where a database would be overkill. However as anyone who's tried to
-build durable long-term automations around spreadsheets using VBA, AppScript or
-any of the other obvious choices, it ain't so easy. That's what I fix here with
-Pipulate; I simplify OAuth2 login, help you grab cell-ranges from the
-spreadsheet, and then help you push your changes back into the sheet. The rest
-(altering the data) is Pandas.
+capable databases and reporting systems. Spreadsheets are designed for humans—
+you don't need a developer for every little thing. You can use ledgers in many
+places where a database would be overkill. However, as anyone who's tried to
+build durable long-term automations around spreadsheets using VBA, AppScript
+(or any of the other obvious choices), it ain't so easy. I fix that here.
 
+First, I plan to open the mysterious world of Python-driven data-automation to
+newbs simply by having you import a library that auto-prompts you for Google's
+OAuth web-login, getting you right over the first show-stopping hurdle. After
+that, I advocate a simple convention of selecting ranges out of a spreadsheet,
+modifying them, and pushing the results back in.  And that's mostly done with
+Pandas; the one data manipulation tool every SEO should right now be mastering.
+
+.. image:: pipulate-logo.svg
+
+Congratulations! You're about to learn to program Python (easily) for SEO::
+
+    #  _____ _     _       _       ____  _             _       _       
+    # |_   _| |__ (_)___  (_)___  |  _ \(_)_ __  _   _| | __ _| |_ ___ 
+    #   | | | '_ \| / __| | / __| | |_) | | '_ \| | | | |/ _` | __/ _ \
+    #   | | | | | | \__ \ | \__ \ |  __/| | |_) | |_| | | (_| | ||  __/
+    #   |_| |_| |_|_|___/ |_|___/ |_|   |_| .__/ \__,_|_|\__,_|\__\___|
+    # There are many frameworks like it,  |_| but this one is mine. -- Mike L
 
 .. contents::
     :backlinks: none
 
 .. sectnum::
 
-
 ########################################
 Background & Philosophy
 ########################################
+::
 
-I've done this sort of work for a long time, inventing my own systems until I
-discovered the combination of Google Sheets, Jupyter Notebook and Pandas. Once
-you can manipulate Pandas DataFrames, the only challenge then is easily getting
-them in and out of Google Spreadsheets for a really rocking system. That's
-where Pipulate comes in::
+    You gotta pay the Python toll
+    If you want out of the vendor hole.
 
-    cl, df = gs.pipulate(tab, rows, cols) 
-    #Do Pandas stuff to df in Jupyter Notebook
-    gs.populate(tab, cl, df) 
+Congratulations to Conductor for the acquisition by WeWork. This should bring a
+normally inaccessible tier of SEO-product into the reach of exactly the sorts
+of people who can use it. For everyone else cobbling it together, I'm here.
 
-That's it. That's Pipulate. Go install Anaconda 3.6 if you haven't already and
-get started on your new career as Datamaster. Track your SEO rankings, Social
-Media views and counts, whatever! This is your chance to easily and with a
-purpose hop onto the following bandwagons:
+.. highlight:: python
 
-- Python
-- Jupyter Notebook
-- Pandas
-- GSheets
+****************************************
+A better way
+****************************************
 
-And while it's definitely NOT required, I'll teach you Linux, vim and git as
-well. This package is about repositioning careers as SEO continues to change.
+I've done ad hoc and scheduled data-churning work for a long time, where
+investigation becomes automated system becomes generalized tool. I've invented
+my own systems for this sort of stuff that have gone obsolete in the face of a
+rapidly changing world so often that it hurts. No really, it hurts. Having now
+experienced almost-framework packages like Flask that merely help you connect
+the dots begging to be connected (Requests & Workzeug in their case / GData &
+GSpread in mine), I'm like Yeah! Pipulate should be like that— almost not
+there. Focus on what's important: Pandas! Think light-touch framework mentality
+as pretty much the opposite of Django, which is what most of my framework
+creations of the past more-or-less resembled. This is I think a better way.
+
+****************************************
+Of Stacked Decks & Killer Card Combinations
+****************************************
+
+So now, instead of inventing my own systems, I leverage the strength of the
+cards I'm dealt. This is familiar to anyone who place the Magic The Gathering
+card battle-game where certain card-combinations can't be played because they
+are too powerful and throw of the balance (and fairness) of the game.
+Thankfully for us SEOs, in real-life thankfully such killer combinations are
+not so easy to ban— such as that of Google Sheets, Jupyter Notebook and
+Pandas. It's like resurrecting elves from your graveyard for unlimited
+fireballs the gift that keeps on giving.
+
+****************************************
+It's Pandas all the way down
+****************************************
+
+An Ode to Pandas::
+
+    I'm a #Python #pandas person'
+    'Cause #SEO will worsen
+    With each day the #AI's
+    Waking uuuup!
+    Solutions?
+    I've a' plenty!
+    But none are
+    Muscle-friendly;
+    Because
+    from #vim
+    I must reach
+    Juuuupyter!
+
+I used to be an amateur (very amateur) magician. You know, it's all the same
+feeling for me; magic, art and coding... 3 sides of an eternal golden braid...
+and a bit of performance art, the constant hunt for a good paying gig, and
+getting down an bunch of cool new moves that will serve you for a few years
+until they stop working. Well, this pandas trick has got quite a few good years
+ahead of it as it replaces SQL as the ad hoc data langua franca du jour— and
+that ain't no fad. Legit bandwagon here that's perfect for SEO's, so ya had
+better get a jumpin. If you weren't a data-tech before, you are one now.
+
+****************************************
+From SEO to Data Tech to Datamaster
+****************************************
+
+Once you can manipulate Pandas DataFrames, you have super-powers and are no
+longer an SEO. Your bullshit will smell more like statistically convincing
+correlations, though you will always attach the standard disclaimer, that does
+not mean causation. Therefore, our field remains Kung Fufu. Anyone who doesn't
+want to be called out on bad-science better be able to walk the walk. Show
+process. KNOW process. Invent process. Make process your own secret sauce in
+such a way where you can EVEN STILL jump-on and benefit from some pretty
+grown-up and destined to succeed bandwagons.
+
+****************************************
+That's where Pipulate comes in
+****************************************
+
+Here's the basic API-invocation for Pipulate::
+
+    cl, df = gs.pipulate(tab, rows, cols)     # pulls range from GSheet
+
+    # Do stuff to df object using pandas,
+    # the new "must know" SQL-alternative.
+    # Just keep the row x col "shape" intact, then...
+
+    gs.populate(tab, cl, df)                  # pushes range to GSheet
+
+That's it. That's Pipulate— it's just the rectangular data-range pull & push
+stuff (nothing in-between). So, `go get Anaconda 3.6 <https://www.anaconda.com/download/>`_ 
+and help me reposition SEO somewhere more than the gut-feeling Intuiters of
+yesteryear and Data Scientists of tomorrow— the **Datamaster** with a
+Python/Pandas industry-standard skill-set has vast room for creative expression
+and career-path flexibility (hedging your bet on SEO). 
+
+****************************************
+there's nothing to see here. please move along.
+****************************************
+
+If you're reading this, you're among the first who knows what's going on with
+me here with my latest version of Pipulate— which amounts to yielding to the
+staggeringly cool process put into motion by Fernando Perez (invented iPython
+that's become Jupyter Notebook) and Continuum Analytics who put together the
+Anaconda FOSS equivalent to Mathematica, MATLAB, SAS or whathaveyou. It's data
+analysis stuff so scientists can solve their crisis of reproducibility a few
+years back that really shook 'em up and gave "the other side" a lot of ammo. 
+
+If you want to fight data with data, you better have some seriously good Kung
+Fu. I'm the type of SEO who survives just fine at places like 360i with clients
+like Apple and JCPenney (I helped pull them out of the fire), and these are my
+tools now in their modern form. I prefer to work in-house where I can slip in
+work like this and not have to bill it evenly against each account I work on
+(yuck!). I can get into my grove, walking the walk as I talk the talk...
+in-house SEO-style... yeah. Good stuff.
+
+****************************************
+Be a Lightweight Pandas-speaking API-Monkey in the Middle
+****************************************
+
+And so, here is my little gift to you, world of SEO. It's not DeepCrawl or
+Conductor or ahrefs. No, but it can connect to any of them. It could draw
+exactly the dashboard you want from out of all 3 systems (if you've got 'em)
+and give you just the dashboard you need under simple GMail security context,
+and not some per-seat license login nonsense. Innovate new reports in Jupyuter
+Notebook. Refine them. Copypasta them over to Linux scheduling where you fit it
+togehter like Tetris, squeezing every dollars worth out of your EC2 instance.
+
+This project is just the medicine that a highly stressed SEO field needs. I got
+your cure right here, and it's really just the minimum baseline technical
+capabilities you should have today so that you may interact...  with...
+anything.
+
+****************************************
+All The Bands Whose Wagon's You're Hitching Your Star Too Are Belong To Us
+****************************************
+
+Track your SEO rankings, Social Media views and counts, whatever!  Start in the
+shallow end with Jupyter Notebook and "graduate" your work to generic scheduled
+Linux jobs that you can run almost anywhere. If you're a successful YouTuber
+worried about the gravy-train running dry, diversify your skills with something
+you'll probably love and can definitely self-learn. This is your chance to jump
+with me onto the following surprisingly fun bandwagons:
+
+- **Python** - programming for humans
+- **Jupyter Notebook** - programming for even more humans
+- **Pandas** - data manipulation for humans
+- **GSheets** - data manipulation for even more humans
+
+...but mostly Python. Go read my love letter to Python even though I have to
+update it for 2018: http://mikelev.in/2011/01/python-programming-language-advantages/
+
+****************************************
+You Would Not, Could Not Learn to Code?
+****************************************
+
+I'm talking to YOU, Animation Gang! Sure, it's fun to animate today, but you
+will always be at the mercy of people who can express automation concepts as
+naturally as you speak English. Coding is not what you think. You already do
+it. You express your creative dynamic right-brained selves in an overwhelmingly
+technical and meticulous left-brained medium. I'm not sure if you understand
+what's giving you super-powers on YouTube, but when that foolish dancing gets
+tired and your energy runs out, come back here, sit down and learn to code
+Python. You'll green eggs and ham.
+
+- Automate Gimp
+- Automate Inkscape
+- Automate Blender
+- Automate ImageMagik
+- Automate Robots
+
+****************************************
+The Million-Follower YouTube Challenge... Accepted
+****************************************
+
+I could go on, but I think I make my point. My daughter challenged me to a
+million followers on YouTube by VidCon. I'm like, haha, not likely. No one's
+really interested in your dad's opinion that you're either either doing it
+old'skool or you're fresh meat. Your dad can reach a million followers by
+VidCon 2019 if I really focus and work on it. First step is to just catch
+Jaiden's or James' or Becca's or Tony's attention and mention my channel in one
+of their videos— a 7 year old YouTuber's super-nerd Dad in New York trying to
+teach kids Python before their brains are poisoned with JavaScript. Oh... he
+was the first to unbox a Raspberry Pi on YouTube and got a million-view video
+out of it... then dropped the ball, because kid. Now kid loves YouTube and is
+challenges me from a million views to a million followers.
+
+Challenge accepted, Adi. https://www.youtube.com/mikelevin
+
+****************************************
+Did I Mention You're Either Old's Kool or Fresh Meat?
+****************************************
+
+And while it's definitely **not** required, I'll also teach you the timeless
+badass tools of tech: **Linux**, **vim** and **git**— or at least the minimum
+you need to know about each to project that "I'm Tony Stark" feeling.
+
+Pipulate is about repositioning careers as SEO continues to change. Some tools
+are like shiny new pennies (Jupyter Notebook & pandas), while others have
+ascended to be the very fabric of our modern infotech-world— the true Samurai
+Kung Fu vorpal light saber weapons of tech where developing muscle-memory makes
+you dangerous... to your competitors.
 
 ########################################
 Installing Pipulate
@@ -71,8 +267,9 @@ For the impatient
 ########################################
 
 The quickest way to pipulate is as follows, but I suggest you read through this
-documentation down to where I cover Python functions and how they get called by
-the Pandas df.apply() method in order to properly grok the power here::
+documentation where I cover creating Pipulate functions. The pandas concept of
+df.apply() is very important to grok. If you don't grok the word grok, go read
+Stranger in a Strange Land and return::
 
     import pipulate as gs
     import pandas as pd
@@ -101,11 +298,13 @@ Things even the impatient must know
 
 - You must be on Python >= 3.x.
 - You must be using a Google Spreadsheet in online mode.
-- You must exactly match 'Your Sheet Name' with your actual sheet name.
+- You must exactly match 'Your Sheet Name' with your actual sheet name (or
+  switch to keys).
 - You must be able to recognize row and column indexes when you see them.
 - When you import pipulate as gs, Google will (1-time) throw up a giant blue
   link that you must click and login with the same Google account you used to
   make the Google Sheet with.
+- The meaning of the word grok.
 
 ****************************************
 Things about OAuth2 you should eventually know
@@ -133,7 +332,7 @@ install, or select Anaconda-Navigator from your Applications folder (Mac) and
 Launch Jupyter Notebook from there. There's a few ways to get Jupyter Notebook
 running, but so long as something pops up in your web browser where you can
 choose New / Notebook: Python 3, then you found it. After you have a new
-Notebook, if you haven't done step #1 already, then execute:
+Notebook, if you haven't done step #1 already, then execute::
 
     !pip install pipulate --upgrade
 
@@ -143,7 +342,7 @@ onto the real action. There are alternative ways to do pip installs in
 "Anaconda Prompts" (with more control outside the browser) but details vary on
 Macs vs. Windows vs. Linux, so I prefer to tell people how to do pip installs
 from within Anaconda. The --upgrade parameter ensures you always have the
-latest because I will be updating it often. Step #2, execute:
+latest because I will be updating it often. Step #2, execute::
 
     import pipulate as gs
 
@@ -347,8 +546,14 @@ other proprietary vendor products which probably don't quite do what you need.
 Pipulate is mostly about Python and Pandas. You could replace gs.pipulate() and
 gs.populate() with pd.read_csv() and pd.to_csv() and take Google Sheets out of
 the equation entirely, or use Excel instead of GSheets by swapping PyExcel for
-GSpread. My thinking is that if you have to learn and master one tool for this
-sort of data manipulation, it might as well be Python/Pandas.
+GSpread. There's also a new library pygsheets that does a few more things like
+named ranges and limited formatting I may switch to. Doesn't matter, because
+Pipulate is a lightweight wrapper to provide a lightweight spreadsheet
+manipulation API.
+
+My thinking is that if you have to learn and master one tool for this sort of
+data manipulation, it might as well be Python/Pandas. Shove all the complexity
+onto pandas... it's going to be around for awhile... and not cost you anything.
 
 ****************************************
 Cheerleading for Anaconda, Jupyter Notebook and Pandas
@@ -360,7 +565,7 @@ is actually different from pure Python. Pandas sits on NumPy which is a popular
 C-optimized Python library that provides N-dimensional arrays for the same kind
 of work that IBM dinosaurs still do in Fortran for science and stuff. Pandas is
 a FRAMEWORK on top of NumPy for such work, but which turns out to be perfectly
-designed for what I used to use Pipulate for when it was a Flash-based Web app.
+designed for what I used to use Pipulate for when it was a Flask-based Web app.
 
 ****************************************
 Applying a Python function to every row of a Google Sheet
@@ -643,7 +848,7 @@ The Pipulate function to could look like::
 ...and calling it from Pandas, again, like this::
 
     df['C'] = df.apply(func, axis=1,
-                       pod=('two', 'peas'),
+                        od=('two', 'peas'),
                        dates={'start' : '2018-01-01',
                                'end': '2018-01-31'
                              }
@@ -873,7 +1078,7 @@ API::
             AND date <= '%s'
         GROUP BY
             url
-        """ % (sql_urls, start, end)
+        """ % (urls, start, end)
 
 ****************************************
 Using Pandas CSVs as SQL temp table
@@ -955,9 +1160,9 @@ Developing Pipualte functions
 
 Because Pipulate functions are really just Python functions (generally being
 called through the Pandas DataFrame.apply() method), you can develop Pipulate
-functions just as you would any other Python funciton.
+functions just as you would any other Python function.
 
-The only unusal concern is how when you feed an entire "row" of a dataframe to
+The only unusual concern is how when you feed an entire "row" of a dataframe to
 a Python function, it takes the form of an arbitrary variable name (usually
 row) containing a numerically indexed list of values (the values from the row,
 of course). This only means that a wee bit of "mapping" need be done inside the
@@ -1020,7 +1225,7 @@ code with update_proxies set to True. It will create a file in your repo folder
 called goodproxies.txt::
 
     update_proxies = True
-    if update_proxies:    
+    if update_proxies:
         import pipulate.update_proxies as up
             up.Main()
 
@@ -1458,17 +1663,17 @@ You can't store everything locally, so don't try. You will run out of space,
 and there's nothing worse than having to do file-maintenance on Cloud hardware
 that's supposed to be sparing you from that nonsense. But neither can you write
 anything that's going to fill your hard drive up forever with past data.
-Hardware is hardware and resources are actually finite -- or rather, they're as
+Hardware is hardware and resources are actually finite— or rather, they're as
 finite as you're willing to pay for. So if we want to store the data long-term,
 it's got to be off-server, probably using a service such as Amazon S3. Using a
 "data bucket" NoSQL hash-table (call it what you will) is a good idea in
 situations like this because "deconstructing" everything into rows & columns
 for SQL-like RDBMS storage isn't worth it, and although field-stuffing into a
 Text or XML field in an RDBMS would work, it feels a lot like shoving a round
-peg into a square hole -- why do it if a round hole is sitting right there?
-This is more a place-holder for me to incorporate probably a decorator-based
-cache system that is back-ended by Amazon S3. That will solve a lot of ongoing
-server maintenance issues.
+peg into a square hole— why do it if a round hole is sitting right there?  This
+is more a place-holder for me to incorporate probably a decorator-based cache
+system that is back-ended by Amazon S3. That will solve a lot of ongoing server
+maintenance issues.
 
 ########################################
 First Scheduled Script
@@ -1590,15 +1795,48 @@ So now, whenever from your host machine you type::
 warm welcome that will impress your friends. What does hi.py look like you
 ask?::
 
-	from pyfiglet import figlet_format
-	from colorama import Fore
+    from pyfiglet import figlet_format
+    from colorama import Fore
 
-	def out(print_me, color=Fore.GREEN, font='standard'):
-		ascii_art = figlet_format(print_me, font=font)
-		print('%s%s%s' % (color, ascii_art, Fore.WHITE))
+    def out(print_me, color=Fore.GREEN, font='standard'):
+        ascii_art = figlet_format(print_me, font=font)
+        print('%s%s%s' % (color, ascii_art, Fore.WHITE))
 
-	out('Welcome.')
-	out("Get pipulating!", font='cybermedium', color=Fore.WHITE)
+    out('Welcome.')
+    out("Get pipulating!", font='cybermedium', color=Fore.WHITE)
+
+########################################
+Getting over the hump
+########################################
+
+When getting started with any new investigation into data residing somewhere
+that you're supposed to fetch, transform, and extract some insights from begins
+with "where does the data come from?" and "Where do I put it?" questions. In
+Google Sheets, you don't really have the option of warehousing all the raw data
+pulls forever, unless you want your spreadsheets to get slower and slower, then
+go corrupt. Instead, you have to either use services like Amazon S3, a large
+local hard drive, or simply not warehouse as much data as you'd like.
+
+****************************************
+The Google Spreadsheet 100,000 cell limit
+****************************************
+
+Fortunately, you can do a lot in just the limited data-space of a single
+spreadsheet, which supports (at last check) about 100,000 cells in any
+Spreadsheet document before reaching a quota (and performance) limit. The 100K
+cells can be broken up any way over rows & columns.
+
+****************************************
+Trim the fat
+****************************************
+
+Because every spreadsheet gives you an automatic 1000 rows and 26 columns, it's
+easy to make the system use up 26,000 of those cells right away. This doesn't
+really happen in practice, but there is ambiguity so as a matter of style and
+preference, I like to delete all the rows and columns I'm not using. As in the
+field of SEO, we just don't want to send mixed signals to Google.
+
+To be continued...
 
 ########################################
 To git clone or pip install?
@@ -1667,3 +1905,31 @@ letter-index::
         letter = gs.cc(i+1)
         eval(tab)[col] = letter
         eval('%s2' % tab)[col] = '%s.%s' % (tab,letter)
+
+Reminder to self: Pipulate Wisdom.
+
+Much of the complexity is in the data-transform. Separate as much of the "raw
+data" work as you can from the derivative output-data formats. Those can be
+re-generated different ways with better and better insights revealed and
+interactivity. But you may never be able to re-get that raw data. So focus!
+
+########################################
+Experimential: The Zen of Pipulate
+########################################
+
+- Everything you need has already been done many, many times.
+- However, this does not spare you from SOME of the work.
+- Processes resist automation until sufficient TLC is applied.
+- And even then, it's all going to fall apart for 10 unexpected reasons.
+- Your job then is to build with that sort of resilience in mind
+- Even if it means scrapping-and-rebuilding quickly.
+
+****************************************
+Ideas for Tenants of the Pipulate System
+****************************************
+
+- Got a dataframe that was tough to get? Maybe it should be a .csv file.
+- Got a .csv file on your drive blocking you? Was it generated today?
+- It's better to pip install pipulate than git clone pipulate.
+- Directories you create to pipulate out of shouldn't all be repos.
+- Little secret-sauce pipulations belong in private Github gists.
