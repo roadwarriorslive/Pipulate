@@ -5,8 +5,8 @@ setup(
   version = '0.1.8',
   download_url = 'https://github.com/miklevin/pipulate/archive/0.1.8.tar.gz',
   description = 'Simplifes Google Spreadsheet Automation',
-  long_description='Light framework to help do manipulate Google Sheets as Pandas Dataframes. Useful for SEO, Social Media Dashboards.'
-  author = 'Mike Levin SEO, Commodore / 360i alum in NYC and Inventor of HitTail',
+  long_description='Light framework to help do manipulate Google Sheets as Pandas Dataframes. Useful for SEO and Social Media Dashboards.'
+  author = 'Mike Levin SEO, Commodore / 360i alumni in NYC and Inventor of HitTail',
   license='MIT',
   author_email = 'miklevin@gmail.com',
   url = 'https://github.com/miklevin/pipulate',
