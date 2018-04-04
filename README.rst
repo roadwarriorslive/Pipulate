@@ -27,7 +27,7 @@ Congratulations! You're about to learn to program Python (easily) for SEO::
     #   | | | '_ \| / __| | / __| | |_) | | '_ \| | | | |/ _` | __/ _ \
     #   | | | | | | \__ \ | \__ \ |  __/| | |_) | |_| | | (_| | ||  __/
     #   |_| |_| |_|_|___/ |_|___/ |_|   |_| .__/ \__,_|_|\__,_|\__\___|
-    # There are many frameworks like it,  |_| but this one is mine. -- Mike L
+    # There are many frameworks like it,  |_| but this one is mine. --MikeL
 
 .. contents::
     :backlinks: none
