@@ -9,7 +9,7 @@ import sys
 import os
 import gspread
 import httplib2
-from datetime import datetime
+from datetime import date, datetime, timedelta
 from oauth2client.client import OAuth2WebServerFlow
 from oauth2client import file, tools
 import pandas as pd
@@ -377,11 +377,10 @@ def human_date(a_datetime, time=False):
 def date_ranges(human=False):
     """Return a list of 3 commonly used daterange tuples."""
 
-    from datetime import date, datetime, timedelta
     def dx(x):
-        return gs.api_date(x)
+        return api_date(x)
     def dh(x):
-        return gs.human_date(x)
+        return human_date(x)
     lot = list()
     today = datetime.now()
     yesterday = today - timedelta(days=1)
@@ -394,11 +393,17 @@ def date_ranges(human=False):
         lot.append((dh(thirty_days_ago), dh(yesterday)))
         lot.append((dh(prior_30_start), dh(prior_30_end)))
         lot.append((dh(prior_year_start), dh(prior_year_end)))
+        lot = [(x +' - '+ y) for x, y in lot]
     else:
         lot.append((dx(thirty_days_ago), dx(yesterday)))
         lot.append((dx(prior_30_start), dx(prior_30_end)))
         lot.append((dx(prior_year_start), dx(prior_year_end)))
     return lot
+
+
+def datestamp():
+    return 'Generated {0:%A, %B %I aprox %I:%m %p}'.format(datetime.now())
+    
 
 class Unbuffered(object):
     """Provides more real-time streaming in Jupyter Notebook"""
