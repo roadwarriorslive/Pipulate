@@ -10,6 +10,7 @@ import os
 import gspread
 import httplib2
 from datetime import date, datetime, timedelta
+import pytz
 from oauth2client.client import OAuth2WebServerFlow
 from oauth2client import file, tools
 import pandas as pd
@@ -402,7 +403,7 @@ def date_ranges(human=False):
 
 
 def datestamp():
-    return 'Generated {0:%A, %B %I aprox %I:%m %p}'.format(datetime.now())
+    return 'Generated {0:%A, %B %d aprox %I:%m %p}'.format(datetime.now(pytz.utc))
     
 
 class Unbuffered(object):
