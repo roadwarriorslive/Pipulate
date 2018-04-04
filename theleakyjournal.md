@@ -1,9 +1,7 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
 ## Wed Apr  4, 2018
-### @11 w/ Michael Levin at 11:00 @...???
-
-Register LearningLevin or something equally good.
+### @11 w/ Michael Levin at 11:00
 
 Okay, it's coming up on 8:00 AM, and I'm going to baby-sit the running of the
 scripts from home, and maybe get into the office even a little bit later than
