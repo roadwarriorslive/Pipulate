@@ -3,13 +3,14 @@
 #   | | | '_ \| / __| | / __| | |_) | | '_ \| | | | |/ _` | __/ _ \
 #   | | | | | | \__ \ | \__ \ |  __/| | |_) | |_| | | (_| | ||  __/
 #   |_| |_| |_|_|___/ |_|___/ |_|   |_| .__/ \__,_|_|\__,_|\__\___|
-# There are many frameworks like it,  |_| but this one is mine. -- Mike L
+# There are many frameworks like it,  |_| but this one is mine. --MikeL
 
 import sys
 import os
 import gspread
 import httplib2
-from datetime import datetime
+from datetime import date, datetime, timedelta
+import pytz
 from oauth2client.client import OAuth2WebServerFlow
 from oauth2client import file, tools
 import pandas as pd
@@ -373,6 +374,37 @@ def human_date(a_datetime, time=False):
     else:
         return ('{0:%m/%d/%Y}'.format(a_datetime))
 
+
+def date_ranges(human=False):
+    """Return a list of 3 commonly used daterange tuples."""
+
+    def dx(x):
+        return api_date(x)
+    def dh(x):
+        return human_date(x)
+    lot = list()
+    today = datetime.now()
+    yesterday = today - timedelta(days=1)
+    thirty_days_ago = yesterday - timedelta(days=30)
+    prior_30_end = thirty_days_ago - timedelta(days=1)
+    prior_30_start = prior_30_end - timedelta(days=30)
+    prior_year_end = yesterday.replace(year = yesterday.year - 1)
+    prior_year_start = thirty_days_ago.replace(year = thirty_days_ago.year - 1)
+    if human:
+        lot.append((dh(thirty_days_ago), dh(yesterday)))
+        lot.append((dh(prior_30_start), dh(prior_30_end)))
+        lot.append((dh(prior_year_start), dh(prior_year_end)))
+        lot = [(x +' - '+ y) for x, y in lot]
+    else:
+        lot.append((dx(thirty_days_ago), dx(yesterday)))
+        lot.append((dx(prior_30_start), dx(prior_30_end)))
+        lot.append((dx(prior_year_start), dx(prior_year_end)))
+    return lot
+
+
+def datestamp():
+    return 'Generated {0:%A, %B %d aprox %I:%m %p}'.format(datetime.now(pytz.utc))
+    
 
 class Unbuffered(object):
     """Provides more real-time streaming in Jupyter Notebook"""
