@@ -1839,6 +1839,62 @@ field of SEO, we just don't want to send mixed signals to Google.
 To be continued...
 
 ########################################
+To git clone or pip install?
+########################################
+
+If you "git clone", then you will get all the standard .ipynb example files in
+a nice accessible place in ~/ (home) which you'll be able to reach with Jupyter
+Notebook, but you can't make that your own home directory for a github repo
+because you can't (easily) mix repos in the same folder. Yet, you're going to
+want to immediately turn this location into your own repo. The answer is to::
+
+    git clone git@github.com:miklevin/pipulate
+
+...in one location in order to have access to the full repo and maybe
+participate in Pipulate development. In another location, you make the folder
+destined to become your own repo after you get my files, then delete out the
+invisible .git folder inside and do a new "git init". So get started making the
+myschedule folder::
+
+    git clone git@github.com:miklevin/pipulate mysched
+    cd mysched
+    rm -rf .git
+    rm -rf pipulate
+    git init
+
+From here, it's up to you how much you want to purge out from the original repo
+files before you make you start adding files to your own git repo, but the
+heart of the thing, the file that the Linux systemd daemon will point to in
+your /etc/systemd/system/mysched.service file. If you pip installed Pipulate on
+your system, none of the other files are really necessary. You may also wish to
+do this clone-and-purge process on your local machine for the sake of keeping
+your Jupyter Notebook work in a git repo as well. Remember the cloud server
+you're working on is where you "promote" ad hoc Jupyter Notebook work to live
+in a more persistent scheduled form, so you want to have very similar
+environments on both. It's like forking, but none of this is really important
+enough to fork. It's just your own scheduling instance of Pipulate.
+
+########################################
+I prefer to pip install... plus nbviewer.
+########################################
+
+If you're a purist about it and want to build it up from scratch for a fuller
+understanding (than clone-and-purge can provide), then just make a new folder
+directly from Jupyter Notebook and copy any raw source files you may need here
+from github, or go through nbviewer for even easier saving of Jupyter
+Notebook-ready .ipynb files. Just paste any templates you're interested in
+from::
+
+    https://github.com/miklevin/Pipulate
+
+into::
+
+    https://nbviewer.jupyter.org/
+
+...and save the resulting .ipynb file to where your local copy of Jupyter
+Notebook can reach it.
+
+########################################
 Reminders & To-Do's
 ########################################
 

@@ -374,6 +374,32 @@ def human_date(a_datetime, time=False):
         return ('{0:%m/%d/%Y}'.format(a_datetime))
 
 
+def date_ranges(human=False):
+    """Return a list of 3 commonly used daterange tuples."""
+
+    from datetime import date, datetime, timedelta
+    def dx(x):
+        return gs.api_date(x)
+    def dh(x):
+        return gs.human_date(x)
+    lot = list()
+    today = datetime.now()
+    yesterday = today - timedelta(days=1)
+    thirty_days_ago = yesterday - timedelta(days=30)
+    prior_30_end = thirty_days_ago - timedelta(days=1)
+    prior_30_start = prior_30_end - timedelta(days=30)
+    prior_year_end = yesterday.replace(year = yesterday.year - 1)
+    prior_year_start = thirty_days_ago.replace(year = thirty_days_ago.year - 1)
+    if human:
+        lot.append((dh(thirty_days_ago), dh(yesterday)))
+        lot.append((dh(prior_30_start), dh(prior_30_end)))
+        lot.append((dh(prior_year_start), dh(prior_year_end)))
+    else:
+        lot.append((dx(thirty_days_ago), dx(yesterday)))
+        lot.append((dx(prior_30_start), dx(prior_30_end)))
+        lot.append((dx(prior_year_start), dx(prior_year_end)))
+    return lot
+
 class Unbuffered(object):
     """Provides more real-time streaming in Jupyter Notebook"""
 
