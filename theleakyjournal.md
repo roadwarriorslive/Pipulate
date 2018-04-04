@@ -1,6 +1,160 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
 ## Wed Apr  4, 2018
+### Linux, Python, vim & git; Finally, I See The Fit
+
+Assume that you are always being stupid, and that there are always smarter and
+better people around you all the time. Why? Because whatever the topic,
+someone's had a lot more time than you to think about it, to prepare, and maybe
+even paid a lot more specialists to tweak it all out just-so that you couldn't
+afford. Forget beating them on the elegance and generic plumbing of hardware.
+Turing complete means anything can be anything. 
+
+But whereas this is normally used as an excuse for sticking with whatever
+language you started with and happen to be most comfortable with, it should
+QUITE THE OPPOSITE, but instead used as an excuse to find the PERFECTLY RIGHT
+LANGUAGE for you and the work at-hand that you wish to complete-- preferable in
+an artistic and flashy fashion full of flair. I like flair. It's the magic
+flash-paper. I have to remember to get more flash-paper. I think Adi would
+enjoy throwing balls of fire again now at 7 years old.
+
+Okay, so that first rule. You have to be just smart enough to outsmart THEM in
+the pesky game of "HE/SHE who becomes the "parent execution context" wins.
+That's why it's generally against Apples licence to virtualize MacOS. It's also
+why Windows is just fiiiine with having Linux SUBSYSYTEMS. Get it? The battle
+is over being the proprietary hardware bottleneck that everyone wants to
+have/use/be. You know, the iPhone back in the Zeros. Now, in the Tens, Android
+is just squeeking ahead. And in my mind, that's only because of the Stylus
+integration into the Samsung Note 8. 
+
+Okay, Samsung has pulled ahead with the Note 8. Google is doing some
+interesting things trying to control the Android platform default norm by
+inserting the proprietary Google Play ecosysystem into an otherwise free and
+open source Android OS. Amazon won't have it, and doesn't pre-install any of
+Google's services on the Kindle HD series. I installed them seperately. On
+Kindle HD8's for $50 and $70 respectively, for my blue one and Adi's pink
+indestruckindle from Prime-Day 2017. We didn't upgrade tablets this year. I'll
+hold off as long as possible since these are the least-used (though still
+occasionally used) of my various in-play hardware platforms.
+
+So, this is about getting a clue technically? Oh yeah! Hardware platforms!
+Master operating systems. The battle to be the proprietary default installed
+control-everything, get you addicted to their stuff, re-creation of the good
+ol' 1950s when GE and Westinghouse had broadcast media basically tied-up neatly
+into efficient local markets for advertisers. Google aligns with the
+advertising industry mentality in offsetting hardware costs considerably with
+advertising, and giving a lot a way for free to become the industry standard.
+Old playbook. VHS vs Betamax, etc. 
+
+Apple aligns with Sony Betamax, with the twist that Jobs had the foresight to
+reposition the Mac on a Unix core foundation. And as the Outliers book
+emphasizes, that means Bill Joy Unix... hahaha! And here I am typing on vim,
+which he calls a mistake. Hi Bill! Another big fan of your mistake here.
+Working in low-bandwidth conditions is good for muscle-memory (use of
+videogame-like keyboarding) versus mousing around. 
+
+So that fact that Bill Joy's re-write of Mach (if I have my stories right per
+Outliers), Linux from the Berkeley lineage, which was the contested leak via
+Ken Thompson from original AT&T Unix (whoops) which got locked up in
+SCO-litigation, who were a spin-off from Novell who acquired it from an AT&T
+Bell-labs spin-off (making it the one true Unix), which didn't matter much in
+the end because both FreeBSD and Linux made SCO's litigation moot. Unix/Linux
+(and *nix in general) are now generic plumbing of the information technology
+world. 
+
+I am not an outlier on the order of a Bill Joy, Ken Thompson, Linus Torvalds or
+Guido van Rossum... my high-tech patron saints, such as it were... with
+onerable mention to Bram Moolenaar for vim (Bill Joy did both the rewrite of
+Ken's Unix and the rewrite of the line editor ex into the precursor to vim,
+vi), and a whole bunch of others for like the Internet, Web and stuff, but
+these 4 names stand above the others. 
+
+Honestly, I wouldn't think of including Bill Joy among those 3 as I think of
+him only as the Sun/vi guy, but listening to Outliers reminded me of his much
+deeper role. So many others! But Ken, Linus, Bill Joy, Bram and Guido wrote all
+the tools that are letting me right this here and now: Unix, Linux, vi (& Linux
+again), vim and Python. Oh yeah, and git for publishing. So that's 2 in the
+Bill Joy column and 2 in the Linus Torvalds column. These tools are different
+from others. True, these 4 are exceptional people, but I guarantee you they are
+also remarkably well placed Outliers for becoming precisely the people they
+became and to play the roles they played.
+
+I'm not in any of their leagues because I have failed to specifically put in
+the 10,000 hours or 10 years on any one precise thing. However, something has
+been plauging me for a time much longer than that, spread out not only over my
+entire 30-some odd years in industry (I was a co-op student at Commodore
+computers), but also back to my 11/12 year summer-camp where I played with my
+first TRS-80 and started reading The Chronicles of Thomas Covenant, and my
+12/13 year old summer when I went to Israel and started reading The Lord of The
+Rings. So much energy I had, and it went unfocused into all different things.
+That's not such a bad thing, but it's really only made an SEO out of me today.
+
+Intuition is compelling me towards tools that shine with a certain light. It's
+not an easily acquired taste, this predelection for tools that are a bit
+prickley. Trying vim for the first time will be the exact same experience as
+smelling a stinky cheese, but if you just get over it and acquire the taste,
+you may find out that it's the Unicorn you've been hunting all your life; that
+it fills an emtpy hole and is as surely intended to be a part of your body and
+human experience as making hand gestures while talking. Linux, Python, vim and
+git.
+
+--------------------------------------------------------------------------------
+## Wed Apr  4, 2018
+### It's Outliers That Get Promoted to Something Else
+
+Okay time to make the donuts. But I already MADE the donuts. So I did! So it's
+time to make the donut maker maker. And then I make sure the donut maker maker
+keeps making the donuts, so my principle job becomes watching it. After I am
+quite certain it (he/she-- we're going to have pronoun problems with robots) is
+making the donuts correctly (enough to run a business), I replicate my donut
+maker maker and put the copy in the next location.
+
+Donut-making is about to undergo a major evolution. For some, it's going to be
+a revolution 'cause they'll be taking up Python too-- and I think that's VERY
+COOL that I can play my little role in promoting this. Guido van Rossum is
+Prometheus. The fire-giver role has already been taken, and it couldn't be by a
+nicer guy. Well, maybe Linus. But we can talk about Prometheus' later. Right
+now, it's about who the baton of fire has been given to (us) and what we do
+with it. That's what this personal journal is about. Using a strong inner voice
+to guide the way.
+
+When we say it's turtles all the way down, what we mean is that everything is a
+system or part of one. Systems within systems within systems. Our "real"
+reality is one system ruled by the rules of both the very big (Einstein's
+Relativity) and the very small. We can say Einstein for Relativity, but there
+are LOTs of people, but let's say it's the 2 maxlights: Max Plank who realized
+photons of light had discreet quantum energy-states, and James Clerk Maxwell (a
+bit later but still in the 1800's) who said electricity, light and magnetism
+are all the same thing and here's the equations. Uh yeah... that works... still
+today.
+
+Within our "real" there can be another system with another set of rules
+containing another seemingly real Universe of its own-- and whether these
+"nested" realities are any more or less valid than each other-- or whether they
+are really even nested anymore once optimized-- is all a matter of debate.
+Virtual realities are real, and they're here to stay. It's going to be as big
+and crazy a thing in our future as the robots, especially in how it will
+insidiously start to divide the always-onners from the mostly-offers.
+
+It's this self-navigation internal voice thing that I have to spend some of the
+best thought-time on. It's more of a first principle than most things. That WE
+HAVE a sort of cognition and persistence of memory and the ability to
+deliberately impact, alter and change the course of development of our world is
+in itself the most noteworthy thing about our lot. We're different than other
+matter in that we organize matter differently than other matter. And THAT does
+in fact matter. We ARE the point. Outliers again. Re-"reading" (Audible)
+Outliers again. That 10,000 hours over a likely duration of 10-years is a very
+important concept. It's what throws off average distributions and promotes
+outliers to something else.
+
+So it's my job to to intuit in what way I am outlying and take advantage of
+it-- perhaps not for profit incentive, buy rather for legacy enrichment for
+Adi. What gift could be greater? Her challenging me to a million subs on
+YouTube almost certainly ties in. Been packing powder long enough. Time to
+light the fuse... but not just yet... not just yet.
+
+--------------------------------------------------------------------------------
+## Wed Apr  4, 2018
 ### @11 w/ Michael Levin at 11:00
 
 Okay, it's coming up on 8:00 AM, and I'm going to baby-sit the running of the
