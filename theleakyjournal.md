@@ -1,24 +1,36 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
 ## Wed Apr  4, 2018
-### Adi Levin with Michael Levin at 11:00 @...???
+### @11 w/ Michael Levin at 11:00 @...???
+
+Register LearningLevin or something equally good.
 
 Okay, it's coming up on 8:00 AM, and I'm going to baby-sit the running of the
 scripts from home, and maybe get into the office even a little bit later than
-usual. I'll be in to meet Matt O, but I'm not going to be in a rush to waste my
-best creative morning energy fighting Staten Islanders in the fucking cattle
+usual. I'll be in to meet Co-worker, but I'm not going to be in a rush to waste
+my best creative morning energy fighting Staten Islanders in the friggin cattle
 shoot. For the first time since the Check Cashing store I had to take over
-right when I turned 21 and graduated college and my dad died. Sheesh! Talk
-about outliers and bad timing. Had I received that extra boost like I'm giving
-Adi... well, let's just say I'm glad I read Malcolm Gladwell early enough that
-I took it also as a sort of parenting guide. Adi's turning 8 soon, and that's
-plenty of time to start zeroing in on her passions and interests that'll take
-the 10,000 hours. Let's start with letting her explore ages 7 through 10. At 10
-or 11 encourage her to "go for it" whatever it is, and be completely supportive
-financially, emotionally and logistically. I should probably leave strategy to
-her... though I may chime in a suggestion here or there. Make the idea hers
-initially if at all possible. Not too Machiavellian. It's all for the greater
-good @11!
+right when I turned 21 and graduated college when my dad died is there another
+thing in my life that earned "friggin" as part of its label.
+
+Sheesh! Talk about outliers and bad timing. Had I received that extra boost
+like I'm giving Adi... well, let's just say I'm glad I read Malcolm Gladwell
+early enough that I took it also as a sort of parenting guide. Adi's turning 8
+soon, and that's plenty of time to start zeroing in on her passions and
+interests that'll take the 10,000 hours. Let's start with letting her explore
+ages 7 through 10. At 10 or 11 encourage her to "go for it" whatever it is, and
+be completely supportive financially, emotionally and logistically. I should
+probably leave strategy to her... though I may chime in a suggestion here or
+there. Make the idea hers initially if at all possible. Not too Machiavellian.
+It's all for the greater good @11!
+
+And so it's like with the Tardigrade Circus. It's not that I don't have the
+capability or interest or raw material. It's that a preponderance of things in
+my life has to be conducive to that sort of thing happening. So you have to
+layer it up. Have consistency. Commit to a path. Maintain state with your
+on-the-fly invented systems-- the principle one of which is developing that
+"internal voice" of yours, which is what these @11 things I believe are going
+to be about.
 
 --------------------------------------------------------------------------------
 ## Tue Apr  3, 2018
