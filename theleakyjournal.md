@@ -1,5 +1,89 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Wed Apr  4, 2018
+### Adi Levin with Michael Levin at 11:00 @...???
+
+Okay, it's coming up on 8:00 AM, and I'm going to baby-sit the running of the
+scripts from home, and maybe get into the office even a little bit later than
+usual. I'll be in to meet Matt O, but I'm not going to be in a rush to waste my
+best creative morning energy fighting Staten Islanders in the fucking cattle
+shoot. For the first time since the Check Cashing store I had to take over
+right when I turned 21 and graduated college and my dad died. Sheesh! Talk
+about outliers and bad timing. Had I received that extra boost like I'm giving
+Adi... well, let's just say I'm glad I read Malcolm Gladwell early enough that
+I took it also as a sort of parenting guide. Adi's turning 8 soon, and that's
+plenty of time to start zeroing in on her passions and interests that'll take
+the 10,000 hours. Let's start with letting her explore ages 7 through 10. At 10
+or 11 encourage her to "go for it" whatever it is, and be completely supportive
+financially, emotionally and logistically. I should probably leave strategy to
+her... though I may chime in a suggestion here or there. Make the idea hers
+initially if at all possible. Not too Machiavellian. It's all for the greater
+good @11!
+
+--------------------------------------------------------------------------------
+## Tue Apr  3, 2018
+### Focus on Mastering the USE of the Tool (not on inventing yet another tool)
+
+The rest of today is going to be about automating a join of some new data into
+the main sheet. All the thought-work I put into how to manage this stuff
+without "a system" beyond what standard Linux/Python provides is going to
+pay-off big-time (I think). I'm on the verge of it, opening the dike... The
+Netherlands being below sea level and the little Dutch boy has LOTS of metaphor
+application, of which I'm going to steer clear of every one, so I can get on
+with the business of final automation... after a short break.
+
+Took my break and had a great chat with Boss about the coming changes. The rest
+of the day is going to be about getting home to wrap up the automation work
+from home tonight. It makes no difference where you work now, and you're going
+to want to be in the office tomorrow to meet Matt O. He's taking the time to
+commute here, which is NOT easy for him, and one of the big points is for him
+to start showing me the mock-ups for the dashboards. Boss making him be very
+explicit. I need do start reading about that API.
+
+Try to do as much of it as you can before you leave. When you get home, let it
+be you-time. Get through it, 1, 2, 3... 1? Okay, pretty much everything is done
+now except for the datestamps and the secondary sheet. First tackle the
+datestamps. That will look MOST wrong. I can always maybe disable the secondary
+sheet and say the issues there were a little more difficult than I thought
+(which they are). But the datestamps I keep getting wrong, so nail it...
+fundamentally. Put something in Pipulate for it.
+
+Hmmm. Put the dateranges themselves right in pipulate. That's pretty bold. That
+certainly justifies staying late tonight. Adi will be calling soon. Make
+whatever you do tonight TOTALLY COMPATIBLE with talking with her. She takes
+priority!
+
+Stayed at the office to talk with Adi tonight, and then even did a little
+daterange work after that. I didn't finish the automation, but this'll be one
+of those nights/mornings/experiences. I don't need to knock myself out. I just
+need to knock it out of the ballpark. Things are coming together. I'm a little
+bit sorry I had to come up with a system to patch old reports rather than just
+move to the new field-mapped reserved row-1 approach (can't wait!), but the
+whole Live Reports ARE Templates, placeholder-columns, shadow copies mental
+framework HAD to be constructed. There's always going to be shitty old reports
+that we need to phase out... well, in phases. Patch now. Polish later.
+
+Laptops are for laps again! I'm sitting here at the Staten Island Ferry
+Terminal Manhattan-side waiting for the 11:00 PM ferry because the 10:30 one
+was cancelled due to a medical emergency. As with so many things in life, my
+timing could hardly be any worse. But hey, that's what makes my journey my
+journey. Minimize regrets. Work in multiple passes. Don't let the crazy nervous
+energies consume you, and definitely help Adi work through them. She will be
+well served learning to navigate with a calm, quiet and competent inner voice
+at a much earlier age than I did.
+
+So, what's the topic of this post? I think it's publishable. I'm in the
+noosphere for sure. I think I'm forging some new territory, and it's time to
+bear down on it and keep doing more and more of it rather than is your old
+habit of backing off and self-sabotaging-- because the time isn't right, or I'm
+scared or whatever. I can make it happen for myself whenever I like, and I like
+to keep telling myself that. It's time to start really... what's my metaphor?
+Heating the iron and striking it while it's hot. And fold it and make the right
+alloy and learn to use what I've built like a master... oh wait! I don't have
+to hammer metal. Guido van Rossum already did that. Focus on mastering use of
+the tool.
+
+--------------------------------------------------------------------------------
 ## Tue Apr  3, 2018
 ### Concerning Mastering Tools With Muscle Memory in Field of Tech
 
