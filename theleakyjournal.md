@@ -1,20 +1,109 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
 ## Wed Apr  4, 2018
+### Before Anything Can Happen, I Need to Find & Defend Center (Coordinate-Zero)
+
+Okay, it's time to get serious about "growing out Pipulate" from the middle.
+Address the difficult to express problems that badger you most, but which get
+discussed the least. I discuss motivation plenty, so we'll skip that but for
+reminding you to have a strong, confident internal voice that you have to
+practice to develop, just like you would typing into vim or keeping a single
+text-file journal for 10 years... oh. Yeah, I'm becoming pretty expert at
+getting into the idea-flow with vim.
+
+But the next big problem is fixed-location issues. Finding your "zero" so you
+can just let muscle memory can kick-in and your subconscious can start steering
+you through the "default" motions of a repetitive task. If you're thinking a
+lot about the steps of a repetitive task (that isn't life-or-death critical),
+then you're wasting the most precious energies you have to offer this world on
+re-figuring out how to do the hokey pokey. Martial Arts are often split into
+the Kata (the forms) and tournament-style (improvised) fighting.
+
+The closest thing I had to a "center" in technology I'd have to say is the
+single-floppy AmigaDOS operating system disk I made for my old Amiga 1000,
+called ARP 'N Crunch-- ARP for the AmigaDOS Replacement Package and binaries
+that have been "crunch" compressed for maximum storage on the disk. Almost
+every file, I had a good sense of what it was, why it was there, and the
+danger of removing it-- which was never much, because the Amiga was going to
+crash anyway. 
+
+It was glorious, booting right into the CLI (command line interface) and not
+invoking Workbench (the Desktop OS) until and unless you wanted it-- a practice
+that was common in the early days of Windows 3.1 and even the Raspberry Pi. The
+original Raspberry Pi was even envisioned as old-school text-only (like the
+Rascal) and no game-caliber Broadcom GPU which it ended up getting (and made
+all the difference). At any rate, small text-only systems that you've pruned
+down line a garden are great. They reveal a lot about your habits (CAN you
+develop muscle-memory or do you RELY on the mouse) and share a lot in common
+with embedded systems where efficiency is always valued for shaving off cost.
+
+Now, center is much more difficult. Systems are built on systems are built on
+systems. That old 8-bit or even 16-bit hardware feeling is... well, a thing of
+the past for all intents and purposes as THE MAINSTREAM computer. Now, they're
+these limitless hybrid things. Very dynamic. Very disconcerting to muscle
+memory. I liked the old Amiga days where you knew how to target an animation to
+play back under just such perfect conditions on another Amiga that had at least
+that bare minimum Amiga 1000 with 256 KB of RAM (yes ladies and gentlemen,
+0-that's 1/4 of 1 MB for the entire computer, OS and any applications you hoped
+to run). Everyone had at least 512 KB of RAM with the basic front-fitting
+expansion slot.
+
+I would love to be spending more time with Adi right now, but just like as with
+last weekend, my preparations to "explode out" from the center of Mikeopolis to
+free myself from the trained into-her crowding me out habit. It went over very
+well. At first, she came on at sort of full attack. I barricaded about a
+5-square foot area that was Mikopolis using the giant air filter and the lizard
+terrarium as I was cleaning it's cage. The point was clearly made with her and
+I saw a flash of anger and "what next then?" demand. And I showed her just like
+how I planned for the Fortress of Adi-tude to actually be quite awesome. 
+
+I laid it out to her that she could go to war with me over nonsense. Or she
+could enjoy a cozy everything's actually quite awesome and well thought out
+experience. One way will lead to a path of isolation from and distancing from
+Dad, because I won't put up with that shit. You can't crowd me out of every
+place I sit. I know you want closeness, but you can't always deliberately
+choose the hallways and passageways for play, especially when it's the only one
+and it's highly used. The conflict that that sets up and the bad poisonous vibe
+throughout the weekend is unacceptable. She may not be able to put it in those
+words, but she's experimenting with being mean with dad. She thinks thoughts
+like that are so advanced and subtle. 
+
+I know exactly what she's doing and I call her out on it. It's shitty behavior,
+and it's going to stop right now if she wants to continue having wonderful
+weekends with dad. If she's going to act out in stupid-ass passive aggressive
+ways that edge me in like a cornered animal that eventually has to lash out,
+0-you're going to see what a Mikopolis defense looks like. Apropos, because we're
+reading Glenda of Oz, the last book of the original Oz series. I think this
+means we will have gone through them all. Now I'm not saying that Dad is
+super-dynamic or anything. I'm not. But I am able to cope with situations. And
+this situation calls for a whole series of Mikopolis defenses.
+
+    I'm Miklevin of Mikopolis.
+    I'm making MY DECREE:
+    I'm pushing lizard tanks at you
+    When you encroach on me.
+    I'm making no excuses. PAUSE.
+    For making awesome usage
+    Of encroacher-crushing walls.
+
+--------------------------------------------------------------------------------
+## Wed Apr  4, 2018
 ### Linux, Python, vim & git; Finally, I See The Fit
 
 Assume that you are always being stupid, and that there are always smarter and
 better people around you all the time. Why? Because whatever the topic,
-someone's had a lot more time than you to think about it, to prepare, and maybe
-even paid a lot more specialists to tweak it all out just-so that you couldn't
-afford. Forget beating them on the elegance and generic plumbing of hardware.
-Turing complete means anything can be anything. 
+someone's had a lot more time to think about it and prepare than you have.
+They started putting their 10,000 hours in sooner, and you'll never catch up.
+They got a budget? They may even have brought in the world's best specialists.
+Forget beating them at THEIR game. The good news is, you don't need to. You
+just need to become an expert TOOL USER to make your mark.
 
-But whereas this is normally used as an excuse for sticking with whatever
-language you started with and happen to be most comfortable with, it should
-QUITE THE OPPOSITE, but instead used as an excuse to find the PERFECTLY RIGHT
-LANGUAGE for you and the work at-hand that you wish to complete-- preferable in
-an artistic and flashy fashion full of flair. I like flair. It's the magic
+But what tool? Any tool can become any other tool, because Turing Complete. But
+whereas this is normally used as an excuse for sticking with whatever language
+you started with and happen to be most comfortable with, it should QUITE THE
+OPPOSITE, but instead used as an excuse to find the PERFECTLY RIGHT LANGUAGE
+for you and the work at-hand that you wish to complete-- preferable in an
+artistic and flashy fashion full of flair. I like flair. It's the magic
 flash-paper. I have to remember to get more flash-paper. I think Adi would
 enjoy throwing balls of fire again now at 7 years old.
 
