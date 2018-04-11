@@ -1,5 +1,132 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Wed Apr 11, 2018
+### The Calm Before The Calm Before The Storm
+
+At the office. Get to know the wizards around you. I think there might be
+wizards. What I am striving to be is a general ad hoc 80/20-rule systems guy
+who's got pretty a tight rein-on and pretty accurate control-over some pretty
+wild data horses, and always manages to get those tables joined and reports
+generated in a sensible, timely and increasingly actionable format to all the
+necessary stakeholders, either for the purposes of manager dashboard
+oversights, or for group-dynamic leader-board movers-and-shaker systems. Try to
+create a sort of Bollinger Bands of predictive analytics for SEO.
+
+Yup. Onto something here. Get the morning donuts baked, and then forge-on
+unapologetically for the work that needs to be done this morning. Give careful
+thought to the ORDER you do things. SEQUENCE MATTERS!!! It's quite possible
+that I'm becoming OCD. And perhaps in a way, well good! I'll work my way up the
+the bravery to do all the many things in life that I should be doing in life
+while I've still got... knock on wood... half a life-time left to use. What you
+lose in youth due to lack of experience, you make up for in old-age by tweaking
+things just-so based on things you know. The time has come to do a little
+tweaking, my friends, hahaha! And here's what I know.
+
+I'm going to Anaheim this June with my daughter. She is 7 and wants to travel
+with Dad. We'll stop at Disney Land while we're there. I'll have to get natural
+about remembering which Disney park is which. Disney World is the one I've been
+to a bunch of times. W because it's a fuzzy soft round blue circle in disguise.
+World is the One that came first. It was Disney's first shot at a park. And he
+made it stick. It planted seed, took root, and really grew over the years
+shining off the energy you put into it in the form of your, rightfully-so in my
+(even Jewish) opinion worshipping dollars that you put into its church.
+Christian corporate America isn't the evilist thing out there. They did buy
+Darth Vader, so redemption... Ka'Ching!
+
+Okay, back to the thoughts of work. You are at the office. You have a black
+column to the right of your screen... out of pride, I think that people can't
+read too easily over your shoulder, because you sure as heck ain't changing
+your word-wrap over having this nifty new laptop, nor am I going to go with a
+dual 80-column terminal split-screen the way that's easy-ish on a wide format
+monitor. I'm glad to be on a right-sized screen finally. Don't envy anyone
+anything. You're putting yourself into a dynamic state where you're not tied to
+particular location. The one price you pay is to carry your laptop almost
+everywhere and have to worry about it all the time, like the good old days of
+something or other, which I can never remember because there never was a (come
+on, now) Amiga laptop, and that was a hole in my heart. Of all the companies
+that could have pulled it off, it should have been Commodore, had they the
+correct engineers working on it with the correct vision and motivation and
+desire to change the world with a vision. Would have been nice too if they
+could have gotten the thing to stop crashing... but hey, that was the Amiga,
+and a big point of the keeping it dynamic point in the first place. So,
+increase your font size to... 32. Just the right compromise of not bringing too
+much attention to my old-man eyes, and large enough for my old-man eyes. 
+
+And now, as one of my wizards would say, now back to work.
+
+Okay, being here at the office (oops) is good for me. Try not to log into the
+office provided laptop even once today. Though don't get OCD asbout it. If you
+SEE A HEADLINE on the line immediately below the dashed-line and datestamp.
+Take advantage of the righteous feedback loop that I'm creating. I may do a
+work from home Friday... with Adi there but... wow... what an innovation. Now
+is the time for innovation and invention. Innovate and be inventive. Connect
+the nearby that are just dying to be connected and have their unexpected
+perfectly complementary 1+1=3 benefits released. If lines aren't the straight
+things of truth that we think (once thought) they were, then integers are not
+necessarily the clear-cut things either... especially around the 0, 1, 2, 3
+thereabouts. Ratios and proportions as visually expressed and imagined are
+perhaps a more accurate thing than integers. Pi how easy it is to express as a
+symbol and difficult as an integer reveals that little truth-bomb about nature.
+Don't rely to heavily on your straight lines or even your integers. They're not
+real. What matters is seeing overall patterns and changes over time (internal
+relative consistency)... because isn't internal relative consistency all you
+can really ask for?
+
+Time for the Pipulate creation myth.
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+## Wed Apr 11, 2018
+### On the Staten Island Ferry Commute, Journaling!
+
+I'm on the Staten Island ferry at 7:45 AM. Okay, there's a TIMESTAMP for you,
+haha! But really, this whole getting my environment into a condition where I
+can work well-- do the best work of my life, in fact. I am factoring around
+making THAT true, BUT not violating the 80/20-rule itself to do so. It's doing
+me A LOT of good listing to Outliers on audio. I missed tons on the first
+go-around, if it was even a complete go-around. I did it in paperback format
+back during the Connors Communications days, along with Guns, Germs & Steel,
+Freakonomics and others. Never got to Collapse. 
+
+I lost most of those books, and never read most to the end. Audible is great
+for letting it resonate and giving my brain more chances to recreate and
+internalize the thoughts as the author intended. I did this on a number of
+Quantum books-- much MORE important to my not-long-ago mind, for it is among
+the last greatest riddles remaining on this side of some sort of enlightenment.
+However, in my thought experiments zeriong in on what's going on with
+non-locality and other quantum weirdness brings me time and again to human
+emotions.
+
+There are new things going on now that my "everyday" laptop for work and home
+is the same thing. I'll be bringing Carroll back and forth to work now. I'll be
+one of THOSE. It is one of the most valuable and important things I own now
+(wow, I own something other than a phone or other pocket-sized thing that is
+actually special to me) and this is a statement on having a larger local static
+state that I can rely upon. I was VERY drawn to tiny minimal Linuxes, like Tiny
+Core Linux. I think things like TinyCore (to avoid avoidance of
+abbreviation-collision with TCL) appeal to folks like me who value the ability
+to get operational the quickest with the least (while still abiding by the
+80/20-rule). There's smaller Unix/Linuxes, like QNS or LFS, which are both
+incredibly valuable in their special cases, but not "Debian-ish" enough--
+meaning having a usable, well-maintained software repository system that deals
+with installs and dependency issues.
+
+Okay, so how I'm using the ferry leg of my commute is to actually do
+vim-writing into my journal. This entry, in fact! It's about a half-hour ride,
+twice a day. My goal is to get my good thought-work "out of the way" during
+these rides. The train-ride going into and out of the ferry ride are very
+different. I have choices between the different subway-lines Manhattan-side.
+The "green line" lets out right at the building where I work, but it requires a
+completely not worth-it transfer. Much better to just take the 5 and get off at
+23rd and walk the rest of the way to 28th. However, I despise the 5-line. It's
+coming in from Brooklyn, and any positivity I've built-up from all the Staten
+Island and ferry beautiful light is wiped away in a sort of worst-of-humanity
+disgust. Wow, I'm glad I don't live in Brooklyn. I don't think I could take it
+layered on so thick. Shit, I hate those people and I am the opposite
+incompatible color, vibration, texture and whatnot from those people-- even
+though I'm very aware I LOOK a lot like them, with my affectations and stuff.
+
+--------------------------------------------------------------------------------
 ## Wed Apr  4, 2018
 ### Before Anything Can Happen, I Need to Find & Defend Center (Coordinate-Zero)
 
