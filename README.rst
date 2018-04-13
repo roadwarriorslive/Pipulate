@@ -283,11 +283,11 @@ Or the slightly longer-form, but probably easy for maintenance::
     import pipulate as gs
     import pandas as pd
     key = 'gobbledygookdockeyhere'
-    tab_name = 'Sheet1'
+    name = 'Sheet1'
     rows = (1, 20)
     cols = ('a', 'b')
     sheet = gs.key(key)
-    tab = sheet.worksheet(tab_name)
+    tab = sheet.worksheet(name)
     cl, df = gs.pipulate(tab, rows, cols)
     df['B'] = 'foo'
     gs.populate(tab, cl, df)
@@ -401,7 +401,7 @@ column indexes, using row-numbers and column-letters that display in
 spreadsheet user interfaces::
 
     key = '[Your GSheet key]'
-    tab_name = 'Sheet1'
+    name = 'Sheet1'
     rows = (1, 20)
     cols = ('a', 'b')
 
@@ -410,7 +410,7 @@ sake of avoiding future confusion about which document you're actually working
 on. It's far too easy to have 2 files with the same name. Be sure to use the
 long string of characters copied out of a Google Sheet URL for the key. That's
 the long string of alphanumeric gobbledygook not broken up by slashes. The
-tab_name is always "Sheet1" on a freshly-made sheet. If you rename it or want
+name is always "Sheet1" on a freshly-made sheet. If you rename it or want
 to manipulate a different tab, be sure to make it match this. The rows and cols
 tuple defines the rectangular region you will want to manipulate.
 
@@ -433,7 +433,7 @@ DataFrame. This is setting the stage to pipulate, by creating two identical
 shapes, but of different types (one from GSpread and the other from Pandas)::
 
     sheet = gs.key(key)
-    tab = sheet.worksheet(tab_name)
+    tab = sheet.worksheet(name)
     cl, df = gs.pipulate(tab, rows, cols)
 
 Even though the cl is a cell_list from GSpread, it is also very similar to
@@ -615,11 +615,11 @@ method directly from a row (when it's implicit). Now, we can select a 3-column
 range::
 
     key = '[Your GSheet key]'
-    tab_name = 'Sheet1'
+    name = 'Sheet1'
     rows = (1, 4)
     cols = ('a', 'c') # <--Switched "b" to "c"
     sheet = gs.key(key)
-    tab = sheet.worksheet(tab_name)
+    tab = sheet.worksheet(name)
     cl, df = gs.pipulate(tab, rows, cols)
 
 Now we plan on putting a URL in column A and some text that we're going to look
@@ -922,11 +922,11 @@ To use step-by-stride with Pipulate we take a basic example and simply add a
     import pipulate as gs
     stride = 100
     key = '[Your GSheet key]'
-    tab_name = 'Sheet1'
+    name = 'Sheet1'
     rows = (1, 10000)
     cols = ('a', 'b')
     sheet = gs.key(key)
-    tab = sheet.worksheet(tab_name)
+    tab = sheet.worksheet(name)
     cl, df = gs.pipulate(tab, rows, cols)
     #df['B'] = 'foo'
     #gs.populate(tab, cl, df)
@@ -965,11 +965,11 @@ pandas API calls described above::
     import pipulate as gs
     stride = 100
     key = '[Your GSheet key]'
-    tab_name = 'Sheet1'
+    name = 'Sheet1'
     rows = (1, 10000)
     cols = ('a', 'b')
     sheet = gs.key(key)
-    tab = sheet.worksheet(tab_name)
+    tab = sheet.worksheet(name)
     cl, df = gs.pipulate(tab, rows, cols)
     steps = rows[1] - rows[0] + 1
     for i in range(steps):
@@ -1124,11 +1124,11 @@ Now instead of hitting the remote, slow, expensive SQL database every time, we
 execute the SQL once at the beginning and can use the local data to pipulate::
 
     key = '[Your GSheet key]'
-    tab_name = 'Sheet1'
+    name = 'Sheet1'
     rows = (1, 1000)
     cols = ('a', 'b')
     sheet = gs.key(key)
-    tab = sheet.worksheet(tab_name)
+    tab = sheet.worksheet(name)
 
     cl, df = gs.pipulate(tab, rows, cols)
     df['B'] = df.apply(hits, axis=1, df_obj=df_sql)
