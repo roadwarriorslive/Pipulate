@@ -1,5 +1,353 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Tue Apr 17, 2018
+### In The Beginning I Re-positioned myself as a Datamaster
+#### Challenge a Samurai to Speed Chess
+
+Just say no to Data Science! It's Data Master you want to be concerned with,
+because who wants to be a scientist? Well... everyone, I should hope. So in a
+final Hail Mary play of wanting to do something significant, I'm going to take
+up Python Pandas as my new data samurai sword-- that is to say, a tool which I
+can commit to muscle-memory that won't go and get its ass obsoleted in under
+one measly decade. 
+
+This is the part where I bore you with background and genesis of this stuff and
+my reductionist of using it. But I'm not reductionist on words. I'm about to
+ramble about state-of-mind and what it is to be human, and the perpetual battle
+we're all locked-in between rule-enforcing static-thinkers (because that's all
+they know because they were taught to confidently believe that's all there is
+to know) like religious zealots and the CompSci elite priesthood that flocked
+from punch-cards to Java (compressed story). I'm likely to piss a lot of people
+off, but hey, if you're not acquiring a few enemies, you don't stand for
+anything. 
+
+I stand for Truth, Justice and the Golden Rule. You can have your way, like
+nearly almost entirely so long as you're not too much of a freak, find others
+like you that support you in and reinforce your odd reality, and get along just
+fine, having adopted the Golden Rule-- in reverse, I might add. Do NOT do unto
+others as you WOULD NOT have them do unto you. Otherwise, you're gonna have
+some bad mojo doing the complete reverse of compounding advantage; eroding
+advantage? Compounding disadvantage?
+
+Anyhow, I've had the giant reset button of vendor-pivoting (responding to some
+alleged competitive pressure ala .NET to Java) pressed on me more than my
+fool-me-X-times threshold... which was an embarrassingly high value. I can be
+fooled A LOT, apparently. TRS-80 to Coleco Adam to Commodore Amiga to Microsoft
+IIS/SQL Server plus variously pfe/Edit Plus kept throwing away invaluable
+keyboard shortcut and macro-writing skills text editors... ugh! It's painful
+even just to think about. The only truly satisfying experience was the Amiga +
+AREXX & Cygnus Editor (CED). Since then, I've been trying to piece together an
+equally lovable small... uh... "stack"?
+
+The answer is the nearly disruption-proof and nearly universally applicable to
+any domain's problems Linux, Python, vim and git. It is for the most part both
+your developer stack and your runtime production environment stack. And it
+could all fit on a rather small USB keychain drive. And all that "sync'ing"
+your critical information/data/configurations/whatever is done through git
+using Github or Bitbucket as your repos-- unless you care to set up your own
+repo on perhaps an EC2 or other generic cloud Linux instance. That's the point.
+Pluming doesn't matter, so long as it's Linux... or maybe Unix (FreeBSD).
+
+The giant reset button of platform obsolescence is your enemy. I'm talking you
+deliberately and right here at this moment upon the reading of this very
+article commit to taking up tech with 20-year lifespans AT LEAST and just for
+starters. And for me, that's Linux, Python, vim and git. I told you why plenty
+now (if you're one of my channel-dispersed 10-thousand-or-so followers), so now
+I'm going to tell you HOW. NOW IS THE TIME TO TUNE IN. And it's not to the
+exclusion of other tech. Quite the contrary, you won't win any
+new-platform-killer-app jackpot race with this platform. Rather, it's going to
+qualify you to be a universal plumber and electrician of the information-age.
+Very Blue Collar, after awhile. It will be. It's not today.
+
+THAT'S the opening I'm walking into. I want to show other people the way I've
+found-- the way I'm typing this into vim right now on the Staten Island Ferry
+with no net connection, totally comfortably knowing every word I type will be
+published because of the "leaky journal" I'm currently now typing it into in
+the main Pipulate branch... hahaha! Well, this is performance art as much as
+anything, and it's about time. I'm good at this stuff, and I can make an
+informal publishing system by "leaning into" the strengths of the tools I'm
+using. This is the computing at 40,000 feet that Linus Torvalds would talk
+about as one of the criteria for the git distributed revision control system he
+created to take the place of the license-inhibited proprietary product the
+Linux kernel had previously been based on. You walk into openings, such as I'm
+doing now with helping to define the new breed of Data Master.
+
+I'm often intuiting the next big thing. The list is actually pretty humiliating
+that I didn't turn any of these insights into vast material wealth by this
+time. I've always tied my material reward the expert practicing of skills...
+which happen to take place unavoidably upon PLATFORMS. Hardware has always
+mattered quite a bit more than people give it credit for, especially how the
+particular hardware in your life during your 5 to 8 year old formative
+circumstances predisposes your static-thinking habits. I'm aggressively
+un-wiring dangerously anger-producing static-wired states that dance around
+settling into my daughter's mind. I thankfully know how to dispel this sort or
+anger-- through like almost a lifetime of dealing with it.
+
+Perhaps teaching Adi what controlling your mind and your tools in a
+Samurai-like fashion is really best. Poker face. Deep and deadly skills that
+make others have to take what you say and do very seriously. Others WILL ALWAYS
+take advantage of you and put you down and make you subservient on their
+internal image of the social scale that they're mentally mapping you into--
+naturally beneath them. They're static thinkers and are staged for disruption
+ways that delightfully remind ourselves of who we really are, despite who we
+like to think we are. There's a bit of anti-pattern mutation-trying Rocky
+Balboa aspect to what I'm promoting. Make up for sheer cleverness by not dying
+from your mistakes. Under-promise and over-deliver.
+
+Mapping out "next steps"... self-navigating... requires contemplation,
+engagement in the action, and sometimes "feeling out" your path and your way in
+a way you can't intellectually do standing at a white-board. APIs have a "feel"
+to them, and you've got to grab the reins and give them a few yanks. Even just
+the authentication issues (if there are any) are quite telling about the
+system. Many of the policies of the contract is exposed at this point. Do they
+include or suggest the client library to use for authentication, if it's one of
+the more complicated ones like OAuth2.
+
+These days, decisions are even more muddled than they were back in the day.
+When the term Web Master was emerging, most do-it-on-the-cheap folks went with
+some form of the LAMP stack. That is to say, Linux, Apache, MySQL and PERL (and
+later PHP or Python). Ruby was honorarily added to the P-languages of the LAMP
+stack just in time for its importance to diminish dramatically by nginx
+replacing Apache as the technorati's darling webserver, and Oracle's acquiring
+of MySQL... and the rise of JavaScript on the server with node.js... yeah, that
+about covers it. CSS. Full Web Stack new rockstar hotshots who also trade in
+cryptocurrency. Uh yeah, not me. Methinks mefeels similar preparation for
+sudden liquification of limestone bedrock sinkholes.
+
+I was among the early wave of Webmasters, but missed LAMP in favor of the
+Microsoft IIS/SQL Server route. I learned the advantages and nuances of
+Transact-SQL and the SQLServer hardware on RAID-10 tweaked-out with magic
+numbers that give better/cheaper/more-controlled performance than the (then)
+cloud equivalent. Well, it's no longer that way, and new systems must rise to
+prevalence and prevail while others fade onto their nuanced niche-y places and
+my ways ascend as they ultimately must, given how their interfaces are
+carefully delineated so as to permit the seeping-in of the accumulating
+wins-over-time properties of exercise and practice.
+
+It is in this muscle-memory promoting sprint that I'm bootstrapping a new
+"non-system" system nearly from scratch. That is to say, the system is pure
+Linux, Python, vim and git knit together into my muscle-memory samurai sword of
+tech. And samurai swords are a bit different than other weapons. They're
+designed to allow a decapitatingly efficient death-blow in a single
+from-relaxed-state movement. THAT'S efficiency. THAT'S OPTIMIZATION. And that's
+the 80/20-rule Pareto Curve, leaning into your tools' strengths, or
+what-have-you. Don't ruin my happiness nor my child's childhood.
+
+The concepts of both Kung Fu and Samurai keep coming up. Perhaps Ninja, but not
+so much for me. Ninjas work in the shadows and are ambush-oriented. That's very
+reptilian-- too much for me. I'm optimizing bipedal primate movements. You can
+optimize your tools and movements to as well-known static state, such as your
+opponent standing within a sword's reach of you, without any sort of
+extraordinary armor or lifetime of training/skills. If you're within arm's
+reach of a skillful Samurai, your life is at his discretion. But challenge a
+Samurai to speed-chess, he'll fall apart.
+
+In the beginning, you didn't know nuddin'. Then you warmed up your brain.
+Perhaps the way I'm going to do things isn't exactly the way I think I'm going
+to be doing things. The goal here is to do something very advanced without
+hardly doing anything at all. Webmastering wouldn't really have become so
+popular back in the day if it was really all that hard. The trick is it
+requires keeping 10 or 20 things straight in your head at the same time whereas
+most people have a hard time with even just 3.
+
+But don't fear! To keep it doable, we're going to start out VERY non-ambitious.
+Basically, we'll be making a Linux-launched but Python managed scheduler...
+usually of other Python tasks, in turn. And by Python tasks, I mean the
+scheduled running of .py files running just as if you ran a script like:
+
+    python file.py
+
+...but from a scheduler! It's EASIER than old LAMP web publishing and such.
+You're running scripts you control when you want to run them, and get to space
+out all of your tasks like a game of tetris to keep your hardware running at or
+near capacity, churning out reports that it has no responsibility for any of
+the back-end database stuff. It's just an API-monkey in the middle, carrying
+out your commands, leveraging the generic Linux/Python.
+
+So you do something in Jupyter Notebook. It's good. What next? Well you sit
+there and "press the button" every day... hahaha! Very Lost.  Guess that's a
+recurring topic in history, as it should be. True automation is an illusion. Or
+at least, lasting automation is an illusion. Everything takes tender love and
+care to keep working. A process neglected is a process likely decaying. And
+hence, we embrace scrap and rebuild. Only X-number of reports are in-play, so
+why not let Y-decay? That's the scrap-end of the scrap-and-rebuild inchworm of
+progress.
+
+The datamaster approaches his work with a scrap-and-rebuild mentality. This can
+only work when building is something you do as easily as speaking or writing.
+
+My problem of late is that I've let a number of reports that have an increasing
+number of eyeballs on them and importance in the company creep out of control
+complexity-wise. There's a lot to have to remember and keep control of
+moving-parts-wise. And by that, I mean caches, archived data-pulls, changing
+APIs and the like. And this is all on just one EC2 instance and no "back-end"
+database to speak of, except for the occasional archiving of .csv files on
+Google Drive, local caches to lower unnecessary API-requerying, and Google
+Sheets itself. And so I have a bunch of python files that are being run from a
+master-script, which is itself being invoked from the default Linux scheduler
+and service manager called systemd.
+
+Each report has its own unique problems now. They're nothing I'm going to solve
+in a day, and I may end up scrap-and-rebuilding them soon anyway. So, don't put
+any craft into the construction of the report itself, except insofar as mastery
+of the Python Pandas library and basic spreadsheet formatting skills that
+should eventually come as naturally to you as anything else. Don't bother
+delving into the in-sheet Excel or AppScript formulas or scripts. There's
+nothing you can accomplish there that isn't accomplished better on the
+back-end. Just use GSheet as a presentation-layer-- and on rare occasions, for
+configuration and setting values.
+
+So, our story starts a bit like life itself. There is barely even any
+self-awareness. You can't yet put 2 & 2 together as such. However, you can
+start discovering and making use of a series of assertions, which once
+discovered, are the first static hook out there you can hang your hat on, so to
+speak. Uh oh, American idioms. Sheesh! Well, I am what I am, and so here we go.
+
+These very first proto-steps are documented already either here in this journal
+or in the associated README.rst. My intention is that over time I will ramble
+on unbearably here, while I continuously refine and improve that file over
+there. And so, get yourself an EC2 or something like it. I go with Amazon,
+because that's what my DevOps Peeps gave me, so that's what I use. You could do
+worse, and it is good to know the Amazon way. Though in the way a Datamaster
+starts out, really almost all decent Linux's that have systemd and a good
+software repository is good enough and equal for our purposes. The trick is to
+think generic here, and you need a generic Linux that runs 24x7 on your behalf,
+and you need to be able to log into it with what's commonly known as a terminal
+program, like that built into Macs and that added with the Linux Bash subsystem
+for Windows. So that means ALL mainstream platforms now offer a native
+text-based terminal with an ssh program. Your devops folks will likely give you
+your key-file that you use on the ssh command to connect to your EC2 instead of
+a password. This is very common and is the company-controlled EC2 context in
+which I run. I AM NOT web publishing. This does not run any webserver or even
+web services software. It just runs scheduled scripts.
+
+Okay, so HOW does it run those scheduled scripts? Oh yes! Okay, copy the
+essentials from elsewhere in this very journal. 
+
+    /etc/system/systemd/keeprunning.service
+
+...which contains:
+
+    [Unit]
+    Description=This keeps the Python program the_schedule.py running.
+
+    [Service]
+    Type=forking
+    Restart=always
+    RestartSec=5
+    User=ubuntu
+    Group=ubuntu
+    WorkingDirectory=/home/ubuntu/repo/
+    ExecStart=/usr/bin/screen -dmS screenname /home/ubuntu/py35/bin/python /home/ubuntu/repo/the_schedule.py
+    StandardOutput=syslog
+    StandardError=syslog
+
+    [Install]
+    WantedBy=multi-user.target
+
+And here's the variety of commands that enable and start the service:
+
+    sudo systemctl enable keeprunning.service
+    sudo systemctl start keeprunning.service
+
+And after edits are made, you can lest the enabled services and reload them.
+
+    systemctl list-unit-files | grep enabled
+    sudo systemctl daemon-reload
+
+--------------------------------------------------------------------------------
+## Fri Apr 13, 2018
+### And Now For Something Completely Different
+
+I desperately need "a system". I need a secret weapon... always. Once upon a
+time, it was The Amiga Computer from Commodore, but really from the same
+hardware wizard as who brought you the Atari 2600, 400/800-- proprietary shit.
+That hardware wizard left Atari and funded by Dentists designed the most
+important piece of visionary future-predicting/shaping piece of hardware
+unrivaled until Apple showed the world how cool mobile could be. Nothing
+interesting came in between, and the desktop "GUI" interface did nothing but
+teach a generation of people how to rely on the must static of devices-- a
+piece of soap on a string-- as a pointing-device. Sheesh!
+
+There's nothing wrong with the text-based type-in computer interface as
+encountered time and again as "the terminal" or the command-line interface (as
+we old Amiga-hat's would say). It's just that Steve Jobs needed a conceptual
+enemy to peddle soap-on-a-string, and he chose the old DOS interface-- lumping
+into it the much more powerful, respectable, and deeply emotionally intuited I
+would like to add. Jokes abound about Unix standing for eunuch, which it is.
+However you have to understand that in the context of the thing it's chopping
+the gonads off of is Multics, an AT&T/GE overlord time-sharing OS that could
+have kept the Internet or personal computers from ever happening, and a
+ka'ching sound on every clock-cycle, which would have probably never surpassed
+a few Megahertz.
+
+Anyhoo, clearly I'm starting something here that I believe is in a noble
+spirit, re-invoking some lost (but not too lost) art-form, which is very
+satisfying when you, in particular, line up your habits in such a way as to
+foster and encourage the development of a particular kind of muscle-memory that
+makes applying a certain type of solution (running Python code against data)
+almost effortless-- and by effortless, I mean right down to the thinking of
+what machine you're going to sit down at, what hand motions you're going to
+perform to start doing what type of work, knowing what you're going to type to
+get input from where, and generally how you're going to process it all on the
+"back-end", and how you're going to push output back out to the various
+stakeholders and people who need it.
+
+This non-system system is based around creating a certain type of Google
+Sheets-based information "dashboard". We say dashboard because vehicle
+dashboards can't really afford to put a lot of extraneous information up there,
+least it distract the driver and cause you to crash the vehicle. So dashboard
+truly implies something very important. If it takes a lot of explanation or its
+importance isn't intuitive at-a-glance, then something is wrong. We're making
+things where captured data will be shoved in efficient but still quite raw
+format (not the original API data-call, but the "extracted" numbers) get shoved
+into a tab that may even be hidden. That info is used to "roll-up" into
+aggregations, sparklines, indexes and other formats and presentations with the
+capability to motivate stakeholders into particular behaviors. Such a system
+could, with just zooming in on the first 10 rows of a spreadsheet in GSheets
+become a leader-board in a sales environment. The applications are limitless.
+
+So, old-fashioned webmastering (which I once was) became search engine
+optimization (didn't want to specialize). Now that machines are ever-so-slowly
+beginning to learn, SEO will be transforming again. That's my field: search
+engine optimization. And the old back of tricks have a lot of life left in
+them. The first things to consider about any API (application program
+interface-- and EVERYTHING'S an API) is the labels and walls. What's being
+accomplished in the details of how the first set of walls and labels are thrown
+up around a thing? In this case, the word "optimization" is called into
+question. Optimization is something compliers do against specific known-state
+static hardware. It's presumptuous when it comes to playing into Google search
+results, as if the old PageRank and Universal Search system REALLY WILL last
+forever. Trust me, Google's working this problem from both ends and they will
+eventually meet in the middle, and you just won't know when the intelligent
+agent is more in charge than the procedurally improving algorithm. 
+
+So, this is an origins story. If I'm going to do this, I'm going to do this
+right. I'm going to minimize the background story now and just sort of drink
+from the troth myself, because you've been led to the water. In case it isn't
+clear yet, install Anaconda for Python 3.x (but probably 3.6). It's your warm
+and fuzzy safety net layer that gives you operating system independence to your
+code, and even the know-how you're developing. What you WON'T be developing
+much with Python under Jupyter Notebook in the web-browser (the principle
+reason for installing Anaconda) is the non-graphical user interface experience
+where muscle-memory and effortless mastery are really born. If you can't
+control it all from the keyboard with only the occasional tap-touch (where it's
+actually FASTER than the keyboard equivalent), you won't get faster and faster
+over time.
+
+And you do want to get faster and faster over time, don't you? Even if it's not
+about becoming a speed-demon, it is still about having it so committed to
+muscle-memory that you CAN go fast without even thinking about it. Even if you
+code slow, you COULD code fast in a pinch if you had to. It's the difference
+between Chess and speed-chess. I bet a lot of people would give up Java and C#
+if they had to code against a clock to the same results vs. a Python person
+(or maybe it is and we're just seeing it play out in the marketplace), then
+things would be a bit different. Python clearly wins. And I have to emphasize
+the point that if you're still resisting taking up Python because of the
+masculine hunter snake name, you're making a big mistake. Python as in Monty.
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 ## Wed Apr 11, 2018
 ### The Calm Before The Calm Before The Storm
 
