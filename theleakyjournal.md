@@ -1,5 +1,409 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Mon Apr 30, 2018
+### Creation of Pipulation
+
+Welcome ladies and gentlemen to the birth of the wizarding world. All around
+you today you will find clues that everything imaginable to humans in on the
+verge of coming into being, either virtual or real. Fairylands and wild flights
+of fancy are all on the menu, so long as they are economically viable. Virtual
+worlds such as World of Warcraft, Second Life and everything that's replaced
+them in the modern age showed us that. Books like Verner Vinge's Rainbows End
+and Neal Stephenson's Snowcrash and everything that's replaced them in the
+modern age have shown us vivid visions of vivid visions. 
+
+The new breed of computer interaction that is upon is is like the next step of
+what happened with Star Trek communicators, which we have long-since
+leapfrogged. Next-up is all the voice recognition and augmented realities.
+When you're casting a spell with a vocal incantation, it will be your own
+personal A.I.  agent listening to and responding to you. When you draw gestures
+and symbols in the air, it will be that same intelligent agent watching your
+augmented reality scribblings. 3D printed robots will provide your flying
+drone-fairies and gated-utopia oasis built in whatever otherwise barren harsh
+bleak landscapes, such as Kansas farmland, will be your Oz.
+
+There is a certain amount of time between now and then when it won't be nearly
+so easy from a natural human spoken-language perspective, or Minority Report
+style air-swoosh gestures to bring sophisticated machine automation control to
+the average person, education-wise as we know ourselves today to be. It's going
+to take several Herculean baby-steps forward to get ourselves as a general
+population to where most of us are as comfortable controlling and instructing
+machines as we are bossing each other around. Most of the world in other words
+is going to have an AI-dependency. They are going to be AI-dependent.
+
+This will apply to everything from driving to typing to tying your own
+shoelaces. Handwriting? Who needs it! And in many ways, this thinking is
+correct. Progress and the gradual shifting and drifting of social norms
+generation to generation could turn common-sense backwards in only about 4 or 5
+generations, which is just long enough for everyone alive to no longer have any
+living memory of the consequences of the mistakes of the past. Horror which was
+once an up-close and personal thing becomes a distant, abstract, and no-longer
+an automatic human-decency dissuasion against committing atrocity. The world
+forgets to become outraged against genocides and such. That is our present
+state, which as Jared Diamond points out (I believe because I have never really
+read it) in his book Collapse. We're perched for a plunge.
+
+The rest of this writing today deals with how to keep you from being sheep
+according to a new methodology I am developing right here and now today. Things
+like it may have existed before, but this particular implementation is mine.
+It's called Pipulate and many of you have seen iterations of it in the past.
+The coolest one was a Flash microwebserver that streamed a single page back at
+you that carried it's entire ongoing I/O throughout the "pipulation" process.
+It was awesome, but alas a dead-end because of GUI-issues. 
+
+Mikey no likey front-end work. It's like hand-coding PostScript. No wonder it's
+called JavaScript-- it's exactly in the tradition of a language nobody was
+every intended to hand-code. It's no wonder all these CSS parsing tools exist
+and all these sub-language framework .js libraries pop up like fleas. The
+LISP-club is back in the form of The Full Webstack (du jour) movement, and it's
+all a bit to arcane and scrap-and-rebuild competitive millennials there for me.
+I've seen it and been there and done that a few too many times to let my
+precious mapping-space in my brain for muscle-memories that must last for a
+lifetime (or at least a career) to get muddled up with beauty contests and
+horse races and the latest hardware platform nuanced details.
+
+For those who don't understand what I mean by hardware details, it's all about
+the user interface. Take touch-screens for example. Precisely how do they work
+code-wise. What about multi-touch? Can you assume pinch-and-zoom? What is the
+operating system supposed to do here versus what you're supposed to do
+"manually" with your programming code? JavaScript has a lot of this, because
+it's event-driven by design. While this may make it ideal for user-interface
+design, this is precisely the part of coding that I really despise. I like the
+"back end" or invisibly running part of coding. Insert random joke here.
+
+Despite what labels you slap onto these two different types of coding, the
+differences are as profound as introvert vs. extrovert... or whether WWF still
+means World Wrestling Federation to you. The hardware/software combo that
+constitutes the "complete" platform often have rabid fans... rabid fans who
+remember their particular hardware that was popular as they were becoming aware
+human beings from about age 6 to 16 as the good old days. This is the beginning
+of your rosy reminiscence. Monday, Tuesday, Happy Days... groovin' bout tech
+with you!
+
+From around 18 to 25 you discover life is awesome but short. If you make it to
+28 then in your 30s, hopefully you figure out who you are, what you're about,
+and precisely what motivates you and where you "draw energy from" in life--
+usually after having given it a few failed attempts. I'm in my late 40s now,
+and I'm kinda sorta seeing that if you've made it this far, gone through a
+life-altering adjustment or two to keep yourself sane, stabilized things enough
+to STILL be thinking about the future, then you're in a position to do a bit of
+that Steve Jobs-style Universe-pinging if you've still got it in you. 
+
+The only thing that's different now is that suddenly, with that wee tiny bit of
+extra capacity you have due to the nature of having done almost everything
+"like that" 2 or 3 times before, when you're faced with new challenges, you can
+create 2nd or 3rd generation solutions even just while the rest of the folks
+are cluing in on the fact that there clearly should be such a thing in the
+modern age as a Data Master. When they realize it and turn to see what a
+datamaster should be, here they shall find this journal in the Pipulate
+repository, and the seminal articles of the rise of datamastering will be
+"discovered" by googling googlers... for you see, I am an SEO.
+
+Today I've decided to life-hack myself into a compulsively addicted to data
+datamaster. This is a bootstrapping trick. Once you do this to yourself, you
+are deeply accountable to yourself and not off the hook... ever... until you
+turn off your automations, disaster strikes, you stop paying your cloud bill,
+or your dying days. Really, a properly put-in-place filename.service started
+with systemctl enable should run for as long as the system its running on is
+still there running. And whatever that thing is that's running will be under
+your explicit control, right down to how often the operating system checks to
+make sure it's still running. The OS has the responsibility to re-spawn it if
+it's not running. Everything is else is up to you in whatever that thing is
+that it's running.
+
+And that thing it's running is a Python script that's actually intended to be
+able to be running 24x7, but would actually be folly to do so because the world
+is not a perfect place, and all machines need a little rest in the form of a
+reboot. Nuke the place from orbit, it's the only way to be sure. Wow, I used to
+think that quote was Nuke the place for morbid... ugh. Anyhoo, our first step
+in our scheduled script is to set a nightly reboot. But I am actually against
+the clock once again. I'm not publishing and pushing out these articles nearly
+as much as I should. I'm doing my Universe-dinging here and nobody will know it
+unless you announce it and push out and forward the narrative.
+
+Okay, I am inspired by Intel's tick-tock model. They had some time-unit in mind
+in which they SHOULD be able to produce such-and-such sort of advancements not
+beyond their reach according to all their experience, and then hold themselves
+accountable to that schedule. Additionally, the cycles of tick and tock
+actually mean different things. Tick is a more aggressive and foundational
+advancement while a tock cycle is a refinement and optimization cycle. Between
+an aggressively culture-itized tick+tock rhythm a company like Intel, which
+arguably didn't start out with the best IC-design templates in the world
+none-the-less self-improved and self-re-invented such that even if it has to
+turn a massive ship to compete with billions little ARM gnats, it can. And
+that's an amazing thing.
+
+So, my version of tick-tock, designed to hold MYSELF accountable to a likewise
+aggressive, yet sanely sized baby-step advancement routine starts with creating
+the routine. The routine is my new Pipulate generalized reporting system for
+SEO and a plethora of other uses you will I expect find to put it to.
+
+Everything begins with a login session to some remote machine running
+somewhere. In my case, it's a company-provided Amazon EC2 instance. I'm pretty
+sure I'm a "home" directory on some larger shared by the occasional
+server-needing co-worker. I know this because when I log into that machine and
+cd ~/ and then cd .. (one dir up) and ls (list files & folders), I see a bunch
+of my co-workers names. I'm named ubuntu. I was the first default user when my
+DevOps guy set up this environment (I think). Woot! 
+
+As it turns out, I have my little helper commands that also serve as a sort of
+documentation of my own work (reading the contents of your alias shortcuts)
+spread between 2 directories: ~/ (aka home) and /usr/local/sbin. This is
+interesting because I thought I was on my own dedicated virtual machine, but it
+makes sense for them to put multiple users on the same machine. Just keep it in
+mind, because naturally now we're timeshare-nested at least 2 degrees deep.
+That EC2 server is partitioned out of the Amazon datacenter, and then within
+that particular hardware of the EC2 instance (yes, there's real hardware there)
+is further shared between whatever users you load on that system, because the
+thing the EC2 instance is emulating is a Linux server, which itself is
+multi-user. And the number of machines DevOps has to maintain goes down as
+user-per-machine goes up. Don't let it bother you. Just keep it in mind. DevOps
+folks who let you play with VMs on their budget because they trust you are at
+the top of the cool-people column.
+
+Okay, my special keyboard commands right now are:
+
+sd: show all MY running services. It grep's on the word that is common to both
+my scheduler.service files. I sd a lot to see if it's just the one (always)
+running service or both. If both, I'm in the rapid-creation mode that I need to
+create for myself right now, this instance. It's the fire under my ass that I
+need. The other command is:
+
+z2s: This STARTS the service that runs on a very rapid basis. Lock yourself
+into that cycle and go. Pipulate the hell out of the rest of the time that you
+have. You still may not be able to do it, but it really is just still 11:30 AM
+and you started at 9:30 AM and you already whipped yourself up into this
+frenzied let's make progress mode! Feel GOOD ABOUT YOUR YOURSELF and your
+capabilities! Who else can do this? Who else can take this next step and lock
+themselves into this new in the noosphere extreme coding technique and very
+particular recipe I'm describing. Crackling energies. Lightning about to be
+drawn down from the sky.
+
+The things to remember are these:
+
+1. You will have TWO scripts running under systemd from the outset.
+2. The OS makes sure each of these scripts is running every 5 seconds.
+3. These scripts are scheduler.py and scheduler2.py, respectively.
+   - While these names are arbitrary, the repetition helps sbin commands.
+4. If the Python scripts are continuously running, the OS does not interfere.
+5. By convention, our python scripts use the PyPI schedule library.
+6. By convention, we schedule a nightly exit of our Python script.
+   - This ensures that we're working with a clean slate every 24-hours.
+7. The scheduler2.py is set to be "aggressive" in its schedule-cycle
+   - A report is set to update every 30-seconds to 2-minutes.
+   - I'm choosing every 1-minute for today's exercise
+   - I'm also making the log-file heartbeat be every 15-seconds
+   - That's 4 beats to a bar. Good for muscle memory but not quite Johnny Cash.
+
+This is about to be a magical 3 hours-- the complete germination of a new
+system. First order of business: making sure you can optionally turn-off the
+hitting of the "expensive" (i.e. non-Google) APIs... Okay, edited out the
+actual hitting of the API. You must thing of the rest of my writing from this
+point on over the next 3 hours just commentary. It is fast-and-furious, because
+it is the birth of a new system, and I am working as much on intuition here as
+reason, and it ain't no damn tutorial. If this works out, light will show the
+way. Anyhoo, 1, 2, 3... 1! No question here. Edit the file scheduler2.py is
+invoking every minute. No lack of clarity here. Deep breath. This is the last
+moment of the pre-pipulate era. I'm about to do the first real session of what
+I hereby coin pipulating. Now, make a light show!
+
+First, we ALWAYS pipulate generally the same way from an initial template. All
+we know is that this thing will be run, run and run again every minute, so make
+every line of code you put down do its role, and do it immediately. And you
+better sure as hell be sure you're taking baby-steps or you're about to have a
+systemd respawning loop-the sign of pipulating being out of whack and an
+adjustment to the process required. It's just a little Python code sitting in
+any old filename.py file that you know Linux is going to keep running if you
+don't. Don't let Linux have the chance!
+
+Create the first-row system. If A1 contains the world map, then it's a field
+mapping row that should be hidden. Right? This should be row 1 because then you
+are always sure to have it above the first frozen row, which must by necessity
+be 2. Do it.
+
+Totally in the zone, and this is actually pretty amazing. I can actually "feel"
+the fast iteration high feedback ad hoc and scheduled reports being the same
+thing system coming into creation. I'll have to expose the git history at some
+point. The key insight here is that because you're in a scheduler and you can
+therefore pump up the schedule to every minute and get a real-time feedback
+loop going on designing the report. This is just so critical on being what you
+need to be at this company. After the report's designed, you cut down the
+cycle.
+
+Okay, this is the Oh Shit critical moment. I have a dataframe loading from the
+sheet. I need to make it look just like a mock-up now. I'm making fabulous
+progress. Code is being kept minimal, readable and the function self-evident at
+a glance. Very nice. Now I've got to populate a data grid as a test.
+
+And everything went well and the phone-call even went well. And then there was
+the follow-up with the stakeholder.
+
+Pshwew! Much of the rest of today went into creating the quick jumping-around
+muscle memory /usr/local/sbin shortcuts. I basically applied much of what I was
+doing on my local laptop (Carroll) to the remote EC2 cloud server. I also took
+a lot of the shortcuts that resided IN THE REPO and thus created ambiguity
+about when they worked and when they didn't based on what directory I was cd'd
+into, and moved them all to sbin.
+
+I additionally renamed what I've been referring to as scheduler.service and
+scheduler2.service into pipulate.service and pipulate2.service, respectively.
+That way, the following keyboard shortcuts in sbin do the following:
+
+- p: Lists all running gnu screen sessions with pipulate in the name
+- p2: Toggles on or off the pipulate2.service (pipulate.service always runs)
+- z: Enters the gnu screen session named pipulate (always running)
+- z2: Enters the gnu screen session named p2 if pipulate2.service is running.
+- g: Git commits the latest schedule stuff and pushes to repository.
+- l: Does screen -ls command to list all gnu screens.
+- r: Reloads all daemons and specifically restarts pipulate.service
+- r2: Only specifically restarts pipulate2.service (no daemon reload)
+- ps: Start (or restart) pipulate.service
+- pss: Stop pipulate.service (you don't often want to do this).
+- p2s: Start (or restart) pipulate2.service
+- p2ss: Stop pipulate2.service (you actually do this quite often).
+- pp: Alias for p2ss because you do it quite often and is good vim humor.
+
+And this leads to interesting patterns to wrap your head around. The 2 most
+common things you'll want to do is p2 for a toggle or pp to explicitly turn it
+off. I can see myself doing this a lot. I'm taking advantage of the short
+1-letter command namespace that the patrons of Unix (and by extension, Linux)
+so courteously left available to us; especially impressive considering how
+short most of the commands like ls, cd, mv, rm and such really are. It wasn't
+until PCs and DOS that ls became dir. Durrr. Anyhoo, that's all for today.
+Muscle memory upon the morrow assured.
+
+This is where things start to get all Samurai Ninja... or at least suburban
+white belt Tae Kwon Do, if it's easier to believe. See you tomorrow.
+
+--------------------------------------------------------------------------------
+## Wed Apr 25, 2018
+### Creating Your First /usr/local/sbin to show your non-existent service running.
+
+Time to do this part as a public thing. I'm soft-launching Pipulate in PyPI.
+That is, you can now pip install pipulate, and now it's time for me to get
+started REALLY USING IT. I'm like using it for the really big projects now that
+my career is based on, and there's a lot of trying and refactoring until I get
+it right. It's a matter of shifting around the responsibility for things until
+exactly the right things have exactly the right responsibilities such that all
+jobs get carried out reliably and predictably and the oversight and constant
+evolving, tweaking and swapping in and out of parts is allowed to occur with
+ease and low-risk. The system should be designed to almost invite you in to
+make it your own... just by creating a few text files and executing a few
+commands. This is Genesis.
+
+In the beginning, you got some generic Linux machine you can run like a
+server-- that is to say, constantly. It doesn't need its own Internet
+accessible IP like web publishing. It can live inside your firewall, so it
+could be a NAS that you keep turned on all the time. A lot of people will end
+up on a cloud server such as an Amazon EC2 instance of the sort that started
+the whole Cloud movement. Regardless of the nature or location of the hardware
+you're running, the main thing is that it supports the new systemd Linux system
+service manager and scheduler. It's sort of like cron, but much easier to work
+with. You just edit a few text files in a location where you'll have to sudo to
+have write permissions. If what I just said intimidates you, stick to the
+Jupyter Notebook stuff for now.
+
+Okay, if you're still reading then the next step is to create TWO different
+schedulers. Because there's always something running in your automated sequence
+that's absolutely essential that it finishes running each morning, you have to
+have two separate schedulers... one considered somewhat inviolate so that you
+only add things to it that have proven themselves in the less-stable and
+non-mission-critical scheduler. I think I've got to call these thing1 and
+thing2. There has to be VERY STRONG nicknames surrounding this. You wouldn't
+think so, but decisions like create the original base assumptions that are
+going to color your entire experience with your own system for perhaps years to
+come. You don't want to over-simplify or over-complicate. You've got to strike
+that most-natural middle so that you can develop effective muscle memory around
+it. This is important.
+
+    /etc/system/systemd/thing1.service
+    /etc/system/systemd/thing2.service
+
+Thing 1 runs first. Thing 2 runs too. Okay, this will work. I've got internal
+names I'm working with here, and it really doesn't matter what you choose. To
+change it later you would just stop the service, disable the service, rename
+the file, enable the "new" service and start the "new" service. See? Anyone
+who's used the Windows Services manager stuff back in the Windows NT/2000 days
+through a graphical user interface stopping and starting services, it's pretty
+much the same thing as systemd under most modern Linuxes except that we're
+interacting with systemd by making text-files that define the service and then
+using the systemctl command to enable, disable, start and stop them. Start by
+logging into your server and typing this command to see all the running
+services:
+
+    systemctl list-unit-files | grep enabled
+
+Or if it scrolls past too fast:
+
+    systemctl list-unit-files | grep enabled | less
+
+This is classing Linux chaining together of commands to get your desired
+effect. The output of systemctl is being fed to grep to filter for just the
+lines containing "enabled" which is being fed into the program "less" which
+lets you scroll forward and back through something that was otherwise scrolling
+past too fast to read. Don't worry about not getting it all at first. Just type
+that command to see all the stuff running like system services (or daemons) in
+Linux. Any program you write in any language can be turned into a system
+service merely by virtue of plopping a text-file in /etc/system/systemd/ with a
+.service extension containing the details about when to start it and how often
+to check that its still running, and it's a service. And THAT means that an
+ALWAYS RUNNING PYTHON SCRIPT can be a service.
+
+Now follow this: if that always-running Python script just so happens to be a
+scheduler itself... well, now you have an OS-ensured running Python script
+running. It only can't have bad syntax. But if your script flakes-out because
+of some untrapped condition, it will respawn itself as fast as you like. I
+generally do every 5 seconds. Of course this doesn't ensure your script is
+running CORRECTLY-- only that it's still running.  If it craps out in under
+5-seconds, then it will get caught in a run, crash, run-loop. Consequently a
+way to tell that your script is running regularly and correctly all the way
+through is foundational. A scheduling heartbeat is that you know you can get
+into the habit of rallying around, perhaps in one and only one Google
+Spreadsheet per Pipulate Server that you can always check in on...  easily and
+from anywhere... because GSheets.
+
+Technically, we will want TWO heartbeats running into perhaps the same Google
+Doc-- but different tabs within the spreadsheet. We can have one sheet for all
+Pipulate servers (independent schedulers / can be on same machine). I can't
+believe it's already 12:30. I got in the paperwork for taking Adi to work
+tomorrow. I hope it's not too late. I have to write my weekly report tonight.
+Okay, let's get this down. It's not really about the automation so much
+anymore. I wouldn't call it automation, so much as sanity. Okay, I want to make
+sure that both scripts are running with an easy to execute command. I'm going
+to start using /usr/local/sbin on the webserver when these commands are bash.
+Otherwise, I'd have to do ./filename.sh every time I execute it out of the repo
+location. First we make the sbin file:
+
+    sudo vim /usr/local/sbin/sd
+
+In vim, hitting "i" gets you into "insert mode". So, hit i and type this in. If
+you get anything wrong, hit the Esc key, hit dd to delete the line, then hit i
+and try again. Welcome to vim. In about 5 years, it'll all come natural and
+actually be worth it.
+
+    systemctl list-units --type=service --state=running | grep 'thing'
+
+To save it, you now can hit [Esc]:wq[Enter]
+
+That is to say, after you're done typing the command into vim, hitting the
+Escape key gets you out of insert mode. Hitting the colon key gets you into ex
+command-mode from which you issue the "write" command and hit Enter to make it
+save and quit. If that was your first experience with vim, congratulations. If
+you got through that successfully and the next few commands and make your first
+sbin command to see if your service is running, then nothing can stop you. This
+is like trial-by-fire for a Datamaster. If you can't set up a basic
+Linux/Python scheduler under generic default Linux with just a few pip
+installs, then this is not the field for you. After /usr/local/sbin/sd exists,
+you want to give it the correct permissions. 
+
+    sudo vim /usr/local/sbin/sd
+    sudo chmod +x /usr/local/sbin/sd
+
+Now anytime you connect to this server, you can just type sd and make sure that
+your service is still running. Notice I left the .sh extension off, which is
+just for rapid-typing convenience. Linux will recognize it as a bash file.
+
+--------------------------------------------------------------------------------
 ## Tue Apr 17, 2018
 ### In The Beginning I Re-positioned myself as a Datamaster
 #### Challenge a Samurai to Speed Chess
