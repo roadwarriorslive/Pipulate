@@ -1,5 +1,282 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Tue May  1, 2018
+### Combining lcu_cache with pd.apply()... brilliant!
+
+Wow, what a day yesterday and so far today. Real birth of a non-system system
+here. Let me tell you what I'm doing and why this is one of those rare
+undiscovered yet meaningful narratives going on right now on the Internet. I've
+developed and adopted and used too many systems that have let me down, my own
+included, to let myself get caught into the overly-specialized system-building
+trap. No, no, no! The point is just to be effortlessly expressive in language
+of your choice, which in my case happens to be Python. And in what contexts can
+you run Python? In the context of a generic Internet-connected Linux server is
+where our story begins. And by all that, I mean a typical Raspberry Pi or
+Amazon EC2 or other hardware or cloud instance of something someone'll sell you
+as a reliably Linux-running Net-connected (or connectable) machine. Kapish?
+
+Fast-forward to you having it, being able to log into it through an
+old-fashioned command line window running terminal software, so you're typing
+into some remote machine instead of seeing it as a graphical point-and-click
+desktop. You're comfortable enough now to copy and paste text-files around
+using commands like sudo, cd and cp. You create files from scratch in
+/usr/local/sbin to make your life much simpler and know you have to sudo vim
+the filename to get started and sudo chmod +x the file afterwards. But once you
+have, you've non-customized customized the operating system. We all have the
+write to write our own aliases, shortcuts and macros. But if we keep all those
+to simple, easy-to-read commands that you would otherwise know anyway, how
+fragile could this really be? Rapidly re-create-able customization on any
+platform is the best kind. Copying your files around in a private github repo,
+if even just for copy-paste example template code in the future, is best.
+
+This type of customization will endure all types of disruption, so like editing
+your ~/.vimrc, ~/.bash_profile and /etc/systemd/system/pipulate.service and
+other key files that turn a generic Linux box provided to you into a slick
+responding to your age-old muscle memory as if it were you own personal
+fine-tuned instrument. Without your config-files and preferences, you are
+merely just a highly competent speed demon minus your tricked-out tricks. Oh,
+did I mention .bash_login? Yeah, even though p2ss is a file in sbin, the way I
+edit pp to it is through the alias command in my .bash_profile. Okay, okay
+enough verbalizing things. Do some deep intuiting and doing. Make today by 3
+another special time. THIS is how to do it. THIS is sane pacing. Big steps
+forward!
+
+I think something's wrong in the existing scheduling routine. I'm getting
+aggressive now about cleaning up pipulate.py (now that I've renamed the old
+name to pipulate, I take it personal, haha!). I'm also cleaning in the greater
+repo folder that it currently lives in that's full of older scripts that I've
+scheduled under the new system. There's nothing new about this system except
+for me pointing out how easy it is to use it for just about the most common use
+case all of use tech jockey jack-of-all-trade type folks repurposing ourselves
+yet again need to be mastering: scheduled tasks like it's no big.
+
+So, I've scheduled tasks like its no big. I've got 2 pipulate services, named
+pipulate.service and pipulate2.service, respectively. That's because the first
+instance actually is special. It doesn't need to be thought about with proper
+array numbering, so it's not going to be. The pipulate.service contains
+everything that's been "promoted" to the 24x7 intended uptime routine. Other
+stuff where rapid iteration development is going to occur gets put in
+pipulate2.service, and so on. You can easily extend this system as far as you'd
+like. Each services calls via a bash command like this:
+
+    ExecStart=/usr/bin/screen -dmS pipulate /home/ubuntu/py35/bin/python /home/ubuntu/scheduler/pipulate.py
+
+This looks so long just because of all the absolute path names, but
+understanding these paths lets you understand A LOT about the Unix/Linux (*nix
+in general) operating systems. It's about the same as:
+
+    ExecStart=screen -dmS pipulate python pipulate.py
+
+If it weren't going through the gnu screen command to get the desired
+log-in-able terminal session I desire for oversight and viewing of the log file
+without looking at log files (you can see the echoed command-line output from
+the log program), then the command would look about like:
+
+    python pipulate.py
+
+So you see, with all this work all we're really doing is getting the
+pipulate.py program to run 24x7 by virtue of being started by the Linux systemd
+service manager, but with the added bonus that you can "log into" these running
+scripts and watch it run mid-run. And everything is always mid-run, because
+it's always running. I schedule one reboot per day to occur... merely by
+scheduling the exiting of the pipulate.py program at a certain time of day,
+because the systemd respawner will immediately run it again, by which time that
+scheduled moment has passed and won't happen again until another 24 hours.
+
+Why reboot nightly like this at all? You go to sleep at night, don't you? Well,
+it's only courteous to allow your machine friend that is working so tirelessly
+hard for you to have a break, clear its mind, and start fresh and renewed each
+morning just like you do. Fortunately, an Amazon EC2 instance doesn't need as
+much REM sleep as you do, so a simple restarting of the Python script should be
+enough. Chances are greater that your code needs the nightly reboot than the
+hosting Linux machine itself (we can reboot that once a month or so).
+
+Ugh, okay with this muscle memory capability, you have to use it. It's use to
+to have it and have it by using it. So get using it...
+
+But not so fast. Big future problems fixed in a BIG WAY now... right now,
+because it fixes the problem you immediately face. It's the old row problem
+again. But that shouldn't be a problem. I should be able to have a certain
+symmetry to how columns are populated. Multiple columns in a a "row" value
+assignemnt should be able to be splatted in a typically Pythonic correlated
+fashion with a data object (return-value of a function or pd.apply() method).
+This is a MUCH MORE ELEGANT approach than simply using a cache for subsequent
+calls. The standard library cache that Raymond Hettinger talks about by the way
+is (and I should STILL use it soon):
+
+https://stackoverflow.com/questions/1427255/is-there-a-python-caching-library
+
+And it really appears to be this simple:
+
+    from functools import lru_cache as cache
+
+    @cache()
+    def f(x):
+        return x*x
+
+    for x in range(20):
+        print(f(x))
+
+    for x in range(20):
+        print(f(x))
+
+Hmmm. Okay, let me look into what splatting return values from a single
+function across a row looks like. Read my own Pipulate documentation, haha!
+
+I'm going to have to do a good cleanup of my scheduler directory soon. It got
+messy from working fast and furious, but it's evolving into my master
+scheduling directory-- for the Python files associated with BOTH systemd
+services. Keeping it all in one folder (repo) but split across 2 schedulers (a
+running instance each of pipulate.py and pipulate2.py) allows you to reuse
+common resources across schedulers without dealing with fancy path issues of
+going "up and over" into the other repo's folder. No, keeping everything in one
+private Github repo (or Bitbucket or your own git repo server / whatever so
+long as it's distributed revision control) is the way to keep scheduling
+scripts short and understandable.
+
+Mastering an API is sometimes about perfect alignments and mastering that
+alignment. The above-described standard library lru_caching system is
+incredibly powerful. I do believe I'm living in the incredibly sweet spot that
+people describe still as "a script". We are not really going to be making
+programs, as such. I mean, I guess they would qualify as programs, but hmmm.
+No, they're more like configuration files for... for the system. The
+non-system. So, what system then? I guess the system is Python, and you have to
+think of it as just sort of an interpreter to your configuration file. You're
+configuring the Python interpreter to act a certain way... to knit fabric or to
+play a tune. All the same stuff. I'm just being a bit clearer in my head about
+the context in which my automation-code is running. I'm steadily squeezing a
+tube of tooth paste. You really must squeeze, but you mustn't hammer. A script.
+
+I am at the edge of known space in the noosphere. Today is significant because
+I'm about to test how well the lru_cache decorator from the Python Standard
+Library works with the Pandas DataFrame.apply() method. This is a pretty big
+friggin' deal for me, because it answers a problem that's been plaguing me on
+and off in one way or another for years. And that is, what is the proper way to
+populate multi-column output in Google Sheets from an single API-call, when the
+system is tooled around df.apply() which is going to try to invoke the function
+once per cell; VERY EXPENSIVE from a hitting-the-api standpoint if that's what
+the function does every time its invoked, and its invoked on every cell. This
+becomes particularly wasteful if what you're doing is just fetching a different
+column out of a dataset that each time that contains ALL your answers, and you
+really could just grab it all there and... well, and then what is always the
+question.
+
+Traditional lines of reasoning at this point and in my experience lead to
+unreasonable convolutions that I will not pursue anymore. However, an every
+24-hours auto-expiring decorator cache provided by the Python Standard Library
+so that subsequent calls after the first column encountered are actually
+pulling data from the cache and not the API... well, that I can get into.
+Goodbye unnecessarily complex column-manipulations and table-joins. I'm just
+gonna pipulate you row-by-row knowing I can economically reuse just-fetched
+data so long as the cache decorated function is invoked with identical
+arguments again... and that means function wrappers AGAIN. Ugh! Okay, that
+part's gotta be part of my convention. Unclear as to whether I'll use
+decorators myself or just stupid nesting.
+
+Okay, so this is where the rubber hits the road. Shit, I gotta do it. Okay,
+okay. Here's the template for a Pipulate function that covers all the argument
+possibilities.
+
+	df['c'] = df.apply(func, axis=1, args=('two', 'peas'),
+					   start='2018-01-01', end='2018-01-31')
+
+	def func(row, *args):
+		number = row[0]
+		tld = row[1]
+		start = kwargs['start']
+		end = kwargs['end']
+		arg1 = args[0]
+		arg2 = args[1]
+		# do stuff here
+		return stuff
+
+The question at-hand is that if you decorate such a function thus:
+
+    from functools import lru_cache as cache
+
+    @cache()
+	df['c'] = df.apply(func, axis=1, args=('two', 'peas'),
+					   start='2018-01-01', end='2018-01-31')
+
+	def func(row, *args):
+		number = row[0]
+		tld = row[1]
+		start = kwargs['start']
+		end = kwargs['end']
+		arg1 = args[0]
+		arg2 = args[1]
+		# do stuff here
+		return stuff
+
+...and you invoked the func function with identical parameters again, will it
+indeed use the cached version and cut-off any attempt to access an external
+resource again? Well, the catch-22 here is that if you invoke it identically,
+then you're doing the same thing and it would result in a duplicate column.
+That's where teh wrappers come-in. I need to write a generic api-hitting
+function that gets called in different ways from wrapper functions that are not
+themselves cached. This also does away with any concern as to whether or not
+this is supported by the Pandas DataFrame.apply() method. It will be one level
+deeper. So the new pattern looks:
+
+	from functools import lru_cache as cache
+
+	def func(row, *args, **kwargs):
+		raw_response = api(row, args, kwargs)
+		# Parse date from raw
+		#return just_your_column
+
+	@cache()
+	def api(row, *args, **kwargs):
+		number = row[0]
+		tld = row[1]
+		start = kwargs['start']
+		end = kwargs['end']
+		arg1 = args[0]
+		arg2 = args[1]
+		# Do stuff here
+		#return raw_data
+
+That's almost copy-paste testable right there in Jupyter Notebook. Let me do
+so! Okay, but not quite. I don't want to go mixing the specialized Pandas
+parameter passing where row is actually the same splat trick as *args, but you
+can't do 2 splats like that in a row according to the Python API, so I've got
+to normalize my splats before nesting them. The code that works looks like
+this:
+
+	from functools import lru_cache as cache
+	import time
+
+	def func(*row, **kwargs):        
+		raw_response = api(*row, **kwargs)        
+		# Parse date from raw        
+		return raw_response  
+
+	@cache()
+	def api(*row, **kwargs):
+		number = row[0]
+		tld = row[1]
+		start = kwargs['start']        
+		end = kwargs['end']
+		return number, tld, start, end, time.time()
+
+	raw_response = func('foo', 'bar', 'spam', 'eggs', start='01-01-1970', end='02-01-1980')
+	print(raw_response)
+
+	time.sleep(1)
+
+	raw_response = func('foo', 'bar', 'spam', 'eggs', start='01-01-1970', end='02-01-1980')
+	print(raw_response)
+
+With the cache enabled, the same time comes back twice. With the cache
+disabled, the time comes back different every time. We can additionally view
+the cache-use or clear it with these commands, respectively:
+
+    api.cache_info()
+    api.cache_clear()
+
+This is glorious. 
+
+--------------------------------------------------------------------------------
 ## Mon Apr 30, 2018
 ### Creation of Pipulation
 
