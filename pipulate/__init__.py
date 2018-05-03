@@ -351,7 +351,7 @@ def aa(column_letter):
 
 def ab(column_letter):
     """Return the column letter for numeric column index, zero0index."""
-    return gspread.utils.a1_to_rowcol('%s1' % column_letter)[0]
+    return gspread.utils.a1_to_rowcol('%s1' % column_letter)[1] - 1
 
 
 def cc(c):

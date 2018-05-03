@@ -1,5 +1,416 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Wed May  2, 2018
+### main_template.ipynb in the pipulate repo is born.
+
+May 1, 2018 was a good day. I finally chased down that Standard Library cache
+that I heard Raymond Hettinger (@raymondh) talk about once upon a time which
+expires every 24 hours. I did this long-overdue and basic test:
+
+	from functools import lru_cache as cache
+	import time
+
+	def func(*row, **kwargs):        
+		raw_response = api(*row, **kwargs)        
+		# Parse date from raw        
+		return raw_response  
+
+	#@cache()
+	def api(*row, **kwargs):
+		number = row[0]
+		tld = row[1]
+		start = kwargs['start']        
+		end = kwargs['end']
+		return number, tld, start, end, time.time()
+
+	raw_response = func('foo', 'bar', 'spam', 'eggs', start='01-01-1970', end='02-01-1980')
+	print(raw_response)
+
+	time.sleep(1)
+
+	raw_response = func('foo', 'bar', 'spam', 'eggs', start='01-01-1970', end='02-01-1980')
+	print(raw_response)
+
+...wow doing experiments like this (usually carried out in Jupyter Notebook
+because you "feel free" to do so) can permanently change your view and
+decisions moving forward. It's a game-changing piece of information that must
+be recognized as such and incorporated into my everyday patterns far more-so
+than it is today, which is pretty easy because I currently don't use lcu_cache
+at all (#HEADSMACK!). Yeah, these head-smack moments that change your behavior
+forever-forward are rare, but they make such a big difference that they must be
+grasped onto and incorporated into your new workflow deliberately and through a
+powerful compelling "spoken" narrative too-- such as the one I'm creating here.
+Take this in: the response from any function you write can be CACHED
+automatically so the function itself doesn't have to run again until the next
+24-hour window occurs. Until then, all calls to that function get replied-to by
+a sub-program that's living inside your program as a result of:
+
+	from functools import lru_cache as cache
+
+...by which ANY function you write and "decorate" with @cache() above the
+function definition (the def keyword on the first line of the function), then
+this other program steps in and takes control of all of your functions I/O...
+because it is being called "through" the decorator function which can step in
+and do whatever it likes to it.
+
+The nuance that I ran into yesterday that set me back is the ambiguous syntax
+that kicks-in, because we're also operating through (or calling our functions
+FROM) the Pandas DataFrame.apply() method, which takes the names of functions
+and invokes them, optionally passing in THE ENTIRE ROW'S (from the DataFrame in
+the current row-processing iteration) data as if it were a list... or more
+specifically, a traditional python *arg splat argument. The problem arises in
+when you're nesting functions called this way because you can't do 2 *arg splat
+arguments in a row in Python, and this is what appeared to be called for when
+nesting functions called from pd.apply(). This is a classic case of not trying
+to fight your findings, or even understand them deeply enough to have a nuanced
+work-around that you'll always have to do mental gymnastics to remember. 
+
+No, instead you want an Occom's Razor solution. You want the solution you will
+intuitively and immediately and effortlessly come up with again every time you
+think about the problem-- all else being equal, the simplest answer or solution
+to a problem is probably the correct one. OCCOM'S RAZOR IS NOT SCIENCE! The
+scientific method does not mandate that among many solutions that solve your
+problem that the simplest one is somehow the most true or right one. All the
+other once are actually just as true and right if it solves your stated problem
+just as well. If it does but you're still for some reason angry, manybe you
+should have stated the problem and its parameters and boundaries more clearly.
+That's why we call the I/O here between functions ARGUMENTS. It's arguably one
+of the most important issues in all of life, designing how API's work.
+
+I now have all the power of SQL now but without SQL, thanks to Python Pandas.
+That is to say, I can pull data in from many data-sources and treat them as if
+they were now tables in a local SQL database installation and do all sorts of
+table joins, concatenations, merges, correlations, vlookups, or choose whatever
+word you want for joining data between tables. If the data doesn't closely
+correlate, data science, models, normalization, blah blah blah. I try to stay
+away from that world. Just pull data from sources where the rows will closely
+correlate to each other and join on say URLs and keywords and such-- right? Am
+I right or am I right? Is SEO the not the new canary in the coalmine, Data
+Master by-fire survival test going into the era of Machine Learning? 
+
+Are we SEOs not the ones that need to adapt first for this increasingly opaque
+black-box world from which "they" can't keep us from looking at their blackbox
+I/O, because we live in an analog world and must experience it through our
+sensory eyes and ears. If humans are supposed to be able to see and interact
+with the data, then it's also scan-able and scrape-able. And the data gathered
+from such exercises will always fairly easily yield actionable (and quite
+profitable) directional-predictions. While correlation does not mean causation,
+it is the modern SEO Data Master's role to see the correlations and suggest
+that they might to the various stakeholders who just may layer on the
+domain-specific insights that nails some awesome shit down that nobody else
+sees.
+
+Okay, this sort of writing ferociously fuels me. I see what I'm doing and I
+have deeper insight into my own "felt-through" intuitive actions. Figuring out
+that lcu_cache is the thing I want and that it MUST be combined with df.apply()
+in such a wall that all API-sub-calls are wrapped-and-cached... THESE are the
+things that will make you work faster, more efficiently and effectively forever
+forward. You always have to be making forward progress and be able to show it.
+The problem here is showing it. Now I've got to use it to show it. You can't
+let the whip-snapping, even based on your own progress/delivery time-estimates.
+Hold yourself accountable to yourself. Do the right things for the right
+reasons and you can't go wrong.
+
+I'm actually in the office now, but from an actual work standpoint now, there's
+no difference in the equipment I'm working on. This Surface Book 2 with the
+office VPN going for that sort of work is becoming the new day-to-day norm for
+me, thank goodness. The dynamic work-anywhere advantage (nomadic powers) with
+the static planted-roots advantage (well-tapping powers). To have well-tapping
+powers layered on top of a caravan platform built for nomads, then you have
+something that is superpower amplifying, indeed. THAT'S what we're doing here,
+and I haven't even seen that Infinity Stone movie yet, even though I was
+writing about the infinity stones on the Internet on May 3, 2012:
+http://mikelev.in/2012/05/yet-another-omnipotence-monologue-prelude-to-a-meeting/
+
+Yet again, I predict what's going to be popular. Heed my words! Let's see...
+that was 6 years ago. Not bad. What's coming up? Well, we're all going to be
+pursuing the hardware (even if accessed through the cloud) to do some big-sized
+machine learning projects. So, we're going to want neural hardware and lots and
+lots of storage that can be used as super-fast key/value, hash/blob, name/value
+or whatever name your own fast indexed-lookup vocabulary; same thing always
+applies. Working with rigidly enforced relational database tabular
+row-and-column heavily vendor-flavored infrastructure is on the decline. The
+APIs are standardizing, and Python is a good place to be because it wraps or
+soon-will wrap everything-- no question. Python won. Sorry Ruby, JavaScript,
+Java, Blub and all you other programming folks. I make no ther arguments here,
+but for telling you that you will see it play out over the next 8 years, haha!
+
+But for the right-now's, for people who want to live on the bleeding edge with
+today's fairly easily cobbled together tools MINUS the Machine Learning,
+there's Mike Levin... hahaha! There's ML and there's !ML. Not-ML is important
+for me, because my daughter has such a supremely awesome logo for herself
+that's going to serve her so well in social media and life that I'm going to
+have to sharpen up my own personal and online identity to stay shining as
+bright as her. Otherwise, I'll lose her respect. It's a Call of The Wild thing.
+I'm the man in the red sweater. Can't get Adi through the violence of the story
+yet, but she's got to hear it sometime soon. Big-time lessons of life embedded
+in that thing. Oh yeah, the story-telling and the narrative. Powerpoint sucks
+and Jeff Bezos is right. We're telling stories, and this is mine in raw form.
+
+Okay, now to do that extreme bit of coding that changes your professional
+career forever forward. I've been stalling and delaying because it's... well,
+it's the exact moment when the rubber hits the road. It's the collapse of the
+wave-function. It's a probability-cloud of potential that has previously only
+existed as close to pure information in my head. Despite that itself being a
+physical process, we must consider it so complex as to be a tuning-instrument
+from beyond. Even if it's not, the butterfly effect as applied to the virtual
+particles of the quantum foam may as well make it so. We all exist trapped in a
+pulsing orbiting rotation that looks like things like day and night... time for
+that later. Pay attention to what you just somehow unaccountably know.
+
+And what I somehow unaccountably know is that the solution to all my problems
+comes from convention. And my developing convention principally consists of:
+
+    import pipulate as gs
+    import common as co
+    import pandas as pd
+    import numpy as np
+	from functools import lru_cache as cache
+    from logzero import logger, setup_logger
+    from pyfiglet import figlet_format
+    from colorama import Fore
+
+I should work on eliminating the common import.
+
+Okay, getting my screens in order:
+
+- Screen 1: My 2 journals in a full-screen local vim session (shortcut: j)
+- Screen 2: Full-screen Chrome browser, fully updated with my synced bookmarks
+- Screen 3: Generic terminal window, local.
+  - MikeL@LunderVand:/mnt/c/Users/mikle/github$
+  - shortcut: github
+- Screen 4: Generic terminal window, local.
+  - MikeL@LunderVand:/mnt/c/Users/mikle/github$
+  - shortcut: github
+- Screen 5: Windows 10 desktop, left blank
+
+### Screen 3: 
+
+    Ctrl+Windows (while holding) Right, Right (to get there)
+    Full-screen bash shell
+    Type go into shell
+    z (same as avove)
+    Expected heartbeat seen in log file
+    Ctrl+A, D (detaches from gnu screen session you just peeked at)
+
+This satisfies me that the 24x7 pipulate service is running as it should. This
+reminds me that I have to add logzero to my standard imports. While I'm at it,
+I should add pyfiglet and colorama. I think I want to eliminate the need for
+common.py. Everything in there either belongs in the "template.py" file or in
+pipulate (no longer pipulate.py, interestingly, but now generally
+pipdev/pipulate/__init__.py, which is a parallel install on my dev-system, but
+which still is not the one REALLY being hit, if I have pip installed pipulate
+on that system. It is therefore important to keep in mind that when I do a
+development-cycle upgrade on pipulate and want it updated in PyPI, I actually
+have to do a series of things that I should really put in an sbin script file,
+but they are for posterity:
+
+First, your ~/.pypirc must be in place with your login credentials for PyPI.
+
+I'm using the Twine package from PyPI to do all this. It's really twine that
+knows to look at .pypirc for the login credentials. You don't really need to do
+this part for using Pipulate, but I'm documenting it for my own edification. If
+you're doing development work on something that you maintain in PyPI (things
+that pip install easily), then you have to pip install twine to make things
+really easy. After twine and your .pypirc file are installed and in place, you
+edit 2 files, but really only 1 of them has the significant stuff in it:
+setup.py, which you edit to match your needs insert SEO here.
+
+Okay, all the work to get to this point has been to come to THIS point. 
+
+I must stop evading here by writing and exploring in the mental idea-world what
+I'm doing and put it to practice "in real life" insofar as the way this stuff
+runs on my laptop and on cloud servers is really "in real life". Punt that one
+to the philosophers. 1, 2, 3... 1?
+
+Finish the API function that generically hits the 3rd party API you're using.
+Create the function that gets wrapped-and-cached. First we wrap. And in this
+wrapping, we should be able to bring the "global" field-mapping object derived
+from row1 into effect:
+
+	import common as co        # wrap common.py into pipulate & tempalte
+	import pipulate as gs
+	import pandas as pd
+	import numpy as np
+
+	from functools import lru_cache as cache
+	from logzero import logger, setup_logger
+	from pyfiglet import figlet_format
+	from colorama import Fore
+	import time
+
+	fm = {'name': 'A', 'number': 'B'}       #field mapping implied by row1
+
+	@cache()
+	def api(*args, **kwargs):
+	   name = args[gs.aa(fm['name'])]
+	   number = args[gs.aa(fm['number'])]
+	   start = kwargs['start']
+	   end = kwargs['end']
+	   return name, number, start, end, time.time()
+
+
+	def func(*row, **kwargs):
+		raw_response = api(*row, **kwargs)
+		# Parse date from raw
+		return raw_response
+		
+	raw_response = func('foo', 'bar', 'spam', 'eggs', start='01-01-1970', end='02-01-1980')
+	print(raw_response)
+
+	time.sleep(1)
+
+	raw_response = func('foo', 'bar', 'spam', 'eggs', start='01-01-1970', end='02-01-1980')
+	print(raw_response)
+
+Wow, that's friggn' it! There's some simplification and subtlety here. I'm
+abandoning my old notion of passing an additional fixed-position argument(s)
+here. I'm using the standard Python conventions of splatted arguments, and ONLY
+splatted arguments. That means that I'm simulating what Pandas
+DataFrame.apply() is doing to pass in a row of data as pandas would, simulating
+the splat effect. So I have to actually USE the splat symbol (asterisk) on the
+argument keyword "row" here, but won't actually have to when it's a pipulate
+function proper. In other words, the asterisk will get removed in the
+definition of the function named func, which is the "outer" function that gets
+called by Panda's DataFrame.apply() method where panda's own API-inventing is
+taking place and we really don't want to be guessing what it's doing.
+Therefore, if we want to pass a bunch of stuff to the "inner" API-calling and
+highly cache-able bit, we want to arrange our call to abide by:
+
+    api(*some_list_object, **some_keywpord_object)
+
+In this way WHENEVER we're doing something that may need to be a cached
+function from within pipulate so that multi-column work can be accomplished
+without fancy SQL-like pandas table manipulation, we want to allow a
+cell-by-cell freely api-hitting processing to be occurring as if APIs had no
+cost or speed limitations. Pull back a mountain of data and just use a little
+bit pulled out of the large data object to fill in that one little cell you're
+filling in on the GSheet-- noooo problem! Why? Because the request is cached
+with lru_cache from the Python standard library, and all subsequent calls to
+that API using the exact same parameters will get the exact same results, as
+delivered by lru_cache as imported above.
+
+And in the end, this makes ALL THE DIFFERENCE!
+
+It's all going to be pulled-in according to the standard Python(ic) *args or
+**kwargs convention, and THAT'S HUGE AND I NEED TO INTERNALIZE WHAT I'M SAYING
+in order to take the next step and live with it for maybe years or even the
+rest of my life if this thing caches on. This is the banned Magic The Gathering
+card move I'm designing. This is the information Samurai Ninja Kung Fu right
+here. The beautiful part is in keeping it simple and leaning into the strenghts
+of the tools so... so lots of things better expressed in code. Most
+importantly, eveything you're planning to cache must be exressed argument-wise
+very much like this:
+
+    def pipulate_function(row, *args, **kwargs):
+        # The Pandas DataFrame.apply() method is going to run this function.
+        # row will contain the data of each row of dataframe.
+        # args is a list of whatever you pass as list after row on function call.
+        # kwargs is dict of remining name/val pairs passed on function call.
+        # It's as if args were *row, *args, **kwargs, but that's bad syntax.
+        # So when THIS function calls NEXT NESTED FUNCTION:
+
+...Okay, I brought it all into Jupyter Notebook to work out the space collision
+of the "row" and the "*args" concepts. They are the same thing on the back, but
+not through the incompatible APIs of Python and raw splatting syntax. So you
+have to ADD row and *args in the function! Here's what I have, and which I'm
+very pleased with. I'm going to ad a gs.ab() method to pipulate so I don't have
+to keep subtracting 1 for the zero-based index.
+
+	import common as co        # wrap common.py into pipulate & tempalte
+	import pipulate as gs
+	import pandas as pd
+	import numpy as np
+
+	from functools import lru_cache as cache
+	from logzero import logger, setup_logger
+	from pyfiglet import figlet_format
+	from colorama import Fore
+	import time
+
+	fm = {'name': 'A', 'number': 'B', 'id': 'C', 'group': 'D'}          #field mapping implied by row1
+	row = ['My Name', 'My Number', 'My ID', 'My Group']
+	args = ['one', 'two']
+
+	@cache()
+	def api(*args, **kwargs):
+	   name = args[gs.aa(fm['name'])-1]
+	   number = args[gs.aa(fm['number'])-1]
+	   id = args[gs.aa(fm['id'])-1]
+	   group = args[gs.aa(fm['group'])-1]
+	   start = kwargs['start']
+	   end = kwargs['end']
+	   return name, number, id, group, start, end, time.time()
+
+
+	def func(row, *args, **kwargs):
+		args = [row] + list(args)
+		raw_response = api(*args, **kwargs)
+		# Parse date from raw
+		return raw_response
+		
+	raw_response = func(*row, start='01-01-1970', end='02-01-1980')
+	print(raw_response)
+
+	time.sleep(1)
+
+	raw_response = func(*row, start='01-01-1970', end='02-01-1980')
+	print(raw_response)
+
+Okay, and actually DO that revision to pipulate. And when you do, do something
+in the sbin/g program to make sure that the pipsync.py that exists inside this
+repo which uses pipdev/pipulate/__index__.py, but as pipsync.py in its own
+local directory. Ugh, I know there should be better ways here, but this is how
+I'm going to do it for now. It will keep me from having to push lots of
+versions in PyPI on the bright side-- just git commit/pushes will do. Done.
+Okay... okay... one more bathroom break. One Dr. Pepper. Then the moment we've
+all been waiting for, just in time for a 2:00 PM meeting! I have less than one
+hour to pull this revision to my workflow miracle out of my butt... and I'm
+going to do it! 1, 2, 3... 1?
+
+Okay, I got so close but rate quota denied... shit! Sent them an email to find
+out how long I have to wait. I'm impatient and keep hitting the API, but that
+may push back the counter. Must stop! Take breather. You earned it. This is a
+HUGE step forward, not only on these reports but on your career.
+
+Consider the 365 sheet pulse sheet.
+
+Pipulate 2018 is a good name for a sheet with 365 ticked off cells. Maybe 730
+cells: one to show successful script-entry and one to show successful
+script-exit at least once for that day. Maybe a counter for how many times the
+script was restarted. There should only be one restart/day and AFTER that there
+should be a one successful scheduled event for that day recorded at the
+beginning of the script (day) and one successful event recorded for the end of
+the day (just before reboot). This is a separate confidence-building Pipulate
+script you can make that everything else runs RELATIVE TO which you could work
+on while you're waiting for the quota to expire.
+
+Okay, doesn't look like that quota is going to clear before I leave today.
+Bummer. Approach the API with caution tomorrow, but wow, what progress! 
+
+Not often, but every once in awhile work doesn't feel like work. All too often,
+work feels oh too much like work, because you got yourself into a bargain and
+now you have to fulfill your end of the bargain to get your paycheck, and that
+somehow leaches the pure animal fun out of it, like when you're out hunting on
+your own and living or dying by your own wits. That's when you really feel
+alive. But the modern clock-punching regimentarium. The feeling of despair is
+when someone else, some sort of middle-man, is profiting too much by siphoning
+off your margin. Some call that the Pareto Principle of Wealth Distribution. I
+call it human nature. To punch a clock and find the joy in work is a precious
+thing. If you find it, appreciate it. You have a special sort of employer who
+sees the benefit of letting you love what you do.
+
+Okay, time to pay them back for letting me feel the love. It's honestly still
+only 10:30 PM, and I'm done with a very short Adi call and I walked all the way
+home from 28 West 28th Street, minus the bit on the SI Ferry of course. But it
+was glorious. The walk was glorious. This time I passed close to the Brooklyn
+Bridge. I work walking distance from where I live, minus the ferry of course.
+Wow! I think I'm really starting to feel being a New Yorker. It takes 10 years.
+
+Okay... back to seminal writing. It was all expressed in code, currently in the
+pipulate repo. Time to publish THIS and get to sleep.
+
+--------------------------------------------------------------------------------
 ## Tue May  1, 2018
 ### Combining lcu_cache with pd.apply()... brilliant!
 
