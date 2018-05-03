@@ -397,8 +397,8 @@ def date_ranges(human=False, yoy=True):
         last_range_end = yesterday.replace(year = yesterday.year - 1)
         last_range_start = thirty_days_ago.replace(year = thirty_days_ago.year - 1)
     else:
-        last_range_end = prior_30_end - timedelta(days=1)
-        last_range_start = last_range_end - timedelta(days=30)
+        last_range_start = prior_30_end - timedelta(days=1)
+        last_range_end = last_range_start - timedelta(days=30)
     if human:
         lot.append((dh(thirty_days_ago), dh(yesterday)))
         lot.append((dh(prior_30_start), dh(prior_30_end)))
