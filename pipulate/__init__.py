@@ -434,3 +434,6 @@ force_it = oauth()
 
 # Forces Jupyter Notebook to not buffer output (like streaming).
 sys.stdout = Unbuffered(sys.stdout)
+
+api_now = api_date(datetime.now())
+human_now = human_date(datetime.now())
