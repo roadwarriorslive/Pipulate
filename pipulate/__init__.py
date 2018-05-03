@@ -380,7 +380,7 @@ def human_date(a_datetime, time=False):
         return ('{0:%m/%d/%Y}'.format(a_datetime))
 
 
-def date_ranges(human=False):
+def date_ranges(human=False, yoy=True):
     """Return a list of 3 commonly used daterange tuples."""
 
     def dx(x):
@@ -393,17 +393,21 @@ def date_ranges(human=False):
     thirty_days_ago = yesterday - timedelta(days=30)
     prior_30_end = thirty_days_ago - timedelta(days=1)
     prior_30_start = prior_30_end - timedelta(days=30)
-    prior_year_end = yesterday.replace(year = yesterday.year - 1)
-    prior_year_start = thirty_days_ago.replace(year = thirty_days_ago.year - 1)
+    if yoy:
+        last_range_end = yesterday.replace(year = yesterday.year - 1)
+        last_range_start = thirty_days_ago.replace(year = thirty_days_ago.year - 1)
+    else:
+        last_range_end = prior_30_end - timedelta(days=1)
+        last_range_start = last_range_end - timedelta(days=30)
     if human:
         lot.append((dh(thirty_days_ago), dh(yesterday)))
         lot.append((dh(prior_30_start), dh(prior_30_end)))
-        lot.append((dh(prior_year_start), dh(prior_year_end)))
+        lot.append((dh(last_range_start), dh(last_range_end)))
         lot = [(x +' - '+ y) for x, y in lot]
     else:
         lot.append((dx(thirty_days_ago), dx(yesterday)))
         lot.append((dx(prior_30_start), dx(prior_30_end)))
-        lot.append((dx(prior_year_start), dx(prior_year_end)))
+        lot.append((dx(last_range_start), dx(last_range_end)))
     return lot
 
 
