@@ -1,5 +1,62 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Thu May  3, 2018
+### Made "Left-to-Right" improving scripts into my service-naming convention
+
+Okay a big part of really getting back into my work lately is that Windows is
+not reprehensible, Mac is increasingly disappointing, and the Surface Book 2 is
+the gift that keeps on giving. With the Linux subsystem and well thought out
+sbin shortcuts to compensate for the fact you can't just use the ~/ directory
+as you would on a pure Linux system, and you'll pretty soon be feeling you're
+on the best Linux system money can buy-- at least, hardware-build-wise and how
+well Windows snap around into fullscreen and nifty actually usable window
+"panes". 
+
+Yup, Microsoft got that right. Whatever Aerosnap evolved into...  reallll nice.
+Yeah, almost Amiga-like in its window-navigating elegance. I can live with
+Windows Key+left/right to move between virtual screens. A hardwired numerical
+index like the Control key plus 0 through 9 like in Google Chrome but in
+Windows virtual screens would be nice. Anyhoo, it's getting late on yesterday
+and I already started today's journal. So much to think about and do.  So close
+to so many things. Let's just nail this little thing that's been plaguing you
+for awhile. 
+
+Make main_template.ipynb NOT DEPENDENT on the common.py file, and progressively
+move everything into the main template then figure out what to do with the
+common components from there. Who knows, maybe common.py will come back, but I
+think not. I think most of that belongs in pipulate.
+
+Okay, it's the next morning and this is the best starting point I remember
+myself being at in a long time. My overnight sleeping on it realization is that
+the file naming conventions for the services is weak:
+
+    - pipulate.py: the 24x7 mission critical scripts
+    - pipulate2.py: the occasionally pumped-up to every 15-seconds scheduling
+
+The concept of moving scripts "from left to right" isn't expressed here well
+enough, neither is the stuff in "the now" (or the center between left & right),
+so here goes another round of file-renaming... okay, finally done all that. Got
+distracted by getting to know the new API better. One more Hail Mary before a
+2:15 meeting. 1, 2, 3... 1? I have the category ID that I need!
+
+Wow, what a day! Pshwew! Definitely living on the fault line, here. I'm
+creating some very special Kung Fu that's going to have grand application and a
+long shelf-life. It's replacing the place SQL occupied in my heart and soul,
+along with almost every other of my generalized systems I've made in the past,
+just generally getting subsumed to Python, totally aware that I'm still subject
+to the Blub Paradox, but Pythonance is Bliss.
+
+There was a lot of template work today. It was an excellent worksession showing
+that no matter how simple and elegantly meaningful you can make a chart, all it
+takes is one worksession to turn it into a difficult-to-maintain monstrosity.
+All the little details around it have to be all the tighter, briefer, more
+robust and less brittle so that when they want the 1001st variation,
+potentially auto-scheduled, you're not ruined at this job. No matter what
+pressure is being put on you, one wrong move now will end it more quickly than
+not doing it right. So do it right. And quickly. It's 5:00 AM. Time to start
+tomorrow's journal entry.
+
+--------------------------------------------------------------------------------
 ## Wed May  2, 2018
 ### main_template.ipynb in the pipulate repo is born.
 
