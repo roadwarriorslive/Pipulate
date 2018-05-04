@@ -14,7 +14,7 @@ import pytz
 from oauth2client.client import OAuth2WebServerFlow
 from oauth2client import file, tools
 import pandas as pd
-from time import sleep
+from time import sleep, gmtime, strftime
 from pyfiglet import figlet_format
 from colorama import Fore
 from logzero import logger, setup_logger
@@ -82,6 +82,8 @@ def cl_df_fits(cl, df):
         return True
     return False
 
+def gmt():
+    strftime("%a, %d %b %Y %H:%M", gmtime())
 
 def aa(column_letter):
     """Return the column letter for numeric column index."""
