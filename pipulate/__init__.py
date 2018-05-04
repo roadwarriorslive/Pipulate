@@ -265,7 +265,7 @@ def cl_df_from_sheet(sheet, row1, col1, col2, row2=False, columns=False, guess=F
     return cl, df
 
 
-def pipulate(sheet, rows=(2,), cols=('a','b')):
+def pipulate(tab, rows=(2,), cols=('a','b'), columns=None):
     """Alias for what I belive will be the most common use of pipulate"""
 
     left = cols[0]
@@ -275,7 +275,7 @@ def pipulate(sheet, rows=(2,), cols=('a','b')):
     if len(rows) > 1 and rows[1]:
         row2 = rows[1]
         guess = False
-    return cl_df_from_sheet(sheet, rows[0], left, right, guess=guess, row2=row2)
+    return cl_df_from_tab(tab, rows[0], left, right, guess=guess, row2=row2)
 
 
 def cl_df_to_sheet(sheet, cl, df):
