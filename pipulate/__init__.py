@@ -27,12 +27,11 @@ client_secret = "D2F1D--b_yKNLrJSPmrn2jik"
 
 def pipulate(tab, rows, cols, columns=None):
     """All that pipulate really is"""
-    
+
     row1, row2 = rows
     col1, col2 = cols
     col1, col2 = aa(col1), aa(col2)
     cl = tab.range(row1, col1, row2, col2)
-
     list_of_tuples = cl_to_tuples(cl)
     if not columns:
         columns = tab.range(row1, col1, row1, col2)
@@ -41,6 +40,7 @@ def pipulate(tab, rows, cols, columns=None):
     print("Success! You can now look at your df. It's shape is %s rows x %s cols." % df.shape)
     print('Do pandas stuff like df["B"] = "foo", but maintan range "shape".')
     print("Update GSheet with changes: gs.populate(tab, cl, df)")
+    
     return cl, df
 
 
@@ -54,6 +54,8 @@ def populate(tab, cl, df):
             cell.value = flat[i]
             success = True
         tab.update_cells(cl)
+    else:
+       print('WARNING: GSheet cl and Pandas df are different sizes.')
 
 
 def cl_to_tuples(cell_list):
@@ -358,6 +360,37 @@ def human_date(a_datetime, time=False):
         return ('{0:%m/%d/%Y %H:%M:%S}'.format(a_datetime))
     else:
         return ('{0:%m/%d/%Y}'.format(a_datetime))
+
+
+def date_ranges(human=False, yoy=True):
+    """Return a list of 3 commonly used daterange tuples."""
+
+    def dx(x):
+        return api_date(x)
+    def dh(x):
+        return human_date(x)
+    lot = list()
+    today = datetime.now()
+    yesterday = today - timedelta(days=1)
+    thirty_days_ago = yesterday - timedelta(days=30)
+    prior_30_end = thirty_days_ago - timedelta(days=1)
+    prior_30_start = prior_30_end - timedelta(days=30)
+    if yoy:
+        last_range_end = yesterday.replace(year = yesterday.year - 1)
+        last_range_start = thirty_days_ago.replace(year = thirty_days_ago.year - 1)
+    else:
+        last_range_start = prior_30_end - timedelta(days=1)
+        last_range_end = last_range_start - timedelta(days=30)
+    if human:
+        lot.append((dh(thirty_days_ago), dh(yesterday)))
+        lot.append((dh(prior_30_start), dh(prior_30_end)))
+        lot.append((dh(last_range_start), dh(last_range_end)))
+        lot = [(x +' - '+ y) for x, y in lot]
+    else:
+        lot.append((dx(thirty_days_ago), dx(yesterday)))
+        lot.append((dx(prior_30_start), dx(prior_30_end)))
+        lot.append((dx(last_range_start), dx(last_range_end)))
+    return lot
 
 
 def date_ranges(human=False, yoy=True):
