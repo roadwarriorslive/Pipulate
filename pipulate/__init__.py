@@ -381,39 +381,8 @@ def date_ranges(human=False, yoy=True):
         last_range_end = yesterday.replace(year = yesterday.year - 1)
         last_range_start = thirty_days_ago.replace(year = thirty_days_ago.year - 1)
     else:
-        last_range_start = prior_30_end - timedelta(days=1)
-        last_range_end = last_range_start - timedelta(days=30)
-    if human:
-        lot.append((dh(thirty_days_ago), dh(yesterday)))
-        lot.append((dh(prior_30_start), dh(prior_30_end)))
-        lot.append((dh(last_range_start), dh(last_range_end)))
-        lot = [(x +' - '+ y) for x, y in lot]
-    else:
-        lot.append((dx(thirty_days_ago), dx(yesterday)))
-        lot.append((dx(prior_30_start), dx(prior_30_end)))
-        lot.append((dx(last_range_start), dx(last_range_end)))
-    return lot
-
-
-def date_ranges(human=False, yoy=True):
-    """Return a list of 3 commonly used daterange tuples."""
-
-    def dx(x):
-        return api_date(x)
-    def dh(x):
-        return human_date(x)
-    lot = list()
-    today = datetime.now()
-    yesterday = today - timedelta(days=1)
-    thirty_days_ago = yesterday - timedelta(days=30)
-    prior_30_end = thirty_days_ago - timedelta(days=1)
-    prior_30_start = prior_30_end - timedelta(days=30)
-    if yoy:
-        last_range_end = yesterday.replace(year = yesterday.year - 1)
-        last_range_start = thirty_days_ago.replace(year = thirty_days_ago.year - 1)
-    else:
-        last_range_start = prior_30_end - timedelta(days=1)
-        last_range_end = last_range_start - timedelta(days=30)
+        last_range_end = thirty_days_ago - timedelta(days=31)
+        last_range_start = prior_30_end - timedelta(days=60)
     if human:
         lot.append((dh(thirty_days_ago), dh(yesterday)))
         lot.append((dh(prior_30_start), dh(prior_30_end)))

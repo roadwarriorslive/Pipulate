@@ -1,5 +1,216 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Fri May  4, 2018
+### Pipulate Main Template: Getting the Bits to be Copy & Pasted Right
+
+Today's journal entry is getting started at 5:00 AM. I am in total immersion in
+a project. I am in the zone, actually producing fast in extreme coding style,
+delivering as I go, even if it's the fleshing-it-out templates, which is
+exactly what I'm doing. This is a crafty craft of template design, 'cause
+you're going to have to copy and paste that code A LOT and live with it a long
+time. And it's precisely those amazingly difficult to think-through little
+details you never get around to thinking through which, if you stop to think
+about it, makes all the difference-- precisely because no one else does. And so
+let's do some of THAT thinking now, while there are no interruptions or
+pressures of forward-progress meetings... shit. Okay, deep breath.
+
+The "config-files" could be yet simpler. But the simpler I make them, the more
+I'm pushing code "elsewhere" and making precisely the sort of cruddy framework
+system that I abhor. No wonder everyone fell in love with ROR and I didn't,
+because I'd been there and done that like 2 or 3 times before. I know what I
+like and I don't. The field mapping is powerful, but there should be an
+alternative column-naming system used in the dataframe than A through whatever
+letters, because now we occasionally have a reliable row1 with field-mapping.
+Those could become the column-names directly, and that should be an option of
+using Pipulate (an argument?) so that report config-files become simpler. df
+fieldnames will look like regular Pandas copy-paste examples, and that'd be
+good for the system and long-term maintenance. And THAT'S in pipulate code...
+ugh! Gotta do it. Now's the time.
+
+Looking at the pipulate code. Wow, I'm a pretty smart guy, I have to hand it to
+myself. I do want to take out the "guess-work" that's built into Pipulate now.
+It's not up to this highly zoomed-in granularity of process to sort-of zoom-out
+again of its own accord and make guesses about its own parameters (in our case,
+a range). No, rather it's up to the outer-process that contains and controls it
+like its own jackhammer to back up and move it to some new concrete, and such.
+You get the picture. Our "spoken" English language is so strange adapted to
+describe processes taking place in another language (Python). It goes something
+like this:
+
+The "pipulate" function that's used so much in cl, df = gs.pipulate(tab, rows,
+cols) statements actually calls the pipulate cl_df_from_sheet() function, which
+for the most part does all the heavy lifting throughout the pipulation process.
+It could be used directly to do the pipulate input-statements instead of
+gs.pipulate(), but what fun would that be making y'all have to remember
+cl_df_from_sheet? It's very literal and pythonic and self-descriptive blah blah
+blah, but terrible internal detail to expose. It's bad enough I've got to
+populate TWO objects with it's output, but at least it gets y'all having to
+understand
+
+    something, about = 'tuple', 'assignment'
+
+...and that's what I'm doing with:
+
+    cl, df = function_returns_tuple()
+
+...because I've gotta keep the cl object around to re-populate with any new
+values existing in the mutated df. I say mutated df, because df is always a
+pandas dataframe returned from cl_df_from_sheet on which you CAN do all sorts
+of wonderful transformations, the leading candidate of which is always
+df.apply() because it offloads all the work from pandas onto generic Python,
+where my expertise increasingly resides. Generic python comes first.
+Pandas-specific (and numpy-by-association) flavor of python comes second. We
+(I) will be doing that sort of data munging, but for now I'm gonna be doing a
+while lotta df.apply(function_name, axis=1)'s for you see THAT is the key trick
+supported by Pandas that makes me able to abandon much of my old work.
+
+That's the trick. THIS is where the sleight-of-hand is occurring that makes
+Pandas something more than just another FORTRAN slight simplification to make
+matrices algebra accessible to the lower-than-average scientific-mind, which is
+me. It's one of the great ironies of science and technology that as your
+science capacity goes up, down goes your tech capacity. There's just not enough
+Gladwellian hours left over to become effortlessly proficient in two such
+radically different fields. If you're gonna do some tech automation-- and
+EVERYONE'S gonna need to do some tech automation someday-- then it may as well
+be in a language you carry around in your head like a samurai sword ready to be
+deployed just as swiftly and effectively as that particular nano-sharp tool.
+
+Okay, think! Push this thing forward. The pay-off here is potentially huge. You
+won't have to use all those field-mapping extra layers in your df statements.
+Currently, every column maps to it's Excel-style letter: column 1 to A, 2 to B
+and so on. The dl that gets returned by gs.pipulate is ALWAYS column-labeled as
+such. But it need not be. By the time the pipulate function is called, we are
+already sitting on top of a list of field-names as extracted by the
+template-side of the pipulation process. The pipulation process is being split
+between config-files and package-files. This bit of surgery is to push some
+complexity from config-files onto the package.
+
+    df[fm['name']] = df.apply(foo, axis=1)
+
+...becomes:
+
+    df['name'] = df.apply(foo, axis=1)
+
+...if only I make gs.pipulate() support an optional columns list. Duh,
+no-brainer. Go right in and do that now. The trick here is that because I
+maintain Pipulate now in the PyPI index (the thing controlling what happens
+when you pip install pipulate), I don't go through whole official
+release-cycles as I iterate fast. I have no idea if I'm going to want the world
+to be hit (and potentially interrupted by) my API-changes unless I'm really
+happy with them after the work stabilizes and I'm happy with the results and
+the particulars of the new interface-language I'm creating. We are always
+creating or evolving or twisting our own languages into sorta new ones.
+
+Shit, the sun's coming up. Nail this bad boy now! Go to def pipulate in
+__init__.py... yep. Okay, a plan is taking shape. First of all, I need the
+power of ALL my code execution contexts-- except interestingly enough the
+scheduled one, which gets run really on the remote server primarily unless you
+want to go through the trouble of reproducing the systemd service trick on your
+local machine be it Windows, Mac or even Linux... good luck! No, the workflow
+is solidifying in my mind, and 2 very important pillars are local while the 3rd
+pillar is remote of this rapid development of scripts that optionally go 24x7
+reliably scheduled and become templates for replication.
+
+But here's how it all ties so beautifully together. We are eliminating flaky
+copy/paste out of our life. Copy/paste between different code execution
+contexts is a huge enemy to productivity. Avoid it at all cost. And so what
+takes its place is... 
+
+I have found my center. A directory named pipulate (by itself with no modifier)
+is always a mistake. There is only pipulate-left, pipulate-right and
+pipulate-center... in terms of all the official names I will make throughout
+the system with:
+
+- pipulate-left: Currently-running 24x7 scripts that should be "left" behind.
+- pipulate-right: New and improved 24x7 scripts implemented the "right" way.
+- pipulate-center: Rapidly iterating scripts you're getting right right now.
+
+So there will be 3 services instead of 2. Left and right are always running.
+It's center that you toggle on and off all the time. I will have yet another
+round of file renaming and link-reference editing to do today, but don't have
+to worry about that just yet. The urgent thing now is... what? Finishing the
+removal of the extra field mapper.
+
+Okay, I just achieved something I've been meaning and trying to for awhile. It
+can be stated as:
+
+- I'm working off of one primary main "local" machine first time in awhile.
+- The "fixed locations" of things on this laptop are helping me work faster.
+- Even though I have the hardware advantage again, I'm keeping old techniques.
+- Everything to reproduce my work is also on Github which I push to often.
+- In a pinch, I can still sit down almost anywhere and continue working.
+- A copy of at least one piece of my work is always on a 24x7 (cloud) server.
+- With VPN, I can "log into" that 24x7 always-running job from anywhere.
+- I use gnu screen to step in and out of server-maintained terminal sessions.
+- Gnu screen eliminates the need to grep log files to see what's going on.
+- Log files are still being written for more precise debugging & diagnostics.
+- The result is akin to virtual screens, but terminal-consoles on a server.
+- The amount of special Unix/Linux you need to know is nominal and even fun.
+- Logging into any of these virtual screens shows where the tasks are up to.
+- Logging into any of these screens also provides an entertaining light show.
+- I have a series of shortcuts in /usr/local/sbin to help navigate screens.
+- Perhaps more than anything else, these sbin commands help muscle memory.
+- Each 24x7 type job I run is started by a /etc/systemd/system/file.service
+- Currently, only one systemd pipulate service is running (pipulate-left)
+- Current work on pipulate-center updates every 15-seconds when toggled on.
+- Very soon, pipulate-right will be running as a second 24x7 service.
+- Reports that have undergone a "clean-up" move from left service to right.
+- Reports that are currently undergoing rapid revision go in pipulate-center.
+- The pipulate-center.service gets toggled-on only during worksessions.
+- My pipulate repository itself from github is in pipdev for development work.
+- Any directory just named pipulate aside from what's in pipdev is a mistake.
+- Directories named pipulate-left, pipulate-right or pipulate-center are fine.
+- These folders house only your arbitrarily named python pipulate config files.
+- Most people other than me will have pip installed pipulate (not clone repo).
+- This "frees up" any new folders you create to be your own job or task repos.
+- Job repos can be .py files but can just as easily be iPython .ipynb's.
+- Jobs in pipulate-center frequently start out as Jupyter Notebooks.
+- Jobs being rapidly revised are precisely the kind you want in git right away.
+- These jobs are nothing more than arbitrary file.py, usually using pipulate.
+- These arbitrarily named job files are each called that repo's scheduler file.
+- Keep python scheduler filenames similar to their service like python-left.py.
+- You can test a scheduler simply with python python-left.py.
+- You can test individual jobs it calls simply with python job_file.py.
+- If you don't want to pay for private github repos, you can use Bitbucket.
+
+Pshwew! Pushed out a commit. The biggest thing now is... oh! Gotta remove field
+mapping reference and see if it still works, haha!
+
+Hot damn! I did it. I eliminated the need for the arbitrary field mapping in
+scheduled pipulate jobs! This is huge. It means the pipulate config files are
+going to read VERY MUCH like standard Python pandas code examples, and that's
+going to go a LONG way. That's going to be the gift that keeps on giving back.
+
+Wow, SO MUCH PROGRESS today. The config file is rapidly becoming beautiful, and
+I'm also re-engaged in rapid iteration of the pipulate main package itself,
+which is now in pipdev/pipulate/__init__.py.
+
+Alright, things have settled down enough that I should grab for the real
+secondary lookup data now. Pshwew! Git commit everything AGAIN and work a
+generic template into the main pipulate repo.
+
+Okay, I've banked that awesome main template in the main pipulate repo. That is
+huge right there. What it means is that I know EXACTLY where to start from in
+future projects, and I get to iterate off of that one template example
+improving it over time, committing that one (and only one) template back into
+the repo. Wow! I think I may set up my own Amazon EC2 instance this weekend.
+This will accelerate at work if I have my own parallel personal projects going
+on using all the same concepts that I've used over the years.
+
+Tackle every little issue online. Continue using your Macs and Screenflow when
+appropriate. Get more familiar with Techsmith Camtasia Studio as well. That'll
+be something like try #5 for Camtasia over the years. Not a big winner when it
+comes to being productive fast, the way ScreenFlow was. Oh well, I really have
+to re-center myself on Windows 10 now with this awesome laptop, and maybe
+things have improved. ScreenFlow captures my keyboard shortcuts which is a
+pretty big deal with vim. Camtasia only captured a few choice keys (due to how
+Windows works) when last I checked.
+
+Okay, I've got my first version of a "main template" done for Pipulate. WOW! I
+think I want to add my services to the repo. Nahhh, that's just a distraction--
+especially until I have my own EC2 instance running (again).
+
+--------------------------------------------------------------------------------
 ## Thu May  3, 2018
 ### Made "Left-to-Right" improving scripts into my service-naming convention
 
