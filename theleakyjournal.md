@@ -1,5 +1,163 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Sat May  5, 2018
+### Adi, Saturday and The Information by The Information by James Gleick
+
+When I first started looking back at my technological past, in my 30s looking
+at my 20s... or maybe in my 20s looking at my teens / whatever... pangs of
+regrets for paths not taken and dead-end's taken usually was my first and gut
+and I guess "truest" reaction. However, the longer I live and the deeper I feel
+I know things, the more I appreciate those earlier experiences as a means to
+help me triangulate in on better and better... uh... paths? Implementations?
+Hardware/software nuanced platform combinations that will serve me well for 10,
+20, lifetime's at a time. Life isn't really all that long in the grand scheme
+of things, and its a shame the amount of your precious full-on attention
+resources y'all gotta go burning on keeping up with the Joneses.js. That's like
+the language you speak, English, changing so much mid-novel-writing that by the
+time you finish, your opening chapters feel antiquated. Did Mozart and Picasso
+have such problems with their tools and instruments? No! Effortless mastery
+arises from a one-ness with your tools that only comes from the ness becoming
+part of the one.
+
+Yesterday's work was so, so, SOOOO critical to a viable future at the very
+company I'm working at, despite the pressure to deliver yesterday. I do what
+others don't (can't?) and to be undergoing the next phase of evolution
+(speaking of my personal technological capabilities), there's no poorer choice
+than to let myself get interrupted (again) on the verge of breakthroughs-- no
+matter how much it looks like decipherable (un-trusted) nonsense to muggles. I
+think part of my mission has got to be to just share all the wizarding with the
+muggles in a way that they can start casting instant magic tricks. THAT's the
+true function of main_template.ipynb. It's the path of potentially thousands of
+folks to become technically proficient in a way that helps them during that
+very same sit-down-and-learn (for the first time) session with Python... via
+Pipulate. Generally, the stack goes:
+
+Some Hardware / Some OS / ( Python & Browser) / Your Apps / I/O Devices / User
+
+And that's circular, you see because the user has (or has access to) "Some
+Hardware". This is going somewhere! Or maybe it's just circular. Relative
+universe, remember? Who's to say that things moving in circles relative to each
+other are not actually going somewhere on a grander scale? In fact, that's
+exactly what appears to be going on. It's not just the expanding raisin bread,
+but the raisins are usually actually clusters of raisins locked into mutual
+spiraling corkscrewing orbits with each-other on their greater outwardly
+expanding raisin-path. So don't feel bad if you feel locked into a pattern or a
+rhythm, so long as you have compounding or accumulating effects of your efforts
+day-to-day. Wheel-spinning or losing ground is the conceptual enemy here...
+though of course like my Coleco Adam and Commodore Amiga days, who's to say
+what experiences yield net positives versus net negatives? There's a lot of
+unexpectedness and surprisingly high long-term value in things you long-ago
+wrote off as wastes of time. No regreeeeeeets... Thunk/bounce. Give yourself
+safety-nets.
+
+Reality itself it's starting to appear (has appeared for a long time?) is just
+another hardware/software platform combination, which like any hardware
+platform, is in constant drift, flux, evolution, devolution, transition, change
+or whatever. I guess it depends a bit on your perspective. I guess the "bit"
+depends on your perspective.
+
+Adi's awake. I'm hoping she gets a little more sleep. It's coming on 9:00 AM.
+She didn't get to sleep until about 2:30 AM last night because I fell asleep
+first and didn't get her to sleep. I'm sure this is a common enough problem and
+most parents get their children to sleep before they go to sleep, but my place
+is just so awesome when Adi gets here it's always happy party time. However,
+now that she's easing awake, every 5 minutes it's Daaaaad... this latest time
+was while I was giving Sammy his insulin injection and I told her I'd pay
+attention to her when I could. Now I'm letting 5 or 10 minutes go by so she
+learns I always respond to her, but not right away. I'm using exponential
+backoff-- which I have to incorporate into Pipulate too! Haha! Adi's inability
+to entertain herself even for an hour while she lazily wakes up is a developing
+API-problem. I have to help her fix it on her side, and protect my sanity (or
+at least calm non-stressed state (barely)) from my side. 
+
+There are many echoes here I detect of patterns throughout my life which I am
+determined to help Adi deal with better. Don't either BE an emotional bully OR
+give in to them. A more practical alternative is, while never backing down from
+a bully's antagonizing, neither do you walk or play into their traps. Instead,
+dangle bait in their trap and when they take it, parry. Repeat. Dangle bait and
+parry. Dangle, parry. So long as YOU'RE the one dangling the bait (whether the
+bully actually knows it or not), then you're in control of the interaction.
+This is basically the same scene as the man in the red sweater with Buck in
+Call of The Wild.  Like Buck, bully's don't know that's what they're doing--
+they're just responding to life, coping the only way they know to make staying
+in the game a little more tolerable (for them).
+
+So today's May 5th. That's something, right? Cinco de Mayo. Anyway from just
+the weather itself, I can feel it. Confirmed that iFly is at 6:00 PM today.
+Woot! NO RUSH! Totally open-ended day. Rachel sent me something about something
+opening today. Maybe, but maybe just working on the place with Adi. It's
+amazing how much disaster-area she can produce just from last evening when I
+got her here to about 2:00 AM when I woke up and got her to sleep. She falls
+asleep rather fast and easily at that point, and that is a definite up-side.
+Getting her to bed by 11:00 PM on a night light that is nigh impossible.
+
+Okay, it's around 2:00 PM. Adi's playing Monopoly with some of the other Urby
+weekend kids. Weather fantastic. She was out kit flying with them and out on
+her bike. This is the season I have to get her bike riding. I think she's about
+ready for the type of freedom (and super powers) that could entail. I love her
+being the "inside kid" who actually lives here when other neighborhood SI kids
+come to visit. It's like Eloise, but with both parents completely engaged with
+her at all times. Very nice. Even this is new. I think nicknaming my laptop
+Carroll helped. Recently she asked Carol's a girl's name, right? And I'm
+like... well, that would be a whole article in itself suffice to say I
+explained both Lewis Carroll and Carroll O'Connor, which is especially
+meaningful to me because my dad loved Carroll O'Connor. Again, heady stuff.
+Sent her gifs of Archie and Edith singing Those Were The Days... oh, how I get
+it. Those where the days.
+
+This sort of weekend time typing... to myself while Adi's occupied and engaged
+is novelty enough, but doing so when I'm completely in the zone on my work--
+wow, I hardly know what to do with the next few moments. 2 Phones... 2 EC2
+servers; 2nd one mine! Yeah, that'll lock me into that righteous feedback loop
+for sure. And maybe use the Amazon Service for what you really want to.
+
+I am gradually finding a new center. This is a useful thing. It's your center
+that trickles out from your brain to your fingers and eyes and servers that
+keeps things reliably happening, as if by you with effortless mastery, but
+without you precisely having to be paying it your full-time attention. That's
+AUTOMATION! A center is what issues commands out to sub-systems. A center is
+the place where a critical enough mass of sub-systems are controlled as to call
+it the main thing in charge. Even with that thinking, you'd get at least two
+answers: the autonomous and subconscious sub-systems that keep your heart
+beating and sugar-levels in the blood steady. We're a fairly complex chemical
+reaction which could just have easily have run out of control and off the
+tracks as to get to the end of the average turn-length successfully-- whatever
+successfully means in this context; probably just alive.
+
+I'm listing to: The Information again now. Actually, for the first time. This
+is a book I bought as a Kindle edition, started reading, and never got far past
+the African Singing Drums chapter. As interesting as the topic is to me even
+Stigand, the patriotic archbishop of Canterbury found it advisable... Well, you
+get the idea. It's MUCH easier when you buy the audio accompaniment. And I DO
+mean accompaniment because on the android version, it highlights the sentence
+you're on until the whole sentence is highlighted, then it starts highlighting
+the next sentence as it stops on the last. It's a WONDERFUL read-along
+effect... really better than the more 6 year old targeted Speak-a-Boo's. Adi's
+growing up. 
+
+I'm really going to try to put her to sleep to one of these audible's reading
+along. Unfortunately, the Scarlett Johansson narrated Audible version doesn't
+go along with any of the Kindle books (that I can see), because that would be
+perfect, and we can't have perfect. Even the iPhone Kindle version, which
+DOESN'T DO THE HIGHLIGHTING on the tiny-screen version I'm using doesn't do
+that cool read-along highlighting, though it DOES flip the page along with the
+narration as you flip the page. Correspondingly, as you flip pages the
+narration goes right to where the page begins which is its whole own kind of
+cool.
+
+Okay wow it's 4:00 PM. Adi has had a full day of running around with the Urby
+kids since around 10:00 AM when we came down for the smoothies. She's currently
+playing with Josh's kids, catching upi with them finally. She's really too
+much. It's amazing seeing her interact with his boys. She is so... well, Adi. I
+think heartbreaker is a bit of an understatement for just the general effect
+this kid is going to be able to produce in this world. I think I can give her
+no greater gift than... than this. Urby is great. Staten Island is good. It's
+5-boroughs plus, like I know I should. I have to be sure to instill into her a
+bit of the suburban advantage, and that was completely impossible, especially
+in Manhattan... even in Inwood. Thank God things are going the way they are.
+I'm deep in operation recover, reorder and instill. Yup.
+
+--------------------------------------------------------------------------------
 ## Fri May  4, 2018
 ### Pipulate Main Template: Getting the Bits to be Copy & Pasted Right
 
