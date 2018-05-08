@@ -1,5 +1,63 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Mon May  7, 2018
+### First Instance of Customized main_template.ipynb
+
+Wow, okay I walked here FROM the Ferry station this morning. I don't even want
+to say what time I got here, suffice to say I am clearly in a big-time
+transition and I shouldn't feel bad about any of it. I'm incubating a new
+generation type of skill whose value is beyond beyond. It will pay back time
+and again... so long as this initial trick contains enough clues and compressed
+easily consumed information, control, API-ness to keep each report as deeply
+and extensively customized (lots of server-side pre-calculations AND lots of
+columns) without overwhelming the user, and I think I have it right now here:
+
+https://github.com/miklevin/Pipulate/blob/master/main_template.ipynb
+
+This is really shaping up. There is a master template for Pipulate now. I
+wonder if there's a way to attach the Google Sheet that's connected to the
+spreadsheet into the git repository so that people could clone a Sheet template
+without hitting a shared actual template at my actual account. The need to have
+a sort of actual proprietary template in the picture is still a bit of a
+weakness of the system, but if I went discounting the system based on Google
+dependences, I wouldn't be here talking about it. Google dependencies are okay,
+but in for a penny, in for a pound thinking is not.
+
+The first command to be sure I'm accustomed to is sbin itself. Typing that
+brings me into /usr/local/sbin and an ls can show me my whole inventory of
+special commands (minus alias's from .bash_profile).
+
+"a" is the temporary alias for the application.py I'm currently working on.
+Whenever I have a revision in Jupyter Notebook that's stable enough to be put
+into "column-tweaking" mode, I copy/paste from pipulate-center.ipynb (which I'm
+running locally) to pipulate-center.py (which I'm running on a remote cloud
+server). But until you're column-tweaking, it stays in Jupyter Notebook. Get
+SOME VALUE coming back on the secondary function, then put on caching and
+expand it to full number of rows on the response. Each time you do this both
+"probes" to make sure I've got the correct numbers with right-looking data, but
+also uses up 30 or whatever number of rows-per-second because I HAVE been shut
+out. I have to touch the API CORRECTLY, which means cached. Which means a few
+sample rows to "get a flavor" of the result-set data.
+
+I got the latest squeeze, and so... and so... I adjust my work-flow a little
+bit. Get that data back on the secondary query! Why should it be hard AT ALL?
+
+Okay, everything you're doing now in your SLIGHTLY CUSTOMIZED version of
+main_template.ipynb is good and correct. Even down to the incorrect secondary
+query is good and correct. However, I don't have an environment where I can
+EXPLORE the API more effectively. I'm still sort of terrified about using up
+the row-calls. Oh, so make a row-number limit! Is that even viable with the
+current approach? Oh! Is this where I put stride-by-step back in and just limit
+at one step with a small stride? No rabbit holes, but yes, that does sound the
+most appealing. Get some food and come back. Maybe take your whole everything
+with you and work in the park. That sounds very appealing. It's also a very
+solid test of "things". Then get back and show at the... no. The 3:00 PM is too
+soon. Every moment counts and is precious. Liquid strike. Coffee, maybe the
+Green or the Red plus a light sushi, then back here.
+
+But get your brain working on a problem before you go.
+
+--------------------------------------------------------------------------------
 ## Sat May  5, 2018
 ### Adi, Saturday and The Information by The Information by James Gleick
 
