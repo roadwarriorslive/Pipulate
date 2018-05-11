@@ -1,5 +1,63 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Wed May  9, 2018
+### As with my old systems, I can't get away from a config tab
+
+I've never had my instruments so finely tuned to be so well subject to
+muscle-memory learning before. I think back to my Amiga-days and I was always
+hobbled to a desk somewhere based on a non-laptop Amiga, which is really much
+more static than I remember. I think my memory tricks me because I always used
+to carry around my highly customized AmigaDOS boot disk that could take over
+any Amiga and make it pretty much my own familiar environment. Amiga was much
+more auto-configuring to varying peripherals in those days than most other
+computers, so it was the rough equivalent of chroot'ing on Unix/Linux. To this
+day its hard to imagine how well-familiar I got with all the general Unix API
+abstractions by becoming familiar with the Amiga.
+
+Now, the original message is the important thing. I got THAT message. Matter is
+here to serve you; not work against you. If it feels like its working against
+you, something's wrong. Now I've got matter working for me well for maybe the
+first time in 20 or 30 years. It's been a long vast wasteland. If there was
+stuff there that was love-worthy that I could have made a career and life on
+before Python started to take off and become universal, I don't know what it
+was. I always feel like I'm missing or missed the boat. I'm glad I'm staying
+tuned-into what's going on on all the different mainstream platforms, or my old
+dogma's would have made me miss what was going on with Microsoft.
+
+Okay, so plan today out. I need a more methodical system to plan the day out. A
+routine or algorithm. If my system needs a fresh restart, screen 1 in the
+ribbon of Windows virtual screens is now always a Hyper.is terminal window
+using the local "j" command from sbin to load my journals. It's journals plural
+with an s because one is a private repo and one is theleakyjournal.md file in
+the Pipulate repo. I "publish" excerpts merely by copying entries from the
+private journal where I'm always writing and processing my thoughts over to the
+public journal, which will get published when next I use the "g" command from
+sbin to git commit and push all my must-be-regularly-updated systems. I can use
+the g command as often as I like. The git messages aren't very informative, but
+the reliable commits and pushing out of queued leakyjournal entries awaiting
+publishing is comforting... g!
+
+There's productive in the material sense, and there's productive in the
+information sense. The information sense isn't real until it is expressed
+(implemented) in the material sense. Until then, it is theoretical, foggy, and
+only potential. Putting ideas to the test creates a rapid and vibrating
+feedback loop, which is much like molding modeling clay into position. There's
+not a lot of time between now and the 3:00 PM check-in meeting and I want to be
+A LOT past where I am now. It's bliss NOT HAVING TO BLAST MUSIC IN MY EARS
+ANYMORE TO CONCENTRATE! But put your concentration where your gratitude is.
+
+Surprisingly simplified work-flow. Okay, lots of great progress but the values
+in the spreadsheet aren't changed yet. Get the benchmarks for the category now. 
+
+...
+
+I should do some convention like those 3 dots to show some good amount of time
+has passed. Very good meeting today. My feeling of non-progress was actually
+great progress. Good topics discussed. The things that set me back a bit were
+actually the perfect discussion points, and that config tab is fished and turns
+the whole thing quite meta.
+
+--------------------------------------------------------------------------------
 ## Mon May  7, 2018
 ### First Instance of Customized main_template.ipynb
 
