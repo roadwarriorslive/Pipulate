@@ -1,5 +1,184 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Wed May 16, 2018
+### The Necessity to "Go Pedantic" can Cause Mental Block
+
+Okay, focus like a laserbeam. You've got to deliver on this YESTERDAY. Work
+through these things one at a time. Crank them out. You've got them listed
+below and no other work interfering. This is your chance. I need a modified
+date range. That's in the most well known and familiar territory presently, so
+crank that out first. 1, 2, 3... 1? It's in the pipdev date_ranges function
+code that you haven't been in in awhile. Also, complexity. Naming convention
+for these date ranges. 
+
+Don't go all rabbit hole on it though. You have date_range() which was your
+first thought when this became recurring with 30, 60, 90. Now that it's 30, 90,
+180 it may be... well, we skip 60 and 120. That in itself is interesting
+naming-convention-wise. thirty_90_180() maybe? Haha, then the prior function
+could have the alias thirty_60_90(). Identifiers can't start with a digit, so
+this is probably maybe the most Pythonic naming convention I can think of for
+these things. It's convention-y enough I think that I won't need the further
+qualifier of daterange in the name. Okay, so get __init__.py loaded and
+duplicate date_ranges() for starters... 
+
+Okay, it became date_ranger() and now has a days parameter that defaults to 30.
+The YOY concept is removed, and that will be the reason for the old
+date_ranges() to stay around. Okay, the date_ranger(days) function went very
+well. Solidly set up for reuse and different ranges. Okay, but have more to
+show for the meeting. Lift formulas from mock-up...
+
+Navigation! Navigate! Use your music to get you back on track. That's the
+track! Music... I lack the knack. Remember this, because it's a solid poem in
+there somewhere. #xbook. But I do digress. Get over this mental hump. It's a
+field-mapping thing. From letter-indexes in someone else's Excel mock-up to
+named indexes in my live code. Okay, why should such inane tasks be the sources
+of mental barriers? This is the sort of thing that USED to be difficult, and my
+body remembers. I have to overcome that.
+
+Okay, it's because I have a lot of column correlating to do to do this thing
+properly. Oh yeah, it's the pedantic avoidance thing again. I like general
+cases, and when you drill-down to specifics, all the general-case beauty gets
+mangled and munged. No matter. Do it anyway and STILL make it wonderful enough
+to be the master template. It's got a case for all things.
+
+--------------------------------------------------------------------------------
+## Mon May 14, 2018
+### Finding my Pipulate-Center
+
+Very strange times and mind-space. Don't blow it. First, the rules of the API
+are all-important. Know those details and corner their rules. Confine, make
+examples, focus on edge-cases to establish API-boundaries. What are the errors
+on bad input? Fuzzed input? Don't get hung up on this sort of thinking today,
+but DO use it in making your quick decisions. You have to work quick today!
+MERCILESSLY suppress/put-away, take out of your focus ANYTHING THAT DISTRACTS--
+and that can't be this journal, because this journal is your focus. It is a
+shadow cast by your train-of-thought through having good muscle-memory in vim.
+
+This paragraph is a distraction, but I feel I must get it out of my system
+quick. FIRST, check the reports! Okay, done. Things don't look bad, but I think
+something may be crashing in the schedule. Ugh, that's the pipulate-left
+service for you. All that stuff ought to be left behind. Let's get this right.
+Once things are right, they last 'cause they're house-of-brick design; and I
+assure you that stable, meaningful, vendor-independent, easily read,
+maintained, duplicated and transformable digital dashboard systems for
+marketing that can be envisioned, implemented, refined and maintained by a
+single person as a sort of secret weapon today and major feather-in-our-cap
+bragging point in the future as an example of innovative thinking is not a
+common thing. Neither is a sentence that long or concept so convoluted.
+
+I guess developing the ability to construct a sentence like that and somehow
+still make it work is the reason I had to take this slightly icky stroll
+through the field of SEO. I mean, we're not all totally slime-balls, but I do
+realize that we're on the edge of mysticism peering into crystal balls that are
+just low-resolution 4-dimensional strange attractors holographic ally projected
+like a floating head at Disney World. If you get yourself into the right
+head-space RIGHT NOW, you can do this. Control all the factors. No matter how
+interesting the Chaos audio book is right now, you've got to switch to either
+silence or your zonelist. I like that concept: my zonelist. Even Adi noticed
+the hysterically laughing Professor Hubert J. Farnsworth adorning the cover of
+my favorite playlist-- whether I'm at work or home doing things I want to or
+have to. I feel my full-integration philosophy at work there.
+
+Speaking of full-integration, get to work! Navigate. Do an expert bit of
+navigating here. You need a ritual that's more-than and better-than "check the
+reports" and your 3 daily metaphors (most broken, biggest bang, and plates
+needing spinning). It's got to involve the actual application of THIS
+muscle-memory and type of time you're spending right here and getting you over
+doing particular things in "screens and tabs" relative to where you are here--
+actual finger-movement-wise. Make forward-progress an inescapable result of
+naturally occurring finger-movements before you even start to consciously think
+about what you need to do each morning. I'm reducing the re-initialization and
+re-capturing of the in-the-zone creative state and creative act (producing the
+actual PRODUCT of creative behavior) into a martial arts kata. Yeah, that's
+basically it. So it's pretty easy to see that this journal entry is going to
+go-public, and I had better walk the walk now that I'm two paragraphs past NO
+DISTRACTIONS! Pshwe, okay... 
+
+Begin the light-show. The light-show has to be brilliant. It has to exude truth
+and competence and that samurai datamaster feeling; ALL THE TIME AND IN ALL
+THINGS. You are embarking on a world of sides and middles. You are always
+working on something in the middle. You live in the middle. And you are the
+crazy acrobatic meaning-instilling API-monkey in the middle. You don't need no
+stinkin' vendors, and the whole damn world is as big as all 5 boroughs plus the
+Catskills-- and occasionally Philadelphia, because that's what even the
+greatest of native New Yorkers in their independent movies fantasize about
+being from, so we genuine tiger-eyed Italian Stallions who are quite difficult
+to knock down for the count. Sure technicalities, but everyone really knows
+that's just the judges making a subjective call.
+
+It's funny, I keep skipping Limbo as my first song, going right to Ain't Got
+Rhythm-- much better for getting into the zone. It's amazing how much
+"alignment" of the matter around you (me) is necessary to get it all just to
+fade away into a flow of thought that CAN include things that are under the
+category of HAVE TO DO rather than want to do-- there's something about finding
+the love for the work in this process-- tying ANY task to the love of
+exercising the muscle-memory necessary to making it real. And in this case, I
+just blasted out the pipes by running the upper-portion of my current
+pipulate-center project. It's currently called apptopia.ipynb and is in a
+private github repo for pipulate-center. Probably a bad idea to say stuff like
+that, but f-it. Nothing here is top secret, and I'm actually trying to make
+this stuff blow-up... eventually... ever-so gradually. No rush, in fact. Just
+plant flags and document. And that's what entries like this are. Nice
+discovery, huh? Hahaha! Thought you invented this little corner of the
+noosphere. Nope, mine! GSheets as Dashboards as heart of the modern
+Pandas-centric Datamaster movement... epicenter: SEO. Good headline possibility
+there. Don't forget.
+
+Okay, better center. Better focus. Better epicenter of all your work... it
+converges on Jupyter Notebook and it converges on:
+
+    ~/github/pipulate-center/pipulate-center.ipynb
+
+Guess it doesn't get any more centered than that. I will never NOT be able to
+find my current work. It's in experimental (not-scheduled (non-automated?))
+mode in Jupyter Notebook-- so all the goodness of vim goes... goes...
+short-circuit! Not @j... no, that's a new journal entry. It's just plain old j
+at a Linux prompt that is the dot begging to be connected here. My true center
+is not a single file. It's... 
+
+    ~/github/pipulate-center/pipulate-center.ipynb
+    ~/github/pipulate-center/pipulate-center.py
+
+YES! Now eat some food while you work to reward yourself, and put
+pipulate-center.py in place and git mv oldappname.ipynb to
+pipulate-center.ipynb! Wow, my muscle-memory is going to be thanking me forever
+for this one. That location on the file-system NOW IS MY CENTER! It is my
+Window[1] in Windows 10 virtual screens. It is my Ctrl+1 in Google Chrome. Of
+course, those are both zero-based index-systems, so I'm skipping zero for my
+"home"-- and THAT'S BECAUSE true home is actually where you keep records of
+this, your internal "navigation" voice. Don't let anyone fool you or be able to
+(even in a technical capacity-wise) take it away from you. Carry your
+universally applicable data-samurai capabilities around with you like an
+attached body organ. Evolve it in-- and even that begins with practice.
+
+The concept of Best Practice just rolled through my head like an alarm warning.
+I think I'm having a subconscious sleeping on it moment, and had to get on the
+record about something that's been bugging me. And I did. I got it out. I'm on
+the record, and that should HELP ME FOCUS! One baby-step forward! Make that
+query against SDK-ID's. That's urgent. Okay, I'm getting side-tracked by
+automatically saving the accompanying .py files. Just capture HOW to do it from
+the command line with the note that this can be come by:
+
+    import nbconvert
+
+...as a module IN NOTEBOOK, but I'll get to that later. Manually on-demand
+right now, it's:
+
+    jupyter nbconvert --to script pipulate-center.ipynb
+
+Pshwew, okay, this is good 80/20-rule back-off. BACK THE F-OFF! SDK ID's!
+
+First I always have to make sure my token's not expired. Always check! But not
+now... haha! That's what gets me (and I'm sure tons of people) into trouble.
+But that's not where to put my focus right now. Precious moments. Just solve
+this SDK ID thing. Ugh! It's a worse situation than I thought. I have next
+question into vendor.
+
+3:00 PM meeting cancelled. Big weight off. Look carefully at how to do a
+category performance look-up. Isn't there some way that doesn't require sdk
+IDs?
+
+--------------------------------------------------------------------------------
 ## Wed May  9, 2018
 ### As with my old systems, I can't get away from a config tab
 

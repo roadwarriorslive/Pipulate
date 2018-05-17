@@ -55,7 +55,11 @@ def populate(tab, cl, df):
             success = True
         tab.update_cells(cl)
     else:
-       print('WARNING: GSheet cl and Pandas df are different sizes.')
+       print('WARNING: cl and df are different sizes.')
+       print('Google Sheet NOT UPDATED.')
+       print('Look at your df and compare to your range input.')
+       print("Cances are you're accidentially creating new columns.")
+       raise SystemExit()
 
 
 def cl_to_tuples(cell_list):
@@ -392,6 +396,33 @@ def date_ranges(human=False, yoy=True):
         lot.append((dx(thirty_days_ago), dx(yesterday)))
         lot.append((dx(prior_30_start), dx(prior_30_end)))
         lot.append((dx(last_range_start), dx(last_range_end)))
+    return lot
+
+
+def date_ranger(days=30, human=False):
+    """Return a list of 3 commonly used daterange tuples."""
+
+    def dx(x):
+        return api_date(x)
+    def dh(x):
+        return human_date(x)
+    lot = list()
+    today = datetime.now()
+    yesterday = today - timedelta(days=1)
+    days_ago = yesterday - timedelta(days=days)
+    midrange_end = days_ago - timedelta(days=1)
+    midrange_start = midrange_end - timedelta(days=days)
+    lastrange_end = days_ago - timedelta(days=days+2)
+    lastrange_start = midrange_end - timedelta(days=days*2)
+    if human:
+        lot.append((dh(days_ago), dh(yesterday)))
+        lot.append((dh(midrange_start), dh(midrange_end)))
+        lot.append((dh(lastrange_start), dh(lastrange_end)))
+        lot = [(x +' - '+ y) for x, y in lot]
+    else:
+        lot.append((dx(days_ago), dx(yesterday)))
+        lot.append((dx(midrange_start), dx(midrange_end)))
+        lot.append((dx(lastrange_start), dx(lastrange_end)))
     return lot
 
 
