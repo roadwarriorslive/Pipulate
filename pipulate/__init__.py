@@ -63,7 +63,7 @@ def populate(tab, cl, df):
        print('WARNING: cl and df are different sizes.')
        print('Google Sheet NOT UPDATED.')
        print('Look at your df and compare to your range input.')
-       print("Cances are you're accidentially creating new columns.")
+       print("Chances are you're accidentially creating new columns.")
        raise SystemExit()
 
 
@@ -440,6 +440,39 @@ def date_ranger(days=30, human=False):
         lot = [(x +' - '+ y) for x, y in lot]
     else:
         lot.append((dx(days_ago), dx(yesterday)))
+        lot.append((dx(midrange_start), dx(midrange_end)))
+        lot.append((dx(lastrange_start), dx(lastrange_end)))
+    return lot
+
+
+def tri_thirty(days=(30, 90, 180), human=False):
+    """Returns 30-day ranges from days-ago starts."""
+
+    def dx(x):
+        return gs.api_date(x)
+    def dh(x):
+        return gs.human_date(x)
+    
+    lot = list()
+    today = datetime.now()
+    yesterday = today - timedelta(days=1)
+    
+    firstrange_start = yesterday - timedelta(days=days[0])
+    firstrange_end = firstrange_start + timedelta(days=30)
+    
+    midrange_start = yesterday - timedelta(days=days[1])
+    midrange_end = midrange_start + timedelta(days=30)
+    
+    lastrange_start = yesterday - timedelta(days=days[2])
+    lastrange_end = lastrange_start + timedelta(days=30)
+    
+    if human:
+        lot.append((dh(firstrange_start), dh(firstrange_end)))
+        lot.append((dh(midrange_start), dh(midrange_end)))
+        lot.append((dh(lastrange_start), dh(lastrange_end)))
+        lot = [(x +' - '+ y) for x, y in lot]
+    else:
+        lot.append((dx(firstrange_start), dx(firstrange_end)))
         lot.append((dx(midrange_start), dx(midrange_end)))
         lot.append((dx(lastrange_start), dx(lastrange_end)))
     return lot
