@@ -10,6 +10,8 @@ import os
 import gspread
 import httplib2
 from datetime import date, datetime, timedelta
+from inspect import getfile, currentframe, getouterframes, stack
+from collections import defaultdict
 import pytz
 from oauth2client.client import OAuth2WebServerFlow
 from oauth2client import file, tools
@@ -23,6 +25,9 @@ from logzero import logger, setup_logger
 filename = "oauth.dat"
 client_id =     "769904540573-knscs3mhvd56odnf7i8h3al13kiqulft.apps.googleusercontent.com"
 client_secret = "D2F1D--b_yKNLrJSPmrn2jik"
+
+# To count how frequently functions have been called.
+counters = defaultdict(int)
 
 
 def pipulate(tab, rows, cols, columns=None):
@@ -132,6 +137,19 @@ def name(name):
     return oauth().open(name)
 
 
+def module_name():
+    """Return name of calling module; good at the end of cached functions.
+    Also creates and increments a counter per calling function."""
+
+    global counters
+    current_frame = currentframe()
+    outer_frame = getouterframes(current_frame, 2)
+    name = outer_frame[1][3]
+    counters[name] +=1
+    return_me = '(%s: %s) ' % (name, counters[name])
+    return return_me
+
+
 def create_google_service(filename, api_name, version):
     """Return instance of Google Service object."""
 
@@ -218,6 +236,7 @@ def h1(print_me, color=Fore.GREEN, font='standard'):
 def h2(print_me, color=Fore.GREEN, font='cybermedium'):
     ''' The human brain generally only deals well with shallow nesting. '''
     ascii_art = figlet_format(print_me, font=font)
+    print()
     print('%s%s%s' % (color, ascii_art, Fore.WHITE))
     return print_me
 

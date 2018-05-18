@@ -1,45 +1,85 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
-## Wed May 16, 2018
-### The Necessity to "Go Pedantic" can Cause Mental Block
+## Thu May 17, 2018
+### pip install percache / Firefly Tiffany Lamp Destroyed
 
-Okay, focus like a laserbeam. You've got to deliver on this YESTERDAY. Work
-through these things one at a time. Crank them out. You've got them listed
-below and no other work interfering. This is your chance. I need a modified
-date range. That's in the most well known and familiar territory presently, so
-crank that out first. 1, 2, 3... 1? It's in the pipdev date_ranges function
-code that you haven't been in in awhile. Also, complexity. Naming convention
-for these date ranges. 
+Today... a weekly report day. Make it one for the history books. Solve lots of
+long-standing problems. I actually thought I did that with lru_cache from the
+standard library, but turns out, that's just "in-session"... or during one
+execution-run, such as it were. This is probably fine for webservers where the
+parent task stays in memory (and thus the cache) until a server restart, but
+with scheduled tasks, memory gets cleared between every run. And especially
+with Jupyter Notebook, it gets cleared every time you simply re-run your
+script... and that's no good for my use. So I'm trying to get something
+basically API-compatible with lru_cache. It's an old case of how easy it was to
+switch to git because I knew hg (Mercurial, a git-equivalent distributred
+revision control system written in Python).
 
-Don't go all rabbit hole on it though. You have date_range() which was your
-first thought when this became recurring with 30, 60, 90. Now that it's 30, 90,
-180 it may be... well, we skip 60 and 120. That in itself is interesting
-naming-convention-wise. thirty_90_180() maybe? Haha, then the prior function
-could have the alias thirty_60_90(). Identifiers can't start with a digit, so
-this is probably maybe the most Pythonic naming convention I can think of for
-these things. It's convention-y enough I think that I won't need the further
-qualifier of daterange in the name. Okay, so get __init__.py loaded and
-duplicate date_ranges() for starters... 
+Ugh, Billy has given me the greatest gift of a totally clear desk, free of my
+new Tiffany firefly desktop lamp which he broke in a mad-dash to get food that
+he thought that wasn't coming out, but wasn't. So it was over nothing. I think
+it was like $250 or something. Oh well, live and learn. There's always matter
+that you think is going to matter edging its way into your life, then turns out
+not mattering at all because other jealous matter saw to it. Yup, although
+living, the cats are the most jealous bits of matter in my immediate orbit--
+until the weekend begins, which is tomorrow night. Wow... okay, I feel
+ever-more ready for Adi in my tiny Urby studio.  Big lessons in life in this.
+Don't put ANYTHING out that you're not okay with getting broken or destroyed...
+sometimes meaninglessly. Just wrong place at wrong time.
 
-Okay, it became date_ranger() and now has a days parameter that defaults to 30.
-The YOY concept is removed, and that will be the reason for the old
-date_ranges() to stay around. Okay, the date_ranger(days) function went very
-well. Solidly set up for reuse and different ranges. Okay, but have more to
-show for the meeting. Lift formulas from mock-up...
+I have a whole theory about the wants and desires of matter to become entangled
+in your life, for the sole purpose of becoming entangled with a local "god" of
+matter, who can bend and shape and form it-- reducing disorder and wrapping
+out-of-the-game (or lesser-participating) matter into in-the-game or
+more-participating matter. There's (probably) dark matter/energy and there's
+light matter/energy (all we can see) and then there's things we call alive and
+things we don't call alive. In some form or another, I think we're going to
+find out that going from information to light to matter is actually the first
+step in life. Not that all matter is life, but all matter is maybe like
+proto-life. Its the stuff that has to exist first, before life (like ours) can
+exist. And that's a very workable theory. Gets solidly into Star Wars force
+territory, but I think there's a good slice of truth in there, like so many
+artists get when intuiting (channeling?) their way through stuff.
 
-Navigation! Navigate! Use your music to get you back on track. That's the
-track! Music... I lack the knack. Remember this, because it's a solid poem in
-there somewhere. #xbook. But I do digress. Get over this mental hump. It's a
-field-mapping thing. From letter-indexes in someone else's Excel mock-up to
-named indexes in my live code. Okay, why should such inane tasks be the sources
-of mental barriers? This is the sort of thing that USED to be difficult, and my
-body remembers. I have to overcome that.
+To have a good showing by this 3:00 PM, I definitely want the formula correct
+AND a better cache in use. Install perchace... do it from the Anaconda
+prompt...
 
-Okay, it's because I have a lot of column correlating to do to do this thing
-properly. Oh yeah, it's the pedantic avoidance thing again. I like general
-cases, and when you drill-down to specifics, all the general-case beauty gets
-mangled and munged. No matter. Do it anyway and STILL make it wonderful enough
-to be the master template. It's got a case for all things.
+    pip install percache
+
+Okay, now test it from a brand new notebook. Do it in pipulate-center but call
+it experiments.ipynb so you know nothing in there never really needs to be
+kept. But DO add it to the git repo. Also upgraded from pip 9.0.1 to pip 10.0.1
+under Anaconda prompt.
+
+Wow, what an interesting day. Yes, one for the history books, but it turned out
+to be because of the chain of discoveries culminating in using the
+game-changing percache library, which is basically API-compatible (a few small
+edits) with Python's lru_cache built into the standard library. My education
+that culminated in this discovery went something like this:
+
+- Python can pickle any Python object for long-term storage
+- Pickled objects can be stored in "shelves" using key/pickles
+- The old web browser cookie-nesting for sub-keys trick also applies here
+- Ohhh, so home-grown caching systems are a cinch to implement. Implemented.
+- Oh, that's a whole lot to maintain with all those "with open's"... yuck!
+- Elsewhere in my Python education, I discover decorators (during Flask work)
+- Raymond Hettinger, you say lru_cache from Standard Library uses decorators?
+- Well, caches and decorators are a match made in heaven, aren't they?
+- Oh wait, that's not caching between script-runs... waaaait a minute.
+- It's solving the 2nd half of my pandas.apply() problem, but not the first.
+- Can't I just swap lru_cach for something API-compatible and persistent?
+- Search, read, search, read... yep. Per chance, it is percache.
+- Swapped in perchance code (removed the parenthesis after @cache).
+- Assured myself of behavior of print() statement from cached function call.
+- Wrote support-function for bottom of cached function for assurance's sake.
+- I realize THIS IS WHAT DECORATORS AVOID for and will later modify percache.  
+- Test my control over clearing the cache by setting maxage argument.
+- Totally satisfied with percache behavior... pshew!
+- Weekly report. Attempting to not look like an idiot for the more visible
+  "top-line" items not getting done.
+
+Publish? Publish.
 
 --------------------------------------------------------------------------------
 ## Mon May 14, 2018
@@ -177,6 +217,13 @@ question into vendor.
 3:00 PM meeting cancelled. Big weight off. Look carefully at how to do a
 category performance look-up. Isn't there some way that doesn't require sdk
 IDs?
+
+I'm taking these lines out for now:
+
+    %load_ext pycodestyle_magic
+    %%pycodestyle   # Edit out leading hash for a pep8 scolding 
+
+
 
 --------------------------------------------------------------------------------
 ## Wed May  9, 2018
