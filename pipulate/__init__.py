@@ -449,9 +449,9 @@ def tri_thirty(days=(30, 90, 180), human=False):
     """Returns 30-day ranges from days-ago starts."""
 
     def dx(x):
-        return gs.api_date(x)
+        return api_date(x)
     def dh(x):
-        return gs.human_date(x)
+        return human_date(x)
     
     lot = list()
     today = datetime.now()
