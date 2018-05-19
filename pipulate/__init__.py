@@ -30,6 +30,13 @@ client_secret = "D2F1D--b_yKNLrJSPmrn2jik"
 counters = defaultdict(int)
 
 
+def except_me():
+    """Return error tuple and stop execution. Useful on naked exceptions."""
+    e = sys.exc_info()
+    print(e)
+    raise SystemExit()
+
+
 def pipulate(tab, rows, cols, columns=None):
     """All that pipulate really is"""
 
@@ -418,35 +425,8 @@ def date_ranges(human=False, yoy=True):
     return lot
 
 
-def date_ranger(days=30, human=False):
-    """Return a list of 3 commonly used daterange tuples."""
-
-    def dx(x):
-        return api_date(x)
-    def dh(x):
-        return human_date(x)
-    lot = list()
-    today = datetime.now()
-    yesterday = today - timedelta(days=1)
-    days_ago = yesterday - timedelta(days=days)
-    midrange_end = days_ago - timedelta(days=1)
-    midrange_start = midrange_end - timedelta(days=days)
-    lastrange_end = days_ago - timedelta(days=days+2)
-    lastrange_start = midrange_end - timedelta(days=days*2)
-    if human:
-        lot.append((dh(days_ago), dh(yesterday)))
-        lot.append((dh(midrange_start), dh(midrange_end)))
-        lot.append((dh(lastrange_start), dh(lastrange_end)))
-        lot = [(x +' - '+ y) for x, y in lot]
-    else:
-        lot.append((dx(days_ago), dx(yesterday)))
-        lot.append((dx(midrange_start), dx(midrange_end)))
-        lot.append((dx(lastrange_start), dx(lastrange_end)))
-    return lot
-
-
-def tri_thirty(days=(30, 90, 180), human=False):
-    """Returns 30-day ranges from days-ago starts."""
+def date_ranger(starts=(30, 90, 180), days=30, human=False):
+    """Returns 3 date ranges from days-ago starts to days-later."""
 
     def dx(x):
         return api_date(x)
@@ -457,14 +437,14 @@ def tri_thirty(days=(30, 90, 180), human=False):
     today = datetime.now()
     yesterday = today - timedelta(days=1)
     
-    firstrange_start = yesterday - timedelta(days=days[0])
-    firstrange_end = firstrange_start + timedelta(days=30)
+    firstrange_start = yesterday - timedelta(days=starts[0])
+    firstrange_end = firstrange_start + timedelta(days=days)
     
-    midrange_start = yesterday - timedelta(days=days[1])
-    midrange_end = midrange_start + timedelta(days=30)
+    midrange_start = yesterday - timedelta(days=starts[1])
+    midrange_end = midrange_start + timedelta(days=days)
     
-    lastrange_start = yesterday - timedelta(days=days[2])
-    lastrange_end = lastrange_start + timedelta(days=30)
+    lastrange_start = yesterday - timedelta(days=starts[2])
+    lastrange_end = lastrange_start + timedelta(days=days)
     
     if human:
         lot.append((dh(firstrange_start), dh(firstrange_end)))
@@ -496,8 +476,14 @@ class Unbuffered(object):
         return getattr(self.stream, attr)
 
 
-# Importing pipulate initiates Web-based Google login.
-force_it = oauth()
+# Importing pipulate prompts for 1st-time Google login.
+try:
+    force_it = oauth()
+except httplib2.ServerNotFoundError:
+    print("You are probably not connected to the Internet.")
+    raise SystemExit()
+except:
+    except_me()
 
 # Forces Jupyter Notebook to not buffer output (like streaming).
 sys.stdout = Unbuffered(sys.stdout)

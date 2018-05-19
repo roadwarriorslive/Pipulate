@@ -1,5 +1,195 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Fri May 18, 2018
+### Daterange Function Drawn and Quartered (grisly metaphor)
+
+Let there always be gratitude. You always have someone to thank.
+
+Let the day begin. It is another Hail Mary (by 1:00 PM) Friday.
+
+You can do this. JUST GET THE FORMULAS DONE!
+
+This involves a benchmark for every time-range.
+
+This involves the time-ranges being really 30, 90 and 190.
+
+This involves datetime work I don't want to cram in, so support faking a date.
+
+This involves maintaining focus in a way I rarely can pull off in 2-hours.
+
+But do it. Show your gratitude for this chance. You're aspiring to be a data
+samurai ninja. Be one. 1, 2, 3... 1? Oh god, Windows 10 mysteriously freezes
+all input for seconds at a time. What is that a sign of this day-and-age with
+hardware this powerful... a lag that can last for 5 or 10 seconds? Shit,
+remember to Google for what's going on there. Mac's don't do that. When they
+freeze, they're toast. When Windows 10 freezes, just hang tight and keep that
+special rage reserved for idiots on the road in-check. Don't let that kind of
+ire get directed at a platform that only just became usable in every other
+regard. The Amiga crashed, after all. Momentary freezes are wayyyy better than
+crashing, even if it is to report all your activities to mama.
+
+1, 2, 3... 1? Center. Center means pipulate-center.ipynb now. Go check it out
+in the browser... okay, runs well.
+
+Interesting thing with the cache though. I expected AS MUCH hitting the cache
+today as after clearing the cache yesterday, but it wasn't. I think I didn't
+think through the behavior of the maxage parameter of percache fully.
+
+I have to also fully internalize the new slate of pipulate left, right and
+center sbin commands. If in doubt, always type:
+
+- p[Enter] (to list pipulate services running)
+- pc[Enter] (to toggle the pipulate serice on or off)
+
+Between those two commands, I can always ensure that the 24x7 pipulate services
+(currently only pipulate-left but soon pipulate-left and pipulate-right) are
+running. Pipulate-center gets toggled on and off according to whether my
+"centered work" is actually in the scheduler or not. More often than not, it's
+going to be in Jupyter Notebook still, which is interesting. I've got a quick
+test to do there regarding invoking entire modules from inside other modules
+without relying on invoking classes or functions from inside the module. I'm
+looking for the global effect of just important the module to be able to be
+re-executed by the Python schedule PyPI module. I used to import them using the
+normal Python import statement, keep global side-effects to a minimum, and then
+invoke module_name.Main(), relying on the presence of a conventionally named
+Main() function to be there for scheduling. But because cramming everything at
+the script's global root into a function like completely throws away the
+REPL-advantages of Jupyter Notebook and throws intuition out the window for
+anyone dealing with such a script in Jupyter Notebook, the right solution is to
+figure out how to intentionally import (or load/reload or whatever) a Python
+module primarily for it's global "on-first-run" behavior. This very much leads
+me to think I'll be using the same trick in the pipulate-right main scheduler
+script (clearly destined for a reworking) in a very similar way to how I'm
+dynamically loading and refreshing Pipulate every time from ../pipdev. See? The
+solution is looking me in the face, already in my pipulate-center.ipynb.
+
+It's worth pointing out now that I have some VERY STRONG NICKNAMES (and
+therefore conventions) in play now. Specifically, my main work files are
+ALWAYS:
+
+    [wherever]/github/pipulate-center/pipulate-center.ipynb
+
+This is the current (often highly customized) version of:
+
+    [wherever]/github/pipdev/main_template.py
+
+Every morning, I try to "find my center" to be fully effective. I don't fully
+know what it means, but it works. It has something to do with Elon Musk's First
+Principles, or the axioms, givens, truths, assumptions of philosophy, math,
+whatever. But the point is that you always build-up AND build-down. You're
+vibrating back and forth on a generally similar stack of stuff. The more
+similar the stack of stuff each day you're scanning and sampling back-and-forth
+between, and the more linear our back-and-forth scanning is (as opposed to the
+formidable task of a SETI-sky-search), the more effective you can be each day
+at banking a few of the important difficult (and no-takeback) things required
+to keep moving your life forward, and forever closer to your own personal
+whatever's if you've got 'em. I do; although they're not always clear.
+
+EVEN THIS WRITING IS A DISTRACTION.Back on track for meeting... in just over an
+hour. Get it to a good demonstration-point. It doesn't have to be done... just
+obviously just about there. Put all the benchmark placeholders in the config
+tab. You've GOT to think those through. Okay, THIS is the way to do it. Just
+start filling data in and flex the system you JUST MADE THAT FLEXIBLE into
+shape. Yeah, I'm doing some remarkable stuff here. Don't apologize for your
+speed or sell yourself short. Correct component-selection combined with elegant
+Language/API-use to keep it all... well... LOVE-WORTHY thus scalable by a
+single individual... yeah, that's it. That's important. That's a tenant of
+modern effective Python-centric datamastering. Even though other people will
+have APPEARED to have been here before you, you are really actually
+homesteading in the noosphere. I feel it in my bones. 1, 2, 3... 1?
+
+Get those date-ranges correct, dumbass! That's a big dependency for other
+things, and it's come up in a few meetings already. It's YET ANOTHER spin on
+the date_range function, but it's highly abstracted now in its latest rendition
+in pipulate (go look at the repo for yourself), and so I should be able to:
+
+1. Limit the function to ONLY ever return 30-day ranges.
+2. Take a tuple of days-ago as an input (180, 90, 30).
+3. Make the whole date-range thing EVEN SIMPLER as a result. So worth it.
+
+Okay, so I need this in Jupyter Notebook and NOT in experiments.ipynb... good,
+I'm making muscle-memory mappings and connections and wired-pathways or
+what-have-you to some very concrete locations in the nothingness of the
+informationscape. Next to pipulate-center.ipynb is ALWAYS experiments.ipynb and
+pipulate-center.py... see? Very tightly confined scope of "center" and contents
+in "center". When I bring my center in focus, let there be no misunderstanding
+of what I am working on right-now and why.
+
+Let pipulate-center.ipynb always reside on the 2nd Chrome tab, because that
+maps to Ctrl+1. This loosely corresponds to the :b1 vim command I frequently
+use to get back to this, my private thoughts journal-- `before I copy/paste
+select entries to the vim-buffer residing on :b2. Simply moving entries from b1
+to b2 IS THE ACT OF PUBLISHING THEM, because it will get swept-up in a general
+update by the "g" command that I'm always updating to keep all my key repos
+up-to-date on Github. Muscle-memory, see? The sbin location, and a cascading
+effect of distributed revision control that familiarity with one-letter sbin
+commands of your creation kickstarts your self-navigating momentum... because
+complex concepts start becoming as easy to express as:
+
+    g
+
+Gee, that's easy. And this is progress too. I'm in a friggin' pupa stage still
+of datamasting. I'm a friggin chrysalis. I accept and admit that. It makes me
+slower than I'd like to be at work, but I'm about to emerge as a butterfly
+here. Maybe I can lay claim to the mantle of the Caterpiliar as my soul-match
+in Wonderland, after all. I tell Adi that while I may sound like the
+Caterpiliar, in reality I'm more like Bill... poor Bill. But Burt does have
+some mad sidewalk-VR skills. But that's the nonlinear thinking that must get
+swept under the rug of daily effectiveness. It's coming up on Noon, and you are
+SO CLOSE. Drive this puppy home! 1, 2, 3... 1?
+
+Run pipulate-center.ipynb again now that the cache is populated for today and
+the 9 benchmark placeholders are in the config tab. Okay, to get this formula
+down... axioms...
+
+1. You ALWAYS HAVE BENCHMARK DATA in config dict (by whatever means).
+2. Every formula-invokation must know for what time-range (1, 2 or 3).
+3. Every formula-invokation must know for what metric ('dl', 'dau', 'rev')
+
+The formula is always:
+
+    ((newer - older) / newer) - ((bm_newer - bm_older) / bm_newer)
+
+The newer and older values have the following parameters:
+
+    - the metric's name: ('dl', 'dau', 'rev')
+    - the time_range: (1, 2 or 3)
+
+Okay, so slam out the global dictionary with the new time-ranges. Lift
+date_ranger function from pipdev... on your local machine. Can be done right in
+Jupyter Notebook (the web browser)!
+
+Phone-call had. Went well. Want to pick up Adi by 7:00 PM. It's about 5:00 PM.
+Once I pick her up, I'll probably get nothing else done for the weekend,
+realistically. Haven't eaten anything or taken a shower yet today either. Tick
+Tock! Keep aware of the clock. Keep aware of the vision. Don't let up. It's
+okay to eat while you work. Do a shower last thing before leaving to pick up
+Adi.
+
+This next step is the argument-passing mental gymnastics of how Panda's
+DataFrame.apply() works. It's not loading the function in the tradtional way,
+so one would not expect a cache decorator to work with it. It might. But
+really, that's besides the point. It's about parameter passing and not caching. 
+
+Wow... so much mental gymnastics today! Look over your work today and make sure
+it's on-track. Okay, there's a bit of follow-up work on the new date_ranger
+function. It's so friggin awesome. It's api is:
+
+    dates = date_ranger(starts=(30, 90, 180), days=30)
+
+And you get back 3 date-ranges of 30-day intervals starting 30, 90 and 180 days
+ago. This is where the grisly concept of drawn and quartered in the headline
+came from. It's spreading the 30-day date-ranges over a broader total distance.
+There are nuances here. I find the API I'm working with to be good with 30-day
+ranges but not 60-day ones for example, so the 180 days can't be more
+comprehensively split up with:
+
+    dates = date_ranger(starts=(60  120, 180), days=60)
+
+That would have better day-coverage over the 3-ranges in 60-day sets, but the
+API choked on it. So, drawn and quartered it is.
+
+--------------------------------------------------------------------------------
 ## Thu May 17, 2018
 ### pip install percache / Firefly Tiffany Lamp Destroyed
 
