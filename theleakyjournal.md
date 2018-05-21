@@ -1,6 +1,7 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
 ## Mon May 21, 2018
+###
 
 Interesting. Okay. Monday morning. At office. Have to be at the office in
 person a few times a week. Good always to start out with Monday to get off on
@@ -269,7 +270,10 @@ Good workflow. Go Right.
 The meeting went fairly well. The rabbit I must not chase right now is how I
 put the data retrieved through the API BACK INTO the config tab, tempting as
 this final bit of meta-magic may be. Instead, just copy/paste the data from the
-gui for each of those "time-frames"... 
+gui for each of those "time-frames"... okay. So you're just mapping to the
+closest month. 30 is last full month (April). 90 is probably February. That
+would make 180 last December. That will work for now. Get those numbers in
+pronto!
 
 --------------------------------------------------------------------------------
 ## Fri May 18, 2018
