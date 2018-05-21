@@ -1,5 +1,277 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Mon May 21, 2018
+
+Interesting. Okay. Monday morning. At office. Have to be at the office in
+person a few times a week. Good always to start out with Monday to get off on
+the right foot. Make the best of your commute. That video you did this
+morning... 10 minutes no talking, spectacular view... was a good start. But now
+throw yourself completely and whole-heartedly into the report(s) this morning.
+Get that grabbing of the category benchmark correctly (enough) to feed a good
+category estimate (percentage) for the difference calculation. You've to to
+start allowing "math" (justified as the inputs and outputs of functions...
+haha! (publish this)) if you want to do your job the best you possibly can
+here. You have to stop brushing off the derivative formulas as final-mile
+details. The more you start with the purpose and spirit of the derivative
+formulas in mind, the better will be your selection of the data to sample out
+of the deep and vast flowing ocean of data that's available already through
+various "web-scale" APIs provided by Google, Amazon and others. But mostly,
+Google and Amazon. Know these 3 things:
+
+    - Google Services
+    - Amazon Services
+    - Local & Cloud-based Hardware
+    - API Nuance Wrangling
+    - Having/Realizing Vision
+
+Yup. That's about it. Don't let too much time slip by this Monday morning.
+Update your boss with this / better clarified in terms of what it means to him.
+
+- Final stages of API nuance wrangling.
+- Final Master Template instance inches away.
+- Big payoffs here. Allow me to enumerate.
+
+Enumerate! Don't forget the heroic date_ranger() function... implemented on
+some iterating object to give you arbitrary number of date-ranges corresponding
+to an arbitrary number of fed-in "days-ago" integers along with an optional
+unit representing the number of days in the range (defaults to 30). So this
+accommodates all the current common cases except for the increasingly unpopular
+calendar-date ranges. 1, 2, 3... 1?
+
+Check the reports! 10:30 AM is an opportune time to look, right in the middle
+of a hard-scheduled periodic run (organic.py). Hmmm. Yep. Still appropriate for
+publishing. It's no mystery an SEO interested in Google Sheet automation is
+also interested in the subject-matter of organic search traffic. I have after
+all embedded a few sample GA and GSC (Google Analytics and Google Search
+Console) and now I see it going into the big, laborious GSC CSV
+generation-phase because until recently, you could only get a 3-month window
+out of GSC, which was not long enough for the necessary-for-business
+annual-cycle predictions and so necessarily needed to be archived. Rethinking
+necessary. I upped my business-account quota on my Google Data storage so I
+could go up to 100GB of company-related storage. Very interesting move to dodge
+having to refactor everything around Amazon S3. 
+
+I was completely disinterested in doing this on the "old" pipulate files which
+are currently "on the left"...  left behind, preferably each time you re-think
+and redo (aka scrap-and-rebuild) based on newer realities and newer tools and
+techniques and even business principles. We cannot lose sight of the impact of
+generally technology-driven disruption. We also must not lose sight that it's
+remarkably difficult to tell the real long-term winners from losers until after
+the dust settles. I think it'll be our children or grandchildren who really
+will be able to accurately judge the long-term efficacy of the plans and moves
+of Amazon vs. Google vs. Apple vs. every other musky company you can insert
+here. 
+
+I'm increasingly believing that what we're immersed in the middle of right now
+and have difficulty expressing as a not-scifi tinfoil hat sort of thing is the
+race to construct the evolutionarily obvious next-step digital nervous system
+ushering in light digital versions of group-conciousness-- group by virtue of
+the fact that some in-common digital assistant akin to the computer on the
+bridge of the Starship Enterprise, precisely as envisioned by the granddaddy
+engineers at Google before they started distracting us from that key-goal with
+an alphabet soup of distraction.  Just follow the AdWords money. Protecting
+THAT revenue-stream is top priority around Google... NOT self-driving cars.
+
+Okay, so distraction is my greatest weakness, but occasionally following the
+threads of those distractions to their logical conclusions, and coming out the
+better and more capable (if not battle-scarred for it) is the source of my
+greatest secret weapons and strength. Currently, that's being expressed best by
+FINALLY investing myself whole-heartedly and "all-in" on a thing... which
+happens to be Python, mainly. But then also vim secondarily, and generally a
+nice generic but diverse smattering of Linux from non-desktop versions like the
+minimum core version of Tiny Core Linux that leaves out the graphical desktop
+to a nice bloated Debain version like Ubuntu and at least one Redhat-lineage
+Linux like CentOS just so you're exposed to rpm/yum and stuff. By the end of
+that experience, you'll know tce-load, apt-get and yum. 
+
+That's not a bad place to be on the Linux-front. It may drift somewhere
+adjacent over the next 10 to 20 years, like to more embedded-systems or
+high-level systems that layer in the amazing augmented reality capabilities of
+modern hardware without forcing you to do low-level platform-dependent hardware
+programming. I know they say that the abstraction layers of modern languages
+are supposed to spare you from that, but try telling that to an iOS developer
+versus an Android or XBox or PlayStation developer. Hardware surprisingly still
+matters... a lot. I'd certainly be an iPhone app developer today were it not
+for Objective C. Their opinion swung back towards pragmatic, but not before it
+was too late, and they lost me to Python. And Python's big weakness is mobile.
+How's that for irony? The thing I advocate most is mobile least. Ugh! So take
+whatever I say with a grain of salt. My credibility always hangs in the brink.
+I'm a risk taker. I'm placing my bet on Python. Welcome to SEO. You're reading
+the writing of the real-deal, doing their thing in the noosphere, knowing
+you'll be poking around in here sooner or later if this pipulate thing takes
+off... haha! vipgq
+
+There's a whole lot of specialties out there to trap you like an Alice in
+Wonderland Rabbit Hole from which there is no return... because all your highly
+receptive underutilized and yet-to-be-programmed synapses get the first layer
+of learning laid-down with whatever you chance into... and too often, that's
+Java because of college compsci courses or JavaScript because of the sexy, sexy
+front-end user interface job market and potential Rockstar status.
+
+If you want to be the baddest ass of badasses, also learn pacman under Arch
+Linux, and throw in some Raspberry Pi sd-card imaging, and you'll be a
+hardware-controlling kernel-shuffling virtual-god on the order of any of the
+old school (not old'skool) Unix sysadmins of yore who got off on choking their
+enemies off from their budget-given... 1, 2, 3... 1? 80/20-rule escape! It's
+already 11:00 AM. Check your email and find your Jupyter Notebook
+browser-center. You have 2 actual center's here... Left and Right. The center
+of the center is the OS. It's the gluon. 
+
+The OS is whatever provides the Amiga+N, the Ctrl+Windows+Left/Right, the
+3-finger left/right swoosh on a trackpad or whatever it is you're going to have
+to do to navigate between static-memory-biasing "fullscreen" configurations
+sweeping desktop since mobile showed "us" the way. And by us, I mean you people
+who never knew the joy of Amiga+N in the EIGHTIES!!! At any rate, by whatever
+technique you navigate quickly between Left and Right at Center is a function
+of which host OS (platform/whatever) you're choosing. Some have certain
+difficult-to-decline advantages like always-just-working that keep this part of
+the tool equation deeply rooted in the proprietary-tool solutions. This is
+where I am still on Microsoft-hardware running Windows 10. 
+
+If you're talking about Bill, you're talking about my g, g, generation. I'll
+stop trying to put him down, just because he played dirty in his day. What's
+coming out of their labs have clearly learned the lessons of the Amiga, better
+in fact than the Mac, and in ways that embrace new technologies like
+touchscreens sooner, faster and better than Apple. Wow... didn't think I'd see
+the day in the one direction (Apple's miraculous recovery/ascent) and then the
+other (Microsoft's miraculous recovery/ascent). And for these to be my everyday
+thoughts, and for me to take such joy in the return of technology muscle-memory
+recovery (achieving for the first time "for-real") is a kick and a breath of
+fresh air every day. I have to pay-back my employers (for the time, not
+equipment which is my own) with remarkable productivity now. The butterfly must
+come out of its cocoon. 
+
+Begin rolling out this no-system system. Immerse yourself in the work in
+lighthearted little loveworthy ways every day, and let it organically grow and
+spiral out from there. Let it blossom like a flower. Don't try stomping on it
+like a tube of toothplaste. I've been in the role of that tube of toothpaste
+goodness to be squashed flat and rolled-up and discarded too many times to not
+recognize the latest rendition. Fear not! This is never (rarely) the
+intentional behavior of the task-masters. People who hire wizards expect magic
+without an appreciation for what it requires to actually BE the type of person
+who can marshal those resources and visualize those subtle cascading
+connections of cause-and-effect, and then to perform that magical sequence of
+symbols and gestures so as to trigger of that cascading magical moment.
+
+And trust me, that moment is pure magic to those who need it and witness it and
+covet it. And the best wizards don't hoard magic or keep secrets. Because the
+practicing of such magic should almost in every case lead to better lives for
+everyone in the all-around everybody-wins fairytale future that we're perfectly
+capable of making if only everyone were open about everything that matters
+because it impacts other people and that's just called being a decent human
+being. But believing we are on the verge of infinite inexhaustible resources,
+including time, space and matter, is a pretty tough sell to the luddites who
+generally run the place, because the keys to power are closely guarded and
+handed down generationally, first in the family, second in the tribe, and third
+over their dead bodies.
+
+Shit. 1, 2, 3... 1? Center. You're Left. Go Right, my son. Oh! The Web Browser!
+I'll be vibrating back and forth here while I calibrate for a hyper-effective
+few hours of work. Be proud by 3! 1, 2, 3... be proud by 3. You could have 1 if
+only you knew what 2 do...
+
+Tab 1 is this, even though it's not your work-in-progress file, but rather a
+Jupyter Notebook provided directory-listing of your Center repo. This makes
+sense because even though it is Tab 1 because... oops! Things have changed.
+
+    http://localhost:8888/tree/github/pipulate-center
+
+The above may end up being Tab 2 or opened only as-needed, because the way
+Chrome behaves recently changed. It used to be that Tab 1 was Ctrl+0 as far as
+keyboard shortcuts were concerned to jump-around tabs. This is an excellent
+example of where you actually do have to keep your muscle-memory a wee-bit
+flexible, even on multi-platform, seemingly fabric-of-the-Internet tools (but
+really, not) like Chrome. Even here you must be aware-of and concerned with a
+certain vendor dependency to your habits that sneaks in at the edges where you
+wouldn't expect. Google might switch the Ctrl+[number] keyboard shortcuts that
+let you jump around your browser tabs without taking your hands off of the
+keyboard from being a 0-based to being a 1-based index... hahaha!
+
+Trust me, nobody appreciates this as much as me. I am THE audience for that
+person there who made the final decision, and they don't even know it because
+there's not enough time in the day to participate in every tool's RFC
+discussions. I used to that sort of thing, but got it and everything like it
+out of my system in the late 80s and early 90s before the Web set in. Commodore
+and the Amiga in particular had a pre-Web twisted-pair (old phone system) and
+user group (pre socialmedia) version of pretty much everything-- including
+vim... Fred Fish #591 in 1991... which I received in the middle of enemy
+territory at Drexel University where I went to college-- the first one to
+require every incoming freshmen compsci or not to buy a computer. First in the
+country to do that, and they required Macs! My alma matter was one of the
+biggest feathers in the history of Apple's cap, and there I was an avid Amiga
+user and president of the local user group squatting on a monthly meeting place
+and storage closet for like 4 years. Those were the glory days. I'm such a
+geek. It's such a pleasure to see the world finally catching up. Go Right!
+
+Got it! Your work-in-progress can NOW ALWAYS BE BOTH TAB-1 VISUALLY AND CTRL+1
+KEYBOARD SHORTCUT-WISE and this is huge for muscle memory. This is the first
+time in years. Okay, push observations like that out into the twittersphere
+when they occur to you. Be the Seinfeld of tech. These sort of things occur to
+you and are genuinely important and sometimes funny and certainly must be
+commented upon. And so I have:
+
+    https://twitter.com/miklevin/status/998589254472265733
+
+...although my delivery and laughtrack is decidedly and lot quieter and drier
+than Seinfeld's. Oh well. It's for my entertainment (and assurance of forward
+progress) not yours. Go Right (has the potential to ascend to be as useful as
+1, 2, 3... 1?). Ah, you ran pipulate-center.ipynb for the first time today a
+few moments ago. Take down some cache stats. They're uniquely well displayed
+there right now. Immerse yourself in your system-making non-system system
+conventions. See? It's just a few working-together conventions that make the
+system-- NOT some django-like mega-framework. I'm really getting the difference
+now between Django and Ruby on Rails though I can't really express it well yet.
+You will continue to be well-served though by avoiding Django, I do still
+believe that, even though I never really tried it and there is one lightweight
+derivative version for Web CMS (as an alternative to static files) that does
+appeal to me. But those Web publishing days (as a thing) is mostly behind me
+now. It's all about these Github-repo-project-embedded journals now and for the
+foreseeable future. What did I see when I went Right?
+
+    app_sdks: 2
+    category: 1
+    app_data: 28
+    estimate: 168
+
+Wow, this is really, really powerful! Okay, hit this friggin thing home for the
+3:00 PM. It's staged to spike. Run report again and get the new numbers. Okay,
+only app_sdks got re-run. Cache it... well, it ran TWICE after the cache was
+added... same behavior as during the Friday call. Smoking gun. For whatever the
+conditions are that I'm creating (Jupyter Notebook REPL execution context) or
+by design of the cache's default behavior (a possibility I must investigate),
+it takes 2-runs before a function-call is cached and it's printing side-effects
+are no longer invoked (by a "real" non-cached function-call).
+
+Okay nice, I'm now getting no uncached function-run outputs. Solid. Fast
+iteration-land. Nice feeling inside. Watch your caches. Control your caches.
+Pushed a tweet out to that effect. Okay, you're closing in on the important
+thing for the meeting. I want to eat, but maybe just another caffeine boost.
+Nothing more. Do it here with the crap powered coffee machine... no... Dr.
+Pepper. Don't drink bad coffee when old magic potion is available. Okay, doen.
+Body tricked into thinking it has what it needs. Take advantage of it now!
+Forget about your clever date_ranger desire (to make it more flexible with any
+number of ranges based on number of start-dates input) as a major code elegance
+improvement to pipulate, but that's not what you need most now.
+
+Okay, so what I have now is a vibrating between Left and Right with a gluon
+(hardly existing) Center. What is your Left, Right and Center can vary based on
+what you're doing. For example, switching screens has no center per se. It's
+the process of transition that makes center. However, oh the Left, Journal is
+center. However, Journal even has a Left (Private Thoughts) and Right
+(Pipulate's Leaky Journal)... so the metaphor of Left/Center/Right is just
+mapped over whatever other concept however it needs to be to make sense and to
+best service muscle memory. Sometimes Center is virtual-glue (never "seen" as a
+screen) and sometimes it is an actual screen and file and "on-deck"
+work-in-progress like pipulate-center.ipynb and pipulate-center.py.
+
+Good workflow. Go Right.
+
+The meeting went fairly well. The rabbit I must not chase right now is how I
+put the data retrieved through the API BACK INTO the config tab, tempting as
+this final bit of meta-magic may be. Instead, just copy/paste the data from the
+gui for each of those "time-frames"... 
+
+--------------------------------------------------------------------------------
 ## Fri May 18, 2018
 ### Daterange Function Drawn and Quartered (grisly metaphor)
 

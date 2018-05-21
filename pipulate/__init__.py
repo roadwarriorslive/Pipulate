@@ -99,7 +99,7 @@ def cl_df_fits(cl, df):
     return False
 
 def gmt():
-    strftime("%a, %d %b %Y %H:%M", gmtime())
+    return strftime("%a, %d %b %Y %H:%M", gmtime())
 
 def aa(column_letter):
     """Return the column letter for numeric column index."""
