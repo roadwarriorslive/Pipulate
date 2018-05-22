@@ -1,7 +1,7 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
 ## Mon May 21, 2018
-###
+### Go Right
 
 Interesting. Okay. Monday morning. At office. Have to be at the office in
 person a few times a week. Good always to start out with Monday to get off on
@@ -274,6 +274,34 @@ gui for each of those "time-frames"... okay. So you're just mapping to the
 closest month. 30 is last full month (April). 90 is probably February. That
 would make 180 last December. That will work for now. Get those numbers in
 pronto!
+
+Okay and the last thing now is the trajectory column. You get to lift that
+formula directly from the mock-up.
+
+It's 6:45 PM and I'm at the SI Ferry terminal Manhattan-side, sitting on a
+window ledge vimming into my Surface Book 2 actually on my lap. I remember when
+the joke was that laptops were for anything but your lap, for every reason from
+design to how hot they ran. Well, it's another thing that's gone full-circle.
+
+You know what else has gone full-circle? Magic. It's easy to imagine lands like
+Asgard per the Marvel movies existing due to the fact that any civilization
+sufficiently advanced will have allowed it to have accidentally slipped into
+the realm of magic... due to the AI "spirits" having been self-repairing and
+taking human requests in verbal format for a few generations-- just long enough
+to forget, and otherwise lose interest in, the "old-school" way of doing
+things. Why learn Python today if some collaborative design-bot out to bring
+out your best enables you to just forget about it and focus on verbal
+expressiveness-- which is what humans are wired to do well anyway.
+
+Okay, it's clear that I'm ever-so-gradually falling back in love with
+technology after a long winter of betrayal and perpetually "floating position"
+setbacks and undo's thanks to greedy and incompetent vendors-- no matter how
+meritorious the platform. I'm of the school of Atari 2600... those of us who
+knew the otherwise Atari VCS, when 8-bit machines were highly proprietary and
+Jack Tramiel was pitching computers for the masses, not the classes. This was
+before even the Apple Macintosh 1984 commercials and before IBM PCs commonly
+even had color graphics-- something not considered "necessary" in a serious
+business machine.
 
 --------------------------------------------------------------------------------
 ## Fri May 18, 2018
