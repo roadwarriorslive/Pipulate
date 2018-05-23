@@ -72,6 +72,7 @@ def populate(tab, cl, df):
        print('Look at your df and compare to your range input.')
        print("Chances are you're accidentially creating new columns.")
        raise SystemExit()
+    print('Populate success!')
 
 
 def cl_to_tuples(cell_list):
