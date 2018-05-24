@@ -49,10 +49,9 @@ def pipulate(tab, rows, cols, columns=None):
         columns = tab.range(row1, col1, row1, col2)
         columns = [cc(x.col) for x in columns]
     df = pd.DataFrame(list_of_tuples, columns=columns)
-    print("Success! You can now look at your df. It's shape is %s rows x %s cols." % df.shape)
-    print('Do pandas stuff like df["B"] = "foo", but maintan range "shape".')
-    print("Update GSheet with changes: gs.populate(tab, cl, df)")
-    
+    print("Success! Your Google Sheet %s rows x %s cols has been blit into a Pandas DataFrame." % df.shape)
+    print('Do Pandas data-transforms like df["B"] = "foo", but maintan range "shape".')
+    print("Update your Google Sheet with changes: gs.populate(tab, cl, df)")
     return cl, df
 
 
@@ -72,7 +71,7 @@ def populate(tab, cl, df):
        print('Look at your df and compare to your range input.')
        print("Chances are you're accidentially creating new columns.")
        raise SystemExit()
-    print('Populate success!')
+    print('Success! Your modified Pandas DataFrame has been blit back into Google Sheet.')
 
 
 def cl_to_tuples(cell_list):

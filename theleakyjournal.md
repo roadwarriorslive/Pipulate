@@ -1,5 +1,118 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Wed May 23, 2018
+### The "Go Right" Physical Memory To Boot The Day
+
+It's totally freaky that I don't have to worry about online vs. offline anymore
+when I "sit down to work". Of course, the work is the thought-work that I would
+normally over the past ~10 years have had to have done directly into my phone
+into some app or other, maybe cloud-sync'ed but just as often not. Personal
+"on-you" space that travels with you wherever you go is actually a remarkable
+thing. 
+
+I was never much of a laptop carrier, ever since I think my first
+office-provided laptops over the years starting with Scala. Then, it felt too
+heavy to carry around to be worth the benefit, and it has remained feeling so
+over the past quarter-century or so that I've been looking for my samurai sword
+secret weapon of tech-- something that I actually COULD put the 10,000-hours of
+practice and mastery into and have it actually still be there in 10 years.  My
+prospects have been bleak, full of false-starts including the Mac switching to
+Unix (but without any worthwhile built-in FOSS repo / yeah yeah brew, macports,
+blah bah not Apple) and probably the current one of Microsoft supporting
+managed sub-kernels including Ubuntu Linux. 
+
+What a trick, Microsoft!  My hat's off to you. Just like when Bill said about
+the iPhone that Microsoft didn't reach high enough, they sure as heck did with
+Windows 10 plus the Surface Book hardware. And I'm not talking about just the
+Surface Pro tablet, or Windows 10 naked without a Linux kernel. No, I'm talking
+specifically about the laptop-ish version of the Surface line, which is more a
+"portfolio" design than a classic clamshell laptop-- and I LOVE it. It hasn't
+withstood the test of time yet, but so far so good. 
+
+Okay, at about this time if I'm not already dived deep in some topic, I review
+my recent writing. The priority goes, if you've got motivation on some
+such-and-such topic-y thing, run with it. That's a precious energy colored
+unique, and you may never be playing that precise tune again, so tease out the
+melody and see if anything's there. But beware of the hypnotic effect of
+rabbits running with waistcoats; they can destroy your productivity for the
+day, your mood for the week, or even the rest of your life if you're not
+careful. We are little else but the decision-makers of the incredibly abstract
+higher-order decisions that don't fall to whatever keeps your heart pumping and
+legs moving; and so each of those strange and often paradoxical A or B type
+moments that percolate up to that part of you that's reading this is a critical
+life-path decision... maybe. 
+
+Critical because the butterfly effect is absolutely real and the smallest of
+your decisions could have profound path-in-life altering consequences; but
+maybe because most of your decisions don't really even matter at all against
+the background of statically predetermined events going on around you. There
+will always be a tomorrow, and if you don't screw up, it will at least be
+another day much like yesterday-- per the program. And I'm not saying there's
+any conspiracy or collaboration here; no, just human nature. We are our own
+best self-saboteurs, deep down in our lizard brain core really just wanting to
+be warm and cozy as we digest our food... and to be able to receive our next
+bite through lazy (efficient) reptilian ambush rather than through the much
+more mammalian scurrying about... thanks to carrying around our own heating
+system. Get it?
+
+Go watch the first few episodes of that documentary program "Inner Fish".
+Return. This is my omage to the computer that becomes self-aware in Hitchiker's
+Guide who in order to get what it meant to be human was referred to the
+complete works of William Shakespeare and then after a moment's pause gives a
+sympathetic "Ohhh..." Yeah, I think making sense of Shakespeare should be built
+into robot kernels akin to Asimov's rules of robotics that our real-life
+death-kill strike-drones seem to lack today. No big. Anything without the
+inherent hardware ability to heal and grow isn't that big of a threat because
+all matter decays. 
+
+Every single day, the ramifications of e=mc^2 sinks in deeper. First, m=c^2/e
+due to maths. Shit, think about that. Matter (you and me) are EQUAL TO in terms
+of equivalent energies the Speed of Light x the Speed of Light divided by the
+total amount of energy your body could release in total matter/anti-matter
+annihilation. So the "m" that is you probably took considerably less pure-force
+energy than a small lump of gold, because that lump is stuffed with a whole lot
+more quarks (3 per proton or neutron which are much fewer in carbon than gold).
+And we humans do seek gold intuitively... but us. How could WE, such complex
+thinking and sometimes even self-aware beings, be LESS VALUABLE in our total e
+than a lump of gold? Because there's a disconnect between matter/energy (same
+thing) and information (not the same thing).
+
+Okay, in the office. Log into office-provided "static, light-show" laptop. Go
+Left (if not already). Type "go". Type "z". Take note of place in process and
+take note of timestamp values. Subtract a minimum of 4 (5 when on daylight
+savings)... okay, looking good.
+
+Pushing out my video, Blitter Data Master w/GSheet & Pandas. Doing that from
+iPhone, so no keyword fields on the upload. Don't forget to add the keywords
+immediately after upload. Keep the ideas flowing. You've got the motivation and
+a few hours going into this meeting. Use it! 1, 2, 3... 1? Go Right!
+
+    Ctrl+Windows, Right-arrow
+    Ctrl+1 (as long as Chrome is showing)
+    Esc, Home (gets out of Jupyter Notebook edit mode and jumps to top.
+    THIS LOCATION is my "Go Right & Center Yourself" location.
+
+Drop your pointer into the should-be active cell (in Jupyter Notebook) and
+click the run button on the browser. Ctrl+Enter would also do, but I'm not
+going to be a stickler for using the keyboard while in a web browser. A browser
+is like the definition of a point-and-click environment, so yield to the
+browser. Just don't take up JavaScript as your main programming language. Okay,
+so... switched Tab name to Health. Get everything lined-up and get it working.
+Okay, now figure out how to input values BACK INTO the config tab without
+file-bloat. How can you express this most simply? Okay, done. Next?
+
+Meeting coming up and I will need to run multiple versions... do a test run.
+Work through it. Do it all in the next 15 minutes before my 2:00 PM
+pre-check-in. Deep breath...
+
+Okay, that went well. It is much later in the evening. 8:15 in fact and I'm
+waiting for the Adi call while I'm here on the train. I may not accept the call
+and spare us both the frustration, then text her some train emoji's. Maybe I'll
+do that right now... Done. Good move. I sent her a rocket ship, then a
+helicopter then a canoe. Adi sent me a series of green and blue hearts. That
+may shape up to be our logo, hers and mine.
+
+--------------------------------------------------------------------------------
 ## Mon May 21, 2018
 ### Go Right
 
