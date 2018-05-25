@@ -1,5 +1,294 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Fri May 25, 2018
+### Advice to Self: Be The Shaggy Man
+
+We live in a very statistical universe. Astoundingly large collections of
+things are clumping together to erase non-statistical single-particle
+non-entangled effects. All things that are are entangled with other things.
+Individual particles existing apart in such isolation that it can stay in
+counter-intuitive superimposed states (particles being in more than one place)
+are so fleeting at the macro-scale as to be non-existent. Everything that
+"exists" as we experience has undergone decoherence and integrated into the
+universe. Any Heisenberg uncertainty is erased through collapse but also
+because all things interact with each other, the observer paradox ALSO
+interferes. I think the net result is an underlying low-resolution
+predetermined universe like Einstein liked to believe. The more "alive" you
+are, the more you can push and twist the actual reality (head of the Github
+repo wall call our timeline) in different and unpredictable directions. So try
+to be unexpected like that. Be original information in the system. Don't allow
+whatever compression algorithms that come in to make human history more
+digestible for super-beings erase you.
+
+The very first thing an API has to create is some sense of labels and walls so
+that observations and interactions can even occur. Otherwise, we'd all just be
+blended together stuff. Apartness and separateness of one thing from another
+is, per genesis and just about every reasonable way of thinking about these
+things, is that some blend of mystery-soup needs to be parcelled out into
+separate bowls or lumps so things can happen to each other. As the lump of
+stuff known as you, one of the most effective ways to interact with other
+things is to make accurate observations about how those walls and labels have
+been made around you and of you. You're probably going to find something with
+lots of hierarchies and circular orbits. Things fly apart if there's not a
+forcer pulling it together. But it would be self-defeating if the things got
+pulled together so tightly their ability to interact with things around them
+disappeared powerful techniques in interacting with other things Programming or
+coding is a process of making illusions out of labels and walls that represent
+(encode) what's there. And THIS line of thinking is where all those
+anthropomorphic models of the world come into play. The fact that we're here to
+make these observations means that the universe (we live in) must favor all
+those rules about establishing labels and walls that make us possible.
+
+Of course, there's tons more than JUST walls and labels, but those take in a
+lot of abstract concepts. The stage on which things occur (time/space) is sort
+of implied in the separation of things through labels (names, symbols or
+whatnot-- a common language so that 2 lumps of stuff can focus their attention
+on a third or each other) and walls (some way to separate lump-A from lump-B,
+which could very well be a clumping-force like gravity and not a membrane-style
+wall at all). Enough parenthesis. I'm listening to Our Mathematical Universe in
+case you couldn't tell I was reading a freaky philosophical book. Mathematics
+somehow exists outside space and time. Mathematical constructs are evolving and
+permutating producing everything. That stuff that produces our type of
+planet-bound wet carbon life had to, almost logically, have to evolve through
+permuting universes where about 32 of the universal constants of existence are
+trying out different values. Those constants are like the speed of light,
+Planck's constant and such. The dials have to be set just-so (the fact that
+fuels anthropomorphism-- the belief the universe was uniquely made for us) to
+support life like us has ended up that way not through miracles, but rather
+through almost statistical inevitability given enough... uh... time? to work
+with? Time and heat-energy. Those are the two tricky ones that point to the
+idea that it's uniquely sequenced information information that's cascading
+through these mathematical structures as sort of standing waveform templates.
+"Dumb" matter gets swept-up by and carried around by such standing waveforms,
+becoming new physical instances of this continuously evolving template.
+
+Yep, I think about these things in Pipulate.
+
+Overshare without oversharing. Show your whole damn deep-self with gusto. Let
+others get swept up by your enthusiasm for things. Do so in at least 3 popular
+mainstream media-channels where the spark could ignite, but don't go lighting
+the fire. Just keep packing a better and better big T-pee tent of layered
+combustible material. Just keep building a good bonfire. Someone else will
+light the flame when the time is right. Or I may do so myself. However, the
+thing I have inside of me that needs saying has not yet actually taken its full
+form yet. Yeah sure, Linux, Python, vim and git-- emphasis on Python. But
+that's not all. It's WET vs. DRY. It's getting up to your own version-3 of a
+thing, and then forge onto version 1001, by which time "your thing" has
+probably morphed, evolved, and totally changed like 2 or 3 times. 
+
+That's about where I am today, having gone from multimedia software like
+AmigaVision and Scala to tracking-gif software like Google Analytic (yeah, I
+used to WRITE the tracking-gif data-collectors) at various of my past
+workplaces. One is still alive today in the form of HitTail. But the systems
+I've built that have iterated to and beyond version-3's include Ruby on Rails
+"CRUD"-style relational database front-end scaffolding-building frameworks.
+Yup, I did a version of ROR before ROR, but on VBScript. A version from 2002 is
+still running. That's an enterprise system of mine from 2002 in the Philly
+'burbs still running, and a system of mine from 2006 still being a popular SEO
+tool site. After web-bugs and crud-apps (quite inauspicious beginning to a
+career of someone who idolizes our great scientists), I took up what I can best
+describe as monkey-in-the-middle API-work. 
+
+It's becoming good... indeed, mastering... this in-between stuff where I've
+been spending most of my time of-late. Very specifically, it's doing it in such
+a way as to exercise as many nasty vendor dependencies and gotcha's and
+basically everything that self-sabotages all your endeavors before they even
+get off the ground for reasons you cannot even know about yet... until you're
+20 or 30 years into it like I am. With me approaching 50, my arguably 40-years
+that I've had has been plenty to take-up and master plenty of things-- without
+even putting too much of a burden on myself. If it takes about 10-years or
+10,000 hours of practice and dedication and immersion in a thing to truly
+master it, then starting at about age-10 by which time you really might have
+found a thing you LOVE, that thing could have morphed into or been swapped for
+another 1 or 2 times, and gone through the whole mastery-achieving cycle again
+and again, taking up say violin and running. Imagine! But alas, we don't learn
+all these lessons about how you could have been better using your time until
+its used up. And THAT shifts an awful lot of the burden for laying out a vast
+array of possibilities upon parents or whatever older generation is shepherding
+the younger one into the world.
+
+For Adi, that's Adi's mother who is homeschooling her, and it is me who has her
+every single weekend for as long as she'll have me. That makes HER MY PROJECT,
+but hopefully not in a way that limits her options in life. In my
+Audible-listening (I still want to say "books I'm reading" but still can't), I
+got up to the part in Our Mathematical Universe where the author talking about
+the suicide of the daughter of Hugh Everett, author of the Multi-Worlds theory
+of quantum mechanics who was never acknowledged by the field of physics in his
+lifetime and died bitter. His daughter's suicide note said that she was going
+to be with her father in a parallel universe. I can hardly even write these
+words. Then there's Ada Lovelace. Sure, adversity and daddy-issues probably
+made Ada stronger, but not so with the attention-starved children of other
+double-alpha obsessives. I've got those leanings inside of me, but I keep them
+in check through a rigorous routine of self-sabotage that keeps me humble and
+enjoying the journey. Be the Shaggy Man. That's a good model.
+
+Today is Friday and I traditionally pick up Adi from classes in the city, so
+today's a good day to go into the office. I'll have been in the office Monday,
+Wednesday and Friday this week, and that's pretty good. I have a project I want
+to deliver for a friend which requires me re-gaining access to a resource I
+lost... well, I didn't really lose so much as the site switched to secure, and
+I only have access to the data for the pre-secure version of the site. Once I
+have that, I can deliver on a very cool deliverable for a friend that has sort
+of a tricking-out from the center-well effect. Yep, everything I needed to know
+about being a tech asshole, I learned from a tech asshole except that I am very
+determined to share the wealth in a version-3 now that I know how to way.
+
+Now I'm actually on the train still typing. It's actually quite amazing how the
+not being scared to actually CLOSE a Windows laptop PC makes such a huge
+difference. In addition to not being scared to close it, least it lose network
+connection and require you to log in again with a potentially very long, secure
+and difficult to type password every time. Microsoft seems to have solved that.
+Even though it's still sleeps-hot Intel processors, the industry has still
+somehow learned to put equipment into some sort of low-power mode when you
+close the laptop. Thank goodness the concept of explicitly setting sleep versus
+hibernate has gone away. 
+
+Sheesh! EVERYTHING is user interface design one way or the other, isn't it?
+Even if it's the API's for controlling whatever, you still have to DESIGN the
+API, and it's not always a matter of just sending a few numeric or string
+values as arguments in on a couple of parameters. Our eyes and skin and every
+sensor and really everything in the world that interacts with anything else in
+the world has an API. Things lump arbitrarily so that they can be effectively
+passed in and out of functions in discrete lumps of manageable stuff. And
+THAT'S how all this ties together, which is ironic because I for a long time
+have considered everything having to do with UI (user interface) design toxic.
+This is the main thing keeping me away from the general full web stack-- too
+much emphasis on user interaction from a graphical user interface standpoint.
+
+Just talked with the vendor of the API I'm currently using. The situation is
+pretty much what I thought. Got an excellent update on the status of that
+project to my coworkers. Now I have just over an hour to get ready for the 1:00
+meeting. These meetings are 2-hours earlier than most of the rest of the week,
+and those 2 hours make a huge difference. The good news is that I'm in a really
+good place. Focus to make the good place a fabulous place by 1:00 PM. An hour
+is a huge amount of time to work with when you have your center. So, Go Right!
+
+Windows had restarted just in the short time since the train ride. I guess
+updates were waiting to install and just got it done. It's a good test of this
+stuff. Absolutely, first thing is Chrome on Windows virtual screen #2. Too bad
+there's not direct-number index access like there is in Chrome with
+Ctrl+[Number] to jump between tabs and vim with :b[Number] to jump between
+buffers. Having it in Windows too would just be too sweet but DO NOT use silly
+little mods if it's not the native OS to get such features, or you're acquiring
+wasted muscle memory-- UNLESS it maps to the modern tools. Mercurial hg for git
+for example is fine. Using VirtuaWin to get virtual windows on Windows 7 is
+fine. 
+
+Just think about whether the 10,000 hours you're going to have to put into
+mastering the thing is worth it, based on the likelihood of it still being
+applicable then. Nothing like having just fully mastered the tool of a dying
+industry. It's not pleasant going down with the ship and if you have even the
+slightest inkling towards the technical or data-driven, then you'd be crazy to
+not install Anaconda and take up Python... right now. Today. Next thing you do.
+Just get Anaconda installed. Figure out how to start Jupyter Notebook and
+create a new Python 3 notebook in your browser. That alone is just such a huge
+first step. Have somewhere to easily run your code that puts you on a good and
+true path.
+
+Okay, I had to change my password. Be on the lookout for breaking automations.
+Maybe go in and manually start a report in each repo. Thank goodness it's just
+3 directories (ever) now for automation: Left, Center and Right. Nice! VERY
+good for muscle memory. Go Right!
+
+--------------------------------------------------------------------------------
+## Thu May 24, 2018
+### Follow your path. Let them talk.
+
+Had an interesting worksession with a co-worker yesterday who is positioning
+herself as a Data Scientist, per the bloginvention of a major. If you're
+WRITING the data models that other people who are applying that actually
+innovates something new as a result of a hypothesis, experiments and new
+findings, then fine; you're a scientist. But if you're just applying other
+people's data-models, linking up sequences and making processes and algorithms,
+then sorry, you're an artistic technician, much like me as an SEO. That's why
+you feel a certain kindred with and knowledge that you could do well in the
+field of SEO. It's all about highly linked nodes in a network... duh. Don't pat
+yourselves on the back too much for realizing that. Your flashcards was my
+HitaTail, twelve years-old and still continuously running (in a single Jupyter
+Notebook script sense) and still winning new subscribers with its basic tenant
+that amounts to nothing more than an Excel formula to a real-time influx of
+data. No matter how much things have changed over that time, algorithms only
+needed to be tweaked and processes re-implemented on more modern and
+cloud-friendly tooling. 
+
+Really, HitTail has been based on VBScript (old fashioned Microsoft ASP), Ruby
+on Rails and most recently, Microsoft C#. Really hardly matters-- it's just a
+few thousand lines of code that takes care of business. Anyone could do it, and
+it's not much more than the academic web logfile parsing of yore, such as
+Webtrends (remember that?). Even during the rise of the machines, expressing
+yourself well (clearly, effectively, yadda yadda) as a plain old human,
+speaking plain old pre-A.I. computer languages will always have value, because
+presumably humans will always still be participating in decision-making, and it
+will always be useful to have languages more precise than the spoken sort as an
+interoperable language. In short, I predict that Python or something almost
+exactly like it will have to stay in the picture as an interoperable layer to
+most machine learning systems, just as it is today through such libraries as
+SciKitLearn, TensorFlow or Keras which sits on top of all of those lower-level
+learning libraries providing a common ML language for Python the way Pandas
+provides a common SQL-like language. This is where you ought to be if you have
+even the smallest respect for processes being data-driven and some intent to
+"become technical". That's all I did, back around after I got out of college
+and started my first "real" job at Scala, Multimedia.
+
+Before I get into that, I need to use the wisdom of yesterday's post. That's
+another advantage of keeping your "blog" in one long text-file in a Github
+repo with vim or something. You can see the headline of yesterday's post right
+below where you're typing, even in a long post. It just keeps pushing it down,
+yet immediately beneath your cursor as you go. It's hard to forget your
+"topping of the day" and deriving an H3 headline for the day's post bit of info
+staring you in the face until you acknowledge it. Start the day with physical
+muscle memory. Start your In The Zone music play-list. Go Right!
+
+Wow, what a brilliant approach. Go right. Ensure Chrome is selected on Windows
+10's 2nd virtual screen in the ribbon. Close unnecessary tabs. Click tab 1 or
+press Ctrl+1 (same thing, yay!). If you're not scrolled to the top of your
+pipulate-center.ipynb file (I'm speaking to myself, not instructing you) then
+hit Esc and then Home. At this point, Optionally hit 00[Enter] to make Jupyter
+Notebook restart even though it won't waste time changing anything showing in
+the browser. It's a fast-track Kernel / Restart menu option. Drop your pointer
+(click center of screen on my Surface Book). 
+
+I'm getting a very strange jumping around in large code-blocks in Jupyter
+Notebook. I figured if I'm feeling that pain, it must be felt x 10,000
+throughout the world (am I wrong-- long blocks in Jupyter Notebook?) so I
+searched and found:
+
+    https://github.com/ipython/ipython/issues/4809/
+
+And so from a Conda terminal, I'm:
+
+    conda update conda
+
+Okay, I'm upgrading from 4.4.10 to 4.5.4. I neglected to quit out of Jupyter
+Notebook first and got (maybe related) related to 'block' not being an internal
+or external command. I quit JN and re-ran conda update conda and it seems to
+have gotten through with no errors. Restart Jupyter Notebook, refresh my
+notebooks that are still "in-browswer" (hooray Web stack!) Oops, misspelled
+hooray in some posts yesterday. But that's MUCH easier. Even when web-funkiness
+sets-in, it's good to google and update. It's good to be on mainstream stuff.
+It's strange that the mainstream stuff is so non-Ivory-tower awesome!
+
+Ugh, there's been a fatal stabbing on the 3rd floor, I believe over at the
+other building, here at Urby. Shit, not what I need this weekend. It's not like
+that's going to stop the festivities going on here with Fleet Week. I took down
+my just-published (only 4 views) video walk & talk from this morning. The
+increased police presence around here lately wasn't only from Fleet Week. Okay,
+so I'm aware of this but I'm not going to focus on it. Back to my music. Best
+strategy is to get on about my day. Someone getting killed last night in the
+building next to me... okay... testing continues. Adapt.
+
+I used my muscle memory to regain a starting point. That worked well. That led
+to getting rid of the agonizingly annoying scrolling problem in Jupyter
+Notebook. It's getting close to the time when a meeting should be held. Get
+that sort order thing down. Just google DataFrame sort.
+
+...well THAT was a long time ago. No timestamps still interesting to me. A
+journal with hours at a time passing between paragraphs... strange. Hard to get
+that very precise time-accounting of progress, but that's the point.
+Accountability is on a per-day basis... API-design, haha! It's almost 4, and I
+pick up Adi at 4:45. So do your final Hail-Mary of today.
+
+--------------------------------------------------------------------------------
 ## Wed May 23, 2018
 ### The "Go Right" Physical Memory To Boot The Day
 
