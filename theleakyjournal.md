@@ -1,5 +1,187 @@
 # Beginning of Journal
 --------------------------------------------------------------------------------
+## Mon Jun  4, 2018
+### Fortress of Natitude? Honey Badger Don't Care
+
+Wowsers, and shazam! My small Urby studio apartment now has a Garden of
+Natitude. FYI, magic is real and I got a feel from a recent experimental spell
+I'm working on. Thanks to the folks running the show. Our smartphone magic
+wands are far more powerful than most people can use 'em for.  Honey Badger
+don't care.  The Crazy Nastyass Honey Badger by Randall, hahaha, the first
+genuine LMAO and ROTFL video of significant importance to my life in a long
+while. This is my new Dinosaurs by Squelch on YouTube. Wow, yet another case of
+life dishing out just the right thing at the right time simply my holding your
+hand out and saying you're ready. If it's a reasonable request, it seems to be
+granted in my case.
+
+Nat. I can't make "gnat" my word of affection for a special someone I just
+recently met, who I conjured with my spell. I want to finish my book now. Go
+all "data master" on my Twitter feed. Follow through on a bunch of things that
+you KNOW if you follow through on, you'll make a big splash. Go out with a
+bang... but in style like Gandalf did with the Balrog. Don't be a douche bag
+MBA-tycoon whose never really happy because they get trapped into the
+money-reward feedback-loop. Money is an excellent proxy for things, but not all
+things. Money can't buy you love, but that's no biggie if you never really knew
+what it felt like, being the natural child after a guilt-ridden adoption.
+
+You know, I used to get tuned into the vibe by all my relatives that I got the
+short end of the stick because they were able to turn themselves into the sort
+of fathers who could provide for their family, 2nd marriages, lots of children
+and half-children, family cruises every year for the extended family of very
+educated and scholarshipped cousins. I rarely had anything going for me in my
+life except maybe for a brief stint at Commodore Computers in my back yard as a
+teenager and a brief stint running my dad's last-ditch check cashing company
+for about a year after he died 2 weeks after I graduated college and assured
+him I had a job with Scala Multimedia. 
+
+Dad was soooo relieved at me having that job in tech lined-up. He never made
+the transition, a Jew stuck in textiles. I think my Dad had his own plans
+nobody knew about. I was launched into life in classic Batman-style, eerily
+similar to how I once expressed to him how my "blessed" life spared my any
+chance of a real hardening. I wasn't being critical. It's just something I
+knew: real character is built from challenge. And as challenged as it might
+have been emotionally and in the private-school area, it was NOT in the
+day-to-day sense. Seen Stranger Things? ET? Basically that down to the cheezy
+orangish and lime-green decors. 
+
+I was 6 when Star Wars came out, and couldn't appreciate it properly creating a
+Star Wars blind-spot for the rest of my life because things were not so easy to
+watch over and over then after it was out of the theaters. Most people didn't
+even have VCRs then and if they did, they didn't own Star Wars. My old house
+growing up was a beautiful one in a beautiful neighborhood surrounded by the
+80's dream-people-- a lot of them of the private-school type. But even the
+public-school ones at my public high school went on to become dotcom tycoons
+and reality TV stars. My endearing next door neighbor friend growing up still
+joke about and compare ourselves to that kid. I laugh. 
+
+The journey is the reward. I couldn't think of a fate worse than that much
+success that early.  Probable interesting futures for you suddenly disappear
+when there's so much money in your life that it will become the main proxy for
+absolutely everything else... including the love you so desperately need and
+aren't even aware of.  Once rich, the motivations of the people around you can
+never be guaranteed pure. You will never know if someone loves you for just
+being you again in life-- a reward even the poorest on this planet can still
+cherish, for there are few rewards in life quite so great as finding just the
+right person to cohabitate (at least occasionally) your local-space with.
+
+Yeah sure, sour grapes a little bit. That could have been me. But in the halls
+of Commodore Computers, I fell in love with the hardware as a means of creative
+expression-- a tool and a weapon much in the way a Samurai Sword is an
+extension of the Warrior's body. In one smooth practice perfect motion, the
+skilled servant of the local lord could decapitate any ill-prepared civilian in
+sword's reach. In this way, many large battles did not need to be fought to be
+won. It was an agreeable arrangement between the Walrus and the Carpenter. By
+the way, the poem of the Walrus and the Carpenter as read by tweedledum and
+tweedledee were not actually in Alice's Adventures in Wonderland, but actually
+the 2nd book, Through the Looking Glass (FYI).
+
+Obviously (I hope by now, or you wouldn't be here), I relate to and aspire to
+be the Carpenter. However in reality, I am much more like the chimney sweep
+lizard, Bill. Poor Bill-- a fact I joke about readily with my 7 year-old
+daughter who by this time, deeply "gets it" and will tell you while her Daddy
+thinks both Alice and Dorothy are 2 of the finest characters in two of the most
+important books ever written, but that he prefers Dorothy's "American"
+take-charge Yosemite Sam-style guns-blazing style who gets Aunt Em and Uncle
+Henry... oh, but I don't want to be a spoiler. Everyone who ever told you the
+12 more books after the original Oz are not as good and not worth reading are
+giving you a line of bullshit and trying to keep you from being a better
+person.
+
+So says Shaggy Man... a character who doesn't appear until book 5, The Road to
+Oz-- just as important as any other, 'cause that's where I realized even
+children's books like these can throw in a character for the old divorced dad
+to relate to. Anyone who follows my Twitter feed knows that I think L. Frank
+Baum is a channeller of emotional physics on an order not often seen or felt in
+actual successful-in-their-lifetime folks. They usually either kill themselves
+or die failures and unrecognized in their own age. The main response to
+creative genius is secret jealousy, fear and monkey-brained plotting against
+you. It's like the subject of half the tragedies out there. 
+
+Just look at Alan Turing-- basically won WWII for the Allies by inventing
+computers and cracking codes more surely as the Atomic Bomb (war was already
+over by then but we "Dorothy's" couldn't resist. Similarly, all the stodgy old
+German judges never gave Einstein the Nobel prize for Relativity, haha!
+Dumbasses. If the world around you seems remarkably stupid for reasons you can
+write a world-changing paper on, you too might be an Einstein. Don't let the
+nattering nabobs intimidate you. They're scared of you and trying to clip your
+wings in case you're actually onto something and they think will (in their own
+twisted minds) make them look bad. I know this an under-the-radar flying
+observer, and not any sort of scientist, philosopher or theorist.
+
+I'm just here to tell you about how you can frame the entire world, especially
+in the eyes of young girls, in the context of Alice's and Dorothy's adventures.
+They are 2 of the most important book series ever written. Diamond age gives a
+nice Oz-esque modern interpretation as do countless other modern pop-culture
+series from Foster's Home for Imaginary Friends to Kim Possible. These stories
+are the gifts that never stop giving and teach the world's most important
+lesson: only Creativity Violates Physics. Everything else has to play by a
+bunch of statistical normal distribution rules that most decidedly DO NOT work
+in your favor. These two iconic book-series don't get put into "Young Lady's
+Primer" terms often enough in pop-culture, but I do in everyday life with my
+daughter...  perhaps annoyingly so. 
+
+And it's impossible to put all this life's proper-journey / life's
+proper-reward stuff together for yourself until all the King's horses and men
+can hardly put you together again-- although even that's changing to be
+less-true every day as technology starts accelerating faster than we age.
+
+I'm 47 years-old, and it's time for me to spring into some writing-action. I've
+moved to the gates of Oz.  I've left my love magnet at the door, and I'm
+tapping into all that excess energy of not having to always do everything for
+everyone (like a "real man").  My spirit animal could still be either the
+Griffon, Raven or Honey Badger-- the hat couldn't decide (though I do/did own a
+snake). I'm stuck in that vibrating middle of lots of possibility yet deeply
+misunderstood. Honey Badger don't care (Thanks Nat for the instantly-treasured
+reference). 
+
+This is obviously (to me now that it's many paragraphs underway) that THIS is
+my first life's work that I've been dying to write for awhile now that just
+started pouring out as I sat down to write journal-style, as I have more or
+less done every day for the past 30-years. I put in a bit more than my 10K
+hours and 10 years into just expressing myself through righting, and most
+recently through vim, the best environment yet written for writers in only a
+way a tech willing to master an old-school Samurai Sword could appreciate. 
+
+My path is not the one more often traveled, nor do I even recommend it for
+everyone. No, this is a path you should only go on if you are in it for the
+love of the work... and the work happens to be expressing yourself through the
+automating of things in the world around you as naturally as you read, write or
+speak once you put that 10K hours in... because you want-to, not because you
+have to or your parents tell you or you got hypnotized by money. 
+
+So now it should be easy for me. It's something I do every day and have been
+practicing for 30 years (yep, writing almost daily since the day I was 18) and
+haven't really published a single wit of anything of importance in all those
+years. I feel now that between a background on the Amiga computer that makes
+everything of today's miraculous world right down to augmented reality feel
+like a second coming, and all my other irons in the fires of NYC that are
+finally panning out (an SEO never met a metaphor they wouldn't mix), this
+should be a breeze if I just do it the way I write. Just add a little planning,
+structure and use any special motivations or channeling when you are lucky
+enough to receive it.
+
+Hello World. I'm Mike Levin, and I've recently started to take offense when
+called a Muggle by my daughter. I'm a wizard; a freshly minted minor one to be
+sure, but have taken the long, weak slow-grow path of the 80's wizards of the
+Advanced D&D sets. I'm finally beyond the bag of holding and can cast a few
+doozies. I'm finely balanced between the houses, and my daughter refuses to
+align herself with a single particular Powerpuff Girl. She's on my adventure
+with me as I desperately work to upgrade myself from the Humbug Wizard of Book
+One to the more sympathetic old man with new tricks that followed. 
+
+Though as tempted as I am to cast myself as the man behind the curtains, I am
+no more that than I am the Carpenter, Caterpillar, Cheshire Cat, or even (and
+of most obvious immediate comparison) the Mad Hatter. Due to the chances of
+life or whatever, I'm still poor Bill chasing the Dodo's opportunity of a
+lifetime. After enough years and making sure the opportunities of a lifetime
+were still all valuable for the experience-- often learning quite a bit more
+than the Dodo ever expected possible-- you transform gradually into something
+new, like the slowly cooking frog, until one day you realize you're at least a
+White Wizard. Is that PC to say? F-it. Walk your own path and let 'em talk.
+
+Let's cast some powerful life-changing spells together.
+
+--------------------------------------------------------------------------------
 ## Fri May 25, 2018
 ### Advice to Self: Be The Shaggy Man
 
