@@ -20,8 +20,7 @@ to the following magical incantations::
     import numpy as np
 
 Then hold onto your hat, because you've just jumped onto the bandwagon of a
-lifetime. Here is my love letter to Python:
-http://mikelev.in/2011/01/python-programming-language-advantages/
+lifetime. Here is my `love letter to Python <http://mikelev.in/2011/01/python-programming-language-advantages/>`.
 
 .. image:: pipulate-logo.svg
 
