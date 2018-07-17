@@ -10,7 +10,7 @@ pipulate v0.1.8 - Automate Google Sheets for SEO
 - Would you like that glue to be career-advantageous future-proofing coolness?
 
 If you've answered yes to one or more of these questions, then Pipulate is for
-you-- or in a broader sense, Python and the SQL-alternative, Pandas. Go install
+you— or in a broader sense, Python and the SQL-alternative, Pandas. Go install
 the Python 3.6 version of Anaconda from https://www.anaconda.com/download/ and
 then run Jupyter Notebook. It'll pop up in a tab in your browser. Then get used
 to the following magical incantations::
