@@ -7,7 +7,7 @@ pipulate v0.1.8 - Automate Google Sheets for SEO
 - Are you already drinking the Google Koolaid with Analytics, GSC and GDocs?
 - Are you still paying for Google Sheet automation with expensive plug-ins?
 - Do you feel there's some sort of missing "glue" to hold it all together?
-- Would you like that glue to be a big old can of old's kool career yumminess?
+- Would you like that glue to be career-advantageous future-proofing coolness?
 
 If you've answered yes to one or more of these questions, then Pipulate is for
 you. Go install the Python 3.6 version of Anaconda from
