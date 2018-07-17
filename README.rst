@@ -9,6 +9,20 @@ pipulate v0.1.8 - Automate Google Sheets for SEO
 - Do you feel there's some sort of missing "glue" to hold it all together?
 - Would you like that glue to be a big old can of old's kool career yumminess?
 
+If you've answered yes to one or more of these questions, then Pipulate is for
+you. Go install the Python 3.6 version of Anaconda from Continuum.io and then
+run Jupyter Notebook. It'll pop up in a tab in your browser. Then get used to
+the following magical incantations:
+
+    import pipulate as gs
+    import pandas as pd
+    import numpy as np
+
+Then hold onto your hat, because you've just jumped onto the bandwagon of a
+lifetime!
+
+.. image:: pipulate-logo.svg
+
 There's a reason spreadsheets remain as popular as they do in the face of more
 capable databases and reporting systems. Spreadsheets are designed for humans—
 you don't need a developer for every little thing. You can use ledgers in many
@@ -22,8 +36,6 @@ OAuth web-login, getting you right over the first show-stopping hurdle. After
 that, I advocate a simple convention of selecting ranges out of a spreadsheet,
 modifying them, and pushing the results back in.  And that's mostly done with
 Pandas; the one data manipulation tool every SEO should right now be mastering.
-
-.. image:: pipulate-logo.svg
 
 Congratulations! You're about to learn to program Python (easily) for SEO::
 
