@@ -12,7 +12,7 @@ pipulate v0.1.8 - Automate Google Sheets for SEO
 If you've answered yes to one or more of these questions, then Pipulate is for
 you. Go install the Python 3.6 version of Anaconda from Continuum.io and then
 run Jupyter Notebook. It'll pop up in a tab in your browser. Then get used to
-the following magical incantations:
+the following magical incantations::
 
     import pipulate as gs
     import pandas as pd
