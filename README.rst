@@ -4,6 +4,11 @@ pipulate v0.1.8 - Automate Google Sheets for SEO
 
 :Author: `Mike Levin, HitTail Inventor & SEO in New York City <http://mikelev.in>`_
 
+- Are you already drinking the Google Koolaid with Analytics, GSC and GDocs?
+- Are you still paying for Google Sheet automation with expensive plug-ins?
+- Do you feel there's some sort of missing "glue" to hold it all together?
+- Would you like that glue to be a big old can of old's kool career yumminess?
+
 There's a reason spreadsheets remain as popular as they do in the face of more
 capable databases and reporting systems. Spreadsheets are designed for humans—
 you don't need a developer for every little thing. You can use ledgers in many
