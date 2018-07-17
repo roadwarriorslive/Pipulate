@@ -14,7 +14,7 @@ you. Go install the Python 3.6 version of Anaconda from Continuum.io and then
 run Jupyter Notebook. It'll pop up in a tab in your browser. Then get used to
 the following magical incantations::
 
-    import pipulate as gs
+    import pipulate as gs  # Install from console with: pip install pipulate
     import pandas as pd
     import numpy as np
 
