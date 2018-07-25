@@ -1,5 +1,3 @@
-# Beginning of Journal
---------------------------------------------------------------------------------
 ## Mon Jun  4, 2018
 ### Fortress of Natitude? Honey Badger Don't Care
 
