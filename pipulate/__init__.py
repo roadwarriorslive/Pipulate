@@ -30,7 +30,20 @@ client_secret = "D2F1D--b_yKNLrJSPmrn2jik"
 counters = defaultdict(int)
 
 
-def except_me():
+dev pipdev():
+	import sys
+	from os import makedirs
+	from os.path import isdir, isfile, dirname, abspath
+	from inspect import getfile, currentframe
+	currentdir = dirname(abspath(getfile(currentframe())))
+	parentdir = dirname(currentdir)
+	sys.path.insert(0, parentdir)
+	from pipdev import pipulate as gs
+	from importlib import reload
+	reload(gs)
+
+
+def return_error():
     """Return error tuple and stop execution. Useful on naked exceptions."""
     e = sys.exc_info()
     print(e)
@@ -483,7 +496,7 @@ except httplib2.ServerNotFoundError:
     print("You are probably not connected to the Internet.")
     raise SystemExit()
 except:
-    except_me()
+    return_error()
 
 # Forces Jupyter Notebook to not buffer output (like streaming).
 sys.stdout = Unbuffered(sys.stdout)
