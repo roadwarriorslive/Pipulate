@@ -5,6 +5,12 @@
 #   |_| |_| |_|_|___/ |_|___/ |_|   |_| .__/ \__,_|_|\__,_|\__\___|
 # There are many frameworks like it,  |_| but this one is mine. --MikeL
 
+# IMPORTANT THINGS TO REMEMBER:
+# 1. Make life easy by filling your ~/.bash_profile with aliases.
+# 2. Make life easy by filling /usr/local/sbin with helper scripts.
+# 3. pip puts things ~here: /usr/local/lib/python3.5/dist-packages/
+# 4. oauth2client is deprecated. Replace it soon.
+
 import sys
 import os
 import gspread
@@ -28,19 +34,6 @@ client_secret = "D2F1D--b_yKNLrJSPmrn2jik"
 
 # To count how frequently functions have been called.
 counters = defaultdict(int)
-
-
-dev pipdev():
-	import sys
-	from os import makedirs
-	from os.path import isdir, isfile, dirname, abspath
-	from inspect import getfile, currentframe
-	currentdir = dirname(abspath(getfile(currentframe())))
-	parentdir = dirname(currentdir)
-	sys.path.insert(0, parentdir)
-	from pipdev import pipulate as gs
-	from importlib import reload
-	reload(gs)
 
 
 def return_error():
