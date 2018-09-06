@@ -13,5 +13,7 @@
 .ipynb_checkpoints/
 /dist
 /py3
+/pics/*
+/csvs/*
 __pycache__/
 MANIFEST
