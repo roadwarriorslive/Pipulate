@@ -50,11 +50,12 @@ def pipulate(tab, rows, cols, columns=None):
     col1, col2 = cols
     col1, col2 = aa(col1), aa(col2)
     cl = tab.range(row1, col1, row2, col2)
-    list_of_tuples = cl_to_tuples(cl)
+    list_of_tuples = cl_to_list(cl)
     if not columns:
         columns = tab.range(row1, col1, row1, col2)
         columns = [cc(x.col) for x in columns]
     df = pd.DataFrame(list_of_tuples, columns=columns)
+    print(df)
     print("Success! Pipulate BLIT %s rows x %s cols from Google Sheets into a Pandas DataFrame." % df.shape)
     print('Do Pandas data-transforms like df["B"] = "foo", but maintan range "shape".')
     print("Push your modified DateFrame back into Google Sheets with: gs.populate(tab, cl, df)")
@@ -80,7 +81,23 @@ def populate(tab, cl, df):
     print('Success! Pipulate BLIT your modified DataFrame back into Google Sheet!')
 
 
-def cl_to_tuples(cell_list):
+def cl_to_list(cl):
+	new_table = []
+	for i, cell in enumerate(cl):
+		if i == 0:
+			row_num = 1
+			memory = cell.row
+			row = [cell.value]
+		if cell.row == memory and i > 0:
+			new_table.append(row)
+			row.append(cell.value)
+		else:
+			row_num += 1
+			memory = cell.row
+			row = [cell.value]
+	return new_table
+
+def OLDcl_to_tuples(cell_list):
     """Return a list of tuples given a GSpread cell list.."""
 
     list_of_tuples = list()
