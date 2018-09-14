@@ -50,12 +50,11 @@ def pipulate(tab, rows, cols, columns=None):
     col1, col2 = cols
     col1, col2 = aa(col1), aa(col2)
     cl = tab.range(row1, col1, row2, col2)
-    list_of_tuples = cl_to_list(cl)
+    list_of_lists = cl_to_list(cl)
     if not columns:
         columns = tab.range(row1, col1, row1, col2)
         columns = [cc(x.col) for x in columns]
-    df = pd.DataFrame(list_of_tuples, columns=columns)
-    print(df)
+    df = pd.DataFrame(list_of_lists, columns=columns)
     print("Success! Pipulate BLIT %s rows x %s cols from Google Sheets into a Pandas DataFrame." % df.shape)
     print('Do Pandas data-transforms like df["B"] = "foo", but maintan range "shape".')
     print("Push your modified DateFrame back into Google Sheets with: gs.populate(tab, cl, df)")
@@ -65,37 +64,37 @@ def pipulate(tab, rows, cols, columns=None):
 def populate(tab, cl, df):
     """Push df back to spreadsheet."""
 
-    if cl_df_fits(cl, df):
-        lol = df.values.tolist()
-        flat = [y for x in lol for y in x]
-        for i, cell in enumerate(cl):
-            cell.value = flat[i]
-            success = True
-        tab.update_cells(cl)
-    else:
-       print('WARNING: cl and df are different sizes.')
-       print('Google Sheet NOT UPDATED.')
-       print('Look at your df and compare to your range input.')
-       print("Chances are you're accidentially creating new columns.")
-       raise SystemExit()
+    #if cl_df_fits(cl, df):
+    lol = df.values.tolist()
+    flat = [y for x in lol for y in x]
+    for i, cell in enumerate(cl):
+        cell.value = flat[i]
+        success = True
+    tab.update_cells(cl)
+    #else:
+    #   print('WARNING: cl and df are different sizes.')
+    #   print('Google Sheet NOT UPDATED.')
+    #   print('Look at your df and compare to your range input.')
+    #   print("Chances are you're accidentially creating new columns.")
+    #   raise SystemExit()
     print('Success! Pipulate BLIT your modified DataFrame back into Google Sheet!')
 
 
 def cl_to_list(cl):
-	new_table = []
-	for i, cell in enumerate(cl):
-		if i == 0:
-			row_num = 1
-			memory = cell.row
-			row = [cell.value]
-		if cell.row == memory and i > 0:
-			new_table.append(row)
-			row.append(cell.value)
-		else:
-			row_num += 1
-			memory = cell.row
-			row = [cell.value]
-	return new_table
+    new_table = []
+    for i, cell in enumerate(cl):
+        if i == 0:
+            row_num = 1
+            memory = cell.row
+            row = [cell.value]
+        if cell.row == memory and i > 0:
+            row.append(cell.value)
+        else:
+            row_num += 1
+            memory = cell.row
+            row = [cell.value]
+            new_table.append(row)
+    return new_table
 
 def OLDcl_to_tuples(cell_list):
     """Return a list of tuples given a GSpread cell list.."""
