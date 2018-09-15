@@ -55,29 +55,25 @@ def pipulate(tab, rows, cols, columns=None):
         columns = tab.range(row1, col1, row1, col2)
         columns = [cc(x.col) for x in columns]
     df = pd.DataFrame(list_of_lists, columns=columns)
-    print("Success! Pipulate BLIT %s rows x %s cols from Google Sheets into a Pandas DataFrame." % df.shape)
-    print('Do Pandas data-transforms like df["B"] = "foo", but maintan range "shape".')
-    print("Push your modified DateFrame back into Google Sheets with: gs.populate(tab, cl, df)")
+    print("Pipulate successful. rows=%s, cols=%s in df." % (rows, cols))
+    print("Now manipulate the DataFrame but keep its shape.")
+    print("gs.populate(tab, cl, df) to update GSheet.")
     return cl, df
 
 
 def populate(tab, cl, df):
     """Push df back to spreadsheet."""
 
-    #if cl_df_fits(cl, df):
-    lol = df.values.tolist()
-    flat = [y for x in lol for y in x]
-    for i, cell in enumerate(cl):
-        cell.value = flat[i]
-        success = True
-    tab.update_cells(cl)
-    #else:
-    #   print('WARNING: cl and df are different sizes.')
-    #   print('Google Sheet NOT UPDATED.')
-    #   print('Look at your df and compare to your range input.')
-    #   print("Chances are you're accidentially creating new columns.")
-    #   raise SystemExit()
-    print('Success! Pipulate BLIT your modified DataFrame back into Google Sheet!')
+    if cl_df_fits(cl, df):
+        lol = df.values.tolist()
+        flat = [y for x in lol for y in x]
+        for i, cell in enumerate(cl):
+            cell.value = flat[i]
+            success = True
+        tab.update_cells(cl)
+    else:
+       raise SystemExit()
+    print('Populate successful. GSheet updated!')
 
 
 def cl_to_list(cl):
@@ -96,32 +92,23 @@ def cl_to_list(cl):
             new_table.append(row)
     return new_table
 
-def OLDcl_to_tuples(cell_list):
-    """Return a list of tuples given a GSpread cell list.."""
-
-    list_of_tuples = list()
-    num_cols = max([x.col for x in cell_list])
-    for i, cell in enumerate(cell_list):
-        col = i % num_cols
-        if not col:
-            a_tuple = tuple([x.value for x in cell_list[i:i+num_cols]])
-            list_of_tuples.append(a_tuple)
-    return list_of_tuples
-
 
 def cl_df_fits(cl, df):
     """Check if GSpread cell list same shape as Pandas dataframe."""
-
-    cl_rows = len(set([x.row for x in cl]))
-    cl_cols = max([x.col for x in cl])
-    print('GSpread cell_list (cl) shape: (%s, %s)' % (cl_rows, cl_cols))
-    print('Pandas  DataFrame (df) shape: (%s, %s)' % df.shape)
-    if df.shape == (cl_rows, cl_cols):
+    list_of_lists = cl_to_list(cl)
+    height = len(list_of_lists)
+    width = len(list_of_lists[0])
+    size_tuple = (height, width)
+    if size_tuple == df.shape:
         return True
+    print('GOOGLE SHEET NOT UPDATED.')
+    print('cl %s and df %s different sizes.' % (size_tuple, df.shape))
     return False
+
 
 def gmt():
     return strftime("%a, %d %b %Y %H:%M", gmtime())
+
 
 def aa(column_letter):
     """Return the column letter for numeric column index."""
