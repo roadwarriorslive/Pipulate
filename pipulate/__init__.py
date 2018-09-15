@@ -55,8 +55,8 @@ def pipulate(tab, rows, cols, columns=None):
         columns = tab.range(row1, col1, row1, col2)
         columns = [cc(x.col) for x in columns]
     df = pd.DataFrame(list_of_lists, columns=columns)
-    print("Pipulate successful. rows=%s, cols=%s in df." % (rows, cols))
-    print("Now manipulate the DataFrame but keep its shape.")
+    print("Pipulating rows=%s, cols=%s into df successful." % (rows, cols))
+    print("You may now manipulate the df, maintaining its %sx%s shape." % df.shape)
     print("gs.populate(tab, cl, df) to update GSheet.")
     return cl, df
 
@@ -73,7 +73,7 @@ def populate(tab, cl, df):
         tab.update_cells(cl)
     else:
        raise SystemExit()
-    print('Populate successful. GSheet updated!')
+    print('Populating GSheet with update successful.')
 
 
 def cl_to_list(cl):
