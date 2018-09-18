@@ -37,13 +37,6 @@ client_secret = "D2F1D--b_yKNLrJSPmrn2jik"
 counters = defaultdict(int)
 
 
-def return_error():
-    """Return error tuple and stop execution. Useful on naked exceptions."""
-    e = sys.exc_info()
-    print(e)
-    raise SystemExit()
-
-
 def pipulate(tab, rows, cols, columns=None):
     """All that pipulate really is"""
 
@@ -68,6 +61,7 @@ def populate(tab, cl, df):
     if cl_df_fits(cl, df):
         lol = df.values.tolist()
         flat = [y for x in lol for y in x]
+        flat[:] = ['NaN' if pd.isnull(x) else x for x in flat]
         for i, cell in enumerate(cl):
             cell.value = flat[i]
         tab.update_cells(cl)
