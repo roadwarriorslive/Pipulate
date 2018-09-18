@@ -13,16 +13,18 @@
 
 import sys
 import os
-import gspread
 import httplib2
+import argparse
+import json
+import pytz
+from time import gmtime, strftime
+from collections import defaultdict
 from datetime import datetime, timedelta
 from inspect import currentframe, getouterframes
-from collections import defaultdict
-import pytz
 from oauth2client.client import OAuth2WebServerFlow
 from oauth2client import file, tools
+import gspread
 import pandas as pd
-from time import gmtime, strftime
 from pyfiglet import figlet_format
 from colorama import Fore
 
@@ -196,8 +198,6 @@ def creds():
 def oauth():
     """Create a fully authenticated GSheet connection."""
 
-    import argparse
-    import json
     scopes = ["https://www.googleapis.com/auth/analytics.readonly",
               "https://www.googleapis.com/auth/webmasters.readonly",
               "https://www.googleapis.com/auth/yt-analytics.readonly",
@@ -441,16 +441,12 @@ def date_ranger(starts=(30, 90, 180), days=30, human=False):
     lot = list()
     today = datetime.now()
     yesterday = today - timedelta(days=1)
-
     firstrange_start = yesterday - timedelta(days=starts[0])
     firstrange_end = firstrange_start + timedelta(days=days)
-
     midrange_start = yesterday - timedelta(days=starts[1])
     midrange_end = midrange_start + timedelta(days=days)
-
     lastrange_start = yesterday - timedelta(days=starts[2])
     lastrange_end = lastrange_start + timedelta(days=days)
-
     if human:
         lot.append((dh(firstrange_start), dh(firstrange_end)))
         lot.append((dh(midrange_start), dh(midrange_end)))
@@ -489,9 +485,7 @@ except httplib2.ServerNotFoundError:
     raise SystemExit()
 except Exception as e:
     print(type(e).__name__)
-
 # Forces Jupyter Notebook to not buffer output (like streaming).
 sys.stdout = Unbuffered(sys.stdout)
-
 api_now = api_date(datetime.now())
 human_now = human_date(datetime.now())
