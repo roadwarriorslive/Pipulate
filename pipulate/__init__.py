@@ -15,21 +15,20 @@ import sys
 import os
 import gspread
 import httplib2
-from datetime import date, datetime, timedelta
-from inspect import getfile, currentframe, getouterframes, stack
+from datetime import datetime, timedelta
+from inspect import currentframe, getouterframes
 from collections import defaultdict
 import pytz
 from oauth2client.client import OAuth2WebServerFlow
 from oauth2client import file, tools
 import pandas as pd
-from time import sleep, gmtime, strftime
+from time import gmtime, strftime
 from pyfiglet import figlet_format
 from colorama import Fore
-from logzero import logger, setup_logger
 
 
 filename = "oauth.dat"
-client_id =     "769904540573-knscs3mhvd56odnf7i8h3al13kiqulft.apps.googleusercontent.com"
+client_id = "769904540573-knscs3mhvd56odnf7i8h3al13kiqulft.apps.googleusercontent.com"
 client_secret = "D2F1D--b_yKNLrJSPmrn2jik"
 
 # To count how frequently functions have been called.
@@ -69,10 +68,9 @@ def populate(tab, cl, df):
         flat = [y for x in lol for y in x]
         for i, cell in enumerate(cl):
             cell.value = flat[i]
-            success = True
         tab.update_cells(cl)
     else:
-       raise SystemExit()
+        raise SystemExit()
     print('gs.populate(%s, cl, df) successful. GSheet updated.' % tab.title)
 
 
@@ -161,7 +159,7 @@ def module_name():
     current_frame = currentframe()
     outer_frame = getouterframes(current_frame, 2)
     name = outer_frame[1][3]
-    counters[name] +=1
+    counters[name] += 1
     return_me = '(%s: %s) ' % (name, counters[name])
     return return_me
 
@@ -280,7 +278,7 @@ def Log(yval, xval, sheet):
         if not m and a_cell.value:
             ydex = a_cell.value
             if ydex == yval:
-                cell_dex = i+col_list.index(xval)
+                cell_dex = i + col_list.index(xval)
                 cell_value = human_date(datetime.now())
                 log_cells[cell_dex].value = cell_value
                 logsheet.update_cells(log_cells)
@@ -301,7 +299,7 @@ def Check(yval, xval, sheet):
         if not m and a_cell.value:
             ydex = a_cell.value
             if ydex == yval:
-                cell_dex = i+col_list.index(xval)
+                cell_dex = i + col_list.index(xval)
                 today_human = human_date(datetime.now())
                 cell_value = log_cells[cell_dex].value
                 if cell_value == today_human:
@@ -319,13 +317,13 @@ def ga_url(gaid, start, end, path):
                'pageviewsPerSession', 'avgSessionDuration']
     metrics = ''.join(['ga:%s,' % x for x in metrics])[:-1]
     ga_request = service.data().ga().get(
-        ids='ga:'+gaid,
+        ids='ga:' + gaid,
         start_date=start,
         end_date=end,
         metrics=metrics,
         dimensions='ga:pagePath',
         sort='-ga:users',
-        filters='ga:pagePath=='+path,
+        filters='ga:pagePath==' + path,
         segment='sessions::condition::ga:medium==organic',
         max_results=1
     )
@@ -340,28 +338,25 @@ def ga_url(gaid, start, end, path):
 def gsc_url_keyword(prop, start, end, query, url):
     service = gsc()
     request = {
-      "startDate": start,
-      "endDate": end,
-      "dimensions": [
-        "query",
-        "page"
-      ],
-      "dimensionFilterGroups": [
+        "startDate": start,
+        "endDate": end,
+        "dimensions": [
+            "query",
+            "page"],
+        "dimensionFilterGroups": [
         {
-          "filters": [
+            "filters": [
             {
-              "operator": "equals",
-              "expression": url,
-              "dimension": "page"
+                "operator": "equals",
+                "expression": url,
+                "dimension": "page"
             },
             {
-              "operator": "equals",
-              "expression": query,
-              "dimension": "query"
-            }
-          ]
-        }
-      ]
+                "operator": "equals",
+                "expression": query,
+                "dimension": "query"
+            }]
+        }]
     }
     dat = service.searchanalytics().query(siteUrl=prop, body=request).execute()
     val = []
@@ -372,10 +367,8 @@ def gsc_url_keyword(prop, start, end, query, url):
     return val
 
 
-
 def cl_lol_to_sheet(cell_list, lol, sheet):
     """Update existing Gspread scell list with a same-shaped list of lists."""
-
     flat = [y for x in lol for y in x]
     for i, cell in enumerate(cell_list):
         cell.value = flat[i]
@@ -408,8 +401,10 @@ def date_ranges(human=False, yoy=True):
 
     def dx(x):
         return api_date(x)
+
     def dh(x):
         return human_date(x)
+
     lot = list()
     today = datetime.now()
     yesterday = today - timedelta(days=1)
@@ -417,8 +412,8 @@ def date_ranges(human=False, yoy=True):
     prior_30_end = thirty_days_ago - timedelta(days=1)
     prior_30_start = prior_30_end - timedelta(days=30)
     if yoy:
-        last_range_end = yesterday.replace(year = yesterday.year - 1)
-        last_range_start = thirty_days_ago.replace(year = thirty_days_ago.year - 1)
+        last_range_end = yesterday.replace(year=yesterday.year - 1)
+        last_range_start = thirty_days_ago.replace(year=thirty_days_ago.year - 1)
     else:
         last_range_end = thirty_days_ago - timedelta(days=32)
         last_range_start = prior_30_end - timedelta(days=60)
@@ -426,7 +421,7 @@ def date_ranges(human=False, yoy=True):
         lot.append((dh(thirty_days_ago), dh(yesterday)))
         lot.append((dh(prior_30_start), dh(prior_30_end)))
         lot.append((dh(last_range_start), dh(last_range_end)))
-        lot = [(x +' - '+ y) for x, y in lot]
+        lot = [(x + ' - ' + y) for x, y in lot]
     else:
         lot.append((dx(thirty_days_ago), dx(yesterday)))
         lot.append((dx(prior_30_start), dx(prior_30_end)))
@@ -439,27 +434,28 @@ def date_ranger(starts=(30, 90, 180), days=30, human=False):
 
     def dx(x):
         return api_date(x)
+
     def dh(x):
         return human_date(x)
-    
+
     lot = list()
     today = datetime.now()
     yesterday = today - timedelta(days=1)
-    
+
     firstrange_start = yesterday - timedelta(days=starts[0])
     firstrange_end = firstrange_start + timedelta(days=days)
-    
+
     midrange_start = yesterday - timedelta(days=starts[1])
     midrange_end = midrange_start + timedelta(days=days)
-    
+
     lastrange_start = yesterday - timedelta(days=starts[2])
     lastrange_end = lastrange_start + timedelta(days=days)
-    
+
     if human:
         lot.append((dh(firstrange_start), dh(firstrange_end)))
         lot.append((dh(midrange_start), dh(midrange_end)))
         lot.append((dh(lastrange_start), dh(lastrange_end)))
-        lot = [(x +' - '+ y) for x, y in lot]
+        lot = [(x + ' - ' + y) for x, y in lot]
     else:
         lot.append((dx(firstrange_start), dx(firstrange_end)))
         lot.append((dx(midrange_start), dx(midrange_end)))
@@ -491,8 +487,8 @@ try:
 except httplib2.ServerNotFoundError:
     print("You are probably not connected to the Internet.")
     raise SystemExit()
-except:
-    return_error()
+except Exception as e:
+    print(type(e).__name__)
 
 # Forces Jupyter Notebook to not buffer output (like streaming).
 sys.stdout = Unbuffered(sys.stdout)
