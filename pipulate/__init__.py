@@ -61,7 +61,7 @@ def populate(tab, cl, df):
     if cl_df_fits(cl, df):
         lol = df.values.tolist()
         flat = [y for x in lol for y in x]
-        flat[:] = ['NaN' if pd.isnull(x) else x for x in flat]
+        flat[:] = ['N/A' if pd.isnull(x) else x for x in flat]
         for i, cell in enumerate(cl):
             cell.value = flat[i]
         tab.update_cells(cl)
