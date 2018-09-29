@@ -1,0 +1,5 @@
+echo "The running gnu screen terminals are:"
+echo ""
+screen -ls | grep 'pipulate'
+echo ""
+echo "Look in /usr/local/sbin or ~/github/pipdev/sbin for more commands."
