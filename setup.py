@@ -2,8 +2,8 @@ from distutils.core import setup
 setup(
     name = 'pipulate',
     packages = ['pipulate'],
-    version = '0.2.24',
-    download_url = 'https://github.com/miklevin/pipulate/archive/0.2.24.tar.gz',
+    version = '0.2.26',
+    download_url = 'https://github.com/miklevin/pipulate/archive/0.2.25.tar.gz',
     description = 'Free and Open Source SEO Software (update Google Sheets for Data Dashboards).',
     long_description = open('README.rst', 'r').read(),
     author = 'Mike Levin SEO, 360i & Commodore alum, Creator of HitTail now working in NYC for J2 Ziff-Davis Mashable IGN.',
