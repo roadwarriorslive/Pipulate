@@ -1,5 +1,5 @@
 ===============
-pipulate v0.2.0 - Automate Google Sheets with Python for Data Dashboards
+pipulate v0.2 - Automate Google Sheets with Python for Data Dashboards
 ===============
 
 :Author: `Mike Levin, HitTail Inventor & SEO in New York City <http://mikelev.in>`_

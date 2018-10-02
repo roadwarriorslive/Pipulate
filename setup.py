@@ -2,8 +2,8 @@ from distutils.core import setup
 setup(
     name = 'pipulate',
     packages = ['pipulate'],
-    version = '0.2.22',
-    download_url = 'https://github.com/miklevin/pipulate/archive/0.2.22.tar.gz',
+    version = '0.2.23',
+    download_url = 'https://github.com/miklevin/pipulate/archive/0.2.23.tar.gz',
     description = 'Update Google Sheets for Data Dashboards (alt to Tableau & Data Studio).',
     long_description = open('README.rst', 'r').read(),
     author = 'Mike Levin SEO, 360i & Commodore alum, Creator of HitTail now working in NYC for J2 Ziff-Davis Mashable IGN.',
