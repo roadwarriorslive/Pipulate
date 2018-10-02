@@ -1,7 +1,7 @@
-pipulate v0.2.22 - Free and Open Source SEO Software (Automate Google Sheets)
-#############################################################################
+:Author: `Mike Levin, HitTail Inventor, 360i & Commodore alum, and SEO in NYC <http://mikelev.in>`_
 
-:Author: `Mike Levin, HitTail Inventor & SEO in New York City <http://mikelev.in>`_
+Pipulate Free and Open Source SEO Software (Automate Google Sheets for Dashboards)
+##################################################################################
 
 .. image:: https://raw.githubusercontent.com/miklevin/Pipulate/master/pipulate-logo.svg?sanitize=true
 
@@ -15,7 +15,7 @@ Here's the basic API-invocation::
     # Do stuff to df
     gs.populate(tab, cl, df)
 
-This loads the rectangluar region you defined with the rows and columns into
+This loads the rectangular region you defined with the rows and columns into
 memory in a way where you can treat it a lot like a tab in Microsoft Excel or
 like a SQL table. You can manipulate the pandas "DataFrame" (abbreviated as
 df), and then push the changes back out to the Google Sheet. For example::
@@ -37,9 +37,9 @@ data. You can install Pipulate from a Jupyter Notebook with this code::
     !{sys.executable} -m pip install pipulate
 
 And that's it. What you do with the Pandas DataFrame (df) is up to you. All
-Pipulate does is pull down the rectangualar cell-range you define and plop it
-into df. You then can modify the df however you like (refer ro Pandas
+Pipulate does is pull down the rectangular cell-range you define and plop it
+into df. You then can modify the df however you like (refer to Pandas
 examples). So long as you keep the rows x columns shape the same as what you
-selected, you can push the altered data back into the GSheet. Once you're happy
+selected, you can push the altered data back into the Sheet. Once you're happy
 with your script, you can copy/paste it into a .py file and schedule it with a
 standard Linux scheduler.
