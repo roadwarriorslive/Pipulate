@@ -1,5 +1,5 @@
 pipulate v0.2.22 - Free and Open Source SEO Software (Automate Google Sheets)
-############################################################################
+#############################################################################
 
 :Author: `Mike Levin, HitTail Inventor & SEO in New York City <http://mikelev.in>`_
 
