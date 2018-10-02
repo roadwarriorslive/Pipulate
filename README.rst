@@ -62,5 +62,5 @@ those custom reports necessary to surface actionable data every day. It's also
 your easy route into data manipulation with Python/Pandas and the repurposing
 of your aging SEO career into something simultaneously more timely and
 timeless. Learning just the right Linux, Python, vim and git (LPvg) will
-set you on a good course for the next 10-years or so.
+set you on a good course for the next 10-years and beyond.
 
