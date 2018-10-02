@@ -47,7 +47,7 @@ and then push the changes back out to the Google Sheet. For example::
 
 And that's it. All Pipulate does is pull down the rectangular cell-range you
 define and plop it into df. What you do with the Pandas DataFrame (df) is up to
-you. I'll load the examples directory with ideas, but this is very open-ended
+you. I'll load the examples directory with ideas, but this is very open-ended,
 designed to make automation of traditional tedious tasks in SEO much simpler.
 Once you're happy with your script, you can copy/paste it into a .py file and
 schedule it with a standard Linux scheduler, which is another part of this
