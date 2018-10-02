@@ -1,4 +1,4 @@
-:Author: `Mike Levin SEO in NY, 360i & Commodore alum, and HitTail Creator <http://mikelev.in>`_
+:Author: `Mike Levin SEO in NYC, 360i & Commodore alum, and HitTail Creator <http://mikelev.in>`_
 
 Pipulate Free and Open Source SEO Software (Automate Google Sheets for Dashboards)
 ##################################################################################
