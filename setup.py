@@ -1,6 +1,6 @@
 from distutils.core import setup
 
-version = '0.2.29'
+version = '0.2.3'
 download_url = 'https://github.com/miklevin/pipulate/archive/%s.tar.gz' % version
 
 setup(
