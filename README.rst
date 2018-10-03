@@ -1,4 +1,4 @@
-:Author: `Mike Levin SEO in NYC, 360i & Commodore alum, and HitTail Creator <http://mikelev.in>`_
+:Author: `Mike Levin SEO in NYC, alum of Commodore & 360i, Creator of HitTail, currently with J2/Ziff-Davis/IGN/Mashable. <http://mikelev.in>`_
 
 Pipulate Free and Open Source SEO Software (Automate Google Sheets for Dashboards)
 ##################################################################################
@@ -16,8 +16,8 @@ Pipulate is designed to make playing with data in Jupyter Notebook easy. The
 easiest way to install Pipulate from Jupyter is to execute these commands from
 within a Notebook::
 
-    import sys
-    !{sys.executable} -m pip install pipulate
+	import sys
+	!{sys.executable} -m pip install --upgrade --no-cache-dir pipulate
 
 If you're not using Anaconda, then you will have to install Pandas first.
 
