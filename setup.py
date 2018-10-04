@@ -1,15 +1,15 @@
 from distutils.core import setup
 
-version = '0.2.3'
-download_url = 'https://github.com/miklevin/pipulate/archive/%s.tar.gz' % version
+with open("README.rst", "r") as fh:
+    long_description = fh.read()
 
 setup(
     name = 'pipulate',
     packages = ['pipulate'],
+    version = '0.2.31',
     version = version,
-    download_url = download_url,
     description = 'Free and Open Source SEO Software (Auto-Update Google Sheets).',
-    long_description = open('README.rst', 'r').read(),
+    long_description = long_description,
     author = 'Mike Levin SEO in NYC, alum of Commodore & 360i, Creator of HitTail.com, currently with J2/Ziff-Davis/IGN/Mashable.',
     license='MIT',
     author_email = 'miklevin@gmail.com',
