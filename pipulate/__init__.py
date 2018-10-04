@@ -68,6 +68,7 @@ def populate(tab, cl, df):
     else:
         raise SystemExit()
     print('gs.populate("%s", cl, df) <<< GSHEET UPDATED! >>>' % tab.title)
+    print()
 
 
 def cl_to_list(cl):
