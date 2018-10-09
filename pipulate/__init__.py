@@ -419,7 +419,7 @@ def date_ranges(human=False, yoy=True):
     return lot
 
 
-def date_ranger(starts=(30, 90, 180), days=30, human=False):
+def date_ranger(starts=(30, 90, 180), days=30, start=1, human=False):
     """Returns 3 date ranges from days-ago starts to days-later."""
 
     def dx(x):
@@ -430,7 +430,7 @@ def date_ranger(starts=(30, 90, 180), days=30, human=False):
 
     lot = list()
     today = datetime.now()
-    yesterday = today - timedelta(days=1)
+    yesterday = today - timedelta(days=start)
     firstrange_start = yesterday - timedelta(days=starts[0])
     firstrange_end = firstrange_start + timedelta(days=days)
     midrange_start = yesterday - timedelta(days=starts[1])
