@@ -17,7 +17,6 @@ import httplib2
 import argparse
 import json
 import pytz
-from time import gmtime, strftime
 from collections import defaultdict
 from datetime import datetime, timedelta
 from inspect import currentframe, getouterframes
@@ -101,10 +100,6 @@ def cl_df_fits(cl, df):
     return False
 
 
-def gmt():
-    return strftime("%a, %d %b %Y %H:%M", gmtime())
-
-
 def a1(pos, reverse=False):
     """Return the column letter for numeric column index."""
     if reverse:
@@ -154,19 +149,6 @@ def module_name():
     counters[name] += 1
     return_me = '(%s: %s) ' % (name, counters[name])
     return return_me
-
-
-def create_google_service(filename, api_name, version):
-    """Return instance of Google Service object."""
-
-    from apiclient.discovery import build
-    path = os.path.dirname(os.path.realpath('__file__'))
-    path_filename = os.path.join(path, filename)
-    storage = file.Storage(path_filename)
-    credentials = storage.get()
-    http = credentials.authorize(http=httplib2.Http())
-    service = build(api_name, version, http=http)
-    return service
 
 
 class AccessToken(object):
@@ -228,146 +210,6 @@ def oauth():
     access = AccessToken(access_token=token)
     connect = gspread.authorize(access)
     return connect
-
-
-def h1(print_me, color=Fore.GREEN, font='standard'):
-    ''' Never underestimate the power of a good nickname. '''
-    ascii_art = figlet_format(print_me, font=font)
-    print('%s%s%s' % (color, ascii_art, Fore.WHITE))
-    return print_me
-
-
-def h2(print_me, color=Fore.GREEN, font='cybermedium'):
-    ''' The human brain generally only deals well with shallow nesting. '''
-    ascii_art = figlet_format(print_me, font=font)
-    print()
-    print('%s%s%s' % (color, ascii_art, Fore.WHITE))
-    return print_me
-
-
-def ga():
-    """Return instance of Google Analytics object."""
-    return create_google_service(filename, "analytics", "v3")
-
-
-def gsc():
-    """Return instance of Google Search Console object."""
-    return create_google_service(filename, "webmasters", "v3")
-
-
-def Log(yval, xval, sheet):
-    """Insert date into 'log' tab at by row/col named index."""
-
-    logsheet = sheet.worksheet('logs')
-    row_count = logsheet.row_count
-    col_list = logsheet.row_values(1)
-    col_count = len(col_list)
-    log_cells = logsheet.range(1, 1, row_count, col_count)
-    for i, a_cell in enumerate(log_cells):
-        m = i % col_count
-        if not m and a_cell.value:
-            ydex = a_cell.value
-            if ydex == yval:
-                cell_dex = i + col_list.index(xval)
-                cell_value = human_date(datetime.now())
-                log_cells[cell_dex].value = cell_value
-                logsheet.update_cells(log_cells)
-                break
-
-
-def Check(yval, xval, sheet):
-    """Checks if today's date arleady in row/col named index."""
-
-    logsheet = sheet.worksheet('logs')
-    return_truth = False
-    row_count = logsheet.row_count
-    col_list = logsheet.row_values(1)
-    col_count = len(col_list)
-    log_cells = logsheet.range(1, 1, row_count, col_count)
-    for i, a_cell in enumerate(log_cells):
-        m = i % col_count
-        if not m and a_cell.value:
-            ydex = a_cell.value
-            if ydex == yval:
-                cell_dex = i + col_list.index(xval)
-                today_human = human_date(datetime.now())
-                cell_value = log_cells[cell_dex].value
-                if cell_value == today_human:
-                    return_truth = True
-                break
-    return return_truth
-
-
-def ga_url(gaid, start, end, path):
-    """Return Google Analytics metrics for a URL."""
-
-    path = path.replace(',', r'\,')
-    service = ga()
-    metrics = ['users', 'newUsers', 'sessions', 'bounceRate',
-               'pageviewsPerSession', 'avgSessionDuration']
-    metrics = ''.join(['ga:%s,' % x for x in metrics])[:-1]
-    ga_request = service.data().ga().get(
-        ids='ga:' + gaid,
-        start_date=start,
-        end_date=end,
-        metrics=metrics,
-        dimensions='ga:pagePath',
-        sort='-ga:users',
-        filters='ga:pagePath==' + path,
-        segment='sessions::condition::ga:medium==organic',
-        max_results=1
-    )
-    ga_response = ga_request.execute()
-    rval = []
-    if 'rows' in ga_response:
-        raw_rows = ga_response['rows'][0]
-        rval = raw_rows
-    return rval
-
-
-def gsc_url_keyword(prop, start, end, query, url):
-    service = gsc()
-    request = {
-        "startDate": start,
-        "endDate": end,
-        "dimensions": [
-            "query",
-            "page"],
-        "dimensionFilterGroups": [
-        {
-            "filters": [
-            {
-                "operator": "equals",
-                "expression": url,
-                "dimension": "page"
-            },
-            {
-                "operator": "equals",
-                "expression": query,
-                "dimension": "query"
-            }]
-        }]
-    }
-    dat = service.searchanalytics().query(siteUrl=prop, body=request).execute()
-    val = []
-    if 'rows' in dat:  # For the foolish Hobgoblins of PEP8 consistency
-        r = dat['rows'][0]
-        val = [start] + [r['keys'][0]] + [r['keys'][1]] + [
-            r['position']] + [r['clicks']] + [r['impressions']] + [r['ctr']]
-    return val
-
-
-def cl_lol_to_sheet(cell_list, lol, sheet):
-    """Update existing Gspread scell list with a same-shaped list of lists."""
-    flat = [y for x in lol for y in x]
-    for i, cell in enumerate(cell_list):
-        cell.value = flat[i]
-    sheet.update_cells(cell_list)
-
-
-def df_to_lol(df):
-    """Return a list of lists from Pandas dataframe."""
-    return [list(x) for x in df.values]
 
 
 def api_date(a_datetime, time=False):
@@ -449,8 +291,112 @@ def date_ranger(starts=(30, 90, 180), days=30, start=1, human=False):
     return lot
 
 
+def gmt():
+    """Returns current time in Greenwich Mean Time"""
+    from time import gmtime, strftime
+    return strftime("%a, %d %b %Y %H:%M", gmtime())
+
+
 def datestamp():
+    """Returns local time formatted for timestamp."""
     return 'Generated {0:%A, %B %d aprox %I:%m %p}'.format(datetime.now(pytz.utc))
+
+
+def create_google_service(filename, api_name, version):
+    """Return instance of Google Service object."""
+
+    from apiclient.discovery import build
+    path = os.path.dirname(os.path.realpath('__file__'))
+    path_filename = os.path.join(path, filename)
+    storage = file.Storage(path_filename)
+    credentials = storage.get()
+    http = credentials.authorize(http=httplib2.Http())
+    service = build(api_name, version, http=http)
+    return service
+
+
+def ga_url(gaid, start, end, path):
+    """Return Google Analytics metrics for a URL."""
+
+    path = path.replace(',', r'\,')
+    service = ga()
+    metrics = ['users', 'newUsers', 'sessions', 'bounceRate',
+               'pageviewsPerSession', 'avgSessionDuration']
+    metrics = ''.join(['ga:%s,' % x for x in metrics])[:-1]
+    ga_request = service.data().ga().get(
+        ids='ga:' + gaid,
+        start_date=start,
+        end_date=end,
+        metrics=metrics,
+        dimensions='ga:pagePath',
+        sort='-ga:users',
+        filters='ga:pagePath==' + path,
+        segment='sessions::condition::ga:medium==organic',
+        max_results=1
+    )
+    ga_response = ga_request.execute()
+    rval = []
+    if 'rows' in ga_response:
+        raw_rows = ga_response['rows'][0]
+        rval = raw_rows
+    return rval
+
+
+def gsc_url_keyword(prop, start, end, query, url):
+    service = gsc()
+    request = {
+        "startDate": start,
+        "endDate": end,
+        "dimensions": [
+            "query",
+            "page"],
+        "dimensionFilterGroups": [
+        {
+            "filters": [
+            {
+                "operator": "equals",
+                "expression": url,
+                "dimension": "page"
+            },
+            {
+                "operator": "equals",
+                "expression": query,
+                "dimension": "query"
+            }]
+        }]
+    }
+    dat = service.searchanalytics().query(siteUrl=prop, body=request).execute()
+    val = []
+    if 'rows' in dat:  # For the foolish Hobgoblins of PEP8 consistency
+        r = dat['rows'][0]
+        val = [start] + [r['keys'][0]] + [r['keys'][1]] + [
+            r['position']] + [r['clicks']] + [r['impressions']] + [r['ctr']]
+    return val
+
+
+def ga():
+    """Return instance of Google Analytics object."""
+    return create_google_service(filename, "analytics", "v3")
+
+
+def gsc():
+    """Return instance of Google Search Console object."""
+    return create_google_service(filename, "webmasters", "v3")
+
+
+def h1(print_me, color=Fore.GREEN, font='standard'):
+    ''' Never underestimate the power of a good nickname. '''
+    ascii_art = figlet_format(print_me, font=font)
+    print('%s%s%s' % (color, ascii_art, Fore.WHITE))
+    return print_me
+
+
+def h2(print_me, color=Fore.GREEN, font='cybermedium'):
+    ''' The human brain generally only deals well with shallow nesting. '''
+    ascii_art = figlet_format(print_me, font=font)
+    print()
+    print('%s%s%s' % (color, ascii_art, Fore.WHITE))
+    return print_me
 
 
 class Unbuffered(object):
