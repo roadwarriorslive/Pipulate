@@ -103,6 +103,34 @@ desktop interface.
 
 	sudo apt-get install libgtk-3-0
 
+And then FINALLY the extracted .py files (from Jupyter Notebook .ipynb files)
+actually ran correctly from Windows 10 Ubuntu Bash terminal. This is almost
+exactly the same process as I had to do to get it working on my Amazon cloud
+server. The version of Ubuntu is exactly the same on both sides:
+
+    >> lsb_release -a
+    No LSB modules are available.
+    Distributor ID: Ubuntu
+    Description:    Ubuntu 16.04.5 LTS
+    Release:        16.04
+    Codename:       xenial
+
+I actually ALSO had to upgrade the default Python 3.5 release that comes with
+16.04 to 3.6. I did this a few weeks ago on the EC2 and I just did it now on
+Windows Ubuntu. This is what I had to do to get myself onto Python 3.6 on
+Ubuntu 16.04 (both in the Amazon cloud and on my local Windows 10 machine) as
+documented at: https://stackoverflow.com/questions/41712326/how-to-install-python3-6-in-window-ubuntu-bash
+
+    sudo add-apt-repository ppa:jonathonf/python-3.6
+    sudo apt update
+    sudo apt install python3.6
+
+And then after Python 3.6 is installed, I sort of lock myself into that
+virtualenv (I find stepping in and out of virtualenv's a pain) by putting this
+line at the top of my ~/.bash_profile:
+
+    source ~/py36/bin/activate ~/py36
+
 --------------------------------------------------------------------------------
 ## Mon Jun  4, 2018
 ### Fortress of Natitude? Honey Badger Don't Care
