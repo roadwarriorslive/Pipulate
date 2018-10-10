@@ -1,4 +1,110 @@
 ## Mon Jun  4, 2018
+--------------------------------------------------------------------------------
+## Wed Oct 10, 2018
+### Getting Headless Chrome Running Under Windows 10 Ubuntu BASH Terminal
+
+Okay so yesterday was very interesting. I needed a more rapid development cycle
+than transmitting .py files to the EC2 cloud could provide. I wanted to run
+everything I can do in Jupyter Notebook and on the cloud Linux server also on
+my local Windows Ubuntu Terminal. Windows 10 allows you to have an optional
+genuine Ubuntu Linux kernel running and an accompanying Linux BASH terminal. So
+in general workflow, I "flesh it out" in Jupyter Notebook and then copy-paste
+the Python code into a .py file and test-run it immediately from an always-open
+(and cd'd to the same folder) terminal window.
+
+This is my normal day-to-day Linux terminal, but it has nuanced differences
+from one that comes with a genuinely installed instance of Ubuntu because it's
+being managed by Windows. It's lack-of an acceptable sandbox apparently makes
+it different to run Chrome in headless server mode. It felt like a rabbit hole
+a little bit, but also if I can't do stuff like that it's pretty invalidating
+of being able to use a Windows Ubuntu terminal as a genuine one. The error
+message said that if I turned off sandbox mode (and live dangerously) it would
+work. It's an acceptable risk because of how it fits into the workflow. I'm not
+running malicious JavaScript code, but rather only the code on pages I'm
+scraping. And so I figured out how to pass arguments to the invocation of a new
+Browser instance under pyppeteer (different from Chrome's puppeteer library).
+Sheesh! Complex. 
+
+I already have things running identically to Jupyter Notebook in Anaconda
+consoles, but Anaconda consoles are terrible. They are very reminiscent of the
+Windows command window or Powershell-- both of which are completely
+unacceptable in approach I'm taking. Learning (becoming proficient at) another
+command-line environment than the Linux (BASH) one is a terrible proposition.
+It's better to just keep it in the BASH Terminal shell provided by Ubuntu under
+Linux, but it's a whole separate code execution environment. This is especially
+so after creating a virtualenv instance to keep the right version of Python
+running and all the dependencies isolated. I had a few problems to overcome and
+realizations that I had. For example, never sudo this command or local (within
+the virtualenv) pip installs will never work.
+
+    Correct:
+    virtualenv --python=python3.6 ~/py36
+
+    Incorrect:
+    sudo virtualenv --python=python3.6 ~/py36
+
+If you DO sudo the virtualenv command, it's going to make root the owner of
+stuff in home ( ~/ ) and it will have to be undone with a chown command:
+
+    chown -R MikeL:MikeL ~/py36
+
+Once ownership was correct, I was able to get all the pip requirements from the
+prior environment (non-virtualenv) with the following (before in the
+virtualenv but after cd'ing into the pipdev repo directory):
+
+    pip freeze > requirements.txt
+
+I then launched the virtualenv which is now down automatically and by default
+by this entry in my .bash_profile:
+
+    source ~/py36/bin/activate ~/py36
+
+And then I could "unfreeze" the requirements by doing the install out of the
+requirements file:
+
+    pip install -r requirements.txt
+
+These are the ADDITIONAL pip installs I had to do from the virtualenv. I have
+to work this out for better process/documentation.
+
+    python3.6 -m pip install pipulate
+    python3.6 -m pip install pandas
+    python3.6 -m pip install pyppeteer
+    python3.6 -m pip install --upgrade oauth2client
+    python3.6 -m pip install pyfiglet
+    python3.6 -m pip install colorama
+    python3.6 -m pip install logzero
+
+Then to get Chrome running headlessly, it was very similar to the apt-get
+installs I had to do on the Amazon EC2 Ubuntu instance I'm using, but it had
+one extra command because libgtk never got installed for anything else along
+the way.
+
+    sudo apt-get install libx11-xcb1
+    sudo apt-get install libxcomposite1
+    sudo apt-get install libxcursor1
+    sudo apt-get install libxdamage-dev
+    sudo apt-get install libxi6
+    sudo apt-get install libxtst6
+    sudo apt-get install libnss3-dev
+    sudo apt-get install libcups2
+    sudo apt-get install libxss1
+    sudo apt-get install libxrandr2
+    sudo apt-get install libasound2
+    sudo apt-get install libpangocairo-1.0-0
+    sudo apt-get install libatk1.0-0
+    sudo apt-get install libatk-bridge2.0-0
+
+And one that was necessary on Windows Ubuntu. This is the graphics stuff that
+headless Chrome requires so triggering off this particular apt-get takes a
+really long time. It's like turning your graphics-only BASH terminal virtualenv
+environment capable of running desktop-apps requiring graphics, mouse, and
+desktop interface.
+
+	sudo apt-get install libgtk-3-0
+
+--------------------------------------------------------------------------------
+## Mon Jun  4, 2018
 ### Fortress of Natitude? Honey Badger Don't Care
 
 Wowsers, and shazam! My small Urby studio apartment now has a Garden of
