@@ -1,4 +1,3 @@
-## Mon Jun  4, 2018
 --------------------------------------------------------------------------------
 ## Wed Oct 10, 2018
 ### Getting Headless Chrome Running Under Windows 10 Ubuntu BASH Terminal
