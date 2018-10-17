@@ -8,8 +8,9 @@
 # IMPORTANT THINGS TO REMEMBER:
 # 1. Make life easy by filling your ~/.bash_profile with aliases.
 # 2. Make life easy by filling /usr/local/sbin with helper scripts.
-# 3. pip puts things ~here: /usr/local/lib/python3.6/dist-packages/
-# 4. oauth2client is deprecated. Replace it soon.
+# 3. Without virtualenv, pip ~puts things: /usr/local/lib/python3.6/dist-packages/
+# 4. With virtualenv, pip ~puts things: /home/MikeL/py36/lib/python3.6/site-packages
+# 5. oauth2client is deprecated. Replace it soon.
 
 import sys
 import os
