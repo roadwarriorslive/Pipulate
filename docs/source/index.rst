@@ -11,6 +11,7 @@ Welcome to Pipulate's documentation!
    :caption: Contents:
 
 
+Text
 
 Indices and tables
 ==================
