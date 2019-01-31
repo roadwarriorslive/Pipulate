@@ -1,7 +1,7 @@
-:Author: `Mike Levin SEO in NYC, alum of Commodore & 360i, Creator of HitTail, currently with J2/Ziff-Davis/IGN/Mashable. <http://mikelev.in>`_
+:Author: `Mike Levin SEO in NYC, Commodore & 360i alum, HitTail creator, J2 Global employee. <http://mikelev.in>`_
 
-Pipulate Free and Open Source SEO Software (Automate Google Sheets for Dashboards)
-##################################################################################
+Pipulate Free & Open Source SEO Software (Automate GSheets for Dashboards)
+##########################################################################
 
 .. image:: https://raw.githubusercontent.com/miklevin/Pipulate/master/pipulate-logo.svg?sanitize=true
 
