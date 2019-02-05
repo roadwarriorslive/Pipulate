@@ -50,6 +50,10 @@ this:
 And now I have this location which appears to update on the git push without a
 manual make html. https://pipulate.readthedocs.io/en/latest/
 
+Okay, what I'm really doing here is using the Sphinx Python Documentation
+Generator. 
+
+--------------------------------------------------------------------------------
 ## Wed Oct 10, 2018
 ### Getting Headless Chrome Running Under Windows 10 Ubuntu BASH Terminal
 
