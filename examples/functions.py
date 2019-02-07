@@ -4,20 +4,13 @@ import requests
 import re
 import time
 
-# Preferred method: load field-mappings from file
-import global_definitions as g
-
-# Alternative method: same API, but doesn't require external file.
-#from collections import namedtuple
-#Columns = namedtuple('Columns', 'keyword,match_pattern,stuffed_serp')
-#g = Columns(keyword='A', match_pattern='B', stuffed_serp='C')
-
 use_proxies = False
+print("Use proxies: %s" % use_proxies)
 
-proxy_list = list()
-bad_blocks = list()
 
-try:
+if use_proxies:
+    proxy_list = list()
+    bad_blocks = list()
     with open('goodproxies.txt') as proxies:
         for line in proxies:
             proxy_list.append(line[:-1])
@@ -25,11 +18,7 @@ try:
         for line in proxies:
             bad_blocks.append(line[:-1])
     proxy_cycler = cycle(proxy_list)
-    use_proxies = True
-except:
-    pass
-
-print("Use proxies: %s" % use_proxies)
+    
 
 common_agents = list()
 with open('useragents.txt') as agents:
@@ -40,13 +29,6 @@ agent_cycler = cycle(common_agents)
 
 def fu():
     return 'bar'
-
-
-def spam(row, *args, **kwargs):
-    global g
-    A = row[g.A]
-    B = row[g.B]
-    return A
 
 
 def serp(row):
@@ -65,6 +47,8 @@ def serp(row):
     sleep_delay = 2
     try_proxies = 1000
     
+    agent = next(agent_cycler)
+    user_agent = {'User-agent': agent}
     # The preferred path if you have anonymous web proxies.
     # The light that burns twice as bright burns half as long.
     if use_proxies:
@@ -79,8 +63,6 @@ def serp(row):
         hide = ('*' * len(ip))[:p]+ip[p:]
         proxy = {'http': 'http://'+ip, 'https': 'https://'+ip}
         print('Using proxy: %s' % hide)
-        agent = next(agent_cycler)
-        user_agent = {'User-agent': agent}
         for i in range(proxied_retries):
             response = requests.get(search_url, proxies=proxy, headers=user_agent)
             landing_pages = re.findall(pattern, response.text)
@@ -90,13 +72,13 @@ def serp(row):
                 break
     else:
         for i in range(unproxied_retries):
-            try:
-                response = requests.get(search_url, headers=user_agent)
-                landing_pages = re.findall(pattern, response.text)
-                break
-            except:
-                agent = next(agent_cycler)
-                user_agent = {'User-agent': agent}
+            #try:
+            response = requests.get(search_url, headers=user_agent)
+            landing_pages = re.findall(pattern, response.text)
+            break
+            #except:
+            #    agent = next(agent_cycler)
+            #    user_agent = {'User-agent': agent}
         
     return landing_pages
 
