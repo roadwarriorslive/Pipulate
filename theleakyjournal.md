@@ -1,4 +1,59 @@
 --------------------------------------------------------------------------------
+## Thu Jan 31, 2019
+### Getting Pipulate into readthedocs.org
+
+I keep loosing grip on the next and most important project... firming-up the
+broad strokes of the necessary components of Data Mastering. I should really
+start drawing diagrams using this incredible laptop I have. But I'm not exactly
+sure where the stylus is for this thing. I don't remember the last place I put
+it. Shit, I should be better at keeping track where this sort of stuff is.
+Think! We need a pulse and a rhythm. We need a place where I will always
+impulsively be checking, and that it is okay to. I just need to know that
+everything is working well, with a sort of Zen calm and assuredness. 
+
+It's also time to conduct a bit of this in public. I plan on rebooting my
+YouTube series soon, but before that it should really be about doing a kick-ass
+job for my employer. But journaling into the Pipulate development repo doesn't
+detract from that. In fact, it ADDs to it, in getting on the record in a public
+way that doesn't (I believe) conflict with my employer. It brings personal
+investment and clarity of thought to topics that I'm not being given technical
+guidance on by my employer. It's all just got to spring from my mind.
+
+The first trick is to get VPN out of the picture. What do I always do to check
+on the cloud server? Move THAT into a GSheet. 1, 2, 3... 1? Go Right!
+
+Well, the start of all this stuff is in my Pipulate pipdev repo. It's time for
+me to start using readthedocs.org. So I make a docs directory inside pipdev per
+these instructions:
+https://docs.readthedocs.io/en/latest/intro/getting-started-with-sphinx.html
+
+    pip install sphinx
+
+Then I cd into the docs directory and type:
+
+    sphinx-quickstart
+
+Answer a bunch of questions, Then you can cd into docs/build/html and type:
+
+    make html
+
+That makes the html files locally. Okay, I did the Github integration and
+changed the theme. I had to actually install the theme:
+
+    pip install sphinx_rtd_theme
+
+And then I had to edit the docs/source/conf.py file and alter the theme line to
+this:
+
+    html_theme = "sphinx_rtd_theme"
+
+And now I have this location which appears to update on the git push without a
+manual make html. https://pipulate.readthedocs.io/en/latest/
+
+Okay, what I'm really doing here is using the Sphinx Python Documentation
+Generator. 
+
+--------------------------------------------------------------------------------
 ## Wed Oct 10, 2018
 ### Getting Headless Chrome Running Under Windows 10 Ubuntu BASH Terminal
 
