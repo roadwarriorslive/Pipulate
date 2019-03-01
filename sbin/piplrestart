@@ -1,4 +1,4 @@
-SERVICE=pipulate-center.service
+SERVICE=pipulate-left.service
 
 if [ "`systemctl is-active $SERVICE`" != "active" ] 
 then 
@@ -6,7 +6,7 @@ then
 	echo "$SERVICE started."
 	exit 0
 else
-	sudo systemctl center $SERVICE
+	sudo systemctl start $SERVICE
     echo "$SERVICE started."
 	exit 0
 fi 
