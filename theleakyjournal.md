@@ -1,4 +1,77 @@
 --------------------------------------------------------------------------------
+## Thu Apr 18, 2019
+### Chrome Screenshots with NodeJS
+
+Okay, think through next steps. Publish yesterday's entry. Okay, done. Check in
+Github... Yep, that entry from yesterday about incorporating nodejs into my
+daily workflow got pushed out into the Pipulate repo. This is the least way I
+could do personal publishing now for the sake of forcing myself to move forward
+faster using the principles of commitment and consistency.
+
+Anyway, I've learned that I can invoke node commands from within Python so I
+can put files like screenshot.js into the same folder with some script.py and
+call it from within Python like this:
+
+    NODE_LOCATION = "/usr/bin/node"
+    file_name = "screenshot.png"
+    url = "https://www.amazon.com/"
+    cmd = r'%s screenshot.js %s %s' % (NODE_LOCATION, file_name, url)
+    subprocess.getoutput(cmd)
+
+The home folder need only have the screenshot.js file sitting there. I guess
+you could break it out into a separate repo, but then things get more fragile.
+Stuff breaks less when everything works out of the same folder. The
+screenshot.js file that I developed yesterday is this:
+
+	console.log('Starting');
+	const puppeteer = require('puppeteer');
+	const filename = process.argv[2];
+	const url = process.argv[3];
+	(async () => {
+	  const browser = await puppeteer.launch({headless: true,
+		executablePath: '/usr/bin/chromium-browser',
+		args: ['--no-sandbox', '--disable-setuid-sandbox']});
+	  const page = await browser.newPage();
+	  page.setViewport({ width: 1080, height: 2500 });
+	  await page.goto(url);
+	  await page.screenshot({path: filename});
+	  await browser.close();
+	})();
+	console.log('Done');
+
+You can actually use screenshot.js from the Linux terminal to take screenshots
+with commands like:
+
+    node screenshot.js amazon.png https://www.amazon.com/
+
+...and a file named "amazon.png" would be deposited into the current folder
+after Chrome is headlessly invoked. Technically, it's Chromium and not Chrome
+but it doesn't seem to make any difference. We talk about headless Chrome and
+not Chromium, but Chromium is the truly free and open source version of Chrome.
+Also, the above code has headless: true, but it works just as well set to false
+and actually watching Chromium pop up for a moment. I have this working
+correctly under Python in Jupyter Notebook, under the Ubuntu Bash Shell in the
+Windows Subsystem for Linux (WSL) and of course on a generic Linux cloud
+server, where it really is only ever running headlessly. 
+
+The important thing here is that I CAN run it non-headlessly for development
+and debugging purposes, now in BOTH Jupyter Notebook and the WSL Bash Shell.
+That later part was not an easy thing. I still have to document the magic
+cocktail mix and incantations that got it working. I believe it was:
+
+1. sudo apt-get install ubuntu-desktop
+2. sudo apt install nodejs npm
+3. npm i puppeteer
+4. apt-get installing a bunch of other dependency stuff I'll document later
+5. Exporting some environment variables and putting them in .bash_profile
+6. Installing a Windows XServer and making sure it's running correctly
+
+So I basically have this done twice; once for WSL and once for the Anaconda
+environment under which Jupyter Notebook runs. So I have nodejs installed twice
+on the same system, once for each execution environment. The one on the cloud
+server makes 3 separate Python/Node/Chrome execution environments.
+
+--------------------------------------------------------------------------------
 ## Wed Apr 17, 2019
 ### Invoking NodeJS from Command-line With Arguments
 
