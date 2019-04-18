@@ -1,4 +1,33 @@
 --------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+## Wed Apr 17, 2019
+### Invoking NodeJS from Command-line With Arguments
+
+Okay, my "static-locations" workflow is evolving again right now. It's time
+that I start pushing out these daily journal entries into the Pipulte repo.
+It's the least I can do with getting back on-track with being a semi-public
+persona, sharing the details of what I'm doing with my day-to-day work. I'll
+write this journal entry with this in mind. Just as a quick recap for those
+just following along now, I keep a single "forever" text-file as a personal
+journal in a private Github repo. So why are you reading this here in the
+Pipulate repo? Because whenever I load my journal, I'm actually loading TWO
+files, one from each repo. In fact this is the macro I use to do it:
+
+	if [ -f /mnt/c/Users/mikle/github/journal/.journal.md.swp ]; then
+		rm /mnt/c/Users/mikle/github/journal/.journal.md.swp
+	fi
+	vim /mnt/c/Users/mikle/github/journal/journal.md /mnt/c/Users/mikle/github/pipdev/theleakyjournal.md
+
+That vim command means I'm loading two documents at once into vim, one in each
+buffer. For almost the entire time, I'm in the first buffer which is my main
+daily journal. Weeks or months usually go by with me working just that way.
+Sometimes I don't even make the private journal entries at all. But when I need
+to think things through out loud, it's there. And I usually do better when I
+use the journal. The journal is most useful at times like now when I'm going
+through tricky career repositioning. When it's time to push out that day's
+journal entry, I just use my vim-macro @p (for "publish") which is in my
+~/.vimrc file:
+
 ## Thu Jan 31, 2019
 ### Getting Pipulate into readthedocs.org
 
