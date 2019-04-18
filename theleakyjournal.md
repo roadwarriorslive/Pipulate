@@ -1,5 +1,4 @@
 --------------------------------------------------------------------------------
---------------------------------------------------------------------------------
 ## Wed Apr 17, 2019
 ### Invoking NodeJS from Command-line With Arguments
 
@@ -28,6 +27,117 @@ through tricky career repositioning. When it's time to push out that day's
 journal entry, I just use my vim-macro @p (for "publish") which is in my
 ~/.vimrc file:
 
+	let @p = '?--------------------------------------------------------------------------------^Mjji### Published^M^[:w^MkkkVj/--------------------------------------------------------------------------------^Mky:bn^Mggpjjddo^M^[ki### ^[kdd$a'
+
+Okay, that's going to scroll-right pretty far. But I'll see how the Github
+markdown rendering handles it. These little shortcuts like the "j" command to
+launch vim with the 2 journal buffers goes into /usr/local/sbin while the
+shortcuts from within vim go into /home/[username]/.vimrc. That "home" location
+which has your username in it has the shortcut ~/ making this location also
+known as ~/.vimrc. All these special paths and locations are from the Unix and
+Linux worlds and are very, very, very standard. As strange as some of the stuff
+I'm talking about may seem, I'm actually trying to stay as mainstream standard
+as possible for the sake of code stability, longevity, and portability.
+
+I work out of a number of different directories (a.k.a. folders) and on
+different files. One of my sbin commands is "g" which uses the git command to
+back-up and push all the latest changes up to Github. From inside vim what I
+can do (after a save) is temporarily dropping out of vim into a vim-provided
+command-line with the :sh command and then just typing "g" and waiting for the
+script to finish, and then just typing "exit" to go back into vim. Gonna do it
+now... okay, done. 
+
+When I add new workflow control shortcut files and such to these directories, I
+see git show red-text indicating they're not yet git-tracked files. This
+workflow allows me to always make sure I have a "core" set of main files that
+are always backed up in Github. When I make changes like adding new files to my
+workflow, such deviation is regularly brought to my attention when I use my "g"
+shortcut. 
+
+All I really do for all this customization is edit a few script-files that are
+written in the most standard of all ways in computer-dom, Unix shell scripts.
+More precisely, I'm using the "bash" flavor of this scripting language which
+has slightly more logic-flow control (if/than statements and such) than
+standard Unix shell scripts which is okay because the Bash dialect of Unix
+shell scripts is the most universally popular. It is for example what Microsoft
+has built into their Windows subsystem for Linux (WSL).
+
+Okay, I could talk this way in my journal all day and waste the day on
+exposition and reminding myself how and why I do the things I do, but it's time
+to get to today's business: Chrome automation under the Windows Subsystem for
+Linux (WSL) WITH a graphics sub-system active so that I can run Chrome NOT
+headlessly. In other words, I launch scripts from a WSL Bash terminal (courtesy
+of Microsoft) and the Chromium browser actually pops up and shows you what's
+going on. This provides a great opportunity for debugging and adjusting timing
+in the Chrome automations; something that is very difficult to do headlessly.
+
+The background here is that Google has recently added the ability to control
+Chrome with external scripts and released a client library called Puppeteer to
+make it easier, but this is in conflict with my recently blossomed love for
+Python under Jupyter Notebook (in a web browser). Puppeteer JavaScript code is
+I actually figured out how to use the Python Pyppeteer wrapper-library to use
+Puppeteer through Python through Jupyter Notebook and did my first few
+scheduled automations by moving the script from Jupyter Notebook into a
+standard python text-file and over to a Linux cloud server running Chrome
+headlessly (as indented). 
+
+This Jupyter Notebook/Python-wrapper approach to executing node code has worked
+for me so far for the first few Chrome automations. The Puppeteer-installed
+Chromium does indeed momentarily pop up and I can do some debugging. However,
+the JavaScript code that's still really being executed by nodejs doesn't really
+go away or become much more "Pythonic" when you're using Pyppeteer. As such,
+the "win" I'm looking for is unsatisfying and I feel needlessly isolated from
+node. You just LOOK AT the JavaScript code embedded inside a Python file and
+it's a lot of extra thought overhead when if you just took Python and Jupyter
+Notebook out of the picture, I would be doing my work in native JavaScript
+(using vim as my text editor) and executing the code in node.
+
+Ugh! There ARE issues with this graphics subsystem. Or maybe the Chromium
+version. Or maybe the lack of a sandboxed environment. Anyway, I keep getting a
+failure on apt-get update due to the inability to remove certain files. Googled
+it and StackExchange had the answer as usual.
+
+	sudo mv /var/cache/app-info/xapian/default /var/cache/app-info/xapian/default_old
+	sudo mv /var/cache/app-info/xapian/default_old /var/cache/app-info/xapian/default
+
+Ugh! It's 11:00 PM. Not everything has worked out as well as I would have
+liked, but I'm going to try to give working during the night in bed next to Nat
+a try. I get to put on the headphones and go into the zone for as long as I
+like and Billy is next to me and I can pet him as much as I like. These are two
+things I am generally not able to do during the day. Okay, let's take advantage
+of this potentially long stretch of focus and push "the system" forward as much
+as we can. Of course the system in this case and for the most part is just
+generic Linux and a few other tools like Chrome thrown in. Okay, where am I and
+what next?
+
+I need to assert better control over Chrome automation (still)! 1, 2, 3... 1?
+Go Right! Then, Go Right, Go Right! Hmm. Okay the problem I'm encountering
+right now is that the screenshot parameter to chrome isn't working with this
+graphics subsystem. However, it is working in my barebones.js example where I'm
+going through node. So why not just go through node all the time. Okay, node
+accepts arguments from the command-line: https://flaviocopes.com/node-cli-args/
+
+Okay, it's easy enough to step through non-labeled fixed-position arguments:
+
+    for (let j = 0; j < process.argv.length; j++) {  
+        console.log(j + ' -> ' + (process.argv[j]));
+    }
+
+The above code given three arguments would return this, and so we can see that
+position 0 gives you the command, position 1 gives you the fully qualified path
+to the input-file and then the rest are positional arguments.
+
+    0 -> /usr/bin/node
+    1 -> /mnt/c/Users/mikle/github/puppetshow/barebones.js
+    2 -> first
+    3 -> second
+    4 -> third
+
+Okay, so my barebones.js file is going to become a screenshot.js file that
+takes positional input arguments.
+
+
+--------------------------------------------------------------------------------
 ## Thu Jan 31, 2019
 ### Getting Pipulate into readthedocs.org
 
