@@ -1,0 +1,15 @@
+#!/bin/bash
+
+SERVICE=pipulate-center.service
+
+if [ "`systemctl is-active $SERVICE`" != "active" ] 
+then 
+	sudo systemctl restart $SERVICE
+	echo "$SERVICE started."
+	exit 0
+else
+	sudo systemctl start $SERVICE
+    echo "$SERVICE started."
+	exit 0
+fi 
+exit 0

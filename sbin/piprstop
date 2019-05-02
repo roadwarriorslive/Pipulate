@@ -1,0 +1,11 @@
+SERVICE=pipulate-right.service
+
+if [ "`systemctl is-active $SERVICE`" == "active" ] 
+then 
+	sudo systemctl stop $SERVICE
+	echo "$SERVICE stopped."
+	exit 0
+else
+    echo "$SERVICE not running."
+fi 
+exit 0
