@@ -1,0 +1,16 @@
+echo ""
+echo "<< RUNNING SERVICES >>"
+systemctl list-units --type=service --state=running | grep 'pipulate'
+echo ""
+echo "<< ACTIVE GNU SCREENS >>"
+screen -ls | grep 'pipulate'
+echo ""
+echo "Available commands: pipsee (this)"
+echo ""
+echo "<< LEFT >>   << CENTER >>   << RIGHT >>"
+echo " piplsee      pipcsee        piprsee"
+echo " piplstart    pipcstart      piprstart"
+echo " piplstop     pipcstop       piprstop"
+echo ""
+echo "Remember to use Ctrl a d to cleanly detatch from GNU screen."
+
