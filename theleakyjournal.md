@@ -1,5 +1,5 @@
 ## Mon May  6, 2019
-### 1, 3, 3... 1? Go Right! Bootstrapping Daily Productivity
+### 1, 2, 3... 1? Go Right! Bootstrapping Daily Productivity
 
 There is a consistent, even, familiar rhythm to getting started with work. If
 you're not feeling that rhythm, you're not getting started with work. Work is a
