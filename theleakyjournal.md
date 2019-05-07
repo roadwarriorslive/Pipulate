@@ -47,7 +47,7 @@ Right! Keep getting yourself back on-track. Upgraded Hyper.is to version 3...
 ugh! One more distraction because I HAD to fix the config file (to point to
 bash.exe) to continue to be productive. Okay, done. I can not emphasize enough
 how much the combo of Window's Linux bash.exe under Hyper.is makes a Windows
-system usable for a Unix/Linux-mided person.
+system usable for a Unix/Linux-minded person.
 
 --------------------------------------------------------------------------------
 ## Thu Apr 18, 2019
