@@ -1,3 +1,54 @@
+## Mon May  6, 2019
+### 1, 3, 3... 1? Go Right! Bootstrapping Daily Productivity
+
+There is a consistent, even, familiar rhythm to getting started with work. If
+you're not feeling that rhythm, you're not getting started with work. Work is a
+funny thing. Work leads to reward, like living life for one more day. Or at
+least, that's what getting to work once meant to human beings when we were in a
+more nomadic tribal state, following the seasonal migration herds of vegetable
+grazing animals. No longer. Our basic needs are met by society, at least if you
+can keep your act together enough to explain your situation to somebody who'll
+care. And if you have enough fuel and brilliance in that internal engine of
+yours to keep you going, you'll claw your way up and out and prevail.
+
+I have to be mentally all-in today on the work at-hand. Shit, okay, take your
+own advice and focus! 1, 2, 3... 1? Go Right! The repeating rhythm of life.
+That means go one screen to the right which will contain Chrome, go to Tab-1 by
+hitting Ctrl+1, go to the top of the page and hit Esc, 0, 0, Enter, drop your
+cursor in block-one and hit Shift+Enter. Pshwew! A story is starting to be
+told. It is the story of regaining-state of the last time you were here doing
+the work in the forefront (in center stage, in the spotlight, in focus, etc.)
+and as the subject of you being in The Zone. You're going to release the last
+version of yourself you had just been using to get here, this far.
+
+Maybe start some music now. Maybe try achieving that blissful elusive silence,
+or maybe crickets, running water, background noise or whatever. You have to go
+through a transition that's easy for some folks and hard as heck for others.
+It's like telling someone to think about something else other than some
+ridiculous thing that's impossible to get out of your mind. Absurd combinations
+of animals and colors come to mind like blue monkeys or pink elephants. Better
+yet, blue monkeys riding pink elephants. Don't think about them! Okay, some
+say. It's a snap and they've somehow got that mode-switch-trick down or they're
+lying. 
+
+You've got to win over your body with hardware-tricks that your conscious mind
+will write off as ridiculous or not having a chance against it, like deep
+breathing, and then activating some deep animal trigger, like the alpha brain
+state your mind wanders into shortly before falling asleep, where you're very
+relaxed and thinking about nothing. Call this state meditating, hypnosis,
+zoning-out or eggbert, for all I care. It's a documented thing. The front part
+of your brain that hosts all that human thinking stuff you're doing right now
+gives it a rest, kicks off it's shoes, hops into a happy place and gently
+discorporates. Taking 10 deep, slow, deliberate breaths is always a good place
+to start with these hardware tricks.
+
+Okay, there's lots of distractions including your own mind. 1, 2, 3... 1? Go
+Right! Keep getting yourself back on-track. Upgraded Hyper.is to version 3...
+ugh! One more distraction because I HAD to fix the config file (to point to
+bash.exe) to continue to be productive. Okay, done. I can not emphasize enough
+how much the combo of Window's Linux bash.exe under Hyper.is makes a Windows
+system usable for a Unix/Linux-mided person.
+
 --------------------------------------------------------------------------------
 ## Thu Apr 18, 2019
 ### Chrome Screenshots with NodeJS
