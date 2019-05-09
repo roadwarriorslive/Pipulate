@@ -2,10 +2,10 @@
 
 SERVICE=pipulate-right.service
 
-if [ "`systemctl is-active $SERVICE`" != "active" ] 
+if [ "`systemctl is-active $SERVICE`" == "active" ] 
 then 
 	sudo systemctl restart $SERVICE
-	echo "$SERVICE started."
+	echo "$SERVICE restarted."
 	exit 0
 else
 	sudo systemctl start $SERVICE
