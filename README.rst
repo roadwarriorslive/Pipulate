@@ -110,8 +110,8 @@ Learning just the right Linux, Python, vim and git (LPvg) will set you on a
 good course for the next 10-years and beyond. If you're still scared of the old
 text-based command-line interface to computers which is both the past and
 future of tech, then stick your hand into the Gom Jabbar of Linux, my other
-popular Repo here on Github: _Levinux: https://github.com/miklevin/levinux and
-repeat after me: I must not fear. Fear is the mind-killer. Fear is the
+popular Repo here on Github: `Levinux: <https://github.com/miklevin/levinux>`
+and repeat after me: I must not fear. Fear is the mind-killer. Fear is the
 little-death that brings total obliteration. I will face my fear. I will permit
 it to pass over me and through me.
 
