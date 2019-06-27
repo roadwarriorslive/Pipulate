@@ -53,6 +53,45 @@ Once you're happy with your script, you can copy/paste it into a .py file and
 schedule it with a standard Linux scheduler, which is another part of this
 project I'll be expanding considerably (generic task-scheduling under Linux).
 
+Parametrizing Your Arguments
+============================
+
+The time has come the Walrus said to talk about automation. While this is not
+about Pipulate, after you get something working in Jupyter Notebook what are
+you going to do? Well, you're going to put the code in a scheduler somewhere in
+a parameterized fashion so you can feed it different sites, Google Analytics
+IDs, keywords, filters and whatnot. It's way too much to cover here, but I may
+as well show you how to develop with parameterized arguments in Jupyter
+Notebook then have those same arguments able to be used on the command-line
+when invoked form a Linux Scheduler. You're welcome::
+
+    (py36) MikeL@LunderVand:$ filename.py --kung "foo"
+    kung: foo
+
+You can alternatively use::
+
+    (py36) MikeL@LunderVand:$ filename.py -k "foo"
+    kung: foo
+
+To support more arguments, just make more of the parser.add_argument() function
+calls and access them through the args dictionary::
+
+	name = 'kung'
+	jn = True
+	try:
+		get_ipython()
+	except NameError:
+		jn = False
+	if jn:
+		val = 'foo'
+	else:
+		import argparse
+		parser = argparse.ArgumentParser(description='Parses args when run from console.')
+		parser.add_argument('-k','--kung', default='foo', help='', required=False)
+        args = vars(parser.parse_args())
+		val = args[name]
+	print('%s: %s' % (name, val))`
+
 The Shameless Hype
 ==================
 
