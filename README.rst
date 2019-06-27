@@ -107,4 +107,4 @@ of your aging SEO career into something simultaneously more timely and
 timeless. Learning just the right Linux, Python, vim and git (LPvg) will
 set you on a good course for the next 10-years and beyond.
 
-.. image:: https://raw.githubusercontent.com/miklevin/Pipulate/master/mike-levin-seo-in-nyc.png
+.. image:: https://raw.githubusercontent.com/miklevin/Pipulate/master/mike-levin-seo-nyc.png
