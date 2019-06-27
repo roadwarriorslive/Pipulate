@@ -74,7 +74,9 @@ You can alternatively use::
     kung: foo
 
 To support more arguments, just make more of the parser.add_argument() function
-calls and access them through the args dictionary::
+calls and access them through the args dictionary. Here's the code in
+filename.py in the above commands. When this is run from Jupyter Notebook, the
+"foo" value is set in the "if jn:" if-block. Clear? Enjoy!::
 
 	name = 'kung'
 	jn = True
