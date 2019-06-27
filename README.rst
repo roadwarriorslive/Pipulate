@@ -104,7 +104,15 @@ Sheets easy? It's because this is the main missing ingredient in building all
 those custom reports necessary to surface actionable data every day. It's also
 your easy route into data manipulation with Python/Pandas and the repurposing
 of your aging SEO career into something simultaneously more timely and
-timeless. Learning just the right Linux, Python, vim and git (LPvg) will
-set you on a good course for the next 10-years and beyond.
+timeless.
+
+Learning just the right Linux, Python, vim and git (LPvg) will set you on a
+good course for the next 10-years and beyond. If you're still scared of the old
+text-based command-line interface to computers which is both the past and
+future of tech, then stick your hand into the Gom Jabbar of Linux, my other
+popular Repo here on Github: _Levinux: https://github.com/miklevin/levinux and
+repeat after me: I must not fear. Fear is the mind-killer. Fear is the
+little-death that brings total obliteration. I will face my fear. I will permit
+it to pass over me and through me.
 
 .. image:: https://raw.githubusercontent.com/miklevin/Pipulate/master/mike-levin-seo-nyc.png
