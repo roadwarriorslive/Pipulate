@@ -16,8 +16,8 @@ Pipulate is designed to make playing with data in Jupyter Notebook easy. The
 easiest way to install Pipulate from Jupyter is to execute these commands from
 within a Notebook::
 
-	import sys
-	!{sys.executable} -m pip install --upgrade --no-cache-dir pipulate
+    import sys
+    !{sys.executable} -m pip install --upgrade --no-cache-dir pipulate
 
 If you're not using Anaconda, then you will have to install Pandas first.
 
@@ -76,23 +76,25 @@ You can alternatively use::
 To support more arguments, just make more of the parser.add_argument() function
 calls and access them through the args dictionary. Here's the code in
 filename.py in the above commands. When this is run from Jupyter Notebook, the
-"foo" value is set in the "if jn:" if-block. Clear? Enjoy!::
+"foo" value is set in the "if jn:" if-block. It's fairly likely you'll have
+code like this at the top of any Pipulate script that starts out in Jupyter
+Notebook and is destined for scheduling. Clear? Enjoy!::
 
-	name = 'kung'
-	jn = True
-	try:
-		get_ipython()
-	except NameError:
-		jn = False
-	if jn:
-		val = 'foo'
-	else:
-		import argparse
-		parser = argparse.ArgumentParser(description='Parses args when run from console.')
-		parser.add_argument('-k','--kung', default='foo', help='', required=False)
+    name = 'kung'
+    jn = True
+    try:
+        get_ipython()
+    except NameError:
+        jn = False
+    if jn:
+        val = 'foo'
+    else:
+        import argparse
+        parser = argparse.ArgumentParser(description='Parses args when run from console.')
+        parser.add_argument('-k','--kung', default='foo', help='', required=False)
         args = vars(parser.parse_args())
-		val = args[name]
-	print('%s: %s' % (name, val))`
+        val = args[name]
+    print('%s: %s' % (name, val))`
 
 The Shameless Hype
 ==================
