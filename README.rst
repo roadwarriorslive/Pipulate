@@ -120,7 +120,7 @@ Learning Linux, Python, vim and git (LPvg) will set you on a good course for at
 least the next 10-years. If you're still scared of the Unix shell, that old
 text-based command-line interface which is both the past and future of tech,
 then stick your hand into the Gom Jabbar pain-box of Linux and cut your teeth
-on my other repo here on Github: Levinux: https://github.com/miklevin/levinux.
+on my other repo here on Github _Levinux: https://github.com/miklevin/levinux
 Now repeat after me: I must not fear. Fear is the mind-killer. Fear is the
 little-death that brings total obliteration. I will face my fear. I will permit
 it to pass over me and through me.
