@@ -101,9 +101,9 @@ Notebook and is destined for scheduling. Clear? Enjoy!::
         parser.add_argument('-k','--kung', default='foo', help='', required=False)
         args = vars(parser.parse_args())
         val = args[name]
-    print('%s: %s' % (name, val))`
+    print('%s: %s' % (name, val))
 
-FEAR IS THE MIND KILLER
+Fear Is The Mind Killer
 =======================
 
 Why do I call Google Sheets automation components "SEO software"? It's because
