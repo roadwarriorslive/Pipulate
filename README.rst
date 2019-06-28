@@ -62,10 +62,15 @@ sit there and press a button every day like in Lost, then you're going to have
 to put the code in some sort of scheduling system. When you do this, it is best
 to do it in a parameterized fashion, meaning you can feed the one script
 different sites, Google Analytics IDs, keywords, filters and whatnot; allowing
-the same code to drive different dashboards. It's way too much to cover here,
-but I may as well show you how to develop with parameterized arguments in
-Jupyter Notebook then have those same arguments able to be used on the
-command-line when invoked form a Linux Scheduler. You're welcome::
+the same code to drive different dashboards. 
+
+Generic Linux script scheduling is too much to cover here, but I may as well
+show you how to develop with parameterized arguments in Jupyter Notebook then
+have those same arguments able to be used on the command-line when invoked from
+scheduling. So if you have filename.ipynb (A Jupyter Notebook) and you
+copy/paste its content into filename.py, then you can change its internal
+variable values by the way you run it form the Unix shell, thereby using it to
+drive many different Google Sheet dashboards. You're welcome::
 
     (py36) MikeL@LunderVand:$ filename.py --kung "foo"
     kung: foo
