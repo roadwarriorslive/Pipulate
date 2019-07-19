@@ -19,7 +19,8 @@ within a Notebook::
     import sys
     !{sys.executable} -m pip install --upgrade --no-cache-dir pipulate
 
-If you're not using Anaconda, then you will have to install Pandas first.
+If you're not using Anaconda, then you will have to install Pandas first. But
+you should really be using Anaconda.
 
 The first time you import Pipulate, you will receive a Google OAuth prompt to
 allow access to the Google Spreadsheet you want to edit.  Click the big link
