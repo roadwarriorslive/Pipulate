@@ -1,4 +1,4 @@
-SERVICE=pipulate-left.service
+SERVICE=pipleft.service
 
 if [ "`systemctl is-active $SERVICE`" == "active" ] 
 then 

@@ -1,4 +1,4 @@
-SERVICE=pipulate-center.service
+SERVICE=pipcenter.service
 
 if [ "`systemctl is-active $SERVICE`" == "active" ] 
 then 

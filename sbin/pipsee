@@ -1,9 +1,9 @@
 echo ""
 echo "<< RUNNING SERVICES >>"
-systemctl list-units --type=service --state=running | grep 'pipulate'
+systemctl list-units --type=service --state=running | grep 'pip'
 echo ""
 echo "<< ACTIVE GNU SCREENS >>"
-screen -ls | grep 'pipulate'
+screen -ls | grep 'pip'
 echo ""
 echo "Available commands: pipsee (this)"
 echo ""
