@@ -1,0 +1,16 @@
+[Unit]
+Description=Run Python script to handle scheduling
+
+[Service]
+Type=forking
+Restart=always
+RestartSec=5
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/zdsched/
+ExecStart=/usr/bin/screen -dmS pipulate-left /home/ubuntu/py35/bin/python /home/ubuntu/zdsched/pipulate-left.py
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target

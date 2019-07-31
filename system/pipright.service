@@ -1,0 +1,16 @@
+[Unit]
+Description=Run Python script to handle scheduling
+
+[Service]
+Type=forking
+Restart=always
+RestartSec=5
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/github/pipright/
+ExecStart=/usr/bin/screen -dmS pipright /home/ubuntu/py36/bin/python /home/ubuntu/github/pipright/pipright.py
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target

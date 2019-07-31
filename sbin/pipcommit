@@ -1,2 +1,5 @@
 cp /usr/local/sbin/* /home/ubuntu/github/pipdev/sbin/
+cp /etc/systemd/system/pipleft.service /home/ubuntu/github/pipdev/system/pipleft.service
+cp /etc/systemd/system/pipright.service /home/ubuntu/github/pipdev/system/pipright.service
+cp /etc/systemd/system/pipcenter.service /home/ubuntu/github/pipdev/system/pipcenter.service
 
