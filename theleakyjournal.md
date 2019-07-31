@@ -1,3 +1,243 @@
+--------------------------------------------------------------------------------
+## Wed Jun 12, 2019
+### Two Paths to Career Advance: With & Without Headless Chrome
+
+I have the same aversion to starting my own business as my dad always did.
+Ultimate responsibility coming down on your head will kill you. Who needs it?
+It's better to be a Samurai-style master carpenter who works for a lord patron,
+supporting your endeavors so you can focus on your craft, serve best, and
+nurture a reputation that makes you obsolescence-proof in your lifetime. That's
+what I'm doing, and that's what I endeavor to do every day.
+
+To do this every day, we must first begin by structuring our day. This does not
+come by easy or ever flow automatically by habit. Sure, sitting down at the
+right place and taking out the right tools may come by habit, but every day is
+different and we are navigating a way through life which always takes special
+thought and consideration above and beyond that which you can do automatically
+by muscle-memory, dropping into some sort of fugue state.
+
+So, psyche yourself up! What are the goals out there large and small that you
+are pursuing? Why is your actual very life going to be better after today? What
+have you done that you had not been able to do (or even identify the need to
+do) yesterday? 
+
+There's a notion of perfection in the pursuit of things in life that is the
+ideal but unachievable. Truth is that life is statistical in nature and you
+zero in on goodness by laying it down in small layers that fit into the day. We
+lose our state each night from sleep, so regaining this state is of the utmost
+importance, if even just to lay down one more small layer.
+
+Okay, I fixed the problem in hyper.is with the clear command not working. That
+was subconsciously keeping me from starting screen-casting again, but now with
+Camtasia. I just upgraded Camtasia to version 2019.0.2. Ugh! Keystrokes and my
+conversation with their tech group. Let me quickly research software to show
+all my keystrokes onscreen.
+
+I'm facing a sort of existential crisis of career that I've got to come to
+grips with, and overcome. I'm about to reboot my experience. This is a good
+thing. This is always a good thing situation allowing because you don't lose
+what you've got, and you get to accumulate-up and incorporate-in a bit more of
+new important stuff. Things change in tech and you've got to change with it.
+
+I'm facing a rabbit hole. Some rabbit holes, you do run down and you're better
+off for it. Other rabbit holes you run down and don't ever come up from. Still
+others trap you for quite awhile or get you complexly entangled with your
+personal psyche and don't let go easily. Something inside's telling you that
+you're onto something, evidence and guts supports it, and if you just push a
+little bit harder you'll get the uncommon reward; uncommon by virtue of the
+exact fact that most people give-up right before this point. It's where the
+satisfyingly still-undiscovered or not-yet-appreciated vibrating-edge of
+important new stuff exists.
+
+The question in such time comes down to continue-to-invest or cut-your-losses?
+And if continue, why not back up and pivot a little then re-tackle the problem
+fresh and new? Why not psychologically reboot your thought-process by
+documenting out the step-by-step baby-steps fresh and anew? This is your career
+you're talking about and it's just so critical to get these butterfly-effect
+moments correct. Things that are easy to do now are going to be much more
+difficult later if you're too far down the wrong path.
+
+So, choose a path wisely. Know you're picking it for solid and perhaps
+future-proofing reasons. It makes me nervous investing too much into Chrome
+automation and all the potential JavaScript new-learnings and overhead that
+comes with that, when I could just say go with the Selenium API and stick with
+Firefox or the Webdriver. But that'd be ridiculous now that Google's announced
+that even Googlebot will be using the latest headless version of the Chromium
+browser for all site-rendering. Does that mean for all crawling entirely?
+Maybe.
+
+You can't tell the future and it's always good thinking to believe that the
+simpler subsystems continue to run as a sort of a safety-net against the
+astoundingly more complex new operations. To fully render a web-page as if a
+human web-surfer with a browser takes, I would guess, thousands of times more
+computing resources than just reading and parsing the text found in the
+view-source of the HTML code emitted at that URL. 
+
+So in other words, the work involved in crawling the web went from being an
+almost text-only game into being a complex and sometimes animated document
+object model (DOM) with the execution of JavaScript code and probably lots of
+subsequent little html-calls to other resources to build the page. That's a lot
+of processing power dedicated to documenting every page of the Web by Google.
+
+In order to standardize and make well-understood the entire process, Google has
+made Chromium (the FOSS version of Chrome) able to run headlessly and be
+automated so we can do many of the same sorts of things Google does with
+Googlebot. We'll know we're on the same friggin' code as them and no longer be
+limited to only crawling things in view-source. We also get thumbnail images
+and a bunch of other goodies.
+
+My career really is that of an SEO. But instead of chasing tweets and
+conferences and articles, I'll chase the data. All that cool old stuff that
+used to be the single-handed love of the Webmaster, I'm banking on becoming the
+single-handed love of the Datamaster. I'm pretty darn sure and pumped about it
+because Python Pandas. Wow, is this a thing. As is all the investigation and
+automation surrounding it. 
+
+Things don't automate easily, and to be the sort who knows all the things that
+go into it, do all the exploration to make sure what you're attempting is even
+feasible, to do the initial build, to run that code on-demand, to run that code
+on a scheduled basis, and then to make sure it all continues has great value.
+You can replace an entire department in a single person, with fairly reasonable
+results. It's an excellent application of the 80/20-rule: getting 80% of the
+benefit from the first 20% of the effort.
+
+But it is in this exact 80/20-rule thinking that I want to back away from
+Chrome automation through Puppeteer because... well, because tech-yuck! I have
+to get a whole bunch of stuff installed in a whole bunch of places and get all
+the scripts I run portable between these places... only then to have to futz
+around with JavaScript, even if only the smallest and most appropriately
+domain-specific location, that I could make it. 
+
+I'm writing small JavaScript programs that only do single tasks well. In this
+way, I don't have to deal with very much JavaScript, except insofar as
+necessary to grab a piece of data out of the DOM according to some rule
+expressed as an xpath, json, regex or some other method. JavaScript is a tool.
+I am allowed to use tools other than my nearly religiously adored favorites
+like Python. 
+
+In fact, I make this concession to the use of a very un-favorite tool
+(JavaScript) so that I may practice the API of another favorite (but slightly
+less-favorite than Python) tool, Linux. My entire stack-or-whatever is Linux,
+Python, vim and git. I do not exclude the use of other wacky and useful tools
+like nodejs/JavaScript because there's some parts I don't want to have to learn
+much about cranking around in there. I'll learn a little about it; just enough
+for small screenshot or scraping functions. 
+
+The key to that is the Unix/Linux type-in text interface. When I say that the
+four key things to learn are Linux, Python, vim and git, what I'm really saying
+in regard to Linux is that you need a Unix-like operating environment in which
+you can run (or optionally schedule) commands that essentially are read out of
+a text file like a series of commands being typed in a command-line terminal.
+Such syntax usually goes:
+
+    path/filename arguments
+
+This is so small but brilliant in *nix. The first item is taken to be some sort
+of command by which control of the system is handed over, really taking over
+from the operating system. It is expected to be a binary executable piece of
+code targeting that particular host-machine's hardware/processor. In
+DOS/Windows terms, that would be a .exe file (for executable). In Unix/Linix
+land, these files lack file-extentions but have an executable bit set in its
+file's description bits. The part that follows the name of the command are the
+arguments. 
+
+We say arguments instead of parameters because parameters indicates the values
+that go into the arguments. You want to think of taking something that would
+normally run one particular way and make arguments to make it run some other
+way. There are a lot of options on how to handle command arguments. They could
+be positional or keyword arguments using switches or not. Unix/Linux has a few
+conventions, key thing being that everything that comes AFTER the executable in
+the command are fed to the command itself. And by this simple trick, all your
+language are belong to us.
+
+This is where Linux/Unix has really become the "plumbing" of tech. Because when
+a system boots-up the operating system has control first. No matter how your
+program application is run, there's a hand-off that occurs from the operating
+system that was installed on the hardware. Of course with cloud hardware, a lot
+of this is obfuscated and abstrated away, but you would be doing yourself a
+major disservice ignoring how you can take command of a machine right away on
+boot. 
+
+That's the Linux part. You'll not always have a place to run your code but also
+a way to make sure it starts on start-up and on any subsequent time-interval or
+conditions, and how your program can be "invoked" differently based on the
+arguments on the command-line. This was true in the 1970s when Unix was
+invented, and it'll likely be true in the 2070s. It doesn't care WHAT the
+command is, so long as it runs and gets access to the arguments it's being fed.
+Sprinkle in an explanation of scripts, pipes and return values, you've got a
+mostly technology agnostic system for gluing systems together and passing data
+around between systems whose basic trick and value is assured to last not only
+for a career, but for several lifetimes. How rare is that in tech?
+
+So that forward-slash in paths is a little pesky. You'd think it'd be
+universal, right? Wrong! This is one of the many things that Microsoft in ages
+long ago screwed up and made so much fatiguing overhead for so many of us
+forever forward by using backslashes. This is why the Linux/Unix knowledge
+isn't universal. Windows is still very proprietary in how it does many of its
+things, but it is goign to ship a full Linux kernel in Windows 10 soon. This
+means that the Windows Subsystem for Linux (WSL 2) will come standard with
+Winodws and perhaps even the Linux-version of Anaconda could be installed,
+avoiding the path inconsistency problems that Windows introduces. Until that
+ideallic day, we must deal with path-conversion. It always helps to keep
+everythning relative to the current working directory on program-launch, which
+is usually the directory the program is in when it starts unless otherwise
+somehow specified. By keeping paths relative, they convert between
+forward-slashes and back-slashes most easily. You don't want the part of the
+path going up to the hard drive on Windows like C:\Program Files. Ugh!
+
+Ugh, okay so all this is to say that when you venture into another language
+like JavaScript, one of the most useful things you can do is to figure out how
+to run your programs from the command-line using arguments, and it's suddenly a
+magical new candidate tool for you to incorporate into your Datamastering.
+Because so long as you can get everything installed correctly to run that
+command correctly, who cares what language is being executed. In fact it
+expands your capabilties a thousand-fold by just being able to wrap any old
+thing into your Datamaster ecosystem.
+
+Okay, so what next? 1, 2, 3... 1? Go Right! Hmmm. I've had a number of reports
+I'm in the process of retiring. First comment them out of pipulate-left.
+They're left there because we want to leave those older reports and technqiues
+behind us. We want to move things into pipulate-right. That was my first
+thought, moving the one thing I still want to keep running over there, but I
+think it's best to comment all the other stuff out first. Go one step at a
+time. Deactive portions of the old report but don't do the additional risk of
+changing the good (right) script. Okay, check! Next?
+
+Okay, Iv'e gone crazy of late dealing with the multiplatform headless Chrome
+(Chromium) issues. There was the fact that Chromium couldn't be called directly
+to reliably create screenshots across platforms. This is common for argument
+support to vary across platforms especially in a constantly moving codebase.
+I've seen it before in QEMU. It's always best to stay close to the well-beaten
+path, and there's no chance that any of the releases of Chromium won't work
+with the newly created JavaScript API which is greatly simplified by using the
+Puppeteer client library provided by Google that runs on nodejs. And so to keep
+things simple we need to invoke headless chrome through JavaScript files
+written for execution by nodejs that communicates to the local install of
+Chromium through its JavaScript API. Pshwew! It gets even more complex with the
+above-mentioned path problems if you're on that most alluring of platforms,
+Jupyter Notebook, for development work. I have to just leave one project active
+using this tech and let it gradually sink-in over time.
+
+So I'm going to start on a pair of parallel tracks, implementing the same app 2
+different ways; one with a headless Chrome browser and the other with
+traditional html/json scraping/api-work that requires little more than the
+standared Python library, but for which I use the Requests pagage just to
+simplify http calls. 1, 2, 3... 1?
+
+First record these 2 URLs:
+- https://www.seroundtable.com/google-pagespeed-insights-aggregated-speed-data-origin-25935.html
+- https://twitter.com/VeryDanNutter/status/1009365962997542913
+
+Okay, my attention is no longer on paths. I can reduce my focus on the
+portapath repo. Don't forget it. You will soon be revisiting what you learned
+there. But for now, a new nickname? A brand new speeddash folder. Make it
+speeddash. I can evetually retire the speedtest folder. But build up this app
+"from scratch" such as it were, knowing it's never really from scratch anymore
+with pipulate.
+
+Okay, this is where I have to wrap up for today. I'm at a fairly good point to
+hit hard tomorrow.
+
 ## Mon May  6, 2019
 ### 1, 2, 3... 1? Go Right! Bootstrapping Daily Productivity
 
