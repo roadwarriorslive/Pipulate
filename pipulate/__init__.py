@@ -123,9 +123,9 @@ def key(key):
     return oauth().open_by_key(key)
 
 
-def get_email(oauthfile=filename):
+def get_email():
     """Return email given provided Google OAuth account."""
-    service = create_google_service(oauthfile, "oauth2", "v2")
+    service = create_google_service("oauth2", "v2", filename)
     user_document = service.userinfo().get().execute()
     email = user_document['email']
     return email
@@ -160,17 +160,17 @@ class AccessToken(object):
         self.access_token = access_token
 
 
-def creds(oauthfile=filename):
+def creds():
     """Create Google OAuth credential object for resources that need it."""
 
     path = os.path.dirname(os.path.realpath('__file__'))
-    path_filename = os.path.join(path, oauthfile)
+    path_filename = os.path.join(path, filename)
     storage = file.Storage(path_filename)
     credentials = storage.get()
     return credentials
 
 
-def oauth(oauthfile=filename):
+def oauth():
     """Create a fully authenticated GSheet connection."""
 
     scopes = ["https://www.googleapis.com/auth/analytics.readonly",
@@ -182,7 +182,7 @@ def oauth(oauthfile=filename):
               "https://www.googleapis.com/auth/userinfo.email"]
 
     path = os.path.dirname(os.path.realpath('__file__'))
-    path_filename = os.path.join(path, oauthfile)
+    path_filename = os.path.join(path, filename)
     flow = OAuth2WebServerFlow(client_id, client_secret, scopes,
                                redirect_uri='urn:ietf:wg:oauth:2.0:oob',
                                response_type='code',
@@ -215,12 +215,12 @@ def oauth(oauthfile=filename):
     return connect
 
 
-def create_google_service(oauthfile=filename, api_name, version):
+def create_google_service(api_name, version, filename):
     """Return instance of Google Service object."""
 
     from apiclient.discovery import build
     path = os.path.dirname(os.path.realpath('__file__'))
-    path_filename = os.path.join(path, oauthfile)
+    path_filename = os.path.join(path, filename)
     storage = file.Storage(path_filename)
     credentials = storage.get()
     http = credentials.authorize(http=httplib2.Http())
@@ -228,14 +228,14 @@ def create_google_service(oauthfile=filename, api_name, version):
     return service
 
 
-def ga(oauthfile=filename):
+def ga():
     """Return instance of Google Analytics object."""
-    return create_google_service(oauthfile, "analytics", "v3")
+    return create_google_service("analytics", "v3", filename)
 
 
-def gsc(oauthfile=filename):
+def gsc():
     """Return instance of Google Search Console object."""
-    return create_google_service(oauthfile, "webmasters", "v3")
+    return create_google_service("webmasters", "v3", filename)
 
 
 class Unbuffered(object):
