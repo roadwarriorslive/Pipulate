@@ -8,7 +8,7 @@ with open("README.rst", "r") as fh:
 setup(
     name = 'pipulate',
     packages = ['pipulate'],
-    version = '0.2.35',
+    version = '0.2.36',
     description = 'Free and Open Source SEO Software (Auto-Update Google Sheets).',
     long_description = long_description,
     author = 'Mike Levin SEO in NYC, alum of Commodore & 360i, Creator of HitTail.com, currently with J2/Ziff-Davis/IGN/Mashable.',
