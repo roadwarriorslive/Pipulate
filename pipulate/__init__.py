@@ -24,15 +24,11 @@ from oauth2client.client import OAuth2WebServerFlow
 from oauth2client import file, tools
 import gspread
 import pandas as pd
-from pyfiglet import figlet_format
-from logzero import logger, setup_logger
-from colorama import Fore
 
 
 filename = "oauth.dat"
 client_id = "769904540573-knscs3mhvd56odnf7i8h3al13kiqulft.apps.googleusercontent.com"
 client_secret = "D2F1D--b_yKNLrJSPmrn2jik"
-log = setup_logger(logfile='log.log')
 
 # To count how frequently functions have been called.
 counters = defaultdict(int)
