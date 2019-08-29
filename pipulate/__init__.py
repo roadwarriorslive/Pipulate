@@ -48,7 +48,7 @@ def pipulate(tab, rows, cols, columns=None):
     df = pd.DataFrame(list_of_lists, columns=columns)
     print('cl, df = gs.pipulate(tab, rows=%s, cols=%s) was successful.' % (rows, cols))
     print("You may now manipulate the DataFrame but maintain its (%s x %s) shape." % df.shape)
-    print('To update the GSheet with changes, gs.populate(tab, cl, df)'
+    print('To update the GSheet with changes, gs.populate(tab, cl, df)')
     return cl, df
 
 
