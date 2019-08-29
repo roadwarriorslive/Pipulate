@@ -5,9 +5,9 @@ Pipulate Free & Open Source SEO Software (Automate GSheets for Dashboards)
 
 .. image:: https://raw.githubusercontent.com/miklevin/Pipulate/master/pipulate-logo.svg?sanitize=true
 
-- Do you make Spreadsheet Reports using Google Analytics, GSC and other Data?
+- Do you use Google Spreadsheets to make Data Dashboards for Business?
 - Are you using expensive plug-ins or products to keep these Reports Updated?
-- Do you feel all this stuff should be FREE if only you could wire it all up?
+- Would you rather not have to pay and have even more creativity and control?
 
 Then It's Time To Learn a Little Python!
 ========================================
