@@ -66,7 +66,8 @@ should have a www at the beginning or if the protocol is correct::
     google.com
 
 And now let's say you write a simple function that will test what the real
-homepage URL is::
+homepage URL is. This example uses the popular "Requests" package for making
+http requests::
 
 	import requests
 
@@ -95,7 +96,14 @@ the results in column B and push the results back up into Google Sheets::
     df['B'] = df['A'].apply(cleanurl)
     gs.populate(tab, cl, df)
 
-And that's it! Imagine the utility.
+And that's it! Column B will now contain::
+
+    https://www.apple.com/
+    https://www.google.com/
+    https://www.amazon.com/
+
+Imagine the utility! I addition to working magic in Google Sheets, you're
+acquiring incredibly useful Python Pandas skills!
 
 Parametrizing Your Arguments for Scheduling
 ===========================================
