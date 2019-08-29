@@ -54,6 +54,49 @@ Once you're happy with your script, you can copy/paste it into a .py file and
 schedule it with a standard Linux scheduler, which is another part of this
 project I'll be expanding considerably (generic task-scheduling under Linux).
 
+Real Life Example
+=================
+
+Say you have a spreadsheet with a list of URLs that were provided to you from
+some unreliable source in column A starting from A1. You don't know whether it
+should have a www at the beginning or if the protocol is correct::
+
+    amazon.com
+    apple.com
+    google.com
+
+And now let's say you write a simple function that will test what the real
+homepage URL is::
+
+	import requests
+
+	def cleanurl(provided):
+		guess = provided
+		if provided[:4].lower() != 'http':
+			guess = 'https://%s' % provided
+		try:
+			r = requests.head(guess, allow_redirects=True)
+			resolved = r.url
+		except:
+			resolved = "Can't find %s" % provided
+		return resolved
+
+To use Pipulate and Pandas to apply this function to each line of column A, you
+would first select columns A & B into a Pandas DataFrame::
+
+    import pipulate as gs
+    sheet = gs.key('1119mnC8Day78KexU_yv7J_wfA3p7iZeXa0YEtmg1Igu4')
+    tab = sheet.worksheet('Sheet1')
+    cl, df = gs.pipulate(tab, rows=(1, 4), cols=('A', 'B'))
+
+Then you apply the function to each cell in column A of your DataFrame and put
+the results in column B and push the results back up into Google Sheets::
+
+    df['B'] = df['A'].apply(cleanurl)
+    gs.populate(tab, cl, df)
+
+And that's it! Imagine the utility.
+
 Parametrizing Your Arguments for Scheduling
 ===========================================
 
