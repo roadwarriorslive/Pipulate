@@ -17,7 +17,6 @@ import os
 import httplib2
 import argparse
 import json
-import pytz
 from collections import defaultdict
 from datetime import datetime, timedelta
 from inspect import currentframe, getouterframes
