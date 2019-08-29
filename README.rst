@@ -12,9 +12,10 @@ Pipulate Free & Open Source SEO Software (Automate GSheets for Dashboards)
 Then It's Time To Learn a Little Python!
 ========================================
 
-Pipulate is designed to make playing with data in Jupyter Notebook easy. The
-easiest way to install Pipulate from Jupyter is to execute these commands from
-within a Notebook::
+Pipulate is designed to make playing with data in Jupyter Notebook easy, and
+set the stage for you to move your code over to cheap generic Linux servers for
+automation. The easiest way to install Pipulate from Jupyter is to execute
+these commands from within a Notebook::
 
     import sys
     !{sys.executable} -m pip install --upgrade --no-cache-dir pipulate
