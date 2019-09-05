@@ -64,7 +64,7 @@ def populate(tab, cl, df):
         tab.update_cells(cl)
     else:
         raise SystemExit()
-    print('gs.populate(tab, cl, df) <<< GSHEET UPDATED! >>>'
+    print('gs.populate(tab, cl, df) <<< GSHEET UPDATED! >>>')
     print()
 
 
