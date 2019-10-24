@@ -5,33 +5,16 @@
 #   |_| |_| |_|_|___/ |_|___/ |_|   |_| .__/ \__,_|_|\__,_|\__\___|
 # There are many frameworks like it,  |_| but this one is mine. --MikeL
 
-# IMPORTANT THINGS TO REMEMBER:
-# 1. Make life easy by filling your ~/.bash_profile with aliases.
-# 2. Make life easy by filling /usr/local/sbin with helper scripts.
-# 3. Without virtualenv, pip ~puts things: /usr/local/lib/python3.6/dist-packages/
-# 4. With virtualenv, pip ~puts things: /home/MikeL/py36/lib/python3.6/site-packages
-# 5. oauth2client is deprecated. Replace it soon.
 
-import sys
-import os
-import httplib2
-import argparse
-import json
-from collections import defaultdict
-from datetime import datetime, timedelta
-from inspect import currentframe, getouterframes
-from oauth2client.client import OAuth2WebServerFlow
-from oauth2client import file, tools
+import pickle
 import gspread
 import pandas as pd
-
-
-filename = "oauth.dat"
-client_id = "769904540573-knscs3mhvd56odnf7i8h3al13kiqulft.apps.googleusercontent.com"
-client_secret = "D2F1D--b_yKNLrJSPmrn2jik"
-
-# To count how frequently functions have been called.
-counters = defaultdict(int)
+from sys import stdout
+from os import environ
+import google.auth.transport.requests
+from apiclient.discovery import build
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
 
 
 def pipulate(tab, rows, cols, columns=None):
@@ -110,12 +93,12 @@ def a1(pos, reverse=False):
 
 def spreadsheet(key):
     """Return instance of GSheet by key."""
-    return oauth().open_by_key(key)
+    return gc.open_by_key(key)
 
 
 def key(key):
     """Alias to Return instance of GSheet by key."""
-    return oauth().open_by_key(key)
+    return gc.open_by_key(key)
 
 
 def get_email():
@@ -131,89 +114,9 @@ def link(gsheet_key):
     return 'https://docs.google.com/spreadsheets/d/%s/edit' % gsheet_key
 
 
-def name(name):
-    """Return instance of GSheet by document name"""
-    return oauth().open(name)
-
-
-def module_name():
-    """Return name of calling module; good at the end of cached functions.
-    Also creates and increments a counter per calling function."""
-
-    global counters
-    current_frame = currentframe()
-    outer_frame = getouterframes(current_frame, 2)
-    name = outer_frame[1][3]
-    counters[name] += 1
-    return_me = '(%s: %s) ' % (name, counters[name])
-    return return_me
-
-
-class AccessToken(object):
-    """Return authentication object given access_token."""
-    def __init__(self, access_token=None):
-        self.access_token = access_token
-
-
-def creds():
-    """Create Google OAuth credential object for resources that need it."""
-
-    path = os.path.dirname(os.path.realpath('__file__'))
-    path_filename = os.path.join(path, filename)
-    storage = file.Storage(path_filename)
-    credentials = storage.get()
-    return credentials
-
-
-def oauth():
-    """Create a fully authenticated GSheet connection."""
-
-    scopes = ["https://www.googleapis.com/auth/analytics.readonly",
-              "https://www.googleapis.com/auth/webmasters.readonly",
-              "https://www.googleapis.com/auth/yt-analytics.readonly",
-              "https://www.googleapis.com/auth/youtube.readonly",
-              "https://spreadsheets.google.com/feeds/",
-              "https://www.googleapis.com/auth/gmail.modify",
-              "https://www.googleapis.com/auth/userinfo.email"]
-
-    path = os.path.dirname(os.path.realpath('__file__'))
-    path_filename = os.path.join(path, filename)
-    flow = OAuth2WebServerFlow(client_id, client_secret, scopes,
-                               redirect_uri='urn:ietf:wg:oauth:2.0:oob',
-                               response_type='code',
-                               prompt='consent',
-                               access_type='offline')
-    storage = file.Storage(path_filename)
-    credentials = storage.get()
-    argparser = argparse.ArgumentParser(add_help=False)
-    parents = [argparser]
-    parent_parsers = [tools.argparser]
-    parent_parsers.extend(parents)
-    parser = argparse.ArgumentParser(
-        description="__doc__",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        parents=parent_parsers)
-    flags = parser.parse_args(['--noauth_local_webserver'])
-    try:
-        http = credentials.authorize(http=httplib2.Http())
-    except AttributeError:
-        pass
-    if credentials is None or credentials.invalid:
-        credentials = tools.run_flow(flow, storage, flags)
-    else:
-        credentials.refresh(http)
-    with open(path_filename) as json_file:
-        jdata = json.load(json_file)
-    token = jdata['access_token']
-    access = AccessToken(access_token=token)
-    connect = gspread.authorize(access)
-    return connect
-
-
 def create_google_service(api_name, version, filename):
     """Return instance of Google Service object."""
 
-    from apiclient.discovery import build
     path = os.path.dirname(os.path.realpath('__file__'))
     path_filename = os.path.join(path, filename)
     storage = file.Storage(path_filename)
@@ -247,13 +150,42 @@ class Unbuffered(object):
         return getattr(self.stream, attr)
 
 
-# Importing pipulate prompts for 1st-time Google login.
 try:
-    force_it = oauth()
-except httplib2.ServerNotFoundError:
-    print("You are probably not connected to the Internet.")
-    raise SystemExit()
-except Exception as e:
-    print(type(e).__name__)
-# Forces Jupyter Notebook to not buffer output (like streaming).
-sys.stdout = Unbuffered(sys.stdout)
+    with open("credentials.pickle", "rb") as input_file:
+        credentials = pickle.load(input_file)
+except:
+    credentials = False
+if not credentials:
+    client_id = "769904540573-knscs3mhvd56odnf7i8h3al13kiqulft.apps.googleusercontent.com"
+    client_secret = "D2F1D--b_yKNLrJSPmrn2jik"
+    environ["OAUTHLIB_RELAX_TOKEN_SCOPE"] = "1"
+    scopes = ["https://www.googleapis.com/auth/analytics.readonly", 
+              "https://www.googleapis.com/auth/webmasters.readonly", 
+              "https://www.googleapis.com/auth/yt-analytics.readonly",
+              "https://www.googleapis.com/auth/youtube.readonly", 
+              "https://spreadsheets.google.com/feeds/", 
+              "https://www.googleapis.com/auth/gmail.modify", 
+              "https://www.googleapis.com/auth/userinfo.email"] 
+    client_config = {
+        "installed": {
+            "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+            "token_uri": "https://accounts.google.com/o/oauth2/token",
+            "redirect_uris": ["urn:ietf:wg:oauth:2.0:oob"],
+            "client_id": client_id,
+            "client_secret": client_secret
+        }
+    }
+    flow = InstalledAppFlow.from_client_config(client_config, scopes)
+    credentials = flow.run_console()
+    credentials.access_token = credentials.token
+    with open("credentials.pickle", "wb") as output_file:
+        pickle.dump(credentials, output_file)
+if not credentials.valid:
+    request = google.auth.transport.requests.Request()
+    credentials.refresh(request)
+    credentials.access_token = credentials.token
+    with open("credentials.pickle", "wb") as output_file:
+        pickle.dump(credentials, output_file)
+gc = gspread.authorize(credentials)
+
+stdout = Unbuffered(stdout)
