@@ -11,6 +11,7 @@ import gspread
 import pandas as pd
 from sys import stdout
 from os import environ
+from apiclient.discovery import build
 import google.auth.transport.requests
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -100,18 +101,9 @@ def key(key):
     return gc.open_by_key(key)
 
 
-def get_email():
-    """Return email given provided Google OAuth account."""
-    service = create_google_service("oauth2", "v2", filename)
-    user_document = service.userinfo().get().execute()
-    email = user_document['email']
-    return email
-
-
 def link(gsheet_key):
     """Return GSheet URL for data from Web UI."""
     return 'https://docs.google.com/spreadsheets/d/%s/edit' % gsheet_key
-
 
 
 class Unbuffered(object):
@@ -165,5 +157,99 @@ if not credentials.valid:
     with open("credentials.pickle", "wb") as output_file:
         pickle.dump(credentials, output_file)
 gc = gspread.authorize(credentials)
+
+
+def get_email():
+    """Return email given provided Google OAuth account."""
+    service = build("oauth2", "v2", credentials=credentials)
+    user_document = service.userinfo().get().execute()
+    email = user_document['email']
+    return email
+
+
+def analytics():
+	return build('analyticsreporting', 'v4', credentials=credentials)
+
+
+def searchconsole():
+	return build('webmasters', 'v3', credentials=credentials)
+
+
+def ga(gaid, start, end, path):
+    """Return Google Analytics metrics for a URL."""
+
+    path = path.replace(',', r'\,')
+    service = analytics()
+    metrics = ['users', 'newUsers', 'sessions', 'bounceRate',
+               'pageviewsPerSession', 'avgSessionDuration']
+    metrics = ''.join(['ga:%s,' % x for x in metrics])[:-1]
+    ga_request = service.data().ga().get(
+        ids='ga:' + gaid,
+        start_date=start,
+        end_date=end,
+        metrics=metrics,
+        dimensions='ga:pagePath',
+        sort='-ga:users',
+        filters='ga:pagePath==' + path,
+        segment='sessions::condition::ga:medium==organic',
+        max_results=1
+    )
+    ga_response = ga_request.execute()
+    rval = []
+    if 'rows' in ga_response:
+        raw_rows = ga_response['rows'][0]
+        rval = raw_rows
+    return rval
+
+
+def gsc(prop, start, end, query, url):
+    service = searchconsole()
+    request = {
+        "startDate": start,
+        "endDate": end,
+        "dimensions": [
+            "query",
+            "page"],
+        "dimensionFilterGroups": [
+        {
+            "filters": [
+            {
+                "operator": "equals",
+                "expression": url,
+                "dimension": "page"
+            },
+            {
+                "operator": "equals",
+                "expression": query,
+                "dimension": "query"
+            }]
+        }]
+    }
+    dat = service.searchanalytics().query(siteUrl=prop, body=request).execute()
+    val = []
+    if 'rows' in dat:  # For the foolish Hobgoblins of PEP8 consistency
+        r = dat['rows'][0]
+        val = [start] + [r['keys'][0]] + [r['keys'][1]] + [
+            r['position']] + [r['clicks']] + [r['impressions']] + [r['ctr']]
+    return val
+
+
+def api_date(a_datetime, time=False):
+    """Return datetime string in Google API friendly format."""
+
+    if time:
+        return ('{0:%Y-%m-%d %H:%M:%S}'.format(a_datetime))
+    else:
+        return ('{0:%Y-%m-%d}'.format(a_datetime))
+
+
+def human_date(a_datetime, time=False):
+    """Return datetime object as American-friendly string."""
+
+    if time:
+        return ('{0:%m/%d/%Y %H:%M:%S}'.format(a_datetime))
+    else:
+        return ('{0:%m/%d/%Y}'.format(a_datetime))
+
 
 stdout = Unbuffered(stdout)
