@@ -12,7 +12,6 @@ import pandas as pd
 from sys import stdout
 from os import environ
 import google.auth.transport.requests
-from apiclient.discovery import build
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 
@@ -113,27 +112,6 @@ def link(gsheet_key):
     """Return GSheet URL for data from Web UI."""
     return 'https://docs.google.com/spreadsheets/d/%s/edit' % gsheet_key
 
-
-def create_google_service(api_name, version, filename):
-    """Return instance of Google Service object."""
-
-    path = os.path.dirname(os.path.realpath('__file__'))
-    path_filename = os.path.join(path, filename)
-    storage = file.Storage(path_filename)
-    credentials = storage.get()
-    http = credentials.authorize(http=httplib2.Http())
-    service = build(api_name, version, http=http, cache_discovery=False)
-    return service
-
-
-def ga():
-    """Return instance of Google Analytics object."""
-    return create_google_service("analytics", "v3", filename)
-
-
-def gsc():
-    """Return instance of Google Search Console object."""
-    return create_google_service("webmasters", "v3", filename)
 
 
 class Unbuffered(object):
