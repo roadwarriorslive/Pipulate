@@ -1,4 +1,4 @@
-#  _____ _     _       _       ____  _             _       _
+#  _____ _     _       _       ____  _             _     
 # |_   _| |__ (_)___  (_)___  |  _ \(_)_ __  _   _| | __ _| |_ ___
 #   | | | '_ \| / __| | / __| | |_) | | '_ \| | | | |/ _` | __/ _ \
 #   | | | | | | \__ \ | \__ \ |  __/| | |_) | |_| | | (_| | ||  __/
@@ -91,80 +91,15 @@ def a1(pos, reverse=False):
         return "Must be integer"
 
 
-def spreadsheet(key):
-    """Return instance of GSheet by key."""
-    return gc.open_by_key(key)
-
-
 def key(key):
     """Alias to Return instance of GSheet by key."""
-    return gc.open_by_key(key)
+    global gsprd
+    return gsprd.open_by_key(key)
 
 
 def link(gsheet_key):
     """Return GSheet URL for data from Web UI."""
     return 'https://docs.google.com/spreadsheets/d/%s/edit' % gsheet_key
-
-
-class Unbuffered(object):
-    """Provides more real-time streaming in Jupyter Notebook"""
-
-    def __init__(self, stream):
-        self.stream = stream
-
-    def write(self, data):
-        self.stream.write(data)
-        self.stream.flush()
-
-    def __getattr__(self, attr):
-        return getattr(self.stream, attr)
-
-
-try:
-    with open("credentials.pickle", "rb") as input_file:
-        credentials = pickle.load(input_file)
-except:
-    credentials = False
-if not credentials:
-    client_id = "769904540573-knscs3mhvd56odnf7i8h3al13kiqulft.apps.googleusercontent.com"
-    client_secret = "D2F1D--b_yKNLrJSPmrn2jik"
-    environ["OAUTHLIB_RELAX_TOKEN_SCOPE"] = "1"
-    scopes = ["https://www.googleapis.com/auth/analytics.readonly", 
-              "https://www.googleapis.com/auth/webmasters.readonly", 
-              "https://www.googleapis.com/auth/yt-analytics.readonly",
-              "https://www.googleapis.com/auth/youtube.readonly", 
-              "https://spreadsheets.google.com/feeds/", 
-              "https://www.googleapis.com/auth/gmail.modify", 
-              "https://www.googleapis.com/auth/userinfo.email"] 
-    client_config = {
-        "installed": {
-            "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-            "token_uri": "https://accounts.google.com/o/oauth2/token",
-            "redirect_uris": ["urn:ietf:wg:oauth:2.0:oob"],
-            "client_id": client_id,
-            "client_secret": client_secret
-        }
-    }
-    flow = InstalledAppFlow.from_client_config(client_config, scopes)
-    credentials = flow.run_console()
-    credentials.access_token = credentials.token
-    with open("credentials.pickle", "wb") as output_file:
-        pickle.dump(credentials, output_file)
-if not credentials.valid:
-    request = google.auth.transport.requests.Request()
-    credentials.refresh(request)
-    credentials.access_token = credentials.token
-    with open("credentials.pickle", "wb") as output_file:
-        pickle.dump(credentials, output_file)
-gc = gspread.authorize(credentials)
-
-
-def get_email():
-    """Return email given provided Google OAuth account."""
-    service = build("oauth2", "v2", credentials=credentials)
-    user_document = service.userinfo().get().execute()
-    email = user_document['email']
-    return email
 
 
 def analytics():
@@ -251,5 +186,88 @@ def human_date(a_datetime, time=False):
     else:
         return ('{0:%m/%d/%Y}'.format(a_datetime))
 
+
+def email():
+    """Return email given provided Google OAuth account."""
+    service = build("oauth2", "v2", credentials=credentials)
+    user_document = service.userinfo().get().execute()
+    email = user_document['email']
+    return email
+
+
+def login():
+    client_id = "769904540573-knscs3mhvd56odnf7i8h3al13kiqulft.apps.googleusercontent.com"
+    client_secret = "D2F1D--b_yKNLrJSPmrn2jik"
+    environ["OAUTHLIB_RELAX_TOKEN_SCOPE"] = "1"
+    scopes = ["https://www.googleapis.com/auth/analytics.readonly", 
+              "https://www.googleapis.com/auth/webmasters.readonly", 
+              "https://www.googleapis.com/auth/yt-analytics.readonly",
+              "https://www.googleapis.com/auth/youtube.readonly", 
+              "https://spreadsheets.google.com/feeds/", 
+              "https://www.googleapis.com/auth/gmail.modify", 
+              "https://www.googleapis.com/auth/userinfo.email"] 
+    client_config = {
+        "installed": {
+            "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+            "token_uri": "https://accounts.google.com/o/oauth2/token",
+            "redirect_uris": ["urn:ietf:wg:oauth:2.0:oob"],
+            "client_id": client_id,
+            "client_secret": client_secret
+        }
+    }
+    flow = InstalledAppFlow.from_client_config(client_config, scopes)
+    credentials = flow.run_console()
+    credentials.access_token = credentials.token
+    with open("credentials.pickle", "wb") as output_file:
+        pickle.dump(credentials, output_file)
+    return credentials
+
+
+def logout():
+    import requests
+    from os import remove
+    global credentials
+    requests.post('https://accounts.google.com/o/oauth2/revoke',
+        params={'token': credentials.token},
+        headers = {'content-type': 'application/x-www-form-urlencoded'})
+    try:
+        remove('credentials.pickle')
+    except:
+        pass
+    credentials = None
+
+
+class Unbuffered(object):
+    """Provides more real-time streaming in Jupyter Notebook"""
+
+    def __init__(self, stream):
+        self.stream = stream
+
+    def write(self, data):
+        self.stream.write(data)
+        self.stream.flush()
+
+    def __getattr__(self, attr):
+        return getattr(self.stream, attr)
+
+
+try:
+    with open("credentials.pickle", "rb") as input_file:
+        credentials = pickle.load(input_file)
+except:
+    credentials = False
+
+if not credentials:
+    credentials = login()
+
+if not credentials.valid:
+    request = google.auth.transport.requests.Request()
+    credentials.refresh(request)
+    credentials.access_token = credentials.token
+    with open("credentials.pickle", "wb") as output_file:
+        pickle.dump(credentials, output_file)
+
+gsprd = gspread.authorize(credentials)
+print("You are logged in as %s" % email())
 
 stdout = Unbuffered(stdout)

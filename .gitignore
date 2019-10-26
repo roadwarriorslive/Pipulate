@@ -6,6 +6,7 @@
 *.ini
 *.log
 *.pkl
+*.pickle
 *.pyc
 *.swp
 *.txt
