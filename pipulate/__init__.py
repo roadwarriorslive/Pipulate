@@ -70,7 +70,7 @@ def populate(worksheet, cl, df):
         tab.update_cells(cl)
     else:
         raise SystemExit()
-    print('gs.populate(tab, cl, df) <<< GSHEET UPDATED! >>>')
+    print('gs.populate("%s", cl, df) <<< GSHEET UPDATED! >>>' % tab.title)
 
 
 def check_worksheet(worksheet):
