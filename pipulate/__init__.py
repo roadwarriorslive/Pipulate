@@ -42,7 +42,7 @@ def pipulate(worksheet, row_or_range, cols=None, columns=None, start=None, end=N
         if not columns:
             cell_list = tab.range(row1, col1, row1, col2)
             columns = [a1(x.col) for x in cell_list]
-        print('cl, df = pipulate("%s", %s, %s) << SUCCESSFUL! >>' % (tab.title, row_or_range, cols))
+        print('cl, df = pipulate("%s", %s, %s) <<< SUCCESSFUL! >>>' % (tab.title, row_or_range, cols))
     else:
         cl = tab.range(row_or_range)
         list_of_lists = cl_to_list(cl)
