@@ -17,19 +17,42 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 
 
-def pipulate(tab, rows, cols, columns=None):
-    """All that pipulate really is"""
+global_doc = None
 
-    row1, row2 = rows
-    col1, col2 = cols
-    col1, col2 = a1(col1, reverse=True), a1(col2, reverse=True)
-    cl = tab.range(row1, col1, row2, col2)
-    list_of_lists = cl_to_list(cl)
-    if not columns:
-        columns = tab.range(row1, col1, row1, col2)
-        columns = [a1(x.col) for x in columns]
+
+def doc(akey):
+    global global_doc
+    global_doc = key(akey)
+
+
+def pipulate(worksheet, row_or_range, cols=None, columns=None, start=None, end=None):
+    """All that pipulate really is"""
+    
+    if type(worksheet) == gspread.models.Worksheet:
+        tab = worksheet
+    elif type(worksheet) == str:
+        tab = global_doc.worksheet(worksheet)
+    else:
+        print("Argument 1 must be gspread Worksheet object or 'Tab Name' with global key set.")
+        raise SystemExit()
+
+    if cols: 
+        row1, row2 = row_or_range
+        col1, col2 = cols
+        col1, col2 = a1(col1, reverse=True), a1(col2, reverse=True)
+        cl = tab.range(row1, col1, row2, col2)
+        list_of_lists = cl_to_list(cl)
+        if not columns:
+            cell_list = tab.range(row1, col1, row1, col2)
+            columns = [a1(x.col) for x in cell_list]
+    else:
+        cl = tab.range(row_or_range)
+        list_of_lists = cl_to_list(cl)
+        if not columns:
+            columns = [a1(i+1) for i, x in enumerate(list_of_lists[0])]
+
     df = pd.DataFrame(list_of_lists, columns=columns)
-    print('cl, df = gs.pipulate(tab, rows=%s, cols=%s) was successful.' % (rows, cols))
+    print('Pandas DataGrid selection was successful.')
     print("You may now manipulate the DataFrame but maintain its (%s x %s) shape." % df.shape)
     print('To update the GSheet with changes, gs.populate(tab, cl, df)')
     return cl, df
@@ -91,15 +114,16 @@ def a1(pos, reverse=False):
         return "Must be integer"
 
 
-def key(key):
-    """Alias to Return instance of GSheet by key."""
-    global gsprd
-    return gsprd.open_by_key(key)
-
-
 def link(gsheet_key):
     """Return GSheet URL for data from Web UI."""
     return 'https://docs.google.com/spreadsheets/d/%s/edit' % gsheet_key
+
+
+def key(key):
+    """Alias to Return instance of GSheet by key."""
+    global gsprd
+    print(link(key))
+    return gsprd.open_by_key(key)
 
 
 def analytics():
@@ -266,8 +290,11 @@ if not credentials.valid:
     credentials.access_token = credentials.token
     with open("credentials.pickle", "wb") as output_file:
         pickle.dump(credentials, output_file)
+    if not credentials.valid:
+        credentials = login()
 
 gsprd = gspread.authorize(credentials)
+
 print("You are logged in as %s" % email())
 
 stdout = Unbuffered(stdout)
