@@ -21,20 +21,17 @@ global_doc = None
 
 
 def doc(akey):
+    """Creates a global gspread document object for easier pipulating."""
     global global_doc
     global_doc = key(akey)
+    sheet1 = global_doc.worksheets()[0].title
+    print("Run selections like: cl, df = gs.pipulate('%s', 'A1:D10')" % sheet1)
 
 
 def pipulate(worksheet, row_or_range, cols=None, columns=None, start=None, end=None):
     """All that pipulate really is"""
     
-    if type(worksheet) == gspread.models.Worksheet:
-        tab = worksheet
-    elif type(worksheet) == str:
-        tab = global_doc.worksheet(worksheet)
-    else:
-        print("Argument 1 must be gspread Worksheet object or 'Tab Name' with global key set.")
-        raise SystemExit()
+    tab = check_worksheet(worksheet)
 
     if cols: 
         row1, row2 = row_or_range
@@ -45,21 +42,24 @@ def pipulate(worksheet, row_or_range, cols=None, columns=None, start=None, end=N
         if not columns:
             cell_list = tab.range(row1, col1, row1, col2)
             columns = [a1(x.col) for x in cell_list]
+        print('cl, df = pipulate("%s", %s, %s) << SUCCESSFUL! >>' % (tab.title, row_or_range, cols))
     else:
         cl = tab.range(row_or_range)
         list_of_lists = cl_to_list(cl)
         if not columns:
             columns = [a1(i+1) for i, x in enumerate(list_of_lists[0])]
+        print('cl, df = pipulate("%s", "%s") << SUCCESSFUL! >>' % (tab.title, row_or_range))
 
     df = pd.DataFrame(list_of_lists, columns=columns)
-    print('Pandas DataGrid selection was successful.')
     print("You may now manipulate the DataFrame but maintain its (%s x %s) shape." % df.shape)
-    print('To update the GSheet with changes, gs.populate(tab, cl, df)')
+    print('To update the GSheet with changes, gs.populate("%s", cl, df)' % tab.title)
     return cl, df
 
 
-def populate(tab, cl, df):
+def populate(worksheet, cl, df):
     """Push df back to spreadsheet."""
+
+    tab = check_worksheet(worksheet)
 
     if cl_df_fits(cl, df):
         lol = df.values.tolist()
@@ -71,7 +71,22 @@ def populate(tab, cl, df):
     else:
         raise SystemExit()
     print('gs.populate(tab, cl, df) <<< GSHEET UPDATED! >>>')
-    print()
+
+
+def check_worksheet(worksheet):
+    if type(worksheet) == gspread.models.Worksheet:
+        tab = worksheet
+    elif type(worksheet) == str:
+        if 'global_doc' in globals():
+            if worksheet in [x.title for x in global_doc.worksheets()]:
+                tab = global_doc.worksheet(worksheet)
+            else:
+                print("Worksheet not found")
+                raise SystemExit()
+        else:
+            print("gs.doc([Your GSheets key here]) must be set")
+            raise SystemExit()
+    return tab
 
 
 def cl_to_list(cl):
@@ -122,7 +137,7 @@ def link(gsheet_key):
 def key(key):
     """Alias to Return instance of GSheet by key."""
     global gsprd
-    print(link(key))
+    print("View the GSheet at %s" % link(key))
     return gsprd.open_by_key(key)
 
 
@@ -296,5 +311,6 @@ if not credentials.valid:
 gsprd = gspread.authorize(credentials)
 
 print("You are logged in as %s" % email())
+print('Get started by running: gs.doc("insert your gsheet key here")')
 
 stdout = Unbuffered(stdout)
