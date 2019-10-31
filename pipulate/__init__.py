@@ -37,6 +37,7 @@ def pipulate(worksheet, row_or_range, cols=None, columns=None, start=None, end=N
     """All that pipulate really is"""
 
     global credentials
+    original_range, original_row1 = None, None
 
     try: 
         tab = check_worksheet(worksheet)
@@ -46,6 +47,7 @@ def pipulate(worksheet, row_or_range, cols=None, columns=None, start=None, end=N
     if cols: 
         row1, row2 = row_or_range
         if type(columns) == bool:
+            original_row1 = row1
             row1 = row1 + 1
         col1, col2 = cols
         col1, col2 = a1(col1, reverse=True), a1(col2, reverse=True)
@@ -57,6 +59,7 @@ def pipulate(worksheet, row_or_range, cols=None, columns=None, start=None, end=N
         print('cl, df = pipulate("%s", %s, %s) <<< SUCCESSFUL! >>>' % (tab.title, row_or_range, cols))
     else:
         if type(columns) == bool:
+            original_range = row_or_range
             row_or_range = shift_range(row_or_range)
         cl = tab.range(row_or_range)
         list_of_lists = cl_to_list(cl)
@@ -65,14 +68,18 @@ def pipulate(worksheet, row_or_range, cols=None, columns=None, start=None, end=N
         print('cl, df = pipulate("%s", "%s") <<< SUCCESSFUL! >>>' % (tab.title, row_or_range))
 
     if type(columns) == bool and columns == True:
-        df_cols = pd.DataFrame(list_of_lists[0])
-        columns = [x[0] for x in df_cols.values.tolist()]
-        list_of_lists = list_of_lists[1:]
-        if not all(v for v in columns):
-            print("All cells in row 1 must contain values when used for column labels.")
-            raise SystemExit()
+        if cols:
+            cl_cols = tab.range(original_row1, col1, row2, col2)
+        else:
+            cl_cols = tab.range(original_range)
+        columns = cl_to_list(cl_cols)[0]
+    if not all(v for v in columns):
+        print(columns)
+        print("All columns must have labels when using columns=True or columns=list.")
+        raise SystemExit()
 
     df = pd.DataFrame(list_of_lists, columns=columns)
+
     print("You may now manipulate the DataFrame but maintain its (%s x %s) shape." % df.shape)
     print('To update the GSheet with changes, gs.populate("%s", cl, df)' % tab.title)
     return cl, df
@@ -172,7 +179,7 @@ def link(gsheet_key):
 def key(key):
     """Alias to Return instance of GSheet by key."""
     global gsprd
-    print("View the GSheet at %s" % link(key))
+    print("VIEW: %s" % link(key))
     try:
         return gsprd.open_by_key(key)
     except:
