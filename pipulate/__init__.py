@@ -11,6 +11,7 @@ import gspread
 import pandas as pd
 from sys import stdout
 from os import environ
+from sys import exc_info as error
 from apiclient.discovery import build
 import google.auth.transport.requests
 from google.oauth2.credentials import Credentials
@@ -18,23 +19,34 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 
 
 global_doc = None
+err = lambda : print(error()[0].__name__)
 
 
 def doc(akey):
     """Creates a global gspread document object for easier pipulating."""
     global global_doc
     global_doc = key(akey)
-    sheet1 = global_doc.worksheets()[0].title
-    print("Run selections like: cl, df = gs.pipulate('%s', 'A1:D10')" % sheet1)
+    try:
+        sheet1 = global_doc.worksheets()[0].title
+        print("Run selections like: cl, df = gs.pipulate('%s', 'A1:D10')" % sheet1)
+    except:
+        err()
 
 
 def pipulate(worksheet, row_or_range, cols=None, columns=None, start=None, end=None):
     """All that pipulate really is"""
-    
-    tab = check_worksheet(worksheet)
+
+    global credentials
+
+    try: 
+        tab = check_worksheet(worksheet)
+    except:
+        check_credentials(credentials)
 
     if cols: 
         row1, row2 = row_or_range
+        if type(columns) == bool:
+            row1 = row1 + 1
         col1, col2 = cols
         col1, col2 = a1(col1, reverse=True), a1(col2, reverse=True)
         cl = tab.range(row1, col1, row2, col2)
@@ -44,11 +56,21 @@ def pipulate(worksheet, row_or_range, cols=None, columns=None, start=None, end=N
             columns = [a1(x.col) for x in cell_list]
         print('cl, df = pipulate("%s", %s, %s) <<< SUCCESSFUL! >>>' % (tab.title, row_or_range, cols))
     else:
+        if type(columns) == bool:
+            row_or_range = shift_range(row_or_range)
         cl = tab.range(row_or_range)
         list_of_lists = cl_to_list(cl)
         if not columns:
             columns = [a1(i+1) for i, x in enumerate(list_of_lists[0])]
-        print('cl, df = pipulate("%s", "%s") << SUCCESSFUL! >>' % (tab.title, row_or_range))
+        print('cl, df = pipulate("%s", "%s") <<< SUCCESSFUL! >>>' % (tab.title, row_or_range))
+
+    if type(columns) == bool and columns == True:
+        df_cols = pd.DataFrame(list_of_lists[0])
+        columns = [x[0] for x in df_cols.values.tolist()]
+        list_of_lists = list_of_lists[1:]
+        if not all(v for v in columns):
+            print("All cells in row 1 must contain values when used for column labels.")
+            raise SystemExit()
 
     df = pd.DataFrame(list_of_lists, columns=columns)
     print("You may now manipulate the DataFrame but maintain its (%s x %s) shape." % df.shape)
@@ -71,6 +93,19 @@ def populate(worksheet, cl, df):
     else:
         raise SystemExit()
     print('gs.populate("%s", cl, df) <<< GSHEET UPDATED! >>>' % tab.title)
+
+
+def shift_range(sheet_range):
+    range_tuple = sheet_range.split(':')
+    upper_left = range_tuple[0]
+    for i, x in enumerate(upper_left):
+        if x.isnumeric():
+            break
+    row_one = int(upper_left[len(upper_left) - 1:])
+    col_one = upper_left[:len(upper_left) - 1]
+    row_two = row_one + 1
+    shifted_down = "".join([col_one, str(row_two), ":", range_tuple[1]])
+    return shifted_down
 
 
 def check_worksheet(worksheet):
@@ -138,15 +173,18 @@ def key(key):
     """Alias to Return instance of GSheet by key."""
     global gsprd
     print("View the GSheet at %s" % link(key))
-    return gsprd.open_by_key(key)
+    try:
+        return gsprd.open_by_key(key)
+    except:
+        err() 
 
 
 def analytics():
-	return build('analyticsreporting', 'v4', credentials=credentials)
+    return build('analyticsreporting', 'v4', credentials=credentials)
 
 
 def searchconsole():
-	return build('webmasters', 'v3', credentials=credentials)
+    return build('webmasters', 'v3', credentials=credentials)
 
 
 def ga(gaid, start, end, path):
@@ -262,6 +300,17 @@ def login():
     return credentials
 
 
+def check_credentials(credentials):
+    if not credentials.valid:
+        request = google.auth.transport.requests.Request()
+        credentials.refresh(request)
+        credentials.access_token = credentials.token
+        with open("credentials.pickle", "wb") as output_file:
+            pickle.dump(credentials, output_file)
+        if not credentials.valid:
+            credentials = login()
+
+
 def logout():
     import requests
     from os import remove
@@ -293,20 +342,11 @@ class Unbuffered(object):
 try:
     with open("credentials.pickle", "rb") as input_file:
         credentials = pickle.load(input_file)
+        check_credentials(credentials)
 except:
-    credentials = False
-
-if not credentials:
     credentials = login()
 
-if not credentials.valid:
-    request = google.auth.transport.requests.Request()
-    credentials.refresh(request)
-    credentials.access_token = credentials.token
-    with open("credentials.pickle", "wb") as output_file:
-        pickle.dump(credentials, output_file)
-    if not credentials.valid:
-        credentials = login()
+check_credentials(credentials)
 
 gsprd = gspread.authorize(credentials)
 
