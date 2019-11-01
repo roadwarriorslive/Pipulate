@@ -8,6 +8,7 @@
 
 import pickle
 import gspread
+import pygsheets
 import pandas as pd
 from sys import stdout
 from os import environ
@@ -18,8 +19,8 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 
 
-global_gspread = None
-global_pygsheets = None
+gspread_ = None
+pygsheet_ = None
 err = lambda : print(error()[0].__name__)
 
 
@@ -28,64 +29,66 @@ def key(url):
 
 
 def sheet(key):
-    global gsprd, global_gspread
+    global gsprd, pygs, gspread_, pygsheet_
 
     try:
         if key[:4].lower() == 'http':
             print("VIEW: %s" % key)
-            global_gspread = gsprd.open_by_url(key)
+            gspread_ = gsprd.open_by_url(key)
+            pygsheet_ = pygs.open_by_url(key)
         else:
             print("VIEW: %s" % link(key))
-            global_gspread = gsprd.open_by_key(key)
+            gspread_ = gsprd.open_by_key(key)
+            pygsheet_ = pygs.open_by_key(key)
     except:
         err() 
     try:
-        sheet1 = global_gspread.worksheets()[0].title
-        print("Run selections like: cl, df = gs.pipulate('%s', 'A1:D10')" % sheet1)
+        sheet1 = gspread_.worksheets()[0].title
+        print("Run selections like: cl, df = good.pipulate('%s', 'A1:D10')" % sheet1)
     except:
         err()
 
 
-def pipulate(worksheet, row_or_range, cols=None, columns=None, start=None, end=None):
+def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
     """All that pipulate really is"""
 
     global credentials
     original_range, original_row1 = None, None
 
     try: 
-        tab = check_worksheet(worksheet)
+        worksheet_ = check_worksheet(tab)
     except:
         check_credentials(credentials)
 
     if cols: 
-        row1, row2 = row_or_range
+        row1, row2 = rows
         if type(columns) == bool:
             original_row1 = row1
             row1 = row1 + 1
         col1, col2 = cols
         if not type(col1) == int and not type(col2) == int:
             col1, col2 = a1(col1, reverse=True), a1(col2, reverse=True)
-        cl = tab.range(row1, col1, row2, col2)
+        cl = worksheet_.range(row1, col1, row2, col2)
         list_of_lists = cl_to_list(cl)
         if not columns:
-            cell_list = tab.range(row1, col1, row1, col2)
+            cell_list = worksheet_.range(row1, col1, row1, col2)
             columns = [a1(x.col) for x in cell_list]
-        print('cl, df = pipulate("%s", %s, %s) <<< SUCCESSFUL! >>>' % (tab.title, row_or_range, cols))
+        print('cl, df = pipulate("%s", %s, %s) <<< SUCCESSFUL! >>>' % (worksheet_.title, rows, cols))
     else:
         if type(columns) == bool:
-            original_range = row_or_range
-            row_or_range = shift_range(row_or_range)
-        cl = tab.range(row_or_range)
+            original_range = rows
+            rows = shift_range(rows)
+        cl = worksheet_.range(rows)
         list_of_lists = cl_to_list(cl)
         if not columns:
             columns = [a1(i+1) for i, x in enumerate(list_of_lists[0])]
-        print('cl, df = pipulate("%s", "%s") <<< SUCCESSFUL! >>>' % (tab.title, row_or_range))
+        print('cl, df = pipulate("%s", "%s") <<< SUCCESSFUL! >>>' % (worksheet_.title, rows))
 
     if type(columns) == bool and columns == True:
         if cols:
-            cl_cols = tab.range(original_row1, col1, row2, col2)
+            cl_cols = worksheet_.range(original_row1, col1, row2, col2)
         else:
-            cl_cols = tab.range(original_range)
+            cl_cols = worksheet_.range(original_range)
         columns = cl_to_list(cl_cols)[0]
     if not all(v for v in columns):
         print(columns)
@@ -99,14 +102,18 @@ def pipulate(worksheet, row_or_range, cols=None, columns=None, start=None, end=N
     df = pd.DataFrame(list_of_lists, columns=columns)
 
     print("You may now manipulate the DataFrame but maintain its (%s x %s) shape." % df.shape)
-    print('To update the GSheet with changes, gs.populate("%s", cl, df)' % tab.title)
+    print('To update the GSheet with changes, good.populate("%s", cl, df)' % worksheet_.title)
     return cl, df
 
 
-def populate(worksheet, cl, df):
+def populate(tab, cl, df):
     """Push df back to spreadsheet."""
 
-    tab = check_worksheet(worksheet)
+    try: 
+        worksheet_ = check_worksheet(tab)
+    except:
+        check_credentials(credentials)
+
 
     if cl_df_fits(cl, df):
         lol = df.values.tolist()
@@ -114,10 +121,10 @@ def populate(worksheet, cl, df):
         flat[:] = ['N/A' if pd.isnull(x) else x for x in flat]
         for i, cell in enumerate(cl):
             cell.value = flat[i]
-        tab.update_cells(cl)
+        worksheet_.update_cells(cl)
     else:
         raise SystemExit()
-    print('gs.populate("%s", cl, df) <<< GSHEET UPDATED! >>>' % tab.title)
+    print('good.populate("%s", cl, df) <<< GSHEET UPDATED! >>>' % worksheet_.title)
 
 
 def shift_range(sheet_range):
@@ -137,15 +144,28 @@ def check_worksheet(worksheet):
     if type(worksheet) == gspread.models.Worksheet:
         tab = worksheet
     elif type(worksheet) == str:
-        if 'global_gspread' in globals():
-            if worksheet in [x.title for x in global_gspread.worksheets()]:
-                tab = global_gspread.worksheet(worksheet)
+        if 'gspread_' in globals():
+            if worksheet in [x.title for x in gspread_.worksheets()]:
+                tab = gspread_.worksheet(worksheet)
             else:
                 print("Worksheet not found")
                 raise SystemExit()
         else:
-            print("gs.doc([Your GSheets key here]) must be set")
-            raise SystemExit()
+            print("good.doc([your gsheets key here]) must be set")
+            raise systemexit()
+    elif type(worksheet) == int:
+        if 'gspread_' in globals():
+            if worksheet <= len(gspread_.worksheets()):
+                tab = gspread_.worksheets()[worksheet] 
+            else:
+                print("Worksheet ID too high. Try 0 for sheet 1.")
+                raise SystemExit()
+        else:
+            print("good.doc([your gsheets key here]) must be set")
+            raise systemexit()
+    else:
+        print("Worksheet must be exact tab-name as string, gspread Worksheet object or tab-index.")
+        raise SystemExit()
     return tab
 
 
@@ -362,10 +382,10 @@ except:
     credentials = login()
 
 check_credentials(credentials)
-
 gsprd = gspread.authorize(credentials)
+pygs = pygsheets.authorize(custom_credentials=credentials)
 
-print("You are logged in as %s" % email())
-print('Get started by running: gs.doc("insert your gsheet key here")')
+print("Congratulations, you are logged in as %s" % email())
+print('Get started by running: good.doc("Insert your GSheet document-key or URL here.")')
 
 stdout = Unbuffered(stdout)
