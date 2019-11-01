@@ -21,39 +21,63 @@ these commands from within a Notebook::
     !{sys.executable} -m pip install --upgrade --no-cache-dir pipulate
 
 If you're not using Anaconda, then you will have to install Pandas first. But
-you should really be using Anaconda.
+you should really be using Anaconda. The idea is that you experiment in Jupyter
+Notebook, which is a great learning environment and move your scripts as they
+mature over to a more automated generic Linux server.
 
 The first time you import Pipulate, you will receive a Google OAuth prompt to
-allow access to the Google Spreadsheet you want to edit.  Click the big link
+allow access to the Google Spreadsheet you want to edit. Click the big link
 and paste the resulting token back into the field shown in Jupyter Notebook or
 your command-line. Once this is done, the basic use is::
 
-    import pipulate as gs
-    cl, df = gs.pipulate(tab, rows, cols)
-    # Do stuff to df
-    gs.populate(tab, cl, df)
+    import pipulate as good
+    good.sheet('119mnC8Day78KexU_yv7J_wfA3p7iZeXa0YEtmg1Igu4')  # replace with yours
+    cl, df = good.pipulate(tab=0, rows='A1:J10')
+    df.loc[:,:] = 'foo'
+    good.populate(tab=0 cl, df)
 
 This loads the rectangular region you defined with the rows and columns into
 memory in a way where you can treat it a lot like a tab in Microsoft Excel or
 table in SQL. You can manipulate the pandas "DataFrame" (abbreviated as df),
-and then push the changes back out to the Google Sheet. For example::
+and then push the changes back out to the Google Sheet. This is very
+open-ended, designed to make automation of traditional tedious tasks in SEO
+much simpler. Once you're happy with your script, you can copy/paste it into a
+.py file and schedule it with a standard Linux scheduler, which is another part
+of this project I'll be expanding considerably (generic task-scheduling under
+Linux).
 
-    import pipulate as gs
-    sheet = gs.key('119mnC8Day78KexU_yv7J_wfA3p7iZeXa0YEtmg1Igu4')  # your key
-    tab = sheet.worksheet('Sheet1')
-    cl, df = gs.pipulate(tab, rows=(1, 5), cols=('A', 'C'))
-    df['A'] = 'foo'
-    df['B'] = 'bar'
-    df['C'] = df['A'] + df['B']
-    gs.populate(tab, cl, df)  # Watch the sheet update :)
+There is some flexibility in the API and ability to assign column labels from
+row 1, allowing you to adapt to your style. Here are some variations::
 
-And that's it. All Pipulate does is pull down the rectangular cell-range you
-define and plop it into df. What you do with the Pandas DataFrame (df) is up to
-you. I'll load the examples directory with ideas, but this is very open-ended,
-designed to make automation of traditional tedious tasks in SEO much simpler.
-Once you're happy with your script, you can copy/paste it into a .py file and
-schedule it with a standard Linux scheduler, which is another part of this
-project I'll be expanding considerably (generic task-scheduling under Linux).
+    cl, df = good.pipulate(tab=0, rows='A1:J5', columns=True)  # Row 1 is column labels
+    cl, df = good.pipulate('Sheet1', rows='A1:J5')             # Name the sheet with a string
+    cl, df = good.pipulate(0, rows=(1,5), cols=('A','J'))      # Use rows and Ax column style
+    cl, df = good.pipulate(0, (1,5), (1,10))                   # Use row and column indexes
+    cl, df = good.pipulate(2, rows='A1:J5')                    # Work on the 3rd tab.
+    cl, df = good.pipulate(wksht, rows='A1:J5')                # Use GSpread Worksheet object
+
+As you can see, using argument labels is optional. The exact string-name,
+0-based numerical index or a GSpread Worksheet object-type must be in the first
+position. The 2nd position is the "rows" value, which may either be an
+Excel-like range or a row-range. If a row-range then you must also have a
+col-range in position 3 (or label the argument "cols"). The details of how you
+do it will vary with your project. It is often useful to name your tabs so you
+can do different manipulations to different tabs without worrying about
+changing their order in the spreadsheet Web user interface.
+
+If you don't give any column labels, Pipulate will assign them automatically
+using the Excel-like letter-labels for columns. If you want to name your
+column, you can either use row 1 by setting your columns parameter to true or
+you can provide your own list of column names::
+
+	cols = ['one', 'two', 'three', 'four', 'five']
+    cl, df = good.pipulate(tab=0, rows='A1:J5', columns=cols)  # Set columns labels from list
+
+After you make your cl (GSpread cell_list) and df (pandas DataFrame) selection,
+you can modify your df and push it back into Google Sheets with the symmetrical
+populate command:
+
+    good.populate(0, cl, df)  # Works in most cases
 
 Real Life Example
 =================
@@ -86,16 +110,15 @@ http requests::
 To use Pipulate and Pandas to apply this function to each line of column A, you
 would first select columns A & B into a Pandas DataFrame::
 
-    import pipulate as gs
-    sheet = gs.key('1119mnC8Day78KexU_yv7J_wfA3p7iZeXa0YEtmg1Igu4')
-    tab = sheet.worksheet('Sheet1')
-    cl, df = gs.pipulate(tab, rows=(1, 4), cols=('A', 'B'))
+    import pipulate as good
+    good.sheet('119mnC8Day78KexU_yv7J_wfA3p7iZeXa0YEtmg1Igu4')
+    cl, df = good.pipulate(tab=0, rows='A1:B3')
 
 Then you apply the function to each cell in column A of your DataFrame and put
 the results in column B and push the results back up into Google Sheets::
 
     df['B'] = df['A'].apply(cleanurl)
-    gs.populate(tab, cl, df)
+    good.populate(0 cl, df)
 
 And that's it! Column B will now contain::
 
