@@ -18,16 +18,29 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 
 
-global_doc = None
+global_gspread = None
+global_pygsheets = None
 err = lambda : print(error()[0].__name__)
 
 
-def doc(akey):
-    """Creates a global gspread document object for easier pipulating."""
-    global global_doc
-    global_doc = key(akey)
+def key(url):
+    return open(url)
+
+
+def sheet(key):
+    global gsprd, global_gspread
+
     try:
-        sheet1 = global_doc.worksheets()[0].title
+        if key[:4].lower() == 'http':
+            print("VIEW: %s" % key)
+            global_gspread = gsprd.open_by_url(key)
+        else:
+            print("VIEW: %s" % link(key))
+            global_gspread = gsprd.open_by_key(key)
+    except:
+        err() 
+    try:
+        sheet1 = global_gspread.worksheets()[0].title
         print("Run selections like: cl, df = gs.pipulate('%s', 'A1:D10')" % sheet1)
     except:
         err()
@@ -50,7 +63,8 @@ def pipulate(worksheet, row_or_range, cols=None, columns=None, start=None, end=N
             original_row1 = row1
             row1 = row1 + 1
         col1, col2 = cols
-        col1, col2 = a1(col1, reverse=True), a1(col2, reverse=True)
+        if not type(col1) == int and not type(col2) == int:
+            col1, col2 = a1(col1, reverse=True), a1(col2, reverse=True)
         cl = tab.range(row1, col1, row2, col2)
         list_of_lists = cl_to_list(cl)
         if not columns:
@@ -74,6 +88,10 @@ def pipulate(worksheet, row_or_range, cols=None, columns=None, start=None, end=N
             cl_cols = tab.range(original_range)
         columns = cl_to_list(cl_cols)[0]
     if not all(v for v in columns):
+        print(columns)
+        print("All columns must have labels when using columns=True or columns=list.")
+        raise SystemExit()
+    if len(set(columns)) < len(columns):
         print(columns)
         print("All columns must have labels when using columns=True or columns=list.")
         raise SystemExit()
@@ -119,9 +137,9 @@ def check_worksheet(worksheet):
     if type(worksheet) == gspread.models.Worksheet:
         tab = worksheet
     elif type(worksheet) == str:
-        if 'global_doc' in globals():
-            if worksheet in [x.title for x in global_doc.worksheets()]:
-                tab = global_doc.worksheet(worksheet)
+        if 'global_gspread' in globals():
+            if worksheet in [x.title for x in global_gspread.worksheets()]:
+                tab = global_gspread.worksheet(worksheet)
             else:
                 print("Worksheet not found")
                 raise SystemExit()
@@ -174,16 +192,6 @@ def a1(pos, reverse=False):
 def link(gsheet_key):
     """Return GSheet URL for data from Web UI."""
     return 'https://docs.google.com/spreadsheets/d/%s/edit' % gsheet_key
-
-
-def key(key):
-    """Alias to Return instance of GSheet by key."""
-    global gsprd
-    print("VIEW: %s" % link(key))
-    try:
-        return gsprd.open_by_key(key)
-    except:
-        err() 
 
 
 def analytics():
