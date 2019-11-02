@@ -94,18 +94,18 @@ And now let's say you write a simple function that will test what the real
 homepage URL is. This example uses the popular "Requests" package for making
 http requests::
 
-	import requests
+    import requests
 
-	def cleanurl(provided):
-		guess = provided
-		if provided[:4].lower() != 'http':
-			guess = 'https://%s' % provided
-		try:
-			r = requests.head(guess, allow_redirects=True)
-			resolved = r.url
-		except:
-			resolved = "Can't find %s" % provided
-		return resolved
+    def cleanurl(provided):
+        guess = provided
+        if provided[:4].lower() != 'http':
+            guess = 'https://%s' % provided
+        try:
+            r = requests.head(guess, allow_redirects=True)
+            resolved = r.url
+        except:
+            resolved = "Can't find %s" % provided
+        return resolved
 
 To use Pipulate and Pandas to apply this function to each line of column A, you
 would first select columns A & B into a Pandas DataFrame::
