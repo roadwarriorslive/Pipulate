@@ -118,7 +118,7 @@ Then you apply the function to each cell in column A of your DataFrame and put
 the results in column B and push the results back up into Google Sheets::
 
     df['B'] = df['A'].apply(cleanurl)
-    pipulate.push(0 cl, df)
+    pipulate.push(0, cl, df)
 
 And that's it! Column B will now contain::
 
