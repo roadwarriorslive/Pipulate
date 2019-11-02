@@ -44,14 +44,27 @@ def sheet(key):
         err() 
     try:
         sheet1 = gspread_.worksheets()[0].title
-        print("Run selections like: cl, df = good.pipulate('%s', 'A1:D10')" % sheet1)
+        print("Pull data from sheet like: cl, df = pipulate.pull('%s', 'A1:D10')" % sheet1)
+        print("Type pipulate.help() for help.")
     except:
         err()
 
 
-def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
-    """All that pipulate really is"""
+def help():
+    print(__name__)
+    print("Welcome to Pipulate.")
+    print("You can also manipulate pipulate.pygsheet_ and pipulate.gspread_")
 
+
+def pull(tab, rows, cols=None, columns=None, start=None, end=None):
+    return pipulate(tab, rows, cols=None, columns=None, start=None, end=None)
+
+
+def push(tab, cl, df):
+    return populate(tab, cl, df)
+
+
+def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
     global credentials
     original_range, original_row1 = None, None
 
@@ -78,6 +91,7 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
         if type(columns) == bool:
             original_range = rows
             rows = shift_range(rows)
+        # Add an undefined end-row check so we can use ranges like A1:C
         cl = worksheet_.range(rows)
         list_of_lists = cl_to_list(cl)
         if not columns:
@@ -102,7 +116,7 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
     df = pd.DataFrame(list_of_lists, columns=columns)
 
     print("You may now manipulate the DataFrame but maintain its (%s x %s) shape." % df.shape)
-    print('To update the GSheet with changes, good.populate("%s", cl, df)' % worksheet_.title)
+    print('To update the GSheet with changes, pipulate.pull("%s", cl, df)' % worksheet_.title)
     return cl, df
 
 
@@ -124,7 +138,7 @@ def populate(tab, cl, df):
         worksheet_.update_cells(cl)
     else:
         raise SystemExit()
-    print('good.populate("%s", cl, df) <<< GSHEET UPDATED! >>>' % worksheet_.title)
+    print('pipulate.pull("%s", cl, df) <<< GSHEET UPDATED! >>>' % worksheet_.title)
 
 
 def shift_range(sheet_range):
@@ -151,7 +165,7 @@ def check_worksheet(worksheet):
                 print("Worksheet not found")
                 raise SystemExit()
         else:
-            print("good.doc([your gsheets key here]) must be set")
+            print("pipulate.sheet([your gsheets key here]) must be set")
             raise systemexit()
     elif type(worksheet) == int:
         if 'gspread_' in globals():
@@ -161,7 +175,7 @@ def check_worksheet(worksheet):
                 print("Worksheet ID too high. Try 0 for sheet 1.")
                 raise SystemExit()
         else:
-            print("good.doc([your gsheets key here]) must be set")
+            print("pipulate.sheet([your gsheets key here]) must be set")
             raise systemexit()
     else:
         print("Worksheet must be exact tab-name as string, gspread Worksheet object or tab-index.")
@@ -386,6 +400,6 @@ gsprd = gspread.authorize(credentials)
 pygs = pygsheets.authorize(custom_credentials=credentials)
 
 print("Congratulations, you are logged in as %s" % email())
-print('Get started by running: good.doc("Insert your GSheet document-key or URL here.")')
+print('Get started by running: pipulate.sheet("Insert your GSheet document-key or URL here.")')
 
 stdout = Unbuffered(stdout)

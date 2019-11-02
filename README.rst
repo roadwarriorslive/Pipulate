@@ -30,11 +30,11 @@ allow access to the Google Spreadsheet you want to edit. Click the big link
 and paste the resulting token back into the field shown in Jupyter Notebook or
 your command-line. Once this is done, the basic use is::
 
-    import pipulate as good
-    good.sheet('119mnC8Day78KexU_yv7J_wfA3p7iZeXa0YEtmg1Igu4')  # replace with yours
-    cl, df = good.pipulate(tab=0, rows='A1:J10')
+    import pipulate
+    pipulate.sheet('119mnC8Day78KexU_yv7J_wfA3p7iZeXa0YEtmg1Igu4')  # replace with yours
+    cl, df = pipulate.pull(tab=0, rows='A1:J10')
     df.loc[:,:] = 'foo'
-    good.populate(tab=0 cl, df)
+    pipulate.push(tab=0 cl, df)
 
 This loads the rectangular region you defined with the rows and columns into
 memory in a way where you can treat it a lot like a tab in Microsoft Excel or
@@ -49,12 +49,12 @@ Linux).
 There is some flexibility in the API and ability to assign column labels from
 row 1, allowing you to adapt to your style. Here are some variations::
 
-    cl, df = good.pipulate(tab=0, rows='A1:J5', columns=True)  # Row 1 is column labels
-    cl, df = good.pipulate('Sheet1', rows='A1:J5')             # Name the sheet with a string
-    cl, df = good.pipulate(0, rows=(1,5), cols=('A','J'))      # Use rows and Ax column style
-    cl, df = good.pipulate(0, (1,5), (1,10))                   # Use row and column indexes
-    cl, df = good.pipulate(2, rows='A1:J5')                    # Work on the 3rd tab.
-    cl, df = good.pipulate(wksht, rows='A1:J5')                # Use GSpread Worksheet object
+    cl, df = pipulate.pull(tab=0, rows='A1:J5', columns=True)  # Row 1 is column labels
+    cl, df = pipulate.pull('Sheet1', rows='A1:J5')             # Name the sheet with a string
+    cl, df = pipulate.pull(0, rows=(1,5), cols=('A','J'))      # Use rows and Ax column style
+    cl, df = pipulate.pull(0, (1,5), (1,10))                   # Use row and column indexes
+    cl, df = pipulate.pull(2, rows='A1:J5')                    # Work on the 3rd tab.
+    cl, df = pipulate.pull(wksht, rows='A1:J5')                # Use GSpread Worksheet object
 
 As you can see, using argument labels is optional. The exact string-name,
 0-based numerical index or a GSpread Worksheet object-type must be in the first
@@ -70,14 +70,14 @@ using the Excel-like letter-labels for columns. If you want to name your
 column, you can either use row 1 by setting your columns parameter to true or
 you can provide your own list of column names::
 
-	cols = ['one', 'two', 'three', 'four', 'five']
-    cl, df = good.pipulate(tab=0, rows='A1:J5', columns=cols)  # Set columns labels from list
+    cols = ['one', 'two', 'three', 'four', 'five']
+    cl, df = pipulate.pull(tab=0, rows='A1:J5', columns=cols)  # Set columns labels from list
 
 After you make your cl (GSpread cell_list) and df (pandas DataFrame) selection,
 you can modify your df and push it back into Google Sheets with the symmetrical
-populate command:
+populate command::
 
-    good.populate(0, cl, df)  # Works in most cases
+    pipulate.push(0, cl, df)  # Works in most cases
 
 Real Life Example
 =================
@@ -110,15 +110,15 @@ http requests::
 To use Pipulate and Pandas to apply this function to each line of column A, you
 would first select columns A & B into a Pandas DataFrame::
 
-    import pipulate as good
-    good.sheet('119mnC8Day78KexU_yv7J_wfA3p7iZeXa0YEtmg1Igu4')
-    cl, df = good.pipulate(tab=0, rows='A1:B3')
+    import pipulate
+    pipulate.sheet('119mnC8Day78KexU_yv7J_wfA3p7iZeXa0YEtmg1Igu4')
+    cl, df = pipulate.pull(tab=0, rows='A1:B3')
 
 Then you apply the function to each cell in column A of your DataFrame and put
 the results in column B and push the results back up into Google Sheets::
 
     df['B'] = df['A'].apply(cleanurl)
-    good.populate(0 cl, df)
+    pipulate.push(0 cl, df)
 
 And that's it! Column B will now contain::
 
