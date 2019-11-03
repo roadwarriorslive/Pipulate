@@ -34,7 +34,7 @@ your command-line. Once this is done, the basic use is::
     pipulate.sheet('119mnC8Day78KexU_yv7J_wfA3p7iZeXa0YEtmg1Igu4')  # replace with yours
     cl, df = pipulate.pull(tab=0, rows='A1:J10')
     df.loc[:,:] = 'foo'
-    pipulate.push(tab=0 cl, df)
+    pipulate.push(0, cl, df)
 
 This loads the rectangular region you defined with the rows and columns into
 memory in a way where you can treat it a lot like a tab in Microsoft Excel or
