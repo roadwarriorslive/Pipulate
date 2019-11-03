@@ -102,7 +102,7 @@ def basic_incantation(sheet_name='Sheet1'):
 
 
 def pull(tab, rows, cols=None, columns=None, start=None, end=None):
-    return pipulate(tab, rows, cols=None, columns=None, start=None, end=None)
+    return pipulate(tab, rows, cols=cols, columns=columns, start=start, end=end)
 
 
 def push(tab, cl, df):
@@ -146,8 +146,6 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
             columns = [a1(i+1) for i, x in enumerate(list_of_lists[0])]
 
     if type(columns) == bool and columns == True:
-        print('hit')
-        raise SystemExit()
         if cols:
             cl_cols = worksheet_.range(original_row1, col1, row2, col2)
         else:
