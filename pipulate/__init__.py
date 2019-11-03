@@ -19,8 +19,8 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 
 
-gspread_ = None
-pygsheet_ = None
+gspread_sheet = None
+pygsheets_sheet = None
 err = lambda : print(error()[0].__name__)
 
 
@@ -29,31 +29,76 @@ def key(url):
 
 
 def sheet(key):
-    global gsprd, pygs, gspread_, pygsheet_
+    global gspread_authorized, pygsheets_authorized
+    global gspread_sheet, pygsheets_sheet
+    global credentials
+
+    check_credentials(credentials)
 
     try:
         if key[:4].lower() == 'http':
-            print("VIEW: %s" % key)
-            gspread_ = gsprd.open_by_url(key)
-            pygsheet_ = pygs.open_by_url(key)
+            print("GSheet Link: %s" % key)
+            gspread_sheet = gspread_authorized.open_by_url(key)
+            pygsheets_sheet = pygsheets_authorized.open_by_url(key)
         else:
-            print("VIEW: %s" % link(key))
-            gspread_ = gsprd.open_by_key(key)
-            pygsheet_ = pygs.open_by_key(key)
+            print("GSheet Link: %s" % link(key))
+            gspread_sheet = gspread_authorized.open_by_key(key)
+            pygsheets_sheet = pygsheets_authorized.open_by_key(key)
     except:
         err() 
+        print("Make sure %s has permission to this document." % email())
+        raise SystemExit()
     try:
-        sheet1 = gspread_.worksheets()[0].title
-        print("Pull data from sheet like: cl, df = pipulate.pull('%s', 'A1:D10')" % sheet1)
-        print("Type pipulate.help() for help.")
+        sheet1 = gspread_sheet.worksheets()[0].title
+        basic_incantation(sheet1)
+        print()
+        print("For help, run: pipulate.help()")
     except:
         err()
+        raise SystemExit()
 
 
 def help():
-    print(__name__)
-    print("Welcome to Pipulate.")
-    print("You can also manipulate pipulate.pygsheet_ and pipulate.gspread_")
+    print("Welcome to Pipulate: eaiser Google Sheet automation for SEO and more.")
+    print("To pipulate a Google Spreadsheet, you use the following command:")
+    print()
+    print('    pipulate.sheet("Insert your GSheet key or URL")')
+    print()
+    basic_incantation()
+    print()
+    print('Now use Python pandas to manipulate the DataFrame (df):')
+    print()
+    print('   df[["A", "B"]] = ["foo", "bar"]') 
+    print()
+    print("You can see your changes by running df on a line by itself in Jupyter Notebook.")
+    print()
+    print("    df")
+    print()
+    print("Now make append the values of columns A and B into column C:")
+    print()
+    print('    df["C"] = df["A"] + df["B"]')
+    print()
+    print('And finllay, "push" the altered DataFrame back into GSheet:')
+    print()
+    print('    pipulate.push("Sheet1", cl, df)')
+    print()
+    print("It's nice to work with column labels, so let's put some in:")
+    print()
+    print('    cl, df = pipulate.pull("Sheet1", "A1:C1")')
+    print('    df[["A", "B", "C"]] = ["One" , "Two", "Three"]')
+    print('    pipulate.push("Sheet1", cl, df)')
+    print()
+    print("And now we can select the DataFrame with row 1 as column labels:")
+    print()
+    print('    cl, df = pipulate.pull("Sheet1", "A1:C4", columns=True)')
+    print()
+    print('Learn more at https://github.com/miklevin/Pipulate')
+
+
+def basic_incantation(sheet_name='Sheet1'):
+    print('Now you can select a "cell_list" and a "DataFrame" from the sheet:')
+    print()
+    print('    cl, df = pipulate.pull("%s", "A2:C5")' % sheet_name)
 
 
 def pull(tab, rows, cols=None, columns=None, start=None, end=None):
@@ -72,6 +117,10 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
         worksheet_ = check_worksheet(tab)
     except:
         check_credentials(credentials)
+    
+    if gspread_sheet == None:
+        print('Make sure you pipulate.sheet("key or url") first.')
+        raise SystemExit()
 
     if cols: 
         row1, row2 = rows
@@ -86,7 +135,6 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
         if not columns:
             cell_list = worksheet_.range(row1, col1, row1, col2)
             columns = [a1(x.col) for x in cell_list]
-        print('cl, df = pipulate("%s", %s, %s) <<< SUCCESSFUL! >>>' % (worksheet_.title, rows, cols))
     else:
         if type(columns) == bool:
             original_range = rows
@@ -96,9 +144,10 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
         list_of_lists = cl_to_list(cl)
         if not columns:
             columns = [a1(i+1) for i, x in enumerate(list_of_lists[0])]
-        print('cl, df = pipulate("%s", "%s") <<< SUCCESSFUL! >>>' % (worksheet_.title, rows))
 
     if type(columns) == bool and columns == True:
+        print('hit')
+        raise SystemExit()
         if cols:
             cl_cols = worksheet_.range(original_row1, col1, row2, col2)
         else:
@@ -115,8 +164,8 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
 
     df = pd.DataFrame(list_of_lists, columns=columns)
 
-    print("You may now manipulate the DataFrame but maintain its (%s x %s) shape." % df.shape)
-    print('To update the GSheet with changes, pipulate.pull("%s", cl, df)' % worksheet_.title)
+    print("<<< SUCCESSFUL! >>> Manipulate DataFrame but keep its (%s x %s) shape." % df.shape)
+    print('To push updated DataFrame to GSheet: pipulate.push("%s", cl, df)' % worksheet_.title)
     return cl, df
 
 
@@ -138,7 +187,7 @@ def populate(tab, cl, df):
         worksheet_.update_cells(cl)
     else:
         raise SystemExit()
-    print('pipulate.pull("%s", cl, df) <<< GSHEET UPDATED! >>>' % worksheet_.title)
+    print('pipulate.push("%s", cl, df) <<< GSHEET UPDATED! >>>' % worksheet_.title)
 
 
 def shift_range(sheet_range):
@@ -155,12 +204,13 @@ def shift_range(sheet_range):
 
 
 def check_worksheet(worksheet):
+    global gspread_sheet
     if type(worksheet) == gspread.models.Worksheet:
         tab = worksheet
     elif type(worksheet) == str:
-        if 'gspread_' in globals():
-            if worksheet in [x.title for x in gspread_.worksheets()]:
-                tab = gspread_.worksheet(worksheet)
+        if 'gspread_sheet' in globals():
+            if worksheet in [x.title for x in gspread_sheet.worksheets()]:
+                tab = gspread_sheet.worksheet(worksheet)
             else:
                 print("Worksheet not found")
                 raise SystemExit()
@@ -168,9 +218,9 @@ def check_worksheet(worksheet):
             print("pipulate.sheet([your gsheets key here]) must be set")
             raise systemexit()
     elif type(worksheet) == int:
-        if 'gspread_' in globals():
-            if worksheet <= len(gspread_.worksheets()):
-                tab = gspread_.worksheets()[worksheet] 
+        if 'gspread_sheet' in globals():
+            if worksheet <= len(gspread_sheet.worksheets()):
+                tab = gspread_sheet.worksheets()[worksheet] 
             else:
                 print("Worksheet ID too high. Try 0 for sheet 1.")
                 raise SystemExit()
@@ -350,14 +400,19 @@ def login():
 
 
 def check_credentials(credentials):
-    if not credentials.valid:
-        request = google.auth.transport.requests.Request()
-        credentials.refresh(request)
-        credentials.access_token = credentials.token
-        with open("credentials.pickle", "wb") as output_file:
-            pickle.dump(credentials, output_file)
+    if type(credentials) == google.oauth2.credentials.Credentials:
         if not credentials.valid:
+            request = google.auth.transport.requests.Request()
+            credentials.refresh(request)
+            credentials.access_token = credentials.token
+            with open("credentials.pickle", "wb") as output_file:
+                pickle.dump(credentials, output_file)
+            if not credentials.valid:
+                credentials = login()
+        elif not credentials:
             credentials = login()
+    else:
+        credentials = login()
 
 
 def logout():
@@ -396,10 +451,15 @@ except:
     credentials = login()
 
 check_credentials(credentials)
-gsprd = gspread.authorize(credentials)
-pygs = pygsheets.authorize(custom_credentials=credentials)
+gspread_authorized = gspread.authorize(credentials)
+pygsheets_authorized = pygsheets.authorize(custom_credentials=credentials)
 
-print("Congratulations, you are logged in as %s" % email())
-print('Get started by running: pipulate.sheet("Insert your GSheet document-key or URL here.")')
+print("CONGRATULATIONS! You are logged in as <<< %s >>>" % email())
+print('Get started with: pipulate.sheet("Insert your GSheet key or URL")')
+print()
+print("For help, run:")
+print()
+print("    pipulate.help()")
+print()
 
 stdout = Unbuffered(stdout)
