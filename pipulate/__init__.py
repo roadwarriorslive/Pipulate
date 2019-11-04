@@ -25,7 +25,7 @@ err = lambda : print(error()[0].__name__)
 
 
 def key(url):
-    return open(url)
+    return sheet(url)
 
 
 def sheet(key):
