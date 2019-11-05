@@ -50,9 +50,7 @@ def sheet(key):
         raise SystemExit()
     try:
         sheet1 = gspread_sheet.worksheets()[0].title
-        basic_incantation(sheet1)
-        print()
-        print("For help, run: pipulate.help()")
+        print('Now you can select a "cell_list" and a "DataFrame". For help: pipulate.help()')
     except:
         err()
         raise SystemExit()
@@ -64,7 +62,9 @@ def help():
     print()
     print('    pipulate.sheet("Insert your GSheet key or URL")')
     print()
-    basic_incantation()
+    print('Now you can select a gspread "cell_list" (cl) and a pandas "DataFrame" (df).')
+    print()
+    print('    cl, df = pipulate.pull("Sheet1", "A2:C4")')
     print()
     print('Now use Python pandas to manipulate the DataFrame (df):')
     print()
@@ -95,18 +95,14 @@ def help():
     print('Learn more at https://github.com/miklevin/Pipulate')
 
 
-def basic_incantation(sheet_name='Sheet1'):
-    print('Now you can select a "cell_list" and a "DataFrame" from the sheet:')
-    print()
-    print('    cl, df = pipulate.pull("%s", "A2:C5")' % sheet_name)
 
 
 def pull(tab, rows, cols=None, columns=None, start=None, end=None):
     return pipulate(tab, rows, cols=cols, columns=columns, start=start, end=end)
 
 
-def push(tab, cl, df):
-    return populate(tab, cl, df)
+def push(tab, cl, df, formulas=False):
+    return populate(tab, cl, df, formulas=formulas)
 
 
 def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
@@ -151,14 +147,14 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
         else:
             cl_cols = worksheet_.range(original_range)
         columns = cl_to_list(cl_cols)[0]
-    if not all(v for v in columns):
-        print(columns)
-        print("All columns must have labels when using columns=True or columns=list.")
-        raise SystemExit()
-    if len(set(columns)) < len(columns):
-        print(columns)
-        print("All columns must have labels when using columns=True or columns=list.")
-        raise SystemExit()
+    #if not all(v for v in columns):
+    #    print(columns)
+    #    print("All columns must have labels when using columns=True or columns=list.")
+    #    raise SystemExit()
+    #if len(set(columns)) < len(columns):
+    #    print(columns)
+    #    print("All columns must have labels when using columns=True or columns=list.")
+    #    raise SystemExit()
 
     df = pd.DataFrame(list_of_lists, columns=columns)
 
@@ -167,7 +163,7 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
     return cl, df
 
 
-def populate(tab, cl, df):
+def populate(tab, cl, df, formulas=False):
     """Push df back to spreadsheet."""
 
     try: 
@@ -182,7 +178,10 @@ def populate(tab, cl, df):
         flat[:] = ['N/A' if pd.isnull(x) else x for x in flat]
         for i, cell in enumerate(cl):
             cell.value = flat[i]
-        worksheet_.update_cells(cl)
+        if formulas:
+            worksheet_.update_cells(cl, value_input_option='USER_ENTERED')
+        else:
+            worksheet_.update_cells(cl)
     else:
         raise SystemExit()
     print('pipulate.push("%s", cl, df) <<< GSHEET UPDATED! >>>' % worksheet_.title)
@@ -454,10 +453,7 @@ pygsheets_authorized = pygsheets.authorize(custom_credentials=credentials)
 
 print("CONGRATULATIONS! You are logged in as <<< %s >>>" % email())
 print('Get started with: pipulate.sheet("Insert your GSheet key or URL")')
-print()
-print("For help, run:")
-print()
-print("    pipulate.help()")
+print("For help, run: pipulate.help()")
 print()
 
 stdout = Unbuffered(stdout)
