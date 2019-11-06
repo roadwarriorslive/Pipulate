@@ -126,7 +126,11 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
         col1, col2 = cols
         if not type(col1) == int and not type(col2) == int:
             col1, col2 = a1(col1, reverse=True), a1(col2, reverse=True)
-        cl = worksheet_.range(row1, col1, row2, col2)
+        try:
+            cl = worksheet_.range(row1, col1, row2, col2)
+        except:
+            print('Rate quota possibly exceeded. Wait a minute and try again.')
+            raise SystemExit()
         list_of_lists = cl_to_list(cl)
         if not columns:
             cell_list = worksheet_.range(row1, col1, row1, col2)
@@ -136,7 +140,11 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
             original_range = rows
             rows = shift_range(rows)
         # Add an undefined end-row check so we can use ranges like A1:C
-        cl = worksheet_.range(rows)
+        try:
+            cl = worksheet_.range(rows)
+        except:
+            print('Rate quota possibly exceeded. Wait a minute and try again.')
+            raise SystemExit()
         list_of_lists = cl_to_list(cl)
         if not columns:
             columns = [a1(i+1) for i, x in enumerate(list_of_lists[0])]
