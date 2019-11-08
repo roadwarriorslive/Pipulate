@@ -21,6 +21,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 
 gspread_sheet = None
 pygsheets_sheet = None
+column_uniqueness = False
 err = lambda : print(error()[0].__name__)
 
 
@@ -37,20 +38,23 @@ def sheet(key):
 
     try:
         if key[:4].lower() == 'http':
-            print("GSheet Link: %s" % key)
             gspread_sheet = gspread_authorized.open_by_url(key)
             pygsheets_sheet = pygsheets_authorized.open_by_url(key)
         else:
-            print("GSheet Link: %s" % link(key))
             gspread_sheet = gspread_authorized.open_by_key(key)
             pygsheets_sheet = pygsheets_authorized.open_by_key(key)
+        print("""<<< CONNECTED! >>> You can open the Google Sheet with the following link:""")
+        if key[:4].lower() == 'http':
+            print(key)
+        else:
+            print(link(key))
     except:
         err() 
         print("Make sure %s has permission to this document." % email())
         raise SystemExit()
     try:
         sheet1 = gspread_sheet.worksheets()[0].title
-        print('Now you can select a "cell_list" and a "DataFrame". For help: pipulate.help()')
+        print('Try: cl, df = pipulate.pull("%s", "A1:C3") # or pipulate.help() for help.')
     except:
         err()
         raise SystemExit()
@@ -135,7 +139,7 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
         if not columns:
             cell_list = worksheet_.range(row1, col1, row1, col2)
             columns = [a1(x.col) for x in cell_list]
-    else:
+    elif ':' in rows:
         if type(columns) == bool:
             original_range = rows
             rows = shift_range(rows)
@@ -148,6 +152,9 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
         list_of_lists = cl_to_list(cl)
         if not columns:
             columns = [a1(i+1) for i, x in enumerate(list_of_lists[0])]
+    else:
+        print("Check your rows or range definition.")
+        raise SystemExit()
 
     if type(columns) == bool and columns == True:
         if cols:
@@ -155,14 +162,15 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
         else:
             cl_cols = worksheet_.range(original_range)
         columns = cl_to_list(cl_cols)[0]
-    #if not all(v for v in columns):
-    #    print(columns)
-    #    print("All columns must have labels when using columns=True or columns=list.")
-    #    raise SystemExit()
-    #if len(set(columns)) < len(columns):
-    #    print(columns)
-    #    print("All columns must have labels when using columns=True or columns=list.")
-    #    raise SystemExit()
+    if column_uniqueness: 
+        if not all(v for v in columns):
+            print(columns)
+            print("All columns must have labels when using columns=True or columns=list.")
+            raise SystemExit()
+        if len(set(columns)) < len(columns):
+            print(columns)
+            print("All columns must have labels when using columns=True or columns=list.")
+            raise SystemExit()
 
     df = pd.DataFrame(list_of_lists, columns=columns)
 
