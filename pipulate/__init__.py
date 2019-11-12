@@ -140,10 +140,13 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
             cell_list = worksheet_.range(row1, col1, row1, col2)
             columns = [a1(x.col) for x in cell_list]
     elif ':' in rows:
+        if not rows.split(':')[1][-1].isdigit():  # Figure out end of column
+            aletter = rows.split(':')[1]
+            col_length = len(worksheet_.col_values(a1(aletter, reverse=True))) 
+            rows = "%s%s" % (rows, col_length)
         if type(columns) == bool:
             original_range = rows
             rows = shift_range(rows)
-        # Add an undefined end-row check so we can use ranges like A1:C
         try:
             cl = worksheet_.range(rows)
         except:
