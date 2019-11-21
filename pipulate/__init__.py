@@ -54,7 +54,7 @@ def sheet(key):
         raise SystemExit()
     try:
         sheet1 = gspread_sheet.worksheets()[0].title
-        print('Try: cl, df = pipulate.pull("%s", "A1:C3") # or pipulate.help() for help.')
+        print('Try: cl, df = pipulate.pull("%s", "A1:C3") # or pipulate.help() for help.' % sheet1)
     except:
         err()
         raise SystemExit()
@@ -64,13 +64,17 @@ def help():
     print("Welcome to Pipulate: eaiser Google Sheet automation for SEO and more.")
     print("To pipulate a Google Spreadsheet, you use the following command:")
     print()
-    print('    pipulate.sheet("Insert your GSheet key or URL")')
+    print('    pipulate.sheet("Insert your Google Sheet key or URL")')
     print()
-    print('Now you can select a gspread "cell_list" (cl) and a pandas "DataFrame" (df).')
+    print('Now you can select a gspread "cell_list" (cl) and a pandas "DataFrame" (df) like this:')
     print()
     print('    cl, df = pipulate.pull("Sheet1", "A2:C4")')
     print()
-    print('Now use Python pandas to manipulate the DataFrame (df):')
+    print('You can optionally leave off the last-row number. It will be figured out:')
+    print()
+    print('    cl, df = pipulate.pull("Sheet1", "A2:C")')
+    print()
+    print('Now you can use Python pandas to manipulate the pandas DataFrame (df) like this:')
     print()
     print('   df[["A", "B"]] = ["foo", "bar"]') 
     print()
@@ -88,9 +92,7 @@ def help():
     print()
     print("It's nice to work with column labels, so let's put some in:")
     print()
-    print('    cl, df = pipulate.pull("Sheet1", "A1:C1")')
-    print('    df[["A", "B", "C"]] = ["One" , "Two", "Three"]')
-    print('    pipulate.push("Sheet1", cl, df)')
+    print('    pipulate.poke("Sheet1", columns=["One" , "Two", "Three"])')
     print()
     print("And now we can select the DataFrame with row 1 as column labels:")
     print()
@@ -99,14 +101,18 @@ def help():
     print('Learn more at https://github.com/miklevin/Pipulate')
 
 
-
-
 def pull(tab, rows, cols=None, columns=None, start=None, end=None):
     return pipulate(tab, rows, cols=cols, columns=columns, start=start, end=end)
 
 
 def push(tab, cl, df, formulas=False):
     return populate(tab, cl, df, formulas=formulas)
+
+
+def poke(tab, columns, row=1, start=1):
+    cl, df = pull(tab, (row, row), (start, len(columns)))
+    df.loc[:,:] = columns
+    return push(tab, cl, df)
 
 
 def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
@@ -473,6 +479,5 @@ pygsheets_authorized = pygsheets.authorize(custom_credentials=credentials)
 print("CONGRATULATIONS! You are logged in as <<< %s >>>" % email())
 print('Get started with: pipulate.sheet("Insert your GSheet key or URL")')
 print("For help, run: pipulate.help()")
-print()
 
 stdout = Unbuffered(stdout)
