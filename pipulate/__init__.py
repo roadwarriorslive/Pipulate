@@ -61,8 +61,8 @@ def sheet(key):
 
 
 def help():
-    print("Welcome to Pipulate: eaiser Google Sheet automation for SEO and more.")
-    print("To pipulate a Google Spreadsheet, you use the following command:")
+    print("Welcome to Pipulate, eaiser Google Sheet automation for SEO and more.")
+    print("Load a Google Sheet with the following command (replace text between quotes):")
     print()
     print('    pipulate.sheet("Insert your Google Sheet key or URL")')
     print()
@@ -74,7 +74,12 @@ def help():
     print()
     print('    cl, df = pipulate.pull("Sheet1", "A2:C")')
     print()
-    print('Now you can use Python pandas to manipulate the pandas DataFrame (df) like this:')
+    print('The cl is a place-holder for later, but df is a manipulateable pandas DataFrame.')
+    print('Pandas DataFrames are like tabs in Excel or tables in SQL. Check your row x col shape:')
+    print()
+    print('    df.shape')
+    print()
+    print('Now you can use the pandas API to manipulate the pandas DataFrame (df) like this:')
     print()
     print('   df[["A", "B"]] = ["foo", "bar"]') 
     print()
