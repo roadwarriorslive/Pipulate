@@ -313,31 +313,25 @@ def searchconsole():
     return build('webmasters', 'v3', credentials=credentials)
 
 
-def ga(gaid, start, end, path):
-    """Return Google Analytics metrics for a URL."""
-
-    path = path.replace(',', r'\,')
-    service = analytics()
-    metrics = ['users', 'newUsers', 'sessions', 'bounceRate',
-               'pageviewsPerSession', 'avgSessionDuration']
-    metrics = ''.join(['ga:%s,' % x for x in metrics])[:-1]
-    ga_request = service.data().ga().get(
-        ids='ga:' + gaid,
-        start_date=start,
-        end_date=end,
-        metrics=metrics,
-        dimensions='ga:pagePath',
-        sort='-ga:users',
-        filters='ga:pagePath==' + path,
-        segment='sessions::condition::ga:medium==organic',
-        max_results=1
-    )
-    ga_response = ga_request.execute()
-    rval = []
-    if 'rows' in ga_response:
-        raw_rows = ga_response['rows'][0]
-        rval = raw_rows
-    return rval
+def ga_host(gaid):
+    analytics = pipulate.analytics()
+    try:
+        result = analytics.reports().batchGet(
+          body={
+            'reportRequests': [
+            {
+              'viewId': gaid,
+              'dateRanges': [{'startDate': 'yesterday', 'endDate': 'yesterday'}],
+              'metrics': [{'expression': 'ga:uniquePageviews'}],
+              'dimensions': [{'name': 'ga:hostname'}]
+            }]
+          }
+        ).execute()
+        
+        hostname = result['reports'][0]['data']['rows'][0]['dimensions'][0]
+    except:
+        hostname = 'Unknown'
+    return hostname
 
 
 def gsc(prop, start, end, query, url):
