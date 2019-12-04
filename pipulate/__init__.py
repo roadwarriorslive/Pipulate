@@ -323,7 +323,8 @@ def ga_host(gaid):
               'viewId': gaid,
               'dateRanges': [{'startDate': 'yesterday', 'endDate': 'yesterday'}],
               'metrics': [{'expression': 'ga:uniquePageviews'}],
-              'dimensions': [{'name': 'ga:hostname'}]
+              'dimensions': [{'name': 'ga:hostname'}],
+	          'orderBys': [{'fieldName': 'ga:uniquePageviews', 'sortOrder': 'DESCENDING'}]
             }]
           }
         ).execute()
