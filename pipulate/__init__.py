@@ -56,8 +56,12 @@ def sheet(key):
         sheet1 = gspread_sheet.worksheets()[0].title
         print('Try: cl, df = pipulate.pull("%s", "A1:C3") # or pipulate.help() for help.' % sheet1)
     except:
-        err()
-        raise SystemExit()
+        try:
+            with open("credentials.pickle", "rb") as input_file:
+                credentials = pickle.load(input_file)
+                check_credentials(credentials)
+        except:
+            credentials = login()
 
 
 def help():
@@ -324,7 +328,7 @@ def ga_host(gaid):
               'dateRanges': [{'startDate': 'yesterday', 'endDate': 'yesterday'}],
               'metrics': [{'expression': 'ga:uniquePageviews'}],
               'dimensions': [{'name': 'ga:hostname'}],
-	          'orderBys': [{'fieldName': 'ga:uniquePageviews', 'sortOrder': 'DESCENDING'}]
+              'orderBys': [{'fieldName': 'ga:uniquePageviews', 'sortOrder': 'DESCENDING'}]
             }]
           }
         ).execute()
