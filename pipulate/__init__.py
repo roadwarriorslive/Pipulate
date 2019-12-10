@@ -401,13 +401,13 @@ def login():
     client_id = "769904540573-knscs3mhvd56odnf7i8h3al13kiqulft.apps.googleusercontent.com"
     client_secret = "D2F1D--b_yKNLrJSPmrn2jik"
     environ["OAUTHLIB_RELAX_TOKEN_SCOPE"] = "1"
-    scopes = ["https://www.googleapis.com/auth/analytics.readonly", 
-              "https://www.googleapis.com/auth/webmasters.readonly", 
+    scopes = ["https://spreadsheets.google.com/feeds/",
+              "https://www.googleapis.com/auth/userinfo.email",
+              "https://www.googleapis.com/auth/gmail.modify",
+              "https://www.googleapis.com/auth/analytics.readonly",
+              "https://www.googleapis.com/auth/webmasters.readonly",
               "https://www.googleapis.com/auth/yt-analytics.readonly",
-              "https://www.googleapis.com/auth/youtube.readonly", 
-              "https://spreadsheets.google.com/feeds/", 
-              "https://www.googleapis.com/auth/gmail.modify", 
-              "https://www.googleapis.com/auth/userinfo.email"] 
+              "https://www.googleapis.com/auth/youtube.readonly"]
     client_config = {
         "installed": {
             "auth_uri": "https://accounts.google.com/o/oauth2/auth",
@@ -480,6 +480,7 @@ check_credentials(credentials)
 gspread_authorized = gspread.authorize(credentials)
 pygsheets_authorized = pygsheets.authorize(custom_credentials=credentials)
 
+print()
 print("CONGRATULATIONS! You are logged in as <<< %s >>>" % email())
 print('Get started with: pipulate.sheet("Insert your GSheet key or URL")')
 print("For help, run: pipulate.help()")
