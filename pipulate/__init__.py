@@ -317,10 +317,14 @@ def searchconsole():
     return build('webmasters', 'v3', credentials=credentials)
 
 
+def youtube():
+    return build('youtubeAnalytics', 'v2', credentials=credentials)
+
+
 def ga_host(gaid):
-    analytics = pipulate.analytics()
+    service = analytics()
     try:
-        result = analytics.reports().batchGet(
+        result = service.reports().batchGet(
           body={
             'reportRequests': [
             {
