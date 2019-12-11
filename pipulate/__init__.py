@@ -321,6 +321,18 @@ def youtube():
     return build('youtubeAnalytics', 'v2', credentials=credentials)
 
 
+def ga(qry):
+    return analytics().reports().batchGet(qry).execute()
+
+
+def gsc(qry):
+    return searchconsole().searchanalytics().query(qry).execute()
+
+
+def yt(qry):
+    return youtube().reports().query(qry).execute()
+
+
 def ga_host(gaid):
     service = analytics()
     try:
@@ -343,7 +355,7 @@ def ga_host(gaid):
     return hostname
 
 
-def gsc(prop, start, end, query, url):
+def gsc_old(prop, start, end, query, url):
     service = searchconsole()
     request = {
         "startDate": start,
@@ -404,7 +416,7 @@ def email():
 def login():
     client_id = "769904540573-knscs3mhvd56odnf7i8h3al13kiqulft.apps.googleusercontent.com"
     client_secret = "D2F1D--b_yKNLrJSPmrn2jik"
-    environ["OAUTHLIB_RELAX_TOKEN_SCOPE"] = "1"
+    environ["OAUTHLIB_RELAX_TOKEN_SCOPE"] = "1"  # Don't use in Web apps
     scopes = ["https://spreadsheets.google.com/feeds/",
               "https://www.googleapis.com/auth/userinfo.email",
               "https://www.googleapis.com/auth/gmail.modify",
