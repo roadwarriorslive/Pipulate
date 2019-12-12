@@ -322,15 +322,62 @@ def youtube():
 
 
 def ga(qry):
-    return analytics().reports().batchGet(qry).execute()
+    # https://developers.google.com/analytics/devguides/reporting/core/v4/samples
+    return analytics().reports().batchGet(body=qry).execute()
 
 
-def gsc(qry):
-    return searchconsole().searchanalytics().query(qry).execute()
+def gsc(url, qry):
+    # https://github.com/googleapis/google-api-python-client/blob/master/samples/searchconsole/search_analytics_api_sample.py
+    # https://developers.google.com/webmaster-tools/search-console-api-original/v3/how-tos/search_analytics.html
+    # Results are sorted by click count descending.
+    return searchconsole().searchanalytics().query(siteUrl=url, body=qry).execute()
 
 
 def yt(qry):
-    return youtube().reports().query(qry).execute()
+    # https://github.com/youtube/api-samples/blob/master/python/yt_analytics_v2.py
+    return youtube().reports().query(**qry).execute()
+
+
+def gsc_print_table(response):
+  """Prints out a response table.
+  Each row contains key(s), clicks, impressions, CTR, and average position.
+  Args:
+    response: The server response to be printed as a table.
+  """
+  
+  if 'rows' not in response:
+    print('Empty response')
+    return
+
+  rows = response['rows']
+  row_format = '{:<20}' + '{:>20}' * 4
+  print(row_format.format('Keys', 'Clicks', 'Impressions', 'CTR', 'Position'))
+  for row in rows:
+    keys = ''
+    # Keys are returned only if one or more dimensions are requested.
+    if 'keys' in row:
+      keys = u','.join(row['keys']).encode('utf-8').decode()
+    print(row_format.format(
+        keys, row['clicks'], row['impressions'], row['ctr'], row['position']))
+
+def gsc_print_reponse(response):
+  for report in response.get("reports", []):
+    columnHeader = report.get("columnHeader", {})
+    dimensionHeaders = columnHeader.get("dimensions", [])
+    metricHeaders = columnHeader.get("metricHeader", {}).get("metricHeaderEntries", [])
+    rows = report.get("data", {}).get("rows", [])
+
+    for row in rows:
+      dimensions = row.get("dimensions", [])
+      dateRangeValues = row.get("metrics", [])
+
+      for header, dimension in zip(dimensionHeaders, dimensions):
+        print(header + ": " + dimension)
+
+      for i, values in enumerate(dateRangeValues):
+        print("    Date range index: " + str(i))
+        for metric, value in zip(metricHeaders, values.get("values")):
+          print("    "  + metric.get("name") + ": " + value)
 
 
 def ga_host(gaid):
