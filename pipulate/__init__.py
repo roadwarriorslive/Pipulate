@@ -394,6 +394,62 @@ def print_yt(results):
         print('No Results Found')
 
 
+def ga_accounts(everything=False):
+    service = google_service('analytics', 'v3')
+    accounts = service.management().accounts().list().execute()
+    if everything:
+        return accounts
+    else:
+        if accounts.get('items'):
+            alist = []
+            for item in accounts['items']:
+                alist.append((item['name'], item['id']))
+            return alist
+
+
+def ga_properties(account, everything=False):
+    service = google_service('analytics', 'v3')
+    properties = service.management().webproperties().list(
+        accountId=account).execute()
+    if everything:
+        return properties
+    else:
+        if properties.get('items'):
+            alist = []
+            for item in properties['items']:
+                alist.append((item['name'], item['id']))
+            return alist
+
+
+def ga_profiles(account, property_id, everything=False):
+    service = google_service('analytics', 'v3')
+    profiles = service.management().profiles().list(accountId=account,
+                                                      webPropertyId=property_id
+                                                     ).execute()
+    if everything:
+        return profiles
+    else:
+        if profiles.get('items'):
+            alist = []
+            for item in profiles['items']:
+                alist.append((item['name'], item['id']))
+            return alist
+
+
+def ga_everything():
+	accounts = ga_accounts()
+	for account in accounts:
+		print()
+		print("Account: %s %s" % account)
+		properties = ga_properties(account[1])
+		if properties:
+			for prop in properties:
+				print("%sProperty: %s" % (' '*4, prop))
+				profiles = ga_profiles(account[1], prop[1])
+				for profile in profiles:
+					print("%sProfile: %s" % (' '*8, profile))
+                
+
 def api_date(a_datetime, time=False):
     """Return datetime string in Google API friendly format."""
 
