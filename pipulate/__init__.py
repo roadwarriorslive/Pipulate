@@ -309,129 +309,89 @@ def link(gsheet_key):
     return 'https://docs.google.com/spreadsheets/d/%s/edit' % gsheet_key
 
 
-def analytics():
-    return build('analyticsreporting', 'v4', credentials=credentials)
-
-
-def searchconsole():
-    return build('webmasters', 'v3', credentials=credentials)
-
-
-def youtube():
-    return build('youtubeAnalytics', 'v2', credentials=credentials)
+def google_service(api, version):
+    return build(api, version, credentials=credentials)
 
 
 def ga(qry):
     # https://developers.google.com/analytics/devguides/reporting/core/v4/samples
-    return analytics().reports().batchGet(body=qry).execute()
+    service = google_service('analyticsreporting', 'v4')
+    return service.reports().batchGet(body=qry).execute()
 
 
 def gsc(url, qry):
     # https://github.com/googleapis/google-api-python-client/blob/master/samples/searchconsole/search_analytics_api_sample.py
     # https://developers.google.com/webmaster-tools/search-console-api-original/v3/how-tos/search_analytics.html
     # Results are sorted by click count descending.
-    return searchconsole().searchanalytics().query(siteUrl=url, body=qry).execute()
+    service = google_service('webmasters', 'v3')
+    return service.searchanalytics().query(siteUrl=url, body=qry).execute()
 
 
 def yt(qry):
     # https://github.com/youtube/api-samples/blob/master/python/yt_analytics_v2.py
-    return youtube().reports().query(**qry).execute()
+    service = google_service('youtubeAnalytics', 'v2')
+    return service.reports().query(**qry).execute()
 
 
-def gsc_print_table(response):
-  """Prints out a response table.
-  Each row contains key(s), clicks, impressions, CTR, and average position.
-  Args:
-    response: The server response to be printed as a table.
-  """
+def print_gsc(response):
+    """Prints out a response table.
+    Each row contains key(s), clicks, impressions, CTR, and average position.
+    Args:
+      response: The server response to be printed as a table.
+    """
   
-  if 'rows' not in response:
-    print('Empty response')
-    return
+    if 'rows' not in response:
+        print('Empty response')
+        return
 
-  rows = response['rows']
-  row_format = '{:<20}' + '{:>20}' * 4
-  print(row_format.format('Keys', 'Clicks', 'Impressions', 'CTR', 'Position'))
-  for row in rows:
-    keys = ''
-    # Keys are returned only if one or more dimensions are requested.
-    if 'keys' in row:
-      keys = u','.join(row['keys']).encode('utf-8').decode()
-    print(row_format.format(
+    rows = response['rows']
+    row_format = '{:<20}' + '{:>20}' * 4
+    print(row_format.format('Keys', 'Clicks', 'Impressions', 'CTR', 'Position'))
+    for row in rows:
+        keys = ''
+        # Keys are returned only if one or more dimensions are requested.
+        if 'keys' in row:
+            keys = u','.join(row['keys']).encode('utf-8').decode()
+        print(row_format.format(
         keys, row['clicks'], row['impressions'], row['ctr'], row['position']))
 
-def gsc_print_reponse(response):
-  for report in response.get("reports", []):
-    columnHeader = report.get("columnHeader", {})
-    dimensionHeaders = columnHeader.get("dimensions", [])
-    metricHeaders = columnHeader.get("metricHeader", {}).get("metricHeaderEntries", [])
-    rows = report.get("data", {}).get("rows", [])
 
-    for row in rows:
-      dimensions = row.get("dimensions", [])
-      dateRangeValues = row.get("metrics", [])
+def print_ga(response):
+    for report in response.get("reports", []):
+        columnHeader = report.get("columnHeader", {})
+        dimensionHeaders = columnHeader.get("dimensions", [])
+        metricHeaders = columnHeader.get("metricHeader", {}).get("metricHeaderEntries", [])
+        rows = report.get("data", {}).get("rows", [])
 
-      for header, dimension in zip(dimensionHeaders, dimensions):
-        print(header + ": " + dimension)
+        for row in rows:
+            dimensions = row.get("dimensions", [])
+            dateRangeValues = row.get("metrics", [])
 
-      for i, values in enumerate(dateRangeValues):
-        print("    Date range index: " + str(i))
-        for metric, value in zip(metricHeaders, values.get("values")):
-          print("    "  + metric.get("name") + ": " + value)
+            for header, dimension in zip(dimensionHeaders, dimensions):
+                print(header + ": " + dimension)
 
-
-def ga_host(gaid):
-    service = analytics()
-    try:
-        result = service.reports().batchGet(
-          body={
-            'reportRequests': [
-            {
-              'viewId': gaid,
-              'dateRanges': [{'startDate': 'yesterday', 'endDate': 'yesterday'}],
-              'metrics': [{'expression': 'ga:uniquePageviews'}],
-              'dimensions': [{'name': 'ga:hostname'}],
-              'orderBys': [{'fieldName': 'ga:uniquePageviews', 'sortOrder': 'DESCENDING'}]
-            }]
-          }
-        ).execute()
-        
-        hostname = result['reports'][0]['data']['rows'][0]['dimensions'][0]
-    except:
-        hostname = 'Unknown'
-    return hostname
+            for i, values in enumerate(dateRangeValues):
+                print("        Date range index: " + str(i))
+                for metric, value in zip(metricHeaders, values.get("values")):
+                    print("        "    + metric.get("name") + ": " + value)
 
 
-def gsc_old(prop, start, end, query, url):
-    service = searchconsole()
-    request = {
-        "startDate": start,
-        "endDate": end,
-        "dimensions": [
-            "query",
-            "page"],
-        "dimensionFilterGroups": [
-        {
-            "filters": [
-            {
-                "operator": "equals",
-                "expression": url,
-                "dimension": "page"
-            },
-            {
-                "operator": "equals",
-                "expression": query,
-                "dimension": "query"
-            }]
-        }]
-    }
-    dat = service.searchanalytics().query(siteUrl=prop, body=request).execute()
-    val = []
-    if 'rows' in dat:  # For the foolish Hobgoblins of PEP8 consistency
-        r = dat['rows'][0]
-        val = [start] + [r['keys'][0]] + [r['keys'][1]] + [
-            r['position']] + [r['clicks']] + [r['impressions']] + [r['ctr']]
-    return val
+def print_yt(results):
+    # Print headers.
+    output = []
+    for header in results.get('columnHeaders'):
+        output.append('%30s' % header.get('name'))
+    print(''.join(output))
+
+    # Print rows.
+    if results.get('rows', []):
+        for row in results.get('rows'):
+            output = []
+            for cell in row:
+                output.append('%30s' % cell)
+            print(''.join(output))
+    else:
+        print('No Results Found')
 
 
 def api_date(a_datetime, time=False):
