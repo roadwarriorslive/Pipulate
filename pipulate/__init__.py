@@ -437,17 +437,18 @@ def ga_profiles(account, property_id, everything=False):
 
 
 def ga_everything():
-	accounts = ga_accounts()
-	for account in accounts:
-		print()
-		print("Account: %s %s" % account)
-		properties = ga_properties(account[1])
-		if properties:
-			for prop in properties:
-				print("%sProperty: %s" % (' '*4, prop))
-				profiles = ga_profiles(account[1], prop[1])
-				for profile in profiles:
-					print("%sProfile: %s" % (' '*8, profile))
+    accounts = ga_accounts()
+    for account in accounts:
+        print()
+        print("Account: %s %s" % account)
+        properties = ga_properties(account[1])
+        if properties:
+            for prop in properties:
+                print("%sProperty: %s" % (' '*4, prop))
+                profiles = ga_profiles(account[1], prop[1])
+                if profiles:
+                    for profile in profiles:
+                        print("%sProfile: %s" % (' '*8, profile))
                 
 
 def api_date(a_datetime, time=False):
