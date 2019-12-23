@@ -376,6 +376,17 @@ def print_ga(response):
                     print("        "    + metric.get("name") + ": " + value)
 
 
+def list_ga(ga):
+	for reports in ga:
+		for item in ga[reports]:
+			for row in item['data']['rows']:
+				for metric in row['metrics']:
+					for value in metric:
+						returnme = metric[value]
+						break
+	return returnme
+
+
 def print_yt(results):
     # Print headers.
     output = []
