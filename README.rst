@@ -49,21 +49,25 @@ Linux).
 There is some flexibility in the API and ability to assign column labels from
 row 1, allowing you to adapt to your style. Here are some variations::
 
-    cl, df = pipulate.pull(tab=0, rows='A1:J5', columns=True)  # Row 1 is column labels
-    cl, df = pipulate.pull('Sheet1', rows='A1:J5')             # Name the sheet with a string
-    cl, df = pipulate.pull(0, rows=(1,5), cols=('A','J'))      # Use rows and Ax column style
-    cl, df = pipulate.pull(0, (1,5), (1,10))                   # Use row and column indexes
-    cl, df = pipulate.pull(2, rows='A1:J5')                    # Work on the 3rd tab.
-    cl, df = pipulate.pull(wksht, rows='A1:J5')                # Use GSpread Worksheet object
+    cl, df = pipulate.pull('Sheet1', rows='A1:J5')                # Most common usage
+    cl, df = pipulate.pull('Sheet1', rows='A1:J5', columns=True)  # Turn row 1 into column labels
+    cl, df = pipulate.pull(tab=0, rows='A1:J5')                   # Address tab by index
+    cl, df = pipulate.pull(0, rows='A1:J5')                   	  # Address tab by index, no label
+    cl, df = pipulate.pull(0, rows='A1:J')                   	  # Automatically figure out number of rows
+    cl, df = pipulate.pull(0, rows=(1,5), cols=('A','J'))         # Use the rows=, cols= interface
+    cl, df = pipulate.pull(0, (1,5), ('A','J'))        			  # Use row, col interface, no labels
+    cl, df = pipulate.pull(0, (1,5), (1,10))                      # Use row, col with numeric column index
+    cl, df = pipulate.pull(2, rows='A1:J5')                       # Work on the 3rd tab.
+    cl, df = pipulate.pull(wksht, rows='A1:J5')                   # Use GSpread Worksheet object
 
-As you can see, using argument labels is optional. The exact string-name,
-0-based numerical index or a GSpread Worksheet object-type must be in the first
-position. The 2nd position is the "rows" value, which may either be an
-Excel-like range or a row-range. If a row-range then you must also have a
-col-range in position 3 (or label the argument "cols"). The details of how you
-do it will vary with your project. It is often useful to name your tabs so you
-can do different manipulations to different tabs without worrying about
-changing their order in the spreadsheet Web user interface.
+Using argument labels is optional. The exact string-name, 0-based numerical
+index or a GSpread Worksheet object-type must be in the first position. The 2nd
+position is the "rows" value, which may either be an Excel-like range or a
+row-range. If a row-range then you must also have a col-range in position 3 (or
+label the argument "cols"). The details of how you do it will vary with your
+project. It is often useful to name your tabs so you can do different
+manipulations to different tabs without worrying about changing their order in
+the spreadsheet Web user interface.
 
 If you don't give any column labels, Pipulate will assign them automatically
 using the Excel-like letter-labels for columns. If you want to name your
