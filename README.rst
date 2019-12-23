@@ -52,10 +52,10 @@ row 1, allowing you to adapt to your style. Here are some variations::
     cl, df = pipulate.pull('Sheet1', rows='A1:J5')                # Most common usage
     cl, df = pipulate.pull('Sheet1', rows='A1:J5', columns=True)  # Turn row 1 into column labels
     cl, df = pipulate.pull(tab=0, rows='A1:J5')                   # Address tab by index
-    cl, df = pipulate.pull(0, rows='A1:J5')                   	  # Address tab by index, no label
-    cl, df = pipulate.pull(0, rows='A1:J')                   	  # Automatically figure out number of rows
+    cl, df = pipulate.pull(0, rows='A1:J5')                       # Address tab by index, no label
+    cl, df = pipulate.pull(0, rows='A1:J')                        # Automatically figure out number of rows
     cl, df = pipulate.pull(0, rows=(1,5), cols=('A','J'))         # Use the rows=, cols= interface
-    cl, df = pipulate.pull(0, (1,5), ('A','J'))        			  # Use row, col interface, no labels
+    cl, df = pipulate.pull(0, (1,5), ('A','J'))                   # Use row, col interface, no labels
     cl, df = pipulate.pull(0, (1,5), (1,10))                      # Use row, col with numeric column index
     cl, df = pipulate.pull(2, rows='A1:J5')                       # Work on the 3rd tab.
     cl, df = pipulate.pull(wksht, rows='A1:J5')                   # Use GSpread Worksheet object
