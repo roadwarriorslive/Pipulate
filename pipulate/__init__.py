@@ -23,7 +23,17 @@ gspread_sheet = None
 pygsheets_sheet = None
 column_uniqueness = False
 err = lambda : print(error()[0].__name__)
-
+jn = True
+try:
+    get_ipython()
+except NameError:
+    jn = False
+if jn:
+    from IPython.display import display, Markdown 
+    def h1(text):
+        display(Markdown('# %s' % text))
+    def h2(text):
+        display(Markdown('## %s' % text))
 
 def key(url):
     return sheet(url)
@@ -314,21 +324,88 @@ def google_service(api, version):
 
 
 def ga(qry):
-    # https://developers.google.com/analytics/devguides/reporting/core/v4/samples
+    """
+    https://developers.google.com/analytics/devguides/reporting/core/v4/samples
+    https://ga-dev-tools.appspot.com/request-composer/
+    ga_qry = {
+      "reportRequests": [
+        {
+          "viewId": "[Insert Profile ID here]",
+          "samplingLevel": "SMALL",
+          "dateRanges": [
+            {
+              "startDate": "2019-11-01",
+              "endDate": "2019-11-30"
+            }
+          ],
+          "metrics": [
+            {
+              "expression": "ga:sessions"
+            },
+            {
+              "expression": "ga:pageviews"
+            }
+          ],
+          "segments": [
+            {
+              "segmentId": "gaid::[Insert Segment ID here]"
+            }
+          ],
+          "dimensions": [
+            {
+              "name": "ga:segment"
+            }
+          ],
+        }
+      ]
+    }
+
+    ga = pipulate.ga(ga_qry)
+    pipulate.print_ga(ga)
+    """
+
+
     service = google_service('analyticsreporting', 'v4')
     return service.reports().batchGet(body=qry).execute()
 
 
 def gsc(url, qry):
-    # https://github.com/googleapis/google-api-python-client/blob/master/samples/searchconsole/search_analytics_api_sample.py
-    # https://developers.google.com/webmaster-tools/search-console-api-original/v3/how-tos/search_analytics.html
-    # Results are sorted by click count descending.
+    """
+    https://github.com/googleapis/google-api-python-client/blob/master/samples/searchconsole/search_analytics_api_sample.py
+    https://developers.google.com/webmaster-tools/search-console-api-original/v3/how-tos/search_analytics.html
+    Results are sorted by click count descending.
+
+    gsc_qry = {
+        'startDate': '2019-11-01',
+        'endDate': '2019-11-30',
+        'dimensions': ['query'],
+        'rowLimit': 10
+        }
+
+    gsc = pipulate.gsc('https://www.pcmag.com/', gsc_qry)
+    pipulate.print_gsc(gsc)
+    """
+
+
     service = google_service('webmasters', 'v3')
     return service.searchanalytics().query(siteUrl=url, body=qry).execute()
 
 
 def yt(qry):
-    # https://github.com/youtube/api-samples/blob/master/python/yt_analytics_v2.py
+    """
+    https://github.com/youtube/api-samples/blob/master/python/yt_analytics_v2.py
+
+    yt_qry = {
+        'ids': 'contentOwner==[YouTube content owner ID here]',
+        'startDate': '2019-01-01',
+        'endDate': '2019-12-31',
+        'metrics': 'views',
+        'filters': 'video==[video ID here]'
+        }
+    yt = pipulate.yt(yt_qry)
+    pipulate.print_yt(yt)
+    """
+
     service = google_service('youtubeAnalytics', 'v2')
     return service.reports().query(**qry).execute()
 
@@ -377,14 +454,14 @@ def print_ga(response):
 
 
 def list_ga(ga):
-	for reports in ga:
-		for item in ga[reports]:
-			for row in item['data']['rows']:
-				for metric in row['metrics']:
-					for value in metric:
-						returnme = metric[value]
-						break
-	return returnme
+    for reports in ga:
+        for item in ga[reports]:
+            for row in item['data']['rows']:
+                for metric in row['metrics']:
+                    for value in metric:
+                        returnme = metric[value]
+                        break
+    return returnme
 
 
 def print_yt(results):
