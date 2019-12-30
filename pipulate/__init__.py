@@ -366,7 +366,10 @@ def ga(qry):
 
 
     service = google_service('analyticsreporting', 'v4')
-    return service.reports().batchGet(body=qry).execute()
+    try:
+        return service.reports().batchGet(body=qry).execute()
+    except:
+        return
 
 
 def gsc(url, qry):
@@ -454,13 +457,16 @@ def print_ga(response):
 
 
 def list_ga(ga):
-    for reports in ga:
-        for item in ga[reports]:
-            for row in item['data']['rows']:
-                for metric in row['metrics']:
-                    for value in metric:
-                        returnme = metric[value]
-                        break
+    returnme = [0, 0]
+    if ga:
+        for reports in ga:
+            for item in ga[reports]:
+                if 'rows' in item['data']:
+                    for row in item['data']['rows']:
+                        for metric in row['metrics']:
+                            for value in metric:
+                                returnme = metric[value]
+                                break
     return returnme
 
 
