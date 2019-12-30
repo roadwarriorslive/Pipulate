@@ -413,6 +413,12 @@ def yt(qry):
     return service.reports().query(**qry).execute()
 
 
+def ga_v3(qry):
+    service = google_service('analytics', 'v3')
+    data = service.data().ga().get(**qry).execute()
+    return data
+
+
 def print_gsc(response):
     """Prints out a response table.
     Each row contains key(s), clicks, impressions, CTR, and average position.
