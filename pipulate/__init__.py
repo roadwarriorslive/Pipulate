@@ -28,6 +28,10 @@ try:
     get_ipython()
 except NameError:
     jn = False
+    def h1(text):
+        print('# %s' % text)
+    def h2(text):
+        print('## %s' % text)
 if jn:
     from IPython.display import display, Markdown 
     def h1(text):
@@ -158,8 +162,9 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
         try:
             cl = worksheet_.range(row1, col1, row2, col2)
         except:
-            print('Rate quota possibly exceeded. Wait a minute and try again.')
-            raise SystemExit()
+            credentials = login()
+            # print('Rate quota possibly exceeded. Wait a minute and try again.')
+            # raise SystemExit()
         list_of_lists = cl_to_list(cl)
         if not columns:
             cell_list = worksheet_.range(row1, col1, row1, col2)
@@ -323,7 +328,7 @@ def google_service(api, version):
     return build(api, version, credentials=credentials)
 
 
-def ga(qry):
+def ga(qry=False):
     """
     https://developers.google.com/analytics/devguides/reporting/core/v4/samples
     https://ga-dev-tools.appspot.com/request-composer/
@@ -366,10 +371,14 @@ def ga(qry):
 
 
     service = google_service('analyticsreporting', 'v4')
-    try:
+    if qry:
         return service.reports().batchGet(body=qry).execute()
-    except:
-        return
+    else:
+        print("Design a query at:  https://ga-dev-tools.appspot.com/request-composer/")
+        print("and then invoke the query using foo = pipulate.ga(query).")
+        print("You can extract result values as a list with pipuate.list_ga(foo).")
+        
+
 
 
 def gsc(url, qry):
@@ -536,21 +545,44 @@ def ga_profiles(account, property_id, everything=False):
             return alist
 
 
+def ga_hostname(gaid):
+    query = {'reportRequests': [{'dateRanges': [{'endDate': 'yesterday',
+                                         'startDate': 'yesterday'}],
+                         'dimensions': [{'name': 'ga:hostname'}],
+                         'metrics': [{'alias': '', 'expression': 'ga:pageviews'}],
+                         'orderBys': [{'fieldName': 'ga:pageviews',
+                                       'sortOrder': 'DESCENDING'}],
+                         'samplingLevel': 'SMALL',
+                         'viewId': str(gaid)}]}
+    try:
+        result = ga(query)
+        hostname = result['reports'][0]['data']['rows'][0]['dimensions'][0]
+    except:
+        hostname = 'Unknown'
+    return hostname
+
 def ga_everything():
+    acts = {}
     accounts = ga_accounts()
     for account in accounts:
         print()
         print("Account: %s %s" % account)
+        key, val = account
+        acts[account] = []
         properties = ga_properties(account[1])
         if properties:
             for prop in properties:
                 print("%sProperty: %s" % (' '*4, prop))
                 profiles = ga_profiles(account[1], prop[1])
                 if profiles:
+                    plist = []
                     for profile in profiles:
                         print("%sProfile: %s" % (' '*8, profile))
-                
+                        plist.append(profile)
+                    acts[account].append({prop: plist})
+    return acts
 
+                
 def api_date(a_datetime, time=False):
     """Return datetime string in Google API friendly format."""
 
