@@ -6,12 +6,15 @@
 # There are many frameworks like it,  |_| but this one is mine. --MikeL
 
 
+import re
 import pickle
 import gspread
+import requests
 import pygsheets
 import pandas as pd
 from sys import stdout
 from os import environ
+from itertools import cycle
 from sys import exc_info as error
 from apiclient.discovery import build
 import google.auth.transport.requests
@@ -49,9 +52,61 @@ def persist(obj, filename='default.pickle'):
 
 
 def persists(filename):
-    with open(filename, 'rb') as foo:
-        b = pickle.load(foo)
-    return b
+    with open(filename, 'rb') as handle:
+        return_me = pickle.load(handle)
+    return return_me
+
+
+common_agents = '''User-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36
+Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3095.5 Safari/537.36
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36
+Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36
+Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36
+Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36
+Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.1 Safari/603.1.30
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36
+Mozilla/5.0 (Windows NT 10.0; WOW64; rv:53.0) Gecko/20100101 Firefox/53.0
+Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36
+Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.81 Safari/537.36'''.split('\n')
+agent_cycler = cycle(common_agents)
+
+agent = next(agent_cycler)
+user_agent = {'User-agent': agent}
+
+
+def serp(keyword, filename='serp_default.pkl'):
+
+    url = "https://www.google.com/search?q=%s" % keyword
+    response = requests.get(url, headers=user_agent)
+    pattern = re.compile('<div class="r">(.*?)</div>')
+    result_divs = re.findall(pattern, response.text)
+
+    list_of_tuples = list()
+    for aresult in result_divs:
+        pat_url = re.compile('<a href="(.*?)"')
+        the_url_group = re.match(pat_url, aresult)
+        pat_title = re.compile('<cite .*>(.*?)</cite>')
+        the_title_group = re.search(pat_title, aresult)
+        #print(the_title_group)
+        try:
+            the_url = the_url_group.groups(0)[0]
+        except:
+            the_url = ''
+        try:
+            the_title = the_title_group.groups(0)[0]
+        except:
+            the_title = ''
+        result_tuple = (the_url, the_title)
+        list_of_tuples.append(result_tuple)
+    print(list_of_tuples)
+    
+    both_objects = (response, list_of_tuples)
+
+    persist(both_objects, filename)
+    return both_objects
+    
 
 
 def sheet(key):
