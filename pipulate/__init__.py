@@ -43,6 +43,17 @@ def key(url):
     return sheet(url)
 
 
+def persist(obj, filename='default.pickle'):
+    with open(filename, 'wb') as handle:
+        pickle.dump(obj, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+
+def persists(filename):
+    with open(filename, 'rb') as foo:
+        b = pickle.load(foo)
+    return b
+
+
 def sheet(key):
     global gspread_authorized, pygsheets_authorized
     global gspread_sheet, pygsheets_sheet
