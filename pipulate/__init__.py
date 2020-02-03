@@ -15,9 +15,11 @@ import pandas as pd
 from sys import stdout
 from os import environ
 from itertools import cycle
+from bs4 import BeautifulSoup
 from sys import exc_info as error
 from apiclient.discovery import build
 import google.auth.transport.requests
+from urllib.parse import urlparse, urljoin
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 
@@ -74,6 +76,20 @@ agent_cycler = cycle(common_agents)
 
 agent = next(agent_cycler)
 user_agent = {'User-agent': agent}
+
+
+def crawl(site):
+    r = requests.get(site)
+
+    soup = BeautifulSoup(r.text, 'lxml')
+    links = soup.find_all('a', href=True)
+
+    mydom = urlparse(site).netloc
+    scheme = urlparse(site).scheme
+
+    links1 = [urljoin(site, x['href']) for x in links if x['href'] and x['href'] != '/' and x['href'][0] != '#']
+    links2 =  [x for x in links1 if urlparse(x).netloc == mydom and urlparse(x).scheme == scheme]
+    return links2
 
 
 def serp(keyword, filename='serp_default.pkl', num=10):
