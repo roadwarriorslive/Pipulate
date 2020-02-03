@@ -1,4 +1,4 @@
-#  _____ _     _       _       ____  _             _     
+#  _____ _     _       _       ____  _             _       _
 # |_   _| |__ (_)___  (_)___  |  _ \(_)_ __  _   _| | __ _| |_ ___
 #   | | | '_ \| / __| | / __| | |_) | | '_ \| | | | |/ _` | __/ _ \
 #   | | | | | | \__ \ | \__ \ |  __/| | |_) | |_| | | (_| | ||  __/
@@ -76,9 +76,9 @@ agent = next(agent_cycler)
 user_agent = {'User-agent': agent}
 
 
-def serp(keyword, filename='serp_default.pkl'):
+def serp(keyword, filename='serp_default.pkl', num=10):
 
-    url = "https://www.google.com/search?q=%s" % keyword
+    url = "https://www.google.com/search?num=%s&q=%s" % (num, keyword)
     response = requests.get(url, headers=user_agent)
     pattern = re.compile('<div class="r">(.*?)</div>')
     result_divs = re.findall(pattern, response.text)
