@@ -78,18 +78,28 @@ agent = next(agent_cycler)
 user_agent = {'User-agent': agent}
 
 
-def crawl(site):
+def raw_links(site):
     r = requests.get(site)
-
     soup = BeautifulSoup(r.text, 'lxml')
     links = soup.find_all('a', href=True)
+    return links
 
+
+def crawl(site):
+    links = raw_links(site)
     mydom = urlparse(site).netloc
     scheme = urlparse(site).scheme
-
     links1 = [urljoin(site, x['href']) for x in links if x['href'] and x['href'] != '/' and x['href'][0] != '#']
     links2 =  [x for x in links1 if urlparse(x).netloc == mydom and urlparse(x).scheme == scheme]
     return links2
+
+
+def offsite_links(site):
+    links = raw_links(site)
+    parts = urlparse(site)
+    local_link = '%s://%s' % (parts.scheme, parts.netloc)
+    local_links = [x['href'] for x in links if x['href'][:4] == 'http' and x['href'][:len(local_link)] != local_link]
+    return local_links
 
 
 def serp(keyword, filename='serp_default.pkl', num=10):
