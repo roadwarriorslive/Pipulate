@@ -78,35 +78,41 @@ agent = next(agent_cycler)
 user_agent = {'User-agent': agent}
 
 
-def crawl(site):
+def links(site):
     r = requests.get(site, headers=user_agent)
     soup = BeautifulSoup(r.text, 'lxml')
-    links = soup.find_all('a', href=True)
+    links1 = soup.find_all('a', href=True)
     parts = urlparse(site)
     scheme = urlparse(site).scheme
-    links1 = [urljoin(site, x['href']) for x in links if x['href'] and x['href'] != '/' and x['href'][0] != '#']
-    links2 =  [x for x in links1 if urlparse(x).netloc == parts.netloc and urlparse(x).scheme == scheme]
+    links2 = [urljoin(site, x['href']) for x in links1 if x['href'] and x['href'] != '/' and x['href'][0] != '#']
+    links3 =  [x for x in links2 if urlparse(x).netloc == parts.netloc and urlparse(x).scheme == scheme]
     local_link = '%s://%s' % (parts.scheme, parts.netloc)
-    local_links = [x['href'] for x in links if x['href'][:4] == 'http' and x['href'][:len(local_link)] != local_link]
-    return (links2, local_links)
+    local_links = [x['href'] for x in links1 if x['href'][:4] == 'http' and x['href'][:len(local_link)] != local_link]
+    return (links3, local_links)
 
 
-def oneclick_crawl(site):
-    links = crawl(site)
-    persist(set(links[0]), 'unvisited.pkl')
-    persist(set([site]), 'visited.pkl')
+def crawl(site, restart=True):
+    page_links = links(site)
+    if restart:
+        persist(set(page_links[0]), 'unvisited.pkl')
+        persist(set([site]), 'visited.pkl')
+    msg = ''
     for i, url in enumerate(persists('unvisited.pkl')):
-        unvsited = persists('unvisited.pkl')
-        unvsited.remove(url)
+        unvisited = persists('unvisited.pkl')
+        unvisited.remove(url)
         visited = persists('visited.pkl')
         visited.add(url)
-        new_links = crawl(url)
-        print('%s ' % i, end="")
+        new_links = links(url)
+        #print('%s ' % i, end="")
+        msg = "%s. Unvisited: %s, Visited: %s" % (i + 1, len(unvisited), len(visited))
+        print(msg)
         for new_link in new_links[0]:
             if new_link not in visited:
                 visited.add(new_link)
                 persist(visited, 'visited.pkl')
-        persist(unvsited, 'unvisited.pkl')    
+        persist(unvisited, 'unvisited.pkl')    
+    print(msg)
+    print('Done crawl')
     return visited
 
 
