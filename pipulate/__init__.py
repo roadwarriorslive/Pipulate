@@ -79,7 +79,7 @@ user_agent = {'User-agent': agent}
 
 
 def crawl(site):
-    r = requests.get(site)
+    r = requests.get(site, headers=user_agent)
     soup = BeautifulSoup(r.text, 'lxml')
     links = soup.find_all('a', href=True)
     parts = urlparse(site)
@@ -89,6 +89,25 @@ def crawl(site):
     local_link = '%s://%s' % (parts.scheme, parts.netloc)
     local_links = [x['href'] for x in links if x['href'][:4] == 'http' and x['href'][:len(local_link)] != local_link]
     return (links2, local_links)
+
+
+def oneclick_crawl(site):
+    links = crawl(site)
+    persist(set(links[0]), 'unvisited.pkl')
+    persist(set([site]), 'visited.pkl')
+    for i, url in enumerate(persists('unvisited.pkl')):
+        unvsited = persists('unvisited.pkl')
+        unvsited.remove(url)
+        visited = persists('visited.pkl')
+        visited.add(url)
+        new_links = crawl(url)
+        print('%s ' % i, end="")
+        for new_link in new_links[0]:
+            if new_link not in visited:
+                visited.add(new_link)
+                persist(visited, 'visited.pkl')
+        persist(unvsited, 'unvisited.pkl')    
+    return visited
 
 
 def serp(keyword, filename='serp_default.pkl', num=10):
