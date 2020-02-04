@@ -99,9 +99,11 @@ def crawl(site, restart=True):
         Path.mkdir(pickles)
     unvisited_filename = pickles / 'unvisited.pkl'
     visited_filename = pickles / 'visited.pkl'
+    offsite_filename = pickles / 'offsite.pkl'
     if restart:
         persist(set(page_links[0]), unvisited_filename)
         persist(set([site]), visited_filename)
+        persist(set(), offsite_filename)
     msg = ''
     for i, url in enumerate(persists(unvisited_filename)):
         unvisited = persists(unvisited_filename)
@@ -109,7 +111,9 @@ def crawl(site, restart=True):
         visited = persists(visited_filename)
         visited.add(url)
         new_links = links(url)
-        #print('%s ' % i, end="")
+        offsite = persists(offsite_filename)
+        offsite = offsite | set(new_links[1])
+        persist(offsite, offsite_filename)
         msg = "%s. Unvisited: %s, Visited: %s" % (i + 1, len(unvisited), len(visited))
         print(msg)
         for new_link in new_links[0]:
@@ -119,9 +123,8 @@ def crawl(site, restart=True):
                 visited.add(new_link)
                 persist(visited, visited_filename)
         persist(unvisited, unvisited_filename)    
-    print(msg)
     print('Done crawl')
-    return visited
+    return (visited, offsite)
 
 
 def serp(keyword, filename='serp_default.pkl', num=10):
