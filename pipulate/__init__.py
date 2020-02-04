@@ -113,6 +113,8 @@ def crawl(site, restart=True):
         msg = "%s. Unvisited: %s, Visited: %s" % (i + 1, len(unvisited), len(visited))
         print(msg)
         for new_link in new_links[0]:
+            if '#' in new_link:
+                new_link = new_link[:new_link.find('#')]
             if new_link not in visited:
                 visited.add(new_link)
                 persist(visited, visited_filename)
