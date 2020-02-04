@@ -14,6 +14,7 @@ import pygsheets
 import pandas as pd
 from sys import stdout
 from os import environ
+from pathlib import Path
 from itertools import cycle
 from bs4 import BeautifulSoup
 from sys import exc_info as error
@@ -93,14 +94,19 @@ def links(site):
 
 def crawl(site, restart=True):
     page_links = links(site)
+    pickles = Path.cwd() / 'pickles'
+    if not pickles.exists():
+        Path.mkdir(pickles)
+    unvisited_filename = pickles / 'unvisited.pkl'
+    visited_filename = pickles / 'visited.pkl'
     if restart:
-        persist(set(page_links[0]), 'unvisited.pkl')
-        persist(set([site]), 'visited.pkl')
+        persist(set(page_links[0]), unvisited_filename)
+        persist(set([site]), visited_filename)
     msg = ''
-    for i, url in enumerate(persists('unvisited.pkl')):
-        unvisited = persists('unvisited.pkl')
+    for i, url in enumerate(persists(unvisited_filename)):
+        unvisited = persists(unvisited_filename)
         unvisited.remove(url)
-        visited = persists('visited.pkl')
+        visited = persists(visited_filename)
         visited.add(url)
         new_links = links(url)
         #print('%s ' % i, end="")
@@ -109,8 +115,8 @@ def crawl(site, restart=True):
         for new_link in new_links[0]:
             if new_link not in visited:
                 visited.add(new_link)
-                persist(visited, 'visited.pkl')
-        persist(unvisited, 'unvisited.pkl')    
+                persist(visited, visited_filename)
+        persist(unvisited, unvisited_filename)    
     print(msg)
     print('Done crawl')
     return visited
