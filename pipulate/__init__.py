@@ -16,6 +16,7 @@ from sys import stdout
 from os import environ
 from pathlib import Path
 from itertools import cycle
+from inspect import getsource
 from bs4 import BeautifulSoup
 from sys import exc_info as error
 from apiclient.discovery import build
@@ -38,12 +39,16 @@ except NameError:
         print('# %s' % text)
     def h2(text):
         print('## %s' % text)
+    def h3(text):
+        print('### %s' % text)
 if jn:
     from IPython.display import display, Markdown 
     def h1(text):
         display(Markdown('# %s' % text))
     def h2(text):
         display(Markdown('## %s' % text))
+    def h3(text):
+        display(Markdown('### %s' % text))
 
 def key(url):
     return sheet(url)
@@ -197,6 +202,10 @@ def sheet(key):
 
 def help():
     print("Welcome to Pipulate, eaiser Google Sheet automation for SEO and more.")
+    print("Google Analytics example functions are now built-in. For examples:")
+    print()
+    print('    pipulate.examples()')
+    print()
     print("Load a Google Sheet with the following command (replace text between quotes):")
     print()
     print('    pipulate.sheet("Insert your Google Sheet key or URL")')
@@ -698,6 +707,60 @@ def ga_everything():
                         plist.append(profile)
                     acts[account].append({prop: plist})
     return acts
+
+
+
+
+
+
+
+
+
+
+
+
+
+def organic_traffic(view_id, start_date, end_date):
+    if not type(view_id) == str:
+        view_id = str(view_id) 
+    ga_qry = {'reportRequests': [{'dateRanges': [{'endDate': end_date, 'startDate': start_date}],
+                     'dimensions': [{'name': 'ga:segment'}],
+                     'metrics': [{'expression': 'ga:users'},
+                                 {'expression': 'ga:newusers'},
+                                 {'expression': 'ga:bouncerate'},
+                                 {'expression': 'ga:pageviewsPerSession'},
+                                 {'expression': 'ga:avgSessionDuration'}],
+                     'pageSize': '1',
+                     'samplingLevel': 'SMALL',
+                     'segments': [{'segmentId': 'gaid::-5'}],
+                     'viewId': view_id}]}
+    ga_response = ga(ga_qry)
+    return ga_response
+
+
+def organic_traffic_v3(gaid, start_date, end_date):
+    ga_qry = {'ids': 'ga:%s' % gaid,
+    'start_date': start_date,
+    'end_date': end_date,
+    'metrics': 'ga:users,ga:newusers,ga:bouncerate,ga:pageviewsPerSession,ga:avgSessionDuration',
+    'segment': 'gaid::-5',
+    'max_results': '1'}
+    ga_response = ga_v3(ga_qry)
+    return ga_response
+
+
+def examples():
+    print("This is a Google Analytics API V4 example. You can copy and paste")
+    print("the code into Jupyter Notebook and put 'pipulate.' before ga(ga_qry)")
+    print("and it will be available.")
+    print()
+    print(getsource(organic_traffic))
+    print()
+    print("This is a Google Analytics API V3 example.")
+    print()
+    print(getsource(organic_traffic_v3))
+
+
 
                 
 def api_date(a_datetime, time=False):
