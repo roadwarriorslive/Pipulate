@@ -202,6 +202,13 @@ def sheet(key):
 
 def help():
     print("Welcome to Pipulate, eaiser Google Sheet automation for SEO and more.")
+    print()
+    print('This is a dynamic library, always being improved and the API is subject to change.')
+    print('Get the latest by issuing the following command: (trick can be used on any package)')
+    print()
+    print('    import sys')
+    print('    !{sys.executable} -m pip install --upgrade --no-cache-dir pipulate')
+    print()
     print("Google Analytics example functions are now built-in. For examples:")
     print()
     print('    pipulate.examples()')
