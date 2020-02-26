@@ -30,6 +30,7 @@ gspread_sheet = None
 pygsheets_sheet = None
 column_uniqueness = False
 err = lambda : print(error()[0].__name__)
+
 jn = True
 try:
     get_ipython()
@@ -41,14 +42,19 @@ except NameError:
         print('## %s' % text)
     def h3(text):
         print('### %s' % text)
+    def h4(text):
+        print('#### %s' % text)
 if jn:
-    from IPython.display import display, Markdown 
+    from IPython.display import display, Markdown
     def h1(text):
         display(Markdown('# %s' % text))
     def h2(text):
         display(Markdown('## %s' % text))
     def h3(text):
         display(Markdown('### %s' % text))
+    def h4(text):
+        display(Markdown('#### %s' % text))
+
 
 def key(url):
     return sheet(url)
@@ -87,14 +93,27 @@ user_agent = {'User-agent': agent}
 def links(site):
     r = requests.get(site, headers=user_agent)
     soup = BeautifulSoup(r.text, 'lxml')
-    links1 = soup.find_all('a', href=True)
+    raw_links = soup.find_all('a', href=True)
     parts = urlparse(site)
     scheme = urlparse(site).scheme
-    links2 = [urljoin(site, x['href']) for x in links1 if x['href'] and x['href'] != '/' and x['href'][0] != '#']
-    links3 =  [x for x in links2 if urlparse(x).netloc == parts.netloc and urlparse(x).scheme == scheme]
+    links = []
+    for alink in [x for x in raw_links if x['href'] 
+                                      and x['href'] != '/' 
+                                      and x['href'][0] != '#'
+                                      and x['href'][:11] != 'javascript:']:
+        ahref = urljoin(site, alink['href'])
+        if urlparse(ahref).netloc == parts.netloc and urlparse(ahref).scheme == scheme:
+            rel = None
+            if alink.get('rel'):
+                rel = alink.get('rel')
+            links.append(Link(True, rel, alink['href']))
     local_link = '%s://%s' % (parts.scheme, parts.netloc)
-    local_links = [x['href'] for x in links1 if x['href'][:4] == 'http' and x['href'][:len(local_link)] != local_link]
-    return (links3, local_links)
+    for alink in [x for x in raw_links if x['href'][:4] == 'http' and x['href'][:len(local_link)] != local_link]:
+        rel = None
+        if alink.get('rel'):
+            rel = alink.get('rel')
+        links.append(Link(False, rel, alink['href']))
+    return (links)
 
 
 def crawl(site, restart=True):
