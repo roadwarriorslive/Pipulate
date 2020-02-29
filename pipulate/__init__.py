@@ -19,6 +19,7 @@ from itertools import cycle
 from inspect import getsource
 from bs4 import BeautifulSoup
 from sys import exc_info as error
+from collections import namedtuple
 from apiclient.discovery import build
 import google.auth.transport.requests
 from urllib.parse import urlparse, urljoin
@@ -91,6 +92,7 @@ user_agent = {'User-agent': agent}
 
 
 def links(site):
+    Link = namedtuple('Link', 'onsite, rel, url')
     r = requests.get(site, headers=user_agent)
     soup = BeautifulSoup(r.text, 'lxml')
     raw_links = soup.find_all('a', href=True)
