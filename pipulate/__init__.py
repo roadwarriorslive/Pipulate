@@ -111,8 +111,8 @@ def links(site):
                 rel = alink.get('rel')
                 rel = ','.join([x.lower() for x in sorted(rel)])
             links.append(Link(True, rel, ahref, urlparse(alink['href'])))
-    local_link = '%s://%s' % (parts.scheme, parts.netloc)
-    for alink in [x for x in raw_links if x['href'][:4] == 'http' and x['href'][:len(local_link)] != local_link]:
+    offsite_link = '%s://%s' % (parts.scheme, parts.netloc)
+    for alink in [x for x in raw_links if x['href'][:4] == 'http' and x['href'][:len(offsite_link)] != offsite_link]:
         rel = None
         if alink.get('rel'):
             rel = alink.get('rel')
@@ -121,41 +121,41 @@ def links(site):
     return (links)
 
 
-def crawl(site, restart=True, crawl_page_limit=False):
+def crawl(site, crawl_page_limit=500, restart=True):
     print('Crawling up to %s pages from %s' % (crawl_page_limit, site))
     pickles = Path.cwd() / 'pickles'
     if not pickles.exists():
         Path.mkdir(pickles)
     unvisited_filename = pickles / 'unvisited.pkl'
     visited_filename = pickles / 'visited.pkl'
-    offsite_filename = pickles / 'offsite.pkl'
+    alllinks_filename = pickles / 'alllinks.pkl'
     if restart:
-        page_links = pipulate.links(site)
-        pipulate.persist(set(page_links), unvisited_filename)
-        pipulate.persist(set(), visited_filename)
-        pipulate.persist(set(), offsite_filename)
+        page_links = links(site)
+        persist(set(page_links), unvisited_filename)
+        persist(set(), visited_filename)
+        persist(set(), alllinks_filename)
     msg = ''
-    for i, alink in enumerate(pipulate.persists(unvisited_filename)):
-        unvisited = pipulate.persists(unvisited_filename)
+    for i, alink in enumerate(persists(unvisited_filename)):
+        unvisited = persists(unvisited_filename)
         unvisited.remove(alink)
-        visited = pipulate.persists(visited_filename)
+        visited = persists(visited_filename)
         if crawl_page_limit != False and len(visited) > crawl_page_limit:
             print('Hit crawl page limit.')
             break
         visited.add(alink)
-        new_links = pipulate.links(alink.url)
-        offsite = pipulate.persists(offsite_filename)
-        offsite = offsite | set(new_links)
-        pipulate.persist(offsite, offsite_filename)
+        new_links = links(alink.url)
+        all_links = persists(alllinks_filename)
+        all_links = all_links | set(new_links)
+        persist(all_links, alllinks_filename)
         msg = "%s. Unvisited: %s, Visited: %s" % (i + 1, len(unvisited), len(visited))
         print(msg)
         for new_link in new_links:
             if new_link not in visited:
                 visited.add(new_link)
-                pipulate.persist(visited, visited_filename)
-        pipulate.persist(unvisited, unvisited_filename)
+                persist(visited, visited_filename)
+        persist(unvisited, unvisited_filename)
     print('Done crawl')
-    return offsite
+    return all_links
 
 
 def serp(keyword, filename='serp_default.pkl', num=10):
