@@ -182,7 +182,7 @@ def serp(keyword, filename='serp_default.pkl', num=10):
             the_title = ''
         result_tuple = (the_url, the_title)
         list_of_tuples.append(result_tuple)
-    print(list_of_tuples)
+    #print(list_of_tuples)
     
     both_objects = (response, list_of_tuples)
 
