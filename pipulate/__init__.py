@@ -123,7 +123,7 @@ def links(site):
 
 def crawl(site, crawl_page_limit=500, restart=True):
     print('Crawling up to %s pages from %s' % (crawl_page_limit, site))
-    pickles = Path.cwd() / 'pickles'
+    pickles = Path.cwd() / 'crawl'
     if not pickles.exists():
         Path.mkdir(pickles)
     unvisited_filename = pickles / 'unvisited.pkl'
