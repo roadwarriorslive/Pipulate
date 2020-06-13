@@ -66,8 +66,7 @@ def minute_adder(minutes):
     the_time = datetime.now().time()
     today = date.today()
     beat = timedelta(minutes=minutes)
-    return_value = datetime.combine(today, the_time) + beat
-    return return_value
+    return datetime.combine(today, the_time) + beat
 
 
 if __name__ == '__main__':

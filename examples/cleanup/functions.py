@@ -9,8 +9,8 @@ print("Use proxies: %s" % use_proxies)
 
 
 if use_proxies:
-    proxy_list = list()
-    bad_blocks = list()
+    proxy_list = []
+    bad_blocks = []
     with open('goodproxies.txt') as proxies:
         for line in proxies:
             proxy_list.append(line[:-1])
@@ -18,7 +18,7 @@ if use_proxies:
         for line in proxies:
             bad_blocks.append(line[:-1])
     proxy_cycler = cycle(proxy_list)
-    
+
 
 common_agents = list()
 with open('useragents.txt') as agents:
@@ -33,20 +33,17 @@ def fu():
 
 def serp(row):
     keyword = row[0]
-    
+
     from urllib.parse import quote_plus
     global use_proxies, proxy_cycler, bad_blocks, agent_cycler
-        
+
     rpp=20
     print("Keyword: %s" % keyword)
     search_url = 'https://www.google.com/search?num=%s&q=%s' % (rpp, quote_plus(keyword))
     pattern = re.compile('<h3 class="r"><a href="(http.*?)"')
     landing_pages = []
-    proxied_retries = 3
-    unproxied_retries = 1
-    sleep_delay = 2
     try_proxies = 1000
-    
+
     agent = next(agent_cycler)
     user_agent = {'User-agent': agent}
     # The preferred path if you have anonymous web proxies.
@@ -63,6 +60,8 @@ def serp(row):
         hide = ('*' * len(ip))[:p]+ip[p:]
         proxy = {'http': 'http://'+ip, 'https': 'https://'+ip}
         print('Using proxy: %s' % hide)
+        proxied_retries = 3
+        sleep_delay = 2
         for i in range(proxied_retries):
             response = requests.get(search_url, proxies=proxy, headers=user_agent)
             landing_pages = re.findall(pattern, response.text)
@@ -71,7 +70,8 @@ def serp(row):
                 time.sleep.wait(sleep_delay)
                 break
     else:
-        for i in range(unproxied_retries):
+        unproxied_retries = 1
+        for _ in range(unproxied_retries):
             #try:
             response = requests.get(search_url, headers=user_agent)
             landing_pages = re.findall(pattern, response.text)
@@ -79,7 +79,7 @@ def serp(row):
             #except:
             #    agent = next(agent_cycler)
             #    user_agent = {'User-agent': agent}
-        
+
     return landing_pages
 
 
