@@ -305,8 +305,8 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
         worksheet_ = check_worksheet(tab)
     except:
         check_credentials(credentials)
-    
-    if gspread_sheet == None:
+
+    if gspread_sheet is None:
         print('Make sure you pipulate.sheet("key or url") first.')
         raise SystemExit()
 
@@ -316,7 +316,7 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
             original_row1 = row1
             row1 = row1 + 1
         col1, col2 = cols
-        if not type(col1) == int and not type(col2) == int:
+        if not (type(col1) == int or type(col2) == int):
             col1, col2 = a1(col1, reverse=True), a1(col2, reverse=True)
         try:
             cl = worksheet_.range(row1, col1, row2, col2)
@@ -355,7 +355,7 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
             cl_cols = worksheet_.range(original_range)
         columns = cl_to_list(cl_cols)[0]
     if column_uniqueness: 
-        if not all(v for v in columns):
+        if not all(columns):
             print(columns)
             print("All columns must have labels when using columns=True or columns=list.")
             raise SystemExit()
@@ -404,8 +404,7 @@ def shift_range(sheet_range):
     row_one = int(upper_left[len(upper_left) - 1:])
     col_one = upper_left[:len(upper_left) - 1]
     row_two = row_one + 1
-    shifted_down = "".join([col_one, str(row_two), ":", range_tuple[1]])
-    return shifted_down
+    return "".join([col_one, str(row_two), ":", range_tuple[1]])
 
 
 def check_worksheet(worksheet):
@@ -583,8 +582,7 @@ def yt(qry):
 
 def ga_v3(qry):
     service = google_service('analytics', 'v3')
-    data = service.data().ga().get(**qry).execute()
-    return data
+    return service.data().ga().get(**qry).execute()
 
 
 def print_gsc(response):
@@ -654,9 +652,7 @@ def print_yt(results):
     # Print rows.
     if results.get('rows', []):
         for row in results.get('rows'):
-            output = []
-            for cell in row:
-                output.append('%30s' % cell)
+            output = ['%30s' % cell for cell in row]
             print(''.join(output))
     else:
         print('No Results Found')
@@ -754,8 +750,8 @@ def ga_everything():
 
 
 def organic_traffic(view_id, start_date, end_date):
-    if not type(view_id) == str:
-        view_id = str(view_id) 
+    if type(view_id) != str:
+        view_id = str(view_id)
     ga_qry = {'reportRequests': [{'dateRanges': [{'endDate': end_date, 'startDate': start_date}],
                      'dimensions': [{'name': 'ga:segment'}],
                      'metrics': [{'expression': 'ga:users'},
@@ -767,8 +763,7 @@ def organic_traffic(view_id, start_date, end_date):
                      'samplingLevel': 'SMALL',
                      'segments': [{'segmentId': 'gaid::-5'}],
                      'viewId': view_id}]}
-    ga_response = ga(ga_qry)
-    return ga_response
+    return ga(ga_qry)
 
 
 def organic_traffic_v3(gaid, start_date, end_date):
@@ -778,8 +773,7 @@ def organic_traffic_v3(gaid, start_date, end_date):
     'metrics': 'ga:users,ga:newusers,ga:bouncerate,ga:pageviewsPerSession,ga:avgSessionDuration',
     'segment': 'gaid::-5',
     'max_results': '1'}
-    ga_response = ga_v3(ga_qry)
-    return ga_response
+    return ga_v3(ga_qry)
 
 
 def examples():
@@ -818,8 +812,7 @@ def email():
     """Return email given provided Google OAuth account."""
     service = build("oauth2", "v2", credentials=credentials)
     user_document = service.userinfo().get().execute()
-    email = user_document['email']
-    return email
+    return user_document['email']
 
 
 def login():
