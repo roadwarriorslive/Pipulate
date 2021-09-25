@@ -35,34 +35,23 @@ try:
     get_ipython()
 except NameError:
     jn = False
-
-    def h1(text):
-        print("# %s" % text)
-
-    def h2(text):
-        print("## %s" % text)
-
-    def h3(text):
-        print("### %s" % text)
-
-    def h4(text):
-        print("#### %s" % text)
+    h1 = lambda x: print(f'# {x}')
+    h2 = lambda x: print(f'## {x}')
+    h3 = lambda x: print(f'### {x}')
+    h4 = lambda x: print(f'#### {x}')
+    h5 = lambda x: print(f'##### {x}')
+    h6 = lambda x: print(f'###### {x}')
 
 
 if jn:
     from IPython.display import display, Markdown
 
-    def h1(text):
-        display(Markdown("# %s" % text))
-
-    def h2(text):
-        display(Markdown("## %s" % text))
-
-    def h3(text):
-        display(Markdown("### %s" % text))
-
-    def h4(text):
-        display(Markdown("#### %s" % text))
+    h1 = lambda x: display(Markdown(f'# {x}'))
+    h2 = lambda x: display(Markdown(f'## {x}'))
+    h3 = lambda x: display(Markdown(f'### {x}'))
+    h4 = lambda x: display(Markdown(f'#### {x}'))
+    h6 = lambda x: display(Markdown(f'##### {x}'))
+    h6 = lambda x: display(Markdown(f'###### {x}'))
 
 
 def key(url):
