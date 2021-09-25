@@ -10,7 +10,6 @@ import re
 import pickle
 import gspread
 import requests
-import pygsheets
 import pandas as pd
 from sys import stdout
 from os import environ
@@ -28,51 +27,60 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 
 
 gspread_sheet = None
-pygsheets_sheet = None
 column_uniqueness = False
-err = lambda : print(error()[0].__name__)
+err = lambda: print(error()[0].__name__)
 
 jn = True
 try:
     get_ipython()
 except NameError:
     jn = False
+
     def h1(text):
-        print('# %s' % text)
+        print("# %s" % text)
+
     def h2(text):
-        print('## %s' % text)
+        print("## %s" % text)
+
     def h3(text):
-        print('### %s' % text)
+        print("### %s" % text)
+
     def h4(text):
-        print('#### %s' % text)
+        print("#### %s" % text)
+
+
 if jn:
     from IPython.display import display, Markdown
+
     def h1(text):
-        display(Markdown('# %s' % text))
+        display(Markdown("# %s" % text))
+
     def h2(text):
-        display(Markdown('## %s' % text))
+        display(Markdown("## %s" % text))
+
     def h3(text):
-        display(Markdown('### %s' % text))
+        display(Markdown("### %s" % text))
+
     def h4(text):
-        display(Markdown('#### %s' % text))
+        display(Markdown("#### %s" % text))
 
 
 def key(url):
     return sheet(url)
 
 
-def persist(obj, filename='default.pickle'):
-    with open(filename, 'wb') as handle:
+def persist(obj, filename="default.pickle"):
+    with open(filename, "wb") as handle:
         pickle.dump(obj, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 
 def persists(filename):
-    with open(filename, 'rb') as handle:
+    with open(filename, "rb") as handle:
         return_me = pickle.load(handle)
     return return_me
 
 
-common_agents = '''User-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36
+common_agents = """User-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36
 Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3095.5 Safari/537.36
 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36
 Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36
@@ -84,63 +92,73 @@ Mozilla/5.0 (Windows NT 10.0; WOW64; rv:53.0) Gecko/20100101 Firefox/53.0
 Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36
 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36
 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36
-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.81 Safari/537.36'''.split('\n')
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.81 Safari/537.36""".split(
+    "\n"
+)
 agent_cycler = cycle(common_agents)
 
 agent = next(agent_cycler)
-user_agent = {'User-agent': agent}
+user_agent = {"User-agent": agent}
 
-Link = namedtuple('Link', 'onsite, rel, url, parts')
+Link = namedtuple("Link", "onsite, rel, url, parts")
 
 
 def links(site):
     r = requests.get(site, headers=user_agent)
-    soup = BeautifulSoup(r.text, 'lxml')
-    raw_links = soup.find_all('a', href=True)
+    soup = BeautifulSoup(r.text, "lxml")
+    raw_links = soup.find_all("a", href=True)
     parts = urlparse(site)
     scheme = urlparse(site).scheme
     links = []
-    for alink in [x for x in raw_links if x['href'] 
-                                      and x['href'] != '/' 
-                                      and x['href'][0] != '#'
-                                      and x['href'][:11] != 'javascript:']:
-        ahref = urljoin(site, alink['href'])
+    for alink in [
+        x
+        for x in raw_links
+        if x["href"]
+        and x["href"] != "/"
+        and x["href"][0] != "#"
+        and x["href"][:11] != "javascript:"
+    ]:
+        ahref = urljoin(site, alink["href"])
         if urlparse(ahref).netloc == parts.netloc and urlparse(ahref).scheme == scheme:
             rel = None
-            if alink.get('rel'):
-                rel = alink.get('rel')
-                rel = ','.join([x.lower() for x in sorted(rel)])
-            links.append(Link(True, rel, ahref, urlparse(alink['href'])))
-    offsite_link = '%s://%s' % (parts.scheme, parts.netloc)
-    for alink in [x for x in raw_links if x['href'][:4] == 'http' and x['href'][:len(offsite_link)] != offsite_link]:
+            if alink.get("rel"):
+                rel = alink.get("rel")
+                rel = ",".join([x.lower() for x in sorted(rel)])
+            links.append(Link(True, rel, ahref, urlparse(alink["href"])))
+    offsite_link = "%s://%s" % (parts.scheme, parts.netloc)
+    for alink in [
+        x
+        for x in raw_links
+        if x["href"][:4] == "http" and x["href"][: len(offsite_link)] != offsite_link
+    ]:
         rel = None
-        if alink.get('rel'):
-            rel = alink.get('rel')
-            rel = ','.join([x.lower() for x in sorted(rel)])
-        links.append(Link(False, rel, alink['href'], urlparse(alink['href'])))
-    return (links)
+        if alink.get("rel"):
+            rel = alink.get("rel")
+            rel = ",".join([x.lower() for x in sorted(rel)])
+        links.append(Link(False, rel, alink["href"], urlparse(alink["href"])))
+    return links
 
 
 def crawl(site, crawl_page_limit=500, restart=True):
-    print('Crawling up to %s pages from %s' % (crawl_page_limit, site))
-    pickles = Path.cwd() / 'crawl'
+    print("Crawling up to %s pages from %s" % (crawl_page_limit, site))
+    pickles = Path.cwd() / "crawl"
     if not pickles.exists():
         Path.mkdir(pickles)
-    unvisited_filename = pickles / 'unvisited.pkl'
-    visited_filename = pickles / 'visited.pkl'
-    alllinks_filename = pickles / 'alllinks.pkl'
+    unvisited_filename = pickles / "unvisited.pkl"
+    visited_filename = pickles / "visited.pkl"
+    alllinks_filename = pickles / "alllinks.pkl"
     if restart:
         page_links = links(site)
         persist(set(page_links), unvisited_filename)
         persist(set(), visited_filename)
         persist(set(), alllinks_filename)
-    msg = ''
+    msg = ""
     for i, alink in enumerate(persists(unvisited_filename)):
         unvisited = persists(unvisited_filename)
         unvisited.remove(alink)
         visited = persists(visited_filename)
         if crawl_page_limit != False and len(visited) > crawl_page_limit:
-            print('Hit crawl page limit.')
+            print("Hit crawl page limit.")
             break
         visited.add(alink)
         new_links = links(alink.url)
@@ -154,11 +172,11 @@ def crawl(site, crawl_page_limit=500, restart=True):
                 visited.add(new_link)
                 persist(visited, visited_filename)
         persist(unvisited, unvisited_filename)
-    print('Done crawl')
+    print("Done crawl")
     return all_links
 
 
-def serp(keyword, filename='serp_default.pkl', num=10):
+def serp(keyword, filename="serp_default.pkl", num=10):
 
     url = "https://www.google.com/search?num=%s&q=%s" % (num, keyword)
     response = requests.get(url, headers=user_agent)
@@ -169,54 +187,56 @@ def serp(keyword, filename='serp_default.pkl', num=10):
     for aresult in result_divs:
         pat_url = re.compile('<a href="(.*?)"')
         the_url_group = re.match(pat_url, aresult)
-        pat_title = re.compile('<cite .*>(.*?)</cite>')
+        pat_title = re.compile("<cite .*>(.*?)</cite>")
         the_title_group = re.search(pat_title, aresult)
-        #print(the_title_group)
+        # print(the_title_group)
         try:
             the_url = the_url_group.groups(0)[0]
         except:
-            the_url = ''
+            the_url = ""
         try:
             the_title = the_title_group.groups(0)[0]
         except:
-            the_title = ''
+            the_title = ""
         result_tuple = (the_url, the_title)
         list_of_tuples.append(result_tuple)
-    #print(list_of_tuples)
-    
+    # print(list_of_tuples)
+
     both_objects = (response, list_of_tuples)
 
     persist(both_objects, filename)
     return both_objects
-    
 
 
 def sheet(key):
-    global gspread_authorized, pygsheets_authorized
-    global gspread_sheet, pygsheets_sheet
+    global gspread_authorized
+    global gspread_sheet
     global credentials
 
     check_credentials(credentials)
 
     try:
-        if key[:4].lower() == 'http':
+        if key[:4].lower() == "http":
             gspread_sheet = gspread_authorized.open_by_url(key)
-            pygsheets_sheet = pygsheets_authorized.open_by_url(key)
         else:
             gspread_sheet = gspread_authorized.open_by_key(key)
-            pygsheets_sheet = pygsheets_authorized.open_by_key(key)
-        print("""<<< CONNECTED! >>> You can open the Google Sheet with the following link:""")
-        if key[:4].lower() == 'http':
+        print(
+            """<<< CONNECTED! >>> You can open the Google Sheet with the following link:"""
+        )
+        if key[:4].lower() == "http":
             print(key)
         else:
             print(link(key))
     except:
-        err() 
+        err()
         print("Make sure %s has permission to this document." % email())
         raise SystemExit()
     try:
         sheet1 = gspread_sheet.worksheets()[0].title
-        print('Try: cl, df = pipulate.pull("%s", "A1:C3") # or pipulate.help() for help.' % sheet1)
+        print(
+            'Try: cl, df = pipulate.pull("%s", "A1:C3") # or pipulate.help() for help.'
+            % sheet1
+        )
     except:
         try:
             with open("credentials.pickle", "rb") as input_file:
@@ -229,38 +249,54 @@ def sheet(key):
 def help():
     print("Welcome to Pipulate, eaiser Google Sheet automation for SEO and more.")
     print()
-    print('This is a dynamic library, always being improved and the API is subject to change.')
-    print('Get the latest by issuing the following command: (trick can be used on any package)')
+    print(
+        "This is a dynamic library, always being improved and the API is subject to change."
+    )
+    print(
+        "Get the latest by issuing the following command: (trick can be used on any package)"
+    )
     print()
-    print('    import sys')
-    print('    !{sys.executable} -m pip install --upgrade --no-cache-dir pipulate')
+    print("    import sys")
+    print("    !{sys.executable} -m pip install --upgrade --no-cache-dir pipulate")
     print()
     print("Google Analytics example functions are now built-in. For examples:")
     print()
-    print('    pipulate.examples()')
+    print("    pipulate.examples()")
     print()
-    print("Load a Google Sheet with the following command (replace text between quotes):")
+    print(
+        "Load a Google Sheet with the following command (replace text between quotes):"
+    )
     print()
     print('    pipulate.sheet("Insert your Google Sheet key or URL")')
     print()
-    print('Now you can select a gspread "cell_list" (cl) and a pandas "DataFrame" (df) like this:')
+    print(
+        'Now you can select a gspread "cell_list" (cl) and a pandas "DataFrame" (df) like this:'
+    )
     print()
     print('    cl, df = pipulate.pull("Sheet1", "A2:C4")')
     print()
-    print('You can optionally leave off the last-row number. It will be figured out:')
+    print("You can optionally leave off the last-row number. It will be figured out:")
     print()
     print('    cl, df = pipulate.pull("Sheet1", "A2:C")')
     print()
-    print('The cl is a place-holder for later, but df is a manipulateable pandas DataFrame.')
-    print('Pandas DataFrames are like tabs in Excel or tables in SQL. Check your row x col shape:')
+    print(
+        "The cl is a place-holder for later, but df is a manipulateable pandas DataFrame."
+    )
+    print(
+        "Pandas DataFrames are like tabs in Excel or tables in SQL. Check your row x col shape:"
+    )
     print()
-    print('    df.shape')
+    print("    df.shape")
     print()
-    print('Now you can use the pandas API to manipulate the pandas DataFrame (df) like this:')
+    print(
+        "Now you can use the pandas API to manipulate the pandas DataFrame (df) like this:"
+    )
     print()
-    print('   df[["A", "B"]] = ["foo", "bar"]') 
+    print('   df[["A", "B"]] = ["foo", "bar"]')
     print()
-    print("You can see your changes by running df on a line by itself in Jupyter Notebook.")
+    print(
+        "You can see your changes by running df on a line by itself in Jupyter Notebook."
+    )
     print()
     print("    df")
     print()
@@ -280,7 +316,7 @@ def help():
     print()
     print('    cl, df = pipulate.pull("Sheet1", "A1:C4", columns=True)')
     print()
-    print('Learn more at https://github.com/miklevin/Pipulate')
+    print("Learn more at https://github.com/miklevin/Pipulate")
 
 
 def pull(tab, rows, cols=None, columns=None, start=None, end=None):
@@ -293,7 +329,7 @@ def push(tab, cl, df, formulas=False):
 
 def poke(tab, columns, row=1, start=1):
     cl, df = pull(tab, (row, row), (start, len(columns)))
-    df.loc[:,:] = columns
+    df.loc[:, :] = columns
     return push(tab, cl, df)
 
 
@@ -301,7 +337,7 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
     global credentials
     original_range, original_row1 = None, None
 
-    try: 
+    try:
         worksheet_ = check_worksheet(tab)
     except:
         check_credentials(credentials)
@@ -310,7 +346,7 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
         print('Make sure you pipulate.sheet("key or url") first.')
         raise SystemExit()
 
-    if cols: 
+    if cols:
         row1, row2 = rows
         if type(columns) == bool:
             original_row1 = row1
@@ -328,10 +364,10 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
         if not columns:
             cell_list = worksheet_.range(row1, col1, row1, col2)
             columns = [a1(x.col) for x in cell_list]
-    elif ':' in rows:
-        if not rows.split(':')[1][-1].isdigit():  # Figure out end of column
-            aletter = rows.split(':')[1]
-            col_length = len(worksheet_.col_values(a1(aletter, reverse=True))) 
+    elif ":" in rows:
+        if not rows.split(":")[1][-1].isdigit():  # Figure out end of column
+            aletter = rows.split(":")[1]
+            col_length = len(worksheet_.col_values(a1(aletter, reverse=True)))
             rows = "%s%s" % (rows, col_length)
         if type(columns) == bool:
             original_range = rows
@@ -339,11 +375,11 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
         try:
             cl = worksheet_.range(rows)
         except:
-            print('Rate quota possibly exceeded. Wait a minute and try again.')
+            print("Rate quota possibly exceeded. Wait a minute and try again.")
             raise SystemExit()
         list_of_lists = cl_to_list(cl)
         if not columns:
-            columns = [a1(i+1) for i, x in enumerate(list_of_lists[0])]
+            columns = [a1(i + 1) for i, x in enumerate(list_of_lists[0])]
     else:
         print("Check your rows or range definition.")
         raise SystemExit()
@@ -354,40 +390,49 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
         else:
             cl_cols = worksheet_.range(original_range)
         columns = cl_to_list(cl_cols)[0]
-    if column_uniqueness: 
+    if column_uniqueness:
         if not all(columns):
             print(columns)
-            print("All columns must have labels when using columns=True or columns=list.")
+            print(
+                "All columns must have labels when using columns=True or columns=list."
+            )
             raise SystemExit()
         if len(set(columns)) < len(columns):
             print(columns)
-            print("All columns must have labels when using columns=True or columns=list.")
+            print(
+                "All columns must have labels when using columns=True or columns=list."
+            )
             raise SystemExit()
 
     df = pd.DataFrame(list_of_lists, columns=columns)
 
-    print("<<< SUCCESSFUL! >>> Manipulate DataFrame but keep its (%s x %s) shape." % df.shape)
-    print('To push updated DataFrame to GSheet: pipulate.push("%s", cl, df)' % worksheet_.title)
+    print(
+        "<<< SUCCESSFUL! >>> Manipulate DataFrame but keep its (%s x %s) shape."
+        % df.shape
+    )
+    print(
+        'To push updated DataFrame to GSheet: pipulate.push("%s", cl, df)'
+        % worksheet_.title
+    )
     return cl, df
 
 
 def populate(tab, cl, df, formulas=False):
     """Push df back to spreadsheet."""
 
-    try: 
+    try:
         worksheet_ = check_worksheet(tab)
     except:
         check_credentials(credentials)
 
-
     if cl_df_fits(cl, df):
         lol = df.values.tolist()
         flat = [y for x in lol for y in x]
-        flat[:] = ['N/A' if pd.isnull(x) else x for x in flat]
+        flat[:] = ["N/A" if pd.isnull(x) else x for x in flat]
         for i, cell in enumerate(cl):
             cell.value = flat[i]
         if formulas:
-            worksheet_.update_cells(cl, value_input_option='USER_ENTERED')
+            worksheet_.update_cells(cl, value_input_option="USER_ENTERED")
         else:
             worksheet_.update_cells(cl)
     else:
@@ -396,13 +441,13 @@ def populate(tab, cl, df, formulas=False):
 
 
 def shift_range(sheet_range):
-    range_tuple = sheet_range.split(':')
+    range_tuple = sheet_range.split(":")
     upper_left = range_tuple[0]
     for i, x in enumerate(upper_left):
         if x.isnumeric():
             break
-    row_one = int(upper_left[len(upper_left) - 1:])
-    col_one = upper_left[:len(upper_left) - 1]
+    row_one = int(upper_left[len(upper_left) - 1 :])
+    col_one = upper_left[: len(upper_left) - 1]
     row_two = row_one + 1
     return "".join([col_one, str(row_two), ":", range_tuple[1]])
 
@@ -412,7 +457,7 @@ def check_worksheet(worksheet):
     if type(worksheet) == gspread.models.Worksheet:
         tab = worksheet
     elif type(worksheet) == str:
-        if 'gspread_sheet' in globals():
+        if "gspread_sheet" in globals():
             if worksheet in [x.title for x in gspread_sheet.worksheets()]:
                 tab = gspread_sheet.worksheet(worksheet)
             else:
@@ -422,9 +467,9 @@ def check_worksheet(worksheet):
             print("pipulate.sheet([your gsheets key here]) must be set")
             raise systemexit()
     elif type(worksheet) == int:
-        if 'gspread_sheet' in globals():
+        if "gspread_sheet" in globals():
             if worksheet <= len(gspread_sheet.worksheets()):
-                tab = gspread_sheet.worksheets()[worksheet] 
+                tab = gspread_sheet.worksheets()[worksheet]
             else:
                 print("Worksheet ID too high. Try 0 for sheet 1.")
                 raise SystemExit()
@@ -432,7 +477,9 @@ def check_worksheet(worksheet):
             print("pipulate.sheet([your gsheets key here]) must be set")
             raise systemexit()
     else:
-        print("Worksheet must be exact tab-name as string, gspread Worksheet object or tab-index.")
+        print(
+            "Worksheet must be exact tab-name as string, gspread Worksheet object or tab-index."
+        )
         raise SystemExit()
     return tab
 
@@ -462,15 +509,15 @@ def cl_df_fits(cl, df):
     size_tuple = (height, width)
     if size_tuple == df.shape:
         return True
-    print('GOOGLE SHEET NOT UPDATED.')
-    print('cl %s and df %s different sizes.' % (size_tuple, df.shape))
+    print("GOOGLE SHEET NOT UPDATED.")
+    print("cl %s and df %s different sizes." % (size_tuple, df.shape))
     return False
 
 
 def a1(pos, reverse=False):
     """Return the column letter for numeric column index."""
     if reverse:
-        return gspread.utils.a1_to_rowcol('%s1' % pos)[1]
+        return gspread.utils.a1_to_rowcol("%s1" % pos)[1]
     if str(pos).isdigit():
         return gspread.utils.rowcol_to_a1(1, pos)[:-1]
     else:
@@ -479,7 +526,7 @@ def a1(pos, reverse=False):
 
 def link(gsheet_key):
     """Return GSheet URL for data from Web UI."""
-    return 'https://docs.google.com/spreadsheets/d/%s/edit' % gsheet_key
+    return "https://docs.google.com/spreadsheets/d/%s/edit" % gsheet_key
 
 
 def google_service(api, version):
@@ -527,16 +574,13 @@ def ga(qry=False):
     pipulate.print_ga(ga)
     """
 
-
-    service = google_service('analyticsreporting', 'v4')
+    service = google_service("analyticsreporting", "v4")
     if qry:
         return service.reports().batchGet(body=qry).execute()
     else:
         print("Design a query at:  https://ga-dev-tools.appspot.com/request-composer/")
         print("and then invoke the query using foo = pipulate.ga(query).")
         print("You can extract result values as a list with pipuate.list_ga(foo).")
-        
-
 
 
 def gsc(url, qry):
@@ -556,8 +600,7 @@ def gsc(url, qry):
     pipulate.print_gsc(gsc)
     """
 
-
-    service = google_service('webmasters', 'v3')
+    service = google_service("webmasters", "v3")
     return service.searchanalytics().query(siteUrl=url, body=qry).execute()
 
 
@@ -576,12 +619,12 @@ def yt(qry):
     pipulate.print_yt(yt)
     """
 
-    service = google_service('youtubeAnalytics', 'v2')
+    service = google_service("youtubeAnalytics", "v2")
     return service.reports().query(**qry).execute()
 
 
 def ga_v3(qry):
-    service = google_service('analytics', 'v3')
+    service = google_service("analytics", "v3")
     return service.data().ga().get(**qry).execute()
 
 
@@ -591,28 +634,33 @@ def print_gsc(response):
     Args:
       response: The server response to be printed as a table.
     """
-  
-    if 'rows' not in response:
-        print('Empty response')
+
+    if "rows" not in response:
+        print("Empty response")
         return
 
-    rows = response['rows']
-    row_format = '{:<20}' + '{:>20}' * 4
-    print(row_format.format('Keys', 'Clicks', 'Impressions', 'CTR', 'Position'))
+    rows = response["rows"]
+    row_format = "{:<20}" + "{:>20}" * 4
+    print(row_format.format("Keys", "Clicks", "Impressions", "CTR", "Position"))
     for row in rows:
-        keys = ''
+        keys = ""
         # Keys are returned only if one or more dimensions are requested.
-        if 'keys' in row:
-            keys = u','.join(row['keys']).encode('utf-8').decode()
-        print(row_format.format(
-        keys, row['clicks'], row['impressions'], row['ctr'], row['position']))
+        if "keys" in row:
+            keys = u",".join(row["keys"]).encode("utf-8").decode()
+        print(
+            row_format.format(
+                keys, row["clicks"], row["impressions"], row["ctr"], row["position"]
+            )
+        )
 
 
 def print_ga(response):
     for report in response.get("reports", []):
         columnHeader = report.get("columnHeader", {})
         dimensionHeaders = columnHeader.get("dimensions", [])
-        metricHeaders = columnHeader.get("metricHeader", {}).get("metricHeaderEntries", [])
+        metricHeaders = columnHeader.get("metricHeader", {}).get(
+            "metricHeaderEntries", []
+        )
         rows = report.get("data", {}).get("rows", [])
 
         for row in rows:
@@ -625,7 +673,7 @@ def print_ga(response):
             for i, values in enumerate(dateRangeValues):
                 print("        Date range index: " + str(i))
                 for metric, value in zip(metricHeaders, values.get("values")):
-                    print("        "    + metric.get("name") + ": " + value)
+                    print("        " + metric.get("name") + ": " + value)
 
 
 def list_ga(ga):
@@ -633,9 +681,9 @@ def list_ga(ga):
     if ga:
         for reports in ga:
             for item in ga[reports]:
-                if 'rows' in item['data']:
-                    for row in item['data']['rows']:
-                        for metric in row['metrics']:
+                if "rows" in item["data"]:
+                    for row in item["data"]["rows"]:
+                        for metric in row["metrics"]:
                             for value in metric:
                                 returnme = metric[value]
                                 break
@@ -645,76 +693,83 @@ def list_ga(ga):
 def print_yt(results):
     # Print headers.
     output = []
-    for header in results.get('columnHeaders'):
-        output.append('%30s' % header.get('name'))
-    print(''.join(output))
+    for header in results.get("columnHeaders"):
+        output.append("%30s" % header.get("name"))
+    print("".join(output))
 
     # Print rows.
-    if results.get('rows', []):
-        for row in results.get('rows'):
-            output = ['%30s' % cell for cell in row]
-            print(''.join(output))
+    if results.get("rows", []):
+        for row in results.get("rows"):
+            output = ["%30s" % cell for cell in row]
+            print("".join(output))
     else:
-        print('No Results Found')
+        print("No Results Found")
 
 
 def ga_accounts(everything=False):
-    service = google_service('analytics', 'v3')
+    service = google_service("analytics", "v3")
     accounts = service.management().accounts().list().execute()
     if everything:
         return accounts
     else:
-        if accounts.get('items'):
+        if accounts.get("items"):
             alist = []
-            for item in accounts['items']:
-                alist.append((item['name'], item['id']))
+            for item in accounts["items"]:
+                alist.append((item["name"], item["id"]))
             return alist
 
 
 def ga_properties(account, everything=False):
-    service = google_service('analytics', 'v3')
-    properties = service.management().webproperties().list(
-        accountId=account).execute()
+    service = google_service("analytics", "v3")
+    properties = service.management().webproperties().list(accountId=account).execute()
     if everything:
         return properties
     else:
-        if properties.get('items'):
+        if properties.get("items"):
             alist = []
-            for item in properties['items']:
-                alist.append((item['name'], item['id']))
+            for item in properties["items"]:
+                alist.append((item["name"], item["id"]))
             return alist
 
 
 def ga_profiles(account, property_id, everything=False):
-    service = google_service('analytics', 'v3')
-    profiles = service.management().profiles().list(accountId=account,
-                                                      webPropertyId=property_id
-                                                     ).execute()
+    service = google_service("analytics", "v3")
+    profiles = (
+        service.management()
+        .profiles()
+        .list(accountId=account, webPropertyId=property_id)
+        .execute()
+    )
     if everything:
         return profiles
     else:
-        if profiles.get('items'):
+        if profiles.get("items"):
             alist = []
-            for item in profiles['items']:
-                alist.append((item['name'], item['id']))
+            for item in profiles["items"]:
+                alist.append((item["name"], item["id"]))
             return alist
 
 
 def ga_hostname(gaid):
-    query = {'reportRequests': [{'dateRanges': [{'endDate': 'yesterday',
-                                         'startDate': 'yesterday'}],
-                         'dimensions': [{'name': 'ga:hostname'}],
-                         'metrics': [{'alias': '', 'expression': 'ga:pageviews'}],
-                         'orderBys': [{'fieldName': 'ga:pageviews',
-                                       'sortOrder': 'DESCENDING'}],
-                         'samplingLevel': 'SMALL',
-                         'viewId': str(gaid)}]}
+    query = {
+        "reportRequests": [
+            {
+                "dateRanges": [{"endDate": "yesterday", "startDate": "yesterday"}],
+                "dimensions": [{"name": "ga:hostname"}],
+                "metrics": [{"alias": "", "expression": "ga:pageviews"}],
+                "orderBys": [{"fieldName": "ga:pageviews", "sortOrder": "DESCENDING"}],
+                "samplingLevel": "SMALL",
+                "viewId": str(gaid),
+            }
+        ]
+    }
     try:
         result = ga(query)
-        hostname = result['reports'][0]['data']['rows'][0]['dimensions'][0]
+        hostname = result["reports"][0]["data"]["rows"][0]["dimensions"][0]
     except:
-        hostname = 'Unknown'
+        hostname = "Unknown"
     return hostname
+
 
 def ga_everything():
     acts = {}
@@ -727,52 +782,51 @@ def ga_everything():
         properties = ga_properties(account[1])
         if properties:
             for prop in properties:
-                print("%sProperty: %s" % (' '*4, prop))
+                print("%sProperty: %s" % (" " * 4, prop))
                 profiles = ga_profiles(account[1], prop[1])
                 if profiles:
                     plist = []
                     for profile in profiles:
-                        print("%sProfile: %s" % (' '*8, profile))
+                        print("%sProfile: %s" % (" " * 8, profile))
                         plist.append(profile)
                     acts[account].append({prop: plist})
     return acts
 
 
-
-
-
-
-
-
-
-
-
-
-
 def organic_traffic(view_id, start_date, end_date):
     if type(view_id) != str:
         view_id = str(view_id)
-    ga_qry = {'reportRequests': [{'dateRanges': [{'endDate': end_date, 'startDate': start_date}],
-                     'dimensions': [{'name': 'ga:segment'}],
-                     'metrics': [{'expression': 'ga:users'},
-                                 {'expression': 'ga:newusers'},
-                                 {'expression': 'ga:bouncerate'},
-                                 {'expression': 'ga:pageviewsPerSession'},
-                                 {'expression': 'ga:avgSessionDuration'}],
-                     'pageSize': '1',
-                     'samplingLevel': 'SMALL',
-                     'segments': [{'segmentId': 'gaid::-5'}],
-                     'viewId': view_id}]}
+    ga_qry = {
+        "reportRequests": [
+            {
+                "dateRanges": [{"endDate": end_date, "startDate": start_date}],
+                "dimensions": [{"name": "ga:segment"}],
+                "metrics": [
+                    {"expression": "ga:users"},
+                    {"expression": "ga:newusers"},
+                    {"expression": "ga:bouncerate"},
+                    {"expression": "ga:pageviewsPerSession"},
+                    {"expression": "ga:avgSessionDuration"},
+                ],
+                "pageSize": "1",
+                "samplingLevel": "SMALL",
+                "segments": [{"segmentId": "gaid::-5"}],
+                "viewId": view_id,
+            }
+        ]
+    }
     return ga(ga_qry)
 
 
 def organic_traffic_v3(gaid, start_date, end_date):
-    ga_qry = {'ids': 'ga:%s' % gaid,
-    'start_date': start_date,
-    'end_date': end_date,
-    'metrics': 'ga:users,ga:newusers,ga:bouncerate,ga:pageviewsPerSession,ga:avgSessionDuration',
-    'segment': 'gaid::-5',
-    'max_results': '1'}
+    ga_qry = {
+        "ids": "ga:%s" % gaid,
+        "start_date": start_date,
+        "end_date": end_date,
+        "metrics": "ga:users,ga:newusers,ga:bouncerate,ga:pageviewsPerSession,ga:avgSessionDuration",
+        "segment": "gaid::-5",
+        "max_results": "1",
+    }
     return ga_v3(ga_qry)
 
 
@@ -788,51 +842,53 @@ def examples():
     print(getsource(organic_traffic_v3))
 
 
-
-                
 def api_date(a_datetime, time=False):
     """Return datetime string in Google API friendly format."""
 
     if time:
-        return ('{0:%Y-%m-%d %H:%M:%S}'.format(a_datetime))
+        return "{0:%Y-%m-%d %H:%M:%S}".format(a_datetime)
     else:
-        return ('{0:%Y-%m-%d}'.format(a_datetime))
+        return "{0:%Y-%m-%d}".format(a_datetime)
 
 
 def human_date(a_datetime, time=False):
     """Return datetime object as American-friendly string."""
 
     if time:
-        return ('{0:%m/%d/%Y %H:%M:%S}'.format(a_datetime))
+        return "{0:%m/%d/%Y %H:%M:%S}".format(a_datetime)
     else:
-        return ('{0:%m/%d/%Y}'.format(a_datetime))
+        return "{0:%m/%d/%Y}".format(a_datetime)
 
 
 def email():
     """Return email given provided Google OAuth account."""
     service = build("oauth2", "v2", credentials=credentials)
     user_document = service.userinfo().get().execute()
-    return user_document['email']
+    return user_document["email"]
 
 
 def login():
-    client_id = "769904540573-knscs3mhvd56odnf7i8h3al13kiqulft.apps.googleusercontent.com"
+    client_id = (
+        "769904540573-knscs3mhvd56odnf7i8h3al13kiqulft.apps.googleusercontent.com"
+    )
     client_secret = "D2F1D--b_yKNLrJSPmrn2jik"
     environ["OAUTHLIB_RELAX_TOKEN_SCOPE"] = "1"  # Don't use in Web apps
-    scopes = ["https://spreadsheets.google.com/feeds/",
-              "https://www.googleapis.com/auth/userinfo.email",
-              "https://www.googleapis.com/auth/gmail.modify",
-              "https://www.googleapis.com/auth/analytics.readonly",
-              "https://www.googleapis.com/auth/webmasters.readonly",
-              "https://www.googleapis.com/auth/yt-analytics.readonly",
-              "https://www.googleapis.com/auth/youtube.readonly"]
+    scopes = [
+        "https://spreadsheets.google.com/feeds/",
+        "https://www.googleapis.com/auth/userinfo.email",
+        "https://www.googleapis.com/auth/gmail.modify",
+        "https://www.googleapis.com/auth/analytics.readonly",
+        "https://www.googleapis.com/auth/webmasters.readonly",
+        "https://www.googleapis.com/auth/yt-analytics.readonly",
+        "https://www.googleapis.com/auth/youtube.readonly",
+    ]
     client_config = {
         "installed": {
             "auth_uri": "https://accounts.google.com/o/oauth2/auth",
             "token_uri": "https://accounts.google.com/o/oauth2/token",
             "redirect_uris": ["urn:ietf:wg:oauth:2.0:oob"],
             "client_id": client_id,
-            "client_secret": client_secret
+            "client_secret": client_secret,
         }
     }
     flow = InstalledAppFlow.from_client_config(client_config, scopes)
@@ -862,12 +918,15 @@ def check_credentials(credentials):
 def logout():
     import requests
     from os import remove
+
     global credentials
-    requests.post('https://accounts.google.com/o/oauth2/revoke',
-        params={'token': credentials.token},
-        headers = {'content-type': 'application/x-www-form-urlencoded'})
+    requests.post(
+        "https://accounts.google.com/o/oauth2/revoke",
+        params={"token": credentials.token},
+        headers={"content-type": "application/x-www-form-urlencoded"},
+    )
     try:
-        remove('credentials.pickle')
+        remove("credentials.pickle")
     except:
         pass
     credentials = None
@@ -896,7 +955,6 @@ except:
 
 check_credentials(credentials)
 gspread_authorized = gspread.authorize(credentials)
-pygsheets_authorized = pygsheets.authorize(custom_credentials=credentials)
 
 print()
 print("CONGRATULATIONS! You are logged in as <<< %s >>>" % email())
