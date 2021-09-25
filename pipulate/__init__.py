@@ -6,25 +6,13 @@
 # There are many frameworks like it,  |_| but this one is mine. --MikeL
 
 
-import re
 import ohawf
-import pickle
 import gspread
 import pandas as pd
 from sys import stdout
-from os import environ
-from pathlib import Path
-import httpx as requests
-from itertools import cycle
 from inspect import getsource
-from bs4 import BeautifulSoup
 from sys import exc_info as error
-from collections import namedtuple
 from apiclient.discovery import build
-import google.auth.transport.requests
-from urllib.parse import urlparse, urljoin
-from google.oauth2.credentials import Credentials
-from google_auth_oauthlib.flow import InstalledAppFlow
 
 
 gspread_sheet = None
@@ -36,27 +24,32 @@ try:
     get_ipython()
 except NameError:
     jn = False
-    h1 = lambda x: print(f'# {x}')
-    h2 = lambda x: print(f'## {x}')
-    h3 = lambda x: print(f'### {x}')
-    h4 = lambda x: print(f'#### {x}')
-    h5 = lambda x: print(f'##### {x}')
-    h6 = lambda x: print(f'###### {x}')
+    h1 = lambda x: print(f"# {x}")
+    h2 = lambda x: print(f"## {x}")
+    h3 = lambda x: print(f"### {x}")
+    h4 = lambda x: print(f"#### {x}")
+    h5 = lambda x: print(f"##### {x}")
+    h6 = lambda x: print(f"###### {x}")
 
 
 if jn:
     from IPython.display import display, Markdown
 
-    h1 = lambda x: display(Markdown(f'# {x}'))
-    h2 = lambda x: display(Markdown(f'## {x}'))
-    h3 = lambda x: display(Markdown(f'### {x}'))
-    h4 = lambda x: display(Markdown(f'#### {x}'))
-    h6 = lambda x: display(Markdown(f'##### {x}'))
-    h6 = lambda x: display(Markdown(f'###### {x}'))
+    h1 = lambda x: display(Markdown(f"# {x}"))
+    h2 = lambda x: display(Markdown(f"## {x}"))
+    h3 = lambda x: display(Markdown(f"### {x}"))
+    h4 = lambda x: display(Markdown(f"#### {x}"))
+    h6 = lambda x: display(Markdown(f"##### {x}"))
+    h6 = lambda x: display(Markdown(f"###### {x}"))
 
 
 def key(url):
     return sheet(url)
+
+
+def link(gsheet_key):
+    """Return GSheet URL for data from Web UI."""
+    return 'https://docs.google.com/spreadsheets/d/%s/edit' % gsheet_key
 
 
 def sheet(key):
@@ -203,7 +196,7 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
         try:
             cl = worksheet_.range(row1, col1, row2, col2)
         except:
-            credentials = login()
+            credentials = ohawf.get()
             # print('Rate quota possibly exceeded. Wait a minute and try again.')
             # raise SystemExit()
         list_of_lists = cl_to_list(cl)
@@ -487,7 +480,7 @@ def print_gsc(response):
         keys = ""
         # Keys are returned only if one or more dimensions are requested.
         if "keys" in row:
-            keys = u",".join(row["keys"]).encode("utf-8").decode()
+            keys = ",".join(row["keys"]).encode("utf-8").decode()
         print(
             row_format.format(
                 keys, row["clicks"], row["impressions"], row["ctr"], row["position"]
@@ -708,23 +701,6 @@ def email():
     return user_document["email"]
 
 
-def logout():
-    import requests
-    from os import remove
-
-    global credentials
-    requests.post(
-        "https://accounts.google.com/o/oauth2/revoke",
-        params={"token": credentials.token},
-        headers={"content-type": "application/x-www-form-urlencoded"},
-    )
-    try:
-        remove("credentials.pickle")
-    except:
-        pass
-    credentials = None
-
-
 class Unbuffered(object):
     """Provides more real-time streaming in Jupyter Notebook"""
 
@@ -737,6 +713,7 @@ class Unbuffered(object):
 
     def __getattr__(self, attr):
         return getattr(self.stream, attr)
+
 
 credentials = ohawf.get()
 gspread_authorized = gspread.authorize(credentials)
