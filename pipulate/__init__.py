@@ -7,6 +7,7 @@
 
 
 import re
+import ohawf
 import pickle
 import gspread
 import requests
@@ -202,7 +203,7 @@ def sheet(key):
     global gspread_sheet
     global credentials
 
-    check_credentials(credentials)
+    credentials = ohawf.get()
 
     try:
         if key[:4].lower() == "http":
@@ -227,12 +228,7 @@ def sheet(key):
             % sheet1
         )
     except:
-        try:
-            with open("credentials.pickle", "rb") as input_file:
-                credentials = pickle.load(input_file)
-                check_credentials(credentials)
-        except:
-            credentials = login()
+        credentials = ohawf.get()
 
 
 def help():
@@ -329,7 +325,7 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
     try:
         worksheet_ = check_worksheet(tab)
     except:
-        check_credentials(credentials)
+        credentials = ohawf.get()
 
     if gspread_sheet is None:
         print('Make sure you pipulate.sheet("key or url") first.')
@@ -412,7 +408,7 @@ def populate(tab, cl, df, formulas=False):
     try:
         worksheet_ = check_worksheet(tab)
     except:
-        check_credentials(credentials)
+        credentials = ohawf.get()
 
     if cl_df_fits(cl, df):
         lol = df.values.tolist()
@@ -856,54 +852,6 @@ def email():
     return user_document["email"]
 
 
-def login():
-    client_id = (
-        "769904540573-knscs3mhvd56odnf7i8h3al13kiqulft.apps.googleusercontent.com"
-    )
-    client_secret = "D2F1D--b_yKNLrJSPmrn2jik"
-    environ["OAUTHLIB_RELAX_TOKEN_SCOPE"] = "1"  # Don't use in Web apps
-    scopes = [
-        "https://spreadsheets.google.com/feeds/",
-        "https://www.googleapis.com/auth/userinfo.email",
-        "https://www.googleapis.com/auth/gmail.modify",
-        "https://www.googleapis.com/auth/analytics.readonly",
-        "https://www.googleapis.com/auth/webmasters.readonly",
-        "https://www.googleapis.com/auth/yt-analytics.readonly",
-        "https://www.googleapis.com/auth/youtube.readonly",
-    ]
-    client_config = {
-        "installed": {
-            "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-            "token_uri": "https://accounts.google.com/o/oauth2/token",
-            "redirect_uris": ["urn:ietf:wg:oauth:2.0:oob"],
-            "client_id": client_id,
-            "client_secret": client_secret,
-        }
-    }
-    flow = InstalledAppFlow.from_client_config(client_config, scopes)
-    credentials = flow.run_console()
-    credentials.access_token = credentials.token
-    with open("credentials.pickle", "wb") as output_file:
-        pickle.dump(credentials, output_file)
-    return credentials
-
-
-def check_credentials(credentials):
-    if type(credentials) == google.oauth2.credentials.Credentials:
-        if not credentials.valid:
-            request = google.auth.transport.requests.Request()
-            credentials.refresh(request)
-            credentials.access_token = credentials.token
-            with open("credentials.pickle", "wb") as output_file:
-                pickle.dump(credentials, output_file)
-            if not credentials.valid:
-                credentials = login()
-        elif not credentials:
-            credentials = login()
-    else:
-        credentials = login()
-
-
 def logout():
     import requests
     from os import remove
@@ -934,15 +882,7 @@ class Unbuffered(object):
     def __getattr__(self, attr):
         return getattr(self.stream, attr)
 
-
-try:
-    with open("credentials.pickle", "rb") as input_file:
-        credentials = pickle.load(input_file)
-        check_credentials(credentials)
-except:
-    credentials = login()
-
-check_credentials(credentials)
+credentials = ohawf.get()
 gspread_authorized = gspread.authorize(credentials)
 
 print()
