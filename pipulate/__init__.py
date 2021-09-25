@@ -10,11 +10,11 @@ import re
 import ohawf
 import pickle
 import gspread
-import requests
 import pandas as pd
 from sys import stdout
 from os import environ
 from pathlib import Path
+import httpx as requests
 from itertools import cycle
 from inspect import getsource
 from bs4 import BeautifulSoup
