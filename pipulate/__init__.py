@@ -176,10 +176,8 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
     global credentials
     original_range, original_row1 = None, None
 
-    try:
-        worksheet_ = check_worksheet(tab)
-    except:
-        credentials = ohawf.get()
+    credentials = ohawf.get()
+    worksheet_ = check_worksheet(tab)
 
     if gspread_sheet is None:
         print('Make sure you pipulate.sheet("key or url") first.')
@@ -211,11 +209,11 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
         if type(columns) == bool:
             original_range = rows
             rows = shift_range(rows)
-        try:
-            cl = worksheet_.range(rows)
-        except:
-            print("Rate quota possibly exceeded. Wait a minute and try again.")
-            raise SystemExit()
+        #try:
+        cl = worksheet_.range(rows)
+        #except:
+        #    print("Rate quota possibly exceeded. Wait a minute and try again.")
+        #    raise SystemExit()
         list_of_lists = cl_to_list(cl)
         if not columns:
             columns = [a1(i + 1) for i, x in enumerate(list_of_lists[0])]
