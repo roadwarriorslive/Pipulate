@@ -9,6 +9,7 @@
 import ohawf
 import gspread
 import pandas as pd
+from sys import exit
 from sys import stdout
 from inspect import getsource
 from sys import exc_info as error
@@ -49,7 +50,7 @@ def key(url):
 
 def link(gsheet_key):
     """Return GSheet URL for data from Web UI."""
-    return 'https://docs.google.com/spreadsheets/d/%s/edit' % gsheet_key
+    return "https://docs.google.com/spreadsheets/d/%s/edit" % gsheet_key
 
 
 def sheet(key):
@@ -74,7 +75,7 @@ def sheet(key):
     except:
         err()
         print("Make sure %s has permission to this document." % email())
-        raise SystemExit()
+        exit(1)
     try:
         sheet1 = gspread_sheet.worksheets()[0].title
         print(
@@ -181,7 +182,7 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
 
     if gspread_sheet is None:
         print('Make sure you pipulate.sheet("key or url") first.')
-        raise SystemExit()
+        exit(1)
 
     if cols:
         row1, row2 = rows
@@ -195,8 +196,6 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
             cl = worksheet_.range(row1, col1, row2, col2)
         except:
             credentials = ohawf.get()
-            # print('Rate quota possibly exceeded. Wait a minute and try again.')
-            # raise SystemExit()
         list_of_lists = cl_to_list(cl)
         if not columns:
             cell_list = worksheet_.range(row1, col1, row1, col2)
@@ -209,17 +208,13 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
         if type(columns) == bool:
             original_range = rows
             rows = shift_range(rows)
-        #try:
         cl = worksheet_.range(rows)
-        #except:
-        #    print("Rate quota possibly exceeded. Wait a minute and try again.")
-        #    raise SystemExit()
         list_of_lists = cl_to_list(cl)
         if not columns:
             columns = [a1(i + 1) for i, x in enumerate(list_of_lists[0])]
     else:
         print("Check your rows or range definition.")
-        raise SystemExit()
+        exit(1)
 
     if type(columns) == bool and columns == True:
         if cols:
@@ -233,13 +228,13 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
             print(
                 "All columns must have labels when using columns=True or columns=list."
             )
-            raise SystemExit()
+            exit(1)
         if len(set(columns)) < len(columns):
             print(columns)
             print(
                 "All columns must have labels when using columns=True or columns=list."
             )
-            raise SystemExit()
+            exit(1)
 
     df = pd.DataFrame(list_of_lists, columns=columns)
 
@@ -257,10 +252,7 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
 def populate(tab, cl, df, formulas=False):
     """Push df back to spreadsheet."""
 
-    try:
-        worksheet_ = check_worksheet(tab)
-    except:
-        credentials = ohawf.get()
+    worksheet_ = check_worksheet(tab)
 
     if cl_df_fits(cl, df):
         lol = df.values.tolist()
@@ -273,7 +265,7 @@ def populate(tab, cl, df, formulas=False):
         else:
             worksheet_.update_cells(cl)
     else:
-        raise SystemExit()
+        exit(1)
     print('pipulate.push("%s", cl, df) <<< GSHEET UPDATED! >>>' % worksheet_.title)
 
 
@@ -299,25 +291,25 @@ def check_worksheet(worksheet):
                 tab = gspread_sheet.worksheet(worksheet)
             else:
                 print("Worksheet not found")
-                raise SystemExit()
+                exit(1)
         else:
             print("pipulate.sheet([your gsheets key here]) must be set")
-            raise systemexit()
+            exit(1)
     elif type(worksheet) == int:
         if "gspread_sheet" in globals():
             if worksheet <= len(gspread_sheet.worksheets()):
                 tab = gspread_sheet.worksheets()[worksheet]
             else:
                 print("Worksheet ID too high. Try 0 for sheet 1.")
-                raise SystemExit()
+                exit(1)
         else:
             print("pipulate.sheet([your gsheets key here]) must be set")
-            raise systemexit()
+            exit(1)
     else:
         print(
             "Worksheet must be exact tab-name as string, gspread Worksheet object or tab-index."
         )
-        raise SystemExit()
+        exit(1)
     return tab
 
 
@@ -716,8 +708,6 @@ class Unbuffered(object):
 credentials = ohawf.get()
 gspread_authorized = gspread.authorize(credentials)
 
-print()
-print("CONGRATULATIONS! You are logged in as <<< %s >>>" % email())
 print('Get started with: pipulate.sheet("Insert your GSheet key or URL")')
 print("For help, run: pipulate.help()")
 
