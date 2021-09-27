@@ -3,7 +3,7 @@
 #   | | | '_ \| / __| | / __| | |_) | | '_ \| | | | |/ _` | __/ _ \
 #   | | | | | | \__ \ | \__ \ |  __/| | |_) | |_| | | (_| | ||  __/
 #   |_| |_| |_|_|___/ |_|___/ |_|   |_| .__/ \__,_|_|\__,_|\__\___|
-# There are many frameworks like it,  |_| but this one is mine. --MikeL
+# Push Pandas DataFrames into GSheets |_| for Dashboards and more. 
 
 
 import ohawf
@@ -12,78 +12,41 @@ import pandas as pd
 from sys import exit
 from sys import stdout
 from inspect import getsource
-from sys import exc_info as error
 from apiclient.discovery import build
 
 
 gspread_sheet = None
 column_uniqueness = False
-err = lambda: print(error()[0].__name__)
-
-jn = True
-try:
-    get_ipython()
-except NameError:
-    jn = False
-    h1 = lambda x: print(f"# {x}")
-    h2 = lambda x: print(f"## {x}")
-    h3 = lambda x: print(f"### {x}")
-    h4 = lambda x: print(f"#### {x}")
-    h5 = lambda x: print(f"##### {x}")
-    h6 = lambda x: print(f"###### {x}")
-
-
-if jn:
-    from IPython.display import display, Markdown
-
-    h1 = lambda x: display(Markdown(f"# {x}"))
-    h2 = lambda x: display(Markdown(f"## {x}"))
-    h3 = lambda x: display(Markdown(f"### {x}"))
-    h4 = lambda x: display(Markdown(f"#### {x}"))
-    h6 = lambda x: display(Markdown(f"##### {x}"))
-    h6 = lambda x: display(Markdown(f"###### {x}"))
-
-
-def key(url):
-    return sheet(url)
-
-
-def link(gsheet_key):
-    """Return GSheet URL for data from Web UI."""
-    return "https://docs.google.com/spreadsheets/d/%s/edit" % gsheet_key
-
+gui = "https://docs.google.com/spreadsheets/d/"
+link = lambda key: f"{gui}{key}/edit#gid=0"
+key = lambda key: sheet(key)
 
 def sheet(key):
     global gspread_authorized
     global gspread_sheet
-    global credentials
 
-    credentials = ohawf.get()
-
-    try:
-        if key[:4].lower() == "http":
-            gspread_sheet = gspread_authorized.open_by_url(key)
-        else:
-            gspread_sheet = gspread_authorized.open_by_key(key)
-        print(
-            """<<< CONNECTED! >>> You can open the Google Sheet with the following link:"""
-        )
-        if key[:4].lower() == "http":
-            print(key)
-        else:
-            print(link(key))
-    except:
-        err()
-        print("Make sure %s has permission to this document." % email())
-        exit(1)
+    continue_executing = False
+    if key[:4].lower() == "http":
+        gspread_sheet = gspread_authorized.open_by_url(key)
+    else:
+        gspread_sheet = gspread_authorized.open_by_key(key)
     try:
         sheet1 = gspread_sheet.worksheets()[0].title
-        print(
-            'Try: cl, df = pipulate.pull("%s", "A1:C3") # or pipulate.help() for help.'
-            % sheet1
-        )
+        continue_executing = True
     except:
-        credentials = ohawf.get()
+        continue_executing = False
+    if key[:4].lower() == "http":
+        print(key)
+    else:
+        print(link(key))
+    if not continue_executing:
+        print("Cannot access document. Check URL/key and permissions.")
+        exit(1)
+    print("<<< CONNECTED TO SHEET! >>>")
+    print(
+        'Try: cl, df = pipulate.pull("%s", "A1:C3") # or for help type: pipulate.help()'
+        % sheet1
+    )
 
 
 def help():
@@ -174,10 +137,8 @@ def poke(tab, columns, row=1, start=1):
 
 
 def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
-    global credentials
     original_range, original_row1 = None, None
 
-    credentials = ohawf.get()
     worksheet_ = check_worksheet(tab)
 
     if gspread_sheet is None:
@@ -192,10 +153,7 @@ def pipulate(tab, rows, cols=None, columns=None, start=None, end=None):
         col1, col2 = cols
         if not (type(col1) == int or type(col2) == int):
             col1, col2 = a1(col1, reverse=True), a1(col2, reverse=True)
-        try:
-            cl = worksheet_.range(row1, col1, row2, col2)
-        except:
-            credentials = ohawf.get()
+        cl = worksheet_.range(row1, col1, row2, col2)
         list_of_lists = cl_to_list(cl)
         if not columns:
             cell_list = worksheet_.range(row1, col1, row1, col2)
